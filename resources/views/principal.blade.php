@@ -13,7 +13,9 @@
         <!-- NAV -->
         @include('nav')
         
-        <!-- SECCIÓN -->
-        @yield('content')
+        <!-- CONTENIDO -->
+        <div class="container py-5">
+            @yield('content')
+        </div>
     </body>
 </html>
