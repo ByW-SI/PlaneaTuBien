@@ -1,7 +1,5 @@
 @extends('principal')
 @section('content')
-@extends('principal')
-@section('content')
 <div class="card">
     <div class="card-header">
       <div>
@@ -19,11 +17,11 @@
                 </div>
                 <div class="form-group col-4">
                     <label class="control-label" for="apater">Apellido Paterno:</label>
-                    <input type="text" class="form-control" id="apater" name="apater" value="" >
+                    <input type="text" class="form-control" id="paterno" name="paterno" value="" >
                 </div>	
                 <div class="form-group col-4">
                     <label class="control-label" for="amater">Apellido Materno:</label>
-                    <input type="text" class="form-control" id="amater" name="amater" value="" >
+                    <input type="text" class="form-control" id="materno" name="materno" value="" >
                 </div>		
             </div>
             <div class="row">
@@ -111,7 +109,4 @@
             </div>    
         </form>
 </div> 
-@endsection
-
-
 @endsection

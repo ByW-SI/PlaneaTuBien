@@ -15,7 +15,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+        $empleados = Empleado::get();
+        return view('empleado.index', ['empleados'=>$empleados]);
     }
 
     /**
@@ -25,7 +26,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('empleado.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Empleado::create($request->all());
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        //
+        return view('empleado.show', ['emplado'=>$empleado]);
     }
 
     /**
@@ -58,7 +60,7 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        //
+        return view('empleado.edit', ['emplado'=>$empleado]);  
     }
 
     /**
@@ -70,7 +72,8 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        //
+        $emplaedo->update($request->all());
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -81,6 +84,7 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        //
+        $empleado->delete();
+        return redirect()->route('empleados.index');
     }
 }

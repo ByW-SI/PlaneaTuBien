@@ -26,12 +26,9 @@ class CreateEmpleadoTable extends Migration
             $table->foreign('id_sucursal')->references('id')->on('sucursals');
 
             $table->string('cargo');
-                
-            $table->integer('id_supervisor')->unsigned()->nullable();
-            $table->foreign('id_supervisor')->references('id')->on('empleados');
 
-            $table->integer('id_gerente')->unsigned()->nullable();
-            $table->foreign('id_gerente')->references('id')->on('empleados');
+            $table->integer('id_jefe')->unsigned();
+            $table->foreign('id_jefe')->references('id')->on('empleados');
 
             $table->timestamps();
         });

@@ -1,7 +1,5 @@
 @extends('principal')
 @section('content')
-@extends('principal')
-@section('content')
 <div class="card">
     <div class="card-header">
       <div>
@@ -111,7 +109,4 @@
             </div>    
         </form>
 </div> 
-@endsection
-
-
 @endsection
