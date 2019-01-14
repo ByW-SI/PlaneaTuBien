@@ -13,8 +13,9 @@ class CreateSucursalTable extends Migration
      */
     public function up()
     {
-        Schema::create('sucursal', function (Blueprint $table) {
+        Schema::create('sucursals', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateSucursalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sucursal');
+        Schema::dropIfExists('sucursals');
     }
 }

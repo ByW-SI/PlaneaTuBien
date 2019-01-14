@@ -4,17 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EmpleadoContacto extends Model
+class EmpleadoDireccion extends Model
 {
-
-    protected $table = 'empleadocontactos';
+    protected $table = 'empleadodireccions';
 
     protected $fillable = [
         'id',
         'id_empleado',
-        'telefono',
-        'celular',
-        'correo'
+        'calle',
+        'exterior',
+        'interior',
+        'colonia',
+        'delegacion',
+        'estado',
+        'cp'
     ];
 
     public function empleado(){

@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model
 {
-    const CREATED_AT = 'fecha_creacion';
-    const UPDATED_AT = 'fecha_actualizacion';
-
     protected $table = 'empleados';
 
     protected $fillable = [
@@ -19,10 +16,31 @@ class Empleado extends Model
         'materno',
         'edad',
         'sexo',
-        'sucursal',
+        'id_sucursal',
         'cargo',
-        'supervisor_al_que_pertenece',
-        'gerente_al_que_pertenece',
+        'id_supervisor',
+        'id_gerente'
+
 
     ];
+
+    public function contacto(){
+        return $this->hasMany('App\EmpleadoContacto');
+    }
+
+    public function direccion(){
+        return $this->hasMany('App\EmepladoDireccion');
+    }
+
+    public function sucursal(){
+        return $this->belongsTo('App\Sucursal', 'id_sucursal');
+    }
+
+    public function supervisor(){
+        return $this->belongsTo('App\Empleado', 'id_supervisor');
+    }
+
+    public function gerente(){
+        return $this->belongsTo('App\Empleado', 'id_gerente');
+    }
 }
