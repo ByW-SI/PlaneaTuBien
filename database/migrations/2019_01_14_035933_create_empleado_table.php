@@ -22,8 +22,8 @@ class CreateEmpleadoTable extends Migration
             $table->integer('edad');
             $table->string('sexo');
 
-            //$table->integer('id_sucursal')->unsigned();
-            //$table->foreign('id_sucursal')->references('id')->on('sucursals');
+            $table->integer('sucursal_id')->unsigned();
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
 
             $table->string('cargo');
 

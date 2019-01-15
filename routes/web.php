@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+/*AJAX */
+Route::get('buscarsucursales', 'Sucursal\SucursalController@sucursalesAjax')->name('buscarsucursales');
 
 
 

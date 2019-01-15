@@ -16,7 +16,7 @@ class Empleado extends Model
         'materno',
         'edad',
         'sexo',
-        //'id_sucursal',
+        'sucursal_id',
         'cargo',
         'id_jefe',
         'status',
@@ -40,5 +40,9 @@ class Empleado extends Model
 
     public function empleados(){
         return $this->hasMany('App\Empleado', 'id_jefe', 'id');
+    }
+
+    public function sucursal(){
+        return $this->belongsTo('App\Sucursal');
     }
 }
