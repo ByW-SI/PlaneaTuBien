@@ -74,9 +74,6 @@
                         </div>
                         <select required class="custom-select" id="sucursal" name="sucursal_id">
                             <option selected value="">Selecciona...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                 </div>
@@ -106,9 +103,6 @@
                         </div>
                         <select class="custom-select" id="supervisor" name="supervisor">
                             <option selected value="">Selecciona...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                 </div>
@@ -119,9 +113,6 @@
                         </div>
                         <select class="custom-select" id="gerente" name="gerente">
                             <option selected value="">Selecciona...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                 </div>
