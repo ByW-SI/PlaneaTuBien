@@ -10,7 +10,7 @@ class EmpleadoDireccion extends Model
 
     protected $fillable = [
         'id',
-        'id_empleado',
+        'empleado_id',
         'calle',
         'exterior',
         'interior',
@@ -21,6 +21,6 @@ class EmpleadoDireccion extends Model
     ];
 
     public function empleado(){
-        return $this->belongsTo('App\Empleado', 'id_empleado');
+        return $this->belongsTo('App\Empleado');
     }
 }
