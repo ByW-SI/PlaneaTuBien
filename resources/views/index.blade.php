@@ -1,4 +1,4 @@
 @extends('principal')
 @section('content')
-<h2>ooola</h2>
+<h2>Sistema en desarrollo</h2>
 @endsection
