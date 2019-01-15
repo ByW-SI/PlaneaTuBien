@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\EmpleadoContacto;
+use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

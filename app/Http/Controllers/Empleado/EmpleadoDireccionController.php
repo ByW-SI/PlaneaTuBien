@@ -15,7 +15,8 @@ class EmpleadoDireccionController extends Controller
      */
     public function index()
     {
-        //
+        $empleadosDirecciones = EmpleadoDireccion::get();
+        return view('empleado.empleadodireccion.index', ['empleadosDirecciones'=>$empleadosDirecciones]);
     }
 
     /**
@@ -25,7 +26,7 @@ class EmpleadoDireccionController extends Controller
      */
     public function create()
     {
-        //
+        return view('empleado.empleadodireccion.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class EmpleadoDireccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empleadoDireccion = EmpleadoDireccion::create($request->all());
+        return redirect()->route('empleados.direcciones.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class EmpleadoDireccionController extends Controller
      */
     public function show(EmpleadoDireccion $empleadoDireccion)
     {
-        //
+        return view('empleado.empleadodireccion.show', ['empleado'=>$empleado]);
     }
 
     /**
@@ -58,7 +60,7 @@ class EmpleadoDireccionController extends Controller
      */
     public function edit(EmpleadoDireccion $empleadoDireccion)
     {
-        //
+        return view('empleado.empleadodireccion.edit', ['empleado'=>$empleadoDireccion]); 
     }
 
     /**
@@ -70,7 +72,8 @@ class EmpleadoDireccionController extends Controller
      */
     public function update(Request $request, EmpleadoDireccion $empleadoDireccion)
     {
-        //
+        $empleadoDireccion->update($request->all());
+        return redirect()->route('empleados.direcciones.index');
     }
 
     /**
@@ -81,6 +84,7 @@ class EmpleadoDireccionController extends Controller
      */
     public function destroy(EmpleadoDireccion $empleadoDireccion)
     {
-        //
+        $empleadoDireccion->delete();
+        return redirect()->route('empleados.direcciones.index');
     }
 }
