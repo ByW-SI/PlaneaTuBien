@@ -13,6 +13,7 @@
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
+Route::resource('clientes', 'Cliente\ClienteController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 Route::resource('sucursals', 'Sucursal\SucursalController');
 

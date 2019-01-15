@@ -37,7 +37,6 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-
         $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
             $empleado->id_jefe = $request->input('gerente');
