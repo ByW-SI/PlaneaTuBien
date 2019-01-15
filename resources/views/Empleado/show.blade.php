@@ -12,86 +12,55 @@
             <div class="row">
                 <div class="form-group col-4">
                     <label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
-                    <input readonly type="text" class="form-control" id="nombre" name="nombre" value="" required autofocus>
+                    <input readonly type="text" class="form-control" id="nombre" name="nombre" value="{{$empleado->nombre}}" required autofocus>
                 </div>
                 <div class="form-group col-4">
                     <label class="control-label" for="apater">Apellido Paterno:</label>
-                    <input readonly type="text" class="form-control" id="paterno" name="paterno" value="" >
+                    <input readonly type="text" class="form-control" id="paterno" name="paterno" value="{{$empleado->paterno}}" >
                 </div>	
                 <div class="form-group col-4">
                     <label class="control-label" for="amater">Apellido Materno:</label>
-                    <input readonly type="text" class="form-control" id="materno" name="materno" value="" >
+                    <input readonly type="text" class="form-control" id="materno" name="materno" value="{{$empleado->materno}}" >
                 </div>		
             </div>
             <div class="row">
                 <div class="form-group col-4">
                     <label class="control-label" for="edad"> Edad:</label>
-                    <input readonly type="text" class="form-control" id="edad" name="edad" value=""  autofocus>
+                    <input readonly type="text" class="form-control" id="edad" name="edad" value="{{$empleado->edad}}"  autofocus>
                 </div>
                 <div class="form-group col-4">
                     <label class="control-label" for="sexo">Sexo:</label>
-                    <input readonly type="text" class="form-control" id="sexo" name="sexo" value="" >
+                    <input readonly type="text" class="form-control" id="sexo" name="sexo" value="{{$empleado->sexo}}" >
                 </div>	
-                <div class="form-group col-4 mt-4 mb-1">
-                    <div class="input-group mt-1">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="sucursal">Sucursal:</label>
-                      </div>
-                      <select disabled class="custom-select" id="sucursal" name="sucursal">
-                        <option selected>Selecciona...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-                </div>		
+                <div class="form-group col-4">
+                    <label class="control-label" for="tipo">Tipo:</label>
+                    <input readonly type="text" class="form-control" id="tipo" name="tipo" value="{{$empleado->tipo}}" >
+                </div>			
             </div>
             <div class="row">
-                <div class="form-group col-4 mt-4">
-                    <div class="input-group ">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="cargo">Cargo:</label>
-                      </div>
-                      <select disabled class="custom-select" id="cargo" name="cargo">
-                        <option selected>Selecciona...</option>
-                        <option value="1">Asesor</option>
-                        <option value="2">Supervisor</option>
-                        <option value="3">Gerente</option>
-                        <option value="4">Mesa de trabajo</option>
-                        <option value="5">Ejecutivo de Cuenta</option>
-                        <option value="6">Jurídico</option>
-                        <option value="7">Contador</option>
-                        <option value="8">Gerente de área</option>
-                        <option value="9">Director de área</option>
-                      </select>
-                    </div>
+                <div class="form-group col-4">
+                    <label class="control-label" for="sucursal">Sucursal:</label>
+                    <input readonly type="text" class="form-control" id="sucursal" name="sucursal" value="{{$empleado->sucursal}}" >
                 </div>
-                <div class="form-group col-4 mt-4">
-                    <div class="input-group ">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="supervisor">Supervisor:</label>
-                      </div>
-                      <select disabled class="custom-select" id="supervisor" name="supervisor">
-                        <option selected>Selecciona...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
+                <div class="form-group col-4">
+                    <label class="control-label" for="cargo">Cargo:</label>
+                    <input readonly type="text" class="form-control" id="cargo" name="cargo" value="{{$empleado->cargo}}" >
+                </div>	
+                @if($empleado->tipo == 'Asesor')
+                <div class="form-group col-4">
+                    <label class="control-label" for="sucursal">
+                        Supervisosr:
+                    </label>
+                    <input readonly type="text" class="form-control" id="jefe" name="jefe" value="{{$empleado->jefe->nombre}}" >
                 </div>
-                <div class="form-group col-4 mt-4">
-                    <div class="input-group ">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="gerente">Gerente:</label>
-                      </div>
-                      <select disabled class="custom-select" id="gerente" name="gerente">
-                        <option selected>Selecciona...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
+                @elseif($empleado->tipo == 'Supervisor')
+                <div class="form-group col-4">
+                    <label class="control-label" for="sucursal">
+                        Gerente:
+                    </label>
+                    <input readonly type="text" class="form-control" id="jefe" name="jefe" value="{{$empleado->jefe->nombre}}" >
                 </div>
+                @endif
             </div>
             
             <div class="card-footer">
@@ -108,4 +77,5 @@
             </div>    
         </form>
 </div> 
+@yield('submodulos')
 @endsection

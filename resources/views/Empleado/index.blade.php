@@ -32,13 +32,17 @@
                   </tr>  
                   @foreach($empleados as $empleado)
                     <tr>
-                      <td>{{$empleado->id}}</td>
+                      <td>{{$empleado->id}} </td>
                       <td>{{$empleado->nombre}}</td>
-                      <td>{{$empleado->apellido}}</td>
+                      <td>{{$empleado->paterno}}</td>
                       <td>{{$empleado->created_at}}</td>
                       <td>{{$empleado->fechabaja}}</td>
                       <td>{{$empleado->motivobaja}}</td>
-                      <td></td>
+                      <td>
+                        <a href="{{route('empleados.show', [$empleado])}}" class="btn btn-primary">Ver</a>
+                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" class="btn btn-danger">Baja</button>
+                      </td>
                     </tr>
                   @endforeach
                   <tr></tr>  

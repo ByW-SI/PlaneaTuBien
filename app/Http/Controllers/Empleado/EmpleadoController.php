@@ -38,13 +38,13 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
 
-        $emplaedo = Empleado::create($request->all());
+        $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
-            $emplaedo->id_jefe = $request->input('gerente');
+            $empleado->id_jefe = $request->input('gerente');
             $empleado->save();
         }
         if(!empty($request->input('supervisor'))){
-            $emplaedo->id_jefe = $request->input('supervisor');
+            $empleado->id_jefe = $request->input('supervisor');
             $empleado->save();
         }
         return redirect()->route('empleados.index');
@@ -58,7 +58,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        return view('empleado.show', ['emplado'=>$empleado]);
+        return view('empleado.empleadocontacto.create', ['empleado'=>$empleado]);
     }
 
     /**
@@ -69,7 +69,7 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        return view('empleado.edit', ['emplado'=>$empleado]);  
+        return view('empleado.edit', ['empleado'=>$empleado]);  
     }
 
     /**

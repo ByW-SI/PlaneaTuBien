@@ -41,22 +41,22 @@
                       </div>
                       <select required class="custom-select" id="tipo" name="tipo">
                         <option selected value="">Selecciona...</option>
-                        <option value="asesor">Asesor</option>
-                        <option value="supervisor">Supervisor</option>
-                        <option value="gerente">Gerente</option>
-                        <option value="tkm">TKM</option>
-                        <option value="becarios">becarios</option>
-                        <option value="mesa">Mesa de Control</option>
-                        <option value="ejecutivo">Ejecutivo de Cuenta</option>
-                        <option value="juridica">Jurídico</option>
-                        <option value="contador">Contador</option>
-                        <option value="jefeareaatencionaclientes">Jefe de Área(Atención a clientes)</option>
-                        <option value="jefeareaarchivo">Jefe de Área(Archivo)</option>
-                        <option value="jefeareaventas">Jefe de Área(Ventas)</option>
-                        <option value="jefeareajuridico">Jefe de Área(Jurídico)</option>
-                        <option value="jefeareacontabilidad">Jefe de Área(Contabilidad)</option>
-                        <option value="directivo">Directivo</option>
-                        <option value="administrador">Administrador</option>
+                        <option value="Asesor">Asesor</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="TKM">TKM</option>
+                        <option value="Becarios">Becarios</option>
+                        <option value="Mesa de Control">Mesa de Control</option>
+                        <option value="Ejecutivo de Cuenta">Ejecutivo de Cuenta</option>
+                        <option value="Juridico">Jurídico</option>
+                        <option value="Contador">Contador</option>
+                        <option value="Jefe de area(Atencion a clientes)">Jefe de Área(Atención a clientes)</option>
+                        <option value="Jefe de area(Archivo)">Jefe de Área(Archivo)</option>
+                        <option value="Jefe de area(Ventas)">Jefe de Área(Ventas)</option>
+                        <option value="Jefe de area(Juridico)">Jefe de Área(Jurídico)</option>
+                        <option value="jefe de area(Contabilidad)">Jefe de Área(Contabilidad)</option>
+                        <option value="Directivo">Directivo</option>
+                        <option value="Administrador">Administrador</option>
                       </select>
                     </div>
                 </div>	
@@ -83,15 +83,15 @@
                       </div>
                       <select required class="custom-select" id="cargo" name="cargo">
                         <option selected value="">Selecciona...</option>
-                        <option value="1">Asesor</option>
-                        <option value="2">Supervisor</option>
-                        <option value="3">Gerente</option>
-                        <option value="4">Mesa de trabajo</option>
-                        <option value="5">Ejecutivo de Cuenta</option>
-                        <option value="6">Jurídico</option>
-                        <option value="7">Contador</option>
-                        <option value="8">Gerente de área</option>
-                        <option value="9">Director de área</option>
+                        <option value="Asesor">Asesor</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Mesa de trabajo">Mesa de trabajo</option>
+                        <option value="Ejecutivo de Cuenta">Ejecutivo de Cuenta</option>
+                        <option value="Juridico">Jurídico</option>
+                        <option value="Contador">Contador</option>
+                        <option value="Gerente de area">Gerente de área</option>
+                        <option value="Director de area">Director de área</option>
                       </select>
                     </div>
                 </div>
@@ -142,20 +142,25 @@
         $('#campogerente').hide();
         $('#camposupervisor').hide();
         $('#tipo').change(function(){
-            if($(this).val() == 'asesor'){
+            if($(this).val() == 'Asesor'){
                 $('#campogerente').hide();
                 $("#gerente").val('');
                 $("#gerente").prop('required',false);
-
                 $('#camposupervisor').show();
                 $("#supervisor").prop('required',true);                
-            }
-            if($(this).val() == 'supervisor'){
+            }else if($(this).val() == 'Supervisor'){
                 $('#camposupervisor').hide();
                 $("#supervisor").prop('required',false);
                 $("#supervisor").val('');
                 $('#campogerente').show();
                 $("#gerente").prop('required',true);
+            }else{
+                $('#camposupervisor').hide();
+                $("#supervisor").prop('required',false);
+                $("#supervisor").val('');
+                $('#campogerente').hide();
+                $("#gerente").val('');
+                $("#gerente").prop('required',false);
             }
         });
     });
