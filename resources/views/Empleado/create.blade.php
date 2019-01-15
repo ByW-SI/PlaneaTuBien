@@ -72,7 +72,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="sucursal"><i class="fa fa-asterisk" aria-hidden="true"></i>Sucursal:</label>
                         </div>
-                        <select required class="custom-select" id="sucursal" name="sucursal">
+                        <select required class="custom-select" id="sucursal" name="sucursal_id">
                             <option selected value="">Selecciona...</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
