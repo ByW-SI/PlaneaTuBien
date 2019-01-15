@@ -23,7 +23,7 @@ class CreateEmpleadodireccionsTable extends Migration
             $table->string('interior');
             $table->string('exterior');
             $table->string('colonia');
-            $table->string('delefacion');
+            $table->string('delegacion');
             $table->string('estado');
             $table->string('cp');
             
