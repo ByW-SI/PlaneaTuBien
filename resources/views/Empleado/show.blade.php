@@ -66,12 +66,9 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-4 offset-4 text-center">
-                        <button type="submit" class="btn btn-success">
+                        <button type="button" class="btn btn-success">
                             <i class="fa fa-check"></i> Editar
                         </button>
-                    </div>
-                    <div class="col-sm-4 text-right text-danger">
-                        ✱Campos Requeridos.
                     </div>
                 </div>
             </div>    

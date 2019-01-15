@@ -14,10 +14,9 @@ class EmpleadoContactoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
-        $empleadoscontacto = EmpleadoContacto::get();
-        return view('empleado.empleadocontacto.index', ['empleadoscontacto'=>$empleadoscontacto]);
+        return view('empleado.empleadocontacto.index', ['contactos'=>$empleado->contactos, 'empleado'=>$empleado]);
     }
 
     /**
@@ -25,9 +24,9 @@ class EmpleadoContactoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
-        return view('empleado.empleadocontacto.create');
+        return view('empleado.empleadocontacto.create', ['empleado'=>$empleado]);
     }
 
     /**
@@ -36,10 +35,10 @@ class EmpleadoContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleado $empleado)
     {
-        $empleadoContacto = Empleado::create($request->all());
-        return redirect()->route('empleados.contactos.index');
+        $empleado->contactos()->save(new EmpleadoContacto($request->all()));
+        return redirect()->route('empleados.contactos.index',['empleado'=>$empleado]);
     }
 
     /**

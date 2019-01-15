@@ -10,18 +10,23 @@ class Cliente extends Model
 
     protected $fillable = [
         'id',
-        'tipo',
         'nombre',
         'paterno',
         'materno',
-        'edad',
+        'id_empleado',
+        'rfc',
+        'nacimiento',
+        'lugarnacimiento',
+        'nacionalidad',
         'sexo',
-        //'id_sucursal',
-        'cargo',
-        'id_jefe',
-        'status',
-        'fechabaja',
-        'motivobaja'
+        'edad',
+        'estadocivil',
+        'prefesion',
+        'empresa',
+        'puestoactual',
+        'antiguedad',
+        
+
 
 
     ];

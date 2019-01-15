@@ -58,7 +58,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        return view('empleado.empleadocontacto.create', ['empleado'=>$empleado]);
+        return view('empleado.empleadocontacto.index', ['contactos'=>$empleado->contactos, 'empleado'=>$empleado]);
     }
 
     /**
