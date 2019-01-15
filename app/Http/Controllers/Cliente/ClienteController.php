@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
+use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::get();
+        return view('clientes.index', ['clientes' => $clientes]);
     }
 
     /**
@@ -25,7 +27,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $asesores = Empleado::where('tipo', 'Asesor')->get();
+        return view('clientes.create', ['asesores' => $asesores]);
     }
 
     /**
@@ -36,7 +39,8 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = Cliente::create($request->all());
+        return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
     /**
@@ -47,7 +51,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('clientes.view', ['cliente' => $cliente]);
     }
 
     /**
@@ -58,7 +62,8 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        $asesores = Empleado::where('tipo', 'Asesor')->get();
+        return view('clientes.edit', ['cliente' => $cliente, 'asesores' => $asesores]);
     }
 
     /**
@@ -70,7 +75,8 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $cliente->update($request->all());
+        return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
     /**

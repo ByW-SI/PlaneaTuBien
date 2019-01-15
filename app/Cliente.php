@@ -11,23 +11,37 @@ class Cliente extends Model
     protected $fillable = [
         'id',
         'nombre',
-        'paterno',
-        'materno',
-        'id_empleado',
+        'appaterno',
+        'apmaterno',
+        'empleado_id',
         'rfc',
-        'nacimiento',
-        'lugarnacimiento',
+        'telefono',
+        'oficina',
+        'celular',
+        'email',
+        'fecha_nacimiento',
+        'lugar_nacimiento',
         'nacionalidad',
         'sexo',
         'edad',
-        'estadocivil',
-        'prefesion',
+        'estado_civil',
+        'profesion',
         'empresa',
-        'puestoactual',
-        'antiguedad',
-        
-
-
-
+        'puesto_actual',
+        'puesto_anterior',
+        'antiguo',
+        'ingreso',
+        'calle',
+        'numext',
+        'numint',
+        'colonia',
+        'delegacion',
+        'estado',
+        'cp',
     ];
+
+    public function asesor() {
+        return $this->belongsTo('App\Empleado');
+    }
+
 }

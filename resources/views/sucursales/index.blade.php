@@ -18,7 +18,7 @@
     	<div class="row">
     		<div class="col-sm-12">
     			@if(count($sucursales) > 0)
-	    			<table class="table table-bordered table-stripped table-hover">
+	    			<table class="table table-bordered table-stripped table-hover" style="margin-bottom: 0px;">
 	    				<tr class="table-primary">
 	    					<th>Nombre</th>
 	    					<th>Responsable</th>
