@@ -16,24 +16,15 @@ class Empleado extends Model
         'materno',
         'edad',
         'sexo',
-        'id_sucursal',
+        //'id_sucursal',
         'cargo',
-        'id_jefe'
+        'id_jefe',
+        'status',
+        'fechabaja',
+        'motivobaja'
 
 
     ];
-
-    public function contacto(){
-        return $this->hasMany('App\EmpleadoContacto', 'id_contacto');
-    }
-
-    public function direccion(){
-        return $this->hasMany('App\EmepladoDireccion');
-    }
-
-    public function sucursal(){
-        return $this->belongsTo('App\Sucursal', 'id_sucursal');
-    }
 
     public function jefe(){
         return $this->belongsTo('App\Empleado', 'id_jefe');

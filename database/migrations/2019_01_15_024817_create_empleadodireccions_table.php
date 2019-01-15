@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmpleadoDireccionTable extends Migration
+class CreateEmpleadodireccionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,17 +16,17 @@ class CreateEmpleadoDireccionTable extends Migration
         Schema::create('empleadodireccions', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_empleado')->unsigned();
+            $table->integer('id_empleado')->unsigned()->nullable();
             $table->foreign('id_empleado')->references('id')->on('empleados');
 
             $table->string('calle');
-            $table->string('exterior');
             $table->string('interior');
+            $table->string('exterior');
             $table->string('colonia');
-            $table->string('delegacion');
+            $table->string('delefacion');
             $table->string('estado');
             $table->string('cp');
-
+            
             $table->timestamps();
         });
     }

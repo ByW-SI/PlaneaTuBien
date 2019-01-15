@@ -33,9 +33,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{route('empleados.create')}}">Alta</a>
-          <a class="dropdown-item" href="#">Búsqueda</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Precargas</a>
+          <a class="dropdown-item" href="{{route('empleados.index')}}">Búsqueda</a>
         </div>
       </li>
     </ul>

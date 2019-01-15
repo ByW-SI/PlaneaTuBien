@@ -22,14 +22,17 @@ class CreateEmpleadoTable extends Migration
             $table->integer('edad');
             $table->string('sexo');
 
-            $table->integer('id_sucursal')->unsigned();
-            $table->foreign('id_sucursal')->references('id')->on('sucursals');
+            //$table->integer('id_sucursal')->unsigned();
+            //$table->foreign('id_sucursal')->references('id')->on('sucursals');
 
             $table->string('cargo');
 
-            $table->integer('id_jefe')->unsigned();
+            $table->integer('id_jefe')->unsigned()->nullable();
             $table->foreign('id_jefe')->references('id')->on('empleados');
-
+            $table->string('status');
+            $table->string('fechabaja')->nullable();
+            $table->string('motivobaja')->nullable();
+            
             $table->timestamps();
         });
     }

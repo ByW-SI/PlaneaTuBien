@@ -37,7 +37,16 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        Empleado::create($request->all());
+
+        $emplaedo = Empleado::create($request->all());
+        if(!empty($request->input('gerente'))){
+            $emplaedo->id_jefe = $request->input('gerente');
+            $empleado->save();
+        }
+        if(!empty($request->input('supervisor'))){
+            $emplaedo->id_jefe = $request->input('supervisor');
+            $empleado->save();
+        }
         return redirect()->route('empleados.index');
     }
 

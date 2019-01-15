@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSucursalTable extends Migration
+class CreateEmpleadocontactoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class CreateSucursalTable extends Migration
      */
     public function up()
     {
-        Schema::create('sucursals', function (Blueprint $table) {
+        Schema::create('empleadocontactos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+
+            $table->integer('id_empleado')->unsigned()->nullable();
+            $table->foreign('id_empleado')->references('id')->on('empleados');
+
+            $table->string('telefono');
+            $table->string('celular');
+            $table->string('correo');
+
             $table->timestamps();
         });
     }
@@ -27,6 +34,6 @@ class CreateSucursalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sucursals');
+        Schema::dropIfExists('empleadocontactos');
     }
 }
