@@ -195,6 +195,20 @@
                     $("#gerente").html(resultado);
                 });
             });
+            $('#supervisor').click(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ url('buscarsupervisores') }}",
+                    type: "GET",
+                    dataType: "html",
+                }).done(function (resultado) {
+                    $("#supervisor").html(resultado);
+                });
+            });
 
         });
     </script>
