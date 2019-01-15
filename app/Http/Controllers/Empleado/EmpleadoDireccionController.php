@@ -24,9 +24,9 @@ class EmpleadoDireccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
-        return view('empleado.empleadodireccion.create');
+        return view('empleado.empleadodireccion.create' ,['empleado'=>$empleado]);
     }
 
     /**

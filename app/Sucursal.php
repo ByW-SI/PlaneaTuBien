@@ -21,5 +21,9 @@ class Sucursal extends Model
     	'estado',
     	'delegacion',
     	'telefono',
-    ];
+	];
+	
+	public function empleados(){
+		return $this->hasMany('App\Empleados');
+	}
 }

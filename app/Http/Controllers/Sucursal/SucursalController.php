@@ -87,4 +87,9 @@ class SucursalController extends Controller
         $sucursal->delete();
         return redirect()->route('sucursals.index');
     }
+
+    public function sucursalesAjax(){
+        $sucursales = Sucursal::get();
+        return view('sucursales.lista', ['sucursales'=>$sucursales]);
+    }
 }

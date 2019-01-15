@@ -6,17 +6,16 @@ use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmpleadoController extends Controller
+class EmpleadoRelacionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
-        $empleados = Empleado::get();
-        return view('empleado.index', ['empleados'=>$empleados]);
+        return view('empleado.empleados.index', ['empleados'=>$empleado->empleados, 'empleado'=>$empleado]);
     }
 
     /**
@@ -24,9 +23,9 @@ class EmpleadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
-        return view('empleado.create');
+        return view('empleado.empleados.create',['empleado'=>$empleado]);
     }
 
     /**
@@ -35,18 +34,11 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleado $empleado)
     {
-        $empleado = Empleado::create($request->all());
-        if(!empty($request->input('gerente'))){
-            $empleado->id_jefe = $request->input('gerente');
-            $empleado->save();
-        }
-        if(!empty($request->input('supervisor'))){
-            $empleado->id_jefe = $request->input('supervisor');
-            $empleado->save();
-        }
-        return redirect()->route('empleados.index');
+        $empleado2 = Empleado::find($request->input('empleado'));
+        $empleado2->jefe()->save($empleado);
+        return redirect()->route('empleados.relaciones.index',['empleado'=>$empleado]);
     }
 
     /**
@@ -57,7 +49,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        return view('empleado.empleadocontacto.index', ['contactos'=>$empleado->contactos, 'empleado'=>$empleado]);
+        //
     }
 
     /**
@@ -68,7 +60,7 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        return view('empleado.edit', ['empleado'=>$empleado]);  
+        //
     }
 
     /**
@@ -80,8 +72,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        $emplaedo->update($request->all());
-        return redirect()->route('empleados.index');
+        //
     }
 
     /**
@@ -92,7 +83,6 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        $empleado->delete();
-        return redirect()->route('empleados.index');
+        //
     }
 }

@@ -4,21 +4,37 @@
 
     <div class="card">
         <div class="card-header">
-            <h4>Crear Contactos</h4>
+            <h4>Crear Direcciones</h4>
         </div>
         <form method="POST" action="{{route('empleados.direcciones.store',['empleado'=>$empleado])}}">
         <div class="card-body">
             
                 {{ csrf_field() }}
-                <div class="form-row">
+                <div class="form-row mb-3">
                     <div class="col-4">
-                        <input name="telefono" required type="text" class="form-control" placeholder="*Teléfono">
+                        <input name="calle" required type="text" class="form-control" placeholder="*Calle">
                     </div>
                     <div class="col-4">
-                        <input name="celular" required type="text" class="form-control" placeholder="Celular">
+                        <input name="exterior" required type="text" class="form-control" placeholder="*Exterior">
                     </div>
                     <div class="col">
-                        <input name="correo" required type="mail" class="form-control" placeholder="Correo">
+                        <input name="interior" required type="mail" class="form-control" placeholder="*Interior">
+                    </div>
+                </div>
+                <div class="form-row my-3">
+                    <div class="col-4">
+                        <input name="colonia" required type="text" class="form-control" placeholder="*Colonia">
+                    </div>
+                    <div class="col-4">
+                        <input name="delegacion" required type="text" class="form-control" placeholder="*Delegación">
+                    </div>
+                    <div class="col">
+                        <input name="estado" required type="text" class="form-control" placeholder="*Estado">
+                    </div>
+                </div>
+                <div class="form-row mt-3">
+                    <div class="col-4">
+                        <input name="cp" required type="text" class="form-control" placeholder="*Código Postal">
                     </div>
                 </div>
         </div>
