@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Sucursal;
 
 use App\Sucursal;
-use UxWeb\SweetAlert\SweetAlert as Alert;
 use Illuminate\Http\Request;
-use App\Empleado;
-use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
 
-
-class SucursalController extends Controller{
- // use Alert;
+class SucursalController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +15,8 @@ class SucursalController extends Controller{
      */
     public function index()
     {
-        //
         $sucursales = Sucursal::get();
-       
-        return view('sucursales.index', ['sucursales'=>$sucursales]);
+        return view('sucursales.index', ['sucursales' => $sucursales]);
     }
 
     /**
@@ -32,9 +26,7 @@ class SucursalController extends Controller{
      */
     public function create()
     {
-        //
-        $sucursal=new Sucursal;
-        return view('sucursales.create',['edit'=>false,'sucursal'=>$sucursal]);
+        return view('sucursales.create');
     }
 
     /**
@@ -45,86 +37,54 @@ class SucursalController extends Controller{
      */
     public function store(Request $request)
     {
-        
-            
         $sucursal = Sucursal::create($request->all());
-
-Alert::success("Sucursal registrada con exito")->persistent("Cerrar");
-
-return view('sucursales.view',['sucursal'=>$sucursal]);
-//return redirect()->route('sucursales.view',['sucursal'=>$sucursal]);
-    //Alert::success("Sucursal registrada con exito")->persistent("Cerrar");    
-        
+        return redirect()->route('sucursals.show', ['sucursal' => $sucursal]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sucursale  $sucursal
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function show( $sucursal)
+    public function show(Sucursal $sucursal)
     {
-        
-        $suc= Sucursal::find($sucursal);
-       // dd($suc);
-        return view('sucursales.view',['sucursal'=>$suc]);
+        return view('sucursales.view', ['sucursal' => $sucursal]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Personal  $personal
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function edit( $sucursal)
+    public function edit(Sucursal $sucursal)
     {
-        $suc= Sucursal::find($sucursal);
-        return view('sucursales.create',['edit'=>true,'sucursal'=>$suc]);
+        return view('sucursales.edit', ['sucursal' => $sucursal]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Personal  $personal
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$sucursal)
+    public function update(Request $request, Sucursal $sucursal)
     {
-        //dd($sucursal);
-         $suc= Sucursal::find($sucursal);
-
-        $suc->update($request->all());
-        Alert::success('Proveedor actualizado')->persistent("Cerrar");
-        return redirect()->route('sucursales.show',['sucursal'=>$sucursal]);
+        $sucursal->update($request->all());
+        return redirect()->route('sucursals.show', ['sucursal' => $sucursal]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Personal  $personal
+     * @param  \App\Sucursal  $sucursal
      * @return \Illuminate\Http\Response
      */
-    public function destroy($sucursal)
+    public function destroy(Sucursal $sucursal)
     {
-        
-
+        $sucursal->delete();
+        return redirect()->route('sucursals.index');
     }
-
-
-
-
-    public function buscar( $sucursal){
-   
-        
-
-    }
-
-
-
-  
-   
-
-
 }
