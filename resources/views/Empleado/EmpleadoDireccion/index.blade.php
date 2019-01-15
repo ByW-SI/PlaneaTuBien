@@ -23,12 +23,17 @@
                     <th>Delegación</th>
                     <th>Estado</th>
                     <th>CP</th>
+                    <th>Acciones</th>
                   </tr>  
                   @foreach($direcciones as $direccion)
                     <tr>
-                      <td>{{$contacto->telefono}} </td>
-                      <td>{{$contacto->celular}}</td>
-                      <td>{{$contacto->correo}}</td>
+                      <td>{{$direccion->calle}} </td>
+                      <td>{{$direccion->exterior}}</td>
+                      <td>{{$direccion->interior}}</td>
+                      <td>{{$direccion->colonia}}</td>
+                      <td>{{$direccion->delegacion}}</td>
+                      <td>{{$direccion->estado}}</td>
+                      <td>{{$direccion->cp}}</td>
                       <td>
                         <button type="button" class="btn btn-warning">Editar</button>
                         <button type="button" class="btn btn-danger">Baja</button>

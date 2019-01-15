@@ -2,9 +2,15 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-      <div>
-      <h2>Buscar Agentes</h2>      
+      <div class="row">
+        <div class="col">
+          <h2>Buscar Agentes</h2>  
+        </div>
+        <div class="col">
+        <a href="{{route('empleados.create')}}" class="btn btn-success">Crear Agente</a>
+        </div>
       </div>
+      
   
     </div>
     <div class="card-body">

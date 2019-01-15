@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\EmpleadoDireccion;
+use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -34,10 +35,10 @@ class EmpleadoDireccionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleado $empleado)
     {
-        $empleadoDireccion = EmpleadoDireccion::create($request->all());
-        return redirect()->route('empleados.direcciones.index');
+        $empleado->direcciones()->save(new EmpleadoDireccion($request->all()));
+        return redirect()->route('empleados.direcciones.index',['empleado'=>$empleado]);
     }
 
     /**
