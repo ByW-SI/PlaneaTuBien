@@ -11,13 +11,13 @@ class EmpleadoContacto extends Model
 
     protected $fillable = [
         'id',
-        'id_empleado',
+        'empleado_id',
         'telefono',
         'celular',
         'correo'
     ];
 
     public function empleado(){
-        return $this->belongsTo('App\Empleado', 'id_empleado');
+        return $this->belongsTo('App\Empleado');
     }
 }

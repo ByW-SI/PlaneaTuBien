@@ -26,6 +26,14 @@ class Empleado extends Model
 
     ];
 
+    public function contactos(){
+        return $this->hasMany('App\EmpleadoContacto');
+    }
+
+    public function direcciones(){
+        return $this->hasMany('App\EmpleadoDireccion');
+    }
+
     public function jefe(){
         return $this->belongsTo('App\Empleado', 'id_jefe');
     }

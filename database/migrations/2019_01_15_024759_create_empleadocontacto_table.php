@@ -16,8 +16,8 @@ class CreateEmpleadocontactoTable extends Migration
         Schema::create('empleadocontactos', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_empleado')->unsigned()->nullable();
-            $table->foreign('id_empleado')->references('id')->on('empleados');
+            $table->integer('empleado_id')->unsigned();
+            $table->foreign('empleado_id')->references('id')->on('empleados');
 
             $table->string('telefono');
             $table->string('celular');

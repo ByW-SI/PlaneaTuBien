@@ -13,10 +13,9 @@ class EmpleadoDireccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
-        $empleadosDirecciones = EmpleadoDireccion::get();
-        return view('empleado.empleadodireccion.index', ['empleadosDirecciones'=>$empleadosDirecciones]);
+        return view('empleado.empleadodireccion.index', ['direcciones'=>$empleado->direcciones, 'empleado'=>$empleado]);
     }
 
     /**
