@@ -15,7 +15,8 @@ class EmpleadoContactoController extends Controller
      */
     public function index()
     {
-        //
+        $empleadoscontacto = EmpleadoContacto::get();
+        return view('empleado.empleadocontacto.index', ['empleadoscontacto'=>$empleadoscontacto]);
     }
 
     /**
@@ -25,7 +26,7 @@ class EmpleadoContactoController extends Controller
      */
     public function create()
     {
-        //
+        return view('empleado.empleadocontacto.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class EmpleadoContactoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empleadoContacto = Empleado::create($request->all());
+        return redirect()->route('empleados.contactos.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class EmpleadoContactoController extends Controller
      */
     public function show(EmpleadoContacto $empleadoContacto)
     {
-        //
+        return view('empleado.empleadocontacto.show', ['empleadoContacto'=>$empleadoContacto]);
     }
 
     /**
@@ -58,7 +60,7 @@ class EmpleadoContactoController extends Controller
      */
     public function edit(EmpleadoContacto $empleadoContacto)
     {
-        //
+        return view('empleado.empleadocontacto.edit', ['empleadoContacto'=>$empleadoContacto]);
     }
 
     /**
@@ -70,7 +72,8 @@ class EmpleadoContactoController extends Controller
      */
     public function update(Request $request, EmpleadoContacto $empleadoContacto)
     {
-        //
+        $empleadoContacto->update($request->all());
+        return redirect()->route('empleadosempleados.contactos.index');
     }
 
     /**
@@ -81,6 +84,7 @@ class EmpleadoContactoController extends Controller
      */
     public function destroy(EmpleadoContacto $empleadoContacto)
     {
-        //
+        $empleadoContacto->delete();
+        return redirect()->route('empleadosempleados.contactos.index');
     }
 }

@@ -77,5 +77,6 @@
             </div>    
         </form>
 </div> 
+@include('empleado.nav')
 @yield('submodulos')
 @endsection
