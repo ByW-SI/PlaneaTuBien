@@ -96,4 +96,16 @@ class EmpleadoController extends Controller
         $empleado->delete();
         return redirect()->route('empleados.index');
     }
+
+    public function buscarGerentes(){
+        $gerentes = Empleado::where('tipo', 'Gerente')->get();
+        return view('empleado.listaempleado', ['empleados'=>$gerentes]);
+    }
+
+    public function buscarSupervisores(){
+        $supervisores = Empleado::where('tipo', 'Supervisor')->get();
+        return view('empleado.listaempleado', ['empleados'=>$supervisores]);
+    }
+
+
 }
