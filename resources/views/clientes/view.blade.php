@@ -151,6 +151,48 @@
                 <dd>{{ $cliente->cp }}</dd>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('clientes.pagos.index', ['cliente' => $cliente]) }}">Pagos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">CRM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">CRM General</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4>Pagos:</h4>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="{{ route('clientes.pagos.create', ['cliente' => $cliente]) }}" class="btn btn-success">
+                            <i class="fa fa-plus"></i><strong> Agregar Pago</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        @if(count($cliente->pagos) > 0)
+                            <table class="table table-hover table-bordered table-stripped" style="margin-bottom: 0px;">
+                                
+                            </table>
+                        @else
+                            <h4>No hay pagos disponibles.</h4>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

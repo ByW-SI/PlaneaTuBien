@@ -1,5 +1,11 @@
-<nav class="nav nav-pills nav-fill">
-  <a class="nav-item nav-link" href="{{route('empleados.contactos.index', ['empleado'=>$empleado])}}">Contactos</a>
-  <a class="nav-item nav-link" href="{{route('empleados.relaciones.index', ['empleado'=>$empleado])}}">Empleados</a>
-  <a class="nav-item nav-link" href="{{route('empleados.direcciones.index' , ['empleado'=>$empleado])}}">Dirección</a>
-</nav>
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link active" href="{{ route('empleados.contactos.index', ['empleado' => $empleado]) }}">Contactos</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ route('empleados.relaciones.index', ['empleado' => $empleado]) }}">Empleados</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ route('empleados.direcciones.index' , ['empleado' => $empleado]) }}">Dirección</a>
+	</li>
+</ul>

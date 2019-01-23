@@ -41,7 +41,11 @@ class Cliente extends Model
     ];
 
     public function asesor() {
-        return $this->belongsTo('App\Empleado');
+        return $this->belongsTo('App\Empleado', 'empleado_id');
+    }
+
+    public function pagos() {
+        return $this->hasMany('App\Pago');
     }
 
 }

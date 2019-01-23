@@ -22,9 +22,11 @@ class Empleado extends Model
         'status',
         'fechabaja',
         'motivobaja'
-
-
     ];
+
+    public function clientes() {
+        return $this->hasOne('App\Cliente');
+    }
 
     public function contactos(){
         return $this->hasMany('App\EmpleadoContacto');

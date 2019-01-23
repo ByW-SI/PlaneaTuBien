@@ -2,78 +2,65 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-      <div>
-      <h2>Mostrar Agente</h2>      
-      </div>
-  
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>Datos del Agente:</h4>
+            </div>
+        </div>
     </div>
     <div class="card-body">
-        <form role="form" name="domicilio" id="form-cliente" method="POST" action="" name="form">
-            <div class="row">
-                <div class="form-group col-4">
-                    <label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
-                    <input readonly type="text" class="form-control" id="nombre" name="nombre" value="{{$empleado->nombre}}" required autofocus>
-                </div>
-                <div class="form-group col-4">
-                    <label class="control-label" for="apater">Apellido Paterno:</label>
-                    <input readonly type="text" class="form-control" id="paterno" name="paterno" value="{{$empleado->paterno}}" >
-                </div>	
-                <div class="form-group col-4">
-                    <label class="control-label" for="amater">Apellido Materno:</label>
-                    <input readonly type="text" class="form-control" id="materno" name="materno" value="{{$empleado->materno}}" >
-                </div>		
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="control-label">Nombre:</label>
+                <input type="text" class="form-control" value="{{ $empleado->nombre }}" readonly="">
             </div>
-            <div class="row">
-                <div class="form-group col-4">
-                    <label class="control-label" for="edad"> Edad:</label>
-                    <input readonly type="text" class="form-control" id="edad" name="edad" value="{{$empleado->edad}}"  autofocus>
-                </div>
-                <div class="form-group col-4">
-                    <label class="control-label" for="sexo">Sexo:</label>
-                    <input readonly type="text" class="form-control" id="sexo" name="sexo" value="{{$empleado->sexo}}" >
-                </div>	
-                <div class="form-group col-4">
-                    <label class="control-label" for="tipo">Tipo:</label>
-                    <input readonly type="text" class="form-control" id="tipo" name="tipo" value="{{$empleado->tipo}}" >
-                </div>			
+            <div class="form-group col-4">
+                <label class="control-label">Apellido Paterno:</label>
+                <input type="text" class="form-control" value="{{ $empleado->paterno }}" readonly="">
+            </div>	
+            <div class="form-group col-4">
+                <label class="control-label">Apellido Materno:</label>
+                <input type="text" class="form-control" value="{{ $empleado->materno }}" readonly="">
+            </div>		
+        </div>
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="control-label">Edad:</label>
+                <input type="text" class="form-control" value="{{ $empleado->edad }}" readonly="">
             </div>
-            <div class="row">
-                <div class="form-group col-4">
-                    <label class="control-label" for="sucursal">Sucursal:</label>
-                    <input readonly type="text" class="form-control" id="sucursal" name="sucursal" value="{{$empleado->sucursal}}" >
-                </div>
-                <div class="form-group col-4">
-                    <label class="control-label" for="cargo">Cargo:</label>
-                    <input readonly type="text" class="form-control" id="cargo" name="cargo" value="{{$empleado->cargo}}" >
-                </div>	
-                @if($empleado->tipo == 'Asesor')
-                <div class="form-group col-4">
-                    <label class="control-label" for="sucursal">
-                        Supervisosr:
-                    </label>
-                    <input readonly type="text" class="form-control" id="jefe" name="jefe" value="{{$empleado->jefe->nombre}}" >
-                </div>
-                @elseif($empleado->tipo == 'Supervisor')
-                <div class="form-group col-4">
-                    <label class="control-label" for="sucursal">
-                        Gerente:
-                    </label>
-                    <input readonly type="text" class="form-control" id="jefe" name="jefe" value="{{$empleado->jefe->nombre}}" >
-                </div>
-                @endif
+            <div class="form-group col-4">
+                <label class="control-label">Sexo:</label>
+                <input type="text" class="form-control" value="{{ $empleado->sexo }}" readonly="">
+            </div>	
+            <div class="form-group col-4">
+                <label class="control-label">Tipo:</label>
+                <input type="text" class="form-control" value="{{ $empleado->tipo }}" readonly="">
+            </div>			
+        </div>
+        <div class="row">
+            <div class="form-group col-4">
+                <label class="control-label">Sucursal:</label>
+                <input type="text" class="form-control" value="{{ $empleado->sucursal->nombre }}" readonly="">
             </div>
-            
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-4 offset-4 text-center">
-                        <button type="button" class="btn btn-success">
-                            <i class="fa fa-check"></i> Editar
-                        </button>
-                    </div>
+            <div class="form-group col-4">
+                <label class="control-label">Cargo:</label>
+                <input type="text" class="form-control" value="{{ $empleado->cargo }}" readonly="">
+            </div>	
+            @if($empleado->tipo == 'Asesor')
+                <div class="form-group col-4">
+                    <label class="control-label">Supervisor:</label>
+                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
                 </div>
-            </div>    
-        </form>
-</div> 
-@include('empleado.nav')
-@yield('submodulos')
+            @elseif($empleado->tipo == 'Supervisor')
+                <div class="form-group col-4">
+                    <label class="control-label">Gerente:</label>
+                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
+                </div>
+            @endif
+        </div>
+        @yield('submodulos')
+    </div>
+</div>
+
+
 @endsection
