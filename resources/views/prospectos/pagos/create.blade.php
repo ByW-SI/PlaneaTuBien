@@ -171,6 +171,15 @@
 					</div>
 				</div>
             </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-sm-4 offset-sm-4 text-center">
+                        <button type="submit">
+                            
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -108,5 +108,19 @@ class EmpleadoController extends Controller
         return view('empleado.listaempleado', ['empleados' => $supervisores]);
     }
 
+    public function getAsesores(Request $request) {
+        $query = $request->input('query');
+        $wordsquery = explode(' ', $query);
+        $asesores = Empleado::where(function($q) use($wordsquery) {
+            foreach ($wordsquery as $word) {
+                $q->orWhere('nombre', 'LIKE', "%$word%")
+                  ->orWhere('paterno', 'LIKE', "%$word%")
+                  ->orWhere('materno', 'LIKE', "%$word%");
+            }
+        });
+        $asesores = $asesores->where('tipo', 'Asesor')->get();
+        return view('empleado.asesores', ['asesores' => $asesores]);
+    }
+
 
 }

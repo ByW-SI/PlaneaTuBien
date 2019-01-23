@@ -9,11 +9,11 @@
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fa fa-users"></i><strong> Clientes</strong>
+					<i class="fa fa-users"></i><strong> Prospectos</strong>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{route('clientes.create')}}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{route('clientes.index')}}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+					<a class="dropdown-item" href="{{route('prospectos.create')}}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+					<a class="dropdown-item" href="{{route('prospectos.index')}}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">

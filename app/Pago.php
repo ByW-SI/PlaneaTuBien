@@ -10,7 +10,7 @@ class Pago extends Model
 
 	protected $fillable = [
 		'id',
-		'cliente_id',
+		'prospecto_id',
 		'prestamo',
 		'total',
 		'meses',
@@ -28,7 +28,7 @@ class Pago extends Model
 		'folio'
 	];
 
-	public function cliente() {
-		return $this->belongsTo('App\Cliente');
+	public function prospecto() {
+		return $this->belongsTo('App\Prospecto');
 	}
 }
