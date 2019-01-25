@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
+use App\Sucursal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::get();
+        $empleados = Empleado::whereNotIn('id', [1])->get();
         return view('empleado.index', ['empleados'=>$empleados]);
     }
 
@@ -26,7 +27,8 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        return view('empleado.create');
+        $sucursales = Sucursal::get();
+        return view('empleado.create', ['sucursales' => $sucursales]);
     }
 
     /**
@@ -98,12 +100,26 @@ class EmpleadoController extends Controller
 
     public function buscarGerentes(){
         $gerentes = Empleado::where('tipo', 'Gerente')->get();
-        return view('empleado.listaempleado', ['empleados'=>$gerentes]);
+        return view('empleado.listaempleado', ['empleados' => $gerentes]);
     }
 
     public function buscarSupervisores(){
         $supervisores = Empleado::where('tipo', 'Supervisor')->get();
-        return view('empleado.listaempleado', ['empleados'=>$supervisores]);
+        return view('empleado.listaempleado', ['empleados' => $supervisores]);
+    }
+
+    public function getAsesores(Request $request) {
+        $query = $request->input('query');
+        $wordsquery = explode(' ', $query);
+        $asesores = Empleado::where(function($q) use($wordsquery) {
+            foreach ($wordsquery as $word) {
+                $q->orWhere('nombre', 'LIKE', "%$word%")
+                  ->orWhere('paterno', 'LIKE', "%$word%")
+                  ->orWhere('materno', 'LIKE', "%$word%");
+            }
+        });
+        $asesores = $asesores->where('tipo', 'Asesor')->get();
+        return view('empleado.asesores', ['asesores' => $asesores]);
     }
 
 

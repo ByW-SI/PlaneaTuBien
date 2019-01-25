@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Prospecto;
 
-use App\Cliente;
+use App\Prospecto;
 use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ClienteController extends Controller
+class ProspectoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::get();
-        return view('clientes.index', ['clientes' => $clientes]);
+        $prospectos = Prospecto::get();
+        return view('prospectos.index', ['prospectos' => $prospectos]);
     }
 
     /**
@@ -28,7 +28,7 @@ class ClienteController extends Controller
     public function create()
     {
         $asesores = Empleado::where('tipo', 'Asesor')->get();
-        return view('clientes.create', ['asesores' => $asesores]);
+        return view('prospectos.create', ['asesores' => $asesores]);
     }
 
     /**
@@ -39,54 +39,45 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = Cliente::create($request->all());
-        return redirect()->route('clientes.show', ['cliente' => $cliente]);
+        $prospecto = Prospecto::create($request->all());
+        return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  \App\Prospecto  $prospecto
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show(Prospecto $prospecto)
     {
-        return view('clientes.view', ['cliente' => $cliente]);
+        return view('prospectos.view', ['prospecto' => $prospecto]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  \App\Prospecto  $prospecto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit(Prospecto $prospecto)
     {
         $asesores = Empleado::where('tipo', 'Asesor')->get();
-        return view('clientes.edit', ['cliente' => $cliente, 'asesores' => $asesores]);
+        return view('prospectos.edit', ['prospecto' => $prospecto, 'asesores' => $asesores]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
+     * @param  \App\Prospecto  $prospecto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, Prospecto $prospecto)
     {
-        $cliente->update($request->all());
-        return redirect()->route('clientes.show', ['cliente' => $cliente]);
+        // dd($request->all());
+        $prospecto->update($request->all());
+        return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cliente $cliente)
-    {
-        //
-    }
 }
