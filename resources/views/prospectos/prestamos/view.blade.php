@@ -55,36 +55,42 @@
                             <i class="fa fa-plus"></i><strong> Agregar Préstamo</strong>
                         </a>
                     </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="{{ route('prospectos.prestamos.index', ['prospecto' => $prospecto]) }}" class="btn btn-primary">
+                            <i class="fa fa-bars"></i><strong> Lista de Préstamos</strong>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
-                @if(count($prospecto->prestamos) > 0)
-                    <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-                        <tr class="info">
-                            <th>Préstamo</th>
-                            <th>Meses</th>
-                            <th>Total</th>
-                            <th>Acción</th>
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label class="control-label">Préstamo:</label>
+                        <input type="text" class="form-control" value="${{ number_format($prestamo->prestamo, 2) }}" readonly="">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="control-label">Meses:</label>
+                        <input type="text" class="form-control" value="{{ $prestamo->meses }} meses" readonly="">
+                    </div>
+                </div>
+                <table class="table table-sm table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+                    <tr class="info">
+                        <th>Mes</th>
+                        <th>Pago inicial</th>
+                        <th>Mensualidad</th>
+                    </tr>
+                    @for($i = 1; $i <= $prestamo->meses; $i++)
+                        <tr>
+                            <td>Mes {{ $i }}</td>
+                            <td>{{ $i > 1 ? '-' : '$' . number_format($prestamo->prestamo * 0.1, 2) }}</td>
+                            <td>${{ number_format($prestamo->prestamo / $prestamo->meses, 2) }}</td>
                         </tr>
-                        @foreach($prospecto->prestamos as $prestamo)
-                            <tr>
-                                <td>${{ number_format($prestamo->prestamo, 2) }}</td>
-                                <td>{{ $prestamo->meses }} meses</td>
-                                <td>${{ number_format($prestamo->prestamo * 1.1, 2) }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('prospectos.prestamos.show', ['prospecto' => $prospecto, 'prestamo' => $prestamo]) }}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-eye"></i> Ver
-                                    </a>
-                                    <a href="{{ route('prospectos.prestamos.pdf', ['prospecto' => $prospecto, 'prestamo' => $prestamo]) }}" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa fa-file"></i> PDF
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                @else
-                    <h4>No hay préstamos disponibles.</h4>
-                @endif
+                    @endfor
+                    <tr>
+                        <td colspan="2" class="text-right">Total:</td>
+                        <td>${{ number_format($prestamo->prestamo * 1.1, 2) }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

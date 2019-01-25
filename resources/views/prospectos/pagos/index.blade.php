@@ -33,10 +33,10 @@
                         <a class="nav-link" href="{{ route('prospectos.documentos.index', ['prospecto' => $prospecto]) }}">Documentación</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('prospectos.prestamos.index', ['prospecto' => $prospecto]) }}">Préstamos</a>
+                        <a class="nav-link" href="{{ route('prospectos.prestamos.index', ['prospecto' => $prospecto]) }}">Préstamos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
+                        <a class="nav-link active" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">CRM</a>
@@ -48,38 +48,50 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h5>Préstamos:</h5>
+                        <h5>Pagos:</h5>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <a href="{{ route('prospectos.prestamos.create', ['prospecto' => $prospecto]) }}" class="btn btn-success">
-                            <i class="fa fa-plus"></i><strong> Agregar Préstamo</strong>
+                        <a href="{{ route('prospectos.pagos.store', ['prospecto' => $prospecto]) }}" class="btn btn-success">
+                            <i class="fa fa-plus"></i><strong> Agregar Pago</strong>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                @if(count($prospecto->prestamos) > 0)
+                @if(count($prospecto->pagos) > 0)
                     <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                         <tr class="info">
+                            <th>Fecha del pago</th>
                             <th>Préstamo</th>
                             <th>Meses</th>
                             <th>Total</th>
+                            <th>Monto</th>
+                            <th>Restante</th>
+                            <th>Status</th>
                             <th>Acción</th>
                         </tr>
                         @foreach($prospecto->prestamos as $prestamo)
-                            <tr>
-                                <td>${{ number_format($prestamo->prestamo, 2) }}</td>
-                                <td>{{ $prestamo->meses }} meses</td>
-                                <td>${{ number_format($prestamo->prestamo * 1.1, 2) }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('prospectos.prestamos.show', ['prospecto' => $prospecto, 'prestamo' => $prestamo]) }}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-eye"></i> Ver
-                                    </a>
-                                    <a href="{{ route('prospectos.prestamos.pdf', ['prospecto' => $prospecto, 'prestamo' => $prestamo]) }}" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa fa-file"></i> PDF
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach($prestamo->pagos as $pago)
+                                <tr>
+                                    <td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
+                                    <td>${{ number_format($pago->prestamo->prestamo, 2) }}</td>
+                                    <td>{{ $pago->prestamo->meses }} meses</td>
+                                    <td>${{ number_format($pago->total, 2) }}</td>
+                                    <td>${{ number_format($pago->monto, 2) }}</td>
+                                    <td>${{ number_format($pago->restante, 2) }}</td>
+                                    <td>{{ $pago->status }}</td>
+                                    <td class="text-center">
+                                        {{-- @if($pago == $prestamo->pagos->last() && $pago->status != "Aprobado") --}}
+                                            <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-warning">
+                                                <strong>$</strong> Pagar
+                                            </a>
+                                        {{-- @endif --}}
+                                        <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-eye"></i> Ver
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     </table>
                 @else

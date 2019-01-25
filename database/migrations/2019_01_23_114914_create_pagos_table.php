@@ -17,9 +17,10 @@ class CreatePagosTable extends Migration
             $table->increments('id');
             $table->integer('prospecto_id')->unsigned();
             $table->foreign('prospecto_id')->references('id')->on('prospectos');
-            $table->decimal('prestamo');
+            $table->integer('prestamo_id')->unsigned();
+            $table->foreign('prestamo_id')->references('id')->on('prestamos');
+            $table->decimal('status');
             $table->decimal('total');
-            $table->integer('meses');
             $table->decimal('monto');
             $table->decimal('restante');
             $table->string('identificacion');

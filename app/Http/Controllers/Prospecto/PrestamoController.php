@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Prospecto;
 use App\Prospecto;
 use App\Prestamo;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class PrestamoController extends Controller
@@ -48,20 +49,9 @@ class PrestamoController extends Controller
      * @param  \App\Prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function show(Prestamo $prestamo)
+    public function show(Prospecto $prospecto, Prestamo $prestamo)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Prestamo  $prestamo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Prestamo $prestamo)
-    {
-        //
+        return view('prospectos.prestamos.view', ['prospecto' => $prospecto, 'prestamo' => $prestamo]);
     }
 
     /**
@@ -76,14 +66,10 @@ class PrestamoController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Prestamo  $prestamo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Prestamo $prestamo)
-    {
-        //
+    public function pdf(Prospecto $prospecto, Prestamo $prestamo) {
+        $date = date('d-m-Y');
+        $pdf = PDF::loadView('prospectos.prestamos.pdf', ['prospecto' => $prospecto, 'prestamo' => $prestamo]);
+        return $pdf->download('prestamo' . $date . '.pdf');
     }
+
 }

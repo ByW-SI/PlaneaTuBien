@@ -26,6 +26,7 @@ Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 Route::resource('prospectos', 'Prospecto\ProspectoController');
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
 Route::resource('prospectos.prestamos', 'Prospecto\PrestamoController');
+Route::get('prospectos/{prospecto}/prestamos/{prestamo}/pdf','Prospecto\PrestamoController@pdf')->name('prospectos.prestamos.pdf');
 Route::resource('prospectos.pagos', 'Pago\PagoController');
 
 // SUCURSALES

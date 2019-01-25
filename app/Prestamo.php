@@ -17,6 +17,10 @@ class Prestamo extends Model
     ];
 
     public function prospecto() {
-    	return $this->belongsTo('App\Prospecto');
+        return $this->belongsTo('App\Prospecto');
+    }
+
+    public function pagos() {
+        return $this->hasMany('App\Pago');
     }
 }

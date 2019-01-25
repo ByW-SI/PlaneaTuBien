@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Pago;
 
-use App\Cliente;
+use App\Prospecto;
 use App\Pago;
 use App\Banco;
 use Illuminate\Http\Request;
@@ -15,9 +15,9 @@ class PagoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cliente $cliente)
+    public function index(Prospecto $prospecto)
     {
-        return view('clientes.view', ['cliente' => $cliente]);
+        return view('prospectos.pagos.index', ['prospecto' => $prospecto]);
     }
 
     /**
@@ -25,10 +25,10 @@ class PagoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Cliente $cliente)
+    public function create(Prospecto $prospecto)
     {
         $bancos = Banco::get();
-        return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
+        return view('prospectos.pagos.create', ['prospecto' => $prospecto, 'bancos' => $bancos]);
     }
 
     /**
@@ -37,9 +37,11 @@ class PagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Prospecto $prospecto, Request $request)
     {
-        //
+        $pago = new Pago($request->all());
+        $prospecto->pagos()->save($pago);
+        return redirect()->route('prospectos.pagos.index', ['prospecto' => $prospecto]);
     }
 
     /**
