@@ -10,16 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+    return view('index');
+});
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
 Route::resource('clientes', 'Cliente\ClienteController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 Route::resource('sucursals', 'Sucursal\SucursalController');
-
-Route::get('/', function () {
-    return view('index');
-});
 
 /*AJAX */
 Route::get('buscarsucursales', 'Sucursal\SucursalController@sucursalesAjax')->name('buscarsucursales');
