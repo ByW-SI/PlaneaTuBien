@@ -14,6 +14,7 @@ class Empleado extends Model
         'nombre',
         'paterno',
         'materno',
+        'email',
         'edad',
         'sexo',
         'sucursal_id',
@@ -47,4 +48,9 @@ class Empleado extends Model
     public function sucursal(){
         return $this->belongsTo('App\Sucursal');
     }
+
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+    
 }

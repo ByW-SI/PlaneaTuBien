@@ -16,7 +16,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::get();
+        $empleados = Empleado::whereNotIn('id', [1])->get();
         return view('empleado.index', ['empleados'=>$empleados]);
     }
 

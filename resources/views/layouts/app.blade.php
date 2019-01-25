@@ -13,13 +13,17 @@
         <div class="row">
             <div class="col-12 p-0 m-0">
                 <a href="/">
-                    <img src="{{asset('img/header.jpg')}}" class="img" alt="Planea tu Bien.">
+                    <img src="{{asset(  'img/header.jpg')}}" class="img-fluid" alt="Sigvaris.">
                 </a>
             </div>
         </div>
         <div class="row m-0 p-0">
             <div class="col-12 m-0 p-0">
-                @include('nav')
+                <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #081170;">
+                    <a class="navbar-brand" href="/">
+                        <strong>Planea tu bien</strong>
+                    </a>
+                </nav>
             </div>
         </div>
         <div class="container py-5">

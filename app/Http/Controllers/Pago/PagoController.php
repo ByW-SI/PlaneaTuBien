@@ -55,37 +55,9 @@ class PagoController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pago $pago)
-    {
-        //
+    public function follow(Prospecto $prospecto, Pago $pago) {
+        $bancos = Banco::get();
+        return view('prospectos.pagos.follow', ['prospecto' => $prospecto, 'bancos' => $bancos, 'pago' => $pago]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pago $pago)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pago $pago)
-    {
-        //
-    }
+    
 }

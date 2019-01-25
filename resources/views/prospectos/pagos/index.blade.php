@@ -51,7 +51,7 @@
                         <h5>Pagos:</h5>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <a href="{{ route('prospectos.pagos.store', ['prospecto' => $prospecto]) }}" class="btn btn-success">
+                        <a href="{{ route('prospectos.pagos.create', ['prospecto' => $prospecto]) }}" class="btn btn-success">
                             <i class="fa fa-plus"></i><strong> Agregar Pago</strong>
                         </a>
                     </div>
@@ -81,11 +81,11 @@
                                     <td>${{ number_format($pago->restante, 2) }}</td>
                                     <td>{{ $pago->status }}</td>
                                     <td class="text-center">
-                                        {{-- @if($pago == $prestamo->pagos->last() && $pago->status != "Aprobado") --}}
-                                            <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-warning">
+                                        @if($pago == $prestamo->pagos->last() && $pago->status != "Aprobado")
+                                            <a href="{{ route('prospectos.pagos.follow', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-warning">
                                                 <strong>$</strong> Pagar
                                             </a>
-                                        {{-- @endif --}}
+                                        @endif
                                         <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"></i> Ver
                                         </a>
