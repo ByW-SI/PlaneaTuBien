@@ -14,9 +14,9 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <form role="form" name="domicilio" id="form-cliente" method="POST" action="{{route('empleados.store')}}" name="form">
-            {{ csrf_field() }}
+    <form role="form" name="domicilio" id="form-cliente" method="POST" action="{{route('empleados.store')}}" name="form">
+        {{ csrf_field() }}
+        <div class="card-body">
             <input type="hidden" name="status" value="activo">
             <div class="row">
                 <div class="form-group col-sm-4">
@@ -33,6 +33,10 @@
                 </div>
             </div>
             <div class="row">
+                <div class="form-group col-sm-4">
+                    <label class="control-label">✱Correo electrónico:</label>
+                    <input required type="email" class="form-control" id="email" name="email" value="">
+                </div>
                 <div class="form-group col-sm-4">
                     <label class="control-label">✱Edad:</label>
                     <input required type="text" class="form-control" id="edad" name="edad" value="">
@@ -67,8 +71,6 @@
                         <option value="Administrador">Administrador</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-sm-4">
                     <label class="control-label">✱Sucursal:</label>
                     <div class="input-group">
@@ -121,20 +123,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-sm-4 offset-4 text-center">
-                        <button type="submit" class="btn btn-success">
-                            <i class="fa fa-check"></i> Guardar
-                        </button>
-                    </div>
-                    <div class="col-sm-4 text-right text-danger">
-                        ✱Campos Requeridos.
-                    </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-4 offset-4 text-center">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i> Guardar
+                    </button>
+                </div>
+                <div class="col-sm-4 text-right text-danger">
+                    ✱Campos Requeridos.
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <script type="text/javascript">

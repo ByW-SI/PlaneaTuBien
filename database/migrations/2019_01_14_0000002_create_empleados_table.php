@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmpleadoTable extends Migration
+class CreateEmpleadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,17 +19,17 @@ class CreateEmpleadoTable extends Migration
             $table->string('nombre');
             $table->string('paterno');
             $table->string('materno')->nullable();
-            $table->integer('edad');
-            $table->string('sexo');
-            $table->integer('sucursal_id')->unsigned();
+            $table->string('email')->nullable();
+            $table->integer('edad')->nullable();
+            $table->string('sexo')->nullable();
+            $table->integer('sucursal_id')->unsigned()->nullable();
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
-            $table->string('cargo');
+            $table->string('cargo')->nullable();
             $table->integer('id_jefe')->unsigned()->nullable();
             $table->foreign('id_jefe')->references('id')->on('empleados');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('fechabaja')->nullable();
             $table->string('motivobaja')->nullable();
-            
             $table->timestamps();
         });
     }

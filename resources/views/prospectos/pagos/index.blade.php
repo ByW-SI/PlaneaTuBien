@@ -25,68 +25,15 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>Nombre:</label>
-                <dd>{{ $prospecto->nombre }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Apellido Paterno:</label>
-                <dd>{{ $prospecto->appaterno }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Apellido Materno:</label>
-                <dd>{{ $prospecto->apmaterno ? $prospecto->apmaterno : 'N/A' }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Sexo:</label>
-                <dd>{{ $prospecto->sexo }}</dd>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>RFC:</label>
-                <dd>{{ $prospecto->rfc }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Email:</label>
-                <dd>{{ $prospecto->email }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Teléfono:</label>
-                <dd>{{ $prospecto->telefono }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Teléfono Móvil:</label>
-                <dd>{{ $prospecto->movil }}</dd>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>Asesor:</label>
-                <dd>{{ $prospecto->asesor->nombre }} {{ $prospecto->asesor->paterno }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Ingreso Mensual:</label>
-                <dd>{{ $prospecto->ingreso }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Gasto Mensual:</label>
-                <dd>{{ $prospecto->gasto }}</dd>
-            </div>
-        </div>
+        @include('prospectos.info')
         <div class="row">
             <div class="col-sm-12">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.documentos.index', ['prospecto' => $prospecto]) }}">Documentación</a>
+                        <a class="nav-link" href="{{ route('prospectos.cotizacions.index', ['prospecto' => $prospecto]) }}">Cotización</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('prospectos.prestamos.index', ['prospecto' => $prospecto]) }}">Préstamos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
+                        <a class="nav-link active" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">CRM</a>
@@ -98,33 +45,54 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h5>Préstamos:</h5>
+                        <h5>Pagos:</h5>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <a href="{{ route('prospectos.prestamos.create', ['prospecto' => $prospecto]) }}" class="btn btn-success">
-                            <i class="fa fa-plus"></i><strong> Agregar Préstamo</strong>
+                        <a href="{{ route('prospectos.pagos.create', ['prospecto' => $prospecto]) }}" class="btn btn-success">
+                            <i class="fa fa-plus"></i><strong> Agregar Pago</strong>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                @if(count($prospecto->prestamos) > 0)
+                @if(count($prospecto->pagos) > 0)
                     <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                         <tr class="info">
+                            <th>Fecha del pago</th>
                             <th>Préstamo</th>
                             <th>Meses</th>
-                            <th>Total</th>
+                            <th>Cantidad a pagar</th>
+                            <th>Monto</th>
+                            <th>Restante</th>
+                            <th>Status</th>
+                            <th>Acción</th>
                         </tr>
-                        @foreach($prospecto->prestamos as $prestamo)
-                            <tr>
-                                <td>${{ $prestamo->prestamo }}</td>
-                                <td>{{ $prestamo->meses }} meses</td>
-                                <td>${{ $prestamo->prestamo * 1.1 }}</td>
-                            </tr>
+                        @foreach($prospecto->cotizaciones as $cotizacion)
+                            @foreach($cotizacion->pagos as $pago)
+                                <tr>
+                                    <td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
+                                    <td>${{ number_format($pago->cotizacion->prestamo, 2) }}</td>
+                                    <td>{{ $pago->cotizacion->meses }} meses</td>
+                                    <td>${{ number_format($pago->restante + $pago->monto, 2) }}</td>
+                                    <td>${{ number_format($pago->monto, 2) }}</td>
+                                    <td>${{ number_format($pago->restante, 2) }}</td>
+                                    <td>{{ $pago->status }}</td>
+                                    <td class="text-center">
+                                        @if($pago == $cotizacion->pagos->last() && $pago->status != "Aprobado")
+                                            <a href="{{ route('prospectos.pagos.follow', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-warning">
+                                                <strong>$</strong> Pagar
+                                            </a>
+                                        @endif
+                                        <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-eye"></i> Ver
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                     </table>
                 @else
-                    <h4>No hay préstamos disponibles.</h4>
+                    <h4>No hay pagos disponibles.</h4>
                 @endif
             </div>
         </div>

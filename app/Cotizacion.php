@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prestamo extends Model
+class Cotizacion extends Model
 {
     
-    protected $table = 'prestamos';
+    protected $table = 'cotizacions';
 
     protected $fillable = [
     	'id',
@@ -17,6 +17,10 @@ class Prestamo extends Model
     ];
 
     public function prospecto() {
-    	return $this->belongsTo('App\Prospecto');
+        return $this->belongsTo('App\Prospecto');
+    }
+
+    public function pagos() {
+        return $this->hasMany('App\Pago');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProspectosTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateProspectosTable extends Migration
      */
     public function up()
     {
-        Schema::create('prospectos', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('empleado_id')->unsigned()->nullable();
+            $table->integer('perfil_id')->unsigned()->nullable();
+            $table->foreign('perfil_id')->references('id')->on('perfils');
+            $table->integer('empleado_id')->unique()->unsigned()->nullable();
             $table->foreign('empleado_id')->references('id')->on('empleados');
-            $table->string('nombre');
-            $table->string('appaterno');
-            $table->string('apmaterno')->nullable();
-            $table->string('sexo')->nullable();
-            $table->string('email');
-            $table->string('movil')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateProspectosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('users');
     }
 }

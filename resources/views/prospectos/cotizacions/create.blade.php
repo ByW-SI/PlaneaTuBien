@@ -25,65 +25,12 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>Nombre:</label>
-                <dd>{{ $prospecto->nombre }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Apellido Paterno:</label>
-                <dd>{{ $prospecto->appaterno }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Apellido Materno:</label>
-                <dd>{{ $prospecto->apmaterno ? $prospecto->apmaterno : 'N/A' }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Sexo:</label>
-                <dd>{{ $prospecto->sexo }}</dd>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>RFC:</label>
-                <dd>{{ $prospecto->rfc }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Email:</label>
-                <dd>{{ $prospecto->email }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Teléfono:</label>
-                <dd>{{ $prospecto->telefono }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Teléfono Móvil:</label>
-                <dd>{{ $prospecto->movil }}</dd>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label>Asesor:</label>
-                <dd>{{ $prospecto->asesor->nombre }} {{ $prospecto->asesor->paterno }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Ingreso Mensual:</label>
-                <dd>{{ $prospecto->ingreso }}</dd>
-            </div>
-            <div class="form-group col-sm-3">
-                <label>Gasto Mensual:</label>
-                <dd>{{ $prospecto->gasto }}</dd>
-            </div>
-        </div>
+        @include('prospectos.info')
         <div class="row">
             <div class="col-sm-12">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.documentos.index', ['prospecto' => $prospecto]) }}">Documentación</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('prospectos.prestamos.index', ['prospecto' => $prospecto]) }}">Préstamos</a>
+                        <a class="nav-link active" href="{{ route('prospectos.cotizacions.index', ['prospecto' => $prospecto]) }}">Cotización</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
@@ -98,33 +45,53 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h5>Datos del Préstamo:</h5>
+                        <h5>Datos de la Cotización:</h5>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="{{ route('prospectos.cotizacions.index', ['prospecto' => $prospecto]) }}" class="btn btn-primary">
+                            <i class="fa fa-bars"></i><strong> Lista de Cotizaciones</strong>
+                        </a>
                     </div>
                 </div>
             </div>
-            <form action="{{ route('prospectos.prestamos.store', ['prospecto' => $prospecto]) }}" method="post">
-                {{ csrf_field() }}
+            <form{{-- action=" {{ route('prospectos.cotizacions.store', ['prospecto' => $prospecto]) }}" method="post" --}}>
+                {{-- {{ csrf_field() }} --}}
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-sm-3">
-                            <label class="control-label">✱Préstamo:</label>
-                            <input type="number" name="prestamo" class="form-control" required="" id="prestamo">
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <label class="control-label">✱Meses:</label>
-                            <select name="meses" class="form-control" id="meses">
+                            <label class="control-label">Valor de la propiedad:</label>
+                            <select name="propiedad" class="form-control" id="propiedad">
                                 <option value="">Seleccionar</option>
-                                <option value="12">12 Meses</option>
-                                <option value="24">24 Meses</option>
-                                <option value="36">36 Meses</option>
-                                <option value="48">48 Meses</option>
+                                @for($i = 300000; $i <= 20000000; $i += 50000)
+                                	<option value="$i">${{ number_format($i, 2) }}</option>
+                                @endfor
                             </select>
                         </div>
-                    </div>
-                    <div class="row" style="display: none" id="tablas">
-                        <div class="col-sm-12">
-                            <table class="table table-sm table-stripped table-bordered table-hover" style="margin-bottom: 0px;" id="tabla">
-                            </table>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label">Ahorro del cliente:</label>
+                            <select name="ahorro" class="form-control" id="ahorro">
+                                <option value="">Seleccionar</option>
+                                <option value="0">0%</option>
+                                <option value="0.05">5%</option>
+                                <option value="0.1">10%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.3">30%</option>
+                                <option value="0.4">40%</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                        	<label class="control-label">Plan:</label>
+                        	<select name="plan" class="form-control">
+                        		<option value="">Seleccionar</option>
+                        		<option value="Tanda 36">Tanda 36</option>
+                        		<option value="Tanda 24">Tanda 24</option>
+                        		<option value="Tanda 18">Tanda 18</option>
+                        		<option value="Tanda 12">Tanda 12</option>
+                        		<option value="Tanda 6">Tanda 6</option>
+                        		<option value="Tanda 3">Tanda 3</option>
+                        		<option value="Tanda 2">Tanda 2</option>
+                        		<option value="Tanda 1">Tanda 1</option>
+                        	</select>
                         </div>
                     </div>
                 </div>

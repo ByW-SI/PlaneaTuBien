@@ -15,12 +15,8 @@ class Prospecto extends Model
         'appaterno',
         'apmaterno',
         'sexo',
-        'rfc',
         'email',
-        'telefono',
         'movil',
-        'ingreso',
-        'gasto'
     ];
 
     public function asesor() {
@@ -31,8 +27,8 @@ class Prospecto extends Model
         return $this->hasOne('App\Documento');
     }
 
-    public function prestamos() {
-        return $this->hasMany('App\Prestamo');
+    public function cotizaciones() {
+        return $this->hasMany('App\Cotizacion');
     }
 
     public function pagos() {

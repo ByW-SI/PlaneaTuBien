@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Pago;
 
-use App\Cliente;
+use App\Prospecto;
 use App\Pago;
 use App\Banco;
 use Illuminate\Http\Request;
@@ -15,9 +15,9 @@ class PagoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cliente $cliente)
+    public function index(Prospecto $prospecto)
     {
-        return view('clientes.view', ['cliente' => $cliente]);
+        return view('prospectos.pagos.index', ['prospecto' => $prospecto]);
     }
 
     /**
@@ -25,10 +25,10 @@ class PagoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Cliente $cliente)
+    public function create(Prospecto $prospecto)
     {
         $bancos = Banco::get();
-        return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
+        return view('prospectos.pagos.create', ['prospecto' => $prospecto, 'bancos' => $bancos]);
     }
 
     /**
@@ -37,9 +37,11 @@ class PagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Prospecto $prospecto, Request $request)
     {
-        //
+        $pago = new Pago($request->all());
+        $prospecto->pagos()->save($pago);
+        return redirect()->route('prospectos.pagos.index', ['prospecto' => $prospecto]);
     }
 
     /**
@@ -48,42 +50,14 @@ class PagoController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function show(Pago $pago)
+    public function show(Prospecto $prospecto, Pago $pago)
     {
-        //
+        return view('prospectos.pagos.view', ['prospecto' => $prospecto, 'pago' => $pago]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pago $pago)
-    {
-        //
+    public function follow(Prospecto $prospecto, Pago $pago) {
+        $bancos = Banco::get();
+        return view('prospectos.pagos.follow', ['prospecto' => $prospecto, 'bancos' => $bancos, 'pago' => $pago]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pago $pago)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Pago  $pago
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pago $pago)
-    {
-        //
-    }
+    
 }

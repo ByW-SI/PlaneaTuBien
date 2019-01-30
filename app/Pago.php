@@ -11,9 +11,9 @@ class Pago extends Model
 	protected $fillable = [
 		'id',
 		'prospecto_id',
-		'prestamo',
+		'cotizacion_id',
+		'status',
 		'total',
-		'meses',
 		'monto',
 		'restante',
 		'identificacion',
@@ -30,5 +30,9 @@ class Pago extends Model
 
 	public function prospecto() {
 		return $this->belongsTo('App\Prospecto');
+	}
+
+	public function cotizacion() {
+		return $this->belongsTo('App\Cotizacion');
 	}
 }

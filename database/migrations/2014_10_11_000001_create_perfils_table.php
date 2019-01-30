@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrestamosTable extends Migration
+class CreatePerfilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePrestamosTable extends Migration
      */
     public function up()
     {
-        Schema::create('prestamos', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('prospecto_id')->unsigned();
-            $table->foreign('prospecto_id')->references('id')->on('prospectos');
-            $table->decimal('prestamo');
-            $table->integer('meses');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePrestamosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prestamos');
+        Schema::dropIfExists('perfils');
     }
 }
