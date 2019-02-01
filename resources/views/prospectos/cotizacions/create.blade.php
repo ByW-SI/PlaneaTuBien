@@ -58,17 +58,16 @@
                 {{-- {{ csrf_field() }} --}}
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-sm-3">
-                            <label class="control-label">Valor de la propiedad:</label>
+                        <div class="form-group col-sm-4">
+                            <label class="col-form-label">Valor de la propiedad:</label>
                             <select name="propiedad" class="form-control" id="propiedad">
-                                <option value="">Seleccionar</option>
                                 @for($i = 300000; $i <= 20000000; $i += 50000)
                                 	<option value="$i">${{ number_format($i, 2) }}</option>
                                 @endfor
                             </select>
                         </div>
-                        <div class="form-group col-sm-3">
-                            <label class="control-label">Ahorro del cliente:</label>
+                        <div class="form-group col-sm-4">
+                            <label class="col-form-label">Ahorro del cliente:</label>
                             <select name="ahorro" class="form-control" id="ahorro">
                                 <option value="">Seleccionar</option>
                                 <option value="0">0%</option>
@@ -79,9 +78,9 @@
                                 <option value="0.4">40%</option>
                             </select>
                         </div>
-                        <div class="form-group col-sm-3">
-                        	<label class="control-label">Plan:</label>
-                        	<select name="plan" class="form-control">
+                        <div class="form-group col-sm-4">
+                        	<label class="col-form-label">Plan:</label>
+                        	<select name="plan" class="form-control" id="plan">
                         		<option value="">Seleccionar</option>
                         		<option value="Tanda 36">Tanda 36</option>
                         		<option value="Tanda 24">Tanda 24</option>
@@ -92,6 +91,24 @@
                         		<option value="Tanda 2">Tanda 2</option>
                         		<option value="Tanda 1">Tanda 1</option>
                         	</select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                        	<label class="col-form-label">Monto a adjudicar:</label>
+                        	<div class="input-group">
+                        		<div class="input-group-prepend">
+                        			<span class="input-group-text">$</span>
+                        		</div>
+                        		<input type="text" class="form-control" readonly="">
+                        	</div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                        	<label class="col-form-label">Plazo:</label>
+                        	<input type="text" name="plazo" id="plazo" class="form-control" readonly="">
+                        </div>
+                        <div class="form-group col-sm-4">
+                        	<label id="mens" class="col-form-label"></label>
                         </div>
                     </div>
                 </div>
@@ -114,43 +131,36 @@
 
 <script type="text/javascript">
     
+	var plan;
+	var plazo;
+	var adjudicar;
+
     $(document).ready(function() {
 
-        $('#prestamo').change(function() {
-            var a = $('#prestamo').val();
-            var b = $('#meses').val();
-            if(a && b) {
-                $('#tablas').show();
-                var aux = '<tr class="info"><th>Mes</th><th>Pago inicial</th><th>Mensuallidad</th></tr>';
-                for(i = 1; i <= b; i++) {
-                    aux += '<tr><td>Mes ' + i + '</td><td>' + (i === 1 ? '$' + (a * .1).toFixed(2) : '-') + '</td><td>$' + (a / b).toFixed(2) + ' </td></tr>'
-                }
-                aux += '<tr class="info"><td colspan="2" class="text-right">Total:</td><td>$' + (a * 1.1).toFixed(2) + '</td></tr>'
-                $('#tabla').html(aux);
-            } else {
-                $('#tablas').hide();
-                $('#tabla').html('');
-            }
-        });
+    	$(document).change(function() {
+    		set();
+    	});
 
-        $('#meses').change(function() {
-            var a = $('#prestamo').val();
-            var b = $('#meses').val();
-            if(a && b) {
-                $('#tablas').show();
-                var aux = '<tr class="info"><th>Mes</th><th>Pago inicial</th><th>Mensuallidad</th></tr>';
-                for(i = 1; i <= b; i++) {
-                    aux += '<tr><td>Mes ' + i + '</td><td>' + (i === 1 ? '$' + (a * .1).toFixed(2) : '-') + '</td><td>$' + (a / b).toFixed(2) + ' </td></tr>'
-                }
-                aux += '<tr class="info"><td colspan="2" class="text-right">Total:</td><td>$' + (a * 1.1).toFixed(2) + '</td></tr>'
-                $('#tabla').html(aux);
-            } else {
-                $('#tablas').hide();
-                $('#tabla').html('');
-            }
+        $('#ahorro').change(function() {
+            var ahorro = $('#ahorro').val();
+            plan = ahorro == '0' ? 'anda 36' : ahorro == '0.05' ? 'Tanda 12' : ahorro == '0.1' ? 'Tanda 6' : ahorro == '0.2' ? 'Tanda 3' : ahorro == '0.3' ? 'Tanda 2' : ahorro == '0.4' ? 'Tanda 1' : '';
+            plazo = plan ? '120' : '';
+            calculate();
         });
 
     });
+
+    function set() {
+    	$('#plan').val(plan);
+    	$('#plazo').val(plazo);
+    }
+
+    function calculate() {
+    	var flag = $('#plan').val();
+    	if(flag) {
+    	} else {
+    	}
+    }
 
 </script>
 
