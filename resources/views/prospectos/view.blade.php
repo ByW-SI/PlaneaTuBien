@@ -33,10 +33,7 @@
                         <a class="nav-link" href="{{ route('prospectos.cotizacions.index', ['prospecto' => $prospecto]) }}">Cotización</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.pagos.index', ['prospecto' => $prospecto]) }}">Pagos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">CRM</a>
+                        <a class="nav-link disabled" href="">CRM</a>
                     </li>
                 </ul>
             </div>
