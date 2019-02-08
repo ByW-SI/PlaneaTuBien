@@ -17,8 +17,26 @@ class CreateCotizacionsTable extends Migration
             $table->increments('id');
             $table->integer('prospecto_id')->unsigned();
             $table->foreign('prospecto_id')->references('id')->on('prospectos');
-            $table->decimal('prestamo');
-            $table->integer('meses');
+            $table->string('propiedad');
+            $table->string('ahorro')->nullable();
+            $table->string('plan');
+            $table->string('adjudicar');
+            $table->string('plazo');
+            $table->string('mensualidad');
+            $table->string('porc1');
+            $table->string('porc2');
+            $table->string('porc3');
+            $table->string('porc4');
+            $table->string('monto1');
+            $table->string('monto2');
+            $table->string('monto3');
+            $table->string('monto4');
+            $table->string('mes1');
+            $table->string('mes2');
+            $table->string('mes3');
+            $table->string('total');
+            $table->string('anual');
+            $table->string('inscripcion');
             $table->timestamps();
         });
     }

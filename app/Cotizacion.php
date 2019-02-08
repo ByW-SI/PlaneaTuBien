@@ -12,8 +12,26 @@ class Cotizacion extends Model
     protected $fillable = [
     	'id',
     	'prospecto_id',
-    	'prestamo',
-    	'meses'
+    	'propiedad',
+    	'ahorro',
+        'plan',
+        'adjudicar',
+        'plazo',
+        'mensualidad',
+        'porc1',
+        'porc2',
+        'porc3',
+        'porc4',
+        'monto1',
+        'monto2',
+        'monto3',
+        'monto4',
+        'mes1',
+        'mes2',
+        'mes3',
+        'total',
+        'anual',
+        'inscripcion',
     ];
 
     public function prospecto() {

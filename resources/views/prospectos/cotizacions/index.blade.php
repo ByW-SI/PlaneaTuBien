@@ -58,16 +58,16 @@
                 @if(count($prospecto->cotizaciones) > 0)
                     <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                         <tr class="info">
-                            <th>Préstamo</th>
-                            <th>Meses</th>
+                            <th>Valor de la propiedad</th>
+                            <th>Plan</th>
                             <th>Total</th>
                             <th>Acción</th>
                         </tr>
                         @foreach($prospecto->cotizaciones as $cotizacion)
                             <tr>
-                                <td>${{ number_format($cotizacion->prestamo, 2) }}</td>
-                                <td>{{ $cotizacion->meses }} meses</td>
-                                <td>${{ number_format($cotizacion->prestamo * 1.1, 2) }}</td>
+                                <td>${{ number_format($cotizacion->propiedad, 2) }}</td>
+                                <td>{{ $cotizacion->plan }}</td>
+                                <td>${{ $cotizacion->total }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('prospectos.cotizacions.show', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-eye"></i> Ver

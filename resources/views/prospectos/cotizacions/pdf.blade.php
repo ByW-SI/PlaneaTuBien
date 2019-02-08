@@ -632,35 +632,80 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="form-group col-sm-12">
-								<p>Estimad{{ $prospecto->sexo == 'Hombre' ? 'o' : 'a' }} {{ $prospecto->nombre }}:</p>
-								<p>Se adjunta la información del préstamo que solicitó para la cantidad de ${{ number_format($cotizacion->prestamo, 2) }} a {{ $cotizacion->meses }} meses.</p>
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-sm-12">
-								<table class="table table-sm table-striped table-bordered" style="margin-bottom: 0px;">
-									<tr style="background: #f0f0f0;">
-										<th style="width: 33%;">Mes</th>
-										<th style="width: 33%;">Pago inicial</th>
-										<th style="width: 33%;">Mensualidad</th>
-									</tr>
-									@for($i = 1; $i <= $cotizacion->meses; $i++)
-										<tr>
-											<td>Mes {{ $i }}</td>
-											<td>{{ $i > 1 ? '-' : '$' . number_format($cotizacion->prestamo * 0.1, 2) }}</td>
-											<td>${{ number_format($cotizacion->prestamo / $cotizacion->meses, 2) }}</td>
-										</tr>
-									@endfor
-									<tr style="background: #f0f0f0;">
-										<td colspan="2" style="text-align: right;">
-											Total
-										</td>
-										<td>{{ number_format($cotizacion->prestamo * 1.1, 2) }}</td>
-									</tr>
-								</table>
+								<p>Estimad{{ $prospecto->sexo == 'Hombre' ? 'o' : 'a' }} {{ $prospecto->nombre }}:</p>
+								<p>Se adjunta la información del préstamo que solicitó para la cantidad de ${{ number_format($cotizacion->propiedad, 2) }} en el plan {{ $cotizacion->plan }}.</p>
 							</div>
 						</div>
+		                <div class="row">
+		                    <div class="col-sm-4">
+		                        <label class="control-label">Monto a adjudicar:</label>
+		                        <dd>${{ $cotizacion->adjudicar }}</dd>
+		                    </div>
+		                    <br>
+		                    <div class="col-sm-4">
+		                        <label class="control-label">Plazo:</label>
+		                        <dd>{{ $cotizacion->plazo }} meses</dd>
+		                    </div>
+		                    <br>
+		                    <div class="col-sm-4">
+		                        <label class="control-label">{{ $cotizacion->mes3 + 1 }} mensualidades de:</label>
+		                        <dd>${{ $cotizacion->mensualidad }}</dd>
+		                    </div>
+		                    <br>
+		                </div>
+		                <div class="row">
+		                    <div class="col-sm-12">
+		                        <table class="table table-stripped table-hover table-bordered">
+		                            <tr class="info">
+		                                <th>Aportación extraordinaria</th>
+		                                <th>%</th>
+		                                <th>Monto</th>
+		                                <th>Mes</th>
+		                            </tr>
+		                            <tr>
+		                                <td>1</td>
+		                                <td>{{ $cotizacion->porc1 }}</td>
+		                                <td>{{ $cotizacion->monto1 }}</td>
+		                                <td>{{ $cotizacion->mes1 }}</td>
+		                            </tr>
+		                            <tr>
+		                                <td>2</td>
+		                                <td>{{ $cotizacion->porc2 }}</td>
+		                                <td>{{ $cotizacion->monto2 }}</td>
+		                                <td>{{ $cotizacion->mes2 }}</td>
+		                            </tr>
+		                            <tr>
+		                                <td>3</td>
+		                                <td>{{ $cotizacion->porc3 }}</td>
+		                                <td>{{ $cotizacion->monto3 }}</td>
+		                                <td>{{ $cotizacion->mes3 }}</td>
+		                            </tr>
+		                            <tr>
+		                                <td>Anual</td>
+		                                <td>{{ $cotizacion->porc4 }}</td>
+		                                <td>{{ $cotizacion->monto4 }}</td>
+		                                <td>Cada diciembre</td>
+		                            </tr>
+		                        </table>
+		                    </div>
+		                </div>
+		                <div class="row">
+		                    <div class="col-sm-4">
+		                        <label class="control-label">Monto total:</label>
+		                        <dd>${{ $cotizacion->total }}</dd>
+		                    </div>
+		                    <br>
+		                    <div class="col-sm-4">
+		                        <label class="control-label">Costo anual de:</label>
+		                        <dd>{{ $cotizacion->anual }}%</dd>
+		                    </div>
+		                    <br>
+		                    <div class="col-sm-4">
+		                        <label class="control-label">Inscripción:</label>
+		                        <dd>${{ $cotizacion->inscripcion }}</dd>
+		                    </div>
+		                </div>
 					</div>
 				</div>
 			</div>

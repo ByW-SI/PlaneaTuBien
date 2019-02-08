@@ -62,32 +62,117 @@
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Préstamo:</label>
-                        <input type="text" class="form-control" value="${{ number_format($cotizacion->prestamo, 2) }}" readonly="">
+                        <label class="col-form-label">Valor de la propiedad:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" readonly="" value="{{ number_format($cotizacion->propiedad) }}" class="form-control">
+                        </div>
                     </div>
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Meses:</label>
-                        <input type="text" class="form-control" value="{{ $cotizacion->meses }} meses" readonly="">
+                        <label class="col-form-label">Ahorro del cliente:</label>
+                        <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro : 'N/A' }}" class="form-control">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">      Plan:</label>
+                        <input type="text" readonly="" value="{{ $cotizacion->plan }}" class="form-control">
                     </div>
                 </div>
-                <table class="table table-sm table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-                    <tr class="info">
-                        <th>Mes</th>
-                        <th>Pago inicial</th>
-                        <th>Mensualidad</th>
-                    </tr>
-                    @for($i = 1; $i <= $cotizacion->meses; $i++)
-                        <tr>
-                            <td>Mes {{ $i }}</td>
-                            <td>{{ $i > 1 ? '-' : '$' . number_format($cotizacion->prestamo * 0.1, 2) }}</td>
-                            <td>${{ number_format($cotizacion->prestamo / $cotizacion->meses, 2) }}</td>
-                        </tr>
-                    @endfor
-                    <tr>
-                        <td colspan="2" class="text-right">Total:</td>
-                        <td>${{ number_format($cotizacion->prestamo * 1.1, 2) }}</td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Monto a adjudicar:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" readonly="" value="{{ $cotizacion->adjudicar }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Plazo:</label>
+                        <div class="input-group">
+                            <input type="text" readonly="" value="{{ $cotizacion->plazo }}" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text">meses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">{{ $cotizacion->mes3 + 1 }} mensualidades de:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" readonly="" value="{{ $cotizacion->mensualidad }}" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-stripped table-hover table-bordered">
+                            <tr class="info">
+                                <th>Aportación extraordinaria</th>
+                                <th>%</th>
+                                <th>Monto</th>
+                                <th>Mes</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $cotizacion->porc1 }}</td>
+                                <td>{{ $cotizacion->monto1 }}</td>
+                                <td>{{ $cotizacion->mes1 }}</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>{{ $cotizacion->porc2 }}</td>
+                                <td>{{ $cotizacion->monto2 }}</td>
+                                <td>{{ $cotizacion->mes2 }}</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>{{ $cotizacion->porc3 }}</td>
+                                <td>{{ $cotizacion->monto3 }}</td>
+                                <td>{{ $cotizacion->mes3 }}</td>
+                            </tr>
+                            <tr>
+                                <td>Anual</td>
+                                <td>{{ $cotizacion->porc4 }}</td>
+                                <td>{{ $cotizacion->monto4 }}</td>
+                                <td>Cada diciembre</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Monto total:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" value="{{ $cotizacion->total }}" class="form-control" readonly="">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Costo anual de:</label>
+                        <div class="input-group">
+                            <input type="text" value="{{ $cotizacion->anual }}" class="form-control" readonly="">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Inscripción:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" value="{{ $cotizacion->inscripcion }}" class="form-control" readonly="">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
