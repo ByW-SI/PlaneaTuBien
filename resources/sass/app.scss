@@ -8,7 +8,13 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.imagen{
+    background: url("../img/header.jpg") no-repeat 0px 0px;
+    background-size: 100% 100%;
+    /*background-size: 170px, 50px;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    -ms-background-size:cover;*/
+    min-height: 75px;
 }

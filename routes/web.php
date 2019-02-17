@@ -31,8 +31,13 @@ Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 
+// PROSPECTOS VISTA APARTE
+Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
+Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
+
 // PROSPECTOS
 Route::resource('prospectos', 'Prospecto\ProspectoController');
+Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create');
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
 Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
 Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');

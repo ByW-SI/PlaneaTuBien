@@ -22,7 +22,10 @@ class CreateProspectosTable extends Migration
             $table->string('apmaterno')->nullable();
             $table->string('sexo')->nullable();
             $table->string('email');
+            $table->string('tel');
             $table->string('movil')->nullable();
+            $table->decimal('monto',10,2);
+            $table->string('plan');
             $table->timestamps();
         });
     }

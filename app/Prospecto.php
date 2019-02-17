@@ -16,7 +16,10 @@ class Prospecto extends Model
         'apmaterno',
         'sexo',
         'email',
+        'tel',
         'movil',
+        'monto',
+        'plan',
     ];
 
     public function asesor() {
