@@ -46,7 +46,7 @@
                 <label class="control-label">Cargo:</label>
                 <input type="text" class="form-control" value="{{ $empleado->cargo }}" readonly="">
             </div>	
-            @if($empleado->tipo == 'Asesor')
+           {{--  @if($empleado->tipo == 'Asesor')
                 <div class="form-group col-4">
                     <label class="control-label">Supervisor:</label>
                     <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
@@ -56,7 +56,7 @@
                     <label class="control-label">Gerente:</label>
                     <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
                 </div>
-            @endif
+            @endif --}}
         </div>
         @yield('submodulos')
     </div>
