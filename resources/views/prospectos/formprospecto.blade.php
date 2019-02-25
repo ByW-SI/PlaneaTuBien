@@ -79,14 +79,11 @@
 						<label for="plan">Plan que deseas obtener</label>
 						<select name="plan" class="form-control" id="plan" required>
                     		<option value="">Seleccionar</option>
-                    		<option value="Tanda 36" {{old('plan') == "Tanda 36" ? "selected" : ""}}>Tanda 36</option>
-                    		<option value="Tanda 24" {{old('plan') == "Tanda 24" ? "selected" : ""}}>Tanda 24</option>
-                    		<option value="Tanda 18" {{old('plan') == "Tanda 18" ? "selected" : ""}}>Tanda 18</option>
-                    		<option value="Tanda 12" {{old('plan') == "Tanda 12" ? "selected" : ""}}>Tanda 12</option>
-                    		<option value="Tanda 6" {{old('plan') == "Tanda 6" ? "selected" : ""}}>Tanda 6</option>
-                    		<option value="Tanda 3" {{old('plan') == "Tanda 3" ? "selected" : ""}}>Tanda 3</option>
-                    		<option value="Tanda 2" {{old('plan') == "Tanda 2" ? "selected" : ""}}>Tanda 2</option>
-                    		<option value="Tanda 1" {{old('plan') == "Tanda 1" ? "selected" : ""}}>Tanda 1</option>
+                    		<option value="15 años" {{old('plan') == "15 años" ? "selected" : ""}}>15 años</option>
+                    		<option value="10 años" {{old('plan') == "10 años" ? "selected" : ""}}>10 años</option>
+                    		<option value="6 años" {{old('plan') == "6 años" ? "selected" : ""}}>6 años</option>
+                    		<option value="5 años" {{old('plan') == "5 años" ? "selected" : ""}}>5 años</option>
+                    		<option value="3 años" {{old('plan') == "3 años" ? "selected" : ""}}>3 años</option>
                     	</select>
 					</div>
 				</div>

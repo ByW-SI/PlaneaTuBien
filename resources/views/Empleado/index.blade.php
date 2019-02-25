@@ -51,9 +51,9 @@
 								<a href="{{ route('empleados.show', [$empleado]) }}" class="btn btn-primary">
 									<i class="fa fa-eye"></i> Ver
 								</a>
-								<button type="button" class="btn btn-warning disabled">
+								<a href="{{ route('empleados.edit',[$empleado]) }}" class="btn btn-warning">
 									✎ Editar
-								</button>
+								</a>
 								<button type="button" class="btn btn-danger disabled">
 									<i class="fa fa-times"></i> Baja
 								</button>

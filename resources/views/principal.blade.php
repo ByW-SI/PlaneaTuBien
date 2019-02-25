@@ -37,7 +37,7 @@
 
         
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
         var pusher = new Pusher('402f8ad1b8c66d21fef9', {
           cluster: 'us2',
@@ -64,6 +64,6 @@
           var not_existentes = notificacion.html();
            notificacion.html(not_existentes + toast);
         });
-        $('.toast').toast('show')
+        // $('.toast').toast('show')
     </script>
 </html>

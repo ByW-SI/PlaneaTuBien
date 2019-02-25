@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col h-100 w-100">
                 <a href="/">
-                    <img src="{{asset(  'img/header.jpg')}}" class="img-fluid" alt="planea.">
+                    <img src="{{asset('img/header.jpg')}}" class="img-fluid" alt="planea.">
                 </a>
             </div>
         </div>

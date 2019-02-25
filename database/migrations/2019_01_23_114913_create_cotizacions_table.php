@@ -17,6 +17,8 @@ class CreateCotizacionsTable extends Migration
             $table->increments('id');
             $table->integer('prospecto_id')->unsigned();
             $table->foreign('prospecto_id')->references('id')->on('prospectos');
+            $table->integer('promocion_id')->unsigned()->nullable();
+            $table->foreign('promocion_id')->references('id')->on('promocions');
             $table->string('propiedad');
             $table->string('ahorro')->nullable();
             $table->string('plan');
@@ -38,6 +40,7 @@ class CreateCotizacionsTable extends Migration
             $table->string('anual');
             $table->string('inscripcion');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

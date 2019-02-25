@@ -55,6 +55,23 @@
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+					<i class="fas fa-briefcase"></i><strong> RH</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fas fa-user-plus"></i><strong> Alta</strong></a>
+					<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fas fa-user-friends"></i><strong> Búsqueda</strong></a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+					<i class="fas fa-calendar-alt"></i><strong> C.R.M.</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ route('empleados.prospectos.index',['empleado'=>2]) }}"><i class="fas fa-calendar"></i><strong> Mi CRM</strong></a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 					<i class="fa fa-building"></i><strong> Sucursales</strong>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -68,6 +85,11 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="{{ route('bancos.index') }}"><i class="fa fa-university"></i><strong> Bancos</strong></a>
+					<a class="dropdown-item" href="{{ route('promocions.index') }}"><i class="fas fa-percent"></i><strong> Promociones</strong></a>
+					<a class="dropdown-item" href="{{ route('areas.index') }}"><i class="fas fa-clipboard-check"></i><strong> Areas</strong></a>
+					<a class="dropdown-item" href="{{ route('bajas.index') }}"><i class="fas fa-user-times"></i><strong> Bajas</strong></a>
+					<a class="dropdown-item" href="{{ route('contratos.index') }}"><i class="fas fa-file-contract"></i><strong> Contratos</strong></a>
+					<a class="dropdown-item" href="{{ route('puestos.index') }}"><i class="fas fa-users-cog"></i><strong> Puestos</strong></a>
 				</div>
 			</li>
 		</ul>

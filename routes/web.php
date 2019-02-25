@@ -31,6 +31,14 @@ Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 
+// Empleados
+
+Route::resource('empleados.laborals','Empleado\EmpleadoDatoLabController');
+
+Route::resource('empleados.prospectos','Empleado\EmpleadoProspectoController');
+Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCotizacionController');
+Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController');
+
 // PROSPECTOS VISTA APARTE
 Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
@@ -49,13 +57,18 @@ Route::resource('sucursals', 'Sucursal\SucursalController');
 
 // PRECARGAS
 Route::resource('bancos', 'Banco\BancoController');
+Route::resource('areas','Precargas\TipoAreaController');
+Route::resource('bajas','Precargas\TipoBajaController');
+Route::resource('contratos','Precargas\TipoContratoController');
+Route::resource('puestos','Precargas\TipoPuestoController');
+Route::resource('promocions','Precargas\PromocionController');
 
 // AJAX
 Route::get('buscarsucursales', 'Sucursal\SucursalController@sucursalesAjax')->name('buscarsucursales');
 Route::get('buscargerentes', 'Empleado\EmpleadoController@buscarGerentes')->name('buscargerentes');
 Route::get('buscarsupervisores', 'Empleado\EmpleadoController@buscarSupervisores')->name('buscarsupervisores');
 Route::get('getAsesores', 'Empleado\EmpleadoController@getAsesores')->name('empleados.asesores');
-
+Route::get('promocion/{promocion}','Precargas\PromocionController@getPromo')->name('getPromo');
 // SEGURIDAD
 Route::resource('usuarios', 'Usuario\UsuarioController');
 Route::resource('perfils', 'Perfil\PerfilController');

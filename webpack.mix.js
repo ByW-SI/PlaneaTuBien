@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.autoload({
-   jquery: ['$', 'window.jQuery']
+    jQuery: 'jquery',
+    $: 'jquery',
+    jquery: 'jquery'
 });
 
 mix.setPublicPath('public');

@@ -28,7 +28,9 @@ class EmpleadoController extends Controller
     public function create()
     {
         $sucursales = Sucursal::get();
-        return view('empleado.create', ['sucursales' => $sucursales]);
+        $empleado = new Empleado;
+        return view('empleado.form',['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>false]);
+        // return view('empleado.create', ['sucursales' => $sucursales]);
     }
 
     /**
@@ -47,7 +49,11 @@ class EmpleadoController extends Controller
         if(!empty($request->input('supervisor'))){
             $empleado->id_jefe = $request->input('supervisor');
             $empleado->save();
+
         }
+         $sucursal = Sucursal::find($request->sucursal);
+        $empleado->sucursal()->associate($sucursal);
+        $empleado->save();
         return redirect()->route('empleados.index');
     }
 
@@ -59,7 +65,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        return view('empleado.empleadocontacto.index', ['contactos'=>$empleado->contactos, 'empleado'=>$empleado]);
+        return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
     }
 
     /**
@@ -70,7 +76,8 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        return view('empleado.edit', ['empleado'=>$empleado]);  
+        $sucursales = Sucursal::get();
+        return view('empleado.form', ['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>true]);  
     }
 
     /**
@@ -82,7 +89,10 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        $emplaedo->update($request->all());
+        $empleado->update($request->all());
+        $sucursal = Sucursal::find($request->sucursal);
+        $empleado->sucursal()->associate($sucursal);
+        $empleado->save();
         return redirect()->route('empleados.index');
     }
 

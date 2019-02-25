@@ -38,4 +38,8 @@ class Prospecto extends Model
         return $this->hasMany('App\Pago');
     }
 
+    public function crms(){
+        return $this->hasMany('App\ProspectoCRM')->orderBy('fecha_aviso','asc');
+    }
+
 }

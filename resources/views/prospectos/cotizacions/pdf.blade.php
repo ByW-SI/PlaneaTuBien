@@ -706,6 +706,13 @@
 		                        <dd>${{ $cotizacion->inscripcion }}</dd>
 		                    </div>
 		                </div>
+		                @if ($cotizacion->promocion)
+								<h4>PROMOCION: {{$cotizacion->promocion->nombre}}</h4>
+								<p>Recibe el {{$cotizacion->promocion->tipo_monto == "porcentaje" ? $cotizacion->promocion->monto."%" : "$ ".$cotizacion->promocion->monto."MXN"}} en {{$cotizacion->promocion->tipo_promo}}</p>
+								<p><small>valido de: {{$cotizacion->promocion->valido_inicio." a ".$cotizacion->promocion->valido_fin}}</small></p>
+								</div>
+							</div>
+		                @endif
 					</div>
 				</div>
 			</div>
