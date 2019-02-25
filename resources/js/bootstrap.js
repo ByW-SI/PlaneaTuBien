@@ -81,6 +81,7 @@ $(document).ready(function() {
                 res=>{
                     if (res.data) {
                         let promocion = res.data.promocion;
+                        $("#promocion_div").empty();
                         let html = `
                         <div class="form-group col-sm-3">
                             <label>Monto:</label>
