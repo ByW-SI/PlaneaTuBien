@@ -140,6 +140,9 @@
                                 <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
                                     <i class="fa fa-file"></i> PDF
                                 </a>
+                                <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-envelope"></i> Enviar por correo
+                                </a>
                             </td>
                         </tr>
                     @endforeach

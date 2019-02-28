@@ -66,4 +66,5 @@
         });
         // $('.toast').toast('show')
     </script>
+    @stack('scripts')
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Empleado;
 use App\Cotizacion;
 use App\Empleado;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Promocion;
 use App\Prospecto;
 use Illuminate\Http\Request;
@@ -75,5 +76,24 @@ class EmpleadoProspectoCotizacionController extends Controller
         $date = date('d-m-Y');
         $pdf = PDF::loadView('empleado.prospecto.cotizacion.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
         return $pdf->download('cotizacion' . $date . '.pdf');
+    }
+
+    public function sendMail(Empleado $empleado,Prospecto $prospecto,Cotizacion $cotizacion){
+        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
+        // dd($enviar);
+        // return(new \App\Mail\CotizacionEnviada($cotizacion))->render();
+        // dd($cotizacion->task_send_mail);
+        if ($cotizacion->task_send_mail) {
+            $task=$cotizacion->task_send_mail;
+            $task->hecho=1;
+            $task->save();
+        }
+        if($enviar){
+            return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
+        }
+        else{
+            return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
+        }
     }
 }

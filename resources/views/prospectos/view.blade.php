@@ -26,18 +26,6 @@
     </div>
     <div class="card-body">
         @include('prospectos.info')
-        <div class="row">
-            <div class="col-sm-12">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('prospectos.cotizacions.index', ['prospecto' => $prospecto]) }}">Cotización</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="">CRM</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
 

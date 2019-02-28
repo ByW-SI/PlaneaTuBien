@@ -49,11 +49,17 @@
             Asesor a cargo
         </h4>
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group offset-sm-3 col-sm-4">
         <label>Asesor:</label>
         <dd>{{ $prospecto->asesor ? $prospecto->asesor->nombre . ' ' . $prospecto->asesor->paterno : 'No hay asesor asignado' }}</dd>
-        @if (!$prospecto->asesor)
-            <a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
-        @endif
+        
+    </div>
+    <div class="form-group col-sm-4">
+        <label>Fecha de asignación:</label>
+        <dd>{{ $prospecto->fecha_asignado ? $prospecto->fecha_asignado : 'No hay fecha asignada' }}</dd>
+    </div>
+    <div class="form-group col-sm-12 d-flex justify-content-center">
+        <a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn mt-3 btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
+        
     </div>
 </div>

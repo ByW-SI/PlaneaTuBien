@@ -110,7 +110,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-4">
-                    <h5>C.R.M.:</h5>
+                    <h5>C.R.M. de {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apaterno}}:</h5>
                 </div>
                 <div class="col-sm-4 text-center">
                     <a href="{{ route('empleados.prospectos.crms.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">
@@ -120,47 +120,36 @@
             </div>
         </div>
         <div class="card-body">
-            <form>
+            <form action="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" method="GET">
                 <div class="row row-group">
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
                         <label for="desde">Desde:</label>
-                        <input class="form-control" type="date" name="desde" value="{{old('desde')}}">
+                        <input class="form-control" type="date" name="desde" value="{{$desde}}">
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
                         <label for="hasta">Hasta:</label>
-                        <input class="form-control" type="date" name="hasta" value="{{old('hasta')}}">
+                        <input class="form-control" type="date" name="hasta" value="{{$hasta}}">
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                        <label for="prospecto">Prospecto:</label>
-                        <div class="input-group mb-3">
-                            <input class="form-control" type="text" name="prospecto" value="{{old('prospecto')}}">
-                            <div class="input-group-append">
-                                <button class="input-group-text btn btn-primary" type="submit"><i class="fas fa-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                        
+                        <label><br></label>
+                        <button class="form-control btn btn-primary" type="submit"><i class="fas fa-search"></i> Buscar</button>
                     </div>
-                    
                 </div>
-                
             </form>
 
             <div class="row row-group">
                 <table class="table table-stripped table-bordered table-hover">
                     <tr class="thead-light">
-                        <th class="text-center">Prospecto</th>
                         <th class="text-center">Fecha de contacto</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Telefono</th>
                         <th class="text-center">Correo</th>
                         <th class="text-center">Status</th>
+                        <th class="text-center">Tareas</th>
                         <th class="text-center">Acción</th>
                     </tr>
                     @forelse ($crms as $crm)
                         <tr>
-                            <td>
-                                {{$crm->prospecto->nombre." ".$crm->prospecto->appaterno." ".$crm->prospecto->apaterno}}
-                            </td>
                             <td>
                                 {{$crm->fecha_contacto}}
                             </td>
@@ -180,6 +169,17 @@
                             </td>
                             <td>
                                 {{$crm->status}}
+                            </td>
+                            <td>
+                                @if ($crm->task_send_mail)
+                                    <p>{{$crm->task_send_mail->nombre}} cotizacion #{{$crm->task_send_mail->cotizacion->id}} <input type="checkbox"  {{$crm->task_send_mail->hecho ? 'checked="" disabled=""' : 'disabled=""'}}></p>
+                                @endif
+                                @foreach ($crm->tasks as $tarea)
+                                    <form method="POST" action="{{ route('crms.tareas.tarea_checked',['crm'=>$crm,'tarea'=>$tarea]) }}">
+                                        @csrf
+                                        <p>{{$tarea->nombre}} <input type="checkbox"  {{$tarea->pivot->hecho ? 'checked="" disabled=""' : ''}} onChange="if(confirm('¿Tarea realizada?')){this.form.submit();}else{this.checked = false}"></p>
+                                    </form>
+                                @endforeach
                             </td>
                             <td>
                                 <div class="row justify-content-around">

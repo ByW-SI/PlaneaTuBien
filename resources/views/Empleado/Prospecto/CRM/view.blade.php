@@ -121,43 +121,54 @@
         </div>
         <div class="card-body">
             <div class="row row-group">
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="prospecto">Prospecto:</label>
                     <span class="form-control" readonly>{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apaterno}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="fecha_act">Fecha Actual:</label>
                     <span class="form-control" readonly="">{{$crm->fecha_act}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="fecha_contacto">Fecha de contacto:</label>
                     <span class="form-control" readonly="">{{$crm->fecha_contacto}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="fecha_aviso">Fecha de aviso:</label>
                     <span class="form-control" readonly="">{{$crm->fecha_aviso}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="hora_contacto">Hora de contacto:</label>
                     <span class="form-control" readonly="">{{$crm->hora_contacto}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="tipo_contacto">Forma de contacto:</label>
                     <span class="form-control" readonly="">{{$crm->tipo_contacto}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 offset-md-2">
                     <label for="status">Estado:</label>
                     <span class="form-control" readonly="">{{$crm->status}}</span>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
+                    <label for="status">Tareas:</label>
+                    <ul class="list-group">
+                        @foreach ($crm->tasks as $tarea)
+                            <form method="POST" action="{{ route('crms.tareas.tarea_checked',['crm'=>$crm,'tarea'=>$tarea]) }}">
+                                @csrf
+                                <li class="list-group-item">{{$tarea->nombre}} <input type="checkbox"  {{$tarea->pivot->hecho ? 'checked="" disabled=""' : ''}} onChange="if(confirm('¿Tarea realizada?')){this.form.submit();}else{this.checked = false}"></li>
+                            </form>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="comentarios">Comentarios</label>
                     <textarea class="form-control" readonly="">{{$crm->comentarios}}</textarea>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="acuerdos">Acuerdos</label>
                     <textarea class="form-control" readonly="">{{$crm->acuerdos}}</textarea>
                 </div>
-                <div class="col-12 col-xs-12 col-md-4">
+                <div class="col-12 col-xs-12 col-md-4 form-group">
                     <label for="observaciones">Observaciones</label>
                     <textarea class="form-control" readonly="">{{$crm->observaciones}}</textarea>
                 </div>

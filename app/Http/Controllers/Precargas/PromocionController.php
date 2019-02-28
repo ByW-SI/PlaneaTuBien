@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Precargas;
 
-use Validator;
-use App\Promocion;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Promocion;
+use App\TipoPromocion;
+use Illuminate\Http\Request;
+use Validator;
 
 class PromocionController extends Controller
 {
@@ -35,7 +36,8 @@ class PromocionController extends Controller
         //
         $promocion = new Promocion;
         // dd($promocion->nombre);
-        return view('precargas.promocion.form',['promocion'=>$promocion,'edit'=>false]);
+        $tipo_promociones = TipoPromocion::orderBy('nombre','asc')->get();
+        return view('precargas.promocion.form',['promocion'=>$promocion,'tipo_promociones'=>$tipo_promociones,'edit'=>false]);
     }
 
     /**
@@ -51,14 +53,19 @@ class PromocionController extends Controller
             'nombre'=>'required|max:190',
             'monto'=>'required|numeric',
             'tipo_monto'=>'required|in:porcentaje,efectivo',
-            'tipo_promo'=>'required|in:ultima mensualidad,pago inicial,ultima mensualidad y pago inicial',
+            'tipo_promo'=>'required',
             'valido_inicio'=>'required|date|after:today',
             'valido_fin'=>'required|date|after:valido_inicio',
             'descripcion'=>'nullable'
 
         ];
         $this->validate($request,$rules);
-        Promocion::create($request->all());
+        $promocion = new Promocion($request->all());
+        $tipo_promo = TipoPromocion::findOrFail($request->tipo_promo);
+        $promocion->tipo_promocion()->associate($tipo_promo);
+        $promocion->save();
+        // Promocion::create($request->all());
+
         return redirect()->route('promocions.index');
 
     }
@@ -84,7 +91,8 @@ class PromocionController extends Controller
     public function edit(Promocion $promocion)
     {
         //
-        return view('precargas.promocion.form',['promocion'=>$promocion,'edit'=>true]);
+        $tipo_promociones = TipoPromocion::orderBy('nombre','asc')->get();
+        return view('precargas.promocion.form',['promocion'=>$promocion,'tipo_promociones'=>$tipo_promociones,'edit'=>true]);
     }
 
     /**
@@ -101,13 +109,17 @@ class PromocionController extends Controller
             'nombre'=>'required|max:190',
             'monto'=>'required|numeric',
             'tipo_monto'=>'required|in:porcentaje,efectivo',
-            'tipo_promo'=>'required|in:ultima mensualidad,pago inicial,ultima mensualidad y pago inicial',
-            'valido_inicio'=>'required|date|after_or_equal:'.$promocion->valido_inicio,
+            'tipo_promo'=>'required',
+            'valido_inicio'=>'required|date|after:today',
             'valido_fin'=>'required|date|after:valido_inicio',
             'descripcion'=>'nullable'
+
         ];
         $this->validate($request,$rules);
         $promocion->update($request->all());
+        $tipo_promo = TipoPromocion::findOrFail($request->tipo_promo);
+        $promocion->tipo_promocion()->associate($tipo_promo);
+        $promocion->save();
         return redirect()->route('promocions.index');
 
     }
@@ -127,6 +139,7 @@ class PromocionController extends Controller
     }
     public function getPromo(Promocion $promocion)
     {
+        $promocion->tipo_promocion;
         return response()->json(['promocion'=>$promocion],201);
     }
 }

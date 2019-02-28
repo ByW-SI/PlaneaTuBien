@@ -40,6 +40,7 @@
 					</thead>
 					<tbody>
 						@forelse ($precargas as $precarga)
+						<tr>
 							<th scope="row">{{$precarga->nombre}}</th>
 							<th>{{$precarga->descripcion}}</th>
 							<th>
@@ -52,6 +53,7 @@
 									<a href="{{ route($borrar,['precarga'=>$precarga]) }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-{{$precarga->id}}').submit();"><i class="fas fa-trash"></i> Eliminar</a>
 								</div>
 							</th>
+						</tr>
 						@empty
 							<div class="alert alert-warning" role="alert">
 								No se encontraron registros

@@ -35,9 +35,11 @@ Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 
 Route::resource('empleados.laborals','Empleado\EmpleadoDatoLabController');
 
+Route::resource('empleados.crms','Empleado\EmpleadoCRMController',['only'=>['index']]);
 Route::resource('empleados.prospectos','Empleado\EmpleadoProspectoController');
 Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCotizacionController');
 Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController');
+Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked');
 
 // PROSPECTOS VISTA APARTE
 Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
@@ -49,6 +51,7 @@ Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
 Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
 Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');
+Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail');
 Route::resource('prospectos.pagos', 'Pago\PagoController');
 Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow');
 
@@ -61,6 +64,8 @@ Route::resource('areas','Precargas\TipoAreaController');
 Route::resource('bajas','Precargas\TipoBajaController');
 Route::resource('contratos','Precargas\TipoContratoController');
 Route::resource('puestos','Precargas\TipoPuestoController');
+Route::resource('tasks','Precargas\TaskController');
+Route::resource('tipo_promocions','Precargas\TipoPromocionController');
 Route::resource('promocions','Precargas\PromocionController');
 
 // AJAX

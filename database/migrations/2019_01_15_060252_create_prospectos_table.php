@@ -28,8 +28,10 @@ class CreateProspectosTable extends Migration
             $table->string('plan');
             $table->integer('calificacion')->nullable();
             $table->decimal('sueldo',10,2)->default(0.00);
+            $table->decimal('gastos',10,2)->default(0.00);
             $table->decimal('ahorro',10,2)->default(0.00);
             $table->boolean('aprobado')->nullable();
+            $table->date('fecha_asignado')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Mail\CotizacionEnviada;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Mail;
 
 class Cotizacion extends Model
 {
@@ -55,5 +57,16 @@ class Cotizacion extends Model
 
     public function promocion(){
         return $this->belongsTo('App\Promocion');
+    }
+    public function enviarCotizacion($email,$pdf)
+    {
+        $cotizacion = $this;
+        // dd($email);
+        Mail::to($email)->send(new CotizacionEnviada($cotizacion,$pdf));
+    }
+
+     public function task_send_mail()
+    {
+        return $this->hasOne('App\TaskSendMail','cotizacion_id','id');
     }
 }

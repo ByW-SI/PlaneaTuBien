@@ -69,7 +69,7 @@
                         Asesor a cargo
                     </h4>
                 </div>
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-4">
                     <label>Asesor:</label>
                     <select name="empleado_id" class="form-control" required>
                         <option value="">Seleccione un asesor</option>
@@ -78,7 +78,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group offset-sm-2 col-sm-4">
+                <div class="form-group col-sm-4">
+                    <label>Fecha de asignación:</label>
+                    <input type="date" class="form-control" name="fecha_asignado" value="{{date('Y-m-d')}}"  readonly="">
+                </div>
+                <div class="form-group col-sm-4 d-flex justify-content-center ">
                     <input class="btn btn-primary mt-4" type="submit" value="Guardar">
                 </div>
             </div>

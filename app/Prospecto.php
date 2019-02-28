@@ -20,6 +20,8 @@ class Prospecto extends Model
         'movil',
         'monto',
         'plan',
+        'gastos',
+        'fecha_asignado',
     ];
 
     public function asesor() {

@@ -82,6 +82,7 @@ $(document).ready(function() {
                     if (res.data) {
                         let promocion = res.data.promocion;
                         $("#promocion_div").empty();
+                        
                         let html = `
                         <div class="form-group col-sm-3">
                             <label>Monto:</label>
@@ -94,7 +95,7 @@ $(document).ready(function() {
                         </div>
                         <div class="form-group col-sm-5">
                             <label>Tipo de promoción:</label>
-                            <span class="input-group-text" id="tipo_promo">${promocion.tipo_promo}</span>
+                            <span class="input-group-text" id="tipo_promo">${promocion.tipo_promocion.nombre}</span>
                         </div>
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                             <label>Valido:</label>
@@ -247,3 +248,4 @@ $(document).ready(function() {
         
 
     }
+

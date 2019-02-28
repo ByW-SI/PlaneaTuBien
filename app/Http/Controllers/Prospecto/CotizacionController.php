@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Prospecto;
 
-use App\Prospecto;
 use App\Cotizacion;
-use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
+use App\Empleado;
 use App\Http\Controllers\Controller;
+use App\Prospecto;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class CotizacionController extends Controller
 {
@@ -70,6 +71,19 @@ class CotizacionController extends Controller
         $date = date('d-m-Y');
         $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
         return $pdf->download('cotizacion' . $date . '.pdf');
+    }
+
+    public function sendMail(Prospecto $prospecto,Cotizacion $cotizacion){
+        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
+        // dd($enviar);
+        // return(new \App\Mail\CotizacionEnviada($cotizacion))->render();
+        if($enviar){
+            return redirect()->route('prospectos.cotizacions.index', ['prospecto' => $prospecto]);
+        }
+        else{
+            return redirect()->route('prospectos.cotizacions.index', ['prospecto' => $prospecto]);
+        }
     }
 
 }

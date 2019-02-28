@@ -86,11 +86,13 @@ class EmpleadoProspectoController extends Controller
             'calificacion'=>'required|numeric',
             'aprobado'=>'required|boolean',
             'monto'=>'required|numeric',
+            'gastos'=>'required|numeric',
             'plan' =>' required|in:15 años,10 años,6 años,5 años,3 años',
         ];
         $this->validate($request,$rules);
         $prospecto->sueldo = $request->sueldo;
         $prospecto->ahorro = $request->ahorro;
+        $prospecto->gastos=$request->gastos;
         $prospecto->calificacion = $request->calificacion;
         $prospecto->aprobado = $request->aprobado;
         $prospecto->monto = $request->monto;

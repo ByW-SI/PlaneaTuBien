@@ -103,5 +103,9 @@ class Empleado extends Model
     public function prospectos(){
         return $this->hasMany('App\Prospecto');
     }
+    public function crms(){
+        return $this->hasManyThrough('App\ProspectoCRM','App\Prospecto');
+
+    }
     
 }

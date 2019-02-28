@@ -2,7 +2,7 @@
 @section('content')
 <div class="card card-default">
 	<div class="card-header">
-		<h4>CRM de {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}}</h4>
+		<h4>Prospectos de {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}}</h4>
 	</div>
 	<div class="card-body">
 		<div class="row-group">

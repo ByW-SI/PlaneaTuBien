@@ -48,7 +48,7 @@
 							<th>{{$promocion->descripcion}}</th>
 							<th>{{date('d-m-Y', strtotime($promocion->valido_inicio))}} a {{date('d-m-Y', strtotime($promocion->valido_fin))}}</th>
 							<th>{{$promocion->tipo_monto == "porcentaje" ? "$promocion->monto %" : "$ $promocion->monto MXN"}}</th>
-							<th>{{$promocion->tipo_promo}}</th>
+							<th>{{$promocion->tipo_promocion->nombre}}</th>
 							<th>
 								<div class="row justify-content-around">
 									<a href="{{ route('promocions.edit',['promocion'=>$promocion]) }}" class="btn btn-info"><i class="fas fa-edit"></i> Editar</a>

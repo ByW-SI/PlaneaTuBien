@@ -31,4 +31,13 @@ class ProspectoCRM extends Model
     public function prospecto(){
     	return $this->belongsTo('App\Prospecto');
     }
+
+    public function tasks(){
+        return $this->belongsToMany('App\Task','crm_task','crm_id','task_id')->withPivot('hecho');
+    }
+
+    public function task_send_mail()
+    {
+        return $this->hasOne('App\TaskSendMail','crm_id','id');
+    }
 }

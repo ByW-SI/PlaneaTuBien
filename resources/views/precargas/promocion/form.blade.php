@@ -59,25 +59,13 @@
 					</div>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="monto">Tipo de promoción:</label>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="tipo_promo" id="tipo_promo1" value="ultima mensualidad" required {{(old('tipo_promo') == "ultima mensualidad") ? "checked" : (($promocion->tipo_promo == "ultima mensualidad") ? "checked" : "") }}>
-				  		<label class="form-check-label" for="tipo_promo1">
-					    	En ultima mensualidad
-					  	</label>
-					</div>
-					<div class="form-check">
-				  		<input class="form-check-input" type="radio" name="tipo_promo" id="tipo_promo2" value="pago inicial" {{(old('tipo_promo') == "pago inicial") ? "checked" : (($promocion->tipo_promo == "pago inicial") ? "checked" : "") }}>
-					  	<label class="form-check-label" for="tipo_promo2">
-					    	En pago inicial
-					  	</label>
-					</div>
-					<div class="form-check">
-				  		<input class="form-check-input" type="radio" name="tipo_promo" id="tipo_promo3" value="ultima mensualidad y pago inicial" {{(old('tipo_promo') == "ultima mensualidad y pago inicial") ? "checked" : (($promocion->tipo_promo == "ultima mensualidad y pago inicial") ? "checked" : "") }}>
-					  	<label class="form-check-label" for="tipo_promo3">
-					    	En ultima mensualidad y pago inicial
-					  	</label>
-					</div>
+					<label for="tipo_promo">Tipo de promoción:</label>
+					<select class="form-control" name="tipo_promo" required="">
+						<option value="">Seleccione una opción</option>
+						@foreach ($tipo_promociones as $tipo_promo)
+							<option value="{{$tipo_promo->id}}" title="{{$tipo_promo->descripcion}}" {{old('tipo_promo') == $tipo_promo->id ? 'selected=""' : ($promocion->tipo_promocion->id == $tipo_promo->id ? 'selected=""' : '' )}}>{{$tipo_promo->nombre}}</option>
+						@endforeach
+					</select>
 				</div>
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
 					<label for="descripcion">Descripción (opcional):</label>

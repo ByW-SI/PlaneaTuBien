@@ -73,6 +73,14 @@
 					</div>
 					<input class="form-control" readonly="" type="number" value="{{$prospecto->sueldo}}">
 				</div>
+			</div><div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+				<label for="sueldo">Gastos mensual del prospecto:</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">$</span>
+					</div>
+					<input class="form-control" readonly="" type="number" value="{{$prospecto->gastos}}">
+				</div>
 			</div>
 			<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
 				<label for="ahorro">Ahorro neto del prospecto:</label>
@@ -83,11 +91,11 @@
 					<input class="form-control" readonly="" type="number" value="{{$prospecto->ahorro}}">
 				</div>
 			</div>
-			<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+			<div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
 				<label for="calificacion">Calificación del prospecto:</label>
 				<input class="form-control" readonly="" type="number" value="{{$prospecto->calificacion}}">
 			</div>
-			<div class="form-group col-12 col-xs-12 col-md-12 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+			<div class="form-group col-12 col-xs-12 col-md-12 col-lg-4 col-xl-4">
 				<label for="estado">Estado del prospecto:</label>
 				<input class="form-control" readonly="" type="text" value="{{$prospecto->aprobado ? 'Aprobado' : 'No Aprobado'}}" >
 			</div>

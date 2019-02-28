@@ -14,7 +14,7 @@ class Promocion extends Model
     	'nombre',
     	'monto',
     	'tipo_monto',
-        'tipo_promo',
+        'tipo_promocion_id',
     	'valido_inicio',
     	'valido_fin',
     	'descripcion'
@@ -33,5 +33,10 @@ class Promocion extends Model
     public function cotizaciones()
     {
     	return $this->hasMany('App\Cotizacion');
+    }
+
+    public function tipo_promocion()
+    {
+        return $this->belongsTo('App\TipoPromocion');
     }
 }

@@ -77,6 +77,15 @@
 					</div>
 				</div>
 				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+					<label for="sueldo">Gastos mensual del prospecto:</label>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">$</span>
+						</div>
+						<input class="form-control" type="number" name="gastos" step="any" required>
+					</div>
+				</div>
+				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
 					<label for="ahorro">Ahorro neto del prospecto:</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -85,11 +94,11 @@
 						<input class="form-control" type="number" name="ahorro" step="any" required>
 					</div>
 				</div>
-				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+				<div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
 					<label for="calificacion">Calificación del prospecto:</label>
 					<input class="form-control" type="number" name="calificacion" step="1" min="0" max="10" required>
 				</div>
-				<div class="form-group col-12 col-xs-12 col-md-12 offset-md-4 col-lg-12 offset-lg-4 col-xl-12 offset-xl-4">
+				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-4">
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="radio" name="aprobado" id="aprobado" required value="1">
 					  <label class="form-check-label" for="inlineRadio1">Aprobado</label>
