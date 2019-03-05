@@ -101,7 +101,7 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadoFaltaAdministrativa');   
     }
     public function prospectos(){
-        return $this->hasMany('App\Prospecto');
+        return $this->hasMany('App\Prospecto','empleado_id','id');
     }
     public function crms(){
         return $this->hasManyThrough('App\ProspectoCRM','App\Prospecto');

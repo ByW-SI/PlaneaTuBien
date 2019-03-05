@@ -24,6 +24,17 @@ class Prospecto extends Model
         'fecha_asignado',
     ];
 
+    protected $hidden=[
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'empleado_id',
+
+    ];
+    protected $dates=[
+        'deleted_at'
+    ];
+
     public function asesor() {
         return $this->belongsTo('App\Empleado', 'empleado_id');
     }
@@ -42,6 +53,10 @@ class Prospecto extends Model
 
     public function crms(){
         return $this->hasMany('App\ProspectoCRM')->orderBy('fecha_aviso','asc');
+    }
+
+    public function perfilDatosPersonal(){
+        return $this->hasOne('App\PerfilDatosPersonal','prospecto_id','id');
     }
 
 }

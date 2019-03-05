@@ -27,7 +27,7 @@
                 @endif
             </div>
         </div>
-        <div class="container py-5">
+        <div class="container-fluid py-3">
             @yield('content')
         </div>
     </body>
@@ -38,7 +38,9 @@
         
         // Enable pusher logging - don't include this in production
         // Pusher.logToConsole = true;
-
+        $("#notificacion").on("click",'button',function () {
+          $(this).parent().parent().hide();
+        })
         var pusher = new Pusher('402f8ad1b8c66d21fef9', {
           cluster: 'us2',
           encrypted: true,
@@ -53,6 +55,9 @@
             <div class="toast fade show" role="status" aria-live="polite" aria-atomic="true"  data-delay="5000">
               <div class="toast-header">
                 <strong class="mr-auto">${data.prospecto.nombre} ${data.prospecto.appaterno} ${data.prospecto.apmaterno}</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
               <div class="toast-body">
                 <a href="{{ url('prospectos') }}/${data.prospecto.id}">
@@ -64,7 +69,7 @@
           var not_existentes = notificacion.html();
            notificacion.html(not_existentes + toast);
         });
-        // $('.toast').toast('show')
+        // $('.toast').toast('show')  
     </script>
     @stack('scripts')
 </html>

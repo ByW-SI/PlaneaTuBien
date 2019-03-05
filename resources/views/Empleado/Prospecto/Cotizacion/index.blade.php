@@ -143,6 +143,7 @@
                                 <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
                                     <i class="fas fa-envelope"></i> Enviar por correo
                                 </a>
+                                <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm btn-success"> Seleccionar cotización para crear perfil</a>
                             </td>
                         </tr>
                     @endforeach

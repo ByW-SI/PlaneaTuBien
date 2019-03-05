@@ -58,6 +58,21 @@ Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@fo
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController');
 
+// CREAR PERFIL CON PROSPECTO Y COTIZACION
+
+Route::resource('prospectos.cotizacions.perfils','Prospecto\Cotizacion\PerfilController',['only'=>['create','store']]);
+
+Route::namespace('Prospecto\Cliente\Perfil')
+	->prefix('prospectos/{prospecto}/perfil')
+	->name('prospectos.cotizacions.perfil.')
+	->group(function () {
+	    Route::resource('datos_personal','DatosPersonalesController',['except'=>'show']);
+	    Route::resource('historial_crediticio','HistorialCrediticioController',['except'=>'show']);
+	    Route::resource('inmueble_pretendido','InmueblePretendidoController',['except'=>'show']);
+	    Route::resource('referencia_personals','ReferenciaPersonalController');
+	});
+
+
 // PRECARGAS
 Route::resource('bancos', 'Banco\BancoController');
 Route::resource('areas','Precargas\TipoAreaController');

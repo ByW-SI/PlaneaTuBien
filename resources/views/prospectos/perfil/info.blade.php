@@ -1,13 +1,4 @@
-@extends('principal')
-@section('content')
 <div class="card">
-   <div class="card-header">
-        <div class="row">
-            <div class="col-sm-3">
-                <h4>Datos del Prospecto:</h4>
-            </div>
-        </div>
-    </div>
     <div class="card-header">
         <h5>Datos generales del prospecto:</h5>
     </div>
@@ -110,16 +101,6 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h5>Préstamos:</h5>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i><strong> Agregar Cotización</strong>
-                    </a>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <a href="{{ route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-primary">
-                        <i class="fa fa-bars"></i><strong> Lista de Cotizaciones</strong>
-                    </a>
                 </div>
             </div>
         </div>
@@ -245,21 +226,5 @@
         </div>
     </div>
     <div class="card-footer">
-        <div class="d-flex justify-content-around">
-            <a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-                <i class="far fa-calendar-check"></i>
-                <strong> C.R.M.</strong>
-            </a>
-            <a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-                <i class="fas fa-user-edit"></i>
-                <strong> Editar Prospecto</strong>
-            </a>
-            <a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <strong> Cotizador</strong>
-            </a>
-        </div>
     </div>
 </div>
-
-@endsection
