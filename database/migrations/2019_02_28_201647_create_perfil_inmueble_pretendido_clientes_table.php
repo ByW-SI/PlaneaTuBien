@@ -23,7 +23,7 @@ class CreatePerfilInmueblePretendidoClientesTable extends Migration
             $table->string('estado');
             $table->string('colonia');
             $table->unsignedInteger('recamara');
-            $table->unsignedDecimal('baño',3,1);
+            $table->unsignedDecimal('banio',3,1);
             $table->unsignedInteger('estacionamiento')->default(0);
             $table->unsignedInteger('jardin')->default(0);
             $table->string('gastos_notariales')->nullable();
