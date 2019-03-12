@@ -19,8 +19,8 @@ class CreatePerfilHistorialCrediticioClientesTable extends Migration
             $table->foreign('perfil_id')->references('id')->on('perfil_datos_personal_clientes');
             $table->boolean('tarjeta_debito')->default(false);
             $table->boolean('tarjeta_credito')->default(false);
-            $table->string('numero_tarjeta_debito')->default('0');
-            $table->string('numero_tarjeta_credito')->default('0');
+            $table->string('numero_tarjeta_debito')->nullable();
+            $table->string('numero_tarjeta_credito')->nullable();
             // TARJETAS
             $table->boolean('td_bancomer')->default(false);
             $table->boolean('tc_bancomer')->default(false);

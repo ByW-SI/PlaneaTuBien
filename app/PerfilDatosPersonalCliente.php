@@ -11,8 +11,8 @@ class PerfilDatosPersonalCliente extends Model
     use SoftDeletes;
 
     protected $fillable=[
-    	'prefix_1',
-		'prefix_2',
+    	'prefijo_1',
+		'prefijo_2',
 		'nombre_completo_1',
 		'nombre_completo_2',
 		'ocupacion_1',
@@ -68,6 +68,29 @@ class PerfilDatosPersonalCliente extends Model
     public function prospecto()
     {
     	return $this->belongsTo('App\Prospecto','prospecto_id','id');
+    }
+
+    public function asesor()
+    {
+    	return $this->belongsTo('App\Empleado','empleado_id','id');
+    }
+
+    public function cotizacion()
+    {
+    	return $this->belongsTo('App\Cotizacion');
+    }
+
+    public function historial_crediticio()
+    {
+    	return $this->hasOne('App\PerfilHistorialCrediticioCliente','perfil_id' ,'id');
+    }
+
+    public function inmueble_pretendido(){
+    	return $this->hasOne('App\PerfilInmueblePretendidoCliente','perfil_id','id');
+    }
+    public function referencia_personals()
+    {
+    	return $this->hasMany('App\PerfilReferenciaPersonalCliente','perfil_id','id');
     }
 
 }

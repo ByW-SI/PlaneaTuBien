@@ -55,8 +55,8 @@ class Prospecto extends Model
         return $this->hasMany('App\ProspectoCRM')->orderBy('fecha_aviso','asc');
     }
 
-    public function perfilDatosPersonal(){
-        return $this->hasOne('App\PerfilDatosPersonal','prospecto_id','id');
+    public function perfil(){
+        return $this->hasOne('App\PerfilDatosPersonalCliente','prospecto_id','id');
     }
 
 }

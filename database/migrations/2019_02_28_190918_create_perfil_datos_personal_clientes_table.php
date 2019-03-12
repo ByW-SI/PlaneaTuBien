@@ -28,8 +28,8 @@ class CreatePerfilDatosPersonalClientesTable extends Migration
             $table->string('clave');
             $table->string('plan');
             // 1.- PROSPECTO 2.-SU PAREJA (CASADO O UNION LIBRE)
-            $table->string('prefix_1');
-            $table->string('prefix_2')->nullable();
+            $table->string('prefijo_1');
+            $table->string('prefijo_2')->nullable();
             $table->string('nombre_completo_1');
             $table->string('nombre_completo_2')->nullable();
             $table->string('ocupacion_1');
@@ -70,7 +70,7 @@ class CreatePerfilDatosPersonalClientesTable extends Migration
             $table->string('forma_ahorro')->nullable();
             $table->boolean('ahorra');
             $table->decimal('ahorros')->nullable();
-            $table->string('tipo_ahorro');
+            $table->string('tipo_ahorro')->nullable();
             $table->boolean('otro_participante');
             $table->string('participante')->nullable();
             $table->timestamps();

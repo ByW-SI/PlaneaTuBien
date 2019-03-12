@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Perfil;
 
-use App\PerfilDatosPersonalCliente;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
+use App\PerfilDatosPersonalCliente;
+use App\Prospecto;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DatosPersonalesController extends Controller
 {
@@ -13,10 +16,27 @@ class DatosPersonalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Prospecto $prospecto, Cotizacion $cotizacion)
+    public function index(Prospecto $prospecto)
     {
         //
-        dd($prospecto);
+        $perfil = $prospecto->perfil;
+        return view('prospectos.perfil.index',['prospecto'=>$prospecto,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
+    }
+
+    /**
+     * Display the archive pdf for perfil.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdf(Prospecto $prospecto)
+    {
+        //
+        $perfil = $prospecto->perfil;
+        // return view('prospectos.perfil.pdf',['perfil'=>$perfil]);
+        $pdf = PDF::loadView('prospectos.perfil.pdf',['perfil'=>$perfil]);
+        return $pdf->stream();
+        // dd($perfil);
+        // return view('prospectos.perfil.index',['perfil'=>$perfil]);
     }
 
     /**

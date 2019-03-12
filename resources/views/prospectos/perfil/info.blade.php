@@ -112,7 +112,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->propiedad) }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->propiedad,2) }}" class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">

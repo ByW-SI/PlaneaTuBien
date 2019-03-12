@@ -27,4 +27,8 @@ class PerfilReferenciaPersonalCliente extends Model
 	protected $dates=[
 		'deleted_at'
 	];
+	public function perfil()
+    {
+    	return $this->belongsTo('App\PerfilDatosPersonalCliente','id','perfil_id');
+    }
 }

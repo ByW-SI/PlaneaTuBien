@@ -5,7 +5,8 @@
     @include('prospectos.perfil.info')
   </div>
   <div class="col">
-	<form action="" id="perfil">
+	<form method="POST" action="{{ route('prospectos.cotizacions.perfils.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" id="perfil">
+		@csrf
 	    <div class="card">
 			<div class="card-header">
 		        <h4>Crear perfil:</h4>   
@@ -17,7 +18,7 @@
 		    	<div class="row">
 			    	<label for="folio" class="offset-5 col-sm-2 col-form-label">Folio:</label>
 				    <div class="col">
-				      	<input type="text" class="form-control" id="folio" name="folio" placeholder="número de folio">
+				      	<input type="text" class="form-control" id="folio" name="folio" placeholder="número de folio" readonly="" value="{{$folio}}">
 				    </div>
 		    	</div>
 		    	<div class="row">
@@ -36,7 +37,7 @@
 		    	<div class="row">
 			    	<label for="clave" class="offset-5 col-sm-2 col-form-label">Clave:</label>
 				    <div class="col">
-				      	<input type="text" class="form-control" id="clave" name="clave" placeholder="Clave">
+				      	<input type="text" class="form-control" id="clave" name="clave" placeholder="Clave" value="{{str_random(9)}}" readonly="">
 				    </div>
 		    	</div>
 		    	<div class="row mb-3">
@@ -48,7 +49,7 @@
 		    	<div class="form-group row">
 		    		<div class="col-12">
 			    		<div class="input-group">
-							<select class="custom-select" id="prefijo_1" namme="prefijo_1" required="">
+							<select class="custom-select" name="prefijo_1" id="prefijo_1" required="">
 								<option value="">Elige...</option>
 								<option value="Sr.">Sr.</option>
 								<option value="Sra.">Sra.</option>
@@ -211,11 +212,11 @@
 		    		<label for="hijos" class="col-form-label col-sm-3">Hijos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="hijos" id="hijos_si" value="true">
+							<input class="form-check-input" type="radio" name="hijos" id="hijos_si" value="1">
 							<label class="form-check-label" for="hijos_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="hijos" id="hijos_no" value="false">
+							<input class="form-check-input" type="radio" name="hijos" id="hijos_no" value="0">
 							<label class="form-check-label" for="hijos_no">No</label>
 						</div>
 	    			</div>
@@ -228,11 +229,11 @@
 		    		<label for="dependientes_economicos" class="col-form-label col-sm-3">Dependientes económicos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_si" value="true">
+							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_si" value="1">
 							<label class="form-check-label" for="dependientes_economicos_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_no" value="false">
+							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_no" value="0">
 							<label class="form-check-label" for="dependientes_economicos_no">No</label>
 						</div>
 	    			</div>
@@ -251,13 +252,13 @@
 		    				<input type="number" name="ingresos_extras" class="form-control" step="any" min="0">
 						</div>
 		    		</div>
-		    		<label for="ingresos_total" class="col-form-label col-sm-2">Ingresos totales:</label>
+		    		<label for="ingreso_total" class="col-form-label col-sm-2">Ingresos totales:</label>
 		    		<div class="col-sm-4">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingresos_total" class="form-control" step="any" min="0">
+		    				<input type="number" name="ingreso_total" class="form-control" step="any" min="0">
 						</div>
 		    		</div>
 		    	</div>
@@ -265,11 +266,11 @@
 		    		<label for="ahorro_inicial" class="col-form-label col-sm-9">¿Cuenta con algún tipo de enganche o ahorro destinado para iniciar?</label>
 		    		<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_si" value="true">
+							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_si" value="1">
 							<label class="form-check-label" for="ahorro_inicial_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_no" value="false">
+							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_no" value="0">
 							<label class="form-check-label" for="ahorro_inicial_no">No</label>
 						</div>
 	    			</div>
@@ -284,11 +285,11 @@
 		    		<label for="ahorra" class="col-form-label col-sm-2">¿Ahorra?</label>
 					<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_si" value="true">
+							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_si" value="1">
 							<label class="form-check-label" for="ahorra_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_no" value="false">
+							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_no" value="0">
 							<label class="form-check-label" for="ahorra_no">No</label>
 						</div>
 	    			</div>
@@ -312,11 +313,11 @@
 		    		<label for="otro_participante" class="col-form-label col-sm-5">¿Alguna otra persona participará en la compra?</label>
 					<div class="col-sm-1">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_si" value="true">
+							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_si" value="1">
 							<label class="form-check-label" for="otro_participante_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_no" value="false">
+							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_no" value="0">
 							<label class="form-check-label" for="otro_participante_no">No</label>
 						</div>
 	    			</div>
@@ -333,11 +334,11 @@
 		    		<label for="tarjeta_debito" class="col-form-label col-sm-6">Tarjeta de Débito o Cuenta de Ahorro:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="true">
+							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1">
 							<label class="form-check-label" for="tarjeta_debito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="false">
+							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="0">
 							<label class="form-check-label" for="tarjeta_debito_no">No</label>
 						</div>
 	    			</div>
@@ -349,17 +350,17 @@
 				<div class="form-group row">
 					<div class="offset-sm-1 col-sm-11">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_bancomer" id="td_bancomer" value="true">
+							<input class="form-check-input" type="checkbox" name="td_bancomer" id="td_bancomer" value="1">
 							<label class="form-check-label" for="td_bancomer"><img src="{{ asset('img/bbva.png') }}" width="150" height="30"></label>
 						</div>
 
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_santander" id="td_santander" value="true">
+							<input class="form-check-input" type="checkbox" name="td_santander" id="td_santander" value="1">
 							<label class="form-check-label" for="td_santander"><img src="{{ asset('img/santander.png') }}" width="150" height="30"></label>
 						</div>
 
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_hsbc" id="td_hsbc" value="true">
+							<input class="form-check-input" type="checkbox" name="td_hsbc" id="td_hsbc" value="1">
 							<label class="form-check-label" for="td_hsbc"><img src="{{ asset('img/hsbc.png') }}" width="150" height="30"></label>
 						</div>
 					</div>
@@ -367,17 +368,17 @@
 				<div class="form-group row">
 					<div class="offset-sm-1 col-sm-11">	
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_scotiabank" id="td_scotiabank" value="true">
+							<input class="form-check-input" type="checkbox" name="td_scotiabank" id="td_scotiabank" value="1">
 							<label class="form-check-label" for="td_scotiabank"><img src="{{ asset('img/scotiabank.png') }}" width="150" height="30"></label>
 						</div>
 						
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_banamex" id="td_banamex" value="true">
+							<input class="form-check-input" type="checkbox" name="td_banamex" id="td_banamex" value="1">
 							<label class="form-check-label" for="td_banamex"><img src="{{ asset('img/banamex.png') }}" width="150" height="30"></label>
 						</div>
 						
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_banorte" id="td_banorte" value="true">
+							<input class="form-check-input" type="checkbox" name="td_banorte" id="td_banorte" value="1">
 							<label class="form-check-label" for="td_banorte"><img src="{{ asset('img/banorte.png') }}" width="150" height="30"></label>
 						</div>
 						
@@ -387,11 +388,11 @@
 					<label for="en_buro_credito" class="col-form-label col-sm-3">Buró de Crédito:</label>
 					<div class="col-sm-3">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="true">
+							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1">
 							<label class="form-check-label" for="en_buro_credito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_no" value="false">
+							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_no" value="0">
 							<label class="form-check-label" for="en_buro_credito_no">No</label>
 						</div>
 					</div>
@@ -404,11 +405,11 @@
 		    		<label for="tarjeta_credito" class="col-form-label col-sm-6">Tarjeta de Crédito:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="true">
+							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1">
 							<label class="form-check-label" for="tarjeta_credito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_no" value="false">
+							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_no" value="0">
 							<label class="form-check-label" for="tarjeta_credito_no">No</label>
 						</div>
 	    			</div>
@@ -420,22 +421,22 @@
 				<div class="form-group row">
 					<div class="offset-sm-1 col-sm-11">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_bancomer" id="tc_bancomer" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_bancomer" id="tc_bancomer" value="1">
 							<label class="form-check-label" for="tc_bancomer"><img src="{{ asset('img/bbva.png') }}" width="100" height="30"></label>
 						</div>
 
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_santander" id="tc_santander" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_santander" id="tc_santander" value="1">
 							<label class="form-check-label" for="tc_santander"><img src="{{ asset('img/santander.png') }}" width="100" height="30"></label>
 						</div>
 
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_hsbc" id="tc_hsbc" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_hsbc" id="tc_hsbc" value="1">
 							<label class="form-check-label" for="tc_hsbc"><img src="{{ asset('img/hsbc.png') }}" width="100" height="30"></label>
 						</div>
 
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_amex" id="tc_amex" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_amex" id="tc_amex" value="1">
 							<label class="form-check-label" for="tc_amex"><img src="{{ asset('img/amex.png') }}" width="100" height="30"></label>
 						</div>
 					</div>
@@ -443,17 +444,17 @@
 				<div class="form-group row">
 					<div class="offset-sm-1 col-sm-11">	
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_scotiabank" id="tc_scotiabank" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_scotiabank" id="tc_scotiabank" value="1">
 							<label class="form-check-label" for="tc_scotiabank"><img src="{{ asset('img/scotiabank.png') }}" width="150" height="30"></label>
 						</div>
 						
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_banamex" id="tc_banamex" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_banamex" id="tc_banamex" value="1">
 							<label class="form-check-label" for="tc_banamex"><img src="{{ asset('img/banamex.png') }}" width="150" height="30"></label>
 						</div>
 						
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_banorte" id="tc_banorte" value="true">
+							<input class="form-check-input" type="checkbox" name="tc_banorte" id="tc_banorte" value="1">
 							<label class="form-check-label" for="tc_banorte"><img src="{{ asset('img/banorte.png') }}" width="150" height="30"></label>
 						</div>
 						
@@ -687,11 +688,11 @@
 		    		<label class="col-form-label col-sm-9" for="desicion_propia">¿La decisión de cumplir su meta depende de alguien más?</label>
 		    		<div class="col-sm-3">
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_si" value="true">
+							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_si" value="1">
 							<label class="form-check-label" for="desicion_propia_si">Si</label>
 						</div>
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_no" value="false">
+							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_no" value="0">
 							<label class="form-check-label" for="desicion_propia_no">No</label>
 						</div>
 		    		</div>
@@ -711,11 +712,11 @@
 		    		</label>
 		    		<div class="col-sm-3 mt-4">
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_si" value="true">
+							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_si" value="1">
 							<label class="form-check-label" for="tomaria_desicion_si">Si</label>
 						</div>
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_no" value="false">
+							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_no" value="0">
 							<label class="form-check-label" for="tomaria_desicion_no">No</label>
 						</div>
 		    		</div>
@@ -816,11 +817,11 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-    	$('#perfil input').on('change', function() {
+    	$('#perfil input[name=estado_civil]').on('change', function() {
     		var val = $('input[name=estado_civil]:checked', '#perfil').val();
     		// alert(val);
+			$("#pareja").empty();
     		if(val == "Casado" || val == "Unión Libre"){
-    			$("#pareja").empty();
     			var html_row = `
     			<div class="form-group row" id="regimen_matrimonial">
 	    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">Régimen matrimonial:</label>
@@ -841,7 +842,7 @@
     			<div class="form-group row">
 		    		<div class="col-12">
 			    		<div class="input-group">
-							<select class="custom-select" id="prefijo_2" namme="prefijo_2" required="">
+							<select class="custom-select" id="prefijo_2" name="prefijo_2" required="">
 								<option value="">Elige...</option>
 								<option value="Sr.">Sr.</option>
 								<option value="Sra.">Sra.</option>
@@ -895,11 +896,9 @@
 		    		</div>
 		    	</div>
     			`;
-    			$("#pareja").append(html_row);
+    			$("#pareja").html(html_row);
     		}
-    		else{
-    			$("#pareja").empty();
-    		}
+
 		   // if ($('input[name=estado_civil]:checked', '#perfil').val() == "casado") {
 		   	// alert('Se frego'):
 

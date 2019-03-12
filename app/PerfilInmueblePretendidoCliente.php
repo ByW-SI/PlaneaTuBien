@@ -17,7 +17,7 @@ class PerfilInmueblePretendidoCliente extends Model
 		'estado',
 		'colonia',
 		'recamara',
-		'baño',
+		'banio',
 		'estacionamiento',
 		'jardin',
 		'gastos_notariales',
@@ -42,4 +42,9 @@ class PerfilInmueblePretendidoCliente extends Model
     protected $dates=[
     	'deleted_at'
     ];
+
+    public function perfil()
+    {
+    	return $this->belongsTo('App\PerfilDatosPersonalCliente','id','perfil_id');
+    }
 }

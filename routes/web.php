@@ -64,9 +64,10 @@ Route::resource('prospectos.cotizacions.perfils','Prospecto\Cotizacion\PerfilCon
 
 Route::namespace('Prospecto\Cliente\Perfil')
 	->prefix('prospectos/{prospecto}/perfil')
-	->name('prospectos.cotizacions.perfil.')
+	->name('prospectos.perfil.')
 	->group(function () {
 	    Route::resource('datos_personal','DatosPersonalesController',['except'=>'show']);
+	    Route::get('/pdf','DatosPersonalesController@pdf')->name('pdf');
 	    Route::resource('historial_crediticio','HistorialCrediticioController',['except'=>'show']);
 	    Route::resource('inmueble_pretendido','InmueblePretendidoController',['except'=>'show']);
 	    Route::resource('referencia_personals','ReferenciaPersonalController');
