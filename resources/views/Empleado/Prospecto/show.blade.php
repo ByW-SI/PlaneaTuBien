@@ -71,7 +71,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
-					<input class="form-control" readonly="" type="number" value="{{$prospecto->sueldo}}">
+					<input class="form-control" readonly="" type="number" value="{{number_format($prospecto->sueldo,2)}}">
 				</div>
 			</div><div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
 				<label for="sueldo">Gastos mensual del prospecto:</label>
@@ -79,7 +79,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
-					<input class="form-control" readonly="" type="number" value="{{$prospecto->gastos}}">
+					<input class="form-control" readonly="" type="number" value="{{number_format($prospecto->gastos,2)}}">
 				</div>
 			</div>
 			<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -88,7 +88,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
-					<input class="form-control" readonly="" type="number" value="{{$prospecto->ahorro}}">
+					<input class="form-control" readonly="" type="number" value="{{number_format($prospecto->ahorro,2)}}">
 				</div>
 			</div>
 			<div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
@@ -114,7 +114,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
-					<input class="form-control" readonly="" type="number" value="{{$prospecto->monto}}">
+					<input class="form-control" readonly="" type="number" value="{{number_format($prospecto->monto,2)}}">
 				</div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
@@ -137,6 +137,13 @@
 				<i class="fas fa-file-invoice-dollar"></i>
 				<strong> Cotizador</strong>
 			</a>
+			@if ($prospecto->perfil)
+				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
+					<i class="fas fa-file-invoice"></i>
+					<strong> Perfil</strong>
+				</a>
+			
+			@endif
 		</div>
 	</div>
 </div>

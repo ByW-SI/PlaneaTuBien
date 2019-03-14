@@ -38,6 +38,21 @@ class DatosPersonalesController extends Controller
         // dd($perfil);
         // return view('prospectos.perfil.index',['perfil'=>$perfil]);
     }
+    /**
+     * Display the archive pdf for presolicitud.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function presolicitud(Prospecto $prospecto)
+    {
+        //
+        $perfil = $prospecto->perfil;
+        // return view('prospectos.perfil.pdf',['perfil'=>$perfil]);
+        $pdf = PDF::loadView('prospectos.presolicitud.pdf',['perfil'=>$perfil]);
+        return $pdf->stream();
+        // dd($perfil);
+        // return view('prospectos.perfil.index',['perfil'=>$perfil]);
+    }
 
     /**
      * Show the form for creating a new resource.

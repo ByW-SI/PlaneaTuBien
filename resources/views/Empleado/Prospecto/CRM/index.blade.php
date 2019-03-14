@@ -216,6 +216,13 @@
                 <i class="fas fa-file-invoice-dollar"></i>
                 <strong> Cotizador</strong>
             </a>
+            @if ($prospecto->perfil)
+                <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
+                    <i class="fas fa-file-invoice"></i>
+                    <strong> Perfil</strong>
+                </a>
+            
+            @endif
         </div>
     </div>
 </div>

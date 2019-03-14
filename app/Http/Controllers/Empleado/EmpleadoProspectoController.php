@@ -102,6 +102,13 @@ class EmpleadoProspectoController extends Controller
     {
         //
         $rules = [
+            'nombre'=>'required|max:191',
+            'appaterno'=>'required|max:191',
+            'apmaterno'=>'nullable|max:191',
+            'sexo'=>'nullable|in:["","Hombre","Mujer"]',
+            'email'=>"required|e-mail",
+            'tel'=>"required|numeric",
+            'movil'=>"nullable|numeric",
             'sueldo'=>'required|numeric',
             'ahorro'=>'required|numeric',
             'calificacion'=>'required|numeric',
@@ -111,6 +118,7 @@ class EmpleadoProspectoController extends Controller
             'plan' =>' required|in:15 años,10 años,6 años,5 años,3 años',
         ];
         $this->validate($request,$rules);
+        $prospecto->update($request->all());
         $prospecto->sueldo = $request->sueldo;
         $prospecto->ahorro = $request->ahorro;
         $prospecto->gastos=$request->gastos;

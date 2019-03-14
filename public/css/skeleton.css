@@ -391,7 +391,6 @@ hr {
   display: table;
   clear: both; }
 
-
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
@@ -737,4 +736,8 @@ there.
 
 .page-break {
     page-break-after: always;
+}
+
+.red{
+  background: red;
 }

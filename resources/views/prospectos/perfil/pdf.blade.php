@@ -7,7 +7,7 @@
   		{{-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> --}}
 		<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
-		<title>Cotización</title>
+		<title>Perfil</title>
 	</head>
 	<body>
 		<div class="container">

@@ -71,7 +71,10 @@ Route::namespace('Prospecto\Cliente\Perfil')
 	    Route::resource('historial_crediticio','HistorialCrediticioController',['except'=>'show']);
 	    Route::resource('inmueble_pretendido','InmueblePretendidoController',['except'=>'show']);
 	    Route::resource('referencia_personals','ReferenciaPersonalController');
+		// PRESOLICITUD
+		Route::get('/presolicitud/pdf','DatosPersonalesController@presolicitud')->name('presolicitud');
 	});
+
 
 
 // PRECARGAS
