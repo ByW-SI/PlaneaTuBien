@@ -56,7 +56,7 @@
 								<option value="Srta.">Srta.</option>
 							</select>
 							<div class="input-group-append w-75">
-							<input type="text" class="form-control" name="nombre_completo_1" id="nombre_completo_1" value="{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}">
+							<input type="text" class="form-control" name="nombre_completo_1" id="nombre_completo_1" value="{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}" required="">
 							</div>
 						</div>
 		    		</div>
@@ -64,19 +64,19 @@
 		    	<div class="form-group row">
 		    		<label for="ocupacion_1" class="col-form-label col-sm-2">Ocupación:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="ocupacion_1" class="form-control" id="ocupacion_1">
+		    			<input type="text" name="ocupacion_1" class="form-control" id="ocupacion_1" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="empresa_1" class="col-form-label col-sm-2">Empresa:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="empresa_1" class="form-control" id="empresa_1">
+		    			<input type="text" name="empresa_1" class="form-control" id="empresa_1" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="antiguedad_1" class="col-form-label col-sm-3">Antigüedad:</label>
 		    		<div class="col-sm-9">
-		    			<input type="text" name="antiguedad_1" class="form-control" id="antiguedad_1">
+		    			<input type="text" name="antiguedad_1" class="form-control" id="antiguedad_1" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
@@ -86,20 +86,20 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1">
+							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" required="">
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="rfc_1" class="col-form-label col-sm-2">RFC:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="rfc_1" class="form-control" id="rfc_1">
+		    			<input type="text" name="rfc_1" class="form-control" id="rfc_1" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="nacionalidad_1" class="col-form-label col-sm-3">Nacionalidad:</label>
 		    		<div class="col-sm-9">
-		    			<input type="text" name="nacionalidad_1" class="form-control" id="nacionalidad_1">
+		    			<input type="text" name="nacionalidad_1" class="form-control" id="nacionalidad_1" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
@@ -133,17 +133,17 @@
 	    		<div class="form-group row">
 		    		<label for="direccion" class="col-form-label col-sm-2">Direccion:</label>
 		    		<div class="col-sm-10">
-		    			<textarea name="direccion" class="form-control" id="direccion" placeholder="Dirección del domicilio del prospecto"></textarea>
+		    			<textarea name="direccion" class="form-control" id="direccion" placeholder="Dirección del domicilio del prospecto" required=""></textarea>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="telefono_casa" class="col-form-label col-sm-2">Teléfono de casa:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="telefono_casa" class="form-control" id="telefono_casa">
+		    			<input type="text" name="telefono_casa" class="form-control" id="telefono_casa" required="">
 		    		</div>
 		    		<label for="telefono_celular" class="col-form-label col-sm-2">Teléfono celular:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="telefono_celular" class="form-control" id="telefono_celular">
+		    			<input type="text" name="telefono_celular" class="form-control" id="telefono_celular" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
@@ -153,14 +153,14 @@
 		    		</div>
 		    		<label for="email" class="col-form-label col-sm-2">Email:</label>
 		    		<div class="col-sm-4">
-		    			<input type="email" name="email" class="form-control" id="email">
+		    			<input type="email" name="email" class="form-control" id="email" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="tipo_residencia" class="col-form-label col-sm-3">Residencia Actual:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="tipo_residencia" id="Casa" value="Casa">
+							<input class="form-check-input" type="radio" name="tipo_residencia" id="Casa" value="Casa" required="">
 							<label class="form-check-label" for="Casa">Casa</label>
 						</div>
 						<div class="form-check form-check-inline">
@@ -170,7 +170,7 @@
 	    			</div>
 	    			<div class="col-sm-6">
 	    				<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="duenio_residencia" id="Propio" value="Propio">
+							<input class="form-check-input" type="radio" name="duenio_residencia" id="Propio" value="Propio" required="">
 							<label class="form-check-label" for="Propio">Propio</label>
 						</div>
 						<div class="form-check form-check-inline">
@@ -190,7 +190,7 @@
 		    	<div class="form-group row">
 		    		<label for="habitantes" class="col-form-label col-sm-2">Número de habitantes:</label>
 		    		<div class="col-sm-4">
-		    			<input type="number" name="habitantes" min="1" step="1" value="1" class="form-control" id="habitantes">
+		    			<input type="number" name="habitantes" min="1" step="1" value="1" class="form-control" id="habitantes" required="">
 		    		</div>
 		    		<label for="costo_residencia" class="col-form-label col-sm-2">Costo de la residencia:</label>
 		    		<div class="col-sm-4">
@@ -198,21 +198,21 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" name="costo_residencia" class="form-control" id="costo_residencia">
+							<input type="number" step="any" min="0" name="costo_residencia" class="form-control" id="costo_residencia" required="">
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="tiempo_viviendo" class="col-form-label col-sm-3">¿Cuánto tiempo lleva viviendo ahí?:</label>
 		    		<div class="col-sm-9">
-		    			<input type="text" name="tiempo_viviendo" class="form-control" id="tiempo_viviendo">
+		    			<input type="text" name="tiempo_viviendo" class="form-control" id="tiempo_viviendo" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="hijos" class="col-form-label col-sm-3">Hijos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="hijos" id="hijos_si" value="1">
+							<input class="form-check-input" type="radio" name="hijos" id="hijos_si" value="1" required="">
 							<label class="form-check-label" for="hijos_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -229,7 +229,7 @@
 		    		<label for="dependientes_economicos" class="col-form-label col-sm-3">Dependientes económicos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_si" value="1">
+							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_si" value="1" required="">
 							<label class="form-check-label" for="dependientes_economicos_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -258,7 +258,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingreso_total" class="form-control" step="any" min="0">
+		    				<input type="number" name="ingreso_total" class="form-control" step="any" min="0" required="">
 						</div>
 		    		</div>
 		    	</div>
@@ -266,7 +266,7 @@
 		    		<label for="ahorro_inicial" class="col-form-label col-sm-9">¿Cuenta con algún tipo de enganche o ahorro destinado para iniciar?</label>
 		    		<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_si" value="1">
+							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_si" value="1" required="">
 							<label class="form-check-label" for="ahorro_inicial_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -285,7 +285,7 @@
 		    		<label for="ahorra" class="col-form-label col-sm-2">¿Ahorra?</label>
 					<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_si" value="1">
+							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_si" value="1" required="">
 							<label class="form-check-label" for="ahorra_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -313,7 +313,7 @@
 		    		<label for="otro_participante" class="col-form-label col-sm-5">¿Alguna otra persona participará en la compra?</label>
 					<div class="col-sm-1">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_si" value="1">
+							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_si" value="1" required="">
 							<label class="form-check-label" for="otro_participante_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -334,7 +334,7 @@
 		    		<label for="tarjeta_debito" class="col-form-label col-sm-6">Tarjeta de Débito o Cuenta de Ahorro:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1">
+							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1" required="">
 							<label class="form-check-label" for="tarjeta_debito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -388,7 +388,7 @@
 					<label for="en_buro_credito" class="col-form-label col-sm-3">Buró de Crédito:</label>
 					<div class="col-sm-3">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1">
+							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1" required="">
 							<label class="form-check-label" for="en_buro_credito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -405,7 +405,7 @@
 		    		<label for="tarjeta_credito" class="col-form-label col-sm-6">Tarjeta de Crédito:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1">
+							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1" required="">
 							<label class="form-check-label" for="tarjeta_credito_si">Si</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -475,11 +475,11 @@
 				<div class="form-group row">
 					<label for="destino_1" class="col-form-label col-sm-2">Destino:</label>
 					<div class="col-sm-4">
-						<input type="text" name="destino_1" class="form-control">
+						<input type="text" name="destino_1" class="form-control" required="">
 					</div>
 					<div class="col-sm-2">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_semanal" value="Semanal">
+							<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_semanal" value="Semanal" required="">
 							<label class="form-check-label" for="tipo_destino_1_semanal">Semanal</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -492,18 +492,18 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" class="form-control" name="monto_destino_1" id="monto_destino_1">
+							<input type="number" step="any" min="0" class="form-control" name="monto_destino_1" id="monto_destino_1" required="">
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="destino_2" class="col-form-label col-sm-2">Destino:</label>
 					<div class="col-sm-4">
-						<input type="text" name="destino_2" class="form-control">
+						<input type="text" name="destino_2" class="form-control" required="">
 					</div>
 					<div class="col-sm-2">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_semanal" value="Semanal">
+							<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_semanal" value="Semanal" required="">
 							<label class="form-check-label" for="tipo_destino_2_semanal">Semanal</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -516,18 +516,18 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" class="form-control" name="monto_destino_2" id="monto_destino_2">
+							<input type="number" step="any" min="0" class="form-control" name="monto_destino_2" id="monto_destino_2" required="">
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="destino_3" class="col-form-label col-sm-2">Destino:</label>
 					<div class="col-sm-4">
-						<input type="text" name="destino_3" class="form-control">
+						<input type="text" name="destino_3" class="form-control" required="">
 					</div>
 					<div class="col-sm-2">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_semanal" value="Semanal">
+							<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_semanal" value="Semanal" required="">
 							<label class="form-check-label" for="tipo_destino_3_semanal">Semanal</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -540,7 +540,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" class="form-control" name="monto_destino_3" id="monto_destino_3">
+							<input type="number" step="any" min="0" class="form-control" name="monto_destino_3" id="monto_destino_3" required="">
 						</div>
 					</div>
 				</div>
@@ -548,7 +548,7 @@
 					<label for="calificacion_credito" class="col-form-label col-sm-6">Calificación del cliente:</label>
 					<div class="col-sm-6">
 						<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_bien" value="Bien">
+							<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_bien" value="Bien" required="">
 							<label class="form-check-label" for="calificacion_credito_bien">😊</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -575,7 +575,7 @@
 		    	<div class="form-group row">
 		    		<div class="col-sm-12">
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tipo_inmueble" id="tipo_inmueble_casa" value="Casa">
+							<input class="form-check-input" type="radio" name="tipo_inmueble" id="tipo_inmueble_casa" value="Casa" required="">
 							<label class="form-check-label" for="tipo_inmueble_casa">Casa</label>
 						</div>
 		    			<div class="form-check form-check-inline mt-1">
@@ -614,13 +614,13 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" class="form-control" name="precio_aprox" id="precio_aprox">
+							<input type="number" step="any" min="0" class="form-control" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->propiedad) }}" name="precio_aprox" id="precio_aprox" required="">
 						</div>
 		    		</div>
 		    		<label for="area_inmueble" class="col-form-label col-sm-2">Area:</label>
 		    		<div class="col-sm-3">
 		    			<div class="input-group">
-							<input type="number" step="any" min="0" class="form-control" name="area_inmueble" id="area_inmueble">
+							<input type="number" step="any" min="0" class="form-control" name="area_inmueble" id="area_inmueble" required="">
 							<div class="input-group-append">
 								<span class="input-group-text" id="basic-addon1">m²</span>
 							</div>
@@ -630,31 +630,31 @@
 		    	<div class="form-group row">
 		    		<label for="estado" class="col-form-label col-sm-2">Estado:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="estado" class="form-control">
+		    			<input type="text" name="estado" class="form-control" required="">
 		    		</div>
 		    		<label for="colonia" class="col-form-label col-sm-2">Colonia:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="colonia" class="form-control">
+		    			<input type="text" name="colonia" class="form-control" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label class="col-form-label col-sm-3" for="recamara">Recámaras:</label>
 		    		<div class="col-sm-3">
-		    			<input type="number" min="0" name="recamara" class="form-control">
+		    			<input type="number" min="0" name="recamara" class="form-control" required="">
 		    		</div>
 		    		<label class="col-form-label col-sm-3" for="banio">Baños:</label>
 		    		<div class="col-sm-3">
-		    			<input type="number" min="0" step="any" name="banio" class="form-control">
+		    			<input type="number" min="0" step="any" name="banio" class="form-control" required="">
 		    		</div>
 				</div>
 		    	<div class="form-group row">
 		    		<label class="col-form-label col-sm-3" for="estacionamiento">Lugares de Estacionamiento:</label>
 		    		<div class="col-sm-3">
-		    			<input type="number" min="0" name="estacionamiento" class="form-control">
+		    			<input type="number" min="0" value="0" name="estacionamiento" class="form-control" required="">
 		    		</div>
 		    		<label class="col-form-label col-sm-3" for="jardin">Jardin:</label>
 		    		<div class="col-sm-3">
-		    			<input type="number" min="0" name="jardin" class="form-control">
+		    			<input type="number" min="0" value="0" name="jardin" class="form-control" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
@@ -668,27 +668,27 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" step="any" min="0" step="any" class="form-control" name="monto_contratar" id="monto_contratar">
+							<input type="number" step="any" min="0" step="any" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->total) }}" class="form-control" name="monto_contratar" id="monto_contratar" required="">
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="tiempo_decision" class="col-form-label col-sm-12">¿Cuánto tiempo ha pensado en esta compra?</label>
 		    		<div class="col-sm-12">
-		    			<input type="text" name="tiempo_decision" class="form-control">
+		    			<input type="text" name="tiempo_decision" class="form-control" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label class="col-form-label col-sm-12" for="prioridad">¿Cuánta prioridad le da a esta meta?</label>
 		    		<div class="col-sm-12">
-		    			<input type="text" name="prioridad" class="form-control">
+		    			<input type="text" name="prioridad" class="form-control" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label class="col-form-label col-sm-9" for="desicion_propia">¿La decisión de cumplir su meta depende de alguien más?</label>
 		    		<div class="col-sm-3">
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_si" value="1">
+							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_si" value="1" required="">
 							<label class="form-check-label" for="desicion_propia_si">Si</label>
 						</div>
 		    			<div class="form-check form-check-inline mt-1">
@@ -712,7 +712,7 @@
 		    		</label>
 		    		<div class="col-sm-3 mt-4">
 		    			<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_si" value="1">
+							<input class="form-check-input" type="radio" name="tomaria_desicion" id="tomaria_desicion_si" value="1" required="">
 							<label class="form-check-label" for="tomaria_desicion_si">Si</label>
 						</div>
 		    			<div class="form-check form-check-inline mt-1">
@@ -727,7 +727,7 @@
 		    	<div class="form-group row">
 		    		<label for="medio_entero" class="col-form-label col-sm-6">Medio por el cuál se enteró de nosotros:</label>
 		    		<div class="col-sm-6">
-		    			<input type="text" class="form-control" name="medio_entero">
+		    			<input type="text" class="form-control" name="medio_entero" required="">
 		    		</div>
 		    	</div>
 		    </div>
@@ -739,63 +739,63 @@
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="nombre_completo[1]">Nombre:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="nombre_completo[1]" class="form-control">
+						<input type="text" name="nombre_completo[1]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="parentesco[1]">Parentesco:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="parentesco[1]" class="form-control">
+						<input type="text" name="parentesco[1]" class="form-control" required="">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="telefono[1]">Telefono:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="telefono[1]" class="form-control">
+						<input type="text" name="telefono[1]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="celular[1]">Celular:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="celular[1]" class="form-control">
+						<input type="text" name="celular[1]" class="form-control" required="">
 					</div>
 				</div>
 				<h4>Referencia #2</h4>
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="nombre_completo[2]">Nombre:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="nombre_completo[2]" class="form-control">
+						<input type="text" name="nombre_completo[2]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="parentesco[2]">Parentesco:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="parentesco[2]" class="form-control">
+						<input type="text" name="parentesco[2]" class="form-control" required="">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="telefono[2]">Telefono:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="telefono[2]" class="form-control">
+						<input type="text" name="telefono[2]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="celular[2]">Celular:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="celular[2]" class="form-control">
+						<input type="text" name="celular[2]" class="form-control" required="">
 					</div>
 				</div>
 				<h4>Referencia #3</h4>
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="nombre_completo[3]">Nombre:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="nombre_completo[3]" class="form-control">
+						<input type="text" name="nombre_completo[3]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="parentesco[3]">Parentesco:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="parentesco[3]" class="form-control">
+						<input type="text" name="parentesco[3]" class="form-control" required="">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-form-label col-sm-2" for="telefono[3]">Telefono:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="telefono[3]" class="form-control">
+						<input type="text" name="telefono[3]" class="form-control" required="">
 					</div>
 					<label class="col-form-label col-sm-2" for="celular[3]">Celular:</label>
 					<div class="form-group col-sm-4">
-						<input type="text" name="celular[3]" class="form-control">
+						<input type="text" name="celular[3]" class="form-control" required="">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -827,7 +827,7 @@
 	    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">Régimen matrimonial:</label>
 	    			<div class="col-sm-8">
 	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="radio" name="regimen_matrimonial" id="Sociedad Conyugal" value="Sociedad Conyugal">
+							<input class="form-check-input" type="radio" name="regimen_matrimonial" id="Sociedad Conyugal" value="Sociedad Conyugal" required="">
 							<label class="form-check-label" for="Sociedad Conyugal">Sociedad Conyugal</label>
 						</div>
 						<div class="form-check form-check-inline mt-1">
@@ -849,7 +849,7 @@
 								<option value="Srta.">Srta.</option>
 							</select>
 							<div class="input-group-append w-75">
-							<input type="text" class="form-control" name="nombre_completo_2" id="nombre_completo_2" placeholder="Nombre completo de la pareja">
+							<input type="text" class="form-control" name="nombre_completo_2" id="nombre_completo_2" placeholder="Nombre completo de la pareja"  required="">
 							</div>
 						</div>
 		    		</div>
@@ -857,19 +857,19 @@
     			<div class="form-group row">
 		    		<label for="ocupacion_2" class="col-form-label col-sm-2">Ocupación:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="ocupacion_2" class="form-control" id="ocupacion_2" placeholder="Ocupación de la pareja">
+		    			<input type="text" name="ocupacion_2" class="form-control" id="ocupacion_2" placeholder="Ocupación de la pareja"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="empresa_2" class="col-form-label col-sm-2">Empresa:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="empresa_2" class="form-control" id="empresa_2" placeholder="Empresa en la que labora de la pareja">
+		    			<input type="text" name="empresa_2" class="form-control" id="empresa_2" placeholder="Empresa en la que labora de la pareja"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="antiguedad_2" class="col-form-label col-sm-3">Antigüedad:</label>
 		    		<div class="col-sm-9">
-		    			<input type="text" name="antiguedad_2" class="form-control" id="antiguedad_2" placeholder="Antigüedad en la empresa">
+		    			<input type="text" name="antiguedad_2" class="form-control" id="antiguedad_2" placeholder="Antigüedad en la empresa"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
@@ -879,20 +879,20 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja">
+							<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja"  required="">
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="rfc_2" class="col-form-label col-sm-2">RFC:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="rfc_2" class="form-control" id="rfc_2" placeholder="RFC de la pareja">
+		    			<input type="text" name="rfc_2" class="form-control" id="rfc_2" placeholder="RFC de la pareja"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="nacionalidad_2" class="col-form-label col-sm-3">Nacionalidad:</label>
 		    		<div class="col-sm-9">
-		    			<input type="text" name="nacionalidad_2" class="form-control" id="nacionalidad_2" placeholder="Nacionalidad de la pareja">
+		    			<input type="text" name="nacionalidad_2" class="form-control" id="nacionalidad_2" placeholder="Nacionalidad de la pareja"  required="">
 		    		</div>
 		    	</div>
     			`;

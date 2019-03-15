@@ -55,6 +55,10 @@ class PerfilController extends Controller
         $h_crediticio= new PerfilHistorialCrediticioCliente($request->all());
         $perfil->historial_crediticio()->save($h_crediticio);
         $inmueble = new PerfilInmueblePretendidoCliente($request->all());
+        if ($inmueble->tipo_inmueble == "Otro") {
+            $inmueble->tipo_inmueble = $request->otro_name;
+            // $inmueble->save();
+        }
         $perfil->inmueble_pretendido()->save($inmueble);
         for ($i = 0; $i < sizeof($request->nombre_completo) ; $i++) {
             $referencia = new PerfilReferenciaPersonalCliente([
