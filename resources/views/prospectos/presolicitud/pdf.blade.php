@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		{{-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> --}}
-	<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
 	<title>Presolicitud</title>
 </head>
 <body>
 	<div class="container">
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<label style="color: #B8242B; text-align: center; font-size: 20px;background: #c4c4c4">PRE SOLICITUD DE INSCRIPCIÓN</label>
@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<div class="two columns u-pull-left">
-					<img src="{{ asset('img/perfil.png') }}" height="50" width="100">
+					<img src="img/perfil.png" height="50" width="100">
 				</div>
 				<div class="ten columns column u-pull-right">
 					<div class="two-thirds column u-pull-left">
@@ -606,7 +606,7 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row" style="border-top: 2px solid #B8242B; margin-top: 2px;">
 			<div class="six columns u-pull-left" style="color: #B8242B;background: #c4c4c4; text-align: center; margin-top: 0.5px;">
@@ -812,7 +812,7 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row" style="margin-left: 12px; margin-right: 12px">
 			<div class="twelve columns" style="text-align: justify;">

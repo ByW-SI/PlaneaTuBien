@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
   		{{-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> --}}
-		<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/skeleton.css">
 		<title>Perfil</title>
 	</head>
 	<body>
@@ -15,7 +15,7 @@
 				<div class="twelve columns">
 					<div class="row">
 					    <div class="six columns">
-					    	<img src="{{ asset('img/perfil-header.png') }}">
+					    	<img src="img/perfil-header.png">
 					    </div>
 					    <div class="six columns u-pull-right">
 					    	<div class="twelve columns">
@@ -437,14 +437,14 @@
           <div class="twelve columns">
             <div class="one-half column u-pull-left">
               <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->td_bancomer ? 'checked="checked"' : ''}}><img src="{{ asset('img/bbva.png') }}" width="80" height="30"></label>
+                <label><input type="checkbox" {{$perfil->historial_crediticio->td_bancomer ? 'checked="checked"' : ''}}><img src="img/bbva.png" width="80" height="30"></label>
               </div>
               <div class="two-thirds column u-pull-right">
                 <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_santander ? 'checked="checked"' : ''}}><img src="{{ asset('img/santander.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_santander ? 'checked="checked"' : ''}}><img src="img/santander.png" width="80" height="30"></label>
                 </div>
                 <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_hsbc ? 'checked="checked"' : ''}}><img src="{{ asset('img/hsbc.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_hsbc ? 'checked="checked"' : ''}}><img src="img/hsbc.png" width="80" height="30"></label>
                 </div>
               </div>
             </div>
@@ -452,19 +452,19 @@
               <div class="six columns u-pull-left">
                 <div class="row">
                   <div class="six columns u-pull-left">
-                     <label><input type="checkbox" {{$perfil->historial_crediticio->tc_bancomer ? 'checked="checked"' : ''}}><img src="{{ asset('img/bbva.png') }}" width="60" height="20"></label>
+                     <label><input type="checkbox" {{$perfil->historial_crediticio->tc_bancomer ? 'checked="checked"' : ''}}><img src="img/bbva.png" width="60" height="20"></label>
                   </div>
                   <div class="six columns u-pull-right">
-                    <label><input type="checkbox" {{$perfil->historial_crediticio->tc_santander ? 'checked="checked"' : ''}}><img src="{{ asset('img/santander.png') }}" width="60" height="20"></label>
+                    <label><input type="checkbox" {{$perfil->historial_crediticio->tc_santander ? 'checked="checked"' : ''}}><img src="img/santander.png" width="60" height="20"></label>
                   </div>
                 </div>
               </div>
               <div class="six columns u-pull-right">
                 <div class="six columns u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_hsbc ? 'checked="checked"' : ''}}><img src="{{ asset('img/hsbc.png') }}" width="60" height="20"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_hsbc ? 'checked="checked"' : ''}}><img src="img/hsbc.png" width="60" height="20"></label>
                 </div>
                 <div class="six columns u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_amex ? 'checked="checked"' : ''}}><img src="{{ asset('img/amex.png') }}" width="60" height="20"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_amex ? 'checked="checked"' : ''}}><img src="img/amex.png" width="60" height="20"></label>
                 </div>
               </div>
             </div>
@@ -474,27 +474,27 @@
           <div class="twelve columns">
             <div class="one-half column u-pull-left">
               <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->td_scotiabank ? 'checked="checked"' : ''}}><img src="{{ asset('img/scotiabank.png') }}" width="80" height="30"></label>
+                <label><input type="checkbox" {{$perfil->historial_crediticio->td_scotiabank ? 'checked="checked"' : ''}}><img src="img/scotiabank.png" width="80" height="30"></label>
               </div>
               <div class="two-thirds column u-pull-right">
                 <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banamex ? 'checked="checked"' : ''}}><img src="{{ asset('img/banamex.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banamex ? 'checked="checked"' : ''}}><img src="img/banamex.png" width="80" height="30"></label>
                 </div>
                 <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banorte ? 'checked="checked"' : ''}}><img src="{{ asset('img/banorte.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banorte ? 'checked="checked"' : ''}}><img src="img/banorte.png" width="80" height="30"></label>
                 </div>
               </div>
             </div>
             <div class="one-half column u-pull-right">
               <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->tc_scotiabank ? 'checked="checked"' : ''}}><img src="{{ asset('img/scotiabank.png') }}" width="80" height="30"></label>
+                <label><input type="checkbox" {{$perfil->historial_crediticio->tc_scotiabank ? 'checked="checked"' : ''}}><img src="img/scotiabank.png" width="80" height="30"></label>
               </div>
               <div class="two-thirds column u-pull-right">
                 <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banamex ? 'checked="checked"' : ''}}><img src="{{ asset('img/banamex.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banamex ? 'checked="checked"' : ''}}><img src="img/banamex.png" width="80" height="30"></label>
                 </div>
                 <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banorte ? 'checked="checked"' : ''}}><img src="{{ asset('img/banorte.png') }}" width="80" height="30"></label>
+                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banorte ? 'checked="checked"' : ''}}><img src="img/banorte.png" width="80" height="30"></label>
                 </div>
               </div>
             </div>

@@ -77,7 +77,7 @@
                         @endforeach
                     </table>
                 @else
-                    <h4>No hay préstamos disponibles.</h4>
+                    <h4>No hay cotizaciones disponibles.</h4>
                 @endif
             </div>
         </div>
