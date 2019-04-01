@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
 	<style type="text/css">
 		ul,li,p{
 			font-size: 9px;
@@ -28,13 +28,13 @@
 <body>
 	<div class="container">
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -43,13 +43,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -121,13 +121,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -204,13 +204,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -251,13 +251,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -310,13 +310,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -376,13 +376,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -441,13 +441,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -514,13 +514,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
@@ -595,13 +595,13 @@
 		</div>
 		<div class="page-break"></div>
 		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="{{ asset('img/perfil.png') }}"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
+			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
 				<div class="two columns u-pull-right">
-					<img src="{{ asset('img/perfil.png') }}" height="40" width="80">
+					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
