@@ -63,7 +63,12 @@
 					<select class="form-control" name="tipo_promo" required="">
 						<option value="">Seleccione una opción</option>
 						@foreach ($tipo_promociones as $tipo_promo)
-							<option value="{{$tipo_promo->id}}" title="{{$edit && $tipo_promo->descripcion}}" {{ $promocion->tipo_promocion->id == $tipo_promo->id ? 'selected=""' :( old('tipo_promo') == $tipo_promo->id ? 'selected=""' : "" )}}>{{$tipo_promo->nombre}}</option>
+							<option value="{{$tipo_promo->id}}" title="{{$tipo_promo->descripcion}}"
+								@if ($edit && $promocion->tipo_promocion->id == $tipo_promo->id)
+									selected=""
+								@elseif(old('tipo_promo') == $tipo_promo->id )
+									selected=""
+								@endif>{{$tipo_promo->nombre}}</option>
 						@endforeach
 					</select>
 				</div>
