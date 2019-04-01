@@ -24,7 +24,7 @@
 				</div>
 				<div class="ten columns column u-pull-right">
 					<div class="two-thirds column u-pull-left">
-						<label style="font-size: 9px; text-align: justify;">
+						<label style="font-size: 10px; text-align: justify;">
 							PLANEA TU BIEN, S.A. DE C.V. Jalapa 17 despacho 301 , col Roma. C.P 06700 , delegación Cuauhtemoc. Mexico D.F. TEL. 5533-2201  R.F.C. PTB091030MS1 <a href="www.planeatubien.com.mx" style="color: black">WWW.PLANEATUBIEN.COM.MX</a>
 						</label>
 					</div>
@@ -45,28 +45,28 @@
 			<div class="twelve columns" style="margin-left: 5px; margin-right: 5px;">
 				<div class="one-third column u-pull-left">
 					<div class="one-half column u-pull-left">
-						<label style="font-size: 9px">Precio Inicial del Bien:</label>
+						<label style="font-size: 10px">Precio Inicial del Bien:</label>
 					</div>
 					<div class="one-half column u-pull-right">
-						<label style="font-size: 9px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($presolicitud->precio_inicial,2)}}</label>
+						<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($presolicitud->precio_inicial,2)}}</label>
 					</div>
 				</div>
 				<div class="two-thirds column u-pull-right">
 					<div class="five columns u-pull-left">
 						<div class="row">
 							<div class="one-half column u-pull-left">
-								<label style="font-size: 9px">Plazo Contratado:</label>
+								<label style="font-size: 10px">Plazo Contratado:</label>
 							</div>
 							<div class="one-half column u-pull-right">
-								<label style="font-size: 9px;border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->plazo_contratado}} (meses)</label>
+								<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->plazo_contratado}} (meses)</label>
 							</div>
 						</div>
 					</div>
 					<div class="seven columns u-pull-right">
 						<div class="one-half column u-pull-left">
-							<label style="font-size: 9px"> Seguro de Vida Adicional:</label>
+							<label style="font-size: 10px"> Seguro de Vida Adicional:</label>
 						</div>
-						<div class="one-half column u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 9px; text-align: left;">
+						<div class="one-half column u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: left;">
 							${{$presolicitud->precio_nolose}}
 						</div>
 					</div>
@@ -247,23 +247,23 @@
 					<div class="row">
 						<div class="one-half column u-pull-left">
 							<div class="one-half column u-pull-left">
-								<label style="font-size: 9px;">Fecha de Nacimiento:</label>
+								<label style="font-size: 10px;">Fecha de Nacimiento:</label>
 							</div>
 							<div class="one-half column u-pull-right">
 								<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
 								<label style="text-align: center; font-size: 10px;">
 									{{date('d/m/Y',strtotime($presolicitud->fecha_nacimiento))}}
 								</label>
-								<label style="font-size: 9px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
+								<label style="font-size: 10px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
 							</div>
 						</div>
 						<div class="one-half column u-pull-right">
 							<div class="one-half column u-pull-left">
-								<label style="font-size: 9px;">Lugar de Nacimiento:</label>
+								<label style="font-size: 10px;">Lugar de Nacimiento:</label>
 							</div>
 							<div class="one-half column u-pull-right">
 								<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-								<label style="text-align: center; font-size: 9px;">
+								<label style="text-align: center; font-size: 10px;">
 									{{$presolicitud->lugar_nacimiento}} 
 								</label>
 							</div>
@@ -277,7 +277,7 @@
 					</div>
 					<div class="one-half column u-pull-right">
 						<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-						<label style="text-align: center; font-size: 9px;">
+						<label style="text-align: center; font-size: 10px;">
 							{{$presolicitud->nacionalidad}} 
 						</label>
 					</div>
@@ -350,7 +350,7 @@
 				<div class="two-thirds column u-pull-left">
 					<div class="one-half column u-pull-left">
 						<div class="four columns u-pull-left">
-							<label style="font-size: 9px;">Profesión/ Actividad:</label>
+							<label style="font-size: 10px;">Profesión/ Actividad:</label>
 						</div>
 						<div class="eight columns u-pull-right">
 							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
@@ -361,7 +361,7 @@
 					</div>
 					<div class="one-half column u-pull-right">
 						<div class="one-half column u-pull-left">
-							<label style="font-size: 9px;">Empresa donde trabaja:</label>
+							<label style="font-size: 10px;">Empresa donde trabaja:</label>
 						</div>
 						<div class="one-half column u-pull-right">
 							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
@@ -468,7 +468,7 @@
 									<label style="text-align: center; font-size: 10px;">
 										{{date('d/m/Y',strtotime($presolicitud->conyuge->fecha_nacimiento))}}
 									</label>
-									<label style="font-size: 9px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
+									<label style="font-size: 10px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
 								</div>
 							</div>
 							<div class="one-half column u-pull-right">
@@ -589,7 +589,7 @@
 									<label style="text-align: center; font-size: 10px;">
 										&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;
 									</label>
-									<label style="font-size: 9px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
+									<label style="font-size: 10px; height: 15px; text-align: center; top: 10px; margin-left: 20px; position: absolute;">dd&nbsp;&nbsp;&nbsp;&nbsp;mm&nbsp;&nbsp;&nbsp;&nbsp;aaaa</label>
 								</div>
 							</div>
 							<div class="one-half column u-pull-right">
@@ -727,18 +727,18 @@
 					<div class="seven columns u-pull-left">
 						<div class="nine columns u-pull-left">
 							<div class="one-half column u-pull-left">
-								<label style="font-size: 9px; text-align: center;">Apellido Paterno:</label>
+								<label style="font-size: 10px; text-align: center;">Apellido Paterno:</label>
 							</div>
 							<div class="one-half column u-pull-right">
-								<label style="font-size: 9px; text-align: center">Apellido Materno:</label>
+								<label style="font-size: 10px; text-align: center">Apellido Materno:</label>
 							</div>
 						</div>
 						<div class="three columns u-pull-right">
-							<label style="font-size: 9px; text-align: center">Nombre(s):</label>
+							<label style="font-size: 10px; text-align: center">Nombre(s):</label>
 						</div>
 					</div>
 					<div class="five columns u-pull-right">
-						<label style="font-size: 9px; text-align: center">Edad:</label>
+						<label style="font-size: 10px; text-align: center">Edad:</label>
 					</div>
 				</div>
 				<div class="five columns u-pull-right">
@@ -749,15 +749,8 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-		<div class="page-break"></div>
-		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
-		</div>
 		<div class="row" style="border-top: 2px solid #B8242B; margin-top: 2px;">
-=======
-		<div class="row" style="border-top: 2px solid #B8242B; margin-top: 0px;">
->>>>>>> 6204bbedff9e6ec9e36c79b66f7454315814e2f8
+
 			<div class="six columns u-pull-left" style="color: #B8242B;background: #c4c4c4; text-align: center; margin-top: 0.5px;">
 				<label style="font-size:10px">REFERENCIAS PERSONALES</label>
 			</div>
@@ -820,18 +813,18 @@
 								<div class="one-half column u-pull-left" style="">
 									<label style="font-size: 10px; text-align: center">{{$recibo->sucursal}}</label>
 									<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-									<label style="font-size: 9px; height: 15px; text-align: center; top: 10px; margin-left: 55px; position: absolute;">Sucursal</label>
+									<label style="font-size: 10px; height: 15px; text-align: center; top: 10px; margin-left: 55px; position: absolute;">Sucursal</label>
 								</div>
 								<div class="one-half column u-pull-right" style="">
 									<label style="font-size: 10px; text-align: center">{{$recibo->asesor}}</label>
 									<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-									<label style="font-size: 9px; height: 15px; text-align: center; top: 10px; margin-left: 60px; position: absolute;">Asesor</label>
+									<label style="font-size: 10px; height: 15px; text-align: center; top: 10px; margin-left: 60px; position: absolute;">Asesor</label>
 								</div>
 							</div>
 							<div class="one-third column u-pull-right" style="">
 								<label style="font-size: 10px; text-align: center">{{$recibo->clave}}</label>
 								<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-								<label style="font-size: 9px; height: 15px; text-align: center;top: 10px; margin-left: 60px; position: absolute;">Clave</label>
+								<label style="font-size: 10px; height: 15px; text-align: center;top: 10px; margin-left: 60px; position: absolute;">Clave</label>
 							</div>
 						</div>
 						<div class="row">
@@ -862,25 +855,25 @@
 							</div>
 						</div>
 					</div>
-					<div class="one-third column u-pull-right" style="background: #c4c4c4; height: 95px;">
+					<div class="one-third column u-pull-right" style="background: #c4c4c4; height: 80px;">
 						<div class="eight columns u-pull-left" style="text-align: right;">
-							<label style="font-size: 10px;">Inscripción Inicial:</label>
-							<label style="font-size: 10px;">I.V.A.:</label>
-							<label style="font-size: 10px;">Subtotal:</label>
-							<label style="font-size: 10px;">Cuota Periódica Total:</label>
-							<label style="font-size: 10px;">TOTAL:</label>
+							<label style="font-size: 9px;">Inscripción Inicial:</label>
+							<label style="font-size: 9px;">I.V.A.:</label>
+							<label style="font-size: 9px;">Subtotal:</label>
+							<label style="font-size: 9px;">Cuota Periódica Total:</label>
+							<label style="font-size: 9px;">TOTAL:</label>
 						</div>
 						<div class="four columns u-pull-right">
-							<label style="font-size: 10px; text-align: center">${{number_format($recibo->insc_inicial,2)}}</label>
+							<label style="font-size: 9px; text-align: center">${{number_format($recibo->insc_inicial,2)}}</label>
 							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:15px; width: 100%;"></div>
-							<label style="font-size: 10px; text-align: center">${{number_format($recibo->iva,2)}}</label>
-							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:35px; width: 100%;"></div>
-							<label style="font-size: 10px; text-align: center">${{number_format($recibo->subtotal,2)}}</label>
-							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:50px; width: 100%;"></div>
-							<label style="font-size: 10px; text-align: center">${{number_format($recibo->cuota_periodica,2)}}</label>
-							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:70px; width: 100%;"></div>
-							<label style="font-size: 10px; text-align: center">${{number_format($recibo->total,2)}}</label>
-							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:80px; width: 100%;"></div>
+							<label style="font-size: 9px; text-align: center">${{number_format($recibo->iva,2)}}</label>
+							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:30px; width: 100%;"></div>
+							<label style="font-size: 9px; text-align: center">${{number_format($recibo->subtotal,2)}}</label>
+							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:45px; width: 100%;"></div>
+							<label style="font-size: 9px; text-align: center">${{number_format($recibo->cuota_periodica,2)}}</label>
+							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:60px; width: 100%;"></div>
+							<label style="font-size: 9px; text-align: center">${{number_format($recibo->total,2)}}</label>
+							<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:75px; width: 100%;"></div>
 						</div>
 					</div>
 				</div>
