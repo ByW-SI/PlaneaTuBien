@@ -75,6 +75,20 @@ Route::namespace('Prospecto\Cliente\Perfil')
 		Route::get('/presolicitud/pdf','DatosPersonalesController@presolicitud')->name('presolicitud');
 	});
 
+Route::namespace('Prospecto\Cliente\Presolicitud')
+	->prefix('prospectos/{prospecto}')
+	->name('prospectos.')
+	->group(function(){
+		Route::resource('presolicitud','PresolicitudController',['except'=>['show']]);
+		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']]);
+		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController');
+		Route::resource('presolicitud.recibos','PresolicitudReciboController');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
+		Route::resource('presolicitud.referencias','PresolicitudReferenciaController');
+		Route::get('/presolicitud/{presolicitud}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.manual');
+		Route::get('/presolicitud/{presolicitud}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.contrato');
+
+	});
 
 
 // PRECARGAS

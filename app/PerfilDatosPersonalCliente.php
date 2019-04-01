@@ -92,5 +92,8 @@ class PerfilDatosPersonalCliente extends Model
     {
     	return $this->hasMany('App\PerfilReferenciaPersonalCliente','perfil_id','id');
     }
+    public function presolicitud(){
+    	return $this->hasOne('App\Presolicitud','perfil_id','id');
+    }
 
 }

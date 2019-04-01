@@ -64,7 +64,10 @@
 											<i class="fas fa-file-invoice"></i>
 											<strong> Perfil</strong>
 										</a>
-									
+										<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
+											<i class="fas fa-file-contract"></i>
+											<strong> Presolicitud</strong>
+										</a>
 									@endif
 									<a class="btn btn-success" href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM</strong></a>
 								</div>

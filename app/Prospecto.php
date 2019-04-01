@@ -59,4 +59,5 @@ class Prospecto extends Model
         return $this->hasOne('App\PerfilDatosPersonalCliente','prospecto_id','id');
     }
 
+
 }
