@@ -105,7 +105,7 @@ class EmpleadoProspectoController extends Controller
             'nombre'=>'required|max:191',
             'appaterno'=>'required|max:191',
             'apmaterno'=>'nullable|max:191',
-            'sexo'=>'nullable|in:["","Hombre","Mujer"]',
+            'sexo'=>'nullable|in:,Hombre,Mujer',
             'email'=>"required|e-mail",
             'tel'=>"required|numeric",
             'movil'=>"nullable|numeric",
