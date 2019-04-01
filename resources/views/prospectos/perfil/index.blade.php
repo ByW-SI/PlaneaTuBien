@@ -10,7 +10,7 @@
 	        <div class="d-flex justify-content-between">
 	        	<h4>Perfil:</h4>   
 	        	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
-	        	<a href="{{ route('prospectos.perfil.presolicitud',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir presolicitud</a>
+	        	<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
 	        </div>
 	    </div>
 	    <div class="card-body">
