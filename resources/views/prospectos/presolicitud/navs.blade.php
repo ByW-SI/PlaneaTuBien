@@ -1,4 +1,4 @@
-<div class="card-header">
+ <div class="card-header">
 	<h5>
 		Pre solicitud para {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 	</h5>
@@ -9,8 +9,16 @@
     </div>
   @else
     <div class="d-flex justify-content-start">
-      <a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Manual del consumidor</a>
-      <a href="{{ route('prospectos.presolicitud.contrato',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Contrato</a>
+      <a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Manual del consumidor</a>
+      <a href="{{ route('prospectos.presolicitud.contrato',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Contrato</a>
+      <a href="{{ route('prospectos.presolicitud.aviso_privacidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Aviso de Privacidad</a>
+      <a href="{{ route('prospectos.presolicitud.carta_bienvenida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Carta de Bienvenida</a>
+      <a href="{{ route('prospectos.presolicitud.consentimiento_seguro',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Consentimiento de Seguro</a>
+      <a href="{{ route('prospectos.presolicitud.cuestionario_calidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Cuestionario de Calidad</a>
+      <a href="{{ route('prospectos.presolicitud.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Declaración de Salud</a>
+      <a href="{{ route('prospectos.presolicitud.domiciliacion',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Formato de Domiciliación</a>
+      <a href="{{ route('prospectos.presolicitud.ficha_deposito',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Ficha de Deposito</a>
+      <a href="{{ route('prospectos.presolicitud.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan}}</a>
     </div>
   @endif
 </div>
