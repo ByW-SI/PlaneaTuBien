@@ -56,6 +56,17 @@ class DocumentosController extends Controller
         return $pdf->download('declaracion_salud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
         
     }
+    public function fichaDeposito(Prospecto $prospecto, Presolicitud $presolicitud){
+         $cotizacion = $presolicitud->perfil->cotizacion;
+        preg_match_all('!\d+!', $cotizacion->plan, $matches);
+        $mensualidades =$matches[0][0];
+        $porcentaje_aport = (intval($cotizacion->porc1)+intval($cotizacion->porc2)+intval($cotizacion->porc3)+intval($cotizacion->porc4))/100;
+        $monto_financiar= (float)$cotizacion->propiedad*(1-(float)$porcentaje_aport);
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.ficha_deposito_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'mensualidades'=>$mensualidades,'porcentaje_aport'=>$porcentaje_aport,'monto_financiar'=>$monto_financiar,'cotizacion'=>$cotizacion]);
+        // return $pdf->stream();
+        return $pdf->download('ficha_deposito'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        
+    }
     public function formatoDomicilio(Prospecto $prospecto, Presolicitud $presolicitud){
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.domiciliacion_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud])->setPaper('a4', 'landscape');
         // return $pdf->stream();
@@ -101,8 +112,8 @@ class DocumentosController extends Controller
         }
 
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_tanda_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'mensualidades'=>$mensualidades,'porcentaje_aport'=>$porcentaje_aport,'monto_financiar'=>$monto_financiar,'cotizacion'=>$cotizacion,"puntos"=>$puntos]);
-        return $pdf->stream();
-        // return $pdf->download('anexo_tanda'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        // return $pdf->stream();
+        return $pdf->download('anexo_tanda'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
         
     }
  
