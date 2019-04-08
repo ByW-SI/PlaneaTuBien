@@ -25,6 +25,9 @@ Route::get('/home', function () {
 	}
 })->name('home');
 
+// PLANES
+Route::resource('plans','Plan\PlanController');
+
 // AGENTES
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');

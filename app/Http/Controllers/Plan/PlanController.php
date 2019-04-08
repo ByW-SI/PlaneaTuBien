@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Http\Controllers\Plan;
+
+use App\Plan;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class PlanController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        $planes = Plan::orderBy('nombre','asc')->get();
+        return view('plan.index',['planes'=>$planes]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        return view('plan.form');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        $rules=[
+            'nombre'=>'required',
+            'plazo'=>'required|integer',
+            'mes_aportacion_adjudicado'=>'required|integer',
+            'mes_adjudicado'=>'required|integer',
+            'aportacion_1'=>'required|numeric',
+            'mes_1'=>'required|integer',
+            'aportacion_2'=>'required|numeric',
+            'mes_2'=>'required|integer',
+            'aportacion_3'=>'required|numeric',
+            'mes_3'=>'required|integer',
+            'aportacion_liquidacion'=>'required|numeric',
+            'mes_liquidacion'=>'required|integer',
+            'semestral'=>'required|numeric',
+            'anual'=>'required|numeric',
+            'inscripcion'=>'required|numeric',
+            'cuota_admon'=>'required|numeric',
+            's_v'=>'required|numeric',
+            's_d'=>'required|numeric',
+        ];
+        $this->validate($request,$rules);
+        $plan = Plan::create($request->all());
+        return redirect()->route('plans.index');
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Plan  $plan
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Plan $plan)
+    {
+        //
+        return view('plan.show',['plan'=>$plan]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Plan  $plan
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Plan $plan)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Plan  $plan
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Plan $plan)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Plan  $plan
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Plan $plan)
+    {
+        //
+    }
+}
