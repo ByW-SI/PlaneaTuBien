@@ -39,6 +39,8 @@
 			</tbody>
 		</table>
 	</div>
+	@include('prospectos.presolicitud.footer',['presolicitud'=>$presolicitud])
+	
 
 </div>
 @endsection

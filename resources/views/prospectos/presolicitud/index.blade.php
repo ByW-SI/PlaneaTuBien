@@ -159,12 +159,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="card-footer">
-		<div class="d-flex justify-content-center">
-			{{-- <button class="btn btn-success" type="submit"><i class="fas fa-arrow-alt-circle-right"></i> Siguiente</button> --}}
-		</div>
-	</div>
+	@include('prospectos.presolicitud.footer',['presolicitud'=>$presolicitud])
 
-	</form>
 </div>
 @endsection

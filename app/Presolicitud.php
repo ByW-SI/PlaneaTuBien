@@ -103,4 +103,8 @@ class Presolicitud extends Model
         }
         return $status;
     }
+    public function checklist()
+    {
+        return $this->hasOne('App\ChecklistFolder','presolicitud_id','id');
+    }
 }

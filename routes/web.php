@@ -1,4 +1,4 @@
-<<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +74,6 @@ Route::namespace('Prospecto\Cliente\Perfil')
 		// PRESOLICITUD
 		Route::get('/presolicitud/pdf','DatosPersonalesController@presolicitud')->name('presolicitud');
 	});
-
 Route::namespace('Prospecto\Cliente\Presolicitud')
 	->prefix('prospectos/{prospecto}')
 	->name('prospectos.')
@@ -97,6 +96,8 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::get('/presolicitud/{presolicitud}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.anexo_tanda');
 
 	});
+Route::resource('presolicituds.checklist','Prospecto\Cliente\ChecklistFolderController');
+
 
 
 // PRECARGAS

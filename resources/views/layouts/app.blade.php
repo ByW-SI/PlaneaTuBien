@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="{{ asset('js/app.js') }}"></script>
@@ -14,14 +13,14 @@
     </head>
     <body>
         <div class="row">
-            <div class="col h-100 w-100">
-                <a href="/">
+            <div class="col">
+                <a href="{{ url('/') }}">
                     <img src="{{asset('img/header.jpg')}}" class="img-fluid" alt="planea.">
                 </a>
             </div>
         </div>
         <div class="row">
-            <div class="col h-100 w-100">
+            <div class="col">
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #081170;">
                     <a class="navbar-brand" href="/">
                         <strong>Planea tu bien</strong>
