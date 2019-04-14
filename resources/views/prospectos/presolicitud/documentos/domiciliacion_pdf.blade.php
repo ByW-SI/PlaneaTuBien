@@ -40,9 +40,6 @@
 </head>
 <body>
 	<div class="container" style="border: 1px solid black;">
-		<div style="position: absolute; left: 20%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
-		</div>
 		<div class="row" style="border-bottom: 1px solid black">
 			<div class="twelve columns">
 				<label class="right" style="margin-top: 10px; margin-right: 55px; margin-bottom: 10px;">

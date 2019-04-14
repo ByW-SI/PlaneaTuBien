@@ -43,26 +43,24 @@
 </head>
 <body>
 	<div class="container">
-		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
-		</div>
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
+				<div class="ten columns u-pull-left">
+					<img src="img/ficha_deposito_top.png" height="40" width="80">
+				</div>
 				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
+			<div class="twelve columns" style="border-top: 2px solid #081170; margin-top: 0px;"></div>
 		</div>
 		<h6 class="center">{{strtoupper($presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno)}}</h6>
 		<div class="row">
 			<div class="twelve columns">
 				<div class="two-thirds column u-pull-left">
 					<div class="one-half column u-pull-left">
-						<label class="center" style="background: #B8242B; color: white; border-radius: 12px; margin: 5 5px;">FICHA DE DEPÓSITO</label>
+						<label class="center" style="background: #081170; color: white; border-radius: 12px; margin: 5 5px;">FICHA DE DEPÓSITO</label>
 					</div>
 					<div class="one-half column u-pull-right">
 						<p>REALIZA TU PAGO EN CUALQUIER SUCURSAL <img src="img/bbva.png" height="15px" width="70px"></p>

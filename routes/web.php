@@ -16,6 +16,31 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
+
+Route::prefix('clientes')->group(function(){
+	Route::get('/login','Auth\ClienteLoginController@showLoginForm')->name('cliente.login');
+	Route::post('/login','Auth\ClienteLoginController@login')->name('cliente.login.submit');
+	Route::get('/','ClienteCredentialsController@index')->name('cliente.dashboard');
+	Route::post('/logout','Auth\ClienteLoginController@logout')->name('cliente.logout');
+
+	// Reestablecer las contraseñas 
+	Route::post('/password/email','Auth\ClienteForgotPasswordController@sendResetLinkEmail')->name('cliente.password.email');
+	Route::get('/password/reset','Auth\ClienteForgotPasswordController@showLinkRequestForm')->name('cliente.password.request');
+	Route::post('/password/reset','Auth\ClienteResetPasswordController@reset');
+	Route::get('/password/reset/{token}','Auth\ClienteResetPasswordController@showResetForm')->name('cliente.password.reset');
+	Route::resource('cotizacions','Cliente\CotizacionController');
+
+});
+
+// AUTH
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 // HOME
 Route::get('/home', function () {
 	if(Auth::check()){
@@ -27,6 +52,13 @@ Route::get('/home', function () {
 
 // PLANES
 Route::resource('plans','Plan\PlanController');
+
+// GRUPOS
+Route::resource('grupos','Grupo\GrupoController');
+
+// COTIZADOR
+Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador');
+
 
 // AGENTES
 Route::resource('empleados','Empleado\EmpleadoController');
@@ -82,6 +114,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 	->name('prospectos.')
 	->group(function(){
 		Route::resource('presolicitud','PresolicitudController',['except'=>['show']]);
+		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']]);
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController');

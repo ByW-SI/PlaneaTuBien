@@ -18,12 +18,12 @@
 				    </div>
 				@endif
 				<div class="row">
-					<div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="nombre">Nombre</label>
 						<input type="text" placeholder="Nombre del plan" name="nombre" value="{{old("nombre")}}" class="form-control" required="">
 					</div>
 
-					<div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="plazo">Plazo</label>
 						<div class="input-group mb-3">
 							<input type="number" step="1" name="plazo" value="{{old("plazo")}}" min="1" class="form-control" placeholder="Meses del plan" aria-label=" plan" aria-describedby="basic-addon2" required="">
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="mes_aportacion_adjudicado">Inicio de aportacion adjudicatario</label>
 						<div class="input-group mb-3">
 							<input type="number" step="1" name="mes_aportacion_adjudicado" value="{{old("mes_aportacion_adjudicado")}}" min="1" class="form-control" placeholder="¿En qué mes sus aportaciones son de adjudicado?" aria-label=" plan" aria-describedby="basic-addon2" required="">
@@ -41,7 +41,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="mes_adjudicado">Mes en el que se completan adjudicacion</label>
 						<div class="input-group mb-3">
 							<input type="number" step="1" name="mes_adjudicado" value="{{old("mes_adjudicado")}}" min="1" class="form-control" placeholder="¿En qué mes se completa su adjudicacion?" aria-label=" plan" aria-describedby="basic-addon2" required="">
@@ -50,7 +50,35 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+						<label for="plan_meses">Plan (en meses)</label>
+						<div class="input-group mb-3">
+							<input type="number" step="1" name="plan_meses" value="{{old("plan_meses")}}" min="1" class="form-control" placeholder="" aria-label=" plan" aria-describedby="basic-addon2" required="">
+							<div class="input-group-append">
+								<span class="input-group-text " id="basic-addon2">Meses</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+						<label for="actualizaciones">Número de actualizaciones</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text " id="basic-addon2">#</span>
+							</div>
+							<input type="number" step="1" name="actualizaciones" value="{{old("actualizaciones")}}" min="1" class="form-control" placeholder="Número de actualizaciones al monto a adjudicar" aria-label=" plan" aria-describedby="basic-addon2" required="">
+						</div>
+					</div>
 
+				</div>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+						<label for="nombre">Grupos</label>
+						<select name="grupos[]" id="grupos" class="select-grupos form-control" multiple="multiple" required="">
+							@foreach ($grupos as $grupo)
+								<option value="{{$grupo->id}}">{{"# ".$grupo->id." ".$grupo->fecha_inicio." hasta ".$grupo->fecha_fin}}</option>
+							@endforeach
+						</select>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 offset-lg-2 col-xl-4 offset-xl-2 form-group">
@@ -216,3 +244,12 @@
 		</form>
 	</div>
 @endsection
+@push('scripts')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.select-grupos').select2();
+    });
+    </script>
+@endpush

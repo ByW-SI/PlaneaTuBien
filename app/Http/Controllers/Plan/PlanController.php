@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Plan;
 
 use App\Plan;
+use App\Grupo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,7 +29,11 @@ class PlanController extends Controller
     public function create()
     {
         //
-        return view('plan.form');
+        $grupos = Grupo::where([
+            ['activo',1],
+            ['fecha_fin','>=',date('Y-m-d')]
+        ])->get();
+        return view('plan.form',['grupos'=>$grupos]);
     }
 
     /**
@@ -45,6 +50,8 @@ class PlanController extends Controller
             'plazo'=>'required|integer',
             'mes_aportacion_adjudicado'=>'required|integer',
             'mes_adjudicado'=>'required|integer',
+            'plan_meses'=>'required|integer',
+            'actualizaciones'=>'required|integer',
             'aportacion_1'=>'required|numeric',
             'mes_1'=>'required|integer',
             'aportacion_2'=>'required|numeric',
@@ -62,6 +69,9 @@ class PlanController extends Controller
         ];
         $this->validate($request,$rules);
         $plan = Plan::create($request->all());
+        foreach ($request->grupos as $grupo_id) {
+            $plan->grupos()->attach($grupo_id);
+        }
         return redirect()->route('plans.index');
 
     }

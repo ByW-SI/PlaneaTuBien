@@ -103,6 +103,25 @@
 					<a class="dropdown-item" href="{{ route('promocions.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 				</div>
 			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+					<i class="fas fa-home"></i><strong> Planes</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ route('plans.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+					<a class="dropdown-item" href="{{ route('plans.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+					<a class="dropdown-item" href="{{ route('cotizador') }}"><i class="fa fa-search"></i><strong> Cotizador</strong></a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+					<i class="fas fa-layer-group"></i><strong> Grupos</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ route('grupos.create') }}"><i class="far fa-arrow-alt-circle-up"></i><strong> Alta</strong></a>
+					<a class="dropdown-item" href="{{ route('grupos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+				</div>
+			</li>
 		</ul>
 	</div>
 </nav>

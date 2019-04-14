@@ -107,4 +107,8 @@ class Presolicitud extends Model
     {
         return $this->hasOne('App\ChecklistFolder','presolicitud_id','id');
     }
+    public function cliente_credential()
+    {
+        return $this->hasOne('App\ClienteCredential','presolicitud_id');
+    }
 }
