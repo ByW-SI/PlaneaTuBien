@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->unsignedInteger('plazo');
             $table->unsignedInteger('mes_aportacion_adjudicado');
             $table->unsignedInteger('mes_adjudicado');
+            $table->unsignedInteger('mes_completo_adjudicado');
             $table->unsignedInteger('plan_meses');
             $table->unsignedInteger('actualizaciones')->default(0);
             $table->decimal('aportacion_1',5,2)->default(0.00);

@@ -121,4 +121,10 @@ class PlanController extends Controller
     {
         //
     }
+
+    public function getPlanes($p_ahorrado)
+    {
+        $planes = Plan::where('aportacion_1',$p_ahorrado)->orderBy('mes_adjudicado','asc')->get();
+        return response()->json(['planes'=>$planes],201);
+    }
 }

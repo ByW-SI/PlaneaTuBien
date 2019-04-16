@@ -56,7 +56,197 @@ if (token) {
 //     encrypted: true
 // });
 
+$("#ahorro_cliente").change(function(){
+    var valor = $("#ahorro_cliente").val();
+    var planes = null;
+    axios.get('../../../../../api/planes/'+valor).then(
+        res=>{ planes = res.data.planes[0];
+            switch (valor){
+                case "0":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                case "5":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                case "10":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                case "20":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                case "30":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                case "40":
+                    // console.log(planes);
+                    $("#plan_cliente").val(planes.id);
+                    cotizar();
+
+                    break;
+                
+                default:
+                    alert('ninguno');
+                    break;
+
+            }
+    }).catch(err=>{
+        console.log(err);
+    });
+    // alert(valor);
+    
+
+});
+function cotizar() {
+    // body...
+    $("#cotizador").empty();
+    var monto =$("#monto").val();
+    var plan_id = $("#plan_cliente").val();
+    axios.get(`../../../../../api/cotizar/${monto}/${plan_id}`).then(res=>{
+        var plan = res.data.plan;
+        var html = `
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <h4>${plan.nombre}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">Monto a adjudicar</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.monto_adjudicar.toFixed(2)}" readonly="">
+                </div>
+            </div>
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">Plazo</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.plazo}" readonly="">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">Meses</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">${plan.mes_adjudicado} mensualidades de</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.cotizador.cuota_periodica_integrante.toFixed(2)}" readonly="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Aportación extraordinaria</th>
+                        <th>Porcentaje</th>
+                        <th>Monto</th>
+                        <th>Mes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">${plan.aportacion_1}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_1.toFixed(2)}</td>
+                        <td class="text-center">#${plan.mes_1}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td class="text-center">${plan.aportacion_2}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_2.toFixed(2)}</td>
+                        <td class="text-center">#${plan.mes_2}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td class="text-center">${plan.aportacion_3}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_3.toFixed(2)}</td>
+                        <td class="text-center">#${plan.mes_3}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Liquidación</td>
+                        <td class="text-center">${plan.aportacion_liquidacion}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_liquidacion.toFixed(2)}</td>
+                        <td class="text-center">#${plan.mes_liquidacion}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Anual</td>
+                        <td class="text-center">${plan.anual}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_anual.toFixed(2)}</td>
+                        <td class="text-center">Cada Diciembre</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Semestral</td>
+                        <td class="text-center">${plan.semestral}%</td>
+                        <td class="text-center">$${plan.monto_aportacion_semestral.toFixed(2)}</td>
+                        <td class="text-center">Cada Junio y Diciembre</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">Total de Aportación</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input class="form-control" type="text" value="${plan.cotizador.total_aportacion.toFixed(2)}" readonly="">
+                </div>
+            </div>
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">Costo anual de </label>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" value="${plan.anual_total}" readonly="">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="monto">Inscripción </label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input class="form-control" type="text" value="${plan.monto_inscripcion_con_iva}" readonly="">
+                </div>
+            </div>
+        </div>`;
+        $("#cotizador").append(html);
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+$("#monto").change(function(){
+    cotizar();
+});
+$("#plan_cliente").change(function(){
+    alert('cambiar');
+    cotizar();
+});
+
 $(document).ready(function() {
+
         $('#propiedad').change(function() {
             calculate();
         });

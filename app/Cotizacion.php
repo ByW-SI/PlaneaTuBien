@@ -13,29 +13,33 @@ class Cotizacion extends Model
     
     protected $table = 'cotizacions';
 
+    // protected $fillable = [
+    // 	'id',
+    // 	'prospecto_id',
+    // 	'propiedad',
+    // 	'ahorro',
+    //     'plan',
+    //     'adjudicar',
+    //     'plazo',
+    //     'mensualidad',
+    //     'porc1',
+    //     'porc2',
+    //     'porc3',
+    //     'porc4',
+    //     'monto1',
+    //     'monto2',
+    //     'monto3',
+    //     'monto4',
+    //     'mes1',
+    //     'mes2',
+    //     'mes3',
+    //     'total',
+    //     'anual',
+    //     'inscripcion',
+    // ];
     protected $fillable = [
-    	'id',
-    	'prospecto_id',
-    	'propiedad',
-    	'ahorro',
-        'plan',
-        'adjudicar',
-        'plazo',
-        'mensualidad',
-        'porc1',
-        'porc2',
-        'porc3',
-        'porc4',
-        'monto1',
-        'monto2',
-        'monto3',
-        'monto4',
-        'mes1',
-        'mes2',
-        'mes3',
-        'total',
-        'anual',
-        'inscripcion',
+        'monto',
+        'ahorro'
     ];
 
     protected $hidden =[
@@ -53,6 +57,10 @@ class Cotizacion extends Model
 
     public function pagos() {
         return $this->hasMany('App\Pago');
+    }
+    public function plan()
+    {
+        return $this->belongsTo('App\Plan','plan_id','id');
     }
 
     public function promocion(){

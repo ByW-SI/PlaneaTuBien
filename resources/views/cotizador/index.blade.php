@@ -16,7 +16,7 @@
 						<select name="plan" id="plan" class="form-control mb-2 mr-sm-2" placeholder="Plan a contratar">
 							<option value="">Seleccione un plan</option>
 							@foreach ($planes as $plan)
-								<option value="{{$plan->id}}" {{$request->plan == $plan->id ? 'selected="selected"' : ''}}>{{$plan->nombre}}</option>
+								<option value="{{$plan->id}}" {{$plan_select && $request->plan == $plan_select->id ? 'selected=""' : ''}}>{{$plan->nombre}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -26,6 +26,11 @@
 				</div>
 			</form>
 			@if ($res)
+				<div class="row">
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<h4>{{$plan_select->nombre}}</h4>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto contratado</label>
@@ -39,7 +44,7 @@
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Plazo</label>
 						<div class="input-group mb-3">
-							<span class="form-control bg-light">{{$plan->plazo}}</span>
+							<span class="form-control bg-light">{{$plan_select->plazo}}</span>
 							<div class="input-group-append">
 								<span class="input-group-text">meses</span>
 							</div>
@@ -66,7 +71,7 @@
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Cuota de administración</label>
 						<div class="input-group mb-3">
-							<span class="form-control bg-light">{{$plan->cuota_admon}}</span>
+							<span class="form-control bg-light">{{$plan_select->cuota_admon}}</span>
 							<div class="input-group-append">
 								<span class="input-group-text">%</span>
 							</div>
@@ -159,7 +164,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_1($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_1($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -168,7 +173,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_2($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_2($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -177,7 +182,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_3($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_3($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -186,7 +191,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_liquidacion($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_liquidacion($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -195,7 +200,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_anual($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_anual($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -204,7 +209,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($plan->monto_aportacion_semestral($request->monto),2)}}</span>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_semestral($request->monto),2)}}</span>
 						</div>
 					</div>
 				</div>

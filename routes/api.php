@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('planes/{p_ahorrado}','Plan\PlanController@getPlanes');
+Route::get('cotizar/{monto}/{plan_id}','Plan\CotizadorController@calcular');

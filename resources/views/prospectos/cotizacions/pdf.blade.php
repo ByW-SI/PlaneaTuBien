@@ -634,23 +634,23 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<p>Estimad{{ $prospecto->sexo == 'Hombre' ? 'o' : 'a' }} {{ $prospecto->nombre }}:</p>
-								<p>Se adjunta la información del préstamo que solicitó para la cantidad de ${{ number_format($cotizacion->propiedad, 2) }} en el plan {{ $cotizacion->plan }}.</p>
+								<p>Se adjunta la información del préstamo que solicitó para la cantidad de ${{ number_format($cotizacion->monto, 2) }} en el plan {{ $cotizacion->plan->nombre }}.</p>
 							</div>
 						</div>
 		                <div class="row">
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Monto a adjudicar:</label>
-		                        <dd>${{ $cotizacion->adjudicar }}</dd>
+		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['monto_adjudicar'],2) }}</dd>
 		                    </div>
 		                    <br>
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Plazo:</label>
-		                        <dd>{{ $cotizacion->plazo }} meses</dd>
+		                        <dd>{{ $cotizacion->plan->plazo }} meses</dd>
 		                    </div>
 		                    <br>
 		                    <div class="col-sm-4">
-		                        <label class="control-label">{{ $cotizacion->mes3 + 1 }} mensualidades de:</label>
-		                        <dd>${{ $cotizacion->mensualidad }}</dd>
+		                        <label class="control-label">{{ $cotizacion->plan->mes_adjudicado + 1 }} mensualidades de:</label>
+		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2) }}</dd>
 		                    </div>
 		                    <br>
 		                </div>
@@ -665,45 +665,59 @@
 		                            </tr>
 		                            <tr>
 		                                <td>1</td>
-		                                <td>{{ $cotizacion->porc1 }}</td>
-		                                <td>{{ $cotizacion->monto1 }}</td>
-		                                <td>{{ $cotizacion->mes1 }}</td>
+		                                <td>{{ $cotizacion->plan->aportacion_1 }}</td>
+		                                <td>${{ number_format($cotizacion->plan->monto_aportacion_1($cotizacion->monto),2) }}</td>
+		                                <td>{{ $cotizacion->plan->mes_1 }}</td>
 		                            </tr>
 		                            <tr>
 		                                <td>2</td>
-		                                <td>{{ $cotizacion->porc2 }}</td>
-		                                <td>{{ $cotizacion->monto2 }}</td>
-		                                <td>{{ $cotizacion->mes2 }}</td>
+		                                <td>{{ $cotizacion->plan->aportacion_2 }}</td>
+		                                <td>${{ number_format($cotizacion->plan->monto_aportacion_2($cotizacion->monto),2) }}</td>
+		                                <td>{{ $cotizacion->plan->mes_2 }}</td>
 		                            </tr>
 		                            <tr>
 		                                <td>3</td>
-		                                <td>{{ $cotizacion->porc3 }}</td>
-		                                <td>{{ $cotizacion->monto3 }}</td>
-		                                <td>{{ $cotizacion->mes3 }}</td>
+		                                <td>{{ $cotizacion->plan->aportacion_3 }}</td>
+		                                <td>${{ number_format($cotizacion->plan->monto_aportacion_3($cotizacion->monto),2) }}</td>
+		                                <td>{{ $cotizacion->plan->mes_3 }}</td>
+		                            </tr>
+		                            <tr>
+		                                <td>Liquidación</td>
+		                                <td>{{ $cotizacion->plan->aportacion_liquidacion }}</td>
+		                                <td>${{ number_format($cotizacion->plan->monto_aportacion_liquidacion($cotizacion->monto),2) }}</td>
+		                                <td>{{ $cotizacion->plan->mes_liquidacion }}</td>
 		                            </tr>
 		                            <tr>
 		                                <td>Anual</td>
-		                                <td>{{ $cotizacion->porc4 }}</td>
-		                                <td>{{ $cotizacion->monto4 }}</td>
+		                                <td>{{ $cotizacion->plan->anual }}</td>
+		                                <td>${{ number_format($cotizacion->plan->monto_aportacion_anual($cotizacion->monto),2) }}</td>
 		                                <td>Cada diciembre</td>
 		                            </tr>
+		                            @if ($cotizacion->plan->semestral != 0.00)
+		                            	<tr>
+			                                <td>Semestral</td>
+			                                <td>{{ $cotizacion->plan->semestral }}</td>
+			                                <td>${{ number_format($cotizacion->plan->monto_aportacion_semestral($cotizacion->monto),2) }}</td>
+			                                <td>Cada junio y diciembre</td>
+			                            </tr>
+		                            @endif
 		                        </table>
 		                    </div>
 		                </div>
 		                <div class="row">
 		                    <div class="col-sm-4">
-		                        <label class="control-label">Monto total:</label>
-		                        <dd>${{ $cotizacion->total }}</dd>
+		                        <label class="control-label">Total de aportaciones:</label>
+		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['total_aportacion'],2) }}</dd>
 		                    </div>
 		                    <br>
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Costo anual de:</label>
-		                        <dd>{{ $cotizacion->anual }}%</dd>
+		                        <dd>{{ $cotizacion->plan->anual_total }}%</dd>
 		                    </div>
 		                    <br>
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Inscripción:</label>
-		                        <dd>${{ $cotizacion->inscripcion }}</dd>
+		                        <dd>${{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}</dd>
 		                    </div>
 		                </div>
 		                @if ($cotizacion->promocion)

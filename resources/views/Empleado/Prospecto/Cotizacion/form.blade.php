@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="card">
-   <div class="card-header">
+    <div class="card-header">
         <div class="row">
             <div class="col-sm-3">
                 <h4>Datos del Prospecto:</h4>
@@ -106,76 +106,91 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h5>Cotizaciones:</h5>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i><strong> Agregar Cotización</strong>
-                    </a>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h5>Datos de la Cotización</h5>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="{{ route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-primary">
+                            <i class="fa fa-bars"></i><strong> Lista de Cotizaciones</strong>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-body">
-            @if(count($prospecto->cotizaciones) > 0)
-                <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-                    <tr class="info">
-                        <th>Valor de la propiedad</th>
-                        <th>Plan</th>
-                        <th>Monto a financiar</th>
-                        <th>Acción</th>
-                    </tr>
-                    @foreach($prospecto->cotizaciones as $cotizacion)
-                        <tr>
-                            <td>${{ number_format($cotizacion->monto, 2) }}</td>
-                            <td>{{ $cotizacion->plan->nombre }}</td>
-                            <td>${{number_format($cotizacion->plan->cotizador($cotizacion->monto)['monto_adjudicar'],2)}}</td>
-                            <td class="text-center">
-                                <a href="{{ route('empleados.prospectos.cotizacions.show', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-primary">
-                                    <i class="fa fa-eye"></i> Ver
-                                </a>
-                                <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
-                                    <i class="fa fa-file"></i> PDF
-                                </a>
-                                <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
-                                    <i class="fas fa-envelope"></i> Enviar por correo
-                                </a>
-                                <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm btn-success"> Seleccionar cotización para crear perfil</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            @else
-                <h4>No hay préstamos disponibles.</h4>
-            @endif
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-around">
-            <a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-                <i class="far fa-calendar-check"></i>
-                <strong> C.R.M.</strong>
-            </a>
-            <a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-                <i class="fas fa-user-edit"></i>
-                <strong> Editar Prospecto</strong>
-            </a>
-            <a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <strong> Cotizador</strong>
-            </a>
-            @if ($prospecto->perfil)
-                <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-                    <i class="fas fa-file-invoice"></i>
-                    <strong> Perfil</strong>
-                </a>
-            
-            @endif
+            <form action="{{route('empleados.prospectos.cotizacions.store', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" method="post">
+                {{ csrf_field() }}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                            <label for="monto">✱Valor de la propiedad</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                </div>
+                                <input class="form-control" type="number" name="monto" id="monto" min="300000" max="20000000" step="50000" required="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                            <label for="ahorro">✱Ahorro del cliente</label>
+                            <select name="ahorro" id="ahorro_cliente" class="form-control" required="">
+                                <option value="">Seleccionar</option>
+                                <option value="0">0%</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                            <label for="plan">✱Plan</label>
+                            <select name="plan" id="plan_cliente" class="form-control">
+                                <option value="">Seleccionar</option>
+                                @foreach ($planes as $plan)
+                                    <option value="{{$plan->id}}">{{$plan->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                            <label class="col-form-label">Promocion:</label>
+                            <select name="promocion" class="form-control" id="promocion_select">
+                                <option value="">Seleccione una de las promociones</option>
+                                    @foreach ($promociones as $promocion)
+                                        <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>   
+                                    @endforeach   
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="promocion_div">
+                    </div>
+                    <div id="cotizador">    
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-4 offset-4 text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-check"></i> Guardar
+                            </button>
+                        </div>
+                        <div class="col-sm-4 text-right text-danger">
+                            ✱Campos Requeridos.
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    $("#ahorro_cliente").change(function () {
+        alert('cambio');
+    })
+
+</script>
 
 @endsection

@@ -17,17 +17,37 @@ class CotizadorController extends Controller
     {
         //
         $res=null;
+        $plan = null;
+        // dd($request->plan);
         if($request->monto && $request->plan){
             // $this->cotizar($request->monto,$request->plan);
             $plan = Plan::find($request->plan);
+            // dd($plan);
             $res=$plan->cotizador($request->monto);
             // dd($res);
         }
         $planes = Plan::orderBy('nombre','asc')->get();
-        return view('cotizador.index',['planes'=>$planes,'request'=>$request,'res'=>$res]);
+        return view('cotizador.index',['planes'=>$planes,'request'=>$request,'res'=>$res,'plan_select'=>$plan]);
 
     }
 
+    public function calcular($monto,$plan_id)
+    {
+        $plan = Plan::find($plan_id);
+        $plan->anual_total = $plan->anual_total;
+        $plan->apor_extr = $plan->apor_extr;
+        $plan->monto_financiar = $plan->monto_financiar($monto);
+        $plan->monto_adjudicar = $plan->monto_adjudicar($monto);
+        $plan->monto_aportacion_1 = $plan->monto_aportacion_1($monto);
+        $plan->monto_aportacion_2 = $plan->monto_aportacion_2($monto);
+        $plan->monto_aportacion_3 =$plan->monto_aportacion_3($monto);
+        $plan->monto_aportacion_liquidacion = $plan->monto_aportacion_liquidacion($monto);
+        $plan->monto_aportacion_anual = $plan->monto_aportacion_anual($monto);
+        $plan->monto_aportacion_semestral = $plan->monto_aportacion_semestral($monto);
+        $plan->cotizador = $plan->cotizador($monto);
+        $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
+        return response()->json(['plan'=>$plan],200);
+    }
     // public function cotizar($monto,$plan){
         
     //     $anual_total = $plan->anual_total;

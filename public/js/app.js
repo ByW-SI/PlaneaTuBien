@@ -36667,6 +36667,49 @@ if (token) {
 // });
 
 
+$("#ahorro_cliente").change(function () {
+  var valor = $("#ahorro_cliente").val();
+  var planes = null;
+  axios.get('../../../../../api/planes/' + valor).then(function (res) {
+    planes = res.data.planes[0];
+
+    switch (valor) {
+      case "0":
+        // console.log(planes);
+        $("#plan_cliente").val(planes.id);
+        cotizar();
+        break;
+
+      default:
+        alert('ninguno');
+        break;
+    }
+  }).catch(function (err) {
+    console.log(err);
+  }); // alert(valor);
+});
+
+function cotizar() {
+  // body...
+  $("#cotizador").empty();
+  var monto = $("#monto").val();
+  var plan_id = $("#plan_cliente").val();
+  axios.get("../../../../../api/cotizar/".concat(monto, "/").concat(plan_id)).then(function (res) {
+    var plan = res.data.plan;
+    var html = "\n        <div class=\"row\">\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <h4>".concat(plan.nombre, "</h4>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">Monto a adjudicar</label>\n                <div class=\"input-group mb-3\">\n                    <div class=\"input-group-prepend\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">$</span>\n                    </div>\n                    <input class=\"form-control\" type=\"text\" id=\"monto_adjudicar\" value=\"").concat(plan.monto_adjudicar.toFixed(2), "\" readonly=\"\">\n                </div>\n            </div>\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">Plazo</label>\n                <div class=\"input-group mb-3\">\n                    <input class=\"form-control\" type=\"text\" id=\"monto_adjudicar\" value=\"").concat(plan.plazo, "\" readonly=\"\">\n                    <div class=\"input-group-append\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">Meses</span>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">").concat(plan.mes_adjudicado, " mensualidades de</label>\n                <div class=\"input-group mb-3\">\n                    <div class=\"input-group-prepend\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">$</span>\n                    </div>\n                    <input class=\"form-control\" type=\"text\" id=\"monto_adjudicar\" value=\"").concat(plan.cotizador.cuota_periodica_integrante.toFixed(2), "\" readonly=\"\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <table class=\"table table-bordered table-striped\">\n                <thead>\n                    <tr>\n                        <th>Aportaci\xF3n extraordinaria</th>\n                        <th>Porcentaje</th>\n                        <th>Monto</th>\n                        <th>Mes</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr>\n                        <td class=\"text-center\">1</td>\n                        <td class=\"text-center\">").concat(plan.aportacion_1, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_1.toFixed(2), "</td>\n                        <td class=\"text-center\">#").concat(plan.mes_1, "</td>\n                    </tr>\n                    <tr>\n                        <td class=\"text-center\">2</td>\n                        <td class=\"text-center\">").concat(plan.aportacion_2, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_2.toFixed(2), "</td>\n                        <td class=\"text-center\">#").concat(plan.mes_2, "</td>\n                    </tr>\n                    <tr>\n                        <td class=\"text-center\">3</td>\n                        <td class=\"text-center\">").concat(plan.aportacion_3, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_3.toFixed(2), "</td>\n                        <td class=\"text-center\">#").concat(plan.mes_3, "</td>\n                    </tr>\n                    <tr>\n                        <td class=\"text-center\">Liquidaci\xF3n</td>\n                        <td class=\"text-center\">").concat(plan.aportacion_liquidacion, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_liquidacion.toFixed(2), "</td>\n                        <td class=\"text-center\">#").concat(plan.mes_liquidacion, "</td>\n                    </tr>\n                    <tr>\n                        <td class=\"text-center\">Anual</td>\n                        <td class=\"text-center\">").concat(plan.anual, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_anual.toFixed(2), "</td>\n                        <td class=\"text-center\">Cada Diciembre</td>\n                    </tr>\n                    <tr>\n                        <td class=\"text-center\">Semestral</td>\n                        <td class=\"text-center\">").concat(plan.semestral, "%</td>\n                        <td class=\"text-center\">$").concat(plan.monto_aportacion_semestral.toFixed(2), "</td>\n                        <td class=\"text-center\">Cada Junio y Diciembre</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">Total de Aportaci\xF3n</label>\n                <div class=\"input-group mb-3\">\n                    <div class=\"input-group-prepend\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">$</span>\n                    </div>\n                    <input class=\"form-control\" type=\"text\" value=\"").concat(plan.cotizador.total_aportacion.toFixed(2), "\" readonly=\"\">\n                </div>\n            </div>\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">Costo anual de </label>\n                <div class=\"input-group mb-3\">\n                    <input class=\"form-control\" type=\"text\" value=\"").concat(plan.anual_total, "\" readonly=\"\">\n                    <div class=\"input-group-prepend\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">%</span>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group\">\n                <label for=\"monto\">Inscripci\xF3n </label>\n                <div class=\"input-group mb-3\">\n                    <div class=\"input-group-prepend\">\n                        <span class=\"input-group-text\" id=\"basic-addon1\">$</span>\n                    </div>\n                    <input class=\"form-control\" type=\"text\" value=\"").concat(plan.monto_inscripcion_con_iva, "\" readonly=\"\">\n                </div>\n            </div>\n        </div>");
+    $("#cotizador").append(html);
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
+$("#monto").change(function () {
+  cotizar();
+});
+$("#plan_cliente").change(function () {
+  alert('cambiar');
+  cotizar();
+});
 $(document).ready(function () {
   $('#propiedad').change(function () {
     calculate();

@@ -88,46 +88,34 @@
 					</tr>
 					<tr>
 						<th class="header-bg">
-							APELLIDO PATERNO
 						</th>
 						<th class="header-bg">
-							APELLIDO MATERNO
 						</th>
 						<th class="header-bg">
-							NOMBRE(S)
 						</th>
 						<th class="header-bg"></th>
-						<th class="header-bg">AÑOS</th>
-						<th class="header-bg">(%)</th>
+						<th class="header-bg"></th>
+						<th class="header-bg"></th>
 						<th class="header-bg">SI</th>
 						<th class="header-bg">NO</th>
 					</tr>
-					@foreach ($presolicitud->beneficiarios as $beneficiario)
-						<tr>
-							<td>
-								{{$beneficiario->paterno}}
-							</td>
-							<td>
-								{{$beneficiario->materno}}
-							</td>
-							<td>
-								{{$beneficiario->nombre}}
-							</td>
-							<td>
-								{{$beneficiario->parentesco}}
-							</td>
-							<td>
-								{{$beneficiario->edad}}
-							</td>
-							<td>
-								{{$beneficiario->porcentaje}}%
-							</td>
-							<td>
-								X
-							</td>
-							<td></td>
-						</tr>
-					@endforeach
+					<tr>
+						<td colspan="3">
+							<strong>PLANEA TU BIEN S.A. DE C.V.</strong>
+						</td>
+						<td>
+							Otorgante del Crédito
+						</td>
+						<td>
+						</td>
+						<td>
+							Saldo Insoluto
+						</td>
+						<td>
+							X
+						</td>
+						<td></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

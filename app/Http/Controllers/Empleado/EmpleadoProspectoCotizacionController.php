@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Promocion;
 use App\Prospecto;
+use App\Plan;
 use Illuminate\Http\Request;
 
 class EmpleadoProspectoCotizacionController extends Controller
@@ -19,6 +20,11 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function index(Empleado $empleado,Prospecto $prospecto)
     {
+
+        $cotizaciones = $prospecto->cotizaciones;
+        $cotizacion = $cotizaciones[0];
+        // dd();
+
         return view('empleado.prospecto.cotizacion.index', ['empleado'=>$empleado, 'prospecto' => $prospecto]);
     }
 
@@ -30,7 +36,9 @@ class EmpleadoProspectoCotizacionController extends Controller
     public function create(Empleado $empleado,Prospecto $prospecto)
     {
         $promociones = Promocion::orderBy('valido_inicio','desc')->get();
-        return view('empleado.prospecto.cotizacion.create', ['empleado'=>$empleado,'prospecto' => $prospecto,'promociones'=>$promociones]);
+        $planes = Plan::orderBy('mes_adjudicado','asc')->get();
+        // return view('empleado.prospecto.cotizacion.create', ['empleado'=>$empleado,'prospecto' => $prospecto,'promociones'=>$promociones]);
+        return view('empleado.prospecto.cotizacion.form', ['empleado'=>$empleado,'prospecto' => $prospecto,'promociones'=>$promociones,'planes'=>$planes]);
     }
 
     /**
@@ -43,8 +51,11 @@ class EmpleadoProspectoCotizacionController extends Controller
     {
         $cotizacion = new Cotizacion($request->all());
         $promocion = Promocion::find($request->promocion);
+        $plan = Plan::find($request->plan);
+        $cotizacion->plan_id = $plan->id;
         $prospecto->cotizaciones()->save($cotizacion);
         $cotizacion->promocion()->associate($promocion);
+
         $cotizacion->save();
         return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
     }

@@ -6,6 +6,7 @@ use App\Cotizacion;
 use App\Empleado;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
+use App\Plan;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,8 @@ class CotizacionController extends Controller
      */
     public function create(Prospecto $prospecto)
     {
+        // $planes = Plan::orderBy('mes_adjudicado','asc')->get();
+        // return view('prospectos.cotizacions.form', ['prospecto' => $prospecto,'planes'=>$planes]);
         return view('prospectos.cotizacions.create', ['prospecto' => $prospecto]);
     }
 

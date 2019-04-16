@@ -13,6 +13,7 @@ class Plan extends Model
     	'plazo',
     	'mes_aportacion_adjudicado',
     	'mes_adjudicado',
+        'mes_completo_adjudicado',
         'plan_meses',
         'actualizaciones',
     	'aportacion_1',
@@ -97,9 +98,13 @@ class Plan extends Model
     }
     public function monto_aportacion_semestral($monto){
         $monto_adjudicar = $this->monto_adjudicar($monto);
-        $monto_aportacion_anual = $monto_adjudicar*($this->semestral/100);
-        return $monto_aportacion_anual;
+        $monto_aportacion_semestral = $monto_adjudicar*($this->semestral/100);
+        return $monto_aportacion_semestral;
 
+    }
+    public function monto_inscripcion_con_iva($monto){
+        $monto_inscripcion = $monto*1.16*($this->inscripcion/100);
+        return $monto_inscripcion;
     }
 
     // COTIZADOR
@@ -123,6 +128,7 @@ class Plan extends Model
         // dd($seguro_desempleo);
         $total_aportacion_en_mensualidades= 0.00;
         $total_cuota_administracion=0.00;
+        $bandera_s_d = false;
         for ($i = 1; $i <= $this->plazo; $i++) {
             if(date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12")
             {
@@ -132,13 +138,15 @@ class Plan extends Model
                 $seguro_vida_mes = $seguro_vida_mes*1.03;
             }
             // if($this->plan_meses+1<$i){
-            if($this->plan_meses<$i){
+            if($this->mes_adjudicado<$i){
 
                 // $seguro_desempleo = $monto_adjudicar*($this->s_d/100);
+                // if($bandera_s_d && (date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12"))
                 if(date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12")
                 {
                     $seguro_desempleo = $seguro_desempleo*1.03;
                 }
+                // $bandera_s_d = true;
                 $mes = [
                     'mes'=>date('m',strtotime($mes_actual)),
                     'aportacion'=>$aportacion_mes,
@@ -183,7 +191,7 @@ class Plan extends Model
             $cuota_periodica_adjudicado += $corrida[$i]['total'];
             // var_dump($i);
         }
-        // dd($this->plazo-$this->plan_meses);
+        // dd($cuota_periodica_adjudicado);
         $aportacion_adjudicado = $aportacion_adjudicado/($this->plazo-$this->plan_meses);
         $cuota_periodica_adjudicado = $cuota_periodica_adjudicado/($this->plazo-$this->plan_meses);
         $total_aportaciones_en_extraordin= $monto_adjudicar*($aportaciones_extraordinarias/100);
@@ -217,5 +225,8 @@ class Plan extends Model
     public function grupos()
     {
         return $this->belongsToMany('App\Grupo')->using('App\GrupoPlan');
+    }
+    public function cotizaciones(){
+        return $this->hasMany('App\Cotizacion','plan_id');
     }
 }

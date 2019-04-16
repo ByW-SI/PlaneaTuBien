@@ -131,13 +131,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->propiedad) }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->monto,2) }}" class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Ahorro del cliente:</label>
                     <div class="input-group">
-                        <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro*100 : 'N/A' }}" class="form-control">
+                        <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro : 'N/A' }}" class="form-control">
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>   
@@ -145,7 +145,7 @@
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">      Plan:</label>
-                    <input type="text" readonly="" value="{{ $cotizacion->plan }}" class="form-control">
+                    <input type="text" readonly="" value="{{ $cotizacion->plan->nombre }}" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -155,25 +155,25 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ $cotizacion->adjudicar }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto),2) }}" class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Plazo:</label>
                     <div class="input-group">
-                        <input type="text" readonly="" value="{{ $cotizacion->plazo }}" class="form-control">
+                        <input type="text" readonly="" value="{{ $cotizacion->plan->plazo }}" class="form-control">
                         <div class="input-group-append">
                             <span class="input-group-text">meses</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
-                    <label class="col-form-label">{{ $cotizacion->mes3 + 1 }} mensualidades de:</label>
+                    <label class="col-form-label">{{ $cotizacion->plan->mes_adjudicado }} mensualidades de:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ $cotizacion->mensualidad }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2) }}" class="form-control">
                     </div>
                 </div>
             </div>
@@ -188,45 +188,59 @@
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>{{ $cotizacion->porc1 }}</td>
-                            <td>{{ $cotizacion->monto1 }}</td>
-                            <td>{{ $cotizacion->mes1 }}</td>
+                            <td>{{ $cotizacion->plan->aportacion_1 }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_aportacion_1($cotizacion->monto),2) }}</td>
+                            <td>{{ $cotizacion->plan->mes_1 }}</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>{{ $cotizacion->porc2 }}</td>
-                            <td>{{ $cotizacion->monto2 }}</td>
-                            <td>{{ $cotizacion->mes2 }}</td>
+                            <td>{{ $cotizacion->plan->aportacion_2 }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_aportacion_2($cotizacion->monto),2) }}</td>
+                            <td>{{ $cotizacion->plan->mes_2 }}</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>{{ $cotizacion->porc3 }}</td>
-                            <td>{{ $cotizacion->monto3 }}</td>
-                            <td>{{ $cotizacion->mes3 }}</td>
+                            <td>{{ $cotizacion->plan->aportacion_3 }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_aportacion_3($cotizacion->monto),2) }}</td>
+                            <td>{{ $cotizacion->plan->mes_3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Liquidación</td>
+                            <td>{{ $cotizacion->plan->aportacion_liquidacion }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_aportacion_liquidacion($cotizacion->monto),2) }}</td>
+                            <td>{{ $cotizacion->plan->mes_liquidacion }}</td>
                         </tr>
                         <tr>
                             <td>Anual</td>
-                            <td>{{ $cotizacion->porc4 }}</td>
-                            <td>{{ $cotizacion->monto4 }}</td>
+                            <td>{{ $cotizacion->plan->anual }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_aportacion_anual($cotizacion->monto),2) }}</td>
                             <td>Cada diciembre</td>
                         </tr>
+                        @if ($cotizacion->plan->semestral != 0.00)
+                            <tr>
+                                <td>Semestral</td>
+                                <td>{{ $cotizacion->plan->semestral }}</td>
+                                <td>${{ number_format($cotizacion->plan->monto_aportacion_semestral($cotizacion->monto),2) }}</td>
+                                <td>Cada junio y diciembre</td>
+                            </tr>
+                        @endif
                     </table>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label class="col-form-label">Monto total:</label>
+                    <label class="col-form-label">Total de aportaciones:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{ $cotizacion->total }}" class="form-control" readonly="">
+                        <input type="text" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['total_aportacion'],2) }}" class="form-control" readonly="">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Costo anual de:</label>
                     <div class="input-group">
-                        <input type="text" value="{{ $cotizacion->anual }}" class="form-control" readonly="">
+                        <input type="text" value="{{ $cotizacion->plan->anual_total }}" class="form-control" readonly="">
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>
@@ -238,7 +252,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{ $cotizacion->inscripcion }}" class="form-control" readonly="">
+                        <input type="text" value="{{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}" class="form-control" readonly="">
                     </div>
                 </div>
             </div>

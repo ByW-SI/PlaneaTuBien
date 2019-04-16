@@ -40,10 +40,6 @@
 </head>
 <body>
 	<div class="container">
-		<div style="position: absolute; left: 10%; right: 25%; top: 35%; bottom: 35%;">
-			<img src="img/perfil.png"  style="opacity: 0.1;filter: alpha(opacity=10); height: 100%; width: 600px">
-		</div>
-	
 		<div class="row">
 			<div class="twelve columns">
 				<div class="ten columns u-pull-left"></div>
