@@ -35,15 +35,29 @@
 					</a>
 				</div>
 	        </li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fa fa-users"></i><strong> Prospectos</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('prospectos.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('prospectos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
+
+	        {{--  Prospectos --}}
+	        @foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice prospectos")
+					<li class="nav-item dropdown">
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+								<i class="fa fa-users"></i><strong> Prospectos</strong>
+							</a>
+							@foreach(Auth::user()->perfil->componentes as $c)
+	                            @if($c->nombre == "crear prospecto")
+								<a class="dropdown-item" href="{{ route('prospectos.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice prospectos")
+								<a class="dropdown-item" href="{{ route('prospectos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+            @endforeach
+
+            {{-- Agentes --}}
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 					<i class="fa fa-user-secret"></i><strong> Agentes</strong>
@@ -53,33 +67,65 @@
 					<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 				</div>
 			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-briefcase"></i><strong> RH</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fas fa-user-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fas fa-user-friends"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-calendar-alt"></i><strong> C.R.M.</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('empleados.prospectos.index',['empleado'=>2]) }}"><i class="fa fa-users"></i><strong> Mis prospectos</strong></a>
-					<a class="dropdown-item" href="{{ route('empleados.crms.index',['empleado'=>2]) }}"><i class="fas fa-calendar"></i><strong> Mi C.R.M.</strong></a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fa fa-building"></i><strong> Sucursales</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('sucursals.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('sucursals.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
+
+			{{-- Recursos Humanos --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice recursos humanos")
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+						<i class="fas fa-briefcase"></i><strong> RH</strong>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						@foreach(Auth::user()->perfil->componentes as $c)
+	                        @if($c->nombre == "crear rh")
+								<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fas fa-user-plus"></i><strong> Alta</strong></a>
+							@endif
+							@if($c->nombre == "indice recursos humanos")
+								<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fas fa-user-friends"></i><strong> Búsqueda</strong></a>
+							@endif
+						@endforeach
+					</div>
+				</li>
+				@endif
+            @endforeach
+
+			{{-- CRM --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice CRM")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fas fa-calendar-alt"></i><strong> C.R.M.</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{{ route('empleados.prospectos.index',['empleado'=>2]) }}"><i class="fa fa-users"></i><strong> Mis prospectos</strong></a>
+							<a class="dropdown-item" href="{{ route('empleados.crms.index',['empleado'=>2]) }}"><i class="fas fa-calendar"></i><strong> Mi C.R.M.</strong></a>
+						</div>
+					</li>
+				@endif
+            @endforeach
+
+			{{-- Sucursales --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice Sucursales")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fa fa-building"></i><strong> Sucursales</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							@foreach(Auth::user()->perfil->componentes as $c)
+		                        @if($c->nombre == "crear sucursal")
+									<a class="dropdown-item" href="{{ route('sucursals.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice Sucursales")
+									<a class="dropdown-item" href="{{ route('sucursals.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+            @endforeach
+
+			{{-- Precargas --}}
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 					↻<strong> Precargas</strong>

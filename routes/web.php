@@ -16,6 +16,9 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
+Route::get('/denegado',function(){
+	return view('errors.denegado');
+})->name('denegado');
 
 Route::prefix('clientes')->group(function(){
 	Route::get('/login','Auth\ClienteLoginController@showLoginForm')->name('cliente.login');
@@ -28,7 +31,7 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/password/reset','Auth\ClienteForgotPasswordController@showLinkRequestForm')->name('cliente.password.request');
 	Route::post('/password/reset','Auth\ClienteResetPasswordController@reset');
 	Route::get('/password/reset/{token}','Auth\ClienteResetPasswordController@showResetForm')->name('cliente.password.reset');
-	Route::resource('cotizacions','Cliente\CotizacionController');
+	//Route::resource('cotizacions','Cliente\CotizacionController');
 
 });
 
@@ -81,14 +84,16 @@ Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospec
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
-Route::resource('prospectos', 'Prospecto\ProspectoController');
-Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create');
-Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
-Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
-Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');
-Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail');
-Route::resource('prospectos.pagos', 'Pago\PagoController');
-Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow');
+Route::group(['middleware' => 'prospectos'], function () {
+	Route::resource('prospectos', 'Prospecto\ProspectoController');
+	Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create');
+	Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
+	Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
+	Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');
+	Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail');
+	Route::resource('prospectos.pagos', 'Pago\PagoController');
+	Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow');
+});
 
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController');
