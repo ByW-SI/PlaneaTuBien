@@ -22,7 +22,6 @@ class EmpleadoProspectoCotizacionController extends Controller
     {
 
         $cotizaciones = $prospecto->cotizaciones;
-        $cotizacion = $cotizaciones[0];
         // dd();
 
         return view('empleado.prospecto.cotizacion.index', ['empleado'=>$empleado, 'prospecto' => $prospecto]);
