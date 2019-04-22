@@ -43,7 +43,7 @@
 		    	<div class="row mb-3">
 			    	<label for="plan" class="offset-5 col-sm-2 col-form-label">Plan:</label>
 				    <div class="col">
-				      	<input type="text" class="form-control" id="plan" name="plan" placeholder="plan" value="{{$cotizacion->plan}}" readonly="">
+				      	<input type="text" class="form-control" id="plan" name="plan" placeholder="plan" value="{{$cotizacion->plan->nombre}}" readonly="">
 				    </div>
 		    	</div>
 		    	<div class="form-group row">
@@ -348,41 +348,21 @@
 	    			</div>
 		    	</div>
 				<div class="form-group row">
-					<div class="offset-sm-1 col-sm-11">
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_bancomer" id="td_bancomer" value="1">
-							<label class="form-check-label" for="td_bancomer"><img src="{{ asset('img/bbva.png') }}" width="150" height="30"></label>
-						</div>
+					<div class="col-sm-12">
+						<div class="input-group mb-3" title="Tarjetas de débito">
+							<div class="input-group-prepend">
+								<span class="input-group-text"  title="Tarjetas de débito">
+									<i class="far fa-credit-card"></i>
+								</span>
+							</div>
+							<select name="tarjetas_debito[]" id="tarjetas_debito" class="select-bancos form-control" multiple="multiple">
+								@foreach ($bancos as $banco)
+									<option value="{{$banco->nombre}}" title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
+								@endforeach
+							</select>
 
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_santander" id="td_santander" value="1">
-							<label class="form-check-label" for="td_santander"><img src="{{ asset('img/santander.png') }}" width="150" height="30"></label>
-						</div>
-
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_hsbc" id="td_hsbc" value="1">
-							<label class="form-check-label" for="td_hsbc"><img src="{{ asset('img/hsbc.png') }}" width="150" height="30"></label>
 						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<div class="offset-sm-1 col-sm-11">	
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_scotiabank" id="td_scotiabank" value="1">
-							<label class="form-check-label" for="td_scotiabank"><img src="{{ asset('img/scotiabank.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_banamex" id="td_banamex" value="1">
-							<label class="form-check-label" for="td_banamex"><img src="{{ asset('img/banamex.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="td_banorte" id="td_banorte" value="1">
-							<label class="form-check-label" for="td_banorte"><img src="{{ asset('img/banorte.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    			</div>
 				</div>
 				<div class="form-group row">
 					<label for="en_buro_credito" class="col-form-label col-sm-3">Buró de Crédito:</label>
@@ -419,46 +399,20 @@
 	    			</div>
 		    	</div>
 				<div class="form-group row">
-					<div class="offset-sm-1 col-sm-11">
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_bancomer" id="tc_bancomer" value="1">
-							<label class="form-check-label" for="tc_bancomer"><img src="{{ asset('img/bbva.png') }}" width="100" height="30"></label>
-						</div>
-
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_santander" id="tc_santander" value="1">
-							<label class="form-check-label" for="tc_santander"><img src="{{ asset('img/santander.png') }}" width="100" height="30"></label>
-						</div>
-
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_hsbc" id="tc_hsbc" value="1">
-							<label class="form-check-label" for="tc_hsbc"><img src="{{ asset('img/hsbc.png') }}" width="100" height="30"></label>
-						</div>
-
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_amex" id="tc_amex" value="1">
-							<label class="form-check-label" for="tc_amex"><img src="{{ asset('img/amex.png') }}" width="100" height="30"></label>
+					<div class="col-sm-12">
+						<div class="input-group mb-3"  title="Tarjetas de crédito">
+							<div class="input-group-prepend">
+								<span class="input-group-text" title="Tarjetas de crédito">
+									<i class="fas fa-credit-card"></i>
+								</span>
+							</div>
+							<select name="tarjetas_credito[]" id="tarjetas_credito" class="select-bancos form-control" multiple="multiple">
+								@foreach ($bancos as $banco)
+									<option value="{{$banco->nombre}}" title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<div class="offset-sm-1 col-sm-11">	
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_scotiabank" id="tc_scotiabank" value="1">
-							<label class="form-check-label" for="tc_scotiabank"><img src="{{ asset('img/scotiabank.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_banamex" id="tc_banamex" value="1">
-							<label class="form-check-label" for="tc_banamex"><img src="{{ asset('img/banamex.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    				<div class="form-check form-check-inline mt-1">
-							<input class="form-check-input" type="checkbox" name="tc_banorte" id="tc_banorte" value="1">
-							<label class="form-check-label" for="tc_banorte"><img src="{{ asset('img/banorte.png') }}" width="150" height="30"></label>
-						</div>
-						
-	    			</div>
 				</div>
 				<div class="form-group row">
 					<label for="limite_credito" class="col-form-label col-sm-3">Límite de Credito:</label>
@@ -816,6 +770,13 @@
 </div>
 @endsection
 @push('scripts')
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	        $('.select-bancos').select2();
+	    });
+    </script>
     <script type="text/javascript">
     	$('#perfil input[name=estado_civil]').on('change', function() {
     		var val = $('input[name=estado_civil]:checked', '#perfil').val();

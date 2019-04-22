@@ -6,89 +6,51 @@
 		<div class="form-group row">
 			<div class="col-6">
 				<label>¿Tarjeta debito o Cuenta de Ahorro?:</label>
-    			
 				<label class="form-control" readonly="">
 					{{ $credito->tarjeta_debito ? "Si" : "No" }}
 				</label>
 			</div>
 			@if ($credito->tarjeta_debito)
-			<div class="col-6">
-				<label>Número de tarjetas:</label>
-    			
-				<label class="form-control" readonly="">
-					{{ $credito->numero_tarjeta_debito }}
-				</label>
-			</div>
-			<div class="col-sm-8">
-				<h4>Tarjetas de debito o Cuenta de Ahorro:</h4>
-			</div>
-			<div class="offset-sm-1 col-sm-11">
-
-				@if ($credito->td_bancomer)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_bancomer"><img src="{{ asset('img/bbva.png') }}" width="150" height="30"></label>
+				<div class="col-6">
+					<label>Número de tarjetas:</label>
+	    			
+					<label class="form-control" readonly="">
+						{{ $credito->numero_tarjeta_debito }}
+					</label>
 				</div>
-
-				@endif
-
-				@if ($credito->td_santander)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_santander"><img src="{{ asset('img/santander.png') }}" width="150" height="30"></label>
+				<div class="col-sm-12">
+					<h4>Tarjetas de debito o Cuenta de Ahorro:</h4>
 				</div>
-				
-				@endif
-
-				@if ($credito->td_hsbc)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_hsbc"><img src="{{ asset('img/hsbc.png') }}" width="150" height="30"></label>
+				@foreach (json_decode($credito->tarjetas_debito) as $tarjeta)
+					<div class="col-sm-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="far fa-credit-card"></i>
+								</span>
+							</div>
+							<span class="form-control">
+								{{$tarjeta}}
+							</span>
+						</div>
+					</div>
+				@endforeach
+				<div class="col-6">
+					<label>Buró de crédito:</label>
+					<label class="form-control" readonly="">
+						{{ $credito->en_buro_credito ? "Si" : "No" }}
+					</label>
 				</div>
-
-				
-				@endif
-
-				@if ($credito->td_scotiabank)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_scotiabank"><img src="{{ asset('img/scotiabank.png') }}" width="150" height="30"></label>
+				@if ($credito->en_buro_credito)
+				<div class="col-sm-6">
+					<label class="form-control mt-4" readonly="">
+						{{ $credito->buro_credito }}
+					</label>
 				</div>
-				
 				@endif
-
-				@if ($credito->td_banamex)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_banamex"><img src="{{ asset('img/banamex.png') }}" width="150" height="30"></label>
-				</div>
-				
-				@endif
-
-				@if ($credito->td_banorte)
-
-				<div class="form-check form-check-inline mt-1">
-					<label class="form-check-label" for="td_banorte"><img src="{{ asset('img/banorte.png') }}" width="150" height="30"></label>
-				</div>
-						
-				
-				@endif
-
-			</div>
-			<div class="col-6">
-				<label>Buró de crédito:</label>
-				<label class="form-control" readonly="">
-					{{ $credito->en_buro_credito ? "Si" : "No" }}
-				</label>
-			</div>
-			@if ($credito->en_buro_credito)
-			<div class="col-sm-6">
-				<label class="form-control mt-4" readonly="">
-					{{ $credito->buro_credito }}
-				</label>
-			</div>
 			@endif
-			@endif
+		</div>
+		<div class="form-group row">
 			<div class="col-6">
 				<label>¿Tarjeta de credito?:</label>
 				<label class="form-control" readonly="">
@@ -98,13 +60,25 @@
 			@if ($credito->tarjeta_credito)
 			<div class="col-6">
 				<label>Tarjetas</label>
-    			<div class="col-sm-3">
-    				<label class="form-control" readonly=>{{$credito->numero_tarjeta_credito}}</label>
-    			</div>
+				<span class="form-control" readonly=>{{$credito->numero_tarjeta_credito}}</span>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-12">
 				<h4>Tarjetas de credito:</h4>
 			</div>
+			@foreach (json_decode($credito->tarjetas_credito) as $tarjeta_cred)
+				<div class="col-sm-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fas fa-credit-card"></i>
+							</span>
+						</div>
+						<span class="form-control">
+							{{$tarjeta_cred}}
+						</span>
+					</div>
+				</div>
+			@endforeach
 			<div class="offset-sm-1 col-sm-11">
 
 				@if ($credito->tc_bancomer)

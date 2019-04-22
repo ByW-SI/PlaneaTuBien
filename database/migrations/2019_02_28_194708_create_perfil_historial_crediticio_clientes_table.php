@@ -21,20 +21,9 @@ class CreatePerfilHistorialCrediticioClientesTable extends Migration
             $table->boolean('tarjeta_credito')->default(false);
             $table->string('numero_tarjeta_debito')->nullable();
             $table->string('numero_tarjeta_credito')->nullable();
-            // TARJETAS
-            $table->boolean('td_bancomer')->default(false);
-            $table->boolean('tc_bancomer')->default(false);
-            $table->boolean('td_santander')->default(false);
-            $table->boolean('tc_santander')->default(false);
-            $table->boolean('td_hsbc')->default(false);
-            $table->boolean('tc_hsbc')->default(false);
-            $table->boolean('tc_amex')->default(false);
-            $table->boolean('td_scotiabank')->default(false);
-            $table->boolean('tc_scotiabank')->default(false);
-            $table->boolean('td_banamex')->default(false);
-            $table->boolean('tc_banamex')->default(false);
-            $table->boolean('td_banorte')->default(false);
-            $table->boolean('tc_banorte')->default(false);
+            // TARJETAS creditos
+            $table->json('tarjetas_credito')->nullable();
+            $table->json('tarjetas_debito')->nullable();
 
             $table->boolean('en_buro_credito');
             $table->string('buro_credito')->nullable();

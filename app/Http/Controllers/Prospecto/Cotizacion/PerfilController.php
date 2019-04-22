@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Prospecto\Cotizacion;
 
+use App\Banco;
 use App\Cotizacion;
 use App\Http\Controllers\Controller;
 use App\PerfilDatosPersonalCliente;
@@ -30,8 +31,9 @@ class PerfilController extends Controller
         else{
             $folio=$perfil->id+1;
         }
+        $bancos = Banco::orderBy('nombre','asc')->get();
         // dd($perfil);
-        return view('prospectos.perfil.form',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion, 'folio'=>$folio]);
+        return view('prospectos.perfil.form',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion, 'folio'=>$folio,'bancos'=>$bancos]);
     }
 
     /**
@@ -52,7 +54,29 @@ class PerfilController extends Controller
         $perfil->cotizacion_id = $cotizacion->id;
         $perfil->empleado_id = $request->asesor_id;
         $perfil->save();
-        $h_crediticio= new PerfilHistorialCrediticioCliente($request->all());
+        $h_crediticio= new PerfilHistorialCrediticioCliente([
+            'tarjeta_debito'=>$request->tarjeta_debito,
+            'tarjeta_credito'=>$request->tarjeta_credito,
+            'numero_tarjeta_debito'=>$request->numero_tarjeta_debito,
+            'numero_tarjeta_credito'=>$request->numero_tarjeta_credito,
+            'tarjetas_credito'=> json_encode($request->tarjetas_credito),
+            'tarjetas_debito'=>json_encode($request->tarjetas_debito),
+            'en_buro_credito'=>$request->en_buro_credito,
+            'buro_credito'=>($request->en_buro_credito ? $request->buro_credito : ""),
+            'limite_credito'=>$request->limite_credito,
+            'destino_1'=>$request->destino_1,
+            'tipo_destino_1'=>$request->tipo_destino_1,
+            'monto_destino_1'=>$request->monto_destino_1,
+            'destino_2'=>$request->destino_2,
+            'tipo_destino_2'=>$request->tipo_destino_2,
+            'monto_destino_2'=>$request->monto_destino_2,
+            'destino_3'=>$request->destino_3,
+            'tipo_destino_3'=>$request->tipo_destino_3,
+            'monto_destino_3'=>$request->monto_destino_3,
+            'calificacion_credito'=>$request->calificacion_credito,
+            'descripcion_calificacion'=>$request->descripcion_calificacion
+
+        ]);
         $perfil->historial_crediticio()->save($h_crediticio);
         $inmueble = new PerfilInmueblePretendidoCliente($request->all());
         if ($inmueble->tipo_inmueble == "Otro") {
