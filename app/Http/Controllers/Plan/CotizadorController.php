@@ -48,6 +48,9 @@ class CotizadorController extends Controller
         $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
         return response()->json(['plan'=>$plan],200);
     }
+    public function inscripcion($monto,$plan_id){
+        
+    }
     // public function cotizar($monto,$plan){
         
     //     $anual_total = $plan->anual_total;

@@ -228,7 +228,7 @@ function cotizar() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" value="${plan.monto_inscripcion_con_iva}" readonly="">
+                    <input class="form-control" type="text" value="${plan.monto_inscripcion_con_iva.toFixed(2)}" readonly="">
                 </div>
             </div>
         </div>`;

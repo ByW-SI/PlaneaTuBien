@@ -64,10 +64,10 @@
 					</div>
 					<div class="seven columns u-pull-right">
 						<div class="one-half column u-pull-left">
-							<label style="font-size: 10px"> Seguro de Vida Adicional:</label>
+							<label style="font-size: 10px"> Plan:</label>
 						</div>
 						<div class="one-half column u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: left;">
-							${{$presolicitud->precio_nolose}}
+							{{$presolicitud->precio_nolose}}
 						</div>
 					</div>
 				</div>

@@ -93,6 +93,8 @@ class PerfilController extends Controller
             ]);
             $perfil->referencia_personals()->save($referencia);
         }
+        $cotizacion->elegir = 1;
+        $cotizacion->save();
         return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
 
 

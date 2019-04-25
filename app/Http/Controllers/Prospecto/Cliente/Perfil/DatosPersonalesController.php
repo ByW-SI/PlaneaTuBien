@@ -34,7 +34,7 @@ class DatosPersonalesController extends Controller
         $perfil = $prospecto->perfil;
         // return view('prospectos.perfil.pdf',['perfil'=>$perfil]);
         $pdf = PDF::loadView('prospectos.perfil.pdf',['perfil'=>$perfil]);
-        return $pdf->download('cotizacion' . $prospecto->nombre . '.pdf');
+        return $pdf->download('perfil ' . $prospecto->nombre . '.pdf');
         // dd($perfil);
         // return view('prospectos.perfil.index',['perfil'=>$perfil]);
     }

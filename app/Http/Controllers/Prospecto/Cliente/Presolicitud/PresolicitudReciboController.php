@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 
-use App\Recibo;
-use App\Prospecto;
-use App\Presolicitud;
-use Illuminate\Http\Request;
+use App\Banco;
 use App\Http\Controllers\Controller;
+use App\Presolicitud;
+use App\Prospecto;
+use App\Recibo;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class PresolicitudReciboController extends Controller
 {
@@ -194,7 +195,10 @@ class PresolicitudReciboController extends Controller
     public function index(Prospecto $prospecto, Presolicitud $presolicitud)
     {
         //
-        return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto]);
+        $cotizacion = $presolicitud->cotizacion();
+        // dd($cotizacion->contratos());
+
+        return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
     }
 
     /**
@@ -206,7 +210,18 @@ class PresolicitudReciboController extends Controller
     {
         //
         $cotizacion = $presolicitud->perfil->cotizacion;
-       return view('prospectos.presolicitud.recibo.form',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
+        $recibos = $presolicitud->recibos;
+        $contratos = $cotizacion->contratos();
+        foreach ($recibos as $recibo) {
+            foreach ($contratos as $key=>$monto) {
+                if($recibo->monto  == $monto){
+                    array_splice($contratos,$key,1);
+                }
+            }
+        }
+        // dd($contratos);
+        $bancos = Banco::orderBy('nombre','asc')->get();
+       return view('prospectos.presolicitud.recibo.form',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'bancos'=>$bancos,'contratos'=>$contratos]);
     }
 
     /**

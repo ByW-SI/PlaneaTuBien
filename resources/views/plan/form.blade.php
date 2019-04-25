@@ -22,6 +22,10 @@
 						<label for="nombre">Nombre</label>
 						<input type="text" placeholder="Nombre del plan" name="nombre" value="{{old("nombre")}}" class="form-control" required="">
 					</div>
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+						<label for="abreviatura">Abreviatura</label>
+						<input type="text" placeholder="abreviatura del plan" name="abreviatura" value="{{old("abreviatura")}}" class="form-control" required="">
+					</div>
 
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="plazo">Plazo</label>

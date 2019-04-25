@@ -38,7 +38,9 @@ class Cotizacion extends Model
     //     'inscripcion',
     // ];
     protected $fillable = [
+        'folio',
         'monto',
+        'elegir',
         'ahorro'
     ];
 
@@ -58,6 +60,7 @@ class Cotizacion extends Model
     public function pagos() {
         return $this->hasMany('App\Pago');
     }
+
     public function plan()
     {
         return $this->belongsTo('App\Plan','plan_id','id');
@@ -76,5 +79,55 @@ class Cotizacion extends Model
      public function task_send_mail()
     {
         return $this->hasOne('App\TaskSendMail','cotizacion_id','id');
+    }
+    public function inscripcionFaltante(){
+        $pagos = $this->pagos;
+        $total_pagos = 0.00;
+        foreach ($pagos as $pago) {
+            if($pago->status == "aprobado"){
+                $total_pagos += $pago->total;
+            }
+        }
+        $inscripcion = $this->plan->monto_inscripcion_con_iva($this->monto);
+        $resta= $inscripcion - $total_pagos;
+        return $resta;
+    }
+
+
+    public function contratos(){
+        $monto = $this->monto;
+        $contratos = [];
+        // SI LOS CONTRATOS SON MENORES O IGUALES A 550000 YA QUE NO HAY MULTIPLOS DE 300-500
+        if ($monto <= 550000) {
+            array_push($contratos,550000);
+        }
+        else{
+            $contratos_300 = $monto/300000;
+            $residuo = $monto%300000;
+            for ($i = 0; $i < 7; $i++) {
+                array_push($contratos,300000);
+            }
+            $contratos_mascincuentamil = $residuo/50000;
+            if($residuo%50000 == 0){
+                if($contratos_mascincuentamil <=$contratos_300){
+                    for ($i = 0; $i < $contratos_mascincuentamil; $i++) {
+                        $contratos[$i] += 50000;
+                    }
+                }
+            }
+
+        }
+        $total = 0;
+        foreach ($contratos as $value) {
+            $total += $value;
+        }
+        if($total == $monto){
+            return $contratos;
+
+        }
+        else{
+            dd("verifica tu metodo, tu total de contratos son ".$total." y tu monto es ".$monto);
+        }
+
     }
 }

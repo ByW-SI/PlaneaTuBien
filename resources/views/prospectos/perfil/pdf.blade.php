@@ -51,7 +51,7 @@
 						    				{{$perfil->clave}}
 						    			</label>
 						    			<label style="border-bottom: 0.5px solid #ccc; text-align: center;">
-						    				{{$perfil->cotizacion->plan}}
+						    				{{$perfil->cotizacion->plan->nombre}}
 						    			</label>
 						    		</div>
 					    			
@@ -434,70 +434,19 @@
         </div>
         <br>
         <div class="row">
-          <div class="twelve columns">
-            <div class="one-half column u-pull-left">
-              <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->td_bancomer ? 'checked="checked"' : ''}}><img src="img/bbva.png" width="80" height="30"></label>
-              </div>
-              <div class="two-thirds column u-pull-right">
-                <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_santander ? 'checked="checked"' : ''}}><img src="img/santander.png" width="80" height="30"></label>
-                </div>
-                <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_hsbc ? 'checked="checked"' : ''}}><img src="img/hsbc.png" width="80" height="30"></label>
-                </div>
-              </div>
-            </div>
-            <div class="one-half column u-pull-right">
-              <div class="six columns u-pull-left">
-                <div class="row">
-                  <div class="six columns u-pull-left">
-                     <label><input type="checkbox" {{$perfil->historial_crediticio->tc_bancomer ? 'checked="checked"' : ''}}><img src="img/bbva.png" width="60" height="20"></label>
-                  </div>
-                  <div class="six columns u-pull-right">
-                    <label><input type="checkbox" {{$perfil->historial_crediticio->tc_santander ? 'checked="checked"' : ''}}><img src="img/santander.png" width="60" height="20"></label>
-                  </div>
-                </div>
-              </div>
-              <div class="six columns u-pull-right">
-                <div class="six columns u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_hsbc ? 'checked="checked"' : ''}}><img src="img/hsbc.png" width="60" height="20"></label>
-                </div>
-                <div class="six columns u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_amex ? 'checked="checked"' : ''}}><img src="img/amex.png" width="60" height="20"></label>
-                </div>
-              </div>
-            </div>
+          <div class="one-half column">
+            @if ($perfil->historial_crediticio->tarjetas_debito != "null")
+              @foreach (json_decode($perfil->historial_crediticio->tarjetas_debito) as $key=>$debito)
+                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">#{{$key+1}} {{$debito}}</label>
+              @endforeach
+            @endif
           </div>
-        </div>
-        <div class="row">
-          <div class="twelve columns">
-            <div class="one-half column u-pull-left">
-              <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->td_scotiabank ? 'checked="checked"' : ''}}><img src="img/scotiabank.png" width="80" height="30"></label>
-              </div>
-              <div class="two-thirds column u-pull-right">
-                <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banamex ? 'checked="checked"' : ''}}><img src="img/banamex.png" width="80" height="30"></label>
-                </div>
-                <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->td_banorte ? 'checked="checked"' : ''}}><img src="img/banorte.png" width="80" height="30"></label>
-                </div>
-              </div>
-            </div>
-            <div class="one-half column u-pull-right">
-              <div class="one-third column u-pull-left">
-                <label><input type="checkbox" {{$perfil->historial_crediticio->tc_scotiabank ? 'checked="checked"' : ''}}><img src="img/scotiabank.png" width="80" height="30"></label>
-              </div>
-              <div class="two-thirds column u-pull-right">
-                <div class="one-half column u-pull-left">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banamex ? 'checked="checked"' : ''}}><img src="img/banamex.png" width="80" height="30"></label>
-                </div>
-                <div class="one-half column u-pull-right">
-                  <label><input type="checkbox" {{$perfil->historial_crediticio->tc_banorte ? 'checked="checked"' : ''}}><img src="img/banorte.png" width="80" height="30"></label>
-                </div>
-              </div>
-            </div>
+          <div class="one-half column">
+            @if ($perfil->historial_crediticio->tarjetas_credito != "null")
+              @forelse (json_decode($perfil->historial_crediticio->tarjetas_credito) as $key=>$credito)
+                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">#{{$key}} {{$credito}}</label>
+              @endforeach
+            @endif
           </div>
         </div>
         <div class="row">

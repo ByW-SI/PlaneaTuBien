@@ -32,4 +32,9 @@ class Recibo extends Model
     public function presolicitud(){
     	return $this->belongsTo('App\Presolicitud','id','presolicitud_id');
     }
+
+    public function contrato()
+    {
+        return $this->hasOne('App\Contrato');
+    }
 }

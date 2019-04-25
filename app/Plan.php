@@ -10,6 +10,7 @@ class Plan extends Model
     //
     protected $fillable=[
     	'nombre',
+        'abreviatura',
     	'plazo',
     	'mes_aportacion_adjudicado',
     	'mes_adjudicado',

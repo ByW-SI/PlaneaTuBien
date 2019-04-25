@@ -21,7 +21,7 @@ class EmpleadoProspectoCotizacionController extends Controller
     public function index(Empleado $empleado,Prospecto $prospecto)
     {
 
-        $cotizaciones = $prospecto->cotizaciones;
+        // $cotizaciones = $prospecto->cotizaciones;
         // dd();
 
         return view('empleado.prospecto.cotizacion.index', ['empleado'=>$empleado, 'prospecto' => $prospecto]);
@@ -48,9 +48,16 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function store(Empleado $empleado,Prospecto $prospecto, Request $request)
     {
-        $cotizacion = new Cotizacion($request->all());
-        $promocion = Promocion::find($request->promocion);
+
+        // $folio = $empleado->id.$prospecto->id.date('dmY');
+        // dd($folio);
         $plan = Plan::find($request->plan);
+        $promocion = Promocion::find($request->promocion);
+        $folio = $prospecto->id.$plan->abreviatura.(sizeOf($prospecto->cotizaciones)+1);
+
+        $cotizacion = new Cotizacion($request->all());
+        $cotizacion->folio = $folio;
+        $cotizacion->elegir = 0;
         $cotizacion->plan_id = $plan->id;
         $prospecto->cotizaciones()->save($cotizacion);
         $cotizacion->promocion()->associate($promocion);

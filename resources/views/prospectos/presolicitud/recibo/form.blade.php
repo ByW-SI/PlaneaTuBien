@@ -1,7 +1,7 @@
 @extends('principal')
 @section('content')
 <div class="card">
-	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Conyuge'])
+	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Recibo'])
 	<form method="POST" action="{{ route('prospectos.presolicitud.recibos.store',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">
 		@csrf
 		<div class="card-body">
@@ -17,11 +17,21 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 border">
 					<div class="row mt-3">
-						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+
+						<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
+							<label for="monto">Recibo por </label>
+							<select class="form-control" name="monto" id="monto_contrato" required="">
+								<option value="">Seleccione una opción</option>
+								@foreach (array_unique($contratos) as $contrato)
+									<option value="{{$contrato}}">{{number_format($contrato,2)}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
 							<label for="">Sucursal</label>
 							<input type="text" class="form-control" name="sucursal" value="{{old('sucursal')}}">
 						</div>
-						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+						<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
 							<label for="">Tipo pago</label>
 							<select class="form-control" id="tipo_pago" name="tipo_pago" required="">
 								<option value="">Elija una opción</option>
@@ -29,7 +39,7 @@
 								<option value="Cheque" {{old('tipo_pago') == "Cheque" ? 'selected' : ''}}>Cheque</option>
 							</select>
 						</div>
-						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" id="tarjetas">
+						<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group" id="tarjetas">
 						</div>
 						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
 							<label for="">No.</label>
@@ -37,7 +47,12 @@
 						</div>
 						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
 							<label for="">Banco Emisor</label>
-							<input type="text" class="form-control" name="banco" value="{{old('banco')}}">
+							<select type="text" class="form-control" name="banco" id="banco">
+								<option value="">Seleccionar un banco</option>
+								@foreach ($bancos as $banco)
+									<option value="{{$banco->nombre}}" {{ old('banco') == $banco->nombre ? 'selected=""' : ''}}>{{$banco->nombre}}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 				</div>
@@ -51,7 +66,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">$</span>
 								</div>
-								<input type="number" readonly="" class="form-control text-center" name="insc_inicial" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->inscripcion)-((float)str_replace(array('.', ','), array('.', ''), $cotizacion->inscripcion)*0.16)}}">
+								<input type="text" readonly="" class="form-control text-center" name="insc_inicial" value="{{round(($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto))-($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto)*0.16),2)}}">
 							</div>
 						</div>
 						<div class="col-6 mt-2">
@@ -62,7 +77,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">$</span>
 								</div>
-								<input type="number" readonly="" class="form-control text-center" name="iva" value="{{((float)str_replace(array('.', ','), array('.', ''), $cotizacion->inscripcion)*0.16)}}">
+								<input type="text" readonly="" class="form-control text-center" name="iva" value="{{round($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto)*0.16,2)}}">
 							</div>
 						</div>
 						<div class="col-6 mt-2">
@@ -73,7 +88,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">$</span>
 								</div>
-								<input type="number" readonly="" class="form-control text-center" name="subtotal" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->inscripcion)}}">
+								<input type="text" readonly="" class="form-control text-center" name="subtotal" value="{{round($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2)}}">
 							</div>
 						</div>
 						<div class="col-6 mt-2">
@@ -84,7 +99,10 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">$</span>
 								</div>
-								<input type="number" readonly="" class="form-control text-center" name="cuota_periodica" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->mensualidad)}}">
+								<select name="cuota_periodica" class="form-control text-center" id="cuota_periodica">
+									<option value="0.00">0.00</option>
+									<option value="{{$cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante']}}">{{round($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2)}}</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-6 mt-2">
@@ -95,7 +113,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">$</span>
 								</div>
-								<input type="number" readonly="" class="form-control text-center" name="total" value="{{(float)str_replace(array('.', ','), array('.', ''), $cotizacion->mensualidad)+(float)str_replace(array('.', ','), array('.', ''), $cotizacion->inscripcion)}}">
+								<input type="text" readonly="" class="form-control text-center" name="total" id="total" value="{{round($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2)}}">
 							</div>
 						</div>
 					</div>
@@ -146,6 +164,26 @@
 			</select>
 			`);
 			}
+		});
+		$("#cuota_periodica").change(function(){
+			var cuota_periodica = $("#cuota_periodica").val();
+			if(cuota_periodica != "0.00"){
+				$("#total").val("{{round($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto)+$cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2)}}");
+			}
+			else{
+				$("#total").val("{{round($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2)}}");
+			}
+		});
+		$("#monto_contrato").change(function(){
+			var monto = $("#monto_contrato").val();
+			$.ajax({
+				url: "{{ url('api/inscripcion') }}/"+monto+"/{{$cotizacion->plan->id}}",
+				method: "GET",
+				success:function(result){
+					console.log(result);
+
+				}
+			});
 		});
 	</script>
 @endpush

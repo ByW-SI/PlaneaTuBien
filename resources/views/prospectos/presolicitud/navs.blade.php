@@ -2,8 +2,7 @@
 	<h5>
 		Pre solicitud para {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 	</h5>
-  @if ($prospecto->status >100)
-    
+  @if ($prospecto->status <100)   
     <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{$presolicitud->status}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$presolicitud->status}}%"></div>
     </div>
@@ -18,7 +17,7 @@
       <a href="{{ route('prospectos.presolicitud.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Declaración de Salud</a>
       <a href="{{ route('prospectos.presolicitud.domiciliacion',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Formato de Domiciliación</a>
       <a href="{{ route('prospectos.presolicitud.ficha_deposito',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Ficha de Deposito</a>
-      <a href="{{ route('prospectos.presolicitud.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan}}</a>
+      {{-- <a href="{{ route('prospectos.presolicitud.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan->nombre}}</a> --}}
     </div>
   @endif
 </div>

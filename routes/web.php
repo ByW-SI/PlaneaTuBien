@@ -155,6 +155,8 @@ Route::get('promocion/{promocion}','Precargas\PromocionController@getPromo')->na
 // SEGURIDAD
 Route::resource('usuarios', 'Usuario\UsuarioController');
 Route::resource('perfils', 'Perfil\PerfilController');
+Route::resource('prospectos.cotizacions.pagos','Prospecto\Cotizacion\PagosController');
+Route::put('prospectos/{prospecto}/cotizacions/{cotizacion}/pagos/{pago}/status','Prospecto\Cotizacion\PagosController@changeStatus')->name('prospectos.cotizacions.pagos.update_status');
 
 // AUTH
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

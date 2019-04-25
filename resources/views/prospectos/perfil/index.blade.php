@@ -10,7 +10,10 @@
 	        <div class="d-flex justify-content-between">
 	        	<h4>Perfil:</h4>   
 	        	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
-	        	<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
+	        	<a class="btn btn-success" href="{{ route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">Pagos</a>
+	        	@if ($cotizacion->inscripcionFaltante() <= 0)
+	        		<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
+	        	@endif
 	        </div>
 	    </div>
 	    <div class="card-body">

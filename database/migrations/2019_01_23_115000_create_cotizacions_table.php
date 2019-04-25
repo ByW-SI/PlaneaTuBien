@@ -19,7 +19,9 @@ class CreateCotizacionsTable extends Migration
             $table->foreign('prospecto_id')->references('id')->on('prospectos');
             $table->integer('promocion_id')->unsigned()->nullable();
             $table->foreign('promocion_id')->references('id')->on('promocions');
+            $table->string('folio');
             $table->string('monto');
+            $table->boolean('elegir')->default(0);
             $table->unsignedInteger('ahorro')->default(0);
             $table->unsignedInteger('plan_id')->references('id')->on('plans');
             $table->foreign('plan_id')->references('id')->on('plans');

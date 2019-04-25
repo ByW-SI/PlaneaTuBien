@@ -87,12 +87,11 @@ class PresolicitudController extends Controller
         ];
         $this->validate($request,$rules);
         $perfil = $prospecto->perfil;
-        preg_match_all('!\d+!', $perfil->cotizacion->plan, $matches);
         $presolicitud = new Presolicitud($request->all());
         $presolicitud->folio = 100+Presolicitud::all()->count();
-        $presolicitud->precio_inicial= $perfil->cotizacion->propiedad;
-        $presolicitud->plazo_contratado= $perfil->cotizacion->plazo+$matches[0][0];
-        $presolicitud->precio_nolose=0.00;
+        $presolicitud->precio_inicial= $perfil->cotizacion->monto;
+        $presolicitud->plazo_contratado= $perfil->cotizacion->plan->plazo;
+        $presolicitud->precio_nolose=$perfil->cotizacion->plan->plan_meses;
         $perfil->presolicitud()->save($presolicitud);
         if ($presolicitud) {
             return redirect()->route('prospectos.presolicitud.conyuge.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);

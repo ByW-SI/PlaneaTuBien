@@ -59,6 +59,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/themes/fa/theme.js"></script>
 <!-- optionally if you need translation for your language then include  locale file as mentioned below -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/locales/es.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
     <script>
         // initialize with defaults

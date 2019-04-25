@@ -16,6 +16,7 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->string('abreviatura');
             $table->unsignedInteger('plazo');
             $table->unsignedInteger('mes_aportacion_adjudicado');
             $table->unsignedInteger('mes_adjudicado');

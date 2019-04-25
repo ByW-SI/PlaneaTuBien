@@ -36,7 +36,12 @@ class PresolicitudConyugeController extends Controller
     public function create(Prospecto $prospecto, Presolicitud $presolicitud)
     {
         //
-        return view('prospectos.presolicitud.conyuge.form',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        if(in_array($presolicitud->estado_civil,['Soltero','Viudo'])){
+            return redirect()->route('prospectos.presolicitud.beneficiarios.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        }
+        else{
+            return view('prospectos.presolicitud.conyuge.form',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        }
     }
 
     /**

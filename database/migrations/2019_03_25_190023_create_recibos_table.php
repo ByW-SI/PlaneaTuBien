@@ -19,6 +19,7 @@ class CreateRecibosTable extends Migration
             $table->foreign('presolicitud_id')->references('id')->on('presolicituds');
             $table->string('sucursal');
             $table->string('asesor');
+            $table->decimal('monto',10,2);
             $table->string('clave');
             $table->string('tipo_pago');
             $table->string('tipo_tarjeta')->nullable();
