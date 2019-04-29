@@ -114,7 +114,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 	->name('prospectos.')
 	->group(function(){
 		Route::resource('presolicitud','PresolicitudController',['except'=>['show']]);
-		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
+		// Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']]);
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController');
@@ -133,6 +133,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 
 	});
 Route::resource('presolicituds.checklist','Prospecto\Cliente\ChecklistFolderController');
+Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create']);
 
 
 

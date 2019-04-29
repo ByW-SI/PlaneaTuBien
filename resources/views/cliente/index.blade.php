@@ -1,78 +1,153 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md">
+@extends('layouts.cliente')
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            Bienvenid@ {{$cliente->nombre." ".$cliente->paterno." ".$cliente->materno}}
+        </div>
+        <div class="card-body">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('cliente.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('cliente.logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                <div class="row">
+                    <label class="col-1" style="left: 50%;"><i class="fas fa-walking"></i></label>
+                    <label class="col-1" style="left: 90%;"><i class="fas fa-home"></i></label>
+                  {{-- <label style="margin-left: 50%;"></i></label> --}}
+                  {{-- <label style="margin-left: 100%;"></label> --}}
+                    
+                </div>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
                 </div>
             </div>
-        </nav>
-
-        <main class="py-4">
-        </main>
+        </div>
+        <div class="card-header">
+            Precio total del bien:  ${{number_format($cliente->precio_inicial,2)}}
+        </div>
+        <div class="card body">
+            <div class="row">
+                <div class="col-12 text-center mt-3">
+                    <label>
+                        Numeros de contratos: {{sizeof($cliente->recibos)}}
+                    </label>
+                    
+                </div>
+                @foreach ($cliente->recibos as $recibo)
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Contrato de folio: {{$recibo->clave.$recibo->contrato->numero_contrato}} con valor de {{number_format($recibo->contrato->monto,2)}}
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Fecha del proximo pago
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    {{ date("7/m/Y", strtotime("+1 month", strtotime(date('d-m-Y'))))}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Aportación
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['aportacion'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Cuota de Administración
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['cuota_administracion'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    IVA
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['iva'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Seguro de vida
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['sv'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Seguro de daños
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['sd'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    Total
+                                                </span>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text form-control">
+                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['total'],2)}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center">
+                <span>
+                    Cualquier duda con nuestro servicio por favor comunicate a nuestro telefonos de atención al cliente: 4456-54546-45546. En donde con gusto atenderemos.
+                </span>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+@endsection

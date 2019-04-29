@@ -24,6 +24,7 @@ class ClienteCredential extends Authenticatable
         'name', 
         'email', 
         'password',
+        'presolicitud_id'
     ];
 
     /**

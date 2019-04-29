@@ -39,6 +39,54 @@ class ChecklistFolder extends Model
     ];
 
     public function presolicitud(){
-    	return $this->belongsTo('App\Presolicitud','id','presolicitud_id');
+    	return !$this->belongsTo('App\Presolicitud','id','presolicitud_id');
+    }
+
+    public function getStatusAttribute (){
+        $status = true;
+        if (!$this->ficha_deposito_path) {
+            $status = false;
+        }
+        if (!$this->perfil_path) {
+            $status = false;
+        }
+        if (!$this->presolicitud_path) {
+            $status = false;
+        }
+        if (!$this->contrato_path) {
+            $status = false;
+        }
+        if (!$this->hoja_aceptacion_path) {
+            $status = false;
+        }
+        if (!$this->manual_consumidor_path) {
+            $status = false;
+        }
+        if (!$this->calidad_path) {
+            $status = false;
+        }
+        if (!$this->privacidad_path) {
+            $status = false;
+        }
+        if (!$this->copia_ficha_deposito_path) {
+            $status = false;
+        }
+        if (!$this->identificacion_path) {
+            $status = false;
+        }
+        if (!$this->comprobante_domicilio_path) {
+            $status = false;
+        }
+        if (!$this->croquis_ubicacion_path) {
+            $status = false;
+        }
+        if (!$this->carta_bienvenida_path) {
+            $status = false;
+        }
+        if (!$this->anexos_path) {
+            $status = false;
+        }
+        // dd($status);
+        return $status;
     }
 }

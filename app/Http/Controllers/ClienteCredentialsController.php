@@ -25,8 +25,10 @@ class ClienteCredentialsController extends Controller
     {
         $cliente = auth('cliente')->user()->presolicitud;
         if ($cliente) {
+            $cotizacion = $cliente->cotizacion();
+            $plan = $cotizacion->plan;
             // dd('Si hay cliente');
-            return view('cliente.index',['cliente'=>$cliente]);
+            return view('cliente.index',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
         } else {
             return view('cliente.index');
             // dd('No hay cliente');

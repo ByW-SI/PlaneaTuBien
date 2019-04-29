@@ -26,11 +26,24 @@ class CredencialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Prospecto $prospecto,Presolicitud $presolicitud)
+    public function create(Presolicitud $presolicitud)
     {
         //
-        $credencial = new ClienteCredential;
-        return view('prospectos.presolicitud.credential.form',['credencial'=>$credencial,'edit'=>false,'prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        $length = 10;    
+        $password = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+        $credencial = ClienteCredential::updateOrCreate(['presolicitud_id'=>$presolicitud->id],[
+            'name' =>$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno,
+            'email'=>$presolicitud->email,
+            'password'=>Hash::make($password),
+            'presolicitud_id'=>$presolicitud->id
+        ]);
+        if ($credencial) {
+            $credencial->sendCredentialNotification($password);
+            return back();
+        }
+        else{
+            return back();
+        }
     }
 
     /**

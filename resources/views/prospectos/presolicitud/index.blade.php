@@ -27,13 +27,8 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
-				<label for="">Seguro de vida</label>
-				<div class="input-group mb-3">
-				  	<div class="input-group-prepend">
-				    	<span class="input-group-text" id="basic-addon1">$</span>
-				  	</div>
-					<label class="form-control bg-light">{{number_format($presolicitud->precio_nolose,2)}}</label>
-				</div>
+				<label for="">Plan</label>
+				<label class="form-control bg-light">{{(int)$presolicitud->precio_nolose}}</label>
 			</div>
 			<div class="col-12">
 				<h5>
