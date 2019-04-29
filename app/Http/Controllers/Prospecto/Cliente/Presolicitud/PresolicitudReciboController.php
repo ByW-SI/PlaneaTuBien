@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Presolicitud;
 use App\Prospecto;
 use App\Recibo;
+use App\Contrato;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
@@ -212,9 +213,10 @@ class PresolicitudReciboController extends Controller
         $cotizacion = $presolicitud->perfil->cotizacion;
         $recibos = $presolicitud->recibos;
         $contratos = $cotizacion->contratos();
-        foreach ($recibos as $recibo) {
-            foreach ($contratos as $key=>$monto) {
-                if($recibo->monto  == $monto){
+        // dd($recibos);
+        foreach ($contratos as $key=>$monto) {
+            foreach ($recibos as $recibo) {
+                if($recibo->contrato->monto  == $monto){
                     array_splice($contratos,$key,1);
                 }
             }
@@ -234,26 +236,39 @@ class PresolicitudReciboController extends Controller
     {
         //
         // dd($this->to_word((float)100584.99,"MXN")." ".$request->total);
-        $rules=[
-            'sucursal'=>"required|max:190",
-            'tipo_pago'=>"required|in:Tarjeta de crédito,Cheque",
-            'tipo_tarjeta'=>"required_if:tipo_pago,Tarjeta de crédito",
-            'numero'=>"required|max:190",
-            'banco'=>"required|max:190",
-            'insc_inicial'=>"required|numeric",
-            'iva'=>"required|numeric",
-            'subtotal'=>"required|numeric",
-            'cuota_periodica'=>"required|numeric",
-            'total'=>"required|numeric"
-        ];
-        $this->validate($request,$rules);
-        $recibo = new Recibo($request->all());
-        $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
-        $recibo->numero_contrato = Recibo::get()->count()+1;
-        $recibo->clave = substr(md5($presolicitud->id),0,5);
-        $recibo->total_letra = $this->to_word($recibo->total,"MXN");
-        $presolicitud->recibos()->save($recibo);
-        return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        $grupos = $presolicitud->cotizacion()->plan->grupos;
+        // dd($grupos);
+        foreach ($grupos as $grupo) {
+            if($grupo->contratos > 0 && $grupo->activo == 1){
+                $rules=[
+                    'sucursal'=>"required|max:190",
+                    'tipo_pago'=>"required|in:Tarjeta de crédito,Cheque",
+                    'tipo_tarjeta'=>"required_if:tipo_pago,Tarjeta de crédito",
+                    'numero'=>"required|max:190",
+                    'banco'=>"required|max:190",
+                    'insc_inicial'=>"required|numeric",
+                    'iva'=>"required|numeric",
+                    'subtotal'=>"required|numeric",
+                    'cuota_periodica'=>"required|numeric",
+                    'total'=>"required|numeric"
+                ];
+                $this->validate($request,$rules);
+                $recibo = new Recibo($request->all());
+                $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
+                $recibo->numero_contrato = Recibo::get()->count()+1;
+                $recibo->clave = substr(md5($presolicitud->id),0,5);
+                $recibo->total_letra = $this->to_word($recibo->total,"MXN");
+                $presolicitud->recibos()->save($recibo);
+                $contrato = new Contrato($request->all());
+                $contrato->grupo()->associate($grupo->id);
+                $grupo->contratos -= 1;
+                $grupo->save();
+                $contrato->numero_contrato = 500-$grupo->contratos;
+                $contrato->estado = "registrado";
+                $recibo->contrato()->save($contrato);
+                return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+            }
+        }
 
 
 
@@ -271,8 +286,8 @@ class PresolicitudReciboController extends Controller
     {
         // dd($presolicitud);
         $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo]);
-        // return $pdf->stream();
-        return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        return $pdf->stream();
+        // return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
     }
 
     /**

@@ -120,16 +120,16 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::resource('presolicitud.recibos','PresolicitudReciboController');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
 		Route::resource('presolicitud.referencias','PresolicitudReferenciaController');
-		Route::get('/presolicitud/{presolicitud}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.manual');
-		Route::get('/presolicitud/{presolicitud}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.contrato');
-		Route::get('/presolicitud/{presolicitud}/aviso_privacidad','Documentos\DocumentosController@avisoPrivacidad')->name('presolicitud.aviso_privacidad');
-		Route::get('/presolicitud/{presolicitud}/carta_bienvenida','Documentos\DocumentosController@cartaBienvenida')->name('presolicitud.carta_bienvenida');
-		Route::get('/presolicitud/{presolicitud}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.consentimiento_seguro');
-		Route::get('/presolicitud/{presolicitud}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.cuestionario_calidad');
-		Route::get('/presolicitud/{presolicitud}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.declaracion_salud');
-		Route::get('/presolicitud/{presolicitud}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.domiciliacion');
-		Route::get('/presolicitud/{presolicitud}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.ficha_deposito');
-		Route::get('/presolicitud/{presolicitud}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.anexo_tanda');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.recibos.manual');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.recibos.contrato');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/aviso_privacidad','Documentos\DocumentosController@avisoPrivacidad')->name('presolicitud.recibos.aviso_privacidad');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/carta_bienvenida','Documentos\DocumentosController@cartaBienvenida')->name('presolicitud.recibos.carta_bienvenida');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.recibos.consentimiento_seguro');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.recibos.cuestionario_calidad');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.recibos.declaracion_salud');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.recibos.domiciliacion');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.recibos.ficha_deposito');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.recibos.anexo_tanda');
 
 	});
 Route::resource('presolicituds.checklist','Prospecto\Cliente\ChecklistFolderController');

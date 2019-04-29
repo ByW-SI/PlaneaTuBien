@@ -88,19 +88,18 @@
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="background: #cccc; border-radius:10px;">Día 7 de cada mes</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$presolicitud->recibos->count()}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$presolicitud->id}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$presolicitud->folio}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$presolicitud->clave}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$prospecto->perfil->folio}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$presolicitud->recibos->count()}} de {{ $mensualidades}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($monto_financiar/$cotizacion->plazo,2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{(float)$monto_financiar*.001}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{((float)$monto_financiar*.001)*0.16}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->numero_contrato}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$recibo->clave.$recibo->numero_contrato}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">1 de {{ $plan->plan_meses}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['aportacion'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['cuota_administracion'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['iva'],2)}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">$0.0</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{$cotizacion->propiedad*.0006}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">$0.0</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format(($monto_financiar/$cotizacion->plazo)+((float)$monto_financiar*.001)+(((float)$monto_financiar*.001)*0.16)+($cotizacion->propiedad*.0006),2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['sv'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['sd'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['total'],2)}}</p>
 					</div>
 				</div>
 				<div class="one-third column u-pull-right">

@@ -113,7 +113,7 @@
 							Cuota de inscripción:
 						</th>
 						<td>
-							0.00% (más IVA)
+							{{$plan->inscripcion}}% (más IVA)
 						</td>
 						<td>
 							Una sola vez al inicio
@@ -124,7 +124,7 @@
 							Cuota de administración: 
 						</th>
 						<td>
-							0.20% (más IVA)
+							{{$plan->cuota_admon}}% (más IVA)
 						</td>
 						<td>
 							Mes a mes en tu mensualidad
@@ -134,7 +134,7 @@
 						<th>
 							Prima de Seguro de vida Incapacidad Permanente Total e Invalidez:
 						</th>
-						<td> 0.06%</td>
+						<td> {{$plan->s_v}}%</td>
 						<td>Mes a mes en tu mensualidad</td>
 					</tr>
 					<tr>
@@ -144,7 +144,7 @@
 					</tr>
 					<tr>
 						<th>Prima de seguro de daños del bien:</th>
-						<td>0.04%</td>
+						<td>{{$plan->s_d}}%</td>
 						<td>Mes a mes en tu mensualidad una vez asignada tu propiedad</td>
 					</tr>
 				</tbody>

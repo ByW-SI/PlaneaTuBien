@@ -34,7 +34,7 @@
 							<label style="font-size: 7px">FECHA:</label>
 						</div>
 						<div class="one-half column u-pull-right">
-							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->folio}}</label>
+							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->folio.$recibo->contrato->numero_contrato}}</label>
 							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{date('d-m-Y')}}</label>
 						</div>
 					</div>
@@ -48,11 +48,11 @@
 						<label style="font-size: 10px">Precio Inicial del Bien:</label>
 					</div>
 					<div class="one-half column u-pull-right">
-						<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($presolicitud->precio_inicial,2)}}</label>
+						<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($recibo->contrato->monto,2)}}</label>
 					</div>
 				</div>
 				<div class="two-thirds column u-pull-right">
-					<div class="five columns u-pull-left">
+					<div class="one-half column u-pull-left">
 						<div class="row">
 							<div class="one-half column u-pull-left">
 								<label style="font-size: 10px">Plazo Contratado:</label>
@@ -62,12 +62,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="seven columns u-pull-right">
-						<div class="one-half column u-pull-left">
+					<div class="one-half column u-pull-right">
+						<div class="two columns u-pull-left">
 							<label style="font-size: 10px"> Plan:</label>
 						</div>
-						<div class="one-half column u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: left;">
-							{{$presolicitud->precio_nolose}}
+						<div class="ten columns u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: center;">
+							{{(int)$presolicitud->precio_nolose}}
 						</div>
 					</div>
 				</div>
@@ -922,7 +922,7 @@
 				<div class="twelve columns">
 					<div class="one-half column u-pull-left">
 						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 25px; text-align: center">
-							{{$recibo->numero_contrato}}
+							{{$recibo->contrato->numero_contrato}}
 						</div>
 						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 25px"></div>
 					</div>

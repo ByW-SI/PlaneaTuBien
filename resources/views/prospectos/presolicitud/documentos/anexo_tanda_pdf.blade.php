@@ -80,9 +80,9 @@
 						</div>
 						<div class="one-half column u-pull-right">
 							<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 15px;"><strong>{{$presolicitud->recibos->count()}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 15px;"><strong>{{$presolicitud->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($presolicitud->precio_inicial,2)}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$presolicitud->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$recibo->contrato->grupo->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
 						</div>
 					</div>
 				</div>
@@ -96,10 +96,10 @@
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$puntos}} puntos</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($presolicitud->precio_inicial,2)}}</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$cotizacion->plazo}} meses</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$mensualidades}} meses</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black; margin-top:15px;"><strong>${{number_format($presolicitud->precio_inicial,2)}}</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$plan->plazo}} meses</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$plan->plan_meses}} meses</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black; margin-top:15px;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
 					</div>
 				</div>
 			</div>
@@ -117,34 +117,40 @@
 								</tr>
 								<tr>
 									<td>1</td>
-									<td>{{$cotizacion->porc1}}</td>
-									<td>{{$cotizacion->monto1}}</td>
-									<td>{{$cotizacion->mes1}}</td>
+									<td>{{$plan->aportacion_1}}</td>
+									<td>{{number_format($plan->monto_aportacion_1($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->mes_1}}</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>{{$cotizacion->porc2}}</td>
-									<td>{{$cotizacion->monto2}}</td>
-									<td>{{$cotizacion->mes2}}</td>
+									<td>{{$plan->aportacion_2}}</td>
+									<td>{{number_format($plan->monto_aportacion_2($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->mes_2}}</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>{{$cotizacion->porc3}}</td>
-									<td>{{$cotizacion->monto3}}</td>
-									<td>{{$cotizacion->mes3}}</td>
+									<td>{{$plan->aportacion_3}}</td>
+									<td>{{number_format($plan->monto_aportacion_3($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->mes_3}}</td>
 								</tr>
 								<tr>
-									<td>4</td>
-									<td>{{$cotizacion->porc4}}</td>
-									<td>{{$cotizacion->monto4}}</td>
-									<td>120</td>
+									<td>Liquidación</td>
+									<td>{{$plan->aportacion_liquidacion}}</td>
+									<td>{{number_format($plan->monto_aportacion_liquidacion($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->mes_liquidacion}}</td>
 								</tr>
 								<tr>
 									<td>Anual</td>
-									<td>{{$cotizacion->anual}}%</td>
-									<td>${{number_format($cotizacion->propiedad*(intval($cotizacion->anual)/100),2)}}</td>
+									<td>{{$plan->aportacion_anual}}</td>
+									<td>{{number_format($plan->monto_aportacion_anual($recibo->contrato->monto),2)}}</td>
 									<td>Cada Diciembre</td>
 								</tr>
+								@if ($plan->semestral !=0.00)
+									<td>Semestral</td>
+									<td>{{$plan->aportacion_semestral}}</td>
+									<td>{{number_format($plan->monto_aportacion_semestral($recibo->contrato->monto),2)}}</td>
+									<td>Cada Junio y Diciembre</td>
+								@endif
 							</tbody>
 						</table>
 						<p class="center">Aportaciones Extraordinarias 100% a Capital</p>
@@ -168,28 +174,28 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="justify">
-					1) % Requerido al mes {{$cotizacion->mes1}}. 2) % Requerido al mes {{$cotizacion->mes2}}. 3) % Requerido al mes {{$cotizacion->mes3}}. 4) % Requerido al mes 120. Anual) % Requerido cada Diciembre.
+					1) % Requerido al mes {{$plan->mes_1}}. 2) % Requerido al mes {{$plan->mes_2}}. 3) % Requerido al mes {{$plan->mes_3}}. 4) % Requerido al mes {{$plan->mes_liquidacion}}. Anual) % Requerido cada Diciembre.
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					Aportación Extraordinaria 1: Esta cantidad el consumidor la pagará en el mes de pago {{$cotizacion->mes1}}.
+					Aportación Extraordinaria 1: Esta cantidad el consumidor la pagará en el mes de pago {{$plan->mes_1}}.
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					Aportación Extraordinaria 2: Esta cantidad el consumidor la pagará en el mes de pago {{$cotizacion->mes2}}.
+					Aportación Extraordinaria 2: Esta cantidad el consumidor la pagará en el mes de pago {{$plan->mes_2}}.
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					Aportación Extraordinaria 3: Esta cantidad el consumidor la pagará en el mes de pago {{$cotizacion->mes3}}.
+					Aportación Extraordinaria 3: Esta cantidad el consumidor la pagará en el mes de pago {{$plan->mes_3}}.
 				</p>
 			</div>
 		</div>
@@ -231,14 +237,14 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					{{$mensualidades+1}} pagos mensuales fijos de ${{$cotizacion->mensualidad}}
+					{{$plan->plan_meses}} pagos mensuales fijos de ${{number_format($plan->cotizador($recibo->contrato->monto)['cuota_periodica_integrante'],2)}}
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					{{$cotizacion->plazo-$mensualidades+1}} pagos mensuales fijos de ${{number_format((float)str_replace(array('.', ','), array('.', ''), $cotizacion->mensualidad)+((float)str_replace(array('.', ','), array('.', ''), $cotizacion->mensualidad)*0.35),2)}}
+					{{$plan->plazo-$plan->plan_meses}} pagos mensuales fijos de ${{number_format($plan->cotizador($recibo->contrato->monto)['cuota_periodica_adjudicado'],2)}}
 				</p>
 			</div>
 		</div>

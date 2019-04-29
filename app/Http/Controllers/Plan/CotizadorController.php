@@ -49,7 +49,18 @@ class CotizadorController extends Controller
         return response()->json(['plan'=>$plan],200);
     }
     public function inscripcion($monto,$plan_id){
-        
+        $plan = Plan::find($plan_id);
+        $inscripcion_inicial = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*0.16);
+        $iva = $plan->monto_inscripcion_con_iva($monto)*0.16;
+        $monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
+        $cuota_periodica = $plan->cotizador($monto)['cuota_periodica_integrante'];
+        $recibo = [
+            'inscripcion_inicial' => $inscripcion_inicial,
+            'iva' => $iva,
+            'monto_inscripcion_con_iva' => $monto_inscripcion_con_iva,
+            'cuota_periodica' => $cuota_periodica
+        ];
+        return response()->json(['recibo'=>$recibo],201);
     }
     // public function cotizar($monto,$plan){
         
@@ -106,7 +117,7 @@ class CotizadorController extends Controller
     //         array_push($corrida,$mes);
     //         $total_aportacion_en_mensualidades += $aportacion_mes;
     //         $total_cuota_administracion +=$cuota_admon_mes;
-    //         $mes_actual = date('Y-m-d',strtotime("+1 month",strtotime($mes_actual)));
+    //         $mes_actual = date('Y-m-d',strtotime("+1 month",strtotime($mes_actual)));,
             
     //     }
     //     $aportacion_integrante= 0.00;
