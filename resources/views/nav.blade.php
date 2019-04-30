@@ -22,28 +22,49 @@
 				</div>
             </li>
             {{-- SEGURIDAD --}}
-	        <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-	                <i class="fa fa-lock"></i><strong> Seguridad</strong>
-	            </a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('perfils.index') }}">
-						<i class="fa fa-universal-access"></i><strong> Perfiles</strong>
-					</a>
-					<a class="dropdown-item" href="{{ route('usuarios.index') }}">
-						<i class="fa fa-user-circle"></i><strong> Usuarios</strong>
-					</a>
-				</div>
-	        </li>
+            @php 
+            	$hasPerfil = false;
+            	$hasUsuario = false;
+            @endphp
+            @foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice perfiles")
+					@php
+						$hasPerfil = true;
+					@endphp
+				@elseif($componente->nombre == "indice usuarios")
+					@php
+						$hasUsuario = true;
+					@endphp
+	        	@endif
+            @endforeach
+            @if($hasPerfil || $hasUsuario)
+		        <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+		                <i class="fa fa-lock"></i><strong> Seguridad</strong>
+		            </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					@if($hasPerfil)
+						<a class="dropdown-item" href="{{ route('perfils.index') }}">
+							<i class="fa fa-universal-access"></i><strong> Perfiles</strong>
+						</a>
+					@endif
+					@if($hasUsuario)
+						<a class="dropdown-item" href="{{ route('usuarios.index') }}">
+							<i class="fa fa-user-circle"></i><strong> Usuarios</strong>
+						</a>
+					@endif
+					</div>
+		        </li>
+			@endif
 
 	        {{--  Prospectos --}}
 	        @foreach(Auth::user()->perfil->componentes as $componente)
 		        @if($componente->nombre == "indice prospectos")
 					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fa fa-users"></i><strong> Prospectos</strong>
+						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-								<i class="fa fa-users"></i><strong> Prospectos</strong>
-							</a>
 							@foreach(Auth::user()->perfil->componentes as $c)
 	                            @if($c->nombre == "crear prospecto")
 								<a class="dropdown-item" href="{{ route('prospectos.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
@@ -126,48 +147,112 @@
             @endforeach
 
 			{{-- Precargas --}}
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					↻<strong> Precargas</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('bancos.index') }}"><i class="fa fa-university"></i><strong> Bancos</strong></a>
-					<a class="dropdown-item" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i><strong> Tareas</strong></a>
-					<a class="dropdown-item" href="{{ route('tipo_promocions.index') }}"><i class="fas fa-percent"></i><strong> Tipo de Promociones</strong></a>
-					<a class="dropdown-item" href="{{ route('areas.index') }}"><i class="fas fa-clipboard-check"></i><strong> Areas</strong></a>
-					<a class="dropdown-item" href="{{ route('bajas.index') }}"><i class="fas fa-user-times"></i><strong> Bajas</strong></a>
-					<a class="dropdown-item" href="{{ route('contratos.index') }}"><i class="fas fa-file-contract"></i><strong> Contratos</strong></a>
-					<a class="dropdown-item" href="{{ route('puestos.index') }}"><i class="fas fa-users-cog"></i><strong> Puestos</strong></a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-percent"></i><strong> Promociones</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('promocions.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('promocions.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-home"></i><strong> Planes</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('plans.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('plans.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-					<a class="dropdown-item" href="{{ route('cotizador') }}"><i class="fa fa-search"></i><strong> Cotizador</strong></a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-layer-group"></i><strong> Grupos</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('grupos.create') }}"><i class="far fa-arrow-alt-circle-up"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('grupos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
+			@php
+			 $moduloPrecargas = false;
+			 foreach (Auth::user()->perfil->componentes as $c) {
+			 	if ($c->modulo->nombre == "precargas")
+			 		$moduloPrecargas = true;
+			 }
+			@endphp
+			@if($moduloPrecargas)
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+						↻<strong> Precargas</strong>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						@foreach(Auth::user()->perfil->componentes as $c)
+	                        @if($c->nombre == "Bancos")
+								<a class="dropdown-item" href="{{ route('bancos.index') }}"><i class="fa fa-university"></i><strong> Bancos</strong></a>
+							@endif
+							@if($c->nombre == "Tareas")
+								<a class="dropdown-item" href="{{ route('tasks.index') }}"><i class="fas fa-tasks"></i><strong> Tareas</strong></a>
+							@endif
+							@if($c->nombre == "Tipo de Promociones")
+								<a class="dropdown-item" href="{{ route('tipo_promocions.index') }}"><i class="fas fa-percent"></i><strong> Tipo de Promociones</strong></a>
+							@endif
+							@if($c->nombre == "Areas")
+								<a class="dropdown-item" href="{{ route('areas.index') }}"><i class="fas fa-clipboard-check"></i><strong> Areas</strong></a>
+							@endif
+							@if($c->nombre == "Bajas")
+								<a class="dropdown-item" href="{{ route('bajas.index') }}"><i class="fas fa-user-times"></i><strong> Bajas</strong></a>
+							@endif
+							@if($c->nombre == "Contratos")
+								<a class="dropdown-item" href="{{ route('contratos.index') }}"><i class="fas fa-file-contract"></i><strong> Contratos</strong></a>
+							@endif
+							@if($c->nombre == "Puestos")
+								<a class="dropdown-item" href="{{ route('puestos.index') }}"><i class="fas fa-users-cog"></i><strong> Puestos</strong></a>
+							@endif
+						@endforeach
+					</div>
+				</li>
+			@endif
+
+			{{-- Promociones --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice promociones")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fas fa-percent"></i><strong> Promociones</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							@foreach(Auth::user()->perfil->componentes as $c)
+                        		@if($c->nombre == "crear promocion")
+									<a class="dropdown-item" href="{{ route('promocions.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice promociones")
+									<a class="dropdown-item" href="{{ route('promocions.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+			@endforeach
+
+			{{-- Planes --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice planes")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fas fa-home"></i><strong> Planes</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							@foreach(Auth::user()->perfil->componentes as $c)
+                        		@if($c->nombre == "crear plan")
+									<a class="dropdown-item" href="{{ route('plans.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice planes")
+									<a class="dropdown-item" href="{{ route('plans.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+								@if($c->nombre == "indice promociones")
+								{{-- Checar que usuario puede cotizar --}}
+									<a class="dropdown-item" href="{{ route('cotizador') }}"><i class="fa fa-search"></i><strong> Cotizador</strong></a> 
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+			@endforeach
+
+			{{-- Grupos --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice grupos")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fas fa-layer-group"></i><strong> Grupos</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							@foreach(Auth::user()->perfil->componentes as $c)
+                        		@if($c->nombre == "crear grupo")
+									<a class="dropdown-item" href="{{ route('grupos.create') }}"><i class="far fa-arrow-alt-circle-up"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice grupos")
+									<a class="dropdown-item" href="{{ route('grupos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+			@endforeach
 		</ul>
 	</div>
 </nav>

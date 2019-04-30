@@ -7,21 +7,31 @@
             <div class="col-sm-3">
                 <h4>Datos de la Sucursal:</h4>
             </div>
-            <div class="col-sm-3 text-center">
-                <a href="{{ route('sucursals.edit', ['sucursal' => $sucursal]) }}" class="btn btn-warning">
-                    <strong>✎ Editar Sucursal</strong>
-                </a>
-            </div>
-            <div class="col-sm-3 text-center">
-                <a href="{{ route('sucursals.create') }}" class="btn btn-success">
-                    <i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
-                </a>
-            </div>
-            <div class="col-sm-3 text-center">
-                <a href="{{ route('sucursals.index') }}" class="btn btn-primary">
-                    <i class="fa fa-bars"></i><strong> Lista de Sucursales</strong>
-                </a>
-            </div>
+            @foreach(Auth::user()->perfil->componentes as $c)
+            @if($c->nombre == "ver sucursal" || $c->nombre == "editar sucursal" || $c->nombre == "crear sucursal")
+                @if($c->nombre == "editar sucursal")
+                <div class="col-sm-3 text-center">
+                    <a href="{{ route('sucursals.edit', ['sucursal' => $sucursal]) }}" class="btn btn-warning">
+                        <strong>✎ Editar Sucursal</strong>
+                    </a>
+                </div>
+                @endif
+                @if($c->nombre == "crear sucursal")
+                <div class="col-sm-3 text-center">
+                    <a href="{{ route('sucursals.create') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
+                    </a>
+                </div>
+                @endif
+                @if($c->nombre == "indice Sucursales")
+                <div class="col-sm-3 text-center">
+                    <a href="{{ route('sucursals.index') }}" class="btn btn-primary">
+                        <i class="fa fa-bars"></i><strong> Lista de Sucursales</strong>
+                    </a>
+                </div>
+                @endif
+            @endif
+            @endforeach
         </div>
     </div>
     <div class="card-body">

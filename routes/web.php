@@ -84,16 +84,14 @@ Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospec
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
-Route::group(['middleware' => 'prospectos'], function () {
-	Route::resource('prospectos', 'Prospecto\ProspectoController');
-	Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create');
-	Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
-	Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
-	Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');
-	Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail');
-	Route::resource('prospectos.pagos', 'Pago\PagoController');
-	Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow');
-});
+Route::resource('prospectos', 'Prospecto\ProspectoController');
+Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create');
+Route::resource('prospectos.documentos', 'Prospecto\DocumentoController');
+Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController');
+Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\CotizacionController@pdf')->name('prospectos.cotizacions.pdf');
+Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail');
+Route::resource('prospectos.pagos', 'Pago\PagoController');
+Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow');
 
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController');
@@ -142,13 +140,13 @@ Route::resource('presolicituds.checklist','Prospecto\Cliente\ChecklistFolderCont
 
 
 // PRECARGAS
-Route::resource('bancos', 'Banco\BancoController');
-Route::resource('areas','Precargas\TipoAreaController');
-Route::resource('bajas','Precargas\TipoBajaController');
-Route::resource('contratos','Precargas\TipoContratoController');
-Route::resource('puestos','Precargas\TipoPuestoController');
-Route::resource('tasks','Precargas\TaskController');
-Route::resource('tipo_promocions','Precargas\TipoPromocionController');
+Route::resource('bancos', 'Banco\BancoController')->middleware('precargas:Bancos');
+Route::resource('areas','Precargas\TipoAreaController')->middleware('precargas:Areas');
+Route::resource('bajas','Precargas\TipoBajaController')->middleware('precargas:Bajas');
+Route::resource('contratos','Precargas\TipoContratoController')->middleware('precargas:Contratos');
+Route::resource('puestos','Precargas\TipoPuestoController')->middleware('precargas:Puestos');
+Route::resource('tasks','Precargas\TaskController')->middleware('precargas:Tareas');
+Route::resource('tipo_promocions','Precargas\TipoPromocionController')->middleware('precargas:Tipo de Promociones');
 Route::resource('promocions','Precargas\PromocionController');
 
 // AJAX

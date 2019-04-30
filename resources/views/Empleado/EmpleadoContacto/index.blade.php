@@ -4,6 +4,12 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
+        	<li class="nav-item">
+                <a class="nav-link" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">Datos generales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('empleados.laborals.index', ['empleado' => $empleado]) }}">Datos Laborales</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link active" href="{{ route('empleados.contactos.index', ['empleado' => $empleado]) }}">Contactos</a>
             </li>

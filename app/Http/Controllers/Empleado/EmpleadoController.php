@@ -9,6 +9,16 @@ use App\Http\Controllers\Controller;
 
 class EmpleadoController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('empleados:indice recursos humanos')->only('index');
+        $this->middleware('empleados:crear rh')->only(['create', 'store']);
+        $this->middleware('empleados:editar rh')->only(['edit', 'update']);
+        $this->middleware('empleados:ver rh')->only('show');
+        $this->middleware('empleados:eliminar rh')->only('destroy');
+
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -7,16 +7,24 @@
             <div class="col-sm-4">
                 <h4>Datos de la Sucursal:</h4>
             </div>
-            <div class="col-sm-4 text-center">
-                <a href="{{ route('sucursals.create') }}" class="btn btn-success">
-                    <i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
-                </a>
-            </div>
-            <div class="col-sm-4 text-center">
-                <a href="{{ route('sucursals.index') }}" class="btn btn-primary">
-                    <i class="fa fa-bars"></i><strong> Lista de Sucursales</strong>
-                </a>
-            </div>
+            @foreach(Auth::user()->perfil->componentes as $c)
+	            @if($c->nombre == "crear sucursal" || $c->nombre == "indice Sucursales")
+	                @if($c->nombre == "crear sucursal")
+		            <div class="col-sm-4 text-center">
+		                <a href="{{ route('sucursals.create') }}" class="btn btn-success">
+		                    <i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
+		                </a>
+		            </div>
+		            @endif
+		            @if($c->nombre == "indice Sucursales")
+		            <div class="col-sm-4 text-center">
+		                <a href="{{ route('sucursals.index') }}" class="btn btn-primary">
+		                    <i class="fa fa-bars"></i><strong> Lista de Sucursales</strong>
+		                </a>
+		            </div>
+		            @endif
+	            @endif
+            @endforeach
         </div>
     </div>
     <form action="{{ route('sucursals.update', ['sucursal' => $sucursal]) }}" method="post">

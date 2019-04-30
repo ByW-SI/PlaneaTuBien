@@ -7,11 +7,31 @@
     		<div class="col-sm-4">
     			<h4>Sucursales:</h4>
     		</div>
-    		<div class="col-sm-4 text-center">
-    			<a href="{{ route('sucursals.create') }}" class="btn btn-success">
-    				<i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
-    			</a>
-    		</div>
+    		@php
+			$ver = false;
+			$editar = false;
+			$eliminar = false;
+			$crear = false;		
+			foreach(Auth::user()->perfil->componentes as $c){
+				if($c->nombre == "ver sucursal")
+					$ver = true;
+				
+				if($c->nombre == "editar sucursal")
+					$editar = true;
+				
+				if($c->nombre == "eliminar sucursal")
+					$eliminar = true;
+				if($c->nombre == "crear sucursal")
+					$crear = true;
+			}
+			@endphp
+			@if($crear)
+	    		<div class="col-sm-4 text-center">
+	    			<a href="{{ route('sucursals.create') }}" class="btn btn-success">
+	    				<i class="fa fa-plus"></i><strong> Agregar Sucursal</strong>
+	    			</a>
+	    		</div>
+    		@endif
     	</div>
     </div>
     <div class="card-body">
@@ -24,7 +44,9 @@
 	    					<th>Responsable</th>
 	    					<th>Estado</th>
 	    					<th>Teléfono</th>
-	    					<th>Acción</th>
+	    					@if($ver || $editar || $eliminar)
+	    						<th>Acción</th>
+	    					@endif
 	    				</tr>
 	    				@foreach($sucursales as $sucursal)
 							<tr>
@@ -32,21 +54,29 @@
 								<td>{{ $sucursal->responsable }}</td>
 								<td>{{ $sucursal->estado }}</td>
 								<td>{{ $sucursal->telefono ? $sucursal->telefono : 'N/A' }}</td>
+								@if($ver || $editar || $eliminar)
 								<td class="text-center">
-									<a href="{{ route('sucursals.show', ['sucursal' => $sucursal]) }}" class="btn btn-sm btn-primary">
-										<i class="fa fa-eye"></i> Ver
-									</a>
-									<a href="{{ route('sucursals.edit', ['sucursal' => $sucursal]) }}" class="btn btn-sm btn-warning">
-										✎ Editar
-									</a>
-									<form action="{{ route('sucursals.destroy', ['sucursal' => $sucursal]) }}" style="display: inline;" method="post">
-										{{ csrf_field() }}
-										@method('DELETE')
-										<button type="submit" class="btn btn-sm btn-danger">
-											<i class="fa fa-times"></i> Eliminar
-										</button>
-									</form>
+	                            	@if($ver)
+										<a href="{{ route('sucursals.show', ['sucursal' => $sucursal]) }}" class="btn btn-sm btn-primary">
+											<i class="fa fa-eye"></i> Ver
+										</a>
+									@endif
+									@if($editar)
+										<a href="{{ route('sucursals.edit', ['sucursal' => $sucursal]) }}" class="btn btn-sm btn-warning">
+											✎ Editar
+										</a>
+									@endif
+									@if($eliminar)
+										<form action="{{ route('sucursals.destroy', ['sucursal' => $sucursal]) }}" style="display: inline;" method="post">
+											{{ csrf_field() }}
+											@method('DELETE')
+											<button type="submit" class="btn btn-sm btn-danger">
+												<i class="fa fa-times"></i> Eliminar
+											</button>
+										</form>
+									@endif
 								</td>
+								@endif
 							</tr>
 	    				@endforeach
 	    			</table>
