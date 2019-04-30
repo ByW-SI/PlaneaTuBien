@@ -1,5 +1,26 @@
 @extends('empleado.show')
 @section('submodulos')
+<div class="row">
+  <div class="col-sm-12">
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">Datos generales</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('empleados.laborals.index', ['empleado' => $empleado]) }}">Datos Laborales</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('empleados.contactos.index', ['empleado' => $empleado]) }}">Contactos</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('empleados.relaciones.index', ['empleado' => $empleado]) }}">Empleados</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" href="{{ route('empleados.direcciones.index' , ['empleado' => $empleado]) }}">Dirección</a>
+          </li>
+      </ul>
+  </div>
+</div>
 <div class="container p-5">
 
     <div class="card">

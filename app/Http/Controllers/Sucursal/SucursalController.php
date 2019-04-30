@@ -8,6 +8,22 @@ use App\Http\Controllers\Controller;
 
 class SucursalController extends Controller
 {
+
+    /**
+     * Configura los middleware para cada accion del controlador.
+     *
+     * @return 
+     */
+    function __construct()
+    {
+        $this->middleware('empleados:indice Sucursales')->only('index');
+        $this->middleware('empleados:crear sucursal')->only(['create', 'store']);
+        $this->middleware('empleados:editar sucursal')->only(['edit', 'update']);
+        $this->middleware('empleados:ver sucursal')->only('show');
+        $this->middleware('empleados:eliminar sucursal')->only('destroy');
+
+    }
+
     /**
      * Display a listing of the resource.
      *

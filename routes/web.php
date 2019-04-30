@@ -16,6 +16,9 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
+Route::get('/denegado',function(){
+	return view('errors.denegado');
+})->name('denegado');
 
 Route::prefix('clientes')->group(function(){
 	Route::get('/login','Auth\ClienteLoginController@showLoginForm')->name('cliente.login');
@@ -28,7 +31,7 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/password/reset','Auth\ClienteForgotPasswordController@showLinkRequestForm')->name('cliente.password.request');
 	Route::post('/password/reset','Auth\ClienteResetPasswordController@reset');
 	Route::get('/password/reset/{token}','Auth\ClienteResetPasswordController@showResetForm')->name('cliente.password.reset');
-	Route::resource('cotizacions','Cliente\CotizacionController');
+	//Route::resource('cotizacions','Cliente\CotizacionController');
 
 });
 
@@ -138,13 +141,13 @@ Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\Cred
 
 
 // PRECARGAS
-Route::resource('bancos', 'Banco\BancoController');
-Route::resource('areas','Precargas\TipoAreaController');
-Route::resource('bajas','Precargas\TipoBajaController');
-Route::resource('contratos','Precargas\TipoContratoController');
-Route::resource('puestos','Precargas\TipoPuestoController');
-Route::resource('tasks','Precargas\TaskController');
-Route::resource('tipo_promocions','Precargas\TipoPromocionController');
+Route::resource('bancos', 'Banco\BancoController')->middleware('precargas:Bancos');
+Route::resource('areas','Precargas\TipoAreaController')->middleware('precargas:Areas');
+Route::resource('bajas','Precargas\TipoBajaController')->middleware('precargas:Bajas');
+Route::resource('contratos','Precargas\TipoContratoController')->middleware('precargas:Contratos');
+Route::resource('puestos','Precargas\TipoPuestoController')->middleware('precargas:Puestos');
+Route::resource('tasks','Precargas\TaskController')->middleware('precargas:Tareas');
+Route::resource('tipo_promocions','Precargas\TipoPromocionController')->middleware('precargas:Tipo de Promociones');
 Route::resource('promocions','Precargas\PromocionController');
 
 // AJAX
