@@ -22,8 +22,8 @@ class CreatePerfilHistorialCrediticioClientesTable extends Migration
             $table->string('numero_tarjeta_debito')->nullable();
             $table->string('numero_tarjeta_credito')->nullable();
             // TARJETAS creditos
-            $table->json('tarjetas_credito')->nullable();
-            $table->json('tarjetas_debito')->nullable();
+            $table->text('tarjetas_credito')->nullable();
+            $table->text('tarjetas_debito')->nullable();
 
             $table->boolean('en_buro_credito');
             $table->string('buro_credito')->nullable();

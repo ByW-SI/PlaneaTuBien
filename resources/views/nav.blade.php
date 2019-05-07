@@ -256,3 +256,18 @@
 		</ul>
 	</div>
 </nav>
+{{-- Segunda nav para poner elementos debajo --}}
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #081170;">
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+					<i class="fas fa-layer-group"></i><strong> Pagos</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="{{ route('historial-pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>

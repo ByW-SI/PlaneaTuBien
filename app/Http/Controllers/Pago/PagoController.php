@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pago;
 use App\Prospecto;
 use App\Pago;
 use App\Banco;
+use App\Events\PagoCreated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -41,6 +42,7 @@ class PagoController extends Controller
     {
         $pago = new Pago($request->all());
         $prospecto->pagos()->save($pago);
+        event(new PagoCreated($prospecto, $pago));
         return redirect()->route('prospectos.pagos.index', ['prospecto' => $prospecto]);
     }
 

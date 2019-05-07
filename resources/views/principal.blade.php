@@ -103,6 +103,30 @@
           var not_existentes = notificacion.html();
            notificacion.html(not_existentes + toast);
         });
+        /*
+        *
+        *
+        */
+        var channelPago = pusher.subscribe('prospecto-created');
+        channelPago.bind('pago-creado', function(data) {
+          // alert(JSON.stringify(data)); 
+          var notificacion = $("#notificacion");
+          var toast = `
+            <div class="toast fade show" role="status" aria-live="polite" aria-atomic="true"  data-delay="5000">
+              <div class="toast-header">
+                <strong class="mr-auto">${data.prospecto.nombre} ${data.prospecto.appaterno} ${data.prospecto.apmaterno}</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                ${data.mensaje}
+              </div>
+            </div>
+          `;
+          var not_existentes = notificacion.html();
+           notificacion.html(not_existentes + toast);
+        });
         // $('.toast').toast('show')  
     </script>
     @stack('scripts')
