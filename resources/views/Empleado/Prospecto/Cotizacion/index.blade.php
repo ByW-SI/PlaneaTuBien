@@ -123,16 +123,20 @@
             @if(count($prospecto->cotizaciones) > 0)
                 <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                     <tr class="info">
-                        <th>Valor de la propiedad</th>
                         <th>Plan</th>
-                        <th>Monto a financiar</th>
+                        <th>Valor de la propiedad</th>
+                        <th>Monto total a pagar</th>
+                        <th>Costo anual total</th>
+                        <th>Mensualidades</th>
                         <th>Acción</th>
                     </tr>
                     @foreach($prospecto->cotizaciones as $cotizacion)
                         <tr>
-                            <td>${{ number_format($cotizacion->monto, 2) }}</td>
                             <td>{{ $cotizacion->plan->nombre }}</td>
-                            <td>${{number_format($cotizacion->plan->cotizador($cotizacion->monto)['monto_adjudicar'],2)}}</td>
+                            <td>${{ number_format($cotizacion->monto, 2) }}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto),2) }}</td>
+                            <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto)}}%</td>
+                            <td>{{$cotizacion->plan->mes_aportacion_adjudicado." meses de $".number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2)}}</td>
                             <td class="text-center">
                                 @if ($cotizacion->elegir == 0)
                                     {{-- true expr --}}

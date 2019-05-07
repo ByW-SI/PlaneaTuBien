@@ -37,6 +37,9 @@
 		.justify{
 			text-align: justify;
 		}
+		.page-break {
+		    page-break-after: always;
+		}
 	</style>
 	<title>Anexo Tanda</title>
 </head>

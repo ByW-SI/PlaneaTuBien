@@ -98,36 +98,50 @@ class Cotizacion extends Model
         $monto = $this->monto;
         $contratos = [];
         // SI LOS CONTRATOS SON MENORES O IGUALES A 550000 YA QUE NO HAY MULTIPLOS DE 300-500
-        if ($monto <= 550000) {
+        if ($monto == 550000) {
             array_push($contratos,550000);
         }
         else{
             $contratos_300 = $monto/300000;
             $residuo = $monto%300000;
-            for ($i = 0; $i < 7; $i++) {
+            for ($i = 0; $i < (int)$contratos_300; $i++) {
                 array_push($contratos,300000);
             }
             $contratos_mascincuentamil = $residuo/50000;
-            if($residuo%50000 == 0){
-                if($contratos_mascincuentamil <=$contratos_300){
-                    for ($i = 0; $i < $contratos_mascincuentamil; $i++) {
-                        $contratos[$i] += 50000;
-                    }
-                }
+            $array = $this->residuo($contratos,$residuo);
+            // dd($array);
+
+            // if($residuo%50000 == 0){
+            //     dd($residuo);
+            //     if($contratos_mascincuentamil >= (int)$contratos_300){
+            //         for ($i = 0; $i < $contratos_mascincuentamil; $i++) {
+            //             $contratos[$i] += 50000;
+            //         }
+            //     }
+            // }
+
+        }
+        // dd($contratos);
+        return $array;
+
+    }
+
+    protected function residuo($array,$residuo)
+    {
+        $contratos_mascincuentamil = $residuo/50000;
+        // dd($contratos_mascincuentamil);
+        for ($i = 0; $i <sizeof($array);$i++) {
+            if($contratos_mascincuentamil != 0){
+                $array[$i] += 50000;
+                $contratos_mascincuentamil -= 1;
             }
-
         }
-        $total = 0;
-        foreach ($contratos as $value) {
-            $total += $value;
-        }
-        if($total == $monto){
-            return $contratos;
-
+        if($contratos_mascincuentamil == 0){
+            return $array;
         }
         else{
-            dd("verifica tu metodo, tu total de contratos son ".$total." y tu monto es ".$monto);
+            $residuo = $contratos_mascincuentamil*50000;
+            return $this->residuo($array,$residuo);
         }
-
     }
 }
