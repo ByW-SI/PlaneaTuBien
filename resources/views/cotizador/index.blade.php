@@ -212,6 +212,51 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_semestral($request->monto),2)}}</span>
 						</div>
 					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Monto cuota periodica integrante</label>
+						<div class="input-group mb-3 mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_cuota_periodica_integrante($request->monto),2)}}</span>
+						</div>
+					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Monto cuota periodica adjudicado</label>
+						<div class="input-group mb-3 mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_cuota_periodica_adjudicado($request->monto),2)}}</span>
+						</div>
+					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Monto derecho de adjudicación</label>
+						<div class="input-group mb-3 mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_derecho_adjudicacion($request->monto),2)}}</span>
+						</div>
+					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Monto total a pagar</label>
+						<div class="input-group mb-3 mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_total_pagar($request->monto),2)}}</span>
+						</div>
+					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Sobrecosto anual</label>
+						<div class="input-group mb-3 mt-3">
+							<span class="form-control bg-light">{{$plan_select->sobrecosto_anual($request->monto)}}</span>
+							<div class="input-group-append">
+								<span class="input-group-text">%</span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<table class="table table-bordered table-striped">
@@ -272,6 +317,69 @@
 									</td>
 								</tr>
 							@endforeach
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th class="text-center" scope="col">Meses</th>
+								<th class="text-center" scope="col">Aportación</th>
+								<th class="text-center" scope="col">Cuota de Administración</th>
+								<th class="text-center" scope="col">IVA</th>
+								<th class="text-center" scope="col">Seguro de vida</th>
+								<th class="text-center" scope="col">Seguro de desastres</th>
+								<th class="text-center" scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center">
+									{{$plan_select->corrida_meses_fijos($request->monto)['integrante']['meses']}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['aportacion'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['cuota_administracion'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['iva'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sv'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sd'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['total'],2)}}
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center">
+									{{$plan_select->corrida_meses_fijos($request->monto)['adjudicado']['meses']}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['aportacion'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['cuota_administracion'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['iva'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sv'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sd'],2)}}
+								</td>
+								<td class="text-center">
+									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['total'],2)}}
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
