@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Prospecto\Cotizacion;
 
 use App\Cotizacion;
 use App\Http\Controllers\Controller;
+use App\Events\PagoCreated;
 use App\Pago;
 use App\Banco;
 use App\Prospecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagosController extends Controller
 {
@@ -57,10 +59,11 @@ class PagosController extends Controller
             'total'=>"required|numeric"
         ];
         $this->validate($request,$rules);
-
+        //return dd($request->all());
         $pago = new Pago($request->all());
         $pago->prospecto()->associate($prospecto);
         $cotizacion->pagos()->save($pago);
+        event(new PagoCreated($prospecto, $pago, Auth::user()));
         return redirect()->route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
 
 

@@ -37,12 +37,10 @@
                                 <td>${{ number_format($pago->restante, 2) }}</td>
                                 <td>{{ $pago->status }}</td>
                                 <td class="text-center">
-                                    @if($pago == $cotizacion->pagos->last() && $pago->status != "Aprobado")
-                                        <a href="{{ route('prospectos.pagos.follow', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-warning">
-                                            <strong>$</strong> Pagar
-                                        </a>
-                                    @endif
-                                    <a href="{{ route('prospectos.pagos.show', ['prospecto' => $prospecto, 'pago' => $pago]) }}" class="btn btn-sm btn-primary">
+                                    <a href="#" class="btn btn-sm btn-warning">
+                                        <strong>$</strong> Pagar
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-primary">
                                         <i class="fa fa-eye"></i> Ver
                                     </a>
                                 </td>
