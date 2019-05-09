@@ -41,6 +41,9 @@
 <body>
 	<div class="container">
 		<div class="row">
+			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
+		</div>
+		<div class="row">
 			<div class="twelve columns">
 				<div class="one-third column u-pull-left">
 					<h4>Checklist Folder</h4>
@@ -49,10 +52,12 @@
 					<div class="two columns u-pull-left">
 						<label for="">Cliente:</label>
 						<label for="">Contrato:</label>
+						<label for="">Grupo:</label>
 					</div>
 					<div class="ten columns u-pull-right center">
 						<label>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</label>
-						<label>{{$presolicitud->folio.$presolicitud->id}}</label>
+						<label>{{$recibo->contrato->id}}</label>
+						<label>{{$recibo->contrato->grupo->id}}</label>
 					</div>
 				</div>
 			</div>
@@ -76,19 +81,41 @@
 			</div>
 			<div class="one-half column u-pull-right left">
 				<label for=""><input type="checkbox" readonly disabled {{$checklist->ficha_deposito_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->perfil_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->presolicitud_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->contrato_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->hoja_aceptacion_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->manual_consumidor_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->calidad_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->privacidad_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->copia_ficha_deposito_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->identificacion_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->comprobante_domicilio_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->croquis_ubicacion_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->carta_bienvenida_path ? 'checked=""' : '' }}></label>
-				<label for=""><input type="checkbox" readonly disabled {{$presolicitud->checklist->anexos_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->perfil_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->presolicitud_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->contrato_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->hoja_aceptacion_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->manual_consumidor_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->calidad_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->privacidad_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->copia_ficha_deposito_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->identificacion_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->comprobante_domicilio_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->croquis_ubicacion_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->carta_bienvenida_path ? 'checked=""' : '' }}></label>
+				<label for=""><input type="checkbox" readonly disabled {{$checklist->anexos_path ? 'checked=""' : '' }}></label>
+			</div>
+		</div>
+		<div class="row" style="margin-left: 12px; margin-right: 12px; position: fixed;left: 0;bottom: 15;width: 100%;">
+			<div class="twelve columns">
+				<div class="seven columns u-pull-left">
+					<div class="four columns u-pull-left">
+						<p style="margin-bottom: 1.5rem; font-size: 13px;">Nombre del cliente:</p>
+					</div>
+					<div class="eight columns u-pull-right">
+						<label style="text-align:center;">{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</label>
+						<div style="border-bottom: 0.5px solid #B8242B; top:20px; width: 100%;"></div>
+					</div>
+				</div>
+				<div class="five columns u-pull-right">
+					<div class="two columns u-pull-left">
+						<p style="margin-bottom: 1.5rem; font-size: 13px;" >Firma:</p>
+					</div>
+					<div class="ten columns u-pull-right">
+						<br>
+						<div style="border-bottom: 0.5px solid #B8242B; top:20px; width: 100%;"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

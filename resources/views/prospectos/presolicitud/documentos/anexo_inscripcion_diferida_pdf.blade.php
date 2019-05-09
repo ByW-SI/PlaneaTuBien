@@ -162,6 +162,27 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left" style="padding-left: 25px;">
+					<strong> Beneficio de cuota de inscripción</strong>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+				<p class="justify">
+					La cuota de inscripción se cobrará sobre el valor del bien.
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+				<p class="justify">
+					Por este medio instruyo a la empresa PLANEA TU BIEN S.A. DE C.V. para que el <strong style="color: red">1%</strong> del valor presente del precio inicial del bien, por concepto de cuota de inscripción correspondiente al contrato celebrado entre las partes, sea pagado en el mes de {{$mes}} del año {{date('Y')}}, y/o en el caso en que el(la) suscrito(a) decida cancelar el contrato vigente con el proveedor, dicho monto será restado de las aportaciones realizadas por el (la) signatario(a).
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+				<p class="left" style="padding-left: 25px;">
 					<strong>Aportaciones Extraodinarias 100% a Capital</strong>
 				</p>
 			</div>

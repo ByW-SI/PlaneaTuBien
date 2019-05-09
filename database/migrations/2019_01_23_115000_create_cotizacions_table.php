@@ -25,6 +25,9 @@ class CreateCotizacionsTable extends Migration
             $table->unsignedInteger('ahorro')->default(0);
             $table->unsignedInteger('plan_id')->references('id')->on('plans');
             $table->foreign('plan_id')->references('id')->on('plans');
+            // se agrego despues
+            $table->decimal('descuento')->default(0.00);    
+            $table->decimal('inscripcion')->default(0.00);
             $table->timestamps();
             $table->softDeletes();
         });

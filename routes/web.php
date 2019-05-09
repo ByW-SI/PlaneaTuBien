@@ -121,21 +121,30 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']]);
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
 		Route::resource('presolicitud.referencias','PresolicitudReferenciaController');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.recibos.manual');
+		// aviso de privacidad
+		Route::get('/presolicitud/{presolicitud}/aviso_privacidad','Documentos\DocumentosController@avisoPrivacidad')->name('presolicitud.aviso_privacidad');
+		// carta de bienvenida
+		Route::get('/presolicitud/{presolicitud}/carta_bienvenida','Documentos\DocumentosController@cartaBienvenida')->name('presolicitud.carta_bienvenida');
+		// cuestionario de calidad
+		Route::get('/presolicitud/{presolicitud}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.cuestionario_calidad');
+		// recibo
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
+		// manual de consumidor
+		Route::get('/presolicitud/{presolicitud}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.manual');
+		// consentimiento de seguro
+		Route::get('/presolicitud/{presolicitud}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.consentimiento_seguro');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.recibos.contrato');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/aviso_privacidad','Documentos\DocumentosController@avisoPrivacidad')->name('presolicitud.recibos.aviso_privacidad');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/carta_bienvenida','Documentos\DocumentosController@cartaBienvenida')->name('presolicitud.recibos.carta_bienvenida');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.recibos.consentimiento_seguro');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.recibos.cuestionario_calidad');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.recibos.declaracion_salud');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.recibos.domiciliacion');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.recibos.ficha_deposito');
 		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.recibos.anexo_tanda');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_tanda_clasica','Documentos\DocumentosController@anexoTandaClasica')->name('presolicitud.recibos.anexo_tanda_clasica');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.recibos.anexo_inscripcion_diferida');
 
 	});
-Route::resource('presolicituds.checklist','Prospecto\Cliente\ChecklistFolderController');
+Route::resource('recibos.checklist','Prospecto\Cliente\Presolicitud\ChecklistFolderController');
+Route::resource('recibos.domiciliacion','Prospecto\Cliente\Presolicitud\Contrato\DomiciliacionController');
 Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create']);
 
 

@@ -204,7 +204,7 @@ function cotizar() {
             </table>
         </div>
         <div class="row">
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Monto total que pagarás</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -213,7 +213,7 @@ function cotizar() {
                     <input class="form-control" type="text" value="${plan.monto_total}" readonly="">
                 </div>
             </div>
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Costo anual de </label>
                 <div class="input-group mb-3">
                     <input class="form-control" type="text" value="${plan.sobrecosto_anual}" readonly="">
@@ -222,13 +222,22 @@ function cotizar() {
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
+                <label for="monto">Porcentaje de descuento </label>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" id="descuento_input" name="descuento" min="0" max="30" value="0.00">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Inscripción </label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" value="${plan.monto_inscripcion_con_iva}" readonly="">
+                    <input class="form-control" type="text" id="inscripcion_input" name="inscripcion" value="${plan.monto_inscripcion_con_iva}" required>
                 </div>
             </div>
         </div>`;

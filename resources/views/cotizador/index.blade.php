@@ -281,7 +281,7 @@
 									Seguro de vida
 								</th>
 								<th class="text-center" scope="col">
-									Seguro de desempleo
+									Seguro de desastres
 								</th>
 								<th class="text-center" scope="col">
 									Total

@@ -60,7 +60,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['aportacion'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['aportacion'],2)}}
                                                 </span>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['cuota_administracion'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['cuota_administracion'],2)}}
                                                 </span>
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['iva'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['iva'],2)}}
                                                 </span>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['sv'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sv'],2)}}
                                                 </span>
                                             </div>
                                         </div>
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['sd'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sd'],2)}}
                                                 </span>
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text form-control">
-                                                    ${{number_format($plan->cotizador($recibo->contrato->monto)['corrida'][0]['total'],2)}}
+                                                    ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['total'],2)}}
                                                 </span>
                                             </div>
                                         </div>

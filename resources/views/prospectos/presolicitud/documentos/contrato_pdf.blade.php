@@ -56,9 +56,9 @@
 						</div>
 						<div class="one-half column u-pull-right">
 							<p style="border-bottom: 1px solid black">{{$presolicitud->folio.$recibo->contrato->numero_contrato}}</p>
-							<p style="border-bottom: 1px solid black">{{$presolicitud->id}}</p>
 							<p style="border-bottom: 1px solid black">{{$recibo->contrato->grupo->id}}</p>
 							<p style="border-bottom: 1px solid black">{{$recibo->contrato->numero_contrato}}</p>
+							<p style="border-bottom: 1px solid black">{{$presolicitud->id}}</p>
 							<p style="border-bottom: 1px solid black">{{date('d-m-Y H:m')}}</p>
 						</div>
 					</div>
@@ -180,7 +180,9 @@
 			<div class="row">
 				<div class="twelve columns">
 					<p class="justify">
-						AUTORIZO AL “PROVEEDOR”  A CONTRATAR UN SEGURO DE VIDA, INCAPACIDAD PERMANENTE TOTAL E INVALIDEZ POR EL EQUIVALENTE AL SALDO INSOLUTO DE LA OPERACIÓN Y NOMBRO BENEFICIARIO (S) DEL MISMO A: ______________________________________________________.
+						AUTORIZO AL “PROVEEDOR”  A CONTRATAR UN SEGURO DE VIDA, INCAPACIDAD PERMANENTE TOTAL E INVALIDEZ POR EL EQUIVALENTE AL SALDO INSOLUTO DE LA OPERACIÓN Y NOMBRO BENEFICIARIO (S) DEL MISMO A: <span style="border-bottom:1px solid black">@foreach ($presolicitud->beneficiarios as $key=>$beneficiario)
+							{{" ".$beneficiario->nombre." ".$beneficiario->paterno." ".$beneficiario->materno." ".$beneficiario->porcentaje."%"}}
+						@endforeach</span>.
 					</p>
 				</div>
 			</div>
@@ -192,19 +194,19 @@
 			<div class="row">
 				<div class="twelve columns">
 					<p class="justify">
-						BIEN INMUEBLE LOCALIZADO EN LA C.D. DE: <span style="border-bottom:1px solid black">{{$prospecto->perfil->inmueble_pretendido->estado}}</span>
+						BIEN INMUEBLE LOCALIZADO EN LA C.D. DE: <span style="border-bottom:0.5px solid black">{{$prospecto->perfil->inmueble_pretendido->estado}}</span>
 					</p>
 					<p class="justify">
 						A.- NÚMERO DE CONSUMIDORES: <span style="border-bottom:1px solid black">500</span> (NO MAS DE 500)
 					</p>
 					<p class="justify">
-						B.- VIGENCIA DEL GRUPO: <span style="border-bottom: 1px solid black;">{{$recibo->contrato->grupo->vigencia}}</span>
+						B.- VIGENCIA DEL GRUPO: <span style="border-bottom: 0.5px solid black;">{{$recibo->contrato->grupo->vigencia}}</span> MESES
 					</p>
 					<p class="justify">
 						C.- VIGENCIA DEL PLAN <span style="border-bottom: 0.5px solid black;">{{$plan->plazo}}</span> MESES (EQUIVALENTE A IGUAL NUMERO DE CUOTAS PERIÓDICAS)
 					</p>
 					<p class="justify">
-						D.- PRECIO INICIAL DEL BIEN: <span style="border-bottom: 0.5px solid black;">${{number_format($recibo->contrato->monto)}}</span> MONEDA NACIONAL ($300,000, $350,000, $400,000, $450,000 Y $500,000) 
+						D.- PRECIO INICIAL DEL BIEN: <span style="border-bottom: 0.5px solid black;">${{number_format($monto)}}</span> MONEDA NACIONAL ($300,000, $350,000, $400,000, $450,000 Y $500,000) 
 					</p>
 					<p class="justify">
 						E.- FECHA LÍMITE DEL PAGO MENSUAL: <strong>DÍA SIETE DE CADA MES (EN CASO DE SER INHÁBIL SE PAGARA EL HÁBIL INMEDIATO POSTERIOR)</strong>
@@ -231,25 +233,25 @@
 			<div class="row">
 				<div class="twelve columns">
 					<p class="justify">
-						1.- CUOTA DE INSCRIPCIÓN: <strong style="border-bottom: 0.5px solid black;">{{$plan->inscripcion}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format(($plan->monto_inscripcion_con_iva($recibo->contrato->monto)-($plan->monto_inscripcion_con_iva($recibo->contrato->monto)*0.16)),2)}}</strong>
+						1.- CUOTA DE INSCRIPCIÓN: <strong style="border-bottom: 0.5px solid black;">{{$plan->inscripcion}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format($cuota_inscripcion,2)}}</strong>
 					</p>
 					<p class="justify">
-						2.- IMPUESTO DE LA CUOTA DE INSCRIPCIÓN (I.V.A.): <strong style="border-bottom: 0.5px solid black;">${{number_format(($plan->monto_inscripcion_con_iva($recibo->contrato->monto)*0.16),2)}}</strong>
+						2.- IMPUESTO DE LA CUOTA DE INSCRIPCIÓN (I.V.A.): <strong style="border-bottom: 0.5px solid black;">${{number_format($iva_inscripcion,2)}}</strong>
 					</p>
 					<p class="justify"><strong>
 						CUOTA PERIÓDICA TOTAL (SERA DE MANERA MENSUAL) 
 					</strong></p>
 					<p class="justify">
-						3.- APORTACIÓN PERIÓDICA AL FONDO DEL GRUPO (MENSUAL D/C): <strong style="border-bottom: 0.5px solid black;">${{number_format($plan->cotizador($recibo->contrato->monto)['cuota_periodica_integrante'],2)}}</strong>
+						3.- APORTACIÓN PERIÓDICA AL FONDO DEL GRUPO (MENSUAL D/C): <strong style="border-bottom: 0.5px solid black;">${{number_format($aportacion_periodica,2)}}</strong>
 					</p>
 					<p class="justify">
-						4.- CUOTA DE ADMINISTRACIÓN: <strong style="border-bottom: 0.5px solid black;">{{$plan->cuota_admon}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes'],2)}}</strong>
+						4.- CUOTA DE ADMINISTRACIÓN: <strong style="border-bottom: 0.5px solid black;">{{$plan->cuota_admon}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format($cuota_administracion,2)}}</strong>
 					</p>
 					<p class="justify">
-						5.- I.V.A. DE GASTOS DE ADMINISTRACIÓN: <strong style="border-bottom: 0.5px solid black;">${{number_format($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes_iva'],2)}}</strong>
+						5.- I.V.A. DE GASTOS DE ADMINISTRACIÓN: <strong style="border-bottom: 0.5px solid black;">${{number_format($iva_cuota_admon,2)}}</strong>
 					</p>
 					<p class="justify">
-						6.- PAGO MENSUAL DE SEGURO DE VIDA, INCAPACIDAD PERMANENTE TOTAL E INVALIDEZ:  <strong style="border-bottom: 0.5px solid black;">{{$plan->s_v}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format($plan->cotizador($recibo->contrato->monto)['seguro_vida_mes'],2)}}</strong>
+						6.- PAGO MENSUAL DE SEGURO DE VIDA, INCAPACIDAD PERMANENTE TOTAL E INVALIDEZ:  <strong style="border-bottom: 0.5px solid black;">{{$plan->s_v}}%</strong> <strong style="border-bottom: 0.5px solid black;">${{number_format($seguro_vida,2)}}</strong>
 					</p>
 					<p class="justify">
 						7.- APORTACIONES A FONDO DE CONTINGENCIA: <strong style="border-bottom: 0.5px solid black;">0.00</strong> (2% de la Aportación Periódica al Fondo del Grupo para adjudicatarios y 4% de la Aportación Periódica al Fondo del Grupo para Adjudicados)
@@ -257,13 +259,13 @@
 					<p class="justify">
 						IMPORTE PRIMERA CUOTA PERIÓDICA TOTAL: 
 						<strong style="border-bottom: 0.5px solid black;">
-							${{number_format(($plan->cotizador($recibo->contrato->monto)['cuota_periodica_integrante'])+($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes'])+($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes_iva']-$plan->cotizador($recibo->contrato->monto)['cuota_admon_mes'])+($plan->cotizador($recibo->contrato->monto)['seguro_vida_mes']),2)}}
+							${{number_format($primera_cuota_periodica_total,2)}}
 						</strong>
 					</p>
 					<p class="justify">
 						SUMA DE INSCRIPCIÓN Y CUOTA: 
 						<strong style="border-bottom: 0.5px solid black;">
-							${{number_format(($plan->monto_inscripcion_con_iva($recibo->contrato->monto)-($plan->monto_inscripcion_con_iva($recibo->contrato->monto)*0.16))+($plan->monto_inscripcion_con_iva($recibo->contrato->monto)*0.16)+($plan->cotizador($recibo->contrato->monto)['cuota_periodica_integrante'])+($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes'])+($plan->cotizador($recibo->contrato->monto)['cuota_admon_mes_iva']-$plan->cotizador($recibo->contrato->monto)['cuota_admon_mes'])+($plan->cotizador($recibo->contrato->monto)['seguro_vida_mes']),2)}}
+							${{number_format($suma_incripcion_y_cuota,2)}}
 						</strong>
 					</p>
 					<p class="justify">

@@ -3,16 +3,16 @@
 <div class="card">
     <div class="card-header">
         <h5>
-        	{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
+        	CHECKLIST FOLDER DE {{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
         </h5>
     </div>
-    <form method="POST" action="{{ route('presolicituds.checklist.store',['presolicitud'=>$presolicitud]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('recibos.checklist.store',['recibo'=>$recibo]) }}" enctype="multipart/form-data">
 	@csrf
 		
 	    <div class="card-body">
 	    	<div class="row">
 	    		<h4>
-	    			CHECKLIST FOLDER DE {{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
+	    			Recibo {{$recibo->clave.$recibo->id}}
 	    		</h4>
 	    	</div>
 	    	<div class="row">

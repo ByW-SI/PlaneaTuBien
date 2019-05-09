@@ -41,7 +41,9 @@ class Cotizacion extends Model
         'folio',
         'monto',
         'elegir',
-        'ahorro'
+        'ahorro',
+        'descuento',
+        'inscripcion'
     ];
 
     protected $hidden =[

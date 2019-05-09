@@ -53,15 +53,19 @@ class CotizadorController extends Controller
     }
     public function inscripcion($monto,$plan_id){
         $plan = Plan::find($plan_id);
-        $inscripcion_inicial = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*0.16);
-        $iva = $plan->monto_inscripcion_con_iva($monto)*0.16;
-        $monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
-        $cuota_periodica = $plan->cotizador($monto)['cuota_periodica_integrante'];
+        $cuota_inscripcion = $monto*($plan->inscripcion/100);
+        $iva_inscripcion= $cuota_inscripcion*0.16;
+        $aportacion_periodica = $monto/$plan->plazo;
+        $cuota_administracion = $monto*($plan->cuota_admon/100);
+        $iva_cuota_admon = $cuota_administracion*0.16;
+        $seguro_vida = $monto*($plan->s_v/100);
+        $primera_cuota_periodica_total = $aportacion_periodica+$cuota_administracion+$iva_cuota_admon+$seguro_vida;
+        $suma_incripcion_y_cuota = $cuota_inscripcion+$iva_inscripcion+$primera_cuota_periodica_total;
         $recibo = [
-            'inscripcion_inicial' => $inscripcion_inicial,
-            'iva' => $iva,
-            'monto_inscripcion_con_iva' => $monto_inscripcion_con_iva,
-            'cuota_periodica' => $cuota_periodica
+            'inscripcion_inicial' => $cuota_inscripcion,
+            'iva' => $iva_inscripcion,
+            'monto_inscripcion_con_iva' => $cuota_inscripcion+$iva_inscripcion,
+            'cuota_periodica' => $primera_cuota_periodica_total
         ];
         return response()->json(['recibo'=>$recibo],201);
     }
