@@ -72,7 +72,7 @@
           'previewFileType':'any',
         });
         // Enable pusher logging - don't include this in production
-        // Pusher.logToConsole = true;
+        //Pusher.logToConsole = true;
         $("#notificacion").on("click",'button',function () {
           $(this).parent().parent().hide();
         });
@@ -107,14 +107,13 @@
         *
         *
         */
-        var channelPago = pusher.subscribe('prospecto-created');
-        channelPago.bind('pago-creado', function(data) {
+        channel.bind('pago-creado', function(data) {
           // alert(JSON.stringify(data)); 
           var notificacion = $("#notificacion");
           var toast = `
             <div class="toast fade show" role="status" aria-live="polite" aria-atomic="true"  data-delay="5000">
               <div class="toast-header">
-                <strong class="mr-auto">${data.prospecto.nombre} ${data.prospecto.appaterno} ${data.prospecto.apmaterno}</strong>
+                <strong class="mr-auto">Pago realizado!!</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,7 +124,7 @@
             </div>
           `;
           var not_existentes = notificacion.html();
-           notificacion.html(not_existentes + toast);
+          notificacion.html(not_existentes + toast);
         });
         // $('.toast').toast('show')  
     </script>

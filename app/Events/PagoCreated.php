@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Prospecto;
 use App\Pago;
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PagoCreated
+class PagoCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -42,11 +43,13 @@ class PagoCreated
      *
      * @return void
      */
-    public function __construct(Prospecto $prospecto, Pago $pago)
+    public function __construct(Prospecto $prospecto, Pago $pago, User $user)
     {
         $this->prospecto = $prospecto;
         $this->pago = $pago;
-        $this->mensaje = "Se realizo un pago de {$pago->monto} para el prospecto: {$prospecto->nombre} {$prospecto->appaterno} {$prospecto->apmaterno}";
+        $this->mensaje = "Se realizo un pago de $ {$pago->monto} para el prospecto: {$prospecto->nombre} 
+            {$prospecto->appaterno} {$prospecto->apmaterno}, y lo recibe el empleado: {$user->empleado->nombre} 
+            {$user->empleado->paterno} {$user->empleado->materno}";
     }
 
     /**
