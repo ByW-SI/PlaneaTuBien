@@ -75,15 +75,6 @@
 					</div>
 				</div>
 				<div class="col-12 col-xs-12 col-md-6 col-lg-3 form-group" id="div_monto">
-					<label for="adeudo">Adeudo</label>
-					<div class="input-group mb-3">
-						<div class="input group-prepend">
-							<span class="input-group-text">$</span>
-						</div>
-						<input type="number" class="form-control" step="any" min="0" name="adeudo" value="0" id="adeudo">
-					</div>
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-3 form-group" id="div_monto">
 					<label for="total">Total</label>
 					<div class="input-group mb-3">
 						<div class="input group-prepend">
@@ -128,8 +119,7 @@
 		});
 		function setTotal() {
 			var monto = parseFloat($("#monto").val());
-			var adeudo = parseFloat($("#adeudo").val());
-			total = monto+ +adeudo;
+			total = monto;
 			$("#total").val(total);
 		}
 	</script>

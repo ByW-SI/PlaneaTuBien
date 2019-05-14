@@ -128,6 +128,7 @@
                         <th>Monto total a pagar</th>
                         <th>Costo anual total</th>
                         <th>Mensualidades</th>
+                        <th>Inscripción inicial</th>
                         <th>Acción</th>
                     </tr>
                     @foreach($prospecto->cotizaciones as $cotizacion)
@@ -137,21 +138,22 @@
                             <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto),2) }}</td>
                             <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto)}}%</td>
                             <td>{{$cotizacion->plan->mes_aportacion_adjudicado." meses de $".number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2)}}</td>
+                            <td>${{number_format($cotizacion->inscripcion_total,2)}}</td>
                             <td class="text-center">
                                 @if ($cotizacion->elegir == 0)
                                     {{-- true expr --}}
-                                    <a href="{{ route('empleados.prospectos.cotizacions.show', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('empleados.prospectos.cotizacions.show', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-primary">
                                         <i class="fa fa-eye"></i> Ver
                                     </a>
-                                    <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
+                                    <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
                                         <i class="fa fa-file"></i> PDF
                                     </a>
-                                    <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
+                                    <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
                                         <i class="fas fa-envelope"></i> Enviar por correo
                                     </a>
-                                    <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm btn-success"> Seleccionar cotización para crear perfil</a>
+                                    <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm mt-3 btn-success"> Seleccionar cotización para crear perfil</a>
                                 @else
-                                    <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-sm btn-success">Ver perfil</a>
+                                    <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-sm mt-3 btn-success">Ver perfil</a>
                                     {{-- false expr --}}
                                 @endif
                                 

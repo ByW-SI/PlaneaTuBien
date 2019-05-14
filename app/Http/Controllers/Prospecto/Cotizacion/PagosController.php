@@ -55,7 +55,6 @@ class PagosController extends Controller
             'comprobante'=>'required|in:Luz,Agua,Teléfono,Predial',
             'forma'=>'required|in:Efectivo,Depósito,Cheque,Tarjeta de Crédito,Tarjeta de Débito,Transferencia',
             'monto'=>'required|numeric',
-            'adeudo'=>'required|numeric',
             'total'=>"required|numeric"
         ];
         $this->validate($request,$rules);
@@ -133,6 +132,6 @@ class PagosController extends Controller
         $pago->update([
             'status'=>$request->status
         ]);
-        return redirect()->route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
+        return back();
     }
 }

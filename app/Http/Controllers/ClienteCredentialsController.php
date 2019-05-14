@@ -32,7 +32,7 @@ class ClienteCredentialsController extends Controller
         } else {
             return view('cliente.index');
             // dd('No hay cliente');
-            return redirect()->route('clientes.create');
+            // return redirect()->route('clientes.create');
 
         }
     }

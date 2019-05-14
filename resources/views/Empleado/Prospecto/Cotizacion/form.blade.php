@@ -153,6 +153,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
+                            <label for="monto">Porcentaje de descuento </label>
+                            <div class="input-group mb-3">
+                                <input class="form-control" type="number" id="descuento_input" name="descuento" min="0" max="30" value="0.00">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon1">%</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label class="col-form-label">Promocion:</label>
                             <select name="promocion" class="form-control" id="promocion_select">
@@ -184,13 +193,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    $("#ahorro_cliente").change(function () {
-        alert('cambio');
-    })
-
-</script>
-
 @endsection

@@ -113,10 +113,14 @@ $("#ahorro_cliente").change(function(){
 });
 function cotizar() {
     // body...
-    $("#cotizador").empty();
+    var descuento =$("#descuento_input").val();
+    if (descuento == "") {
+        descuento = 0;
+    }
     var monto =$("#monto").val();
     var plan_id = $("#plan_cliente").val();
-    axios.get(`../../../../../api/cotizar/${monto}/${plan_id}`).then(res=>{
+    $("#cotizador").empty();
+    axios.get(`../../../../../api/cotizar/${monto}/${plan_id}/${descuento}`).then(res=>{
         var plan = res.data.plan;
         var html = `
         <div class="row">
@@ -223,21 +227,12 @@ function cotizar() {
                 </div>
             </div>
             <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
-                <label for="monto">Porcentaje de descuento </label>
-                <div class="input-group mb-3">
-                    <input class="form-control" type="text" id="descuento_input" name="descuento" min="0" max="30" value="0.00">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon1">$</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Inscripción </label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" id="inscripcion_input" name="inscripcion" value="${plan.monto_inscripcion_con_iva}" required>
+                    <input class="form-control" type="number" id="inscripcion_input" readonly="" name="inscripcion" value="${plan.monto_inscripcion_con_iva.toFixed(2)}" required>
                 </div>
             </div>
         </div>`;
@@ -246,11 +241,15 @@ function cotizar() {
         console.log(err);
     })
 }
+$("#descuento_input").change(function(){
+    cotizar();
+    
+
+});
 $("#monto").change(function(){
     cotizar();
 });
 $("#plan_cliente").change(function(){
-    alert('cambiar');
     cotizar();
 });
 

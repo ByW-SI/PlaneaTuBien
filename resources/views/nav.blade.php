@@ -265,7 +265,7 @@
 					<i class="fas fa-layer-group"></i><strong> Pagos</strong>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('historial-pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+					<a class="dropdown-item" href="{{ route('pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 				</div>
 			</li>
 		</ul>

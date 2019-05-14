@@ -78,6 +78,13 @@ class Cotizacion extends Model
         Mail::to($email)->send(new CotizacionEnviada($cotizacion,$pdf));
     }
 
+    public function getInscripcionTotalAttribute()
+    {
+        $monto_inscripcion_con_iva = $this->plan->monto_inscripcion_con_iva($this->monto);
+        $inscripcion_total = $monto_inscripcion_con_iva-($monto_inscripcion_con_iva*($this->descuento/100));
+        return $inscripcion_total;
+    }
+
      public function task_send_mail()
     {
         return $this->hasOne('App\TaskSendMail','cotizacion_id','id');
@@ -90,7 +97,7 @@ class Cotizacion extends Model
                 $total_pagos += $pago->total;
             }
         }
-        $inscripcion = $this->plan->monto_inscripcion_con_iva($this->monto);
+        $inscripcion = $this->inscripcion_total;
         $resta= $inscripcion - $total_pagos;
         return $resta;
     }

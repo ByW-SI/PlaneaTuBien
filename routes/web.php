@@ -31,6 +31,8 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/password/reset','Auth\ClienteForgotPasswordController@showLinkRequestForm')->name('cliente.password.request');
 	Route::post('/password/reset','Auth\ClienteResetPasswordController@reset');
 	Route::get('/password/reset/{token}','Auth\ClienteResetPasswordController@showResetForm')->name('cliente.password.reset');
+	Route::get('/corrida_financiera','Cliente\PlanController@corrida')->name('corrida_financiera');
+	Route::get('/pagar','Cliente\PlanController@pagar')->name('pagar');
 	//Route::resource('cotizacions','Cliente\CotizacionController');
 
 });
@@ -181,4 +183,4 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PAGOS
-Route::resource('historial-pagos', 'Pagos\PagosController');
+Route::resource('pagos', 'Pagos\PagosController',['only'=>['index','show']]);
