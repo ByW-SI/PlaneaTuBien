@@ -175,7 +175,7 @@
 			$("#cuota_periodica").empty();
 			$("#cuota_periodica").append($("<option>").attr("value",0.00).text(0.00))
 			$.ajax({
-				url: "{{ url('api/inscripcion') }}/"+monto+"/{{$cotizacion->plan->id}}",
+				url: "{{ url('api/inscripcion') }}/"+monto+"/{{$cotizacion->plan->id}}/{{$cotizacion->descuento}}",
 				method: "GET",
 				success:function(result){
 					if(result.recibo){

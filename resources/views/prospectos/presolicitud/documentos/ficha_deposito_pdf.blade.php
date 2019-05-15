@@ -92,7 +92,7 @@
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$recibo->clave.$recibo->numero_contrato}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">1 de {{ $corrida_integrante['meses']}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['aportacion'],2)}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['cuota_administracion'],2)}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['iva'],2)}}</p>

@@ -65,14 +65,14 @@ class PresolicitudBeneficiarioController extends Controller
         }
         else{
             $this->validate($request,$rules);
-            for ($i = 0; $i <=3 ; $i++) {
+            foreach ($request->paterno as $key=>$paterno) {
                 $beneficiario = new Beneficiario([
-                    'paterno'=>$request->paterno[$i],
-                    'materno'=>$request->materno[$i],
-                    'nombre'=>$request->nombre[$i],
-                    'edad'=>$request->edad[$i],
-                    'parentesco'=>$request->parentesco[$i],
-                    'porcentaje'=>$request->porcentaje[$i]
+                    'paterno'=>$request->paterno[$key],
+                    'materno'=>$request->materno[$key],
+                    'nombre'=>$request->nombre[$key],
+                    'edad'=>$request->edad[$key],
+                    'parentesco'=>$request->parentesco[$key],
+                    'porcentaje'=>$request->porcentaje[$key]
                 ]);
                 $presolicitud->beneficiarios()->save($beneficiario);
             }

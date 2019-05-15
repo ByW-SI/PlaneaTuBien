@@ -54,8 +54,8 @@ class DocumentosController extends Controller
         $primera_cuota_periodica_total = $aportacion_periodica+$cuota_administracion+$iva_cuota_admon+$seguro_vida;
         $suma_incripcion_y_cuota = $cuota_inscripcion+$iva_inscripcion+$primera_cuota_periodica_total;
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.contrato_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'plan'=>$plan,'recibo'=>$recibo,'monto'=>$monto,'cuota_inscripcion'=>$cuota_inscripcion,'iva_inscripcion'=>$iva_inscripcion,'aportacion_periodica'=>$aportacion_periodica,'cuota_administracion'=>$cuota_administracion,'iva_cuota_admon'=>$iva_cuota_admon,'seguro_vida'=>$seguro_vida,'primera_cuota_periodica_total'=>$primera_cuota_periodica_total,'suma_incripcion_y_cuota'=>$suma_incripcion_y_cuota]);
-        return $pdf->stream();
-        // return $pdf->download('contrato'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        // return $pdf->stream();
+        return $pdf->download('contrato'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
     } 
 
     public function cartaBienvenida(Prospecto $prospecto, Presolicitud $presolicitud,Recibo $recibo){
@@ -75,7 +75,7 @@ class DocumentosController extends Controller
         $corrida_integrante = $plan->corrida_meses_fijos($contrato->monto)['integrante'];
         // dd($corrida_integrante);
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.ficha_deposito_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato,'recibo'=>$recibo,'plan'=>$plan,'corrida_integrante'=>$corrida_integrante]);
-        return $pdf->stream();
+        // return $pdf->stream();
         return $pdf->download('ficha_deposito'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
         
     }
@@ -119,8 +119,8 @@ class DocumentosController extends Controller
         }
 
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_tanda_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'plan'=>$plan,'recibo'=>$recibo,'cotizacion'=>$cotizacion,"puntos"=>$puntos]);
-        return $pdf->stream();
-        // return $pdf->download('anexo_tanda'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        // return $pdf->stream();
+        return $pdf->download('anexo_tanda'.$plan->nombre.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
         
     }
     public function anexoTandaClasica(Prospecto $prospecto, Presolicitud $presolicitud,Recibo $recibo)
@@ -157,7 +157,7 @@ class DocumentosController extends Controller
                 break;
         }
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_tanda_clasica_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'plan'=>$plan,'recibo'=>$recibo,'cotizacion'=>$cotizacion,"puntos"=>$puntos]);
-        return $pdf->stream();
+        return $pdf->download('anexo_tanda_clasica'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
     }
     public function anexoInscripcionDiferida(Prospecto $prospecto, Presolicitud $presolicitud,Recibo $recibo)
     {
@@ -208,7 +208,7 @@ class DocumentosController extends Controller
         ];
         $mes = $meses[(int)date('m')];
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_inscripcion_diferida_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'plan'=>$plan,'recibo'=>$recibo,'cotizacion'=>$cotizacion,"puntos"=>$puntos,'mes'=>$mes]);
-        return $pdf->stream();
+        return $pdf->download('anexo_inscripcion_diferida'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
 
     }
  

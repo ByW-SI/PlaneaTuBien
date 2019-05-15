@@ -125,7 +125,7 @@ class ChecklistFolderController extends Controller
         $presolicitud = $recibo->presolicitud;
         $checklist = $recibo->checklist;
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.checklist',['presolicitud'=>$presolicitud,'recibo'=>$recibo,'checklist'=>$checklist]);
-        return $pdf->stream();
+        // return $pdf->stream();
         return $pdf->download('recibo'.$recibo->clave.$recibo->id.$presolicitud->nombre.$presolicitud->paterno.$presolicitud->materno."checklist.pdf");
     }
 

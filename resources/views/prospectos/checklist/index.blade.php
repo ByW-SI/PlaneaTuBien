@@ -122,9 +122,9 @@
 		</div>
 		<div class="card-footer">
 			<div class="d-flex justify-content-center">
-				<a class="btn btn-success mr-3" href="{{ route('recibos.checklist.create',['presolicitud'=>$presolicitud]) }}"><i class="fas fa-save"></i> Subir/Actualizar Checklist</a>
+				<a class="btn btn-success mr-3" href="{{ route('recibos.checklist.create',['recibo'=>$recibo]) }}"><i class="fas fa-save"></i> Subir/Actualizar Checklist</a>
 				@if ($recibo->checklist->status)
-					<a class="btn btn-success mr-3" href="{{ route('recibos.checklist.show',['presolicitud'=>$presolicitud,'checklist'=>$recibo->checklist]) }}"><i class="fas fa-save"></i> Descargar Checklist</a>
+					<a class="btn btn-success mr-3" href="{{ route('recibos.checklist.show',['recibo'=>$recibo,'checklist'=>$recibo->checklist]) }}"><i class="fas fa-save"></i> Descargar Checklist</a>
 				@endif
 
 			</div>

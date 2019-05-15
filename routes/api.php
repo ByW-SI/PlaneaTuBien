@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('planes/{p_ahorrado}','Plan\PlanController@getPlanes');
 Route::get('cotizar/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@calcular');
-Route::get('inscripcion/{monto}/{plan_id}','Plan\CotizadorController@inscripcion');
+Route::get('inscripcion/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@inscripcion');

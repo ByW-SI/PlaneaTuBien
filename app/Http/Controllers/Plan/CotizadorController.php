@@ -51,9 +51,9 @@ class CotizadorController extends Controller
         $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*($descuento/100));
         return response()->json(['plan'=>$plan],200);
     }
-    public function inscripcion($monto,$plan_id){
+    public function inscripcion($monto,$plan_id,$descuento=0){
         $plan = Plan::find($plan_id);
-        $cuota_inscripcion = $monto*($plan->inscripcion/100);
+        $cuota_inscripcion = $monto*($plan->inscripcion/100)-($monto*($plan->inscripcion/100)*($descuento/100));
         $iva_inscripcion= $cuota_inscripcion*0.16;
         $aportacion_periodica = $monto/$plan->plazo;
         $cuota_administracion = $monto*($plan->cuota_admon/100);
