@@ -921,14 +921,14 @@
 			<div class="row" style="margin-left: 6px; margin-right: 6px">
 				<div class="twelve columns">
 					<div class="one-half column u-pull-left">
-						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 25px; text-align: center">
-							{{$recibo->contrato->numero_contrato}}
+						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 15px; text-align: center">
+							<label style="font-size: 10px; text-align: center;"><strong>{{$recibo->contrato->numero_contrato}}</strong></label>
 						</div>
-						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 25px"></div>
+						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 15px"></div>
 					</div>
 					<div class="one-half column u-pull-right">
-						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 25px"></div>
-						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 25px"></div>
+						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 15px"></div>
+						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 15px"></div>
 					</div>
 				</div>
 			</div>
@@ -936,7 +936,7 @@
 				<div class="twelve columns">
 					<div class="one-half column u-pull-left">
 						<div class="one-half column u-pull-left" style=" text-align: center; font-size: 8px;">
-							<label style="font-size:10px">NO. DE CONTRATO</label>
+							<label>NO. DE CONTRATO</label>
 						</div>
 						<div class="one-half column u-pull-right" style=" text-align: center; font-size: 8px;">
 							<label>NOMBRE Y FIRMA DEL ASESOR</label>

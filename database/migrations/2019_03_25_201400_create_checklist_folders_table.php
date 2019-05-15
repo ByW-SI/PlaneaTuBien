@@ -15,8 +15,8 @@ class CreateChecklistFoldersTable extends Migration
     {
         Schema::create('checklist_folders', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('presolicitud_id');
-            $table->foreign('presolicitud_id')->references('id')->on('presolicituds');
+            $table->unsignedInteger('recibo_id');
+            $table->foreign('recibo_id')->references('id')->on('recibos');
             $table->string('ficha_deposito_path')->nullable();
             $table->string('perfil_path')->nullable();
             $table->string('presolicitud_path')->nullable();

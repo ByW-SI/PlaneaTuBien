@@ -29,7 +29,6 @@
 						<th class="text-center" scope="col">Monto total a pagar</th>
 						<th class="text-center" scope="col">Folio de cotización</th>
 						<th class="text-center" scope="col">Estado del pago</th>
-						<th class="text-center" scope="col">Acción</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,7 +42,7 @@
 								<td class="text-center">${{number_format($pago->total,2)}}</td>
 								<td class="text-center">{{$pago->referencia}}</td>
 								<td class="text-center">{{ucwords($pago->status)}}</td>
-								<td class="text-center">
+								{{-- <td class="text-center">
 									<div class="d-flex justify-content-around">
 										@if ($pago->status == "registrado" )
 											<form method="POST" id="estatus{{$pago->id}}" class="{{$pago->status != 'registrado' ? 'd-none' : ''}}"  action="{{ route('prospectos.cotizacions.pagos.update_status',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) }}">
@@ -59,7 +58,7 @@
 										<a href="#" class="btn btn-info">Ver pago</a>
 										<a href="#" class="btn btn-warning">Editar pago</a>
 									</div>
-								</td>
+								</td> --}}
 							</tr>
 						@empty
 							<div class="alert alert-danger" role="alert">
@@ -68,7 +67,7 @@
 						@endforelse
 						<tr>
 							<th colspan="4" class="text-center">Inscripción Total</th>
-							<th class="text-center">${{number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2)}}</th>
+							<th class="text-center">${{number_format($cotizacion->inscripcion_total,2)}}</th>
 						</tr>
 						@if ($cotizacion->inscripcionFaltante() >= 0)
 							<tr>

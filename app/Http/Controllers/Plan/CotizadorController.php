@@ -31,34 +31,41 @@ class CotizadorController extends Controller
 
     }
 
-    public function calcular($monto,$plan_id)
-    {
+    public function calcular($monto,$plan_id,$descuento=0)
+    {   
         $plan = Plan::find($plan_id);
         $plan->anual_total = $plan->anual_total;
         $plan->apor_extr = $plan->apor_extr;
-        $plan->monto_financiar = $plan->monto_financiar($monto);
-        $plan->monto_adjudicar = $plan->monto_adjudicar($monto);
-        $plan->monto_aportacion_1 = $plan->monto_aportacion_1($monto);
-        $plan->monto_aportacion_2 = $plan->monto_aportacion_2($monto);
-        $plan->monto_aportacion_3 =$plan->monto_aportacion_3($monto);
-        $plan->monto_aportacion_liquidacion = $plan->monto_aportacion_liquidacion($monto);
-        $plan->monto_aportacion_anual = $plan->monto_aportacion_anual($monto);
-        $plan->monto_aportacion_semestral = $plan->monto_aportacion_semestral($monto);
-        $plan->cotizador = $plan->cotizador($monto);
-        $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
+        $plan->monto_financiar = number_format($plan->monto_financiar($monto),2);
+        $plan->monto_adjudicar = number_format($plan->monto_adjudicar($monto),2);
+        $plan->monto_aportacion_1 = number_format($plan->monto_aportacion_1($monto),2);
+        $plan->monto_aportacion_2 = number_format($plan->monto_aportacion_2($monto),2);
+        $plan->monto_aportacion_3 = number_format($plan->monto_aportacion_3($monto),2);
+        $plan->monto_aportacion_liquidacion = number_format($plan->monto_aportacion_liquidacion($monto),2);
+        $plan->monto_aportacion_anual = number_format($plan->monto_aportacion_anual($monto),2);
+        $plan->monto_aportacion_semestral = number_format($plan->monto_aportacion_semestral($monto),2);
+        $plan->mes_aportacion_adjudicado = $plan->mes_aportacion_adjudicado;
+        $plan->cuota_periodica_integrante = number_format($plan->cotizador($monto)['cuota_periodica_integrante'],2);
+        $plan->monto_total = number_format($plan->monto_total_pagar($monto),2);
+        $plan->sobrecosto_anual = $plan->sobrecosto_anual($monto);
+        $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*($descuento/100));
         return response()->json(['plan'=>$plan],200);
     }
-    public function inscripcion($monto,$plan_id){
+    public function inscripcion($monto,$plan_id,$descuento=0){
         $plan = Plan::find($plan_id);
-        $inscripcion_inicial = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*0.16);
-        $iva = $plan->monto_inscripcion_con_iva($monto)*0.16;
-        $monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto);
-        $cuota_periodica = $plan->cotizador($monto)['cuota_periodica_integrante'];
+        $cuota_inscripcion = $monto*($plan->inscripcion/100)-($monto*($plan->inscripcion/100)*($descuento/100));
+        $iva_inscripcion= $cuota_inscripcion*0.16;
+        $aportacion_periodica = $monto/$plan->plazo;
+        $cuota_administracion = $monto*($plan->cuota_admon/100);
+        $iva_cuota_admon = $cuota_administracion*0.16;
+        $seguro_vida = $monto*($plan->s_v/100);
+        $primera_cuota_periodica_total = $aportacion_periodica+$cuota_administracion+$iva_cuota_admon+$seguro_vida;
+        $suma_incripcion_y_cuota = $cuota_inscripcion+$iva_inscripcion+$primera_cuota_periodica_total;
         $recibo = [
-            'inscripcion_inicial' => $inscripcion_inicial,
-            'iva' => $iva,
-            'monto_inscripcion_con_iva' => $monto_inscripcion_con_iva,
-            'cuota_periodica' => $cuota_periodica
+            'inscripcion_inicial' => $cuota_inscripcion,
+            'iva' => $iva_inscripcion,
+            'monto_inscripcion_con_iva' => $cuota_inscripcion+$iva_inscripcion,
+            'cuota_periodica' => $primera_cuota_periodica_total
         ];
         return response()->json(['recibo'=>$recibo],201);
     }

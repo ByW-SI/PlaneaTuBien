@@ -113,10 +113,14 @@ $("#ahorro_cliente").change(function(){
 });
 function cotizar() {
     // body...
-    $("#cotizador").empty();
+    var descuento =$("#descuento_input").val();
+    if (descuento == "") {
+        descuento = 0;
+    }
     var monto =$("#monto").val();
     var plan_id = $("#plan_cliente").val();
-    axios.get(`../../../../../api/cotizar/${monto}/${plan_id}`).then(res=>{
+    $("#cotizador").empty();
+    axios.get(`../../../../../api/cotizar/${monto}/${plan_id}/${descuento}`).then(res=>{
         var plan = res.data.plan;
         var html = `
         <div class="row">
@@ -131,7 +135,7 @@ function cotizar() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.monto_adjudicar.toFixed(2)}" readonly="">
+                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.monto_adjudicar}" readonly="">
                 </div>
             </div>
             <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -144,12 +148,12 @@ function cotizar() {
                 </div>
             </div>
             <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="monto">${plan.mes_adjudicado} mensualidades de</label>
+                <label for="monto">${plan.mes_aportacion_adjudicado} mensualidades de</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.cotizador.cuota_periodica_integrante.toFixed(2)}" readonly="">
+                    <input class="form-control" type="text" id="monto_adjudicar" value="${plan.cuota_periodica_integrante}" readonly="">
                 </div>
             </div>
         </div>
@@ -167,68 +171,68 @@ function cotizar() {
                     <tr>
                         <td class="text-center">1</td>
                         <td class="text-center">${plan.aportacion_1}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_1.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_1}</td>
                         <td class="text-center">#${plan.mes_1}</td>
                     </tr>
                     <tr>
                         <td class="text-center">2</td>
                         <td class="text-center">${plan.aportacion_2}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_2.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_2}</td>
                         <td class="text-center">#${plan.mes_2}</td>
                     </tr>
                     <tr>
                         <td class="text-center">3</td>
                         <td class="text-center">${plan.aportacion_3}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_3.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_3}</td>
                         <td class="text-center">#${plan.mes_3}</td>
                     </tr>
                     <tr>
                         <td class="text-center">Liquidación</td>
                         <td class="text-center">${plan.aportacion_liquidacion}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_liquidacion.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_liquidacion}</td>
                         <td class="text-center">#${plan.mes_liquidacion}</td>
                     </tr>
                     <tr>
                         <td class="text-center">Anual</td>
                         <td class="text-center">${plan.anual}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_anual.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_anual}</td>
                         <td class="text-center">Cada Diciembre</td>
                     </tr>
                     <tr>
                         <td class="text-center">Semestral</td>
                         <td class="text-center">${plan.semestral}%</td>
-                        <td class="text-center">$${plan.monto_aportacion_semestral.toFixed(2)}</td>
+                        <td class="text-center">$${plan.monto_aportacion_semestral}</td>
                         <td class="text-center">Cada Junio y Diciembre</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="row">
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="monto">Total de Aportación</label>
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
+                <label for="monto">Monto total que pagarás</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" value="${plan.cotizador.total_aportacion.toFixed(2)}" readonly="">
+                    <input class="form-control" type="text" value="${plan.monto_total}" readonly="">
                 </div>
             </div>
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Costo anual de </label>
                 <div class="input-group mb-3">
-                    <input class="form-control" type="text" value="${plan.anual_total}" readonly="">
+                    <input class="form-control" type="text" value="${plan.sobrecosto_anual}" readonly="">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">%</span>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 form-group">
+            <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
                 <label for="monto">Inscripción </label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="text" value="${plan.monto_inscripcion_con_iva.toFixed(2)}" readonly="">
+                    <input class="form-control" type="number" id="inscripcion_input" readonly="" name="inscripcion" value="${plan.monto_inscripcion_con_iva.toFixed(2)}" required>
                 </div>
             </div>
         </div>`;
@@ -237,11 +241,15 @@ function cotizar() {
         console.log(err);
     })
 }
+$("#descuento_input").change(function(){
+    cotizar();
+    
+
+});
 $("#monto").change(function(){
     cotizar();
 });
 $("#plan_cliente").change(function(){
-    alert('cambiar');
     cotizar();
 });
 

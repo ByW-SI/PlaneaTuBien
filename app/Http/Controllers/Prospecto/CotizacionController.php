@@ -72,7 +72,8 @@ class CotizacionController extends Controller
 
     public function pdf(Prospecto $prospecto, Cotizacion $cotizacion) {
         $date = date('d-m-Y');
-        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion])->setPaper('a4', 'landscape');
+        return $pdf->stream();
         return $pdf->download('cotizacion' . $date . '.pdf');
     }
 

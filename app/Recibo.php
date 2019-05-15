@@ -8,6 +8,7 @@ class Recibo extends Model
 {
     //
     protected $fillable=[
+        'monto',
     	'sucursal',
 		'tipo_pago',
 		'tipo_tarjeta',
@@ -30,11 +31,15 @@ class Recibo extends Model
     ];
 
     public function presolicitud(){
-    	return $this->belongsTo('App\Presolicitud','id','presolicitud_id');
+    	return $this->belongsTo('App\Presolicitud','presolicitud_id');
     }
 
     public function contrato()
     {
         return $this->hasOne('App\Contrato');
+    }
+    public function checklist()
+    {
+        return $this->hasOne('App\ChecklistFolder');
     }
 }

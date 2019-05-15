@@ -90,16 +90,20 @@
 				</p>
 				<label class="center">
 					<strong>
-						{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
+						{{strtoupper($domiciliacion->emisor)}}
 					</strong>
 				</label>
 			</div>
 			<div class="one-third column u-pull-right" style="border-left: 1px solid black">
 				<p class="left">
-					Referencia
+					REFERENCIA
 
 				</p>
-				<br>
+				<label class="center">
+					<strong>
+						{{strtoupper($domiciliacion->referencia)}}
+					</strong>
+				</label>
 			</div>
 		</div>
 		<div class="row" style="border-top: 1px solid black">
@@ -117,14 +121,18 @@
 						<p class="left">
 							MONTO DEL RECIBO
 						</p>
-						<br>
+						<label class="center"><strong>
+							${{number_format($plan->cuota_periodica_integrante($recibo->monto),2)}}
+						</strong></label>
 					</div>
 				</div>
 				<div class="one-third column u-pull-right" style="border-left: 1px solid black">
 					<p class="left">
 						IVA DEL RECIBO
 					</p>
-					<br>
+					<label class="center"><strong>
+						$0.00
+					</strong></label>
 				</div>
 			</div>
 		</div>
@@ -133,7 +141,9 @@
 				<p class="left">
 					CLIENTE USUARIO TITULAR DE LA CUENTA BANCARIA (Nombre completo)
 				</p>	
-				<br>
+				<label class="center"><strong>
+					{{strtoupper($domiciliacion->titular)}}
+				</strong></label>
 			</div>
 		</div>
 		<div class="row" style="border-top: 1px solid black">
@@ -142,10 +152,17 @@
 					<p class="left">
 						BANCO RECEPTOR DONDE RECIDA LA CUENTA BANCARIA(Razón Social)
 					</p>
-
+					<label class="center"><strong>
+						{{strtoupper($domiciliacion->banco)}}
+					</strong></label>
 				</div>
 				<div class="one-half column u-pull-right" style=" margin-top: 2px;">
-					<img src="img/domiciliación_tarjeta.png">
+					<p class="left">
+						Numero de {{$domiciliacion->tipo}}
+					</p>
+					<label class="center"><strong>
+						{{strtoupper($domiciliacion->numero)}}
+					</strong></label>
 				</div>
 			</div>
 		</div>

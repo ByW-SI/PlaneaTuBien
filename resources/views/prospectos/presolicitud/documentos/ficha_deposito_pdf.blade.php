@@ -92,14 +92,14 @@
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$recibo->clave.$recibo->numero_contrato}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">1 de {{ $plan->plan_meses}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['aportacion'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['cuota_administracion'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['iva'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">$0.0</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['sv'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['sd'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida['corrida'][0]['total'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['aportacion'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['cuota_administracion'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['iva'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">$0.00</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sv'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sd'],2)}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['total'],2)}}</p>
 					</div>
 				</div>
 				<div class="one-third column u-pull-right">

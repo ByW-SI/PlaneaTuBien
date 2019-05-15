@@ -611,6 +611,24 @@
 				width:100%;
 				height: 100%;
 			}
+			.center{
+				text-align: center;
+			}
+			.left{
+				text-align: left;
+			}
+			.right{
+				text-align: right;
+			}
+			.justify{
+				text-align: justify;
+			}
+			.page-break {
+			    page-break-after: always;
+			}
+			li {
+			    list-style-type: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -640,19 +658,22 @@
 		                <div class="row">
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Monto a adjudicar:</label>
+		                    </div>
+		                    <div class="col-sm-4">
 		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['monto_adjudicar'],2) }}</dd>
 		                    </div>
-		                    <br>
 		                    <div class="col-sm-4">
 		                        <label class="control-label">Plazo:</label>
+		                    </div>
+	                        <div class="col-sm-4">
 		                        <dd>{{ $cotizacion->plan->plazo }} meses</dd>
 		                    </div>
-		                    <br>
 		                    <div class="col-sm-4">
-		                        <label class="control-label">{{ $cotizacion->plan->mes_adjudicado + 1 }} mensualidades de:</label>
+		                        <label class="control-label">{{ $cotizacion->plan->mes_aportacion_adjudicado }} mensualidades de:</label>
+		                    </div>
+		                    <div class="col-sm-4">
 		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2) }}</dd>
 		                    </div>
-		                    <br>
 		                </div>
 		                <div class="row">
 		                    <div class="col-sm-12">
@@ -705,28 +726,106 @@
 		                    </div>
 		                </div>
 		                <div class="row">
-		                    <div class="col-sm-4">
-		                        <label class="control-label">Total de aportaciones:</label>
-		                        <dd>${{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['total_aportacion'],2) }}</dd>
-		                    </div>
-		                    <br>
-		                    <div class="col-sm-4">
-		                        <label class="control-label">Costo anual de:</label>
-		                        <dd>{{ $cotizacion->plan->anual_total }}%</dd>
-		                    </div>
-		                    <br>
-		                    <div class="col-sm-4">
-		                        <label class="control-label">Inscripción:</label>
-		                        <dd>${{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}</dd>
+		                    <div class="col-sm-12">
+		                        <label class="control-label">El monto total que pagara el cliente es de ${{number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto),2)}} siendo un costo total anual de {{$cotizacion->plan->sobrecosto_anual($cotizacion->monto)}}%</label>
+		                        
 		                    </div>
 		                </div>
-		                @if ($cotizacion->promocion)
-								<h4>PROMOCION: {{$cotizacion->promocion->nombre}}</h4>
-								<p>Recibe el {{$cotizacion->promocion->tipo_monto == "porcentaje" ? $cotizacion->promocion->monto."%" : "$ ".$cotizacion->promocion->monto."MXN"}} en {{$cotizacion->promocion->tipo_promocion->nombre}}</p>
-								<p><small>valido de: {{$cotizacion->promocion->valido_inicio." a ".$cotizacion->promocion->valido_fin}}</small></p>
-								</div>
-							</div>
-		                @endif
+		                <div class="page-break"></div>
+		                <div class="row center">
+		                    <div class="col-sm-12">
+		                    	<ul>
+		                    		<li class="control-li"><strong>Requisitos:</strong></li>
+		                    		<li class="list-group-item">• Identificacion oficial</li>
+		                    		<li class="list-group-item">• Comprobante de domicilio</li>
+		                    		<li class="list-group-item">• RFC</li>
+		                    		<li class="list-group-item">• CURP</li>
+		                    		<li class="list-group-item">• Comprobante de ingresos ultimos 3 recibos de nomina ó los 3 ultimos estados bancarios</li>
+		                    		<li class="list-group-item">• 3 referencias personales</li>
+		                    		<li class="list-group-item">• Acta de matrimonio en caso de estar casado(a)</li>
+		                    		<li class="list-group-item">• Inscripcion 3%+IVA: ${{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}</li>
+		                    		@if ($cotizacion->promocion)
+											<li>PROMOCION {{$cotizacion->promocion->nombre}}: Recibe el {{$cotizacion->promocion->tipo_monto == "porcentaje" ? $cotizacion->promocion->monto."%" : "$ ".$cotizacion->promocion->monto."MXN"}} en {{$cotizacion->promocion->tipo_promocion->nombre}} <small>*valido de: {{$cotizacion->promocion->valido_inicio." a ".$cotizacion->promocion->valido_fin}}</small></li>
+					                @endif
+		                    	</ul>
+		                    </div>
+		                </div>
+		                <div class="row">
+		                	<div class="col-sm-12">
+		                        <table class="table table-stripped table-hover table-bordered">
+		                        	<thead>
+										<tr>
+											<th class="text-center" scope="col">Meses</th>
+											<th class="text-center" scope="col">Aportación</th>
+											<th class="text-center" scope="col">Cuota de Administración</th>
+											<th class="text-center" scope="col">IVA</th>
+											<th class="text-center" scope="col">Seguro de vida</th>
+											<th class="text-center" scope="col">Seguro de desastres</th>
+											<th class="text-center" scope="col">Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">
+												{{$cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['meses']}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['aportacion'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['cuota_administracion'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['iva'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['sv'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['sd'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['integrante']['total'],2)}}
+											</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												{{$cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['meses']}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['aportacion'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['cuota_administracion'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['iva'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['sv'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['sd'],2)}}
+											</td>
+											<td class="text-center">
+												{{number_format($cotizacion->plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['total'],2)}}
+											</td>
+										</tr>
+									</tbody>
+		                        </table>
+		                    </div>
+		                </div>
+		                <div class="row">
+		                	<label><small>*Esta cotización es solo para fines informativos y tiene una vigencia hasta el último día del mes.</small></label>
+		                </div>
+		                <div class="row">
+		                	<label>
+		                		<small>
+		                			**Esta información constituye un ejercicio numérico de acuerdo a una simulación de condiciones, por lo que el usuario queda enterado que la información que obtenga, no constituye, ni implica obligación alguna para Planea Tu Bien SA de CV
+		                		</small>
+		                	</label>
+		                </div>
+		                
 					</div>
 				</div>
 			</div>

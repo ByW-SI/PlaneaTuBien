@@ -37,19 +37,14 @@
 		.justify{
 			text-align: justify;
 		}
+		.page-break {
+		    page-break-after: always;
+		}
 	</style>
 	<title>Anexo Tanda</title>
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
-				</div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
 		</div>
@@ -99,7 +94,7 @@
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$plan->plazo}} meses</strong></p>
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$plan->plan_meses}} meses</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black; margin-top:15px;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black; margin-top:15px;"><strong>${{number_format($plan->monto_adjudicar($recibo->contrato->monto),2)}}</strong></p>
 					</div>
 				</div>
 			</div>
@@ -117,38 +112,38 @@
 								</tr>
 								<tr>
 									<td>1</td>
-									<td>{{$plan->aportacion_1}}</td>
-									<td>{{number_format($plan->monto_aportacion_1($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->aportacion_1}}%</td>
+									<td>${{number_format($plan->monto_aportacion_1($recibo->contrato->monto),2)}}</td>
 									<td>{{$plan->mes_1}}</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>{{$plan->aportacion_2}}</td>
-									<td>{{number_format($plan->monto_aportacion_2($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->aportacion_2}}%</td>
+									<td>${{number_format($plan->monto_aportacion_2($recibo->contrato->monto),2)}}</td>
 									<td>{{$plan->mes_2}}</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>{{$plan->aportacion_3}}</td>
-									<td>{{number_format($plan->monto_aportacion_3($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->aportacion_3}}%</td>
+									<td>${{number_format($plan->monto_aportacion_3($recibo->contrato->monto),2)}}</td>
 									<td>{{$plan->mes_3}}</td>
 								</tr>
 								<tr>
 									<td>Liquidación</td>
-									<td>{{$plan->aportacion_liquidacion}}</td>
-									<td>{{number_format($plan->monto_aportacion_liquidacion($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->aportacion_liquidacion}}%</td>
+									<td>${{number_format($plan->monto_aportacion_liquidacion($recibo->contrato->monto),2)}}</td>
 									<td>{{$plan->mes_liquidacion}}</td>
 								</tr>
 								<tr>
 									<td>Anual</td>
-									<td>{{$plan->aportacion_anual}}</td>
+									<td>{{$plan->anual}}%</td>
 									<td>{{number_format($plan->monto_aportacion_anual($recibo->contrato->monto),2)}}</td>
 									<td>Cada Diciembre</td>
 								</tr>
 								@if ($plan->semestral !=0.00)
 									<td>Semestral</td>
-									<td>{{$plan->aportacion_semestral}}</td>
-									<td>{{number_format($plan->monto_aportacion_semestral($recibo->contrato->monto),2)}}</td>
+									<td>{{$plan->semestral}}%</td>
+									<td>${{number_format($plan->monto_aportacion_semestral($recibo->contrato->monto),2)}}</td>
 									<td>Cada Junio y Diciembre</td>
 								@endif
 							</tbody>

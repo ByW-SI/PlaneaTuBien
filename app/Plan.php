@@ -130,6 +130,7 @@ class Plan extends Model
         $total_aportacion_en_mensualidades= 0.00;
         $total_cuota_administracion=0.00;
         $bandera_s_d = false;
+        $salto = false;
         for ($i = 1; $i <= $this->plazo; $i++) {
             if(date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12")
             {
@@ -139,12 +140,11 @@ class Plan extends Model
                 $seguro_vida_mes = $seguro_vida_mes*1.03;
             }
             // if($this->plan_meses+1<$i){
-            if($this->mes_adjudicado<$i){
+            if($this->mes_adjudicado-1<$i){
 
                 // $seguro_desempleo = $monto_adjudicar*($this->s_d/100);
                 // if($bandera_s_d && (date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12"))
-                if(date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12")
-                {
+                if (date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12") {
                     $seguro_desempleo = $seguro_desempleo*1.03;
                 }
                 // $bandera_s_d = true;
@@ -177,23 +177,47 @@ class Plan extends Model
         }
         $aportacion_integrante= 0.00;
         $cuota_periodica_integrante = 0.00;
+        $cuota_administracion_integrante = 0.00;
+        $iva_integrante=0.00;
+        $sv_integrante=0.00;
+        $sd_integrante=0.00;
         for ($i = 0 ; $i <  $this->plan_meses; $i++) {
             // var_dump($i);
             $aportacion_integrante += $corrida[$i]['aportacion'];
+            $cuota_administracion_integrante += $corrida[$i]['cuota_administracion'];
+            $iva_integrante += $corrida[$i]['iva'];
+            $sv_integrante += $corrida[$i]['sv'];
+            $sd_integrante += $corrida[$i]['sd'];
             $cuota_periodica_integrante += $corrida[$i]['total'];
         }
         $aportacion_integrante = $aportacion_integrante/$this->plan_meses;
+        $cuota_administracion_integrante = $cuota_administracion_integrante/$this->plan_meses;
+        $iva_integrante = $iva_integrante/$this->plan_meses;
+        $sv_integrante = $sv_integrante/$this->plan_meses;
+        $sd_integrante = $sd_integrante/$this->plan_meses;
         $cuota_periodica_integrante = $cuota_periodica_integrante/$this->plan_meses;
         $aportacion_adjudicado = 0.00;
         $cuota_periodica_adjudicado = 0.00;
+        $cuota_administracion_adjudicado = 0.00;
+        $iva_adjudicado=0.00;
+        $sv_adjudicado=0.00;
+        $sd_adjudicado=0.00;
         // var_dump('adjudicado');
         for($i= $this->plan_meses; $i< $this->plazo;$i++){
             $aportacion_adjudicado += $corrida[$i]['aportacion'];
+            $cuota_administracion_adjudicado += $corrida[$i]['cuota_administracion'];
+            $iva_adjudicado += $corrida[$i]['iva'];
+            $sv_adjudicado += $corrida[$i]['sv'];
+            $sd_adjudicado += $corrida[$i]['sd'];
             $cuota_periodica_adjudicado += $corrida[$i]['total'];
             // var_dump($i);
         }
         // dd($cuota_periodica_adjudicado);
         $aportacion_adjudicado = $aportacion_adjudicado/($this->plazo-$this->plan_meses);
+        $cuota_administracion_adjudicado=$cuota_administracion_adjudicado/($this->plazo-$this->plan_meses);
+        $iva_adjudicado=$iva_adjudicado/($this->plazo-$this->plan_meses);
+        $sv_adjudicado=$sv_adjudicado/($this->plazo-$this->plan_meses);
+        $sd_adjudicado=$sd_adjudicado/($this->plazo-$this->plan_meses);
         $cuota_periodica_adjudicado = $cuota_periodica_adjudicado/($this->plazo-$this->plan_meses);
         $total_aportaciones_en_extraordin= $monto_adjudicar*($aportaciones_extraordinarias/100);
         $total_aportacion = $total_aportacion_en_mensualidades+$total_aportaciones_en_extraordin;
@@ -202,8 +226,19 @@ class Plan extends Model
             'monto_financiar'=>$monto_financiar,
             'anual_total'=>$anual_total,
             'monto_adjudicar'=>$monto_adjudicar,
+            // Integrantes
             'aportacion_integrante'=>$aportacion_integrante,
+            'cuota_administracion_integrante'=>$cuota_administracion_integrante,
+            'iva_integrante'=>$iva_integrante,
+            'sv_integrante'=>$sv_integrante,
+            'sd_integrante'=>$sd_integrante,
+            // adjudicado
             'aportacion_adjudicado'=>$aportacion_adjudicado,
+            'cuota_administracion_adjudicado'=>$cuota_administracion_adjudicado,
+            'iva_adjudicado'=>$iva_adjudicado,
+            'sv_adjudicado'=>$sv_adjudicado,
+            'sd_adjudicado'=>$sd_adjudicado,
+
             'cuota_periodica_integrante'=>$cuota_periodica_integrante,
             'cuota_periodica_adjudicado'=>$cuota_periodica_adjudicado,
             'total_aportacion_en_mensualidades'=>$total_aportacion_en_mensualidades,
@@ -220,6 +255,148 @@ class Plan extends Model
         ];
         
     }
+
+    public function aportaciones_extraordinarias($monto)
+    {
+        return $this->cotizador($monto)['aportaciones_extraordinarias'];
+    }
+    public function anual_total($monto)
+    {
+        return $this->cotizador($monto)['anual_total'];
+    }
+    public function aportacion_integrante($monto)
+    {
+        return $this->cotizador($monto)['aportacion_integrante'];
+    }
+    public function aportacion_adjudicado($monto)
+    {
+        return $this->cotizador($monto)['aportacion_adjudicado'];
+    }
+    public function cuota_periodica_integrante($monto)
+    {
+        return $this->cotizador($monto)['cuota_periodica_integrante'];
+    }
+    public function cuota_periodica_adjudicado($monto)
+    {
+        return $this->cotizador($monto)['cuota_periodica_adjudicado'];
+    }
+    public function total_aportacion_en_mensualidades($monto)
+    {
+        return $this->cotizador($monto)['total_aportacion_en_mensualidades'];
+    }
+    
+    public function total_aportaciones_en_extraordin($monto)
+    {
+        return $this->cotizador($monto)['total_aportaciones_en_extraordin'];
+    }
+    public function total_aportacion($monto)
+    {
+        return $this->cotizador($monto)['total_aportacion'];
+    }
+    public function total_cuota_administracion($monto)
+    {
+        return $this->cotizador($monto)['total_cuota_administracion'];
+    }
+    public function corrida($monto)
+    {
+        return $this->cotizador($monto)['corrida'];
+    }
+    public function aportacion_mes($monto)
+    {
+        return $this->cotizador($monto)['aportacion_mes'];
+    }
+    public function cuota_admon_mes($monto)
+    {
+        return $this->cotizador($monto)['cuota_admon_mes'];
+    }
+    public function cuota_admon_mes_iva($monto)
+    {
+        return $this->cotizador($monto)['cuota_admon_mes_iva'];
+    }
+    public function seguro_vida_mes($monto)
+    {
+        return $this->cotizador($monto)['seguro_vida_mes'];
+    }
+    public function seguro_desastres($monto)
+    {
+        return $this->cotizador($monto)['seguro_desastres'];
+    }
+
+    public function corrida_meses_fijos($monto){
+
+        $corrida = [
+            'integrante'=>[
+                'meses'=>$this->plan_meses,
+                'aportacion'=>$this->cotizador($monto)['aportacion_integrante'],
+                'cuota_administracion'=>$this->cotizador($monto)['cuota_administracion_integrante'],
+                'iva'=>$this->cotizador($monto)['iva_integrante'],
+                'sv'=>$this->cotizador($monto)['sv_integrante'],
+                'sd'=>$this->cotizador($monto)['sd_integrante'],
+                'total'=>$this->cotizador($monto)['cuota_periodica_integrante'],
+
+            ],
+            'adjudicado'=>[
+                'meses'=>$this->plazo-$this->plan_meses,
+                'aportacion'=>$this->cotizador($monto)['aportacion_adjudicado'],
+                'cuota_administracion'=>$this->cotizador($monto)['cuota_administracion_adjudicado'],
+                'iva'=>$this->cotizador($monto)['iva_adjudicado'],
+                'sv'=>$this->cotizador($monto)['sv_adjudicado'],
+                'sd'=>$this->cotizador($monto)['sd_adjudicado'],
+                'total'=>$this->cotizador($monto)['cuota_periodica_adjudicado'],
+            ]
+        ];
+        return $corrida;
+
+    }
+    public function monto_cuota_periodica_integrante($monto)
+    {
+        $cuota_periodica_integrante = $this->cuota_periodica_integrante($monto);
+        $meses_integrante = $this->mes_aportacion_adjudicado;
+        $monto_cuota_periodica_integrante =  $cuota_periodica_integrante*$meses_integrante;
+        return $monto_cuota_periodica_integrante;
+
+    }
+
+    public function monto_cuota_periodica_adjudicado($monto)
+    {
+        $cuota_periodica_adjudicado = $this->cuota_periodica_adjudicado($monto);
+        $meses_adjudicado = $this->plazo - $this->mes_aportacion_adjudicado;
+        $monto_cuota_periodica_adjudicado = $cuota_periodica_adjudicado*$meses_adjudicado;
+        return $monto_cuota_periodica_adjudicado;
+
+    }
+    public function monto_derecho_adjudicacion($monto)
+    {
+        $monto_adjudicar = $this->monto_adjudicar($monto);
+        $monto_derecho_adjudicacion = $monto_adjudicar*0.025*1.16;
+
+        return $monto_derecho_adjudicacion;
+    }
+
+    public function monto_total_pagar($monto)
+    {
+        $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto);
+        $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto);
+        $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto);
+        $monto_inscripcion_con_iva = $this->monto_inscripcion_con_iva($monto);
+        $monto_derecho_adjudicacion = $this->monto_derecho_adjudicacion($monto);
+        $monto_total_pagar = $monto_aportaciones_extraordinarias + $monto_cuota_periodica_integrante +$monto_cuota_periodica_adjudicado + $monto_inscripcion_con_iva + $monto_derecho_adjudicacion;
+        return $monto_total_pagar;
+    }
+
+    public function sobrecosto($monto)
+    {
+        $monto_total_pagar = $this->monto_total_pagar($monto);
+        $monto_adjudicar = $this->monto_adjudicar($monto);
+        $sobrecosto = round(($monto_total_pagar/$monto_adjudicar)-1,2)*100;
+        return $sobrecosto;
+    }
+    public function sobrecosto_anual($monto)
+    {
+        $sobrecosto_anual = $this->sobrecosto($monto)/10;
+        return $sobrecosto_anual;
+    }
+    
 
 
 

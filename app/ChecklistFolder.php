@@ -11,7 +11,7 @@ class ChecklistFolder extends Model
     use SoftDeletes;
 
     protected $fillable=[
-    	'presolicitud_id',
+    	'recibo_id',
     	'ficha_deposito_path',
 		'perfil_path',
 		'presolicitud_path',
@@ -38,8 +38,8 @@ class ChecklistFolder extends Model
     	'deleted_at'
     ];
 
-    public function presolicitud(){
-    	return !$this->belongsTo('App\Presolicitud','id','presolicitud_id');
+    public function recibo(){
+    	return $this->belongsTo('App\Recibo','id','recibo_id');
     }
 
     public function getStatusAttribute (){

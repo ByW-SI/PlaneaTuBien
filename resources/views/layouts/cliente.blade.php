@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -36,13 +35,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Ver Perfil</a>
+                            <a href="{{ route('cliente.dashboard') }}" class="nav-link text-white">Ver Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Mi corrida</a>
+                            <a href="{{ route('corrida_financiera') }}" class="nav-link text-white">Mi corrida</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white">Pagar mensualidad</a>
+                            <a href="{{ route('pagar') }}" class="nav-link text-white">Pagar mensualidad</a>
                         </li>
                     </ul>
 
@@ -86,4 +85,7 @@
         </div>
     </div>
 </body>
+<!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </html>

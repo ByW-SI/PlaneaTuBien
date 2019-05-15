@@ -31,4 +31,9 @@ class Contrato extends Model
     {
     	return $this->belongsTo('App\Recibo');
     }
+
+    public function domiciliacion()
+    {
+        return $this->hasOne('App\Domiciliacion');
+    }
 }

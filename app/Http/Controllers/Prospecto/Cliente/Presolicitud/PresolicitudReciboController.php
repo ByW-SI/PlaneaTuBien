@@ -241,6 +241,7 @@ class PresolicitudReciboController extends Controller
         foreach ($grupos as $grupo) {
             if($grupo->contratos > 0 && $grupo->activo == 1){
                 $rules=[
+                    'monto'=>"required|numeric",
                     'sucursal'=>"required|max:190",
                     'tipo_pago'=>"required|in:Tarjeta de crédito,Cheque",
                     'tipo_tarjeta'=>"required_if:tipo_pago,Tarjeta de crédito",
@@ -253,6 +254,7 @@ class PresolicitudReciboController extends Controller
                     'total'=>"required|numeric"
                 ];
                 $this->validate($request,$rules);
+                // dd($request->all());
                 $recibo = new Recibo($request->all());
                 $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
                 $recibo->numero_contrato = Recibo::get()->count()+1;

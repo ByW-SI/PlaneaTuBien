@@ -10,6 +10,11 @@
 			@else
 				
 			@endif
+			<a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Manual del consumidor</a>
+			<a href="{{ route('prospectos.presolicitud.consentimiento_seguro',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Consentimiento de Seguro</a>
+			<a href="{{ route('prospectos.presolicitud.aviso_privacidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Aviso de Privacidad</a>
+			<a href="{{ route('prospectos.presolicitud.carta_bienvenida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Carta de Bienvenida</a>
+			<a href="{{ route('prospectos.presolicitud.cuestionario_calidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Cuestionario de Calidad</a>
 		</div>
 		<table class="table table-bordered table-striped">
 			<thead>
@@ -36,26 +41,21 @@
 						<td>${{number_format($recibo->total,2)}}</td>
 						<td>
 							<div class="d-flex justify-content-center mb-3">
-								<a href="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm">
+								<a href="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">
 								Imprimir Presolicitud</a>
+								
+						      	<a href="{{ route('prospectos.presolicitud.recibos.contrato',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Contrato</a>
+						      	
+						      	<a href="{{ route('prospectos.presolicitud.recibos.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Declaración de Salud</a>
+						      	<a href="{{ route('recibos.checklist.index',['recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Checklist</a>
 							</div>
 							<div class="d-flex justify-content-center mb-3">
-								<a href="{{ route('prospectos.presolicitud.recibos.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Manual del consumidor</a>
-						      	<a href="{{ route('prospectos.presolicitud.recibos.contrato',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Contrato</a>
-						      	<a href="{{ route('prospectos.presolicitud.recibos.aviso_privacidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Aviso de Privacidad</a>
-						    </div>
-						    <div class="d-flex justify-content-center mb-3">
-						      	<a href="{{ route('prospectos.presolicitud.recibos.carta_bienvenida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Carta de Bienvenida</a>
-						      	<a href="{{ route('prospectos.presolicitud.recibos.consentimiento_seguro',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Consentimiento de Seguro</a>
-						      	<a href="{{ route('prospectos.presolicitud.recibos.cuestionario_calidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Cuestionario de Calidad</a>
-					      	</div>
-					      	<div class="d-flex justify-content-center mb-3">
-						      	<a href="{{ route('prospectos.presolicitud.recibos.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Declaración de Salud</a>
-						      	<a href="{{ route('prospectos.presolicitud.recibos.domiciliacion',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Formato de Domiciliación</a>
+						      	<a href="{{ route('recibos.domiciliacion.index',['recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Formato de Domiciliación</a>
 						      	<a href="{{ route('prospectos.presolicitud.recibos.ficha_deposito',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Ficha de Deposito</a>
-					      	</div>
-					      	<div class="d-flex justify-content-center mb-3">
+					      	
 					      		<a href="{{ route('prospectos.presolicitud.recibos.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan->nombre}}</a>
+					      		<a href="{{ route('prospectos.presolicitud.recibos.anexo_tanda_clasica',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Anexo Tanda Clasica</a>
+					      		<a href="{{ route('prospectos.presolicitud.recibos.anexo_inscripcion_diferida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Anexo Inscripcion Diferida</a>
 							</div>
 						</td>
 					</tr>
