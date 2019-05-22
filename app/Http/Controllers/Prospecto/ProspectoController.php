@@ -7,6 +7,7 @@ use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProspectoController extends Controller
 {
@@ -17,7 +18,31 @@ class ProspectoController extends Controller
      */
     public function index()
     {
-        $prospectos = Prospecto::get();
+        $empleado = Auth::user()->empleado;
+        
+        if ($empleado->id > 1 && $empleado->cargo == "Asesor") 
+            $prospectos = $empleado->prospectos;
+        elseif ($empleado->id > 1 && $empleado->cargo == "Supervisor") {
+            $prospectos = [];
+            foreach ($empleado->empleados as $asesores) {
+                foreach ($asesores->prospectos as $prospe) {
+                    $prospectos[] = $prospe;
+                }
+            }
+        }
+        elseif ($empleado->id > 1 && $empleado->cargo == "Gerente") {
+            $prospectos = [];
+            foreach ($empleado->empleados as $supervisores) {
+                foreach ($supervisores->empleados as $asesores) {
+                    foreach ($asesores->prospectos as $prospe) {
+                        $prospectos[] = $prospe;
+                    }
+                }
+            }
+        }
+        else
+            $prospectos = Prospecto::get();
+        
         return view('prospectos.index', ['prospectos' => $prospectos]);
     }
 

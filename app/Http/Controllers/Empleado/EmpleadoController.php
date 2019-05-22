@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Empleado;
 use App\Empleado;
 use App\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class EmpleadoController extends Controller
 {
     function __construct()
     {
-        $this->middleware('empleados:indice recursos humanos')->only('index');
+        $this->middleware('empleados:indice recursos humanos')->only(['index', 'indexAgentes']);
         $this->middleware('empleados:crear rh')->only(['create', 'store']);
         $this->middleware('empleados:editar rh')->only(['edit', 'update']);
         $this->middleware('empleados:ver rh')->only('show');
@@ -27,6 +28,36 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleados = Empleado::whereNotIn('id', [1])->get();
+        return view('empleado.index', ['empleados'=>$empleados]);
+    }
+
+    /**
+     * Display a listing of the Agentes.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexAgentes()
+    {
+        $empleados = Empleado::whereNotIn('id', [1]);
+        $user = Auth::user()->empleado;
+        switch ($user->tipo) {
+            case 'Supervisor':
+                $empleados = $user->empleados;
+                break;
+
+            case 'Gerente':
+                $empleados = [];
+                foreach ($user->empleados as $supervisores) {
+                    foreach ($supervisores as $asesor) {
+                        $empleados[] = $asesor;
+                    }
+                }
+                break;
+            
+            default:
+                $empleados = $empleados->where('cargo', "Asesor")->get();
+                break;
+        }
         return view('empleado.index', ['empleados'=>$empleados]);
     }
 

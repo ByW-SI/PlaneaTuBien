@@ -26,8 +26,8 @@ class CreateEmpleadosTable extends Migration
             $table->integer('sucursal_id')->unsigned()->nullable();
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->string('cargo')->nullable();
-            // $table->integer('id_jefe')->unsigned()->nullable();
-            // $table->foreign('id_jefe')->references('id')->on('empleados');
+            $table->integer('id_jefe')->unsigned()->nullable();
+            $table->foreign('id_jefe')->references('id')->on('empleados');
             $table->string('status')->nullable();
             $table->string('rfc')->nullable();
             $table->string('telefono')->nullable();

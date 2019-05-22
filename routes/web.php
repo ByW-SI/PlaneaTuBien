@@ -67,6 +67,7 @@ Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador');
 
 // AGENTES
 Route::resource('empleados','Empleado\EmpleadoController');
+Route::get('agentes','Empleado\EmpleadoController@indexAgentes')->name('agentes.index');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');

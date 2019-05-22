@@ -43,12 +43,12 @@
                     <th>Acciones</th>
                   </tr>  
                   @if(isset($empleados))
-                    @foreach($empleados as $empleado)
+                    @foreach($empleados as $empl)
                       <tr>
-                        <td>{{$empleado->id}} </td>
-                        <td>{{$empleado->nombre}}</td>
-                        <td>{{$empleado->cargo}}</td>
-                        <td>{{$empleado->sucursal}}</td>
+                        <td>{{$empl->id}} </td>
+                        <td>{{$empl->nombre}}</td>
+                        <td>{{$empl->cargo}}</td>
+                        <td>{{$empl->sucursal->nombre}}</td>
                         <td>
                           <button type="button" class="btn btn-warning">Editar</button>
                           <button type="button" class="btn btn-danger">Baja</button>

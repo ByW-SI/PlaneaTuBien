@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // PerfilsTableSeeder::class,
-            // ModulosTableSeeder::class,
-            // ComponentesTableSeeder::class,
-            // ComponentePerfilTableSeeder::class,
+            PerfilsTableSeeder::class,
+            ModulosTableSeeder::class,
+            ComponentesTableSeeder::class,
+            ComponentePerfilTableSeeder::class,
             EmpleadosTableSeeder::class,
             UsersTableSeeder::class
         ]);
