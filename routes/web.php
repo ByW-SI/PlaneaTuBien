@@ -61,6 +61,9 @@ Route::resource('plans','Plan\PlanController');
 // GRUPOS
 Route::resource('grupos','Grupo\GrupoController');
 
+// FACTOR DE ACTUALIZACIÓN
+Route::resource('factors','Plan\FactorActualizacionController',['except'=>['show','edit','create']]);
+
 // COTIZADOR
 Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador');
 

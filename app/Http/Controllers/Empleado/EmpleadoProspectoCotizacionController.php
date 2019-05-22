@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Promocion;
 use App\Prospecto;
 use App\Plan;
+use App\FactorActualizacion;
 use Illuminate\Http\Request;
 
 class EmpleadoProspectoCotizacionController extends Controller
@@ -61,6 +62,8 @@ class EmpleadoProspectoCotizacionController extends Controller
         $cotizacion->plan_id = $plan->id;
         $prospecto->cotizaciones()->save($cotizacion);
         $cotizacion->promocion()->associate($promocion);
+        $factor = FactorActualizacion::where('autorizar',1)->get()->last();
+        $cotizacion->factor_actualizacion = ($factor) ? $factor->porcentaje : 3 ;
 
         $cotizacion->save();
         return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
@@ -92,6 +95,7 @@ class EmpleadoProspectoCotizacionController extends Controller
     public function pdf(Empleado $empleado, Prospecto $prospecto, Cotizacion $cotizacion) {
         $date = date('d-m-Y');
         $pdf = PDF::loadView('empleado.prospecto.cotizacion.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        return $pdf->stream();
         return $pdf->download('cotizacion' . $date . '.pdf');
     }
 

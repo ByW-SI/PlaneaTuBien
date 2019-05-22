@@ -135,9 +135,9 @@
                         <tr>
                             <td>{{ $cotizacion->plan->nombre }}</td>
                             <td>${{ number_format($cotizacion->monto, 2) }}</td>
-                            <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto),2) }}</td>
-                            <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto)}}%</td>
-                            <td>{{$cotizacion->plan->mes_aportacion_adjudicado." meses de $".number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2)}}</td>
+                            <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}</td>
+                            <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}%</td>
+                            <td>{{$cotizacion->plan->mes_aportacion_adjudicado." meses de $".number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2)}}</td>
                             <td>${{number_format($cotizacion->inscripcion_total,2)}}</td>
                             <td class="text-center">
                                 @if ($cotizacion->elegir == 0)

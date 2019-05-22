@@ -55,9 +55,9 @@
 						</div>
 					</div>
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
-						<label for="mes_adjudicado">Mes en el que se completan adjudicacion</label>
+						<label for="mes_s_d">Seguro de desastres al mes</label>
 						<div class="input-group mb-3">
-							<input type="number" step="1" name="mes_completo_adjudicado" value="{{old("mes_adjudicado")}}" min="1" class="form-control" placeholder="¿En qué mes se completa su adjudicacion?" aria-label=" plan" aria-describedby="basic-addon2" required="">
+							<input type="number" step="1" name="mes_s_d" value="{{old("mes_s_d")}}" min="0" class="form-control" placeholder="Tiempo en que es integrante" aria-label=" plan" aria-describedby="basic-addon2">
 							<div class="input-group-append">
 								<span class="input-group-text " id="basic-addon2">Meses</span>
 							</div>
