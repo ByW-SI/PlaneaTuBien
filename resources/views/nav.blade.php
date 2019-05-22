@@ -85,7 +85,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+					<a class="dropdown-item" href="{{ route('agentes.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 				</div>
 			</li>
 

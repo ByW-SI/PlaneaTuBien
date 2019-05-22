@@ -6,6 +6,11 @@
             <div class="col-sm-4">
                 <h4>Datos del Agente:</h4>
             </div>
+            <div class="col-sm-4 text-center">
+                <a href="{{ route('empleados.index') }}" class="btn btn-primary">
+                    <i class="fa fa-book"></i><strong> Lista de Agentes</strong>
+                </a>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -51,17 +56,25 @@
                 <label class="control-label">Cargo:</label>
                 <input type="text" class="form-control" value="{{ $empleado->cargo }}" readonly="">
             </div>	
-           {{--  @if($empleado->tipo == 'Asesor')
+            @if($empleado->tipo == 'Asesor')
                 <div class="form-group col-4">
                     <label class="control-label">Supervisor:</label>
-                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
+                    @if(isset($empleado->jefe))
+                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }} {{ $empleado->jefe->paterno }} {{ $empleado->jefe->materno }}" readonly="">
+                    @else
+                    <h5 class="alert-danger">No tiene asignado un Supervisor</h5>
+                    @endif
                 </div>
             @elseif($empleado->tipo == 'Supervisor')
                 <div class="form-group col-4">
                     <label class="control-label">Gerente:</label>
-                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }}" readonly="">
+                    @if(isset($empleado->jefe))
+                    <input type="text" class="form-control" value="{{ $empleado->jefe->nombre }} {{ $empleado->jefe->paterno }} {{ $empleado->jefe->materno }}" readonly="">
+                    @else
+                    <h5 class="alert-danger p-2 rounded">No tiene asignado un Gerente</h5>
+                    @endif
                 </div>
-            @endif --}}
+            @endif
         </div>
         @yield('submodulos')
     </div>

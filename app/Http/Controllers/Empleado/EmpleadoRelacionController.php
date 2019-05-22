@@ -25,7 +25,21 @@ class EmpleadoRelacionController extends Controller
      */
     public function create(Empleado $empleado)
     {
-        return view('empleado.empleados.create',['empleado'=>$empleado]);
+        $empleados = Empleado::where('id', '!=', 1);
+        switch ($empleado->tipo) {
+            case 'Supervisor':
+                $empleados = $empleados->where('tipo', 'Asesor')->where('id_jefe', null)->get();
+                break;
+
+            case 'Gerente':
+                $empleados = $empleados->where('tipo', 'Supervisor')->where('id_jefe', null)->get();
+                break;            
+            
+            default:
+                # code...
+                break;
+        }
+        return view('empleado.empleados.create',['empleado'=>$empleado, 'empleados' => $empleados]);
     }
 
     /**
@@ -37,7 +51,8 @@ class EmpleadoRelacionController extends Controller
     public function store(Request $request, Empleado $empleado)
     {
         $empleado2 = Empleado::find($request->input('empleado'));
-        $empleado2->jefe()->save($empleado);
+        $empleado2->jefe()->associate($empleado);
+        $empleado2->save();
         return redirect()->route('empleados.relaciones.index',['empleado'=>$empleado]);
     }
 

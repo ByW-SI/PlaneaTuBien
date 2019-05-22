@@ -12,13 +12,12 @@
                 {{ csrf_field() }}
                 <div class="form-row mt-3">
                     <div class="col-6 offset-3">
-
                         <div class="input-group">
-                            <select class="custom-select" id="empleado" aria-label="Example select with button addon">
+                            <select class="custom-select" id="empleado" aria-label="Example select with button addon" name="empleado">
                                 <option selected>Agente...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($empleados as $emp)
+                                    <option value="{{ $emp->id }}">{{ $emp->nombre }} {{ $emp->paterno }} {{ $emp->materno }}</option>
+                                @endforeach
                             </select>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-outline-success" type="button">Agregar</button>

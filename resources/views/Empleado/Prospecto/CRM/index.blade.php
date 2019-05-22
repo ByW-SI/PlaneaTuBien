@@ -157,12 +157,14 @@
                                 {{$crm->hora_contacto}}
                             </td>
                             <td>
-                                <li>
-                                    <strong>Telefono: </strong>{{$crm->prospecto->tel}}
-                                </li>
-                                <li>
-                                    <strong>Movil: </strong>{{$crm->prospecto->movil}}
-                                </li>
+                                <ul>
+                                    <li>
+                                        <strong>Telefono: </strong>{{$crm->prospecto->tel}}
+                                    </li>
+                                    <li>
+                                        <strong>Movil: </strong>{{$crm->prospecto->movil}}
+                                    </li>
+                                </ul>
                             </td>
                             <td>
                                 {{$crm->prospecto->email}}
