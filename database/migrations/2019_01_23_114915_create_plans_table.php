@@ -20,7 +20,7 @@ class CreatePlansTable extends Migration
             $table->unsignedInteger('plazo');
             $table->unsignedInteger('mes_aportacion_adjudicado');
             $table->unsignedInteger('mes_adjudicado');
-            $table->unsignedInteger('mes_completo_adjudicado');
+            $table->unsignedInteger('mes_s_d');
             $table->unsignedInteger('plan_meses');
             $table->unsignedInteger('actualizaciones')->default(0);
             $table->decimal('aportacion_1',5,2)->default(0.00);
@@ -38,6 +38,7 @@ class CreatePlansTable extends Migration
             $table->decimal('s_v',5,2)->default(0.00);
             $table->decimal('s_d',5,2)->default(0.00);
             $table->boolean('baja')->default(0);
+            $table->boolean('clasica')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

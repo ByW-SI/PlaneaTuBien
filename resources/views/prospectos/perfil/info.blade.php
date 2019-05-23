@@ -136,7 +136,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto),2) }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -154,7 +154,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['cuota_periodica_integrante'],2) }}" class="form-control">
+                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2) }}" class="form-control">
                     </div>
                 </div>
             </div>
@@ -210,18 +210,18 @@
             </div>
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label class="col-form-label">Total de aportaciones:</label>
+                    <label class="col-form-label">Monto total:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto)['total_aportacion'],2) }}" class="form-control" readonly="">
+                        <input type="text" value="{{number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2)}}" class="form-control" readonly="">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Costo anual de:</label>
                     <div class="input-group">
-                        <input type="text" value="{{ $cotizacion->plan->anual_total }}" class="form-control" readonly="">
+                        <input type="text" value="{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}" class="form-control" readonly="">
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>

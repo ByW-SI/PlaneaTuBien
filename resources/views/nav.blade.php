@@ -228,6 +228,7 @@
 									<a class="dropdown-item" href="{{ route('cotizador') }}"><i class="fa fa-search"></i><strong> Cotizador</strong></a> 
 								@endif
 							@endforeach
+								<a class="dropdown-item" href="{{ route('factors.index') }}"><i class="fa fa-search"></i><strong> Factor de Actualización</strong></a> 
 						</div>
 					</li>
 				@endif

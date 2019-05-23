@@ -83,7 +83,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($res['monto_adjudicar'],2)}}</span>
+							<span class="form-control bg-light">{{$plan_select->abreviatura == "TC"  ? number_format($plan_select->monto_adjudicar_tc($request->monto),2) : number_format($res['monto_adjudicar'],2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
@@ -320,69 +320,72 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="row">
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th class="text-center" scope="col">Meses</th>
-								<th class="text-center" scope="col">Aportación</th>
-								<th class="text-center" scope="col">Cuota de Administración</th>
-								<th class="text-center" scope="col">IVA</th>
-								<th class="text-center" scope="col">Seguro de vida</th>
-								<th class="text-center" scope="col">Seguro de desastres</th>
-								<th class="text-center" scope="col">Total</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">
-									{{$plan_select->corrida_meses_fijos($request->monto)['integrante']['meses']}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['aportacion'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['cuota_administracion'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['iva'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sv'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sd'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['total'],2)}}
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">
-									{{$plan_select->corrida_meses_fijos($request->monto)['adjudicado']['meses']}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['aportacion'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['cuota_administracion'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['iva'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sv'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sd'],2)}}
-								</td>
-								<td class="text-center">
-									{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['total'],2)}}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				@if ($plan_select->abreviatura != "TC")
+					{{-- expr --}}
+					<div class="row">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="text-center" scope="col">Meses</th>
+									<th class="text-center" scope="col">Aportación</th>
+									<th class="text-center" scope="col">Cuota de Administración</th>
+									<th class="text-center" scope="col">IVA</th>
+									<th class="text-center" scope="col">Seguro de vida</th>
+									<th class="text-center" scope="col">Seguro de desastres</th>
+									<th class="text-center" scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-center">
+										{{$plan_select->corrida_meses_fijos($request->monto)['integrante']['meses']}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['aportacion'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['cuota_administracion'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['iva'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sv'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['sd'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['integrante']['total'],2)}}
+									</td>
+								</tr>
+								<tr>
+									<td class="text-center">
+										{{$plan_select->corrida_meses_fijos($request->monto)['adjudicado']['meses']}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['aportacion'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['cuota_administracion'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['iva'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sv'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['sd'],2)}}
+									</td>
+									<td class="text-center">
+										{{number_format($plan_select->corrida_meses_fijos($request->monto)['adjudicado']['total'],2)}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				@endif
 			@endif
 		</div>
 		<div class="card-footer"></div>
