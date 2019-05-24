@@ -79,15 +79,25 @@
             @endforeach
 
             {{-- Agentes --}}
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fa fa-user-secret"></i><strong> Agentes</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
-					<a class="dropdown-item" href="{{ route('agentes.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-				</div>
-			</li>
+            @foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice agentes")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+							<i class="fa fa-user-secret"></i><strong> Agentes</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							@foreach(Auth::user()->perfil->componentes as $c)
+								@if($c->nombre == "crear agente")
+									<a class="dropdown-item" href="{{ route('empleados.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
+								@endif
+								@if($c->nombre == "indice agentes")
+									<a class="dropdown-item" href="{{ route('agentes.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+            @endforeach
 
 			{{-- Recursos Humanos --}}
 			@foreach(Auth::user()->perfil->componentes as $componente)

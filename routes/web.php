@@ -60,6 +60,7 @@ Route::resource('plans','Plan\PlanController');
 
 // GRUPOS
 Route::resource('grupos','Grupo\GrupoController');
+Route::get('grupos/{grupo}/contratos', 'Grupo\GrupoController@listContratos')->name('grupos.listcontratos');
 
 // FACTOR DE ACTUALIZACIÓN
 Route::resource('factors','Plan\FactorActualizacionController',['except'=>['show','edit','create']]);

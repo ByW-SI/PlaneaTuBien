@@ -33,58 +33,43 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-                <div class="col-4 offset-4 text-center">
-                    <a href="{{ route('grupos.listcontratos', ['grupo' =>$grupo]) }}" class="btn btn-primary">
-                        Ver status de contratos
-                    </a>
-                </div>
-            </div>
-            <br>
-            <br>
 			<div class="d-flex justify-content-center">
-				<h4>Planes dentro del grupo</h4>
+				<h4>Contratos del grupo</h4>
 			</div>
 			<div class="row">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Plazo</th>
-							<th scope="col">Aporta</th>
-							<th scope="col">Aportacion extraordinaria 1</th>
-							<th scope="col">Aportacion extraordinaria 2</th>
-							<th scope="col">Aportacion extraordinaria 3</th>
-							<th scope="col">Aportacion extraordinaria Liquidación</th>
-							<th scope="col"></th>
+							<th scope="col">Número de contrato</th>
+							<th scope="col">Monto</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Recibo</th>
 						</tr>
 					</thead>
 					<tbody>
-						@forelse ($grupo->plans as $plan)
+						@forelse ($contratos as $contrato)
 							<tr>
-								<th scope="row">{{$plan->nombre}}</th>
-								<td>{{$plan->plazo}} meses</td>
-								<td>{{$plan->mes_aportacion_adjudicado}} meses</td>
-								<td>{{$plan->aportacion_1.' en el mes #'.$plan->mes_1}}</td>
-								<td>{{$plan->aportacion_2.' en el mes #'.$plan->mes_2}}</td>
-								<td>{{$plan->aportacion_3.' en el mes #'.$plan->mes_3}}</td>
-								<td>{{$plan->aportacion_liquidacion.' en el mes '.$plan->mes_liquidacion}}</td>
-								<td>
+								<th scope="row">{{$contrato->numero_contrato}}</th>
+								<td>${{$contrato->monto}}</td>
+								<td>{{$contrato->estado}}</td>
+								<td>{{$contrato->recibo->numero}}</td>
+								{{-- <td>
 									<div class="d-flex justify-content-center">
 										<a href="{{ route('plans.show',['plan'=>$plan]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
 									</div>
-								</td>
+								</td> --}}
 
 							</tr>
 						@empty
 							<div class="alert alert-info" role="alert">
-							  	Todavía no hay ningún plan <a href="{{ route('plans.create') }}" class="alert-link">haz click aquí</a> para agregar uno.
+							  	Todavía no hay ningún contrato <a href="{{ route('plans.create') }}" class="alert-link">haz click aquí</a> para agregar uno.
 							</div>
 						@endforelse
 					</tbody>
 				</table>
 			</div>
 		</div>
+		{{ $contratos->links() }}
 		<div class="card-footer">
             <div class="row">
                 <div class="col-4 offset-4 text-center">
