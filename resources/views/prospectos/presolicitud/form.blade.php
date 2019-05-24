@@ -65,20 +65,22 @@
 					<input type="text" class="form-control" value="{{old('numero_int')}}" name="numero_int">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="">Colonia</label>
-					<input type="text" class="form-control" value="{{old('colonia')}}" name="colonia" required="">
+					<label for="">Código Postal</label>
+					<input type="text" class="form-control" value="{{old('cp')}}" name="cp" id="cp" required="">
+				</div>
+				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+					<label for="">Colonia o Población</label>
+					<select class="form-control" name="colonia" id="colonia" required="">
+						<option>Seleccione una colonía ó población</option>
+					</select>
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Alcaldía o Municipio</label>
-					<input type="text" class="form-control" value="{{old('municipio')}}" name="municipio" required="">
+					<input type="text" class="form-control" value="{{old('municipio')}}" name="municipio" id="municipio" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Estado</label>
-					<input type="text" class="form-control" value="{{old('estado')}}" name="estado" required="">
-				</div>
-				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="">Código Postal</label>
-					<input type="text" class="form-control" value="{{old('cp')}}" name="cp" required="">
+					<input type="text" class="form-control" value="{{old('estado')}}" name="estado" id="estado" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">R.F.C.</label>
@@ -161,7 +163,13 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">¿Cómo se entero de nosotros?</label>
-					<input type="text" class="form-control" value="{{old('enterarse')}}" name="enterarse" required="">
+					<select name="enterarse" id="enterarse" required="">
+						<option value="">Medío por el que se entero de nosotros</option>
+						<option value="Internet">Internet</option>
+						<option value="T.V.">T.V.</option>
+						<option value="Periodico">Periodico</option>
+						<option value="Otro">Otro</option>
+					</select>
 				</div>
 			</div>
 		</div>
@@ -174,3 +182,44 @@
 	</form>
 </div>
 @endsection
+@push('scripts')
+	<script>
+		$("#cp").change(function(){
+			var cp = $("#cp").val();
+
+			$("#colonia").empty();
+			$("#colonia").append("<option>Seleccione una colonía ó población</option>");
+			$.ajax({
+				url: `{{ url('cp') }}/${cp}`,
+				dataType: 'json',
+				success:function(result,status,xhr){
+					console.log(result);
+					let res_array = result.cp;
+					res_array.forEach(function(item,index){
+						var opt = `<option value="${item.poblacion}">${item.poblacion}</option>`
+						$("#colonia").append(opt)
+					})
+				},
+				error:function(xhr,status,error){
+					alert(error);
+				}
+			});
+		});
+		$("#colonia").change(function(){
+			var cp = $("#cp").val();
+			var colonia = $("#colonia").val();
+			$.ajax({
+				url: `{{ url('cp') }}/${cp}/${colonia}`,
+				dataType: 'json',
+				success:function(result,status,xhr){
+					let res = result.cp[0];
+					$("#municipio").val(res.municipio);
+					$("#estado").val(res.estado);
+				},
+				error:function(xhr,status,error){
+					alert(error);
+				}
+			});
+		});
+	</script>
+@endpush

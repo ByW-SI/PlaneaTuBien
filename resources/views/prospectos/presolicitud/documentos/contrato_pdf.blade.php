@@ -55,9 +55,9 @@
 							<p class="justify">Fecha y Hora</p>
 						</div>
 						<div class="one-half column u-pull-right">
-							<p style="border-bottom: 1px solid black">{{$presolicitud->folio.$recibo->contrato->numero_contrato}}</p>
-							<p style="border-bottom: 1px solid black">{{$recibo->contrato->grupo->id}}</p>
-							<p style="border-bottom: 1px solid black">{{$recibo->contrato->numero_contrato}}</p>
+							<p style="border-bottom: 1px solid black">{{$presolicitud->folio.$contrato->numero_contrato}}</p>
+							<p style="border-bottom: 1px solid black">{{$contrato->grupo->id}}</p>
+							<p style="border-bottom: 1px solid black">{{$contrato->numero_contrato}}</p>
 							<p style="border-bottom: 1px solid black">{{$presolicitud->id}}</p>
 							<p style="border-bottom: 1px solid black">{{date('d-m-Y H:m')}}</p>
 						</div>
@@ -200,7 +200,7 @@
 						A.- NÚMERO DE CONSUMIDORES: <span style="border-bottom:1px solid black">500</span> (NO MAS DE 500)
 					</p>
 					<p class="justify">
-						B.- VIGENCIA DEL GRUPO: <span style="border-bottom: 0.5px solid black;">{{$recibo->contrato->grupo->vigencia}}</span> MESES
+						B.- VIGENCIA DEL GRUPO: <span style="border-bottom: 0.5px solid black;">{{$contrato->grupo->vigencia}}</span> MESES
 					</p>
 					<p class="justify">
 						C.- VIGENCIA DEL PLAN <span style="border-bottom: 0.5px solid black;">{{$plan->plazo}}</span> MESES (EQUIVALENTE A IGUAL NUMERO DE CUOTAS PERIÓDICAS)
@@ -269,7 +269,7 @@
 						</strong>
 					</p>
 					<p class="justify">
-						FACTOR DE ACTUALIZACIÓN INICIAL.- <strong style="border-bottom: 0.5px solid black;">3.00%</strong> (EL PRECIO INICIAL DEL BIEN INMUEBLE SERA AJUSTADO CADA 6 MESES POR LO MENOS CONFORME AL INCREMENTO EN EL ÍNDICE NACIONAL DE PRECIOS AL CONSUMIDOR QUE SEÑALE EL BANCO DE MÉXICO EL SEMESTRE INMEDIATO ANTERIOR A LA FIRMA DE ESTE CONTRATO, O CUALQUIER OTRO QUE PARA EL EFECTO DETERMINE LA AUTORIDAD CORRESPONDIENTE, ESTE INCREMENTO LO PAGARAN TODOS LOS INTEGRANTES ADJUDICATARIOS,  NO ADJUDICATARIOS Y ADJUDICADOS,  DESDE EL PRIMER MES HASTA EL TERMINO DEL CONTRATO DE ADHESIÓN, ÉSTE SERA NOTIFICADO EN LA PÁGINA DE INTERNET DEL PROVEEDOR)
+						FACTOR DE ACTUALIZACIÓN INICIAL.- <strong style="border-bottom: 0.5px solid black;">{{$cotizacion->factor_actualizacion}}%</strong> (EL PRECIO INICIAL DEL BIEN INMUEBLE SERA AJUSTADO CADA 6 MESES POR LO MENOS CONFORME AL INCREMENTO EN EL ÍNDICE NACIONAL DE PRECIOS AL CONSUMIDOR QUE SEÑALE EL BANCO DE MÉXICO EL SEMESTRE INMEDIATO ANTERIOR A LA FIRMA DE ESTE CONTRATO, O CUALQUIER OTRO QUE PARA EL EFECTO DETERMINE LA AUTORIDAD CORRESPONDIENTE, ESTE INCREMENTO LO PAGARAN TODOS LOS INTEGRANTES ADJUDICATARIOS,  NO ADJUDICATARIOS Y ADJUDICADOS,  DESDE EL PRIMER MES HASTA EL TERMINO DEL CONTRATO DE ADHESIÓN, ÉSTE SERA NOTIFICADO EN LA PÁGINA DE INTERNET DEL PROVEEDOR)
 					</p>
 					<p class="justify">
 						LAS REUNIONES DE ADJUDICACIÓN SE LLEVARAN A CABO EL TERCER JUEVES DE CADA MES Y SI NO FUERA HÁBIL EL DÍA HÁBIL INMEDIATO ANTERIOR.

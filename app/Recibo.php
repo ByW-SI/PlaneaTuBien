@@ -34,12 +34,9 @@ class Recibo extends Model
     	return $this->belongsTo('App\Presolicitud','presolicitud_id');
     }
 
-    public function contrato()
+    public function contratos()
     {
-        return $this->hasOne('App\Contrato');
+        return $this->hasMany('App\Contrato');
     }
-    public function checklist()
-    {
-        return $this->hasOne('App\ChecklistFolder');
-    }
+    
 }

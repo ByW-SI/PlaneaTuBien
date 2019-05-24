@@ -56,8 +56,8 @@
 					</div>
 					<div class="ten columns u-pull-right center">
 						<label>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</label>
-						<label>{{$recibo->contrato->id}}</label>
-						<label>{{$recibo->contrato->grupo->id}}</label>
+						<label>{{$contrato->numero_contrato}}</label>
+						<label>{{$contrato->grupo->id}}</label>
 					</div>
 				</div>
 			</div>

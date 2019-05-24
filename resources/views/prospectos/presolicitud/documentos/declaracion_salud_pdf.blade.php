@@ -393,7 +393,7 @@
 						<p class="left">Número Poliza:</p>
 					</div>
 					<div class="one-half column u-pull-right" style="border-bottom: 0.5px solid black;">
-						<p class="center"><strong>{{$recibo->contrato->numero_contrato}}</strong></p>
+						<p class="center"><strong>{{$folio}}</strong></p>
 					</div>
 				</div>
 			</div>

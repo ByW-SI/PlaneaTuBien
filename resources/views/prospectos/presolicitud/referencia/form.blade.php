@@ -31,7 +31,7 @@
 						<input type="text" class="form-control" name="nombre[{{$i}}]" required="" value="{{old('nombre.'.$i)}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">telefono</label>
+						<label for="">Telefono</label>
 						<input type="text" step="1" min="0" class="form-control" name="telefono[{{$i}}]" required="" value="{{old('telefono.'.$i)}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">

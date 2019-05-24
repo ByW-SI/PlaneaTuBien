@@ -198,8 +198,12 @@ class PresolicitudReciboController extends Controller
         //
         $cotizacion = $presolicitud->cotizacion();
         // dd($cotizacion->contratos());
+        if($presolicitud->recibo){
+          return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
 
-        return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
+        }else{
+          return redirect()->route('prospectos.presolicitud.recibos.create',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        }
     }
 
     /**
@@ -211,19 +215,29 @@ class PresolicitudReciboController extends Controller
     {
         //
         $cotizacion = $presolicitud->perfil->cotizacion;
-        $recibos = $presolicitud->recibos;
-        $contratos = $cotizacion->contratos();
-        // dd($recibos);
-        foreach ($contratos as $key=>$monto) {
-            foreach ($recibos as $recibo) {
-                if($recibo->contrato->monto  == $monto){
-                    array_splice($contratos,$key,1);
-                }
-            }
-        }
+        $plan = $cotizacion->plan;
+        $monto = $cotizacion->monto;
+        $cuota_inscripcion = $monto*($plan->inscripcion/100)-($monto*($plan->inscripcion/100)*($cotizacion->descuento/100));
+        $iva_inscripcion= $cuota_inscripcion*0.16;
+        $aportacion_periodica = $monto/$plan->plazo;
+        $cuota_administracion = $monto*($plan->cuota_admon/100);
+        $iva_cuota_admon = $cuota_administracion*0.16;
+        $seguro_vida = $monto*($plan->s_v/100);
+        $primera_cuota_periodica_total = $aportacion_periodica+$cuota_administracion+$iva_cuota_admon+$seguro_vida;
+        $suma_incripcion_y_cuota = $cuota_inscripcion+$iva_inscripcion+$primera_cuota_periodica_total;
+        // $recibos = $presolicitud->recibos;
+        // $contratos = $cotizacion->contratos();
+        // // dd($recibos);
+        // foreach ($contratos as $key=>$monto) {
+        //     foreach ($recibos as $recibo) {
+        //         if($recibo->contrato->monto  == $monto){
+        //             array_splice($contratos,$key,1);
+        //         }
+        //     }
+        // }
         // dd($contratos);
         $bancos = Banco::orderBy('nombre','asc')->get();
-       return view('prospectos.presolicitud.recibo.form',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'bancos'=>$bancos,'contratos'=>$contratos]);
+       return view('prospectos.presolicitud.recibo.form',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'bancos'=>$bancos,'monto'=>$monto,'inscripcion_inicial' => $cuota_inscripcion,'iva' => $iva_inscripcion,'monto_inscripcion_con_iva' => $cuota_inscripcion+$iva_inscripcion,'cuota_periodica' => $primera_cuota_periodica_total]);
     }
 
     /**
@@ -236,8 +250,9 @@ class PresolicitudReciboController extends Controller
     {
         //
         // dd($this->to_word((float)100584.99,"MXN")." ".$request->total);
+        $cotizacion = $presolicitud->perfil->cotizacion;
         $grupos = $presolicitud->cotizacion()->plan->grupos;
-        // dd($grupos);
+        // dd($cotizacion->contratos());
         foreach ($grupos as $grupo) {
             if($grupo->contratos > 0 && $grupo->activo == 1){
                 $rules=[
@@ -260,14 +275,17 @@ class PresolicitudReciboController extends Controller
                 $recibo->numero_contrato = Recibo::get()->count()+1;
                 $recibo->clave = substr(md5($presolicitud->id),0,5);
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
-                $presolicitud->recibos()->save($recibo);
-                $contrato = new Contrato($request->all());
-                $contrato->grupo()->associate($grupo->id);
-                $grupo->contratos -= 1;
-                $grupo->save();
-                $contrato->numero_contrato = 500-$grupo->contratos;
-                $contrato->estado = "registrado";
-                $recibo->contrato()->save($contrato);
+                $presolicitud->recibo()->save($recibo);
+                foreach ($cotizacion->contratos() as $value) {
+                  $contrato = new Contrato;
+                  $contrato->monto = $value;
+                  $contrato->grupo()->associate($grupo->id);
+                  $grupo->contratos -= 1;
+                  $grupo->save();
+                  $contrato->numero_contrato = 500-$grupo->contratos;
+                  $contrato->estado = "registrado";
+                  $recibo->contratos()->save($contrato);
+                }
                 return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
             }
         }
@@ -284,12 +302,12 @@ class PresolicitudReciboController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function pdf(Prospecto $prospecto,Presolicitud $presolicitud,Recibo $recibo)
+    public function pdf(Prospecto $prospecto,Presolicitud $presolicitud,Recibo $recibo,Request $request)
     {
         // dd($presolicitud);
-        $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo]);
-        return $pdf->stream();
-        // return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
+        $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo,'contrato'=>$request->contrato]);
+        // return $pdf->stream();
+        return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno."_contrato_".$request->contrato.".pdf");
     }
 
     /**

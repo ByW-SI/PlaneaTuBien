@@ -7,7 +7,8 @@
 			<h4>Pagos:</h4>   
         	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
 			<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Ver perfil</a>
-			@if ($cotizacion->inscripcionFaltante() <= 0)
+			{{-- {{dd($cotizacion->pagos->count())}} --}}
+			@if ($cotizacion->pagos->count() > 0)
         		<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
         	@endif
         </div>

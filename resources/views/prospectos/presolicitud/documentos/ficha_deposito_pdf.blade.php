@@ -90,7 +90,7 @@
 						<p class="center" style="background: #cccc; border-radius:10px;">Día 7 de cada mes</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->numero_contrato}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$recibo->clave.$recibo->numero_contrato}}</p>
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->recibo->presolicitud->id.$contrato->recibo->folio.$contrato->numero_contrato}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
 						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['aportacion'],2)}}</p>

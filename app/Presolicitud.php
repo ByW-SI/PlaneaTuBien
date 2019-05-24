@@ -78,9 +78,9 @@ class Presolicitud extends Model
     	return $this->hasMany('App\Referencia','presolicitud_id','id');
     }
 
-    public function recibos()
+    public function recibo()
     {
-    	return $this->hasMany('App\Recibo','presolicitud_id','id');
+    	return $this->hasOne('App\Recibo','presolicitud_id','id');
     }
 
     public function getStatusAttribute()
@@ -98,7 +98,7 @@ class Presolicitud extends Model
         if($this->referencias->isNotEmpty()){
             $status+=20;
         }
-        if ($this->recibos->isNotEmpty()) {
+        if ($this->recibo) {
             $status += 20;
         }
         return $status;

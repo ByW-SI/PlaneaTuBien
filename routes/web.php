@@ -135,22 +135,23 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		// cuestionario de calidad
 		Route::get('/presolicitud/{presolicitud}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.cuestionario_calidad');
 		// recibo
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
+		Route::post('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
 		// manual de consumidor
 		Route::get('/presolicitud/{presolicitud}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.manual');
 		// consentimiento de seguro
 		Route::get('/presolicitud/{presolicitud}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.consentimiento_seguro');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.recibos.contrato');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.recibos.declaracion_salud');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.recibos.domiciliacion');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.recibos.ficha_deposito');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.recibos.anexo_tanda');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_tanda_clasica','Documentos\DocumentosController@anexoTandaClasica')->name('presolicitud.recibos.anexo_tanda_clasica');
-		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.recibos.anexo_inscripcion_diferida');
+		Route::get('/presolicitud/{presolicitud}/contratos','Documentos\DocumentosController@index')->name('presolicitud.contratos.index');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.contratos.contrato');
+		Route::post('/presolicitud/{presolicitud}/recibo/{recibo}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.recibos.declaracion_salud');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.contratos.domiciliacion');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.contratos.ficha_deposito');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.contratos.anexo_tanda');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda_clasica','Documentos\DocumentosController@anexoTandaClasica')->name('presolicitud.contratos.anexo_tanda_clasica');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.contratos.anexo_inscripcion_diferida');
 
 	});
-Route::resource('recibos.checklist','Prospecto\Cliente\Presolicitud\ChecklistFolderController');
-Route::resource('recibos.domiciliacion','Prospecto\Cliente\Presolicitud\Contrato\DomiciliacionController');
+Route::resource('contratos.checklist','Prospecto\Cliente\Presolicitud\ChecklistFolderController');
+Route::resource('contratos.domiciliacion','Prospecto\Cliente\Presolicitud\Contrato\DomiciliacionController');
 Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create']);
 
 
@@ -188,3 +189,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PAGOS
 Route::resource('pagos', 'Pagos\PagosController',['only'=>['index','show']]);
+
+// CODIGOS POSTAL
+Route::get('cp/{cp}','CodigoPostal\CodigoPostalController@getCP')->name('cp.get');
+Route::get('cp/{cp}/{colonia}','CodigoPostal\CodigoPostalController@getColonia')->name('colonia.get');
