@@ -232,7 +232,7 @@
 						</div>
 					</div>
 					<div class="col-12 col-sm-12 col-md-6 col-lg-2 col-xl-2 form-group">
-						<label for="s_d">Porcentaje de seguro de desempleo</label>
+						<label for="s_d">Porcentaje de seguro de desastre</label>
 						<div class="input-group mb-3">
 							<input type="number" step="any" name="s_d" value="{{old("s_d")}}" min="0" class="form-control" placeholder="Mensual" aria-label=" plan" aria-describedby="basic-addon2" required="">
 							<div class="input-group-append">

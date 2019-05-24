@@ -25,48 +25,48 @@
 				<tbody>
 					<tr>
 						<td class="text-center">
-							{{$plan->corrida_meses_fijos($cotizacion->monto)['integrante']['meses']}}
+							{{$plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['meses']}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['aportacion'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['aportacion'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['cuota_administracion'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['cuota_administracion'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['iva'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['iva'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['sv'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['sv'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['sd'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['sd'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['integrante']['total'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
 						</td>
 					</tr>
 					<tr>
 						<td class="text-center">
-							{{$plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['meses']}}
+							{{$plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['meses']}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['aportacion'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['aportacion'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['cuota_administracion'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['cuota_administracion'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['iva'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['iva'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['sv'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['sv'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['sd'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['sd'],2)}}
 						</td>
 						<td class="text-center">
-							${{number_format($plan->corrida_meses_fijos($cotizacion->monto)['adjudicado']['total'],2)}}
+							${{number_format($plan->corrida_meses_fijos($cotizacion->monto,$cotizacion->factor_actualizacion)['adjudicado']['total'],2)}}
 						</td>
 					</tr>
 				</tbody>
@@ -130,11 +130,11 @@
 	</div>
 	<div class="card-body">
 		<div class="row">
-		 	@foreach ($cliente->recibos as $recibo)
-	            @if ($recibo->checklist && $recibo->checklist->status)
+		 	@foreach ($cliente->recibo->contratos as $contrato)
+	            @if ($contrato->checklist && $contrato->checklist->status)
 					<div class="col-12">
 						<h5>
-							Contrato de folio: {{$recibo->clave.$recibo->contrato->numero_contrato}} con valor de {{number_format($recibo->contrato->monto,2)}}
+							Contrato de folio: {{$cotizacion->folio.$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
 						</h5>
 					</div>
 	                <div class="col-12">
@@ -153,48 +153,48 @@
 							<tbody>
 								<tr>
 									<td class="text-center">
-										{{$plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['meses']}}
+										{{$plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['meses']}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['aportacion'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['aportacion'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['cuota_administracion'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['cuota_administracion'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['iva'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['iva'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sv'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sv'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sd'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sd'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['total'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
 									</td>
 								</tr>
 								<tr>
 									<td class="text-center">
-										{{$plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['meses']}}
+										{{$plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['meses']}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['aportacion'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['aportacion'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['cuota_administracion'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['cuota_administracion'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['iva'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['iva'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['sv'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['sv'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['sd'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['sd'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['adjudicado']['total'],2)}}
+										${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['adjudicado']['total'],2)}}
 									</td>
 								</tr>
 							</tbody>
@@ -218,37 +218,37 @@
 								<tr>
 									<td class="text-center">1</td>
 									<td class="text-center">{{$plan->aportacion_1}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_1($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_1($contrato->monto),2)}}</td>
 									<td class="text-center">{{$plan->mes_1}}</td>
 								</tr>
 								<tr>
 									<td class="text-center">2</td>
 									<td class="text-center">{{$plan->aportacion_2}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_2($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_2($contrato->monto),2)}}</td>
 									<td class="text-center">{{$plan->mes_2}}</td>
 								</tr>
 								<tr>
 									<td class="text-center">3</td>
 									<td class="text-center">{{$plan->aportacion_3}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_3($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_3($contrato->monto),2)}}</td>
 									<td class="text-center">{{$plan->mes_3}}</td>
 								</tr>
 								<tr>
 									<td class="text-center">Liquidación</td>
 									<td class="text-center">{{$plan->aportacion_liquidacion}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_liquidacion($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_liquidacion($contrato->monto),2)}}</td>
 									<td class="text-center">{{$plan->mes_liquidacion}}</td>
 								</tr>
 								<tr>
 									<td class="text-center">Semestral</td>
 									<td class="text-center">{{$plan->semestral}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_semestral($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_semestral($contrato->monto),2)}}</td>
 									<td class="text-center">Cada Junio y Diciembre</td>
 								</tr>
 								<tr>
 									<td class="text-center">Anual</td>
 									<td class="text-center">{{$plan->anual}}%</td>
-									<td class="text-center">${{number_format($plan->monto_aportacion_anual($recibo->contrato->monto),2)}}</td>
+									<td class="text-center">${{number_format($plan->monto_aportacion_anual($contrato->monto),2)}}</td>
 									<td class="text-center">Cada Diciembre</td>
 								</tr>
 								

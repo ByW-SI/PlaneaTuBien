@@ -25,17 +25,17 @@
             <div class="row">
                 <div class="col-12 text-center mt-3">
                     <label>
-                        Numeros de contratos: {{sizeof($cliente->recibos)}}
+                        Numeros de contratos: {{sizeof($cliente->recibo->contratos)}}
                     </label>
                     
                 </div>
-                @foreach ($cliente->recibos as $recibo)
-                    @if ($recibo->checklist && $recibo->checklist->status)
+                @foreach ($cliente->recibo->contratos as $contrato)
+                    @if ($contrato->checklist && $contrato->checklist->status)
                         {{-- expr --}}
                         <div class="col-6">
                             <div class="card">
                                 <div class="card-header">
-                                    Contrato de folio: {{$recibo->clave.$recibo->contrato->numero_contrato}} con valor de {{number_format($recibo->contrato->monto,2)}}
+                                    Contrato de folio: {{$cotizacion->folio.$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -62,7 +62,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['aportacion'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['aportacion'],2)}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['cuota_administracion'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['cuota_administracion'],2)}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -90,7 +90,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['iva'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['iva'],2)}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sv'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sv'],2)}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -118,7 +118,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['sd'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sd'],2)}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -132,7 +132,7 @@
                                                 </div>
                                                 <div class="input-group-prepend w-50">
                                                     <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($recibo->contrato->monto)['integrante']['total'],2)}}
+                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
                                                     </span>
                                                 </div>
                                             </div>

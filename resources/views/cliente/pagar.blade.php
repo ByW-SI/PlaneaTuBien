@@ -16,25 +16,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($cliente->recibos as $recibo)
-        				{{-- @if ($recibo->checklist && $recibo->checklist->status) --}}
+					@foreach ($cliente->recibo->contratos as $contrato)
+        				{{-- @if ($contrato->checklist && $contrato->checklist->status) --}}
 							<tr>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}"><input type="checkbox" name="recibo[]" id="recibo{{$recibo->id}}" value="{{$plan->cuota_periodica_integrante($recibo->monto)}}"></label>
+									<label for="recibo{{$contrato->id}}"><input type="checkbox" name="recibo[]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion)}}"></label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										{{$recibo->clave.$recibo->contrato->numero_contrato}}
+									<label for="recibo{{$contrato->id}}">
+										{{$cotizacion->folio.$contrato->numero_contrato}}
 									</label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										${{number_format($recibo->contrato->monto,2)}}
+									<label for="recibo{{$contrato->id}}">
+										${{number_format($contrato->monto,2)}}
 									</label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										${{number_format($plan->cuota_periodica_integrante($recibo->monto),2)}}
+									<label for="recibo{{$contrato->id}}">
+										${{number_format($plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion),2)}}
 									</label>
 								</td>
 							</tr>
