@@ -163,7 +163,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">¿Cómo se entero de nosotros?</label>
-					<select name="enterarse" id="enterarse" required="">
+					<select name="enterarse" id="enterarse" required="" class="form-control">
 						<option value="">Medío por el que se entero de nosotros</option>
 						<option value="Internet">Internet</option>
 						<option value="T.V.">T.V.</option>

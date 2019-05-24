@@ -70,7 +70,7 @@
   <li class="nav-item">
     <a class="nav-link {{$active == "Recibo" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">RECIBO PROVISIONAL</a>
   </li>
-  @if (!$presolicitud->recibo->contratos->isEmpty())
+  @if ($presolicitud->recibo && !$presolicitud->recibo->contratos->isEmpty())
     <li class="nav-item">
       <a class="nav-link {{$active == "Contratos" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.contratos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">CONTRATOS</a>
     </li>
