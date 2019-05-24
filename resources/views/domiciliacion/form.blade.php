@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
 	<div class="card-header">Agregar Forma de domiciliación</div>
-	<form method="POST" action="{{ $edit ? route('recibos.domiciliacion.update',['recibo'=>$recibo,'domiciliacion'=>$domiciliacion] ) : route('recibos.domiciliacion.store',['recibo'=>$recibo]) }}">
+	<form method="POST" action="{{ $edit ? route('contratos.domiciliacion.update',['contrato'=>$contrato,'domiciliacion'=>$domiciliacion] ) : route('contratos.domiciliacion.store',['contrato'=>$contrato]) }}">
 		@csrf
 		@if ($edit)
 			@method('PUT')
@@ -21,15 +21,15 @@
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="emisor">Cliente del emisor titular del servicio(Nombre Completo)</label>
-					<input type="text" class="form-control" name="emisor" id="emisor" required="" value="{{$edit ? $domiciliacion->emisor : $recibo->presolicitud->nombre.' '.$recibo->presolicitud->paterno.' '.$recibo->presolicitud->materno}}">
+					<input type="text" class="form-control" name="emisor" id="emisor" required="" value="{{$edit ? $domiciliacion->emisor : $contrato->recibo->presolicitud->nombre.' '.$contrato->recibo->presolicitud->paterno.' '.$contrato->recibo->presolicitud->materno}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : old('referencia')}}">
+					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : $contrato->recibo->presolicitud->cotizacion()->folio}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="titular">Cliente usuario titular de la cuenta bancaria (nombre completo)</label>
-					<input type="text" class="form-control" name="titular" id="titular" required="" value="{{$edit ? $domiciliacion->titular : $recibo->presolicitud->nombre.' '.$recibo->presolicitud->paterno.' '.$recibo->presolicitud->materno}}">
+					<input type="text" class="form-control" name="titular" id="titular" required="" value="{{$edit ? $domiciliacion->titular : $contrato->recibo->presolicitud->nombre.' '.$contrato->recibo->presolicitud->paterno.' '.$contrato->recibo->presolicitud->materno}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="tipo">Tipo de cuenta</label>

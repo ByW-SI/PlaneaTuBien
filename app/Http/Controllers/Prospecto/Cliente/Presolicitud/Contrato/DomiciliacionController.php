@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud\Contrato;
 
 use App\Domiciliacion;
 use App\Http\Controllers\Controller;
-use App\Recibo;
+use App\Contrato;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -16,20 +16,20 @@ class DomiciliacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Recibo $recibo)
+    public function index(Contrato $contrato)
     {
         //
-        $contrato = $recibo->contrato;
+        // $contrato = $contrato->contrato;
         // dd($contrato);
         if (isset($contrato)) {
             // dd($contrato->domiciliacion);
             if ($contrato->domiciliacion) {
                 $domiciliacion=$contrato->domiciliacion;
-                $plan=$recibo->presolicitud->cotizacion()->plan;
-                return view('domiciliacion.index',['contrato'=>$contrato,'recibo'=>$recibo,'domiciliacion'=>$domiciliacion,'plan'=>$plan]);
+                $plan=$contrato->recibo->presolicitud->cotizacion()->plan;
+                return view('domiciliacion.index',['contrato'=>$contrato,'contrato'=>$contrato,'domiciliacion'=>$domiciliacion,'plan'=>$plan]);
             }
             else{
-                return redirect()->route('recibos.domiciliacion.create',['recibo'=>$recibo]);
+                return redirect()->route('contratos.domiciliacion.create',['contrato'=>$contrato]);
             }
         }
         else {
@@ -43,10 +43,10 @@ class DomiciliacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Recibo $recibo)
+    public function create(Contrato $contrato)
     {
         //
-        return view('domiciliacion.form',['recibo'=>$recibo,'edit'=>false]);
+        return view('domiciliacion.form',['contrato'=>$contrato,'edit'=>false]);
     }
 
     /**
@@ -55,7 +55,7 @@ class DomiciliacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Recibo $recibo, Request $request)
+    public function store(Contrato $contrato, Request $request)
     {
         //
         $rules=[
@@ -69,11 +69,10 @@ class DomiciliacionController extends Controller
 
         $this->validate($request, $rules);
         $formato = new Domiciliacion($request->all());
-        $contrato = $recibo->contrato;
         // dd($contrato);
         $formato->contrato_id = $contrato->id;
         $formato->save();
-        return redirect()->route('recibos.domiciliacion.index',['recibo'=>$recibo]);
+        return redirect()->route('contratos.domiciliacion.index',['contrato'=>$contrato]);
         // dd($request->all());
 
     }
@@ -84,13 +83,13 @@ class DomiciliacionController extends Controller
      * @param  \App\Domiciliacion  $domiciliacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Recibo $recibo, Domiciliacion $domiciliacion)
+    public function show(Contrato $contrato, Domiciliacion $domiciliacion)
     {
         //
-        $plan=$recibo->presolicitud->cotizacion()->plan;
-        $pdf = PDF::loadView('prospectos.presolicitud.documentos.domiciliacion_pdf',['domiciliacion'=>$domiciliacion,'plan'=>$plan,'recibo'=>$recibo])->setPaper('a4', 'landscape');
+        $plan=$contrato->recibo->presolicitud->cotizacion()->plan;
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.domiciliacion_pdf',['domiciliacion'=>$domiciliacion,'plan'=>$plan,'contrato'=>$contrato])->setPaper('a4', 'landscape');
         // return $pdf->stream();
-        return $pdf->download('domiciliacion_recibo'.$recibo->clave.$recibo->id.".pdf");
+        return $pdf->download('domiciliacion_contrato'.$contrato->numero_contrato.".pdf");
     }
 
     /**
@@ -99,10 +98,10 @@ class DomiciliacionController extends Controller
      * @param  \App\Domiciliacion  $domiciliacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recibo $recibo, Domiciliacion $domiciliacion)
+    public function edit(Contrato $contrato, Domiciliacion $domiciliacion)
     {
         //
-        return view('domiciliacion.form',['recibo'=>$recibo,'edit'=>true,'domiciliacion'=>$domiciliacion]);
+        return view('domiciliacion.form',['contrato'=>$contrato,'edit'=>true,'domiciliacion'=>$domiciliacion]);
 
     }
 
@@ -113,7 +112,7 @@ class DomiciliacionController extends Controller
      * @param  \App\Domiciliacion  $domiciliacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Recibo $recibo, Request $request, Domiciliacion $domiciliacion)
+    public function update(Contrato $contrato, Request $request, Domiciliacion $domiciliacion)
     {
         //
         $rules=[
@@ -127,7 +126,7 @@ class DomiciliacionController extends Controller
 
         $this->validate($request, $rules);
         $domiciliacion->update($request->all());
-        return redirect()->route('recibos.domiciliacion.index',['recibo'=>$recibo]);
+        return redirect()->route('contratos.domiciliacion.index',['contrato'=>$contrato]);
     }
 
     /**
@@ -136,7 +135,7 @@ class DomiciliacionController extends Controller
      * @param  \App\Domiciliacion  $domiciliacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recibo $recibo, Domiciliacion $domiciliacion)
+    public function destroy(Contrato $contrato, Domiciliacion $domiciliacion)
     {
         //
     }

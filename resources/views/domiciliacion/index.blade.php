@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
 	<div class="card-header">
-		Formato de domiciliación para el recibo #{{$recibo->clave.$recibo->id}}
+		Formato de domiciliación para el contrato #{{$contrato->numero_contrato}}
 	</div>
 	<div class="card-body">
 		<div class="row">
@@ -32,7 +32,7 @@
 			</div>
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
 				<label for="">Monto del recibo</label>
-				<span class="form-control bg-light">${{number_format($plan->cuota_periodica_integrante($recibo->monto),2)}}</span>
+				<span class="form-control bg-light">${{number_format($plan->cuota_periodica_integrante($contrato->monto,$contrato->recibo->presolicitud->cotizacion()->factor_actualizacion),2)}}</span>
 			</div>
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
 				<label for="">I.V.A. del recibo</label>
@@ -54,8 +54,8 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex justify-content-around">
-			<a href="{{ route('recibos.domiciliacion.edit',['recibo'=>$recibo,'domiciliacion'=>$domiciliacion]) }}" class="btn btn-info">Editar</a>
-			<a href="{{ route('recibos.domiciliacion.show',['recibo'=>$recibo,'domiciliacion'=>$domiciliacion]) }}" class="btn btn-success">Descargar formato</a>
+			<a href="{{ route('contratos.domiciliacion.edit',['contrato'=>$contrato,'domiciliacion'=>$domiciliacion]) }}" class="btn btn-info">Editar</a>
+			<a href="{{ route('contratos.domiciliacion.show',['contrato'=>$contrato,'domiciliacion'=>$domiciliacion]) }}" class="btn btn-success">Descargar formato</a>
 		</div>
 	</div>
 </div>

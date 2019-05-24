@@ -76,8 +76,8 @@
 						<div class="one-half column u-pull-right">
 							<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</strong></p>
 							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$presolicitud->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$recibo->contrato->grupo->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$contrato->grupo->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
 						</div>
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$puntos}} puntos</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($recibo->contrato->monto,2)}}</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
 						<p class="center" style="border-bottom: 0.5px solid black;"><strong>168 meses</strong></p>
 						
 					</div>
@@ -135,7 +135,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left" style="padding-left: 25px;">
-					cuota periodica total inicial de ${{number_format($plan->cuota_periodica_integrante($recibo->contrato->monto),2)}}
+					Cuota periodica total inicial de ${{number_format($plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion),2)}}
 				</p>
 			</div>
 		</div>

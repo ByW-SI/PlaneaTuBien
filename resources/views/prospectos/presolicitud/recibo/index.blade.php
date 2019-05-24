@@ -3,20 +3,100 @@
 <div class="card">
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Recibo'])
 	<div class="card-body">
-		<div class="d-flex justify-content-center mb-3">
-			@if (sizeof($cotizacion->contratos()) > sizeof($presolicitud->recibos))
-				{{-- true expr --}}
-				<a href="{{ route('prospectos.presolicitud.recibos.create',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-success">Crear recibo</a>
-			@else
+		<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 border">
+					<div class="row mt-3">
+
+						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+							<label for="monto">Recibo por </label>
+							<span class="form-control">{{$presolicitud->recibo->monto}}</span>
+						</div>
+						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+							<label for="">Sucursal</label>
+							<span class="form-control">{{$presolicitud->recibo->sucursal}}</span>
+						</div>
+						<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+							<label for="">Tipo pago</label>
+							<span class="form-control">{{$presolicitud->recibo->tipo_pago}}</span>
+						</div>
+						@if ($presolicitud->recibo->tipo_pago == "Tarjeta de crédito")
+							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+								<label for="">Tarjeta</label>
+								<span class="form-control">{{$presolicitud->recibo->tipo_tarjeta}}</span>
+							</div>
+						@endif
+						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+							<label for="">No.</label>
+							<span class="form-control">{{$presolicitud->recibo->numero}}</span>
+						</div>
+						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+							<label for="">Banco Emisor</label>
+							<span class="form-control">{{$presolicitud->recibo->banco}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 border bg-light border">
+					<div class="row mt-3">
+						<div class="col-6 mt-2">
+							<label>Inscripción inicial</label>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control text-center">{{number_format($presolicitud->recibo->insc_inicial,2)}}</span>
+							</div>
+						</div>
+						<div class="col-6 mt-2">
+							<label>I.V.A.</label>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control text-center">{{number_format($presolicitud->recibo->iva,2)}}</span>
+							</div>
+						</div>
+						<div class="col-6 mt-2">
+							<label>Subtotal</label>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control text-center">{{number_format($presolicitud->recibo->subtotal,2)}}</span>
+							</div>
+						</div>
+						<div class="col-6 mt-2">
+							<label>Cuota Periódica Total:</label>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control text-center">{{number_format($presolicitud->recibo->cuota_periodica,2)}}</span>
+							</div>
+						</div>
+						<div class="col-6 mt-2">
+							<label>Total:</label>
+						</div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control text-center">{{number_format($presolicitud->recibo->total,2)}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
 				
-			@endif
-			<a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Manual del consumidor</a>
-			<a href="{{ route('prospectos.presolicitud.consentimiento_seguro',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Consentimiento de Seguro</a>
-			<a href="{{ route('prospectos.presolicitud.aviso_privacidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Aviso de Privacidad</a>
-			<a href="{{ route('prospectos.presolicitud.carta_bienvenida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Carta de Bienvenida</a>
-			<a href="{{ route('prospectos.presolicitud.cuestionario_calidad',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info btn-sm mr-3">Cuestionario de Calidad</a>
-		</div>
-		<table class="table table-bordered table-striped">
+			</div>
+		{{-- <table class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th scope="col">Número de contrato</th>
@@ -60,10 +140,9 @@
 						</td>
 					</tr>
 				@empty
-					{{-- empty expr --}}
 				@endforelse
 			</tbody>
-		</table>
+		</table> --}}
 	</div>
 	@include('prospectos.presolicitud.footer',['presolicitud'=>$presolicitud])
 	

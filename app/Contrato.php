@@ -36,4 +36,8 @@ class Contrato extends Model
     {
         return $this->hasOne('App\Domiciliacion');
     }
+    public function checklist()
+    {
+        return $this->hasOne('App\ChecklistFolder');
+    }
 }

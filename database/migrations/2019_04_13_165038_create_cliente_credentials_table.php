@@ -18,7 +18,7 @@ class CreateClienteCredentialsTable extends Migration
             $table->integer('presolicitud_id')->unique()->unsigned()->nullable();
             $table->foreign('presolicitud_id')->references('id')->on('presolicituds');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

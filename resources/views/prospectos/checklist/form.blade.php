@@ -6,13 +6,13 @@
         	CHECKLIST FOLDER DE {{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
         </h5>
     </div>
-    <form method="POST" action="{{ route('recibos.checklist.store',['recibo'=>$recibo]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('contratos.checklist.store',['contrato'=>$contrato]) }}" enctype="multipart/form-data">
 	@csrf
 		
 	    <div class="card-body">
 	    	<div class="row">
 	    		<h4>
-	    			Recibo {{$recibo->clave.$recibo->id}}
+	    			Contrato {{$contrato->numero_contrato}}
 	    		</h4>
 	    	</div>
 	    	<div class="row">

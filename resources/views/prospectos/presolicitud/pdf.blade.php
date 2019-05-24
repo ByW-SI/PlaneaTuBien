@@ -34,7 +34,7 @@
 							<label style="font-size: 7px">FECHA:</label>
 						</div>
 						<div class="one-half column u-pull-right">
-							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->folio.$recibo->contrato->numero_contrato}}</label>
+							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{$presolicitud->folio.$recibo->id}}</label>
 							<label style="font-size: 7px; border-bottom: 0.5px solid #B8242B;text-align: center;">{{date('d-m-Y')}}</label>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 						<label style="font-size: 10px">Precio Inicial del Bien:</label>
 					</div>
 					<div class="one-half column u-pull-right">
-						<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($recibo->contrato->monto,2)}}</label>
+						<label style="font-size: 10px;border-bottom: 0.5px solid #B8242B;text-align: center;">${{number_format($recibo->monto,2)}}</label>
 					</div>
 				</div>
 				<div class="two-thirds column u-pull-right">
@@ -67,7 +67,7 @@
 							<label style="font-size: 10px"> Plan:</label>
 						</div>
 						<div class="ten columns u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: center;">
-							{{(int)$presolicitud->precio_nolose}}
+							{{(int)$presolicitud->precio_nolose}} (meses)
 						</div>
 					</div>
 				</div>
@@ -922,7 +922,7 @@
 				<div class="twelve columns">
 					<div class="one-half column u-pull-left">
 						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 15px; text-align: center">
-							<label style="font-size: 10px; text-align: center;"><strong>{{$recibo->contrato->numero_contrato}}</strong></label>
+							<label style="font-size: 10px; text-align: center;"><strong>{{$contrato}}</strong></label>
 						</div>
 						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 15px"></div>
 					</div>
