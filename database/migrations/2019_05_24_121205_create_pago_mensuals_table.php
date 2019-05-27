@@ -16,6 +16,14 @@ class CreatePagoMensualsTable extends Migration
         Schema::create('pago_mensuals', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('contratos');
+            $table->string('status')->default('registrado');
+            $table->decimal('monto',8,2);
+            $table->date('fecha_pago');
+            $table->decimal('adeudo',8,2)->default(0);
+            $table->decimal('total',8,2);
+            $table->string('folio');
         });
     }
 

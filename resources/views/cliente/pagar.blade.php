@@ -16,25 +16,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($cliente->recibos as $recibo)
+					@foreach ($cliente->recibo->contratos as $contrato)
         				{{-- @if ($recibo->checklist && $recibo->checklist->status) --}}
 							<tr>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}"><input type="checkbox" name="recibo[]" id="recibo{{$recibo->id}}" value="{{$plan->cuota_periodica_integrante($recibo->monto)}}"></label>
+									<label for="recibo{{$contrato->id}}"><input type="checkbox" name="recibo[]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto)}}"></label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										{{$recibo->clave.$recibo->contrato->numero_contrato}}
+									<label for="recibo{{$contrato->id}}">
+										{{$contrato->clave.$contrato->numero_contrato}}
 									</label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										${{number_format($recibo->contrato->monto,2)}}
+									<label for="recibo{{$contrato->id}}">
+										${{number_format($contrato->monto,2)}}
 									</label>
 								</td>
 								<td class="text-center">
-									<label for="recibo{{$recibo->id}}">
-										${{number_format($plan->cuota_periodica_integrante($recibo->monto),2)}}
+									<label for="recibo{{$contrato->id}}">
+										${{number_format($plan->cuota_periodica_integrante($contrato->monto),2)}}
 									</label>
 								</td>
 							</tr>
