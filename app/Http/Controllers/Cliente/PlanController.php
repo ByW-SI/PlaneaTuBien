@@ -30,4 +30,10 @@ class PlanController extends Controller
     	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
 
+    public function guardarPago(Request $request)
+    {
+        $pago = PagoMensual::create($request->all());
+        return redirect()->route('cliente.dashboard');
+    }
+
 }

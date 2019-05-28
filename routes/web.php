@@ -34,6 +34,7 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/corrida_financiera','Cliente\PlanController@corrida')->name('corrida_financiera');
 	Route::get('/pagar','Cliente\PlanController@pagar')->name('pagar');
 	//Route::resource('cotizacions','Cliente\CotizacionController');
+	//Route::resource('/Pagos', 'Pagos\PagoMensualController')->name('clientes.pagos');
 
 });
 
