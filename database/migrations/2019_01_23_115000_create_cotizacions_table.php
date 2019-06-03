@@ -29,6 +29,8 @@ class CreateCotizacionsTable extends Migration
             $table->decimal('descuento',5,2)->default(0.00);    
             $table->decimal('inscripcion',8,2)->default(0.00);
             $table->decimal('factor_actualizacion')->default(3);
+            $table->string('tipo_inscripcion');
+            $table->boolean('liberar')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

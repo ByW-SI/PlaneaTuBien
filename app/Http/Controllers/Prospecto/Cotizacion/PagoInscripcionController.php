@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Prospecto\Cotizacion;
 use App\Cotizacion;
 use App\Http\Controllers\Controller;
 use App\Events\PagoCreated;
-use App\Pago;
+use App\PagoInscripcion;
 use App\Banco;
 use App\Prospecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PagosController extends Controller
+class PagoInscripcionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,8 @@ class PagosController extends Controller
     {
         //
         $bancos = Banco::orderBy('nombre','asc')->get();
-        $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
+        // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
+        $folio = $prospecto->id.$cotizacion->plan->abreviatura.$cotizacion->id.sizeof($cotizacion->pago_inscripcions);
         return view('prospectos.perfil.pagos.form',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'bancos'=>$bancos,'edit'=>false,'folio'=>$folio]);
 
     }
@@ -54,14 +55,13 @@ class PagosController extends Controller
             'identificacion'=>'required|in:INE,Pasaporte,Cédula Profesional,Cartilla,Otro',
             'comprobante'=>'required|in:Luz,Agua,Teléfono,Predial',
             'forma'=>'required|in:Efectivo,Depósito,Cheque,Tarjeta de Crédito,Tarjeta de Débito,Transferencia',
-            'monto'=>'required|numeric',
-            'total'=>"required|numeric"
+            'monto'=>'required|numeric'
         ];
         $this->validate($request,$rules);
         //return dd($request->all());
-        $pago = new Pago($request->all());
+        $pago = new PagoInscripcion($request->all());
         $pago->prospecto()->associate($prospecto);
-        $cotizacion->pagos()->save($pago);
+        $cotizacion->pago_inscripcions()->save($pago);
         event(new PagoCreated($prospecto, $pago, Auth::user()));
         return redirect()->route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
 
@@ -74,7 +74,7 @@ class PagosController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function show(Pago $pago)
+    public function show(PagoInscripcion $pago)
     {
         //
     }
@@ -85,7 +85,7 @@ class PagosController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pago $pago)
+    public function edit(PagoInscripcion $pago)
     {
         //
     }
@@ -97,7 +97,7 @@ class PagosController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pago $pago)
+    public function update(Request $request, PagoInscripcion $pago)
     {
         //
     }
@@ -108,7 +108,7 @@ class PagosController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pago $pago)
+    public function destroy(PagoInscripcion $pago)
     {
         //
     }
@@ -121,17 +121,5 @@ class PagosController extends Controller
      * @param  \App\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function changeStatus(Prospecto $prospecto, Cotizacion $cotizacion, Pago $pago, Request $request)
-    {
-        //
-        // dd($pago);
-         $rules = [
-            'status'=>'required|in:registrado,aprobado,rechazado',
-        ];
-        $this->validate($request,$rules);
-        $pago->update([
-            'status'=>$request->status
-        ]);
-        return back();
-    }
+    
 }

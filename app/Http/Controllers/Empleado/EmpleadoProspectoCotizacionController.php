@@ -10,6 +10,7 @@ use App\Promocion;
 use App\Prospecto;
 use App\Plan;
 use App\FactorActualizacion;
+use App\Events\Cotizacion0Created;
 use Illuminate\Http\Request;
 
 class EmpleadoProspectoCotizacionController extends Controller
@@ -52,12 +53,33 @@ class EmpleadoProspectoCotizacionController extends Controller
 
         // $folio = $empleado->id.$prospecto->id.date('dmY');
         // dd($folio);
+
+        $request->validate([
+            'monto'=>'required|numeric',
+            'ahorro'=>"required|numeric",
+            'plan'=>"required|numeric",
+            'descuento'=>'nullable|numeric',
+            'promocion'=>'nullable|numeric',
+            'tipo_inscripcion'=>'string|required',
+
+        ]);
         $plan = Plan::find($request->plan);
         $promocion = Promocion::find($request->promocion);
-        $folio = $prospecto->id.$plan->abreviatura.(sizeOf($prospecto->cotizaciones)+1);
+        
+        // $folio = $prospecto->id.$plan->abreviatura.(sizeOf($prospecto->cotizaciones)+1);
+        // dd($cotizacion->inscripcion);
 
         $cotizacion = new Cotizacion($request->all());
-        $cotizacion->folio = $folio;
+        $cotizacion->inscripcion= floatval(str_replace(',', '', str_replace('', '.', $cotizacion->inscripcion)));
+        $year = date('y');
+        for ($i = 0; $i < 9999; $i++) {
+            $folio = str_pad("$i".$year,6,'0',STR_PAD_LEFT);
+            $cot_exist = Cotizacion::where('folio',$folio)->get();
+            if($cot_exist->isEmpty()){
+                $cotizacion->folio = $folio;
+                break;
+            }
+        }
         $cotizacion->elegir = 0;
         $cotizacion->plan_id = $plan->id;
         $prospecto->cotizaciones()->save($cotizacion);
@@ -65,7 +87,17 @@ class EmpleadoProspectoCotizacionController extends Controller
         $factor = FactorActualizacion::where('autorizar',1)->get()->last();
         $cotizacion->factor_actualizacion = ($factor) ? $factor->porcentaje : 3 ;
 
-        $cotizacion->save();
+        $verificar = $cotizacion->save();
+        if($verificar && sizeof($prospecto->cotizaciones)>=7){
+            $prospecto->cotizaciones->first()->delete();
+            // dd('se borro');
+        }
+
+        if($cotizacion->tipo_inscripcion == "0_inscripcion_inicial"){
+            event(new Cotizacion0Created($cotizacion));
+            // dd('si entro');
+        }
+        // dd('fin');
         return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
     }
 

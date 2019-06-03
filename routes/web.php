@@ -179,8 +179,7 @@ Route::get('promocion/{promocion}','Precargas\PromocionController@getPromo')->na
 // SEGURIDAD
 Route::resource('usuarios', 'Usuario\UsuarioController');
 Route::resource('perfils', 'Perfil\PerfilController');
-Route::resource('prospectos.cotizacions.pagos','Prospecto\Cotizacion\PagosController');
-Route::put('prospectos/{prospecto}/cotizacions/{cotizacion}/pagos/{pago}/status','Prospecto\Cotizacion\PagosController@changeStatus')->name('prospectos.cotizacions.pagos.update_status');
+Route::resource('prospectos.cotizacions.pagos','Prospecto\Cotizacion\PagoInscripcionController');
 
 // AUTH
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -192,8 +191,18 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PAGOS
-Route::resource('pagos', 'Pagos\PagosController',['only'=>['index','show']]);
+Route::resource('pagos', 'Pagos\PagoInscripcionController',['only'=>['index','show']]);
+Route::put('/pagos/{pago}/status','Pagos\PagoInscripcionController@changeStatus')->name('pagos.update_status');
+Route::get('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@formReciboProvisional')->name('pagos.recibo_provisional');
+Route::post('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@submitReciboProvisional')->name('pagos.submit_recibo_provisional');
 
 // CODIGOS POSTAL
 Route::get('cp/{cp}','CodigoPostal\CodigoPostalController@getCP')->name('cp.get');
 Route::get('cp/{cp}/{colonia}','CodigoPostal\CodigoPostalController@getColonia')->name('colonia.get');
+
+// Polizas
+
+Route::resource('polizas','Poliza\PolizaController');
+
+// autorización de cotizaciones con inscripcion 0
+Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','show','update','destroy']]);

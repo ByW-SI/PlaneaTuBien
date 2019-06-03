@@ -5,6 +5,7 @@
 		<h4>
 			{{$edit ? "Actualizar Pago" : "Nuevo Pago"}}
 		</h4>
+		<span>Tipo de inscripción: {{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
 	</div>
 	<form method="POST" action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
 		@csrf
@@ -24,7 +25,7 @@
 			<div class="row">
 				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
 					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}" name="referencia" id="referencia" readonly="">
+					<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}" name="referencia" id="referencia">
 				</div>
 				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
 					<label for="folio">Folio</label>
@@ -71,16 +72,7 @@
 						<div class="input group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input type="number" class="form-control" step="any" min="0" name="monto" id="monto" required="">
-					</div>
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-3 form-group" id="div_monto">
-					<label for="total">Total</label>
-					<div class="input-group mb-3">
-						<div class="input group-prepend">
-							<span class="input-group-text">$</span>
-						</div>
-						<input type="number" class="form-control" step="any" min="0" name="total" id="total">
+						<input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required="">
 					</div>
 				</div>
 			</div>

@@ -95,6 +95,10 @@ class PerfilController extends Controller
         }
         $cotizacion->elegir = 1;
         $cotizacion->save();
+        $cotizaciones = $prospecto->cotizaciones()->where('elegir',0)->get();
+        foreach ($cotizaciones as $cot) {
+            $cot->delete();
+        }
         return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
 
 

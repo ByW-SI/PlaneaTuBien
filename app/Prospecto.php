@@ -34,6 +34,10 @@ class Prospecto extends Model
     protected $dates=[
         'deleted_at'
     ];
+    public function getFullNameAttribute()
+    {
+        return $this->nombre." ".$this->appaterno." ".$this->apmaterno;
+    }
 
     public function asesor() {
         return $this->belongsTo('App\Empleado', 'empleado_id');
@@ -47,8 +51,8 @@ class Prospecto extends Model
         return $this->hasMany('App\Cotizacion');
     }
 
-    public function pagos() {
-        return $this->hasMany('App\Pago');
+    public function pago_inscripcions() {
+        return $this->hasMany('App\PagoInscripcion');
     }
 
     public function crms(){

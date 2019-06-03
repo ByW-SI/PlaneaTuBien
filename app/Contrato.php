@@ -27,9 +27,9 @@ class Contrato extends Model
     	return $this->belongsTo('App\Grupo');
     }
 
-    public function recibo()
+    public function presolicitud()
     {
-    	return $this->belongsTo('App\Recibo');
+    	return $this->belongsTo('App\Presolicitud');
     }
 
     public function domiciliacion()

@@ -104,7 +104,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Fecha de Nacimiento</label>
-					<input type="date" class="form-control" value="{{old('fecha_nacimiento')}}" name="fecha_nacimiento" required="">
+					<input type="date" class="form-control" value="{{old('fecha_nacimiento')}}" name="fecha_nacimiento" min="{{(integer)date('Y')-64}}-{{date('m')}}-{{date('d')+1}}" max="{{(integer)date('Y')-18}}-{{date('m')}}-{{date('d')}}" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Lugar de Nacimiento</label>

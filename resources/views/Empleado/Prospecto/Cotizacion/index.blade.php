@@ -112,11 +112,13 @@
                 <div class="col-sm-4">
                     <h5>Cotizaciones:</h5>
                 </div>
-                <div class="col-sm-4 text-center">
-                    <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i><strong> Agregar Cotización</strong>
-                    </a>
-                </div>
+                @if (!$prospecto->perfil)
+                    <div class="col-sm-4 text-center">
+                        <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">
+                            <i class="fa fa-plus"></i><strong> Agregar Cotización</strong>
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="card-body">

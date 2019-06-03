@@ -126,6 +126,27 @@
           var not_existentes = notificacion.html();
           notificacion.html(not_existentes + toast);
         });
+        channel.bind('cotizacion0-creada', function(data) {
+          // alert(JSON.stringify(data)); 
+          var notificacion = $("#notificacion");
+          var toast = `
+            <div class="toast fade show" role="status" aria-live="polite" aria-atomic="true"  data-delay="5000">
+              <div class="toast-header">
+                <strong class="mr-auto">Cotización</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                <a href="{{ url('cotizacion0') }}/${data.cotizacion.id}">
+                  ${data.message}
+                </a>
+              </div>
+            </div>
+          `;
+          var not_existentes = notificacion.html();
+          notificacion.html(not_existentes + toast);
+        });
         // $('.toast').toast('show')  
     </script>
     @stack('scripts')

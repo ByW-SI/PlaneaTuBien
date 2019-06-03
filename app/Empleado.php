@@ -52,6 +52,11 @@ class Empleado extends Model
 
     protected $dates=['deleted_at'];
 
+    public function getFullNameAttribute()
+    {
+        return $this->nombre." ".$this->paterno." ".$this->materno;
+    }
+
     public function clientes() {
         return $this->hasOne('App\Cliente');
     }

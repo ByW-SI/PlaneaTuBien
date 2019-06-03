@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Pagos;
 
-use App\Pago;
+use App\PagoInscripcion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PagosController extends Controller
+class PagoInscripcionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PagosController extends Controller
      */
     public function index()
     {
-        $pagos = Pago::get();
+        $pagos = PagoInscripcion::get();
         return view('pagos.index', ['pagos' => $pagos]);
     }
 
@@ -46,7 +46,7 @@ class PagosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Pago $pago)
+    public function show(PagoInscripcion $pago)
     {
         //
         return view('pagos.show',['pago'=>$pago]);
@@ -84,5 +84,31 @@ class PagosController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function changeStatus(PagoInscripcion $pago, Request $request)
+    {
+        //
+        // dd($pago);
+         $rules = [
+            'status'=>'required|in:registrado,aprobado,rechazado',
+        ];
+        $this->validate($request,$rules);
+        $pago->update([
+            'status'=>$request->status
+        ]);
+        if ($pago->status == "aprobado") {
+            $cotizacion = $pago->cotizacion;
+            $cotizacion->liberar = 1;
+            $cotizacion->save();
+        }
+        return back();
+    }
+    public function formReciboProvisional(PagoInscripcion $pago)
+    {
+        
+    }
+    public function submitReciboProvisional(Request $request, PagoInscripcion $pago)
+    {
+        
     }
 }

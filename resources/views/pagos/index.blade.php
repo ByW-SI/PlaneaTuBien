@@ -19,8 +19,10 @@
                     <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                         <tr class="info">
                             <th>Fecha del pago</th>
-                            <th>Folio de la cotización</th>
+                            <th>Folio del pago</th>
+                            <th>Referencia</th>
                             <th>Inscripción</th>
+                            <th>Cuota Periódica Total</th>
                             <th>Prospecto</th>
                             <th>Asesor</th>
                             <th>Cantidad pagada</th>
@@ -32,12 +34,16 @@
                             <tr>
                                 <td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
                                 <td>
+                                    {{$pago->folio}}
+                                </td>
+                                <td>
                                     {{$pago->referencia}}
                                 </td>
                                 <td>${{ number_format($pago->cotizacion->inscripcion_total, 2) }}</td>
+                                <td>${{ number_format($pago->cotizacion->cuota_periodica_total, 2) }}</td>
                                 <td>{{ $pago->prospecto->nombre." ".$pago->prospecto->appaterno." ".$pago->prospecto->apmaterno }}</td>
                                 <td>{{ $pago->prospecto->asesor->nombre." ".$pago->prospecto->asesor->paterno." ".$pago->prospecto->asesor->materno }}</td>
-                                <td>${{ number_format($pago->total, 2) }}</td>
+                                <td>${{ number_format($pago->monto, 2) }}</td>
                                 <td>{{ $pago->forma }}</td>
                                 <td>
                                     @if ($pago->cotizacion->inscripcionFaltante() >= 0)
@@ -50,7 +56,7 @@
                                     
                                         @if ($pago->status == "registrado" )
 
-                                            <form method="POST" id="estatus{{$pago->id}}" class="{{$pago->status != 'registrado' ? 'd-none' : ''}}"  action="{{ route('prospectos.cotizacions.pagos.update_status',['prospecto'=>$pago->prospecto,'cotizacion'=>$pago->cotizacion,'pago'=>$pago]) }}">
+                                            <form method="POST" id="estatus{{$pago->id}}" class="{{$pago->status != 'registrado' ? 'd-none' : ''}}"  action="{{ route('pagos.update_status',['pago'=>$pago]) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <select name="status" class="form-control mt-2" id="selectStatus{{$pago->id}}" onchange="cambiarstatus({{$pago->id}})">
@@ -59,10 +65,12 @@
                                                     <option value="rechazado" {{$pago->status == "rechazado" ? 'selected=""' : ''}} >Rechazado</option>
                                                 </select>
                                             </form>
+                                        @elseif($pago->status == "aprobado")
+                                            <a href="{{ route('pagos.recibo_provisional',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-success">Crear Recibo Provisional</a>
                                         @else
                                             <label for="">{{ strtoupper($pago->status) }}</label>
                                         @endif
-                                        <a href="{{ route('pagos.show',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-info">Ver pago</a>
+                                        <a href="{{ route('pagos.show',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-primary">Ver pago</a>
                                 </td>
                             </tr>
                         @endforeach

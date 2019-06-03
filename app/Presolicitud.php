@@ -78,9 +78,14 @@ class Presolicitud extends Model
     	return $this->hasMany('App\Referencia','presolicitud_id','id');
     }
 
-    public function recibo()
+    public function recibos()
     {
-    	return $this->hasOne('App\Recibo','presolicitud_id','id');
+    	return $this->hasMany('App\Recibo','presolicitud_id','id');
+    }
+    
+    public function contratos()
+    {
+        return $this->hasMany('App\Contrato');
     }
 
     public function getStatusAttribute()
