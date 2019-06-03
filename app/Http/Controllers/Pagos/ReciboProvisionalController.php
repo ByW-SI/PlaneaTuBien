@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Pagos;
 
-use Illuminate\Http\Request;
+use App\Banco;
+use App\Contrato;
 use App\Http\Controllers\Controller;
 use App\PagoInscripcion;
-use App\Banco;
+use App\Recibo;
+use Illuminate\Http\Request;
 
 class ReciboProvisionalController extends Controller
 {
@@ -190,13 +192,17 @@ class ReciboProvisionalController extends Controller
     	$cotizacion = $pago->cotizacion;
     	$prospecto = $cotizacion->prospecto;
     	$monto = $cotizacion->monto;
+    	$inscripcion_solo = $cotizacion->monto*($cotizacion->plan->inscripcion/100);
+    	$iva_solo_inscripcion = $inscripcion_solo*0.16;
+
     	$total_pagado = $pago->cotizacion->total_pagado-$pago->monto;
-        $inscripcion_restante = $pago->cotizacion->inscripcion_total-$total_pagado;
+        $inscripcion_restante = $inscripcion_solo-$total_pagado;
     	$monto_pago = $pago->monto;
     	// si es mayor al monto de inscripcion
         if($monto_pago >=$inscripcion_restante){
         	$inscripcion = $inscripcion_restante;
-        	$sobra = $monto_pago -$inscripcion;
+        	$iva = $inscripcion*.16;
+        	$sobra = $monto_pago -($inscripcion+$iva);
         	if(round($sobra,2) > 0){
 
         		$cuota_periodica = $sobra;
@@ -204,14 +210,16 @@ class ReciboProvisionalController extends Controller
         	else{
         		$cuota_periodica = 0;
         	}
+        	$inscripcion_inicial = $inscripcion;
+       		$iva_inscripcion = $iva;
         }
         // si es menor al monto de inscripcion y no lo cubre;
         else{
-        	$inscripcion = $monto_pago;
+        	$inscripcion_inicial = $monto_pago-($monto_pago*0.16);
+        	$iva_inscripcion = $monto_pago*0.16;
         	$cuota_periodica = 0;
         }
-        $inscripcion_inicial = $inscripcion-($inscripcion*0.16);
-        $iva_inscripcion = $inscripcion*0.16;
+        
         $monto_inscripcion_con_iva = $inscripcion_inicial+$iva_inscripcion;
         $primera_cuota_periodica_total = $cuota_periodica;
         $total = $monto_pago;
@@ -220,6 +228,62 @@ class ReciboProvisionalController extends Controller
     }
     public function submitReciboProvisional(Request $request, PagoInscripcion $pago)
     {
-        
+        $cotizacion = $pago->cotizacion;
+    	$prospecto = $cotizacion->prospecto;
+    	$presolicitud = $prospecto->perfil->presolicitud;
+        $grupos = $cotizacion->plan->grupos;
+        // dd($cotizacion->contratos());
+        foreach ($grupos as $grupo) {
+            if($grupo->contratos > 0 && $grupo->activo == 1){
+                $rules=[
+                    'monto'=>"required|string",
+                    'sucursal'=>"required|max:190",
+                    'tipo_pago'=>"required",
+                    'tipo_tarjeta'=>"required_if:tipo_pago,Tarjeta de Crédito,Tarjeta de Débito",
+                    'numero'=>"nullable|max:190",
+                    'banco'=>"nullable|max:190",
+                    'insc_inicial'=>"required|string",
+                    'iva'=>"required|string",
+                    'subtotal'=>"required|string",
+                    'cuota_periodica'=>"required|string",
+                    'total'=>"required|string"
+                ];
+                $this->validate($request,$rules);
+                // dd($request->all());
+                $recibo = new Recibo($request->all());
+                $recibo->monto = floatval(str_replace(',', '', str_replace('', '.', $recibo->monto)));
+                $recibo->insc_inicial = floatval(str_replace(',', '', str_replace('', '.', $recibo->insc_inicial)));
+                $recibo->iva = floatval(str_replace(',', '', str_replace('', '.', $recibo->iva)));
+                $recibo->subtotal = floatval(str_replace(',', '', str_replace('', '.', $recibo->subtotal)));
+                $recibo->cuota_periodica = floatval(str_replace(',', '', str_replace('', '.', $recibo->cuota_periodica)));
+                $recibo->total = floatval(str_replace(',', '', str_replace('', '.', $recibo->total)));
+                $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
+                $recibo->numero_contrato = Recibo::get()->count()+1;
+                $recibo->clave = substr(md5($presolicitud->id),0,5);
+                $recibo->total_letra = $this->to_word($recibo->total,"MXN");
+                $pago->recibo()->save($recibo);
+
+                if ($presolicitud->contratos->isEmpty() && $cotizacion->total_pagado >= $cotizacion->cuota_inscripcion) {
+                  foreach ($cotizacion->contratos() as $value) {
+                    $contrato = new Contrato;
+                    $contrato->monto = $value;
+                    $contrato->grupo()->associate($grupo->id);
+                    $grupo->contratos -= 1;
+                    $grupo->save();
+                    $contrato->numero_contrato = 500-$grupo->contratos;
+                    $contrato->estado = "registrado";
+                    $presolicitud->contratos()->save($contrato);
+                  }
+                }
+                return redirect()->route('pagos.index');
+            }
+        }
+    }
+    public function showReciboProvisional(PagoInscripcion $pago)
+    {
+    	$cotizacion = $pago->cotizacion;
+    	$prospecto = $cotizacion->prospecto;
+    	$recibo = $pago->recibo;
+    	return view('pagos.recibo.show',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago,'recibo'=>$recibo]);
     }
 }

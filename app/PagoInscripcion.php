@@ -29,8 +29,8 @@ class PagoInscripcion extends Model
 	public function cotizacion() {
 		return $this->belongsTo('App\Cotizacion');
 	}
-	public function recibos()
+	public function recibo()
     {
-    	return $this->hasMany('App\Recibo','pago_inscripcion_id','id');
+    	return $this->hasOne('App\Recibo','pago_inscripcion_id','id');
     }
 }

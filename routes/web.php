@@ -192,6 +192,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('pagos', 'Pagos\PagoInscripcionController',['only'=>['index','show']]);
 Route::put('/pagos/{pago}/status','Pagos\PagoInscripcionController@changeStatus')->name('pagos.update_status');
 Route::get('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@formReciboProvisional')->name('pagos.recibo_provisional');
+Route::get('/pagos/{pago}/recibo_provisional/show','Pagos\ReciboProvisionalController@showReciboProvisional')->name('pagos.recibo_provisional.show');
 Route::post('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@submitReciboProvisional')->name('pagos.submit_recibo_provisional');
 
 // CODIGOS POSTAL

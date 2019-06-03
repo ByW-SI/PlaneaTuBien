@@ -65,8 +65,10 @@
                                                     <option value="rechazado" {{$pago->status == "rechazado" ? 'selected=""' : ''}} >Rechazado</option>
                                                 </select>
                                             </form>
-                                        @elseif($pago->status == "aprobado")
+                                        @elseif($pago->status == "aprobado" && !$pago->recibo)
                                             <a href="{{ route('pagos.recibo_provisional',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-success">Crear Recibo Provisional</a>
+                                        @elseif($pago->recibo)
+                                            <a href="{{ route('pagos.recibo_provisional.show',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-success">Ver Recibo provisional</a>
                                         @else
                                             <label for="">{{ strtoupper($pago->status) }}</label>
                                         @endif
