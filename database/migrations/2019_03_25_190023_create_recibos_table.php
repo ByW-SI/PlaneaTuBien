@@ -15,23 +15,23 @@ class CreateRecibosTable extends Migration
     {
         Schema::create('recibos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('presolicitud_id');
-            $table->foreign('presolicitud_id')->references('id')->on('presolicituds');
+            $table->unsignedInteger('pago_inscripcion_id');
+            $table->foreign('pago_inscripcion_id')->references('id')->on('pago_inscripcions');
             $table->string('sucursal');
             $table->string('asesor');
             $table->decimal('monto',10,2);
             $table->string('clave');
             $table->string('tipo_pago');
             $table->string('tipo_tarjeta')->nullable();
-            $table->string('numero');
-            $table->string('banco');
+            $table->string('numero')->nullable();
+            $table->string('banco')->nullable();
             $table->decimal('insc_inicial',10,2);
             $table->decimal('iva',8,2);
             $table->decimal('subtotal',8,2);
             $table->decimal('cuota_periodica',8,2);
             $table->decimal('total',10,2);
             $table->string('total_letra')->nullable();
-            $table->string('numero_contrato');
+            // $table->string('numero_contrato');
             $table->timestamps();
             $table->softDeletes();
         });

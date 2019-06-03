@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use App\Prospecto;
-use App\Pago;
+use App\PagoInscripcion;
 use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -43,7 +43,7 @@ class PagoCreated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Prospecto $prospecto, Pago $pago, User $user)
+    public function __construct(Prospecto $prospecto, PagoInscripcion $pago, User $user)
     {
         $this->prospecto = $prospecto;
         $this->pago = $pago;

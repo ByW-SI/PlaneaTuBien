@@ -48,7 +48,7 @@ class CotizadorController extends Controller
         $plan->cuota_periodica_integrante = number_format($plan->cotizador($monto)['cuota_periodica_integrante'],2);
         $plan->monto_total = number_format($plan->monto_total_pagar($monto),2);
         $plan->sobrecosto_anual = $plan->sobrecosto_anual($monto);
-        $plan->monto_inscripcion_con_iva = $plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*($descuento/100));
+        $plan->monto_inscripcion_con_iva = number_format(($plan->monto_inscripcion_con_iva($monto)-($plan->monto_inscripcion_con_iva($monto)*($descuento/100))),2);
         return response()->json(['plan'=>$plan],200);
     }
     public function inscripcion($monto,$plan_id,$descuento=0){

@@ -62,7 +62,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->sueldo}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->sueldo,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -71,12 +71,12 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->ahorro}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->ahorro,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
                 <label for="calificacion">Calificación del prospecto:</label>
-                <input class="form-control" readonly="" type="number" value="{{$prospecto->calificacion}}">
+                <input class="form-control" readonly="" type="text" value="{{$prospecto->calificacion}}">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-12 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
                 <label for="estado">Estado del prospecto:</label>
@@ -97,7 +97,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->monto}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->monto,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
@@ -122,6 +122,15 @@
             <form action="{{route('empleados.prospectos.cotizacions.store', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" method="post">
                 {{ csrf_field() }}
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="monto">✱Valor de la propiedad</label>
@@ -129,7 +138,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">$</span>
                                 </div>
-                                <input class="form-control" type="number" name="monto" id="monto" min="300000" max="20000000" step="50000" required="">
+                                <select name="monto" id="monto" class="form-control" required="">
+                                    <option value="">Seleccione un monto</option>
+                                    @for ($i = 300000; $i <= 20000000; $i+=50000)
+                                        {{-- @if ($i%50000) --}}
+                                            <option value="{{$i}}">{{number_format($i)}}</option>
+                                        {{-- @endif --}}
+                                    @endfor
+                                </select>
+                                {{-- <input class="form-control" type="number" name="monto" id="monto" min="300000" max="20000000" step="50000" required=""> --}}
                             </div>
                         </div>
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
@@ -146,7 +163,7 @@
                         </div>
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="plan">✱Plan</label>
-                            <select name="plan" id="plan_cliente" class="form-control">
+                            <select name="plan" id="plan_cliente" class="form-control" required="">
                                 <option value="">Seleccionar</option>
                                 @foreach ($planes as $plan)
                                     <option value="{{$plan->id}}">{{$plan->nombre}}</option>
@@ -169,6 +186,15 @@
                                     @foreach ($promociones as $promocion)
                                         <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>   
                                     @endforeach   
+                            </select>
+                        </div>
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                            <label class="col-form-label">Pago de inscripción:</label>
+                            <select name="tipo_inscripcion" class="form-control" id="tipo_inscripcion_select" required="">
+                                <option value="">Seleccione una opcion</option>
+                                <option value="inscripcion_total">Inscripción Total</option>   
+                                <option value="inscripcion_diferida">Inscripción Diferida</option>   
+                                <option value="0_inscripcion_inicial">0% de inscripción</option>   
                             </select>
                         </div>
                     </div>

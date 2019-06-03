@@ -8,41 +8,37 @@
         	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
 			<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Ver perfil</a>
 			{{-- {{dd($cotizacion->pagos->count())}} --}}
-			@if ($cotizacion->pagos->count() > 0)
+			@if ($cotizacion->liberar)
         		<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
         	@endif
         </div>
-		<div class="d-flex justify-content-between">
-		</div>
 	</div>
 	<div class="card-body">
-		<div class="d-flex justify-content-center mb-5">
-			<a href="{{ route('prospectos.cotizacions.pagos.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-info"><i class="fas fa-money-check-alt"></i> Nuevo Pago</a>
-		</div>
+		@if ($cotizacion->inscripcionFaltante() > 0)
+			<div class="d-flex justify-content-center mb-3">
+				<a href="{{ route('prospectos.cotizacions.pagos.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-info"><i class="fas fa-money-check-alt"></i> Nuevo Pago</a>
+			</div>
+		@endif
 		<div class="row">
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th class="text-center" scope="col">Folio</th>
 						<th class="text-center" scope="col">Forma de pago</th>
-						<th class="text-center" scope="col">Cantidad</th>
-						<th class="text-center" scope="col">Adeudo</th>
-						<th class="text-center" scope="col">Monto total a pagar</th>
 						<th class="text-center" scope="col">Folio de cotización</th>
 						<th class="text-center" scope="col">Estado del pago</th>
+						<th class="text-center" scope="col">Monto total a pagar</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						@forelse ($cotizacion->pagos as $pago)
-							<tr>
+						@forelse ($cotizacion->pago_inscripcions as $pago)
+							<tr class="{{$pago->status == 'registrado' ? 'table-warning' : ($pago->status == 'rechazado' ? 'table-danger' : 'table-success')}}">
 								<th scope="row">{{$pago->folio}}</th>
 								<td class="text-center">{{$pago->forma}}</td>
-								<td class="text-center">${{number_format($pago->monto,2)}}</td>
-								<td class="text-center">${{number_format($pago->adeudo,2)}}</td>
-								<td class="text-center">${{number_format($pago->total,2)}}</td>
 								<td class="text-center">{{$pago->referencia}}</td>
 								<td class="text-center">{{ucwords($pago->status)}}</td>
+								<td class="text-center">${{number_format($pago->monto,2)}}</td>
 								{{-- <td class="text-center">
 									<div class="d-flex justify-content-around">
 										@if ($pago->status == "registrado" )
@@ -69,6 +65,10 @@
 						<tr>
 							<th colspan="4" class="text-center">Inscripción Total</th>
 							<th class="text-center">${{number_format($cotizacion->inscripcion_total,2)}}</th>
+						</tr>
+						<tr>
+							<th colspan="4" class="text-center">Cuota Periodica Total:</th>
+							<th class="text-center">${{number_format($cotizacion->cuota_periodica_total,2)}}</th>
 						</tr>
 						@if ($cotizacion->inscripcionFaltante() >= 0)
 							<tr>

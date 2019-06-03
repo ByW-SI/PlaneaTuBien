@@ -30,13 +30,9 @@ class Recibo extends Model
     	'deleted_at'
     ];
 
-    public function presolicitud(){
-    	return $this->belongsTo('App\Presolicitud','presolicitud_id');
+    public function pago_inscripcion(){
+    	return $this->belongsTo('App\PagoInscripcion','pago_inscripcion_id');
     }
 
-    public function contratos()
-    {
-        return $this->hasMany('App\Contrato');
-    }
     
 }

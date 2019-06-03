@@ -1,9 +1,11 @@
 @extends('principal')
 @section('content')
-<div class="card">
-	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Recibo'])
-	<form method="POST" action="{{ route('prospectos.presolicitud.recibos.store',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">
-		@csrf
+	<div class="card card-default">
+		<div class="card-header">
+			<h4 class="title">
+				Recibo Provisional para el pago #{{$pago->folio}} de {{$prospecto->full_name}}
+			</h4>
+		</div>
 		<div class="card-body">
 			@if ($errors->any())
 			    <div class="alert alert-danger">
@@ -114,80 +116,7 @@
 			</div>
 		</div>
 		<div class="card-footer">
-			<div class="d-flex justify-content-center">
-				<button class="btn btn-success" id="submit" type="submit"><i class="fas fa-arrow-alt-circle-right"></i> Siguiente</button>
-			</div>
+			
 		</div>
-
-	</form>
-</div>
+	</div>
 @endsection
-@push('scripts')
-	<script type="text/javascript">
-		// $(document).ready(function(){
-		$("#tipo_pago").change(function(){
-			var value = this.value;
-			var html= `
-			<label for="">Tarjeta</label>
-			<select class="form-control" id="tipo_tarjeta" name="tipo_tarjeta" required="">
-				<option value="">Elija una opción</option>
-				<option value="Visa" {{old('tipo_tarjeta') == "Visa" ? 'selected' : ''}}>Visa</option>
-				<option value="MasterCard" {{old('tipo_tarjeta') == "MasterCard" ? 'selected' : ''}}>MasterCard</option><option value="American Express" {{old('tipo_tarjeta') == "American Express" ? 'selected' : ''}}>American Express</option>
-			</select>
-			`;
-			$("#tarjetas").empty();
-			if(value == "Tarjeta de crédito"){
-				$("#tarjetas").append(html);
-			}
-			else{
-				$("#tarjetas").empty();
-			}
-		});
-		$(document).ready(function(){
-			// alert($("#tipo_pago").val() );
-			if($("#tipo_pago").val() == "Tarjeta de crédito"){
-				$("#tarjetas").append(`
-			<label for="">Tarjeta</label>
-			<select class="form-control" id="tipo_tarjeta" name="tipo_tarjeta" required="">
-				<option value="">Elija una opción</option>
-				<option value="Visa" {{old('tipo_tarjeta') == "Visa" ? 'selected' : ''}}>Visa</option>
-				<option value="MasterCard" {{old('tipo_tarjeta') == "MasterCard" ? 'selected' : ''}}>MasterCard</option>
-				<option value="American Express" {{old('tipo_tarjeta') == "American Express" ? 'selected' : ''}}>American Express</option>
-			</select>
-			`);
-			}
-		});
-		$("#cuota_periodica").change(function(){
-			var cuota_periodica = $("#cuota_periodica").val();
-			var subtotal = $("#subtotal").val();
-			var total = parseFloat(subtotal) + parseFloat(cuota_periodica);
-			$("#total").val(total.toFixed(2));
-		});
-		// $("#monto_contrato").change(function(){
-		// 	var monto = $("#monto").val();
-		// 	$("#cuota_periodica").empty();
-		// 	$("#cuota_periodica").append($("<option>").attr("value",0.00).text(0.00))
-		// 	$.ajax({
-		// 		url: "{{ url('api/inscripcion') }}/"+monto+"/{{$cotizacion->plan->id}}/{{$cotizacion->descuento}}",
-		// 		method: "GET",
-		// 		success:function(result){
-		// 			if(result.recibo){
-		// 				var recibo = result.recibo
-		// 				console.log(recibo);
-		// 				$("#insc_inicial").val(recibo.inscripcion_inicial.toFixed(2));
-		// 				$("#iva").val(recibo.iva.toFixed(2));
-		// 				$("#subtotal").val(recibo.monto_inscripcion_con_iva.toFixed(2));
-		// 				$("#cuota_periodica").append($("<option>").attr("value",recibo.cuota_periodica.toFixed(2)).text(recibo.cuota_periodica.toFixed(2)));
-		// 				$("#total").val(recibo.monto_inscripcion_con_iva.toFixed(2));
-
-		// 			}
-
-		// 		},
-		// 		error:function(err){
-		// 			console.error(err);
-		// 			$("#insc_inicial").val(0);
-		// 		}
-		// 	});
-		// });
-	</script>
-@endpush

@@ -183,6 +183,8 @@
 								<a class="dropdown-item" href="{{ route('puestos.index') }}"><i class="fas fa-users-cog"></i><strong> Puestos</strong></a>
 							@endif
 						@endforeach
+						{{-- FALTA AUTENTICACIÓN PARA POLIZAS --}}
+						<a class="dropdown-item" href="{{ route('polizas.index') }}"><i class="fas fa-house-damage"></i><strong> Poliza de seguros</strong></a>
 					</div>
 				</li>
 			@endif

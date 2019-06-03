@@ -232,7 +232,7 @@ function cotizar() {
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" type="number" id="inscripcion_input" readonly="" name="inscripcion" value="${plan.monto_inscripcion_con_iva.toFixed(2)}" required>
+                    <input class="form-control" type="text" id="inscripcion_input" readonly="" name="inscripcion" value="${plan.monto_inscripcion_con_iva}" required>
                 </div>
             </div>
         </div>`;
@@ -285,7 +285,7 @@ $(document).ready(function() {
                         <div class="form-group col-sm-3">
                             <label>Monto:</label>
                              <div class="input-group">
-                                <input class="form-control" value="${promocion.monto}">    
+                                <input class="form-control" value="${promocion.monto}" readonly="">    
                                 <div class="input-group-append">
                                     <span class="input-group-text">${promocion.tipo_monto == "porcentaje" ? "%" : "MXN"}</span>
                                 </div>

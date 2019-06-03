@@ -43,7 +43,8 @@ class Cotizacion extends Model
         'elegir',
         'ahorro',
         'descuento',
-        'inscripcion'
+        'inscripcion',
+        'tipo_inscripcion'
     ];
 
     protected $hidden =[
@@ -59,8 +60,11 @@ class Cotizacion extends Model
         return $this->belongsTo('App\Prospecto');
     }
 
-    public function pagos() {
-        return $this->hasMany('App\Pago');
+    public function pago_inscripcions() {
+        return $this->hasMany('App\PagoInscripcion');
+    }
+    public function perfil() {
+        return $this->hasOne('App\PerfilDatosPersonalCliente');
     }
 
     public function plan()
@@ -84,22 +88,42 @@ class Cotizacion extends Model
         $inscripcion_total = $monto_inscripcion_con_iva-($monto_inscripcion_con_iva*($this->descuento/100));
         return $inscripcion_total;
     }
+    public function getCuotaPeriodicaTotalAttribute()
+    {
+        $aportacion_periodica = $this->monto/$this->plan->plazo;
+        $cuota_administracion = $this->monto*($this->plan->cuota_admon/100);
+        $iva_cuota_admon = $cuota_administracion*0.16;
+        $seguro_vida = $this->monto*($this->plan->s_v/100);
+        $primera_cuota_periodica_total = $aportacion_periodica+$cuota_administracion+$iva_cuota_admon+$seguro_vida;
+        return $primera_cuota_periodica_total;
+    }
 
      public function task_send_mail()
     {
         return $this->hasOne('App\TaskSendMail','cotizacion_id','id');
     }
     public function inscripcionFaltante(){
-        $pagos = $this->pagos;
+        $pagos = $this->pago_inscripcions;
         $total_pagos = 0.00;
         foreach ($pagos as $pago) {
             if($pago->status == "aprobado"){
-                $total_pagos += $pago->total;
+                $total_pagos += $pago->monto;
             }
         }
-        $inscripcion = $this->inscripcion_total;
+        $inscripcion = $this->inscripcion_total+$this->cuota_periodica_total;
         $resta= $inscripcion - $total_pagos;
         return $resta;
+    }
+    public function getTotalPagadoAttribute()
+    {
+        $pagos = $this->pago_inscripcions;
+        $total_pagos = 0.00;
+        foreach ($pagos as $pago) {
+            if($pago->status == "aprobado"){
+                $total_pagos += $pago->monto;
+            }
+        }
+        return $total_pagos;
     }
 
 

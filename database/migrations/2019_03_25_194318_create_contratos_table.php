@@ -20,8 +20,8 @@ class CreateContratosTable extends Migration
             $table->string('estado');
             $table->unsignedInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos');
-            $table->unsignedInteger('recibo_id');
-            $table->foreign('recibo_id')->references('id')->on('recibos');
+            $table->unsignedInteger('presolicitud_id');
+            $table->foreign('presolicitud_id')->references('id')->on('presolicituds');
             $table->timestamps();
             $table->softDeletes();
         });

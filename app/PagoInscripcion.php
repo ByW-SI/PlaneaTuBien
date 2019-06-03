@@ -4,26 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pago extends Model
+class PagoInscripcion extends Model
 {
-	protected $table = 'pagos';
+	protected $table = 'pago_inscripcions';
 
 	protected $fillable = [
 		'id',
 		'prospecto_id',
 		'cotizacion_id',
 		'status',
-		'total',
 		'monto',
-		'restante',
 		'identificacion',
 		'comprobante',
 		'forma',
 		'banco',
-		'cheque',
-		'deposito',
-		'tarjeta',
-		'tarjetaHabiente',
 		'referencia',
 		'folio'
 	];
@@ -35,4 +29,8 @@ class Pago extends Model
 	public function cotizacion() {
 		return $this->belongsTo('App\Cotizacion');
 	}
+	public function recibos()
+    {
+    	return $this->hasMany('App\Recibo','pago_inscripcion_id','id');
+    }
 }
