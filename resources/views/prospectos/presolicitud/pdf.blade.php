@@ -922,7 +922,13 @@
 				<div class="twelve columns">
 					<div class="one-half column u-pull-left">
 						<div class="one-half column u-pull-left" style=" border: 1px solid #B8242B; height: 15px; text-align: center">
-							<label style="font-size: 10px; text-align: center;"><strong>{{$contrato}}</strong></label>
+							<label @if($contratos->count() < 9)style="font-size: 10px;text-align: center;" @else style="font-size: 6px;text-align: center;"@endif >
+								<strong>
+									@foreach($contratos as $cont)
+										{{$cont->numero_contrato}}
+									@endforeach
+								</strong>
+							</label>
 						</div>
 						<div class="one-half column u-pull-right" style=" border: 1px solid #B8242B; height: 15px"></div>
 					</div>

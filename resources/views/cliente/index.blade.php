@@ -30,12 +30,12 @@
                     
                 </div>
                 @foreach ($cliente->recibo->contratos as $contrato)
-                    @if ($contrato->checklist && $contrato->checklist->status)
+                    @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
                         {{-- expr --}}
                         <div class="col-6">
                             <div class="card">
                                 <div class="card-header">
-                                    Contrato de folio: {{$cotizacion->folio.$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
+                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
                                 </div>
                                 <div class="card-body">
                                     <div class="row">

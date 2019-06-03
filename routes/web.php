@@ -62,6 +62,7 @@ Route::resource('plans','Plan\PlanController');
 // GRUPOS
 Route::resource('grupos','Grupo\GrupoController');
 Route::get('grupos/{grupo}/contratos', 'Grupo\GrupoController@listContratos')->name('grupos.listcontratos');
+Route::get('grupos/{grupo}/contrato/{contrato}/Pagos', 'Grupo\GrupoController@showPagos')->name('grupos.listpagos');
 
 // FACTOR DE ACTUALIZACIÓN
 Route::resource('factors','Plan\FactorActualizacionController',['except'=>['show','edit','create']]);
@@ -153,6 +154,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 
 	});
 Route::resource('contratos.checklist','Prospecto\Cliente\Presolicitud\ChecklistFolderController');
+Route::get('contratos/{contrato}/checklist/{checklist}/aprobar/{aprobar}', 'Prospecto\Cliente\Presolicitud\ChecklistFolderController@aprobarChecklist')->name('checklist.aprobar');
 Route::resource('contratos.domiciliacion','Prospecto\Cliente\Presolicitud\Contrato\DomiciliacionController');
 Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create']);
 

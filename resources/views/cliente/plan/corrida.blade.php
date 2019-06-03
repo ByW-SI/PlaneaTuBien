@@ -134,7 +134,7 @@
 	            @if ($contrato->checklist && $contrato->checklist->status)
 					<div class="col-12">
 						<h5>
-							Contrato de folio: {{$cotizacion->folio.$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
+							Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
 						</h5>
 					</div>
 	                <div class="col-12">
