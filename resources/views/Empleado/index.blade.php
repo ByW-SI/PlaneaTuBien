@@ -54,6 +54,7 @@
 						<th>ID</th>
 						<th>Nombre</th>
 						<th>Apellido</th>
+						<th>Cargo</th>
 						<th>Fecha de Alta</th>
 						<th>Fecha de Baja</th>
 						<th>Razón de Baja</th>
@@ -66,6 +67,7 @@
 							<td>{{ $empleado->id }} </td>
 							<td>{{ $empleado->nombre }}</td>
 							<td>{{ $empleado->paterno }}</td>
+							<td>{{ $empleado->cargo }}</td>
 							<td>{{ $empleado->created_at }}</td>
 							<td>{{ $empleado->fechabaja ? $empleado->fechabaja : 'N/A' }}</td>
 							<td>{{ $empleado->motivobaja ? $empleado->motivobaja : 'N/A' }}</td>

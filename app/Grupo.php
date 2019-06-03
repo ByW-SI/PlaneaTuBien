@@ -28,7 +28,7 @@ class Grupo extends Model
     	return $this->belongsToMany('App\Plan')->using('App\GrupoPlan');
     }
 
-    public function contratos(){
+    public function contrato(){
         return $this->hasMany('App\Contrato');
     }
 }

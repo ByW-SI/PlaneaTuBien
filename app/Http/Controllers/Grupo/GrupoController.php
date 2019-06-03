@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Grupo;
 
 use App\Grupo;
+use App\Contrato;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -97,5 +98,11 @@ class GrupoController extends Controller
     public function destroy(Grupo $grupo)
     {
         //
+    }
+
+    public function listContratos(Grupo $grupo)
+    {
+        $contratos = Contrato::where('grupo_id', $grupo->id)->paginate(5);
+        return view('grupo.list_contratos',['grupo'=>$grupo, 'contratos' => $contratos]);
     }
 }

@@ -38,12 +38,20 @@
 									@if (!$prospecto->asesor && (Auth::user()->empleado->cargo == '' || Auth::user()->empleado->cargo == 'Supervisor'))
 										<a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn btn-sm btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
 									@endif
-									<a href="{{ route('prospectos.show', ['prospecto' => $prospecto]) }}" class="btn btn-sm btn-primary">
-										<i class="fa fa-eye"></i> Ver
-									</a>
-									<a href="{{ route('prospectos.edit', ['prospecto' => $prospecto]) }}" class="btn btn-sm btn-warning">
-										✎ Editar
-									</a>
+									@foreach(Auth::user()->perfil->componentes as $componente)
+										@if ($componente->nombre == "ver prospecto")
+										<a href="{{ route('prospectos.show', ['prospecto' => $prospecto]) }}" class="btn btn-sm btn-primary">
+											<i class="fa fa-eye"></i> Ver
+										</a>
+										@endif
+									@endforeach
+									@foreach(Auth::user()->perfil->componentes as $componente)
+										@if ($componente->nombre == "editar prospecto")
+										<a href="{{ route('prospectos.edit', ['prospecto' => $prospecto]) }}" class="btn btn-sm btn-warning">
+											✎ Editar
+										</a>
+										@endif
+									@endforeach
 								</td>
 							</tr>
 						@endforeach

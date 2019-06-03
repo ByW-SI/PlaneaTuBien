@@ -12,7 +12,8 @@ class EmpleadoController extends Controller
 {
     function __construct()
     {
-        $this->middleware('empleados:indice recursos humanos')->only(['index', 'indexAgentes']);
+        $this->middleware('empleados:indice recursos humanos')->only('index');
+        $this->middleware('empleados:indice agentes')->only('indexAgentes');
         $this->middleware('empleados:crear rh')->only(['create', 'store']);
         $this->middleware('empleados:editar rh')->only(['edit', 'update']);
         $this->middleware('empleados:ver rh')->only('show');
@@ -48,7 +49,7 @@ class EmpleadoController extends Controller
             case 'Gerente':
                 $empleados = [];
                 foreach ($user->empleados as $supervisores) {
-                    foreach ($supervisores as $asesor) {
+                    foreach ($supervisores->empleados as $asesor) {
                         $empleados[] = $asesor;
                     }
                 }

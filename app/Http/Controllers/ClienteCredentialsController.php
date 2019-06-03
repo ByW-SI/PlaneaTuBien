@@ -27,7 +27,7 @@ class ClienteCredentialsController extends Controller
         if ($cliente) {
             $cotizacion = $cliente->cotizacion();
             $plan = $cotizacion->plan;
-            // dd('Si hay cliente');
+            //dd($cliente->recibo->contratos);
             return view('cliente.index',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
         } else {
             return view('cliente.index');
