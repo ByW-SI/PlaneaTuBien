@@ -11,7 +11,7 @@
       <div class="input-group mb-3 w-25 mr-3">
         <form class="form-inline" action="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$presolicitud->recibo]) }}" method="POST">
           @csrf
-          <select name="contrato" id="contrato" class="form-control" required="">
+          {{-- <select name="contrato" id="contrato" class="form-control" required="">
             <option value="">Contrato</option>
             @forelse ($presolicitud->recibo->contratos as $contrato)
              
@@ -19,7 +19,7 @@
             @empty
               
             @endforelse
-          </select>
+          </select> --}}
           <div class="input-group-append">
             <button class="btn btn-info" type="submit" id="button-addon2">Imprimir Presolicitud</button>
           </div>

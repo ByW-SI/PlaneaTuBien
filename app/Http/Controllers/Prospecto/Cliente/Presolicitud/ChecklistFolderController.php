@@ -149,7 +149,7 @@ class ChecklistFolderController extends Controller
      */
     public function update(Presolicitud $presolicitud,Request $request, ChecklistFolder $checklistFolder)
     {
-        //
+        return "Check list -- Firma update";
     }
 
     /**
@@ -161,5 +161,17 @@ class ChecklistFolderController extends Controller
     public function destroy(Presolicitud $presolicitud,ChecklistFolder $checklistFolder)
     {
         //
+    }
+
+    public function aprobarChecklist(Contrato $contrato, ChecklistFolder $checklist, $aprobado){
+        if ($aprobado == 1) {
+            $checklist->firmas = 1;
+            $checklist->save();
+        }
+        else{
+            $checklist->firmas = -1;
+            $checklist->save();
+        }
+        return redirect()->back();
     }
 }

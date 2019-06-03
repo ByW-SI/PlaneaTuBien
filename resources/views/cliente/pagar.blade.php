@@ -24,7 +24,7 @@
 								</td>
 								<td class="text-center">
 									<label for="recibo{{$contrato->id}}">
-										{{$cotizacion->folio.$contrato->numero_contrato}}
+										@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
 									</label>
 								</td>
 								<td class="text-center">

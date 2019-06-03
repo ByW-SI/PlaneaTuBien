@@ -118,14 +118,30 @@
 						@endif
 					</h4>
 				</div>
+				<div class="mx-auto">
+					<h4>Estado del CheckList: 
+						@if($contrato->checklist->firmas == 0)
+							<span class="alert-link">Sin revisar</span> 
+						@elseif($contrato->checklist->firmas == 1)
+							<span class="alert-success">Aprobado</span>
+						@else
+							<span class="alert-danger">Rechazado</span>
+						@endif
+					</h4>
+				</div>
 			</div>
 		</div>
 		<div class="card-footer">
 			<div class="d-flex justify-content-center">
+			@if(Auth::user()->empleado->tipo != "Gerente")
 				<a class="btn btn-success mr-3" href="{{ route('contratos.checklist.create',['contrato'=>$contrato]) }}"><i class="fas fa-save"></i> Subir/Actualizar Checklist</a>
 				@if ($contrato->checklist->status)
 					<a class="btn btn-success mr-3" href="{{ route('contratos.checklist.show',['contrato'=>$contrato,'checklist'=>$contrato->checklist]) }}"><i class="fas fa-save"></i> Descargar Checklist</a>
 				@endif
+			@else
+				<a class="btn btn-success mr-3" href="{{ route('checklist.aprobar',['contrato'=>$contrato, 'checklist' => $contrato->checklist, 'aprobado'=>1]) }}"><i class="fas fa-check"></i> Aprobar CheckList</a>
+				<a class="btn btn-danger mr-3" href="{{ route('checklist.aprobar',['contrato'=>$contrato, 'checklist' => $contrato->checklist, 'aprobado'=>2]) }}"><i class="fas fa-times"></i> Rechazar CheckList</a>
+			@endif
 
 			</div>
 		</div>

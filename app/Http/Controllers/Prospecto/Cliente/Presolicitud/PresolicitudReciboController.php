@@ -305,7 +305,8 @@ class PresolicitudReciboController extends Controller
     public function pdf(Prospecto $prospecto,Presolicitud $presolicitud,Recibo $recibo,Request $request)
     {
         // dd($presolicitud);
-        $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo,'contrato'=>$request->contrato]);
+        $contratos = $recibo->contratos;
+        $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo,'contratos'=>$contratos]);
         // return $pdf->stream();
         return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno."_contrato_".$request->contrato.".pdf");
     }

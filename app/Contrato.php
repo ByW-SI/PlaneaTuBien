@@ -40,4 +40,9 @@ class Contrato extends Model
     {
         return $this->hasOne('App\ChecklistFolder');
     }
+
+    public function pagoMensual()
+    {
+        return $this->hasMany('App\PagoMensual');
+    }
 }

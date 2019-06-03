@@ -44,6 +44,7 @@
 							<th scope="col">Monto</th>
 							<th scope="col">Estado</th>
 							<th scope="col">Recibo</th>
+							<th scope="col">Acción</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,11 +54,11 @@
 								<td>${{$contrato->monto}}</td>
 								<td>{{$contrato->estado}}</td>
 								<td>{{$contrato->recibo->numero}}</td>
-								{{-- <td>
+								<td>
 									<div class="d-flex justify-content-center">
-										<a href="{{ route('plans.show',['plan'=>$plan]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
+										<a href="{{route('grupos.listpagos',['contrato'=>$contrato]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
 									</div>
-								</td> --}}
+								</td>
 
 							</tr>
 						@empty
