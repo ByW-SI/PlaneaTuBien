@@ -197,9 +197,10 @@ class PresolicitudReciboController extends Controller
     {
         //
         $cotizacion = $presolicitud->cotizacion();
+        $pagos = $cotizacion->pago_inscripcions()->where('status','aprobado')->get();
         // dd($cotizacion->contratos());
         // if($presolicitud->recibos){
-          return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion]);
+          return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pagos'=>$pagos]);
 
         // }else{
           // return redirect()->route('prospectos.presolicitud.recibos.create',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
@@ -322,13 +323,32 @@ class PresolicitudReciboController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function pdf(Prospecto $prospecto,Presolicitud $presolicitud,Recibo $recibo,Request $request)
+    public function pdf(Prospecto $prospecto,Presolicitud $presolicitud,$recibo)
     {
-        // dd($presolicitud);
-        $contratos = $recibo->contratos;
+        if($recibo == "insc_0"){
+          $recibo = new Recibo([
+            'sucursal'=>0,
+            'asesor'=>$prospecto->asesor->full_name,
+            'monto'=>$presolicitud->cotizacion()->monto,
+            'clave'=> "N/A",
+            'tipo_pago' => 'Ninguna',
+            'insc_inicial' =>0.00,
+            'iva'=>0.00,
+            'subtotal'=>0.00,
+            'cuota_periodica'=>0.00,
+            'total'=>0.00,
+            'total_letra'=>"CERO",
+          ]);
+          
+
+        }
+        else{
+          $recibo = Recibo::find($recibo);
+        }
+        $contratos = $presolicitud->contratos;
         $pdf = PDF::loadView('prospectos.presolicitud.pdf',['presolicitud'=>$presolicitud,'recibo'=>$recibo,'contratos'=>$contratos]);
         // return $pdf->stream();
-        return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno."_contrato_".$request->contrato.".pdf");
+        return $pdf->download('presolicitud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
     }
 
     /**

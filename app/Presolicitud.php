@@ -78,10 +78,10 @@ class Presolicitud extends Model
     	return $this->hasMany('App\Referencia','presolicitud_id','id');
     }
 
-    public function recibos()
-    {
-    	return $this->hasMany('App\Recibo','presolicitud_id','id');
-    }
+    // public function recibos()
+    // {
+    // 	return $this->hasMany('App\Recibo','presolicitud_id','id');
+    // }
     
     public function contratos()
     {
@@ -103,7 +103,7 @@ class Presolicitud extends Model
         if($this->referencias->isNotEmpty()){
             $status+=20;
         }
-        if ($this->recibo) {
+        if ($this->cotizacion()->liberar) {
             $status += 20;
         }
         return $status;

@@ -25,15 +25,15 @@ class DomiciliacionController extends Controller
             // dd($contrato->domiciliacion);
             if ($contrato->domiciliacion) {
                 $domiciliacion=$contrato->domiciliacion;
-                $plan=$contrato->recibo->presolicitud->cotizacion()->plan;
-                return view('domiciliacion.index',['contrato'=>$contrato,'contrato'=>$contrato,'domiciliacion'=>$domiciliacion,'plan'=>$plan]);
+                $plan=$contrato->presolicitud->cotizacion()->plan;
+                return view('domiciliacion.index',['contrato'=>$contrato,'domiciliacion'=>$domiciliacion,'plan'=>$plan]);
             }
             else{
                 return redirect()->route('contratos.domiciliacion.create',['contrato'=>$contrato]);
             }
         }
         else {
-            dd('no');
+            // dd('no');
             return back();
         }
     }
@@ -64,7 +64,8 @@ class DomiciliacionController extends Controller
             'titular'=>'required|string',
             'banco'=>'required|string',
             'tipo'=>'required|in:CLABE,Tarjeta de crédito/débito',
-            'numero'=>'required|numeric'
+            'numero'=>'required|numeric',
+            'monto'=>'required|numeric'
         ];
 
         $this->validate($request, $rules);
@@ -86,7 +87,7 @@ class DomiciliacionController extends Controller
     public function show(Contrato $contrato, Domiciliacion $domiciliacion)
     {
         //
-        $plan=$contrato->recibo->presolicitud->cotizacion()->plan;
+        $plan=$contrato->presolicitud->cotizacion()->plan;
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.domiciliacion_pdf',['domiciliacion'=>$domiciliacion,'plan'=>$plan,'contrato'=>$contrato])->setPaper('a4', 'landscape');
         // return $pdf->stream();
         return $pdf->download('domiciliacion_contrato'.$contrato->numero_contrato.".pdf");

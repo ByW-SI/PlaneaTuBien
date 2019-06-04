@@ -138,14 +138,14 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		// cuestionario de calidad
 		Route::get('/presolicitud/{presolicitud}/cuestionario_calidad','Documentos\DocumentosController@cuestionarioCalidad')->name('presolicitud.cuestionario_calidad');
 		// recibo
-		Route::post('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
+		Route::get('/presolicitud/{presolicitud}/recibo/{recibo}/pdf','PresolicitudReciboController@pdf')->name('presolicitud.recibos.pdf');
 		// manual de consumidor
 		Route::get('/presolicitud/{presolicitud}/manual_consumidor','Documentos\DocumentosController@manualConsumidor')->name('presolicitud.manual');
 		// consentimiento de seguro
 		Route::get('/presolicitud/{presolicitud}/consentimiento_seguro','Documentos\DocumentosController@consentimientoSeguro')->name('presolicitud.consentimiento_seguro');
 		Route::get('/presolicitud/{presolicitud}/contratos','Documentos\DocumentosController@index')->name('presolicitud.contratos.index');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/contrato','Documentos\DocumentosController@contrato')->name('presolicitud.contratos.contrato');
-		Route::post('/presolicitud/{presolicitud}/recibo/{recibo}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.recibos.declaracion_salud');
+		Route::get('/presolicitud/{presolicitud}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.declaracion_salud');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.contratos.domiciliacion');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.contratos.ficha_deposito');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.contratos.anexo_tanda');

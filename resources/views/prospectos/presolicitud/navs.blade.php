@@ -7,24 +7,7 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{$presolicitud->status}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$presolicitud->status}}%"></div>
     </div>
   @else
-    <div class="d-flex justify-content-center">
-      <div class="input-group mb-3 w-25 mr-3">
-        <form class="form-inline" action="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$presolicitud->recibo]) }}" method="POST">
-          @csrf
-          {{-- <select name="contrato" id="contrato" class="form-control" required="">
-            <option value="">Contrato</option>
-            @forelse ($presolicitud->recibo->contratos as $contrato)
-             
-              <option value="{{$contrato->numero_contrato}}">#{{$contrato->numero_contrato}}</option>
-            @empty
-              
-            @endforelse
-          </select> --}}
-          <div class="input-group-append">
-            <button class="btn btn-info" type="submit" id="button-addon2">Imprimir Presolicitud</button>
-          </div>
-        </form>
-      </div>
+    {{-- <div class="d-flex justify-content-center"> 
       <div class="input-group mb-3 w-50 mr-3">
         <form class="form-inline" action="{{ route('prospectos.presolicitud.recibos.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$presolicitud->recibo]) }}" method="POST">
           @csrf
@@ -34,10 +17,13 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> --}}
     <div class="d-flex justify-content-center">
       <div>
         <a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Manual del consumidor</a>
+      </div>
+      <div>
+        <a href="{{ route('prospectos.presolicitud.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Declaración de salud</a>
       </div>
       <div>
         <a href="{{ route('prospectos.presolicitud.consentimiento_seguro',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Consentimiento de Seguro</a>
@@ -70,7 +56,7 @@
   <li class="nav-item">
     <a class="nav-link {{$active == "Recibo" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">RECIBO PROVISIONAL</a>
   </li>
-  @if ($presolicitud->recibo && !$presolicitud->recibo->contratos->isEmpty())
+  @if (!$presolicitud->contratos->isEmpty())
     <li class="nav-item">
       <a class="nav-link {{$active == "Contratos" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.contratos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">CONTRATOS</a>
     </li>

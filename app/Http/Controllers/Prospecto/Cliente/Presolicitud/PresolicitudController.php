@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 
+use App\Contrato;
+use App\Http\Controllers\Controller;
 use App\Presolicitud;
 use App\Prospecto;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PresolicitudController extends Controller
 {
@@ -93,7 +94,27 @@ class PresolicitudController extends Controller
         $presolicitud->plazo_contratado= $perfil->cotizacion->plan->plazo;
         $presolicitud->precio_nolose=$perfil->cotizacion->plan->plan_meses;
         $perfil->presolicitud()->save($presolicitud);
+        $cotizacion =$presolicitud->cotizacion();
+        $grupos = $cotizacion->plan->grupos;
         if ($presolicitud) {
+            if ($cotizacion->liberar) {
+                foreach ($grupos as $grupo) {
+                    if($grupo->contratos > 0 && $grupo->activo == 1){
+                        if ($presolicitud->contratos->isEmpty()) {
+                          foreach ($cotizacion->contratos() as $value) {
+                            $contrato = new Contrato;
+                            $contrato->monto = $value;
+                            $contrato->grupo()->associate($grupo->id);
+                            $grupo->contratos -= 1;
+                            $grupo->save();
+                            $contrato->numero_contrato = 500-$grupo->contratos;
+                            $contrato->estado = "registrado";
+                            $presolicitud->contratos()->save($contrato);
+                          }
+                        }
+                    }
+                }
+            }
             return redirect()->route('prospectos.presolicitud.conyuge.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
         }
         // var_dump("<br>");

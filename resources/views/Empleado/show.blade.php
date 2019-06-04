@@ -46,7 +46,7 @@
 
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label">Sucursal:</label>
-                <input type="text" class="form-control" value="{{ $empleado->sucursal->nombre }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->sucursal ? $empleado->sucursal->nombre : 'NA' }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label">Tipo:</label>

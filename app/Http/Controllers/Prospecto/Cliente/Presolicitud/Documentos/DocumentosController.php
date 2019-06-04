@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud\Documentos;
 
+use App\Contrato;
+use App\Http\Controllers\Controller;
+use App\Poliza;
 use App\Presolicitud;
 use App\Prospecto;
 use App\Recibo;
-use App\Contrato;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Http\Request;
 
 class DocumentosController extends Controller
 {
@@ -70,8 +71,10 @@ class DocumentosController extends Controller
         // return $pdf->stream();
         return $pdf->download('carta_de_bienvenida'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
     }
-    public function declaracionSalud(Prospecto $prospecto, Presolicitud $presolicitud,Recibo $recibo,Request $request){
-        $pdf = PDF::loadView('prospectos.presolicitud.documentos.declaracion_salud_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo,'folio'=>$request->folio]);
+    public function declaracionSalud(Prospecto $prospecto, Presolicitud $presolicitud,Request $request){
+
+        $poliza = Poliza::where('fecha_fin','>',date('Y-m-d'))->first();
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.declaracion_salud_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'folio'=>$poliza->folio]);
         // return $pdf->stream();
         return $pdf->download('declaracion_salud'.$prospecto->nombre.$prospecto->appaterno.$prospecto->apmaterno.".pdf");
         

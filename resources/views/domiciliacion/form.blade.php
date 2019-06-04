@@ -21,15 +21,15 @@
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="emisor">Cliente del emisor titular del servicio(Nombre Completo)</label>
-					<input type="text" class="form-control" name="emisor" id="emisor" required="" value="{{$edit ? $domiciliacion->emisor : $contrato->recibo->presolicitud->nombre.' '.$contrato->recibo->presolicitud->paterno.' '.$contrato->recibo->presolicitud->materno}}">
+					<input type="text" class="form-control" name="emisor" id="emisor" required="" value="{{$edit ? $domiciliacion->emisor : $contrato->presolicitud->nombre.' '.$contrato->presolicitud->paterno.' '.$contrato->presolicitud->materno}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : $contrato->recibo->presolicitud->cotizacion()->folio}}">
+					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : $contrato->presolicitud->cotizacion()->folio}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="titular">Cliente usuario titular de la cuenta bancaria (nombre completo)</label>
-					<input type="text" class="form-control" name="titular" id="titular" required="" value="{{$edit ? $domiciliacion->titular : $contrato->recibo->presolicitud->nombre.' '.$contrato->recibo->presolicitud->paterno.' '.$contrato->recibo->presolicitud->materno}}">
+					<input type="text" class="form-control" name="titular" id="titular" required="" value="{{$edit ? $domiciliacion->titular : $contrato->presolicitud->nombre.' '.$contrato->presolicitud->paterno.' '.$contrato->presolicitud->materno}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="tipo">Tipo de cuenta</label>
@@ -46,6 +46,10 @@
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="numero">Número</label>
 					<input type="text" name="numero" id="numero" class="form-control" value="{{$edit ? $domiciliacion->numero : old('numero')}}" pattern="">
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+					<label for="monto">Monto</label>
+					<input type="number" step="any" name="monto" id="monto" class="form-control" value="{{$edit ? $domiciliacion->monto : old('monto')}}" required="">
 				</div>
 			</div>
 		</div>

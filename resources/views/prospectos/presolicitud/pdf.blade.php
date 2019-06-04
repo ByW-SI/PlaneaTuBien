@@ -830,10 +830,10 @@
 						<div class="row">
 							<div class="two-thirds column u-pull-left" >
 								<div class="three columns u-pull-left">
-									<label style="font-size: 6px;">Tarjeta de crédito<input type="checkbox" {{$recibo->tipo_pago == "Tarjeta de crédito" ? "checked=''" : ""}}  style="color: #B8242B"> </label>
+									<label style="font-size: 6px;">Tarjeta de crédito / débito<input type="checkbox" {{$recibo->tipo_pago == "Tarjeta de Crédito" || $recibo->tipo_pago == "Tarjeta de Débito" ? "checked=''" : ""}}  style="color: #B8242B"> </label>
 								</div>
 								<div class="nine columns u-pull-right" style="border-bottom: 0.5px solid #B8242B; text-align: left; font-size: 10px;">
-									No. {{$recibo->tipo_pago == "Tarjeta de crédito" ? $recibo->numero : ""}}
+									No. {{$recibo->tipo_pago == "Tarjeta de Crédito" || $recibo->tipo_pago == "Tarjeta de Débito" ? $recibo->numero : ""}}
 								</div>
 								<br>
 								<div class="row">
@@ -843,7 +843,7 @@
 										</div>
 										<div class="nine columns u-pull-right" >
 											<div style="border-bottom: 0.5px solid #B8242B; position: absolute; top:14px; width: 100%;"></div>
-											<label style="font-size: 10px; text-align: center">{{$recibo->tipo_pago == "Tarjeta de crédito" ? $recibo->banco : ""}}</label>
+											<label style="font-size: 10px; text-align: center">{{$recibo->tipo_pago == "Tarjeta de Crédito" || $recibo->tipo_pago == "Tarjeta de Débito" ? $recibo->banco : ""}}</label>
 										</div>
 									</div>
 								</div>
@@ -882,6 +882,10 @@
 				<div class="eleven columns">
 					<div class="two columns u-pull-left">
 						<label style="font-size: 7px;">Cheque<input type="checkbox" {{$recibo->tipo_pago == "Cheque" ? 'checked' : ""}} style="color: #B8242B"></label>
+						@if ($recibo->tipo_pago != "Tarjeta de Crédito" && $recibo->tipo_pago != "Tarjeta de Débito" && $recibo->tipo_pago != "Cheque")
+							{{-- expr --}}
+							<label style="font-size: 7px;"> {{$recibo->tipo_pago != "Tarjeta de Crédito" && $recibo->tipo_pago != "Tarjeta de Débito" && $recibo->tipo_pago != "Cheque" ? $recibo->tipo_pago : ""}}<input type="checkbox" {{$recibo->tipo_pago != "Tarjeta de Crédito" && $recibo->tipo_pago != "Tarjeta de Débito" && $recibo->tipo_pago != "Cheque" ? 'checked' : ""}} style="color: #B8242B"></label>
+						@endif
 					</div>
 					<div class="ten columns u-pull-right">
 						<div class="eight columns u-pull-left" style="border-bottom: 0.5px solid #B8242B; text-align: left; font-size: 10px">

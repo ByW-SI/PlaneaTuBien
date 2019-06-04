@@ -122,7 +122,7 @@
 							MONTO DEL RECIBO
 						</p>
 						<label class="center"><strong>
-							${{number_format($plan->cuota_periodica_integrante($contrato->monto,$contrato->recibo->presolicitud->cotizacion()->factor_actualizacion),2)}}
+							${{number_format($domiciliacion->monto,2)}}
 						</strong></label>
 					</div>
 				</div>

@@ -259,22 +259,22 @@ class ReciboProvisionalController extends Controller
                 $recibo->total = floatval(str_replace(',', '', str_replace('', '.', $recibo->total)));
                 $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
                 $recibo->numero_contrato = Recibo::get()->count()+1;
-                $recibo->clave = substr(md5($presolicitud->id),0,5);
+                $recibo->clave = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
 
-                if ($presolicitud->contratos->isEmpty() && $cotizacion->total_pagado >= $cotizacion->cuota_inscripcion) {
-                  foreach ($cotizacion->contratos() as $value) {
-                    $contrato = new Contrato;
-                    $contrato->monto = $value;
-                    $contrato->grupo()->associate($grupo->id);
-                    $grupo->contratos -= 1;
-                    $grupo->save();
-                    $contrato->numero_contrato = 500-$grupo->contratos;
-                    $contrato->estado = "registrado";
-                    $presolicitud->contratos()->save($contrato);
-                  }
-                }
+                // if ($presolicitud->contratos->isEmpty()) {
+                //   foreach ($cotizacion->contratos() as $value) {
+                //     $contrato = new Contrato;
+                //     $contrato->monto = $value;
+                //     $contrato->grupo()->associate($grupo->id);
+                //     $grupo->contratos -= 1;
+                //     $grupo->save();
+                //     $contrato->numero_contrato = 500-$grupo->contratos;
+                //     $contrato->estado = "registrado";
+                //     $presolicitud->contratos()->save($contrato);
+                //   }
+                // }
                 return redirect()->route('pagos.index');
             }
         }
