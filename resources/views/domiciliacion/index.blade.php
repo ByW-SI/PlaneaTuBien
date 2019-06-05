@@ -32,7 +32,7 @@
 			</div>
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
 				<label for="">Monto del recibo</label>
-				<span class="form-control bg-light">${{number_format($domiciliacion->monto,2)}}</span>
+				<span class="form-control bg-light">VARIABLE</span>
 			</div>
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
 				<label for="">I.V.A. del recibo</label>

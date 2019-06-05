@@ -19,7 +19,7 @@ class ChecklistFolderController extends Controller
     {
         //
         if ($contrato->checklist) {
-            $presolicitud = $contrato->recibo->presolicitud;
+            $presolicitud = $contrato->presolicitud;
             return view('prospectos.checklist.index',['presolicitud'=>$presolicitud,'contrato'=>$contrato]);
         } else {
             return redirect()->route('contratos.checklist.create',['contrato'=>$contrato]);
@@ -34,7 +34,7 @@ class ChecklistFolderController extends Controller
     public function create(Contrato $contrato)
     {
         //
-        $presolicitud = $contrato->recibo->presolicitud;
+        $presolicitud = $contrato->presolicitud;
         // dd($presolicitud);
         return view('prospectos.checklist.form',['presolicitud'=>$presolicitud,'contrato'=>$contrato]);
     }
@@ -122,7 +122,7 @@ class ChecklistFolderController extends Controller
     public function show(Contrato $contrato, ChecklistFolder $checklist)
     {
         //
-        $presolicitud = $contrato->recibo->presolicitud;
+        $presolicitud = $contrato->presolicitud;
         $checklist = $contrato->checklist;
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.checklist',['presolicitud'=>$presolicitud,'contrato'=>$contrato,'checklist'=>$checklist]);
         // return $pdf->stream();

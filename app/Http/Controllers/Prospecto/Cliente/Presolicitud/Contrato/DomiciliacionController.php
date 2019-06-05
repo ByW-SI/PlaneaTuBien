@@ -64,8 +64,7 @@ class DomiciliacionController extends Controller
             'titular'=>'required|string',
             'banco'=>'required|string',
             'tipo'=>'required|in:CLABE,Tarjeta de crédito/débito',
-            'numero'=>'required|numeric',
-            'monto'=>'required|numeric'
+            'numero'=>'required|numeric'
         ];
 
         $this->validate($request, $rules);

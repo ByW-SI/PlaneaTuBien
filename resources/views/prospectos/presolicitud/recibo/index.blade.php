@@ -28,7 +28,7 @@
 						<td>{{$pago->comprobante}}</td>
 						<td>{{$pago->forma}}</td>
 						<td>{{$pago->referencia}}</td>
-						<td>${{$pago->folio}}</td>
+						<td>{{$pago->folio}}</td>
 						<td>
 							<div class="d-flex justify-content-center mb-3">
 								@if ($pago->recibo)

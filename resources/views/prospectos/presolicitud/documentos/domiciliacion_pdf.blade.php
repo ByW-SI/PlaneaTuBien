@@ -122,7 +122,7 @@
 							MONTO DEL RECIBO
 						</p>
 						<label class="center"><strong>
-							${{number_format($domiciliacion->monto,2)}}
+							VARIABLE
 						</strong></label>
 					</div>
 				</div>

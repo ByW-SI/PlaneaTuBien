@@ -130,7 +130,7 @@
 	</div>
 	<div class="card-body">
 		<div class="row">
-		 	@foreach ($cliente->recibo->contratos as $contrato)
+		 	@foreach ($cliente->contratos as $contrato)
 	            @if ($contrato->checklist && $contrato->checklist->status)
 					<div class="col-12">
 						<h5>

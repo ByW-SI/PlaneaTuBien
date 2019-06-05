@@ -23,7 +23,6 @@ class CreateDomiciliacionsTable extends Migration
             $table->string('banco')->nullable();
             $table->string('tipo');
             $table->string('numero');
-            $table->decimal('monto',8,2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

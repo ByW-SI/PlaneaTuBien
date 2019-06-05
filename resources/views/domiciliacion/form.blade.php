@@ -25,7 +25,7 @@
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : $contrato->presolicitud->cotizacion()->folio}}">
+					<input type="text" class="form-control" name="referencia" id="referencia" required="" value="{{$edit ? $domiciliacion->referencia : $contrato->grupo->id.$contrato->numero_contrato}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 					<label for="titular">Cliente usuario titular de la cuenta bancaria (nombre completo)</label>
@@ -47,10 +47,7 @@
 					<label for="numero">Número</label>
 					<input type="text" name="numero" id="numero" class="form-control" value="{{$edit ? $domiciliacion->numero : old('numero')}}" pattern="">
 				</div>
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
-					<label for="monto">Monto</label>
-					<input type="number" step="any" name="monto" id="monto" class="form-control" value="{{$edit ? $domiciliacion->monto : old('monto')}}" required="">
-				</div>
+				
 			</div>
 		</div>
 		<div class="card-footer">
@@ -69,12 +66,15 @@
     				'pattern':'[0-9]{18}',
     				'title':'El numero de la CLABE debe ser de 18 digitos'
     			});
+
+    			$("#referencia").val("{{$contrato->grupo->id.$contrato->numero_contrato}}"+"C")
     		}
     		if(tipo_val == "Tarjeta de crédito/débito"){
     			$("#numero").attr({
     				'pattern':'[0-9]{16}',
     				'title':'El numero de la tarjeta debe ser de 16 digitos'
     			});
+    			$("#referencia").val("{{$contrato->grupo->id.$contrato->numero_contrato}}"+"T")
     		}
     	})
     </script>

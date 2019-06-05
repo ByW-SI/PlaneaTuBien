@@ -39,7 +39,7 @@
 								<td>{{$plan->aportacion_1.' en el mes #'.$plan->mes_1}}</td>
 								<td>{{$plan->aportacion_2.' en el mes #'.$plan->mes_2}}</td>
 								<td>{{$plan->aportacion_3.' en el mes #'.$plan->mes_3}}</td>
-								<td>{{$plan->aportacion_liquidacion.' en el mes '.$plan->mes_liquidacion}}</td>
+								<td>{{$plan->aportacion_liquidacion.' en el mes #'.$plan->mes_liquidacion}}</td>
 								<td>
 									<div class="d-flex justify-content-center">
 										<a href="{{ route('plans.show',['plan'=>$plan]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>

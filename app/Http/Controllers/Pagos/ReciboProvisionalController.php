@@ -258,7 +258,7 @@ class ReciboProvisionalController extends Controller
                 $recibo->cuota_periodica = floatval(str_replace(',', '', str_replace('', '.', $recibo->cuota_periodica)));
                 $recibo->total = floatval(str_replace(',', '', str_replace('', '.', $recibo->total)));
                 $recibo->asesor = $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno;
-                $recibo->numero_contrato = Recibo::get()->count()+1;
+                // $recibo->numero_contrato = Recibo::get()->count()+1;
                 $recibo->clave = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
