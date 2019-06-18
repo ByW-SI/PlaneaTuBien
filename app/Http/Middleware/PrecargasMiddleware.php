@@ -14,13 +14,13 @@ class PrecargasMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $component)
+    public function handle($request, Closure $next, $component=null)
     {
         if(Auth::check()) {
             foreach (Auth::user()->perfil->componentes as $componente)
                 if($componente->nombre == $component)
                     return $next($request);
-            return redirect()->route('denegado');
+            return redirect()->route('home');
         } else
             return redirect()->route('login');
     }

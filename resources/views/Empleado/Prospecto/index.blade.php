@@ -40,8 +40,14 @@
 									
 								</ul>
 								<ul>
+									@if ($prospecto->tel)
 									<strong>Telefono: </strong>
 									{{$prospecto->tel}}
+									@endif
+								</ul>
+								<ul>
+									<strong>Email: </strong>
+									{{$prospecto->email}}
 								</ul>
 							</td>
 							<td class="text-center">

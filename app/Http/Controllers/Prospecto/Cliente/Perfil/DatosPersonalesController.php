@@ -92,9 +92,11 @@ class DatosPersonalesController extends Controller
      * @param  \App\PerfilDatosPersonalCliente  $perfilDatosPersonalCliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(PerfilDatosPersonalCliente $perfilDatosPersonalCliente)
+    public function edit(Prospecto $prospecto,PerfilDatosPersonalCliente $datos_personal)
     {
         //
+        $perfil = $prospecto->perfil;
+        return view('prospectos.perfil.datos_personal.form',['prospecto'=>$prospecto,'datos_personal'=>$datos_personal,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
     }
 
     /**
@@ -104,9 +106,12 @@ class DatosPersonalesController extends Controller
      * @param  \App\PerfilDatosPersonalCliente  $perfilDatosPersonalCliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PerfilDatosPersonalCliente $perfilDatosPersonalCliente)
+    public function update(Request $request, Prospecto $prospecto, PerfilDatosPersonalCliente $datos_personal)
     {
         //
+        $datos_personal->update($request->all());
+        return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
+
     }
 
     /**

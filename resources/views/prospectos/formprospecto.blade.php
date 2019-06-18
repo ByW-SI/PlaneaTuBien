@@ -60,7 +60,7 @@
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="tel">Telefono particular</label>
-						<input class="form-control" value="{{old('tel')}}" name="tel" required="">
+						<input class="form-control" value="{{old('tel')}}" name="tel">
 					</div>
 					<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="movil">Telefono Movil</label>
