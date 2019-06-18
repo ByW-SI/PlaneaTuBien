@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
-use App\EmpleadoFaltaAdministrativa;
+use App\EmpleadoPermiso;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
-class EmpleadoFaltaAdministrativaController extends Controller
+class EmpleadoPermisoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class EmpleadoFaltaAdministrativaController extends Controller
      */
     public function index(Empleado $empleado)
     {
-        $disciplinas = $empleado->faltas_administrativas;
-        return view('empleado.disciplina.index',['empleado'=>$empleado,'disciplinas'=>$disciplinas]);
+        $permisos = $empleado->permisos;
+        return view('empleado.permiso.index',['empleado'=>$empleado,'permisos'=>$permisos]);
     }
 
     /**
@@ -37,18 +37,18 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Empleado $empleado)
+    public function store(Empleado $empleado, Request $request)
     {
-        $disciplina = new EmpleadoFaltaAdministrativa($request->all());
-        $empleado->faltas_administrativas()->save($disciplina);
+        $permiso = new EmpleadoPermiso($request->all());
+        $empleado->permisos()->save($permiso);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
-        return redirect()->route('empleados.disciplinas.index',['empleado'=>$empleado]);
+        return redirect()->route('empleados.permisos.index',['empleado'=>$empleado]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
+     * @param  \App\EmpleadoPermiso  $empleadoPermiso
      * @return \Illuminate\Http\Response
      */
     public function show(Empleado $empleado)
@@ -59,7 +59,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
+     * @param  \App\EmpleadoPermiso  $empleadoPermiso
      * @return \Illuminate\Http\Response
      */
     public function edit(Empleado $empleado)
@@ -71,7 +71,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
+     * @param  \App\EmpleadoPermiso  $empleadoPermiso
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Empleado $empleado)
@@ -82,7 +82,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
+     * @param  \App\EmpleadoPermiso  $empleadoPermiso
      * @return \Illuminate\Http\Response
      */
     public function destroy(Empleado $empleado)
