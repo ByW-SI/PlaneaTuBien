@@ -104,7 +104,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Fecha de Nacimiento</label>
-					<input type="date" class="form-control" value="{{old('fecha_nacimiento')}}" name="fecha_nacimiento" min="{{(integer)date('Y')-64}}-{{date('m')}}-{{date('d')}}" max="{{(integer)date('Y')-18}}-{{date('m')}}-{{date('d')}}" required="">
+					<input type="date" class="form-control" value="{{old('fecha_nacimiento')}}" name="fecha_nacimiento" min="{{(integer)date('Y')-64}}-{{date('m')}}-{{date('d')}}" max="{{(integer)date('Y')-18}}-{{date('m')}}-{{date('d')}}" required="" onchange="getAge(this.value)">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Lugar de Nacimiento</label>
@@ -124,7 +124,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Edad</label>
-					<input type="number" class="form-control" name="edad" value="{{old('edad')}}" min="0" max="64" required="">
+					<input type="number" class="form-control" id="edad" value="{{old('edad')}}" min="0" max="64" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Estado Civil</label>
@@ -184,6 +184,19 @@
 @endsection
 @push('scripts')
 	<script>
+		function getAge(dateString) 
+		{
+		    var today = new Date();
+		    var birthDate = new Date(dateString);
+		    var age = today.getFullYear() - birthDate.getFullYear();
+		    var m = today.getMonth() - birthDate.getMonth();
+		    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+		    {
+		        age--;
+		    }
+		    $("#edad").val(age);
+		    return age;
+		}
 		$("#cp").change(function(){
 			var cp = $("#cp").val();
 

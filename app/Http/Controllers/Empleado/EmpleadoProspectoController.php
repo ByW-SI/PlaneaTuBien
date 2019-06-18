@@ -28,7 +28,7 @@ class EmpleadoProspectoController extends Controller
                             }
                             $query->where('aprobado',1)
                                 ->orWhereNull('aprobado');
-                        })->paginate(5);   
+                        })->get();   
         }
         else{
             $prospectos=$empleado->prospectos()
@@ -36,7 +36,7 @@ class EmpleadoProspectoController extends Controller
                         {
                             $query->where('aprobado',1)
                                 ->orWhereNull('aprobado');
-                        })->paginate(5);       
+                        })->get();       
         }
         // dd($prospectos);
         return view('empleado.prospecto.index',['empleado'=>$empleado,'prospectos'=>$prospectos,'buscar'=>$request->buscar]);

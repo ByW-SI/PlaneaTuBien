@@ -25,11 +25,11 @@
             <div class="row">
                 <div class="col-12 text-center mt-3">
                     <label>
-                        Numeros de contratos: {{sizeof($cliente->recibo->contratos)}}
+                        Numeros de contratos: {{sizeof($cliente->contratos)}}
                     </label>
                     
                 </div>
-                @foreach ($cliente->recibo->contratos as $contrato)
+                @foreach ($cliente->contratos as $contrato)
                     @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
                         {{-- expr --}}
                         <div class="col-6">

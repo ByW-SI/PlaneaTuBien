@@ -46,7 +46,6 @@ class CreatePresolicitudsTable extends Migration
             $table->string('lugar_nacimiento');
             $table->string('nacionalidad');
             $table->string('sexo');
-            $table->unsignedInteger('edad');
             // ESTADO CIVIL
             $table->string('estado_civil');
             $table->string('profesion');

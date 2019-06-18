@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Presolicitud extends Model
 {
@@ -34,7 +35,6 @@ class Presolicitud extends Model
 		'lugar_nacimiento',
 		'nacionalidad',
 		'sexo',
-		'edad',
 		'estado_civil',
 		'profesion',
 		'empresa',
@@ -54,6 +54,12 @@ class Presolicitud extends Model
     protected $dates=[
     	'deleted_at'
     ];
+    public function getAgeAttribute()
+    {
+        $date_birth = $this->fecha_nacimiento;
+        $age = Carbon::parse($date_birth)->age;
+        return $age;
+    }
 
     public function perfil()
     {

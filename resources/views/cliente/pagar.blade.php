@@ -16,7 +16,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($cliente->recibo->contratos as $contrato)
+					@foreach ($cliente->contratos as $contrato)
         				{{-- @if ($contrato->checklist && $contrato->checklist->status) --}}
 							<tr>
 								<td class="text-center">

@@ -47,14 +47,6 @@
 		<div class="row">
 			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
 		</div>
-		<div class="row">
-			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
-				</div>
-			</div>
-		</div>
 		<h6 class="center">CONSENTIMIENTO</h6>
 		<div class="row" style="margin-top: 5px;">
 			<div class="twelve columns">

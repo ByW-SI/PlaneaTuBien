@@ -15,8 +15,7 @@ class Domiciliacion extends Model
     	'titular',
     	'banco',
     	'tipo',
-    	'numero',
-        'monto'
+    	'numero'
     ];
 
     protected $hidden=[
