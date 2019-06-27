@@ -79,6 +79,9 @@ Route::resource('empleados.contactos','Empleado\EmpleadoContactoController');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController');
 
+// CRM General
+Route::resource('crms', 'CRM\CrmGeneralController');
+
 // Empleados
 
 Route::resource('empleados.laborals','Empleado\EmpleadoDatoLabController');
