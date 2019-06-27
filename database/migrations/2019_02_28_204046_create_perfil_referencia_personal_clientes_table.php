@@ -17,10 +17,12 @@ class CreatePerfilReferenciaPersonalClientesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('perfil_id');
             $table->foreign('perfil_id')->references('id')->on('perfil_datos_personal_clientes');
-            $table->string('nombre_completo');
+            $table->string('paterno');
+            $table->string('materno')->nullable();
+            $table->string('nombre');
             $table->string('parentesco');
             $table->string('telefono');
-            $table->string('celular');
+            $table->string('celular')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

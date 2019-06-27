@@ -76,7 +76,7 @@ class PresolicitudController extends Controller
             'lugar_nacimiento'=>"required|max:190",
             'nacionalidad'=>"required|max:190",
             'sexo'=>"required|in:Masculino,Femenino",
-            'edad'=>'required|numeric|lte:64',
+            // 'edad'=>'required|numeric|lte:64',
             'estado_civil'=>"required|in:Soltero,Casado,Viudo,Divorciado,Unión Libre",
             'profesion'=>"required|max:190",
             'empresa'=>"nullable|max:190",
@@ -92,7 +92,7 @@ class PresolicitudController extends Controller
         $presolicitud->folio = 100+Presolicitud::all()->count();
         $presolicitud->precio_inicial= $perfil->cotizacion->monto;
         $presolicitud->plazo_contratado= $perfil->cotizacion->plan->plazo;
-        $presolicitud->precio_nolose=$perfil->cotizacion->plan->plan_meses;
+        $presolicitud->plan=$perfil->cotizacion->plan->plan_meses;
         $perfil->presolicitud()->save($presolicitud);
         $cotizacion =$presolicitud->cotizacion();
         $grupos = $cotizacion->plan->grupos;
