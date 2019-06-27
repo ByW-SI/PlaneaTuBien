@@ -13,7 +13,7 @@ class SucursalMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $component)
+    public function handle($request, Closure $next, $component=null)
     {
         if(Auth::check()) {
             foreach (Auth::user()->perfil->componentes as $componente)

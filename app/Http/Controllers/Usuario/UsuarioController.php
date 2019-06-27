@@ -15,6 +15,7 @@ class UsuarioController extends Controller
     const PERFIL_ID_ADMIN = 1;
 
     public function __construct() {
+        // dd(Auth::user());
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)

@@ -230,6 +230,9 @@ function cotizar() {
                 <label for="monto">Inscripción </label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">3%</span>
+                    </div>
+                    <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
                     <input class="form-control" type="text" id="inscripcion_input" readonly="" name="inscripcion" value="${plan.monto_inscripcion_con_iva}" required>

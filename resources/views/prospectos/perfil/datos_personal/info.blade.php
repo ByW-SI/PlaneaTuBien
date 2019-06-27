@@ -283,7 +283,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex justify-content-center">
-			<a href="#" class="btn btn-success">Editar datos personales</a>
+			<a href="{{ route('prospectos.perfil.datos_personal.edit',['prospecto'=>$prospecto,'datos_personal'=>$personal]) }}" class="btn btn-success">Editar datos personales</a>
 		</div>
 	</div>
 </div>

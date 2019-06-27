@@ -53,8 +53,8 @@ class ProspectoController extends Controller
      */
     public function create()
     {
-        $asesores = Empleado::where('cargo', 'Asesor')->get();
-        return view('prospectos.create', ['asesores' => $asesores]);
+        $asesor = Auth::user()->empleado;
+        return view('prospectos.create', ['asesor' => $asesor]);
     }
     /**
      * Show the form for creating a new resource.
@@ -80,7 +80,7 @@ class ProspectoController extends Controller
             'apmaterno'=>'nullable|max:191',
             'sexo'=>'nullable|in:["","Hombre","Mujer"]',
             'email'=>"required|e-mail",
-            'tel'=>"required|numeric",
+            'tel'=>"nullable|numeric",
             'movil'=>"nullable|numeric",
             'monto'=>"required|numeric",
             'plan'=>'required'
@@ -100,7 +100,33 @@ class ProspectoController extends Controller
      */
     public function store(Request $request)
     {
-        $prospecto = Prospecto::create($request->all());
+        $rules = [
+            'nombre'=>'required|max:191',
+            'appaterno'=>'required|max:191',
+            'apmaterno'=>'nullable|max:191',
+            'sexo'=>'nullable|in:,Hombre,Mujer',
+            'email'=>"required|e-mail",
+            'tel'=>"nullable|numeric",
+            'movil'=>"nullable|numeric",
+            'sueldo'=>'required|numeric',
+            'ahorro'=>'required|numeric',
+            'calificacion'=>'required|numeric',
+            'aprobado'=>'required|boolean',
+            'monto'=>'required|numeric',
+            'gastos'=>'required|numeric',
+            'plan' =>' required|in:15 años,10 años,6 años,5 años,3 años',
+        ];
+        $this->validate($request,$rules);
+        $prospecto = new Prospecto($request->all());
+        $prospecto->empleado_id = (Auth::user()->empleado->id == 1 ? null : Auth::user()->empleado->id);
+        $prospecto->sueldo = $request->sueldo;
+        $prospecto->ahorro = $request->ahorro;
+        $prospecto->gastos=$request->gastos;
+        $prospecto->calificacion = $request->calificacion;
+        $prospecto->aprobado = $request->aprobado;
+        $prospecto->monto = $request->monto;
+        $prospecto->plan = $request->plan;
+        $prospecto->save();
         return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
 
