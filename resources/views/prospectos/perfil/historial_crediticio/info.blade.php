@@ -21,6 +21,7 @@
 				<div class="col-sm-12">
 					<h4>Tarjetas de debito o Cuenta de Ahorro:</h4>
 				</div>
+				@if(json_decode($credito->tarjetas_debito))
 				@foreach (json_decode($credito->tarjetas_debito) as $tarjeta)
 					<div class="col-sm-4">
 						<div class="input-group mb-3">
@@ -35,6 +36,7 @@
 						</div>
 					</div>
 				@endforeach
+				@endif
 				<div class="col-6">
 					<label>Buró de crédito:</label>
 					<label class="form-control" readonly="">
@@ -65,6 +67,7 @@
 			<div class="col-sm-12">
 				<h4>Tarjetas de credito:</h4>
 			</div>
+			@if(json_decode($credito->tarjetas_credito))
 			@foreach (json_decode($credito->tarjetas_credito) as $tarjeta_cred)
 				<div class="col-sm-4">
 					<div class="input-group mb-3">
@@ -79,6 +82,7 @@
 					</div>
 				</div>
 			@endforeach
+			@endif
 			<div class="offset-sm-1 col-sm-11">
 
 				@if ($credito->tc_bancomer)

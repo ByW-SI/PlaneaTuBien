@@ -76,7 +76,7 @@ class PresolicitudController extends Controller
             'lugar_nacimiento'=>"required|max:190",
             'nacionalidad'=>"required|max:190",
             'sexo'=>"required|in:Masculino,Femenino",
-            'edad'=>'required|numeric|lte:64',
+
             'estado_civil'=>"required|in:Soltero,Casado,Viudo,Divorciado,Unión Libre",
             'profesion'=>"required|max:190",
             'empresa'=>"nullable|max:190",
