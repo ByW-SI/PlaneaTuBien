@@ -1,5 +1,6 @@
 <?php
 
+use App\StatusPago;
 use Illuminate\Database\Seeder;
 
 class StatusPagoSeeder extends Seeder
@@ -11,6 +12,8 @@ class StatusPagoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $status = ['nombre'=>'Aprobado', 'nombre'=>'Revisión', 'nombre'=>'Rechazado'];
+
+        StatusPago::create($perfiles);
     }
 }
