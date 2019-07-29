@@ -130,6 +130,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="{{ route('empleados.prospectos.index',['empleado'=>Auth::user()->empleado]) }}"><i class="fa fa-users"></i><strong> Mis prospectos</strong></a>
 							<a class="dropdown-item" href="{{ route('empleados.crms.index',['empleado'=>Auth::user()->empleado]) }}"><i class="fas fa-calendar"></i><strong> Mi C.R.M.</strong></a>
+							<a class="dropdown-item" href="{{ route('crms.index') }}"><i class="fas fa-calendar"></i><strong> C.R.M. General</strong></a>
 						</div>
 					</li>
 				@endif

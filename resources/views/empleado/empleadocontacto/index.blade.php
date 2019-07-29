@@ -21,6 +21,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('empleados.direcciones.index' , ['empleado' => $empleado]) }}">Dirección</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('empleados.accidentes.index' , ['empleado' => $empleado]) }}">Accidentes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('empleados.beneficiario.index' , ['empleado' => $empleado]) }}">Beneficiario</a>
+            </li>
         </ul>
     </div>
 </div>

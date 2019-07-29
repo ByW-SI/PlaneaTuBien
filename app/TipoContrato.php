@@ -24,6 +24,6 @@ class TipoContrato extends Model
     protected $dates=['deleted_at'];
 
     public function datosLab(){
-    	return $this->hasMany('App\EmpleadosDatosLab');
+    	return $this->hasMany('App\EmpleadosDatoLab');
     }
 }

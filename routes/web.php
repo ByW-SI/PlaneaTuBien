@@ -87,9 +87,20 @@ Route::resource('empleados.contactos','Empleado\EmpleadoContactoController')->mi
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController')->middleware('auth');
 Route::resource('empleados.relaciones','Empleado\EmpleadoRelacionController')->middleware('auth');
 
+// CRM General
+Route::resource('crms', 'CRM\CrmGeneralController');
+
 // Empleados
 
 Route::resource('empleados.laborals','Empleado\EmpleadoDatoLabController')->middleware('auth');
+Route::resource('empleados.accidentes','Empleado\EmpleadoAccidenteController');
+Route::resource('empleados.beneficiario','Empleado\EmpleadoBeneficiarioController',['only'=>['index','create','store','edit','update']]);
+Route::resource('empleados.permisos','Empleado\EmpleadoPermisoController');
+Route::resource('empleados.faltas','Empleado\EmpleadoFaltaController');
+Route::resource('empleados.vacacions','Empleado\EmpleadoVacacionController');
+Route::resource('empleados.estudios','Empleado\EmpleadoEstudioController');
+Route::resource('empleados.emergencias','Empleado\EmpleadoEmergenciaController');
+Route::resource('empleados.disciplinas','Empleado\EmpleadoFaltaAdministrativaController');
 
 Route::resource('empleados.crms','Empleado\EmpleadoCRMController',['only'=>['index']])->middleware('auth');
 Route::resource('empleados.prospectos','Empleado\EmpleadoProspectoController')->middleware('auth');

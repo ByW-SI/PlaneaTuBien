@@ -2,20 +2,42 @@
 
 namespace App\Http\Controllers\Empleado;
 
+use App\Empleado;
 use App\EmpleadoEmergencia;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class EmpleadoEmergenciaController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            if(Auth::check()) {
+                foreach (Auth::user()->perfil->componentes as $componente)
+                    if($componente->modulo->nombre == "rh")
+                        return $next($request);
+                return redirect()->route('denegado');
+            } else
+                return redirect()->route('login');
+        });
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
-        //
+        $emergencia = $empleado->emergencia;
+        if ($emergencia == null) {
+            # code...
+            return redirect()->route('empleados.emergencias.create',['empleado'=>$empleado]);
+        }
+        else {
+
+            return view('empleado.emergencia.view',['empleado'=>$empleado, 'emergencia'=>$emergencia]);
+        }
     }
 
     /**
@@ -23,9 +45,11 @@ class EmpleadoEmergenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
-        //
+        $emergencia = new EmpleadoEmergencia;
+        $edit = false;
+        return view('empleado.emergencia.create',['empleado'=>$empleado,'emergencia'=>$emergencia,'edit'=>$edit]);
     }
 
     /**
@@ -34,9 +58,13 @@ class EmpleadoEmergenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleado $empleado)
     {
-        //
+        $emergencia = new EmpleadoEmergencia($request->all());
+        $empleado->emergencia()->save($emergencia);
+        Alert::success('Registro guardado', 'Siga agregando información al empleado');
+        // $emergencias = EmpleadoEmergencia::create($request->all());
+        return redirect()->route('empleados.emergencias.index',['empleado'=>$empleado,'emergencia'=>$emergencia]);
     }
 
     /**
@@ -45,7 +73,7 @@ class EmpleadoEmergenciaController extends Controller
      * @param  \App\EmpleadoEmergencia  $empleadoEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function show(EmpleadoEmergencia $empleadoEmergencia)
+    public function show(Empleado $empleado)
     {
         //
     }
@@ -56,9 +84,11 @@ class EmpleadoEmergenciaController extends Controller
      * @param  \App\EmpleadoEmergencia  $empleadoEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpleadoEmergencia $empleadoEmergencia)
+    public function edit(Empleado $empleado, $emergencia)
     {
-        //
+        $emergencia = $empleado->emergencia;
+        $edit = true;
+        return view('empleado.emergencia.create',['empleado'=>$empleado, 'emergencia'=>$emergencia,'edit'=>$edit]);
     }
 
     /**
@@ -68,9 +98,12 @@ class EmpleadoEmergenciaController extends Controller
      * @param  \App\EmpleadoEmergencia  $empleadoEmergencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpleadoEmergencia $empleadoEmergencia)
+    public function update(Request $request, Empleado $empleado, $emergencia)
     {
-        //
+        $emergencia = $empleado->emergencia;
+        $emergencia->update($request->all());
+        Alert::success('Registro actualizado', 'Siga agregando información al empleado');
+        return redirect()->route('empleados.emergencias.index',['empleado'=>$empleado,'emergencia'=>$emergencia]);
     }
 
     /**

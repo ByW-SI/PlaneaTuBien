@@ -20,7 +20,7 @@ class CreatePresolicitudsTable extends Migration
             $table->string('folio');
             $table->decimal('precio_inicial',11,2);
             $table->string('plazo_contratado');
-            $table->decimal('precio_nolose',11,2);
+            $table->string('plan');
             // SOLICITANTE NOMBRE
             $table->string('paterno');
             $table->string('materno')->nullable();

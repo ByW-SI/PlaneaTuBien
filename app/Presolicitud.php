@@ -15,7 +15,7 @@ class Presolicitud extends Model
     	'folio',
     	'precio_inicial',
 		'plazo_contratado',
-		'precio_nolose',
+		'plan',
 		'paterno',
 		'materno',
 		'nombre',

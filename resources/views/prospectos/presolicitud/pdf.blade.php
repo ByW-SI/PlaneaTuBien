@@ -67,7 +67,7 @@
 							<label style="font-size: 10px"> Plan:</label>
 						</div>
 						<div class="ten columns u-pull-right" style="border-bottom: 0.5px solid #B8242B;font-size: 10px; text-align: center;">
-							{{(int)$presolicitud->precio_nolose}} (meses)
+							{{$presolicitud->plan}} (meses)
 						</div>
 					</div>
 				</div>

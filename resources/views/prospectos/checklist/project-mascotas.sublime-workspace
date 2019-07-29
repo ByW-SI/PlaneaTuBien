@@ -1,0 +1,1224 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"control",
+				"form-control-label \tBootstrap 4 Class"
+			],
+			[
+				"re",
+				"required\tAttr"
+			],
+			[
+				"alp",
+				"alpha_num"
+			],
+			[
+				"inva",
+				"is-invalid \tBootstrap 4 Class"
+			],
+			[
+				"has-e",
+				"has-danger \tBootstrap 4 Class"
+			],
+			[
+				"has",
+				"has-feedback \tBootstrap 4 Class"
+			],
+			[
+				"is",
+				"is-valid \tBootstrap 4 Class"
+			],
+			[
+				"col-sm-o",
+				"col-sm-auto \tBootstrap 4 Class"
+			],
+			[
+				"p",
+				"push-2 \tBootstrap 4 Class"
+			],
+			[
+				"m-",
+				"m-0 \tBootstrap 4 Class"
+			],
+			[
+				"card-t",
+				"card-title \tBootstrap 4 Class"
+			],
+			[
+				"alert",
+				"alert-link \tBootstrap 3 Class"
+			],
+			[
+				"al",
+				"alert-info \tBootstrap 4 Class"
+			],
+			[
+				"pr",
+				"presolicitud"
+			],
+			[
+				"cont",
+				"contratos"
+			],
+			[
+				"fun",
+				"fun\tfunction …"
+			],
+			[
+				"pro",
+				"prospectos"
+			],
+			[
+				"ase",
+				"asesores"
+			],
+			[
+				"empl",
+				"empleados"
+			],
+			[
+				"emp",
+				"empleado2"
+			],
+			[
+				"eml",
+				"empleado2"
+			],
+			[
+				"emple",
+				"empleado"
+			],
+			[
+				"b",
+				"border \tBootstrap 4 Class"
+			],
+			[
+				"p-",
+				"p-2 \tBootstrap 4 Class"
+			],
+			[
+				"alert-",
+				"alert-danger \tBootstrap 4 Class"
+			],
+			[
+				"card",
+				"card-body \tBootstrap 4 Class"
+			],
+			[
+				"pros",
+				"prospectos"
+			],
+			[
+				"navba",
+				"navbar-brand"
+			],
+			[
+				"modu",
+				"moduloPrecargas"
+			],
+			[
+				"mi",
+				"middleware"
+			],
+			[
+				"emplead",
+				"empleados"
+			],
+			[
+				"compo",
+				"component"
+			],
+			[
+				"ha",
+				"hasUsuario"
+			],
+			[
+				"subgerente",
+				"subgerente"
+			],
+			[
+				"subger",
+				"subgerente"
+			],
+			[
+				"da",
+				"datosLaborales"
+			],
+			[
+				"sub",
+				"subgerente"
+			],
+			[
+				"ch",
+				"children\t.children()"
+			],
+			[
+				"text",
+				"text\t.text()"
+			],
+			[
+				"pa",
+				"parent\t.parent()"
+			],
+			[
+				"V",
+				"VendedorController"
+			],
+			[
+				"bor",
+				"border-radius\tproperty"
+			],
+			[
+				"marg",
+				"margin-top\tproperty"
+			],
+			[
+				"fil",
+				"file_ID"
+			],
+			[
+				"file",
+				"file-style"
+			],
+			[
+				"cli",
+				"cliente"
+			],
+			[
+				"transa",
+				"transaction"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"total",
+				"total_orden"
+			],
+			[
+				"parse",
+				"parseFloat"
+			],
+			[
+				"tot",
+				"total_orden"
+			],
+			[
+				"tota",
+				"total_obra"
+			],
+			[
+				"precio",
+				"precio_m2"
+			],
+			[
+				"ca",
+				"cantidad_material"
+			],
+			[
+				"cantidad",
+				"cantidad_material"
+			],
+			[
+				"num",
+				"num_obra"
+			],
+			[
+				"cant_",
+				"cant_input"
+			],
+			[
+				"onc",
+				"onchange"
+			],
+			[
+				"form",
+				"form-control"
+			],
+			[
+				"profundida",
+				"profundidad_obra"
+			],
+			[
+				"val",
+				"val\t.val()"
+			],
+			[
+				"fi",
+				"first\t.first()"
+			],
+			[
+				"obra",
+				"obra_id"
+			],
+			[
+				"can",
+				"cantaquitar"
+			],
+			[
+				"preci",
+				"precio_medida"
+			],
+			[
+				"or",
+				"ordenTrabajo"
+			],
+			[
+				"Orden",
+				"ordenTrabajo"
+			],
+			[
+				"venta",
+				"Venta_guardada"
+			],
+			[
+				"wh",
+				"where"
+			],
+			[
+				"op",
+				"option\tTag"
+			],
+			[
+				"att",
+				"attr\t.attr() - single"
+			],
+			[
+				"sku",
+				"sku_interno"
+			],
+			[
+				"prod",
+				"Productos"
+			],
+			[
+				"sea",
+				"search_productos"
+			],
+			[
+				"sho",
+				"showProducto"
+			],
+			[
+				"va",
+				"val\t.val()"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"fo",
+				"foreach\tforeach …"
+			],
+			[
+				"if",
+				"if\tif …"
+			],
+			[
+				"tipo",
+				"tipo_convenio"
+			],
+			[
+				"produc",
+				"productos"
+			],
+			[
+				"onC",
+				"onchange\tAttr"
+			],
+			[
+				"conte",
+				"contenido"
+			],
+			[
+				"con",
+				"convenio_total"
+			],
+			[
+				"conveno",
+				"convenio"
+			],
+			[
+				"min",
+				"minLength"
+			],
+			[
+				"id",
+				"id_paciente"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"sal",
+				"saldo_EF"
+			],
+			[
+				"monto_",
+				"monto_ef"
+			],
+			[
+				"saldo_T",
+				"saldo__TRANS"
+			],
+			[
+				"tex",
+				"text\t.text()"
+			],
+			[
+				"saldo",
+				"saldo_TC"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"vi",
+				"view"
+			],
+			[
+				"res",
+				"resource"
+			],
+			[
+				"convenos",
+				"convenios"
+			],
+			[
+				"border-r",
+				"border-top-left-radius\tproperty"
+			],
+			[
+				"border-b",
+				"border-bottom-left-radius\tproperty"
+			],
+			[
+				"bord",
+				"border\tproperty"
+			],
+			[
+				"wid",
+				"width\tproperty"
+			],
+			[
+				"in",
+				"inline-block\tdisplay"
+			],
+			[
+				"inp",
+				"input-group-addon"
+			],
+			[
+				"json",
+				"json"
+			],
+			[
+				"tipos",
+				"tipos_convenios"
+			],
+			[
+				"get",
+				"get\t$.get()"
+			],
+			[
+				"panle",
+				"panel_venta"
+			],
+			[
+				"panel",
+				"panel_venta"
+			],
+			[
+				"sele",
+				"selectConvenio"
+			],
+			[
+				"show",
+				"showConvenios"
+			],
+			[
+				"word",
+				"wordsquery"
+			],
+			[
+				"prosp",
+				"prospectos"
+			],
+			[
+				"crea",
+				"created_at"
+			],
+			[
+				"tar",
+				"tarjetaHabiente"
+			],
+			[
+				"comp",
+				"comprobante"
+			],
+			[
+				"c",
+				"colspan\tAttr"
+			],
+			[
+				"prest",
+				"prestamo"
+			],
+			[
+				"prs",
+				"prospecto"
+			],
+			[
+				"mar",
+				"margin-bottom\tproperty"
+			],
+			[
+				"s",
+				"style\tAttr"
+			],
+			[
+				"prospec",
+				"prospectos"
+			],
+			[
+				"prospe",
+				"prospecto"
+			],
+			[
+				"docume",
+				"documentos"
+			],
+			[
+				"docu",
+				"documento"
+			],
+			[
+				"do",
+				"documentos"
+			],
+			[
+				"prospect",
+				"prospecto"
+			],
+			[
+				"fr",
+				"form-group"
+			],
+			[
+				"ases",
+				"asesor"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/routes/web.php",
+			"settings":
+			{
+				"buffer_size": 2445,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers/Dueño/DueñoController.php",
+			"settings":
+			{
+				"buffer_size": 2848,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 3076,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 5307,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/head.blade.php",
+			"settings":
+			{
+				"buffer_size": 3440,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/empleado/head.blade.php",
+			"settings":
+			{
+				"buffer_size": 1560,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 5302,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"blade",
+				"Set Syntax: Laravel Blade"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"bla",
+				"Blade Spacer: Format File"
+			],
+			[
+				"BLADE",
+				"Blade Spacer: Format File"
+			],
+			[
+				"bladf",
+				"Blade Spacer: Format File"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"mate",
+				"Material Theme: Activate theme"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"material",
+				"Material Theme: Activate theme"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/B&W/Documents/mascotas/mascotas",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Http",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers/Dueño",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers/Empleado",
+		"/C/Users/B&W/Documents/mascotas/mascotas/public",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/empleado",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente"
+	],
+	"file_history":
+	[
+		"/C/Users/B&W/AppData/Local/Temp/Pl0zQ0eV",
+		"/C/Users/B&W/Documents/mascotas/mascotas/config/app.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Dueño.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Mascotas.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2019_06_06_153816_create_mascota_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2019_06_06_154224_create_duenio_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Empleado.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/index.blade.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers/Paciente/PacienteController.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2019_06_06_153816_create_mascotas_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2019_06_06_154224_create_dueño_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2019_06_05_175604_create_pacientes_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/app/Paciente.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/show.blade.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/principal.blade.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/resources/views/nav.blade.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/database/migrations/2017_11_28_000003_create_laborals_table.php",
+		"/C/Users/B&W/Documents/mascotas/mascotas/.env",
+		"/C/Users/B&W/Documents/mascotas/mascotas/.env.example",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Contrato.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cliente/Presolicitud/Documentos/DocumentosController.php",
+		"/C/Users/B&W/Documents/cp.sql",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_01_23_115000_create_cotizacions_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_03_25_194318_create_contratos_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/presolicitud/recibo/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_03_25_190023_create_recibos_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cliente/Presolicitud/PresolicitudReciboController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_01_23_115014_create_pago_inscripcions_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/ProspectoController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/presolicitud/contratos/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/form.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/edit.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Empleados/edit.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/ChecklistFolder.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/presolicitud/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/presolicitud/pdf.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Cotizacion.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Cliente/PlanController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/grupo/list_contratos.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/PagoMensual.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/ClienteCredentialsController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/cliente/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/cliente/plan/corrida.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/cliente/pagar.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Recibo.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Plan.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/presolicitud/navs.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Presolicitud.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Grupo.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Pago.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Pagos/PagosController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Prospecto.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/PerfilDatosPersonalCliente.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cotizacion/PagosController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Pago/PagoController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Pagos/PagoMensualController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoRelacionController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Grupo/GrupoController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/perfil/pagos/form.blade.php",
+		"/C/Users/B&W/Documents/Reloj.java",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Empleado.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/seeds/UsersTableSeeder.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_05_24_121205_create_pago_mensuals_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cliente/Presolicitud/CredencialController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/perfil/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cliente/Perfil/DatosPersonalesController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_01_23_115014_create_pagos_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Auth/ClienteLoginController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Usuario/UsuarioController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/User.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/nav.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/grupo/show.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/.env",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Notifications/ClienteCredentialNotification.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/perfil/historial_crediticio/info.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/perfil/form.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cotizacion/PerfilController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/PerfilHistorialCrediticioCliente.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/CotizacionController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/grupo/form.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Prospecto/Cliente/Perfil/HistorialCrediticioController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Prospecto/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoProspectoController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Middleware/EmpleadosMiddleware.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/show.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoDatoLabController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Empleados/create.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Empleados/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/EmpleadoDireccion/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/EmpleadoContacto/edit.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/EmpleadoContacto/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/DatosGenerales/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/DatosLaborales/create.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/DatosLaborales/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Prospecto/show.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Empleados/show.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasRelationships.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_01_14_0000002_create_empleados_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Prospecto/CRM/form.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/Prospecto/CRM/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoProspectoCRMController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoCRMController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/Empleado/CRM/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Task.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Empleado/EmpleadoProspectoCotizacionController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Events/PagoCreated.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/principal.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/pagos/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/seeds/DatabaseSeeder.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Http/Controllers/Plan/CotizadorController.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/storage/logs/laravel-2019-05-08.log",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/pagos/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/routes/channels.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/app/Events/ProspectoCreated.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/create.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/seeds/ModulosTableSeeder.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/seeds/ComponentesTableSeeder.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_01_15_060252_create_prospectos_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/database/migrations/2019_02_28_194708_create_perfil_historial_crediticio_clientes_table.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/storage/framework/views/4028818116f56db07e1622dc27257d59a0a61b89.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/public/js/app.js",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/prospectos/pagos/follow.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/resources/views/precargas/index.blade.php",
+		"/C/Users/B&W/Documents/planea/PlaneaTuBien/public/css/app.css",
+		"/E/uvas.html"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"h",
+			"empleado",
+			"empleados",
+			"empleado",
+			"email",
+			"Paciente",
+			"name=\"noticias[]\"",
+			"checkbox",
+			"panel",
+			"pacientes",
+			"active"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/routes/web.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2445,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2426,
+								2426
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 380.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/app/Http/Controllers/Dueño/DueñoController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1472,
+								1472
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1193,
+								1194
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 217.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5286,
+								70
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/head.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3440,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2194,
+								2194
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/empleado/head.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								205,
+								205
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 90.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/B&W/Documents/mascotas/mascotas/resources/views/paciente/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5302,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								5302
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1470.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "project-mascotas.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"create_recib",
+				"database\\migrations\\2019_03_25_190023_create_recibos_table.php"
+			],
+			[
+				"create_con",
+				"database\\migrations\\2019_03_25_194318_create_contratos_table.php"
+			],
+			[
+				"create_pa",
+				"database\\migrations\\2019_01_23_115014_create_pago_inscripcions_table.php"
+			],
+			[
+				"pago",
+				"app\\Http\\Controllers\\Prospecto\\Cotizacion\\PagosController.php"
+			],
+			[
+				"Pago",
+				"app\\Http\\Controllers\\Pago\\PagoController.php"
+			],
+			[
+				"ClientesC",
+				"app\\Http\\Controllers\\ClienteCredentialsController.php"
+			],
+			[
+				"create_pagos",
+				"database\\migrations\\2019_01_23_115014_create_pagos_table.php"
+			],
+			[
+				"ClienteCredentialNotification",
+				"app\\Notifications\\ClienteCredentialNotification.php"
+			],
+			[
+				"PagoC",
+				"app\\Http\\Controllers\\Pago\\PagoController.php"
+			],
+			[
+				"create_pro",
+				"database\\migrations\\2019_01_15_060252_create_prospectos_table.php"
+			],
+			[
+				"web",
+				"routes\\web.php"
+			],
+			[
+				"create_emple",
+				"database\\migrations\\2019_01_14_0000002_create_empleados_table.php"
+			],
+			[
+				"create_sub",
+				"database\\migrations\\2017_11_28_000007_create_subgerentes_table.php"
+			],
+			[
+				"Class",
+				"vendor\\composer\\ClassLoader.php"
+			],
+			[
+				"create_of",
+				"database\\migrations\\2017_01_01_000002_create_oficinas_table.php"
+			],
+			[
+				"create_e",
+				"database\\migrations\\2017_11_28_000001_create_empleados_table.php"
+			],
+			[
+				"create_in",
+				"database\\migrations\\2018_02_06_095240_create_integrantes_table.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 302.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

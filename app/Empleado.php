@@ -69,6 +69,24 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadoDireccion');
     }
 
+    public function accidentes(){
+        return $this->hasMany('App\EmpleadoAccidente');
+    }
+
+    public function beneficiario(){
+        return $this->hasOne('App\EmpleadoBeneficiario');
+    }
+
+    public function permisos()
+    {
+        return $this->hasMany('App\EmpleadoPermiso');
+    }
+
+    public function faltas(){
+        return $this->hasMany('App\EmpleadoFalta');
+    }
+
+
     public function jefe(){
         return $this->belongsTo('App\Empleado', 'id_jefe', 'id');
     }
@@ -90,11 +108,11 @@ class Empleado extends Model
     }
 
     public function estudio(){
-        return $this->hasOne('App\EmpleadoEstudios');
+        return $this->hasOne('App\EmpleadoEstudio');
     }
     public function emergencia()
     {
-        return $this->hasOne('App\EmpleadoEmergencias');
+        return $this->hasOne('App\EmpleadoEmergencia');
     }
     public function vacaciones()
     {

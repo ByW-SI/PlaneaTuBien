@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Empleado;
 
+use App\Empleado;
 use App\EmpleadoFaltaAdministrativa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class EmpleadoFaltaAdministrativaController extends Controller
 {
@@ -13,9 +15,10 @@ class EmpleadoFaltaAdministrativaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
-        //
+        $disciplinas = $empleado->faltas_administrativas;
+        return view('empleado.disciplina.index',['empleado'=>$empleado,'disciplinas'=>$disciplinas]);
     }
 
     /**
@@ -34,9 +37,12 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Empleado $empleado)
     {
-        //
+        $disciplina = new EmpleadoFaltaAdministrativa($request->all());
+        $empleado->faltas_administrativas()->save($disciplina);
+        Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
+        return redirect()->route('empleados.disciplinas.index',['empleado'=>$empleado]);
     }
 
     /**
@@ -45,7 +51,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
      * @return \Illuminate\Http\Response
      */
-    public function show(EmpleadoFaltaAdministrativa $empleadoFaltaAdministrativa)
+    public function show(Empleado $empleado)
     {
         //
     }
@@ -56,7 +62,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpleadoFaltaAdministrativa $empleadoFaltaAdministrativa)
+    public function edit(Empleado $empleado)
     {
         //
     }
@@ -68,7 +74,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpleadoFaltaAdministrativa $empleadoFaltaAdministrativa)
+    public function update(Request $request, Empleado $empleado)
     {
         //
     }
@@ -79,7 +85,7 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \App\EmpleadoFaltaAdministrativa  $empleadoFaltaAdministrativa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpleadoFaltaAdministrativa $empleadoFaltaAdministrativa)
+    public function destroy(Empleado $empleado)
     {
         //
     }
