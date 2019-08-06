@@ -1,5 +1,4 @@
 <?php
-
 use App\StatusPago;
 use Illuminate\Database\Seeder;
 
@@ -12,8 +11,11 @@ class StatusPagoSeeder extends Seeder
      */
     public function run()
     {
-        $status = ['nombre'=>'Aprobado', 'nombre'=>'Revisión', 'nombre'=>'Rechazado'];
-
-        StatusPago::create($status);
+        $status = array(
+            array('nombre'=>'Aprobado'),
+            array('nombre'=>'Revision'),
+            array('nombre'=>'Rechazado')
+        );
+        StatusPago::insert($status);
     }
 }

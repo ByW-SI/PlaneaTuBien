@@ -84,9 +84,11 @@ class PerfilController extends Controller
             // $inmueble->save();
         }
         $perfil->inmueble_pretendido()->save($inmueble);
-        for ($i = 0; $i < sizeof($request->nombre_completo) ; $i++) {
+        for ($i = 0; $i < sizeof($request->nombre) ; $i++) {
             $referencia = new PerfilReferenciaPersonalCliente([
-                'nombre_completo' => $request->nombre_completo[$i+1],
+                'nombre' => $request->nombre[$i+1],
+                'paterno' => $request->paterno[$i+1],
+                'materno' => $request->materno[$i+1],
                 'parentesco' => $request->parentesco[$i+1],
                 'telefono' =>$request->telefono[$i+1],
                 'celular'=>$request->celular[$i+1]
