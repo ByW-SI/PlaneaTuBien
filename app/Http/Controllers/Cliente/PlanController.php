@@ -35,5 +35,6 @@ class PlanController extends Controller
         $pago = PagoMensual::create($request->all());
         return redirect()->route('cliente.dashboard');
     }
+    
 
 }

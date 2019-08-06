@@ -14,6 +14,6 @@ class StatusPagoSeeder extends Seeder
     {
         $status = ['nombre'=>'Aprobado', 'nombre'=>'Revisión', 'nombre'=>'Rechazado'];
 
-        StatusPago::create($perfiles);
+        StatusPago::create($status);
     }
 }

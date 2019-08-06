@@ -109,8 +109,8 @@ Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMContro
 Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked')->middleware('auth');
 
 // PROSPECTOS VISTA APARTE
-Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create')->middleware('auth');
-Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit')->middleware('auth');
+Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
+Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
 Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth');

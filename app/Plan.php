@@ -587,6 +587,7 @@ class Plan extends Model
         $sobrecosto = round(($monto_total_pagar/$monto_adjudicar)-1,2)*100;
         return $sobrecosto;
     }
+
     public function sobrecosto_anual($monto,$factor_actualizacion=null)
     {
         if ($factor_actualizacion == null) {
