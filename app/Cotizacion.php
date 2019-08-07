@@ -44,6 +44,7 @@ class Cotizacion extends Model
         'ahorro',
         'descuento',
         'inscripcion',
+        'factor_actualizacion',
         'tipo_inscripcion'
     ];
 
@@ -75,6 +76,17 @@ class Cotizacion extends Model
     public function promocion(){
         return $this->belongsTo('App\Promocion');
     }
+
+    public function datos_de_cotizacion()
+    {
+        return $this->belongsTo('App\Datos_de_Cotizacion');
+    }
+
+    public function corrida()
+    {
+        return $this->hasMany('App\Corrida');
+    }
+
     public function enviarCotizacion($email,$pdf)
     {
         $cotizacion = $this;

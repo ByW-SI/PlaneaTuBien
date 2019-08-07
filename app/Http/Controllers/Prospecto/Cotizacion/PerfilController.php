@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Prospecto\Cotizacion;
 
 use App\Banco;
 use App\Cotizacion;
+use App\Datos_de_Cotizacion;
+use App\Corrida;
 use App\Http\Controllers\Controller;
 use App\PerfilDatosPersonalCliente;
 use App\PerfilHistorialCrediticioCliente;
@@ -23,6 +25,7 @@ class PerfilController extends Controller
     public function create(Prospecto $prospecto, Cotizacion $cotizacion)
     {
         //
+        //dd($prospecto->cotizaciones->last()->plan->cotizador(1100000));
         $perfils      = PerfilDatosPersonalCliente::all();
         $perfil  = $perfils->last();
         if ($perfil == null) {
@@ -32,7 +35,6 @@ class PerfilController extends Controller
             $folio=$perfil->id+1;
         }
         $bancos = Banco::orderBy('nombre','asc')->get();
-        // dd($perfil);
         return view('prospectos.perfil.form',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion, 'folio'=>$folio,'bancos'=>$bancos]);
     }
 
@@ -97,6 +99,22 @@ class PerfilController extends Controller
         }
         $cotizacion->elegir = 1;
         $cotizacion->save();
+
+        $resultado_cotizador = $cotizacion->plan->cotizador($cotizacion->monto, $cotizacion->factor_actualizacion);
+        $resultado_cotizador['cotizacion_id'] = $cotizacion->id;
+        Datos_de_Cotizacion::create($resultado_cotizador);
+        foreach ($resultado_cotizador['corrida'] as $corrida) {
+            Corrida::create([
+                'cotizacion_id' => $cotizacion->id,
+                'mes' => $corrida['mes'],
+                'aportacion' => $corrida['aportacion'],
+                'cuota_administracion' => $corrida['cuota_administracion'],
+                'iva' => $corrida['iva'],
+                'seguro_vida' => $corrida['sv'],
+                'seguro_desastres' => $corrida['sd'],
+                'total' => $corrida['total']
+            ]);
+        }
         $cotizaciones = $prospecto->cotizaciones()->where('elegir',0)->get();
         foreach ($cotizaciones as $cot) {
             $cot->delete();
