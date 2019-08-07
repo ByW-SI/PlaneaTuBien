@@ -150,6 +150,9 @@
                 @endforeach
             </div>
         </div>
+        <div>
+            {{-- {{ dd($plan->cotizador(400000)['corrida']) }} --}}
+        </div>
         <div class="card-footer">
             <div class="d-flex justify-content-center">
                 <span>

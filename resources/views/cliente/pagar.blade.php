@@ -1,5 +1,8 @@
 @extends('layouts.cliente')
 @section('content')
+<?php
+header('Location: https://www.google.com');
+?>
 <div class="card">
 	<div class="card-header">
 		PAGA TU MENSUALIDAD
@@ -52,6 +55,7 @@
 		</div>
 	</form>
 </div>
+
 @endsection
 @push('scripts')
 	<script type="text/javascript">

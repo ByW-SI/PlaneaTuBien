@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
             ModulosTableSeeder::class,
             ComponentesTableSeeder::class,
             ComponentePerfilTableSeeder::class,
-            // EmpleadosTableSeeder::class,
-            // UsersTableSeeder::class
+            EmpleadosTableSeeder::class,
+            UsersTableSeeder::class,
+            StatusPagoSeeder::class
         ]);
     }
 }
