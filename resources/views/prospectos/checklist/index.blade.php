@@ -133,7 +133,7 @@
 		</div>
 		<div class="card-footer">
 			<div class="d-flex justify-content-center">
-			@if(Auth::user()->empleado->tipo != "Gerente")
+			@if(Auth::user()->empleado->tipo != "Gerente" && Auth::user()->empleado->tipo != "Admin")
 				<a class="btn btn-success mr-3" href="{{ route('contratos.checklist.create',['contrato'=>$contrato]) }}"><i class="fas fa-save"></i> Subir/Actualizar Checklist</a>
 				@if ($contrato->checklist->status)
 					<a class="btn btn-success mr-3" href="{{ route('contratos.checklist.show',['contrato'=>$contrato,'checklist'=>$contrato->checklist]) }}"><i class="fas fa-save"></i> Descargar Checklist</a>
