@@ -263,18 +263,18 @@ class ReciboProvisionalController extends Controller
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
 
-                // if ($presolicitud->contratos->isEmpty()) {
-                //   foreach ($cotizacion->contratos() as $value) {
-                //     $contrato = new Contrato;
-                //     $contrato->monto = $value;
-                //     $contrato->grupo()->associate($grupo->id);
-                //     $grupo->contratos -= 1;
-                //     $grupo->save();
-                //     $contrato->numero_contrato = 500-$grupo->contratos;
-                //     $contrato->estado = "registrado";
-                //     $presolicitud->contratos()->save($contrato);
-                //   }
-                // }
+                if ($presolicitud->contratos->isEmpty()) {
+                  foreach ($cotizacion->contratos() as $value) {
+                    $contrato = new Contrato;
+                    $contrato->monto = $value;
+                    $contrato->grupo()->associate($grupo->id);
+                    $grupo->contratos -= 1;
+                    $grupo->save();
+                    $contrato->numero_contrato = 500-$grupo->contratos;
+                    $contrato->estado = "registrado";
+                    $presolicitud->contratos()->save($contrato);
+                  }
+                }
                 return redirect()->route('pagos.index');
             }
         }
