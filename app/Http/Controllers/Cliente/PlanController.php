@@ -24,7 +24,6 @@ class PlanController extends Controller
 
     public function formPagos()
     {
-        return "OK";
     	$cliente = auth('cliente')->user()->presolicitud;
     	$cotizacion=$cliente->cotizacion();
     	$plan = $cotizacion->plan;
