@@ -8,7 +8,7 @@ use Auth;
 
 class ClienteLoginController extends Controller
 {
-    //
+    protected $redirectTo = '/clientes';
     public function __construct(){
     	$this->middleware('guest:cliente',['except'=>['logout','loggedOut']]);
     }

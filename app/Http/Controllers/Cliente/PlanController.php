@@ -10,7 +10,7 @@ class PlanController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth:cliente');
+        //$this->middleware('auth:cliente');
     }
 
 
