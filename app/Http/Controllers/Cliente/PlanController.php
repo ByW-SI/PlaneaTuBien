@@ -27,7 +27,7 @@ class PlanController extends Controller
     	$cliente = auth('cliente')->user()->presolicitud;
     	$cotizacion=$cliente->cotizacion();
     	$plan = $cotizacion->plan;
-    	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
+    	return view('cliente.prueba',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
 
     public function guardarPago(Request $request)
