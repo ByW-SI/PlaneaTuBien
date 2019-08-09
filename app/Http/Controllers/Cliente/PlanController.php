@@ -22,8 +22,9 @@ class PlanController extends Controller
     	return view('cliente.plan.corrida',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
 
-    public function pagar()
+    public function formPagos()
     {
+        return "OK";
     	$cliente = auth('cliente')->user()->presolicitud;
     	$cotizacion=$cliente->cotizacion();
     	$plan = $cotizacion->plan;
