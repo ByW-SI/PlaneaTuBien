@@ -47,7 +47,7 @@
                             <a href="{{ route('historial_cliente') }}" class="nav-link text-white">Historial de Pagos</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('layout') }}" class="nav-link text-white">Pagar</a>
+                            <a href="{{ route('pagar') }}" class="nav-link text-white">Pagar</a>
                         </li>
                     </ul>
 

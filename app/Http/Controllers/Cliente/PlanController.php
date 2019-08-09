@@ -10,7 +10,7 @@ class PlanController extends Controller
     //
     public function __construct()
     {
-        //$this->middleware('auth:cliente');
+        $this->middleware('auth:cliente');
     }
 
 
@@ -27,7 +27,7 @@ class PlanController extends Controller
     	$cliente = auth('cliente')->user()->presolicitud;
     	$cotizacion=$cliente->cotizacion();
     	$plan = $cotizacion->plan;
-    	return view('cliente.prueba',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
+    	return view('cliente.plan.prueba',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
 
     public function guardarPago(Request $request)
@@ -42,14 +42,6 @@ class PlanController extends Controller
         $cotizacion=$cliente->cotizacion();
         $plan = $cotizacion->plan;
         return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
-    }
-
-    public function layout()
-    {
-        $cliente = auth('cliente')->user()->presolicitud;
-        $cotizacion=$cliente->cotizacion();
-        $plan = $cotizacion->plan;
-        return view('cliente.prueba',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
     
 
