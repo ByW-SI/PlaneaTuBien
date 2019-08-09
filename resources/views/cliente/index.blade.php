@@ -7,11 +7,8 @@
         <div class="card-body">
             <div class="container">
                 <div class="row">
-                    <label class="col-1" style="left: 50%;"><i class="fas fa-walking"></i></label>
-                    <label class="col-1" style="left: 90%;"><i class="fas fa-home"></i></label>
-                  {{-- <label style="margin-left: 50%;"></i></label> --}}
-                  {{-- <label style="margin-left: 100%;"></label> --}}
-                    
+                    <label class="col-1" style="left: 48%;"><i class="fas fa-walking"></i></label>
+                    <label class="col-1" style="left: 88%;"><i class="fas fa-home"></i></label>                    
                 </div>
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
@@ -25,133 +22,75 @@
             <div class="row">
                 <div class="col-12 text-center mt-3">
                     <label>
-                        Numeros de contratos: {{sizeof($cliente->contratos)}}
+                        Próximo Pagos
                     </label>
-                    
                 </div>
-                @foreach ($cliente->contratos as $contrato)
-                    @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
-                        {{-- expr --}}
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Fecha del proximo pago
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        {{ date("7/m/Y", strtotime("+1 month", strtotime(date('d-m-Y'))))}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Aportación
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['aportacion'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Cuota de Administración
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['cuota_administracion'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        IVA
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['iva'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Seguro de vida
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sv'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Seguro de daños
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sd'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        Total
-                                                    </span>
-                                                </div>
-                                                <div class="input-group-prepend w-50">
-                                                    <span class="input-group-text form-control">
-                                                        ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#" class="btn btn-success btn-sm"><i class="fas fa-credit-card"> PAGAR</i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                <div class="col-6 offset-3 text-center mt-3">
+                    <table class="table table-borderless">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="border-top-left-radius: 10px;">Contratos</th>
+                                <th>A Pagar</th>
+                                <th>Recargo</th>
+                                <th style="border-top-right-radius: 10px;">Fecha Límite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($cliente->contratos as $contrato)
+                            @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
+                            <tr>
+                                <td>
+                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
+                                </td>
+                                <td>
+                                    ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
+                                </td>
+                                <td>$0</td>
+                                <td>{{ date("7/m/Y", strtotime("+1 month", strtotime(date('d-m-Y'))))}}</td>
+                            </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Corrida Financiera Para El Plan {{$plan->nombre}}
+                </div>
+                <div class="card-body">
+                    <div class="col-sm-8 offset-2">
+                    <table class="table table-bordered table-striped" id="corrida">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col">#</th>
+                                <th class="text-center" scope="col">Aportación</th>
+                                <th class="text-center" scope="col">Cuota de Administración</th>
+                                <th class="text-center" scope="col">IVA</th>
+                                <th class="text-center" scope="col">Seguro de vida</th>
+                                <th class="text-center" scope="col">Seguro de desastres</th>
+                                <th class="text-center" scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($plan->cotizador($cotizacion->monto, $cotizacion->factor_actualizacion)['corrida'] as $key=>$fila)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ number_format($fila["aportacion"], 2) }}</td>
+                                <td>{{ number_format($fila["cuota_administracion"],2 ) }}</td>
+                                <td>{{ number_format($fila["iva"], 2) }}</td>
+                                <td>{{ number_format($fila["sv"],2 ) }}</td>
+                                <td>{{ number_format($fila["sd"], 2) }}</td>
+                                <td>{{ number_format($fila["total"], 2) }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                </div>
             </div>
         </div>
         <div>
-            {{-- {{ dd($plan->cotizador(400000)['corrida']) }} --}}
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-center">
@@ -161,4 +100,13 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log($('#corrdia'));
+            $('#corrida').DataTable();
+        } );
+    </script>
 @endsection

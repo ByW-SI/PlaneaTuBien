@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PagoMensual extends Model
+class Pagos extends Model
 {
     protected $table = 'pago_mensuals';
 

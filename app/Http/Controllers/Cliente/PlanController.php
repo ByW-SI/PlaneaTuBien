@@ -35,6 +35,14 @@ class PlanController extends Controller
         $pago = PagoMensual::create($request->all());
         return redirect()->route('cliente.dashboard');
     }
+
+    public function historial()
+    {
+        $cliente = auth('cliente')->user()->presolicitud;
+        $cotizacion=$cliente->cotizacion();
+        $plan = $cotizacion->plan;
+        return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
+    }
     
 
 }

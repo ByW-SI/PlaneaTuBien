@@ -41,8 +41,8 @@ class Contrato extends Model
         return $this->hasOne('App\ChecklistFolder');
     }
 
-    public function pagoMensual()
+    public function pagos()
     {
-        return $this->hasMany('App\PagoMensual');
+        return $this->hasMany('App\Pagos');
     }
 }

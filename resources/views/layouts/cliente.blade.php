@@ -44,7 +44,10 @@
                             <a href="{{ route('corrida_financiera') }}" class="nav-link text-white">Mi corrida</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('pagar') }}" class="nav-link text-white">Pagar mensualidad</a>
+                            <a href="{{ route('historial_cliente') }}" class="nav-link text-white">Historial de Pagos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pagar') }}" class="nav-link text-white">Pagar</a>
                         </li>
                     </ul>
 

@@ -131,9 +131,9 @@
 	<div class="card-header">
 		Contratos
 	</div>
+	<div class="accordion" id="accordionExample">
 	@foreach ($cliente->contratos as $contrato)
 	 @if ($contrato->checklist && $contrato->checklist->status)
-	<div class="accordion" id="accordionExample">
 	  <div class="card">
 	    <div class="card-header" id="heading{{ $contrato->id }}">
 	      <h2 class="mb-0">
@@ -266,9 +266,9 @@
 			</div>
 	    </div>
 	  </div>
-	</div>
 	  @endif
 	@endforeach
+	</div>
 	<!--ZZZZZZZZZZZZZZZZZZZ-->
 	{{-- <div class="card-header">
 		Contratos
