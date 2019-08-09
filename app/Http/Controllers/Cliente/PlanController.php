@@ -43,6 +43,14 @@ class PlanController extends Controller
         $plan = $cotizacion->plan;
         return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
     }
+
+    public function layout()
+    {
+        $cliente = auth('cliente')->user()->presolicitud;
+        $cotizacion=$cliente->cotizacion();
+        $plan = $cotizacion->plan;
+        return view('cliente.prueba',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
+    }
     
 
 }
