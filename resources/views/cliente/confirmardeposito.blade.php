@@ -7,7 +7,7 @@
 	<div class="card-body col-6 offset-3">
 		<div class="row">
 			<div class="col-sm-12">
-				<form action="{{ route('Cliente-pagos.store') }}" method="POST">
+				<form action="{{ route('store_pago_efectivo') }}" enctype="multipart/form-data" method="POST">
 					@csrf()
 					<div class="form-group">
 					    <label>SPEI o número de movimiento</label>
@@ -21,10 +21,10 @@
 					    <label>Fecha de Pago</label>
 					    <input type="date" class="form-control" name="fecha_pago">
 					</div>
-					<div class="form-group">
+					{{-- <div class="form-group">
 					    <label>Monto Pagado</label>
 					    <input type="text" class="form-control" name="monto">
-					</div>
+					</div> --}}
 					<div class="d-flex justify-content-end">
 						<label class="mr-2">Otra Referencia </label>
 						<button class="btn btn-success rounded-circle" type="button" onclick="addElemento();"> <i class="fas fa-plus"></i></button>
@@ -47,16 +47,22 @@
 			nodo.id = 0;
 			nodo.dom = `<div class="border rounded p-3 my-3" >
 							<div class="row">
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
 								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia0">
 								</div>
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
 								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato0">
+								</div>
+							</div>
+							<div class="col-4">
+								<div class="form-group">
+								    <label>Monto</label>
+								    <input type="text" name="monto[]" class="form-control monto" id="monto0">
 								</div>
 							</div>
 						</div>
@@ -92,16 +98,22 @@
 			$('#div-pagos').empty();
 			let html = `<div class="border rounded p-3 my-3" >
 							<div class="row">
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
 								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[0].id}" value="${pagos[0].referencia}">
 								</div>
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
 								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[0].id}" value="${pagos[0].contrato}">
+								</div>
+							</div>
+							<div class="col-4">
+								<div class="form-group">
+								    <label>Monto</label>
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[0].id}" value="${pagos[0].contrato}">
 								</div>
 							</div>
 						</div>
@@ -118,16 +130,22 @@
 								<button class="btn btn-danger rounded-circle" type="button" onclick="remove(${pagos[i].id});"><i class="fas fa-minus"></i></button>
 							</div>
 							<div class="row">
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
 								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[i].id}" value="${pagos[i].referencia}">
 								</div>
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
 								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[i].id}" value="${pagos[i].contrato}">
+								</div>
+							</div>
+							<div class="col-4">
+								<div class="form-group">
+								    <label>Monto</label>
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[i].id}" value="${pagos[i].contrato}">
 								</div>
 							</div>
 						</div>
@@ -146,16 +164,22 @@
 								<button class="btn btn-danger rounded-circle" type="button" onclick="remove(${i});"><i class="fas fa-minus"></i></button>
 							</div>
 							<div class="row">
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
 								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${i}">
 								</div>
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
 								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${i}">
+								</div>
+							</div>
+							<div class="col-4">
+								<div class="form-group">
+								    <label>Monto</label>
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${i}">
 								</div>
 							</div>
 						</div>
