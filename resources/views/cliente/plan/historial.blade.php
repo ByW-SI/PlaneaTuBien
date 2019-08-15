@@ -29,11 +29,15 @@
 						</tr>
 					</thead>
 					<tbody>
+						@if(isset($pagos[$contrato->id]))
+						@foreach($pagos[$contrato->id] as $pago)
 						<tr>
-							<td>06/08/2019</td>
-							<td>$2,399.41</td>
-							<td>@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ $key*2 }}</td>
+							<td>{{ $pago->fecha_pago }}</td>
+							<td>{{ number_format($pago->total, 2) }}</td>
+							<td>{{ $pago->referencia }}</td>
 						</tr>
+						@endforeach
+						@endif
 					</tbody>
 				</table>
             </div>
