@@ -18,10 +18,10 @@ class ModifyPagomensualsTable extends Migration
             $table->foreign('status_id')->references('id')->on('status_pagos');
             $table->integer('tipopago_id')->unsigned();
             $table->foreign('tipopago_id')->references('id')->on('tipo_pagos');
-            $table->integer('tipocarga_id')->unsigned();
-            $table->foreign('tipocarga_id')->references('id')->on('tipo_cargas');
-            $table->integer('empleado_id')->unsigned();
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            // $table->integer('tipocarga_id')->unsigned();
+            // $table->foreign('tipocarga_id')->references('id')->on('tipo_cargas');
+            // $table->integer('empleado_id')->unsigned();
+            // $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->string('referencia');
         });
         Schema::rename('pago_mensuals', 'pagos');

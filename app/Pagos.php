@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pagos extends Model
 {
-    protected $table = 'pago_mensuals';
+    protected $table = 'pagos';
 
 	protected $fillable = [
 		'id',
@@ -16,7 +16,12 @@ class Pagos extends Model
 		'fecha_pago',
 		'adeudo',
 		'total',
-		'folio'
+		'folio',
+		'status_id',
+		'tipopago_id',
+		'tipocarga_id',
+		'empleado_id',
+		'referencia'
 	];
 
 	protected $hidden =[

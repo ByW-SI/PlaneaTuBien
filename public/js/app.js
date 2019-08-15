@@ -36929,8 +36929,8 @@ function calculate() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\planea\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\planea\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\B&W\Documents\planea\PlaneaTuBien\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\B&W\Documents\planea\PlaneaTuBien\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
