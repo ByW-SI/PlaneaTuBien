@@ -21,7 +21,9 @@ class Pagos extends Model
 		'tipopago_id',
 		'tipocarga_id',
 		'empleado_id',
-		'referencia'
+		'referencia',
+		'spei',
+		'file_comprobante'
 	];
 
 	protected $hidden =[
