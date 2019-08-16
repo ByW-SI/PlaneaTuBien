@@ -44,6 +44,7 @@ class PlanController extends Controller
 
     public function confirmarPago(Request $request)
     {
+        // dd($request->input());
         $montos = $request->recibo;
         $referencias = $request->referencia;
         $total = $request->total;

@@ -91,10 +91,13 @@ class PagosController extends Controller
             $file = $request->file('file_comprobante')[$i];
             $this->storeComprobanteImg($file, $pago);
         }
+
+        return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
     }
 
     /**
-     * Almacena el pago en efectivo con el índice recibido
+     * Almacena el pago en efectivo con el índice de la referencia
+     * recibida.
      */
 
     public function storePagoEfectivo(Request $request, $i)
@@ -117,6 +120,11 @@ class PagosController extends Controller
 
         return $pago;
     }
+
+    /**
+     * Almacena la imagen del comprobante de pago en la carpeta
+     * "public/img/comprobantes/" con el id del pago almacenado
+     */
 
     public function storeComprobanteImg($file, Pagos $pago)
     {

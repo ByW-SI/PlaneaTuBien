@@ -24,8 +24,9 @@
 								<label for="recibo{{$contrato->id}}"><input type="checkbox" class="recibo" name="recibo[{{$contrato->id}}]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion)}}"></label>
 							</td>
 							<td class="text-center" rowspan="8" style="vertical-align:middle;">
-								<label for="recibo{{$contrato->id}}">
+								<label for="contrato{{$contrato->id}}">
 									@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
+									<input type="hidden" name="contratos[{{$contrato->id}}]" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}">
 								</label>
 							</td>
 
