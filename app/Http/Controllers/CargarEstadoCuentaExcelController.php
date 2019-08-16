@@ -10,8 +10,17 @@ use PhpOffice\PhpSpreadsheet\Shared\Date as Dater;
 
 class CargarEstadoCuentaExcelController extends Controller
 {
-    public function show(){
-        return view('pagos.excel.show');
+    public function show(Request $request){
+
+        $depostios_efectivos = DepositoEfectivo::get();
+
+        if($request->input('query')){
+            $query = $request->input('query');
+            $depostios_efectivos = DepositoEfectivo::referencia($query)->get();
+            // return response()->json($depositos, 201);
+        }
+
+        return view('pagos.excel.show', compact('depostios_efectivos'));
     }
 
     public function store(Request $request){

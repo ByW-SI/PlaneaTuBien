@@ -40,5 +40,44 @@
             </div>
         </form>
     </div>
-
+    {{-- Tabla --}}
+    <h3 class="text-center my-3">Estados de cuenta</h3>
+		<div class="row">
+			{{-- {{ dd($plan->cotizador($cotizacion->monto, $cotizacion->factor_actualizacion)['corrida']) }} --}}
+			<div class="col-sm-8 offset-2">
+				<table class="table table-bordered table-striped" id="corrida">
+					<thead>
+						<tr>
+							<th class="text-center" scope="col">#</th>
+							<th class="text-center" scope="col">Referencia</th>
+							<th class="text-center" scope="col">Contrato</th>
+							<th class="text-center" scope="col">Cliente</th>
+							<th class="text-center" scope="col">Acción</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($depostios_efectivos as $deposito_efectivo)
+						<tr>
+							<td>{{$deposito_efectivo->id}}</td>
+							<td>{{$deposito_efectivo->concepto}}</td>
+							<td>3</td>
+							<td>4</td>
+							<td>
+                                <a href="#" class="btn btn-warning">Detalles</a>
+                            </td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+	$(document).ready(function() {
+		console.log($('#corrdia'));
+	    $('#corrida').DataTable();
+	} );
+</script>
 @endsection
