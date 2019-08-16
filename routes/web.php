@@ -60,7 +60,7 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/confirmar-deposito', 'Cliente\PlanController@formDeposito')->name('confirmardeposito');
 	Route::get('/historial', 'Cliente\PlanController@historial')->name('historial_cliente');
 	Route::resource('Cliente-pagos', 'Cliente\PagosController');
-	Route::post('Cliente-pagos','Cliente\PagosController@storePagoEfectivo')->name('store_pago_efectivo');
+	Route::post('Cliente-pagos','Cliente\PagosController@storePagosEfectivos')->name('store_pago_efectivo');
 	//Route::resource('cotizacions','Cliente\CotizacionController');
 	//Route::resource('/Pagos', 'Pagos\PagoMensualController')->name('clientes.pagos');
 

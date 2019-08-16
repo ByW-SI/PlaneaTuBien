@@ -4,7 +4,8 @@
 	<div class="card-header">
 		Confirmar Pago
 	</div>
-	<form action="{{ route('Cliente-pagos.store') }}" method="POST" class="form-inline">
+	
+	<form action="{{-- {{ route('Cliente-pagos.store') }} --}}" method="POST" class="form-inline">
 		@csrf
 		<div class="card-body col-6 offset-3">
 			<h4 class="text-center m-3">Contratos a pagar:</h4>

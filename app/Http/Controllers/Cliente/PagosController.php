@@ -76,42 +76,61 @@ class PagosController extends Controller
         dd($pago);
     }
 
-    public function storePagoEfectivo(Request $request)
+    /**
+     * Almacena todos los pagos por cada una de las referencias
+     * recibidas, y almacena la imagen de comprobante en la carpeta
+     * "public/contratos" con el id del pago
+     */
+
+    public function storePagosEfectivos(Request $request)
     {
-        $referencias = $request->input('referencia');
-        $contratos = $request->input('contrato');
-        $montos = $request->input('monto');
-        $files_comprobantes = $request->input('file_comprobante');
+        $total_referencias = count($request->input('referencia'));
 
-        for ($i = 0; $i < count($referencias); $i++) {
-            $adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
-            $pago = Pagos::create([
-                'contrato_id' => substr($contratos[$i], -1),
-                'monto' => $montos[$i],
-                'fecha_pago' => $request->input('fecha_pago'),
-                'adeudo' => $adeudo,
-                'total' => ($request->monto[$i] + $adeudo),
-                'folio' => $request->input('folio'),
-                'status_id' => 2,
-                'tipopago_id' => 2,
-                'referencia' => $referencias[$i],
-                'spei' => $request->input('spei'),
-                'file_comprobante' => $files_comprobantes[$i],
-            ]);
+        for ($i = 0; $i < $total_referencias; $i++) {
 
-            if($request->hasfile('file_comprobante')) 
-            { 
-              $file = $request->file('file_comprobante')[$i];
-              $extension = $file->getClientOriginalExtension();
-              $filename =$pago->id.'.'.$extension;
-              $file->move('contratos/', $filename);
-              $pago->update(['file_comprobante' => $filename]);
-            }
+            $pago = $this->storePagoEfectivo($request, $i);
+            $file = $request->file('file_comprobante')[$i];
+            $this->storeComprobanteImg($file, $pago);
+        }
+    }
+
+    /**
+     * Almacena el pago en efectivo con el índice recibido
+     */
+
+    public function storePagoEfectivo(Request $request, $i)
+    {
+        $adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
+
+        $pago = Pagos::create([
+            'contrato_id' => substr($request->input('contrato')[$i], -1),
+            'monto' => $request->input('monto')[$i],
+            'fecha_pago' => $request->input('fecha_pago'),
+            'adeudo' => $adeudo,
+            'total' => ($request->monto[$i] + $adeudo),
+            'folio' => $request->input('folio'),
+            'status_id' => 2,
+            'tipopago_id' => 2,
+            'referencia' => $request->input('referencia')[$i],
+            'spei' => $request->input('spei'),
+            'file_comprobante' => $request->input('file_comprobante')[$i],
+        ]);
+
+        return $pago;
+    }
+
+    public function storeComprobanteImg($file, Pagos $pago)
+    {
+        if ($file) {
+            $extension = $file->getClientOriginalExtension();
+            $filename = $pago->id . '.' . $extension;
+            $file->move('contratos/', $filename);
+            $pago->update(['file_comprobante' => $filename]);
         }
     }
 
     /**  2742.187195643
-    *2742.187195643
+     *2742.187195643
      * Display the specified resource.
      *
      * @param  int  $id

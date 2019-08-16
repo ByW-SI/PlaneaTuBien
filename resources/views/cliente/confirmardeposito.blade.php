@@ -11,15 +11,15 @@
 					@csrf()
 					<div class="form-group">
 					    <label>SPEI o número de movimiento</label>
-					    <input type="text" class="form-control" name="spei" aria-describedby="SPEI" placeholder="# SPEI">
+					    <input type="text" class="form-control" name="spei" aria-describedby="SPEI" placeholder="# SPEI" required>
 					</div>
 					<div class="form-group">
 					    <label>Número de Folio</label>
-					    <input type="text" class="form-control" name="folio" placeholder="Numero de folio">
+					    <input type="text" class="form-control" name="folio" placeholder="Numero de folio" required>
 					</div>
 					<div class="form-group">
 					    <label>Fecha de Pago</label>
-					    <input type="date" class="form-control" name="fecha_pago">
+					    <input type="date" class="form-control" name="fecha_pago" required>
 					</div>
 					{{-- <div class="form-group">
 					    <label>Monto Pagado</label>
@@ -50,24 +50,24 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia0">
+								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia0" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato0">
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato0" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Monto</label>
-								    <input type="text" name="monto[]" class="form-control monto" id="monto0">
+								    <input type="text" name="monto[]" class="form-control monto" id="monto0" required>
 								</div>
 							</div>
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile0">
+							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile0" required>
 							<label class="custom-file-label" for="customFile">Subir ficha del depósito o transferencia</label>
 						</div>
 					</div>`
@@ -101,24 +101,24 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[0].id}" value="${pagos[0].referencia}">
+								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[0].id}" value="${pagos[0].referencia}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[0].id}" value="${pagos[0].contrato}">
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[0].id}" value="${pagos[0].contrato}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Monto</label>
-								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[0].id}" value="${pagos[0].contrato}">
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[0].id}" value="${pagos[0].contrato}" required>
 								</div>
 							</div>
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${pagos[0].id}" value="${pagos[0].file_comprobante}">
+							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${pagos[0].id}" value="${pagos[0].file_comprobante}" required>
 							<label class="custom-file-label" for="customFile">${pagos[0].file_comprobante ? pagos[0].file_comprobante.split("\\").pop() : 'Subir ficha del depósito o transferencia'}</label>
 						</div>
 					</div>`;
@@ -133,24 +133,24 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[i].id}" value="${pagos[i].referencia}">
+								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[i].id}" value="${pagos[i].referencia}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[i].id}" value="${pagos[i].contrato}">
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[i].id}" value="${pagos[i].contrato}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Monto</label>
-								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[i].id}" value="${pagos[i].contrato}">
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[i].id}" value="${pagos[i].contrato}" required>
 								</div>
 							</div>
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${pagos[i].id}" value="${pagos[i].file_comprobante}">
+							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${pagos[i].id}" value="${pagos[i].file_comprobante}" required>
 							<label class="custom-file-label" for="customFile">${pagos[i].file_comprobante ? pagos[i].file_comprobante.split("\\").pop() : 'Subir ficha del depósito o transferencia'}</label>
 						</div>
 					</div>`;
@@ -167,24 +167,24 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${i}">
+								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${i}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${i}">
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${i}" required>
 								</div>
 							</div>
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Monto</label>
-								    <input type="text" name="monto[]" class="form-control monto" id="monto${i}">
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${i}" required>
 								</div>
 							</div>
 						</div>
 						<div class="custom-file">
-							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${i}">
+							<input type="file" class="custom-file-input file" name="file_comprobante[]" id="customFile${i}" required>
 							<label class="custom-file-label" for="customFile">Subir ficha del depósito o transferencia</label>
 						</div>
 					</div>`;
