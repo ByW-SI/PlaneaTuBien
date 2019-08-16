@@ -412,7 +412,7 @@
 						<tr>
 							<th class="text-center" scope="col">#</th>
 							<th class="text-center" scope="col">Aportación</th>
-							<th class="text-center" scope="col">Cuota de Administración</th>
+							<th class="text-center" scope="col">Cuota de Administración h</th>
 							<th class="text-center" scope="col">IVA</th>
 							<th class="text-center" scope="col">Seguro de vida</th>
 							<th class="text-center" scope="col">Seguro de desastres</th>
