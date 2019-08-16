@@ -6,8 +6,8 @@
 	</div>
 	<form action="{{ route('confirmar-pago') }}" class="form-inline">
 		<div class="card-body col-6 offset-3">
-
-			@foreach ($cliente->contratos as $contrato)
+			@if($cliente->contratos->count() > count($pagos))
+			@foreach ($contratos as $contrato)
 				@if ($contrato->checklist && $contrato->checklist->status)
 				<table class="table table-bordered table-striped my-4 text-center">
 					<thead>
@@ -92,8 +92,46 @@
 				<div class="d-flex justify-content-center">
 					<button class="btn btn-success" type="submit"><i class="far fa-credit-card"> PAGAR</i></button>
 				</div>
-
 		</div>
+			@else
+    			<h3>Genial <br>Estas al corriente con los pagos del mes.</h3>
+
+    			<div class="row">
+	                <div class="col-12 text-center mt-3">
+	                    <label>
+	                        Próximo Pagos
+	                    </label>
+	                </div>
+	                <div class="col-10 offset-1 text-center mt-3">
+	                    <table class="table table-borderless">
+	                        <thead class="thead-dark">
+	                            <tr>
+	                                <th style="border-top-left-radius: 10px;">Contratos</th>
+	                                <th>A Pagar</th>
+	                                <th>Recargo</th>
+	                                <th style="border-top-right-radius: 10px;">Fecha Límite</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        @foreach ($cliente->contratos as $contrato)
+	                            @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
+	                            <tr>
+	                                <td>
+	                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
+	                                </td>
+	                                <td>
+	                                    ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
+	                                </td>
+	                                <td>${{ number_format($pagos[$contrato->id]->adeudo, 2) }}</td>
+	                                <td>{{ date("7/m/Y", strtotime("+1 month", strtotime(date('d-m-Y'))))}}</td>
+	                            </tr>
+	                            @endif
+	                        @endforeach
+	                        </tbody>
+	                    </table>
+	                </div>
+	            </div>
+			@endif
 	</form>
 </div>
 @endsection

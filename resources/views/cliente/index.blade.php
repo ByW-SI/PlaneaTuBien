@@ -1,5 +1,13 @@
 @extends('layouts.cliente')
 @section('content')
+@if(\Session::has('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <h3>¡Completado!</h3> Tu pago se realizo con éxito.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+@endif
     <div class="card">
         <div class="card-header">
             Bienvenid@ {{$cliente->nombre." ".$cliente->paterno." ".$cliente->materno}}

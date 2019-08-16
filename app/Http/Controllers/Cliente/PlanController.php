@@ -29,11 +29,17 @@ class PlanController extends Controller
     	$cotizacion=$cliente->cotizacion();
     	$plan = $cotizacion->plan;
         $pagos = [];
+        $contratos = [];
         foreach ($cliente->contratos as $contrato) {
-            $pagos[] = Pagos::where('contrato_id', $contrato->id)->get()->last();
+            if (!is_null(Pagos::where('contrato_id', $contrato->id)->get()->last())) {
+                $pagos[$contrato->id] = Pagos::where('contrato_id', $contrato->id)->get()->last();
+            }
+            else{
+                $contratos[] = $contrato;
+            }
         }
-        
-    	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'pagos'=>$pagos]);
+
+    	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'contratos'=>$contratos, 'pagos'=>$pagos]);
     }
 
     public function confirmarPago(Request $request)
@@ -54,11 +60,11 @@ class PlanController extends Controller
         ]);
     }
 
-    public function guardarPago(Request $request)
-    {
-        $pago = PagoMensual::create($request->all());
-        return redirect()->route('cliente.dashboard');
-    }
+    // public function guardarPago(Request $request)
+    // {
+    //     $pago = PagoMensual::create($request->all());
+    //     return redirect()->route('cliente.dashboard');
+    // }
 
     public function formDeposito()
     {
@@ -70,7 +76,13 @@ class PlanController extends Controller
         $cliente = auth('cliente')->user()->presolicitud;
         $cotizacion=$cliente->cotizacion();
         $plan = $cotizacion->plan;
-        return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan]);
+        $pagos = [];
+        foreach ($cliente->contratos as $contrato) {
+            if (!is_null(Pagos::where('contrato_id', $contrato->id)->get()->last()) ) {
+                $pagos[$contrato->id] = Pagos::where('contrato_id', $contrato->id)->get();
+            }
+        }
+        return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'pagos'=>$pagos]);
     }
     
 

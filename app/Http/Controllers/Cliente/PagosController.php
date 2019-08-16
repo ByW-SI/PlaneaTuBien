@@ -72,8 +72,7 @@ class PagosController extends Controller
                 }
             }
         }
-        return redirect()->route('cliente.dashboard');
-        dd($pago);
+        return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
     }
 
     /**
