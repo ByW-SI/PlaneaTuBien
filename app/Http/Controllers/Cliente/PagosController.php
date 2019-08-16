@@ -83,6 +83,7 @@ class PagosController extends Controller
 
     public function storePagosEfectivos(Request $request)
     {
+        dd($request->all());
         $total_referencias = count($request->input('referencia'));
 
         for ($i = 0; $i < $total_referencias; $i++) {
@@ -91,6 +92,7 @@ class PagosController extends Controller
             $file = $request->file('file_comprobante')[$i];
             $this->storeComprobanteImg($file, $pago);
         }
+        return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
     }
 
     /**
@@ -99,14 +101,14 @@ class PagosController extends Controller
 
     public function storePagoEfectivo(Request $request, $i)
     {
-        $adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
+        //$adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
 
         $pago = Pagos::create([
             'contrato_id' => substr($request->input('contrato')[$i], -1),
             'monto' => $request->input('monto')[$i],
             'fecha_pago' => $request->input('fecha_pago'),
-            'adeudo' => $adeudo,
-            'total' => ($request->monto[$i] + $adeudo),
+            //'adeudo' => $adeudo,
+            //'total' => ($request->monto[$i] + $adeudo),
             'folio' => $request->input('folio'),
             'status_id' => 2,
             'tipopago_id' => 2,
@@ -128,8 +130,7 @@ class PagosController extends Controller
         }
     }
 
-    /**  2742.187195643
-     *2742.187195643
+    /** 
      * Display the specified resource.
      *
      * @param  int  $id

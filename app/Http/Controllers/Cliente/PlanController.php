@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use Illuminate\Http\Request;
 use App\Pagos;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
 class PlanController extends Controller
@@ -30,6 +31,7 @@ class PlanController extends Controller
     	$plan = $cotizacion->plan;
         $pagos = [];
         $contratos = [];
+        $fecha_pago = $this->isValidFechaPago(Carbon::now());
         foreach ($cliente->contratos as $contrato) {
             if (!is_null(Pagos::where('contrato_id', $contrato->id)->get()->last())) {
                 $pagos[$contrato->id] = Pagos::where('contrato_id', $contrato->id)->get()->last();
@@ -39,7 +41,7 @@ class PlanController extends Controller
             }
         }
 
-    	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'contratos'=>$contratos, 'pagos'=>$pagos]);
+    	return view('cliente.pagar',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'contratos'=>$contratos, 'pagos'=>$pagos, 'fecha_pago'=>$fecha_pago]);
     }
 
     public function confirmarPago(Request $request)
@@ -68,7 +70,11 @@ class PlanController extends Controller
 
     public function formDeposito()
     {
-        return view('cliente.confirmardeposito');
+        $cliente = auth('cliente')->user()->presolicitud;
+        $cotizacion=$cliente->cotizacion();
+        $plan = $cotizacion->plan;
+        $contratos = $cliente->contratos;
+        return view('cliente.confirmardeposito', ['cliente'=>$cliente, 'cotizacion'=>$cotizacion, 'contratos'=>$contratos]);
     }
 
     public function historial()
@@ -83,6 +89,23 @@ class PlanController extends Controller
             }
         }
         return view('cliente.plan.historial',['cliente'=>$cliente,'cotizacion'=>$cotizacion,'plan'=>$plan, 'pagos'=>$pagos]);
+    }
+
+    public function isValidFechaPago($fecha)
+    {
+        $start = new Carbon('first day of this month');
+        $end = $start->addDay(6);
+
+        while ($end->englishDayOfWeek === "Saturday" || $end->englishDayOfWeek === "Sunday") {
+            /*
+            Aqui ira la condicion de la precarga de dias feriados
+            */
+            $end->addDay();
+        }
+        if ($start->lessThanOrEqualTo($fecha) && $end->greaterThanOrEqualTo($fecha))
+            return true;
+        else
+            return false;
     }
     
 
