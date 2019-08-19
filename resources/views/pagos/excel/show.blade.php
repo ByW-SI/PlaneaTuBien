@@ -1,44 +1,47 @@
 @extends('principal')
 @section('content')
     <div class="container">
-        <form role="form" method="POST" action="{{ route('excel.store') }}" accept-charset="UTF-8" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <div class="row">
-                        {{-- Archivo de excel a subir --}}
-                        <div class="form-group col-sm-12">
-                            <label for="excel_file">Seleccionar archivo a importar:</label>
-                            <input class="form-control" name="excel_file" type="file" id="excel_file" accept=".xls, .xlsx, .csv">
-                        </div>
-                        {{-- Boton para subir archivo excel --}}
-                        <div class="form-group col-sm-12">
-                            <input class="btn btn-success btn-block" type="submit" value="Importar">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4"></div>
-            </div>
-        </form>
-        <form role="form" method="GET" action="{{ route('excel.find') }}" accept-charset="UTF-8" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    {{-- caja de busqueda --}}
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <form role="form" method="POST" action="{{ route('excel.store') }}" accept-charset="UTF-8" enctype="multipart/form-data" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <div class="form-group col-sm-12">
-                        <label for="query">Referencia a buscar:</label>
-                        <input class="form-control" name="query" type="text" id="query" accept=".xls, .xlsx, .csv">
+                        {{-- <label for="excel_file">Seleccionar archivo a importar:</label> --}}
+                        <input class="custom-file-input" name="excel_file" type="file" id="excel_file" accept=".xlsx">
+                        <label for="excel_file" class="custom-file-label">Importar archivo .xlsx</label>
+                    </div>
+                    {{-- Boton para subir archivo excel --}}
+                    <div class="form-group col-sm-12">
+                        <input class="btn btn-success btn-block" type="submit" value="Importar">
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-md-3">
+                
+            </div>
+            <div class="col-12 col-md-3">
+                
+            </div>
+            <div class="col-12 col-md-3">
+                <form role="form" method="GET" action="{{ route('excel.find') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-group col-sm-12">
+                        {{-- <label class="sr-only" for="query">Referencia a buscar:</label> --}}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-search"></i></div>
+                            </div>
+                            <input class="form-control" name="query" type="text" id="query" accept=".xls, .xlsx, .csv" placeholder="Referencia a buscar">
+                        </div>
                     </div>
                     {{-- Boton para realizar busqueda --}}
                     <div class="form-group col-sm-12">
-                        <input class="btn btn-success btn-block" type="submit" value="Buscar">
+                        <input class="btn btn-success " type="submit" value="Buscar">
                     </div>
-                </div>
-                <div class="col-sm-4"></div>
+                </form>
             </div>
-        </form>
+        </div>
+    
     </div>
     {{-- Tabla --}}
     <h3 class="text-center my-3">Estados de cuenta</h3>
@@ -50,7 +53,7 @@
 						<tr>
 							<th class="text-center" scope="col">#</th>
 							<th class="text-center" scope="col">Referencia</th>
-							<th class="text-center" scope="col">Contrato</th>
+							<th class="text-center" scope="col"># Contrato</th>
 							<th class="text-center" scope="col">Cliente</th>
 							<th class="text-center" scope="col">Acción</th>
 						</tr>
@@ -60,10 +63,30 @@
 						<tr>
 							<td>{{$deposito_efectivo->id}}</td>
 							<td>{{$deposito_efectivo->concepto}}</td>
-							<td>3</td>
-							<td>4</td>
 							<td>
-                                <a href="#" class="btn btn-warning">Detalles</a>
+                                @if ($deposito_efectivo->contrato()->first())
+                                    {{$deposito_efectivo->contrato()->first()->numero_contrato}}
+                                @else
+                                    <span class="text-danger">N/A</span>
+                                @endif
+                            </td>
+							<td>
+                                @if ($deposito_efectivo->contrato()->first())
+                                    @if ($deposito_efectivo->contrato()->first()->presolicitud()->first())
+                                        {{$deposito_efectivo->contrato()->first()->presolicitud()->first()->nombre}}
+                                        {{$deposito_efectivo->contrato()->first()->presolicitud()->first()->paterno}}
+                                        {{$deposito_efectivo->contrato()->first()->presolicitud()->first()->materno}}
+                                    @endif
+                                @else
+                                    <span class="text-danger">N/A</span>
+                                @endif
+                            </td>
+							<td>
+                                <form method="GET" action="{{ route('estadoCuenta.detalle') }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="deposito_id" value="{{$deposito_efectivo->id}}">
+                                    <button type="submit" class="btn btn-warning" id="showDetalle">Detalles</button>
+                                </form>
                             </td>
 						</tr>
 						@endforeach

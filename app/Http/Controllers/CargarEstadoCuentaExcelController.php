@@ -10,11 +10,12 @@ use PhpOffice\PhpSpreadsheet\Shared\Date as Dater;
 
 class CargarEstadoCuentaExcelController extends Controller
 {
-    public function show(Request $request){
+    public function show(Request $request)
+    {
 
         $depostios_efectivos = DepositoEfectivo::get();
 
-        if($request->input('query')){
+        if ($request->input('query')) {
             $query = $request->input('query');
             $depostios_efectivos = DepositoEfectivo::referencia($query)->get();
             // return response()->json($depositos, 201);
@@ -23,7 +24,8 @@ class CargarEstadoCuentaExcelController extends Controller
         return view('pagos.excel.show', compact('depostios_efectivos'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if ($request->hasFile('excel_file')) {
             // Obtenemos los datos del excel
             $data = \Excel::toArray(null, request()->file('excel_file'));
@@ -31,6 +33,9 @@ class CargarEstadoCuentaExcelController extends Controller
             foreach ($data[0] as $row) {
                 // Si el concepto es valido
                 if ($this->esConceptoValido($row[1])) {
+                    // Obtenemos solo la referencia
+                    $row[1] = $this->getOnlyReference($row[1]);
+                    // dd($row[1]);
                     // Lo almacenamos en la base de datos
                     $this->saveExcelRow($row);
                 }
@@ -69,9 +74,24 @@ class CargarEstadoCuentaExcelController extends Controller
         ]);
     }
 
-    public function find( Request $request){
+    public function find(Request $request)
+    {
         $query = $request->input('query');
         $depositos = DepositoEfectivo::referencia($query)->get();
         return response()->json($depositos, 201);
+    }
+
+    public function getOnlyReference($string)
+    {
+        // Eliminamos la parte izquierda de la cadena
+        $reference = explode("/", $string);
+        $reference = $reference[1];
+
+        // Eliminamos la parte derecha de la cadena
+        $reference = explode(" ", $reference);
+        $reference = $reference[0];
+        
+        // Retornamos la referencia
+        return $reference;
     }
 }

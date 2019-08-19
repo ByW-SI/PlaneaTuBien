@@ -68,7 +68,7 @@
 							<td>Referencia</td>
 							<td>
 								@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
-								<input type="hidden" name="referencia[{{$contrato->id}}]"required="" readonly="" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+								<input type="hidden" name="referencia[{{$contrato->id}}]" required="" readonly="" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
 							</td>
 						</tr>
 					</tbody>
