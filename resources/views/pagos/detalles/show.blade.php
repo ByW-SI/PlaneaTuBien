@@ -49,9 +49,18 @@
                     <input type="text" class="form-control" name="monto_a_pagar" id="monto_a_pagar">
                 </div>
                 <div class="col-12 col-sm-6 text-right">
-                    <button class="btn btn-success mt-4">Validar</button>
-                    <button class="btn btn-danger mt-4">Rechazar</button>
-                    <button class="btn btn-warning mt-4">Modificar</button>
+                    <button class="btn btn-success mt-4">
+                        <i class="fa fa-check"></i>
+                        <strong>Validar</strong>
+                    </button>
+                    <button class="btn btn-danger mt-4">
+                        <i class="fa fa-ban"></i>
+                        <strong>Rechazar</strong>
+                    </button>
+                    <button class="btn btn-warning mt-4">
+                        <i class="fa fa-pencil-alt"></i>
+                        <strong>Modificar</strong>
+                    </button>
                 </div>
             </div>
             <br>
