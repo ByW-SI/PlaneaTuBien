@@ -46,7 +46,7 @@
                 {{-- Tabla de estados de cuenta --}}
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-bordered table-striped" id="corrida">
+                        <table class="table table-bordered table-striped" id="example">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">#</th>
@@ -57,9 +57,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($depostios_efectivos as $deposito_efectivo)
+                                @foreach($depostios_efectivos as $key=>$deposito_efectivo)
                                 <tr>
-                                    <td>{{$deposito_efectivo->id}}</td>
+                                    <td>{{$key+1}}</td>
                                     <td>{{$deposito_efectivo->concepto}}</td>
                                     <td>
                                         @if ($deposito_efectivo->contrato()->first())
@@ -80,10 +80,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form method="GET" action="{{ route('estadoCuenta.detalle') }}">
+                                        <form method="GET" action="{{ route('estadoCuenta.detalle') }}" class="text-center">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="deposito_id" value="{{$deposito_efectivo->id}}">
-                                            <button type="submit" class="btn btn-warning" id="showDetalle">Detalles</button>
+                                            <button type="submit" class="btn btn-warning" id="showDetalle">
+                                                <i class="fa fa-eye"></i>
+                                                <strong>Detalles</strong>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -96,12 +99,11 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
     <script>
         $(document).ready(function() {
-            console.log($('#corrdia'));
-            $('#corrida').DataTable();
+            $('#example').DataTable();
         } );
     </script>
 @endsection

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class EstadoCuentaController extends Controller
 {
+
+    /**
+     * Mostramos el detalle de uno de los estados de cuenta
+     */
+
     public function detalle(Request $request)
     {
         $deposito_efectivo = DepositoEfectivo::where('id', $request->input('deposito_id'))->first();
@@ -20,6 +25,9 @@ class EstadoCuentaController extends Controller
     /**
      * A partir del deposito en efectivo, obtenemos el contrato,
      * posteriormente, del contrato obtenemos la presolicitud
+     * s
+     * @param DepositoEfectivo $deposito_efectivo
+     * @return Presolicitud $presolicitud
      */
 
     public function getPresolicitudByDepositoEfectivo($deposito_efectivo)
