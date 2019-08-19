@@ -8,15 +8,23 @@ use Illuminate\Http\Request;
 
 class EstadoCuentaController extends Controller
 {
+
+    /**
+     * Mostramos el detalle de uno de los estados de cuenta
+     */
+
     public function detalle(Request $request)
     {
         // dd($request->input());
         $deposito_efectivo = DepositoEfectivo::where('id',$request->input('deposito_id'))->first();
-        $cliente = $deposito_efectivo->contrato()->first()->presolicitud;
+        $cliente = $this->getPresolicitudByDepositoEfectivo($deposito_efectivo);
+        $presolicitud = $this->getPresolicitudByDepositoEfectivo($deposito_efectivo);
         $cotizacion=$cliente->cotizacion();
         $plan = $cotizacion->plan;
         $edit = false;
-        return view('pagos.detalles.show',compact('deposito_efectivo', 'cliente', 'plan', 'edit'));
+        $pago = Pagos::where('referencia', $deposito_efectivo->concepto)->first();
+
+        return view('pagos.detalles.show', compact('deposito_efectivo', 'presolicitud', 'pago','cliente', 'plan', 'edit'));
     }
 
     public function edit(DepositoEfectivo $deposito_efectivo)
@@ -52,6 +60,25 @@ class EstadoCuentaController extends Controller
     		$pago->save();
     		return response()->json(['estado'=>"ok"]);
     	}
-    	return response()->json(['estado'=>"fail"]);
+    	return response()->json(['estado'=>"fail"]);        
+    }
+
+    /**
+     * A partir del deposito en efectivo, obtenemos el contrato,
+     * posteriormente, del contrato obtenemos la presolicitud
+     * s
+     * @param DepositoEfectivo $deposito_efectivo
+     * @return Presolicitud $presolicitud
+     */
+
+    public function getPresolicitudByDepositoEfectivo($deposito_efectivo)
+    {
+        $presolicitud = null;
+        if ($deposito_efectivo->contrato()->first()) {
+            if ($deposito_efectivo->contrato()->first()->presolicitud()->first()) {
+                $presolicitud = $deposito_efectivo->contrato()->first()->presolicitud()->first();
+            }
+        }
+        return $presolicitud;
     }
 }

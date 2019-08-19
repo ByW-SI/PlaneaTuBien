@@ -18,7 +18,6 @@ class CargarEstadoCuentaExcelController extends Controller
         if ($request->input('query')) {
             $query = $request->input('query');
             $depostios_efectivos = DepositoEfectivo::referencia($query)->get();
-            // return response()->json($depositos, 201);
         }
 
         return view('pagos.excel.show', compact('depostios_efectivos'));
@@ -27,19 +26,16 @@ class CargarEstadoCuentaExcelController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('excel_file')) {
-            // Obtenemos los datos del excel
+
             $data = \Excel::toArray(null, request()->file('excel_file'));
-            // Recorremos cada uno de los datos
+
             foreach ($data[0] as $row) {
-                // Si el concepto es valido
                 if ($this->esConceptoValido($row[1])) {
-                    // Obtenemos solo la referencia
                     $row[1] = $this->getOnlyReference($row[1]);
-                    // dd($row[1]);
-                    // Lo almacenamos en la base de datos
                     $this->saveExcelRow($row);
                 }
             }
+
         }
         return redirect()->route('excelpagos')->with('status', "Se cargo correctamente el archivo.");
     }
