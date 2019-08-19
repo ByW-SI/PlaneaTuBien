@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <form role="form" method="POST" action="{{ route('excel.store') }}" accept-charset="UTF-8" enctype="multipart/form-data" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group col-sm-12">
@@ -16,27 +16,21 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-md-3">
-                
+            <div class="col-12 col-md-4">
             </div>
-            <div class="col-12 col-md-3">
-                
-            </div>
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <form role="form" method="GET" action="{{ route('excel.find') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group col-sm-12">
                         {{-- <label class="sr-only" for="query">Referencia a buscar:</label> --}}
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-search"></i></div>
-                            </div>
                             <input class="form-control" name="query" type="text" id="query" accept=".xls, .xlsx, .csv" placeholder="Referencia a buscar">
+                            <input class="btn btn-success form-control" type="submit" value="Buscar">
                         </div>
                     </div>
                     {{-- Boton para realizar busqueda --}}
                     <div class="form-group col-sm-12">
-                        <input class="btn btn-success " type="submit" value="Buscar">
+                        
                     </div>
                 </form>
             </div>
