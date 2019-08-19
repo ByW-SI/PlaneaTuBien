@@ -26,23 +26,7 @@
             <hr>
             <div class="card-body">
                 <h3 class="text-center my-3">ESTADOS DE CUENTA</h3>
-                {{-- Input busqueda de referencia --}}
-                <div class="row">
-                    <div class="col-12 col-md-4"></div>
-                    <div class="col-12 col-md-4"></div>
-                    <div class="col-12 col-md-4">
-                        <form role="form" method="GET" action="{{ route('excel.find') }}" accept-charset="UTF-8" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="form-group col-sm-12">
-                                {{-- <label class="sr-only" for="query">Referencia a buscar:</label> --}}
-                                <div class="input-group">
-                                    <input class="form-control" name="query" type="text" id="query" accept=".xls, .xlsx, .csv" placeholder="Referencia a buscar">
-                                    <input class="btn btn-success form-control" type="submit" value="Buscar">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+
                 {{-- Tabla de estados de cuenta --}}
                 <div class="row">
                     <div class="col-sm-12">
