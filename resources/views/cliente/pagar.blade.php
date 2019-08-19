@@ -9,6 +9,7 @@
 			@if($cliente->contratos->count() > count($pagos))
 			@foreach ($contratos as $contrato)
 				@if ($contrato->checklist && $contrato->checklist->status)
+				@php($recargo = (($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] * 0.03) + ($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] * 0.03) * 0.16))
 				<table class="table table-bordered table-striped my-4 text-center">
 					<thead>
 						<tr>
@@ -20,11 +21,22 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td class="text-center" rowspan="8" style="vertical-align:middle;">
-								<label for="recibo{{$contrato->id}}"><input type="checkbox" class="recibo" name="recibo[{{$contrato->id}}]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion)}}"></label>
+							<td class="text-center" @if(!$fecha_pago)rowspan="9"@else rowspan="8"@endif style="vertical-align:middle;">
+								<label for="recibo{{$contrato->id}}">
+									@if(!$fecha_pago)
+									<input type="checkbox" class="recibo" name="recibo[{{$contrato->id}}]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion) + $recargo}}">
+									@else
+									<input type="checkbox" class="recibo" name="recibo[{{$contrato->id}}]" id="recibo{{$contrato->id}}" value="{{$plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion)}}">
+									@endif
+								</label>
 							</td>
+<<<<<<< HEAD
+							<td class="text-center" @if(!$fecha_pago)rowspan="9"@else rowspan="8"@endif style="vertical-align:middle;">
+								<label for="recibo{{$contrato->id}}">
+=======
 							<td class="text-center" rowspan="8" style="vertical-align:middle;">
 								<label for="contrato{{$contrato->id}}">
+>>>>>>> d0b00291dd7fba9f13f9b772a64b90ce1f55f69d
 									@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
 									<input type="hidden" name="contratos[{{$contrato->id}}]" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}">
 								</label>
@@ -60,10 +72,21 @@
 							<td>Seguro de Daños</td>
 							<td>${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['sd'],2)}}</td>
 						</tr>
+						@if(!$fecha_pago)
+						<tr>
+							<td>Recargo</td>
+							<td>${{number_format($recargo ,2)}}</td>
+						</tr>
+						<tr>
+							<td>Total</td>
+							<td>${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] + $recargo,2)}}</td>
+						</tr>
+						@else
 						<tr>
 							<td>Total</td>
 							<td>${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}</td>
 						</tr>
+						@endif
 						<tr>
 							<td>Referencia</td>
 							<td>

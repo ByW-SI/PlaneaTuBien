@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </div>
-@endsection
+@endsection 
 @push('scripts')
 	<script type="text/javascript">
 		var pagos = new Array();
@@ -50,7 +50,14 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia0" required>
+								    <select class="form-control referencia" name="referencia[]" id="referencia0" required>
+								    	<option value="">Seleccionar</option>
+								    	@foreach($contratos as $contrato)
+								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
+								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		</option>
+								    	@endforeach
+								    </select>
 								</div>
 							</div>
 							<div class="col-4">
@@ -101,7 +108,14 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[0].id}" value="${pagos[0].referencia}" required>
+								    <select class="form-control referencia" name="referencia[]" id="referencia${pagos[0].id}" required>
+								    	<option value="">Seleccionar</option>
+								    	@foreach($contratos as $contrato)
+								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
+								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		</option>
+								    	@endforeach
+								    </select>
 								</div>
 							</div>
 							<div class="col-4">
@@ -133,7 +147,14 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${pagos[i].id}" value="${pagos[i].referencia}" required>
+								    <select class="form-control referencia" name="referencia[]" id="referencia${pagos[i].id}" required >
+								    	<option value="">Seleccionar</option>
+								    	@foreach($contratos as $contrato)
+								    		<option value="${pagos[i].referencia}">
+								    			${pagos[i].referencia}
+								    		</option>
+								    	@endforeach
+								    </select>
 								</div>
 							</div>
 							<div class="col-4">
@@ -167,7 +188,14 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Referencia</label>
-								    <input type="text" name="referencia[]" class="form-control referencia" id="referencia${i}" required>
+								    <select class="form-control referencia" name="referencia[]" id="referencia${i}" required >
+								    	<option value="">Seleccionar</option>
+								    	@foreach($contratos as $contrato)
+								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
+								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		</option>
+								    	@endforeach
+								    </select>
 								</div>
 							</div>
 							<div class="col-4">
@@ -194,22 +222,20 @@
 			return nodo;
 		}
 
-		$(document).on('change', '.referencia', function() {
+		$(document).on('change', '.referencia', function() {($(this));
 			let id = $(this).prop('id').replace(/[a-z]+/g, '');
 			pagos[id].referencia = $(this).val();
-			console.log(pagos);
+			console.log($(this));
 		});
 		$(document).on('change', '.contrato', function() {
 			let id = $(this).prop('id').replace(/[a-z_]+/g, '');
 			pagos[id].contrato = $(this).val();
-			console.log(pagos);
 		});
 		$(document).on('change', '.file', function() {
 			let id = $(this).prop('id').replace(/[a-zA-Z]+/g, '');
 			var fileName = $(this).val().split("\\").pop();
 		  	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 			pagos[id].file_comprobante = $(this).val();
-			console.log(pagos);
 		});
 	</script>
 @endpush
