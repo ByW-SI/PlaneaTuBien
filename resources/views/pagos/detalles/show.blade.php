@@ -5,34 +5,34 @@
         <form action="#" >
             <div class="row">
                 <div class="col-12 col-md-4 form-group">
-                    <label for="spei">SPEI</label>
-                    <input type="text" class="form-control" name="spei" id="spei">
+                    <label><b>SPEI</b></label><br>
+                    N/A
                 </div>
                 <div class="col-12 col-md-4 form-group">
-                    <label for="cliente">cliente</label>
-                    <input type="text" class="form-control" name="cliente" id="cliente">
+                    <label for="cliente"><strong>CLIENTE</strong></label><br>
+                    {{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
                 </div>
                 <div class="col-12 col-md-4">
-                    <label for="fecha">fecha</label>
-                    <input type="text" class="form-control" name="fecha" id="fecha" value="{{$deposito_efectivo->dia}}">
+                    <label for="fecha"><strong>FECHA</strong></label><br>
+                    {{$deposito_efectivo->dia}}
                 </div>
                 <div class="col-12 col-md-4">
-                    <label for="contrato">contrato</label>
-                    <input type="text" class="form-control" name="contrato" id="contrato">
+                    <label for="contrato"><strong># CONTRATO</strong></label><br>
+                    N/A
                 </div>
                 <div class="col-12 col-md-4">
-                    <label for="referencia">referencia</label>
-                    <input type="text" class="form-control" name="referencia" id="referencia" value="{{$deposito_efectivo->concepto}}">
+                    <label for="referencia"><strong>REFERENCIA</strong></label><br>
+                    {{$deposito_efectivo->concepto}}
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-12 col-md-3">
-                    <label for="monto_pagado">monto pagado</label>
+                    <label for="monto_pagado"><strong>MONTO PAGADO</strong></label>
                     <input type="text" class="form-control" name="monto_pagado" id="monto_pagado">
                 </div>
                 <div class="col-12 col-md-3">
-                    <label for="monto_a_pagar">monto a pagar</label>
+                    <label for="monto_a_pagar"><strong>MONTO A PAGAR</strong></label>
                     <input type="text" class="form-control" name="monto_a_pagar" id="monto_a_pagar">
                 </div>
                 <div class="col-12 col-sm-6 text-right">
