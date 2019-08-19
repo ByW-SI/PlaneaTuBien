@@ -26,6 +26,7 @@
 							<th scope="col">Fecha de Pago</th>
 							<th scope="col">Monto</th>
 							<th scope="col">Referencia</th>
+							<th scope="col">Estado del Pago</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,8 +34,15 @@
 						@foreach($pagos[$contrato->id] as $pago)
 						<tr>
 							<td>{{ $pago->fecha_pago }}</td>
-							<td>{{ number_format($pago->total, 2) }}</td>
+							<td>{{ number_format($pago->monto, 2) }}</td>
 							<td>{{ $pago->referencia }}</td>
+							@if($pago->status_id == 1)
+								<td><p class="alert-success"><b>Aprobado</b></p></td>
+							@elseif($pago->status_id == 2)
+								<td><p class="alert-warning"><b>Validando</b></p></td>
+							@elseif($pago->status_id == 3)
+								<td><p class="alert-success"><b>Rechazado</b></p></td>
+							@endif
 						</tr>
 						@endforeach
 						@endif

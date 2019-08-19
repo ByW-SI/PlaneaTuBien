@@ -30,13 +30,8 @@
 									@endif
 								</label>
 							</td>
-<<<<<<< HEAD
 							<td class="text-center" @if(!$fecha_pago)rowspan="9"@else rowspan="8"@endif style="vertical-align:middle;">
 								<label for="recibo{{$contrato->id}}">
-=======
-							<td class="text-center" rowspan="8" style="vertical-align:middle;">
-								<label for="contrato{{$contrato->id}}">
->>>>>>> d0b00291dd7fba9f13f9b772a64b90ce1f55f69d
 									@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
 									<input type="hidden" name="contratos[{{$contrato->id}}]" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}">
 								</label>

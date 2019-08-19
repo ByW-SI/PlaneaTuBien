@@ -41,7 +41,7 @@ class CargarEstadoCuentaExcelController extends Controller
                 }
             }
         }
-        return "Success";
+        return redirect()->route('excelpagos')->with('status', "Se cargo correctamente el archivo.");
     }
 
     public function esConceptoValido($concepto)

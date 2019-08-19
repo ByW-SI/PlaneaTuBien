@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Contrato;
 use App\Pagos;
+use App\EstadoFinanciero;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
@@ -83,7 +84,7 @@ class PagosController extends Controller
 
     public function storePagosEfectivos(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $total_referencias = count($request->input('referencia'));
 
         for ($i = 0; $i < $total_referencias; $i++) {
@@ -92,10 +93,6 @@ class PagosController extends Controller
             $file = $request->file('file_comprobante')[$i];
             $this->storeComprobanteImg($file, $pago);
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> d0b00291dd7fba9f13f9b772a64b90ce1f55f69d
         return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
     }
 
@@ -106,11 +103,28 @@ class PagosController extends Controller
 
     public function storePagoEfectivo(Request $request, $i)
     {
-        //$adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
+        $cliente = auth('cliente')->user()->presolicitud;
+        $cotizacion = $cliente->cotizacion();
+        $plan = $cotizacion->plan;
+        $monto_pago = $request->monto[$i];
+        $contrato = Contrato::find(substr($request->input('contrato')[$i], 3));
 
+        if ($this->isValidFechaPago($request->fecha_pago)) {
+            $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+        }
+        else{
+            $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+            $monto_contrato = $monto_contrato + (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
+        }
+        /*
+        * bccomp devuelve 
+        * 0 si son igual
+        * 1 si el de la izquierda es mayor que el de la derecha
+        * -1 de lo contrario
+        */
         $pago = Pagos::create([
-            'contrato_id' => substr($request->input('contrato')[$i], -1),
-            'monto' => $request->input('monto')[$i],
+            'contrato_id' => $contrato->id,
+            'monto' => $monto_pago,
             'fecha_pago' => $request->input('fecha_pago'),
             //'adeudo' => $adeudo,
             //'total' => ($request->monto[$i] + $adeudo),
@@ -121,6 +135,66 @@ class PagosController extends Controller
             'spei' => $request->input('spei'),
             'file_comprobante' => $request->input('file_comprobante')[$i],
         ]);
+        if(bccomp($monto_pago, $monto_contrato) == -1){
+            if ($this->isValidFechaPago($request->fecha_pago)) {
+                $adeudo = $monto_contrato - $monto_pago;
+                $estadoF = EstadoFinanciero::updateOrCreate(
+                    ['contrato_id'=>$contrato->id],
+                    ['contrato_id'=>$contrato->id, 'adeudo'=>$adeudo]
+                );
+                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
+                $estadoF->save();
+            }
+            else{
+                $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+                $adeudo = $monto_contrato - $monto_pago;
+                $recargo = (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
+                $estadoF = EstadoFinanciero::updateOrCreate(
+                    ['contrato_id'=>$contrato->id],
+                    ['contrato_id'=>$contrato->id, 'adeudo'=>$adeudo, 'recargo'=>$recargo]
+                );
+                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
+                $estadoF->save();
+                
+            }
+        }
+        else if(bccomp($monto_pago, $monto_contrato) == 1){
+            if ($this->isValidFechaPago($request->fecha_pago)) {
+                $abono = $monto_pago - $monto_contrato;
+                $estadoF = EstadoFinanciero::updateOrCreate(
+                    ['contrato_id'=>$contrato->id],
+                    ['contrato_id'=>$contrato->id, 'abono'=>$abono]
+                );
+                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
+                $estadoF->save();
+            }
+            else{
+                $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+                $abono = $monto_pago - $monto_contrato;
+                $recargo = (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
+                if($abono > $recargo){
+                    $abono = $abono - $recargo;
+                    $recargo = 0;
+                }
+                elseif($abono < $recargo){
+                    $recargo = $recargo - $abono;
+                    $abono = 0;
+                }
+                else {
+                    $abono = 0;
+                    $recargo = 0;
+                }
+                $estadoF = EstadoFinanciero::updateOrCreate(
+                    ['contrato_id'=>$contrato->id],
+                    ['contrato_id'=>$contrato->id, 'abono'=>$abono, 'recargo'=>$recargo]
+                );
+                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
+                $estadoF->save();
+                
+            }
+        }
+
+        
 
         return $pago;
     }

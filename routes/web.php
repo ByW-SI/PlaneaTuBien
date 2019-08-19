@@ -219,6 +219,9 @@ Route::get('excelpagos','CargarEstadoCuentaExcelController@show')->name('excelpa
 Route::post('excel.store','CargarEstadoCuentaExcelController@store')->name('excel.store')->middleware('auth');
 Route::get('excel.find','CargarEstadoCuentaExcelController@show')->name('excel.find')->middleware('auth');
 Route::get('estadoCuenta.detalle','EstadoCuentaController@detalle')->name('estadoCuenta.detalle')->middleware('auth');
+Route::get('estadoCuenta/{deposito_efectivo}', 'EstadoCuentaController@edit')->name('estadoCuenta.edit')->middleware('auth');
+Route::post('estado-cuenta', 'EstadoCuentaController@validarPago')->name('depositoPagoValidar')->middleware('auth');
+Route::post('estado-cuenta-rechazar', 'EstadoCuentaController@rechazarPago')->name('depositoPagoRechazar')->middleware('auth');
 Route::put('/pagos/{pago}/status','Pagos\PagoInscripcionController@changeStatus')->name('pagos.update_status')->middleware('auth');
 Route::get('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@formReciboProvisional')->name('pagos.recibo_provisional')->middleware('auth');
 Route::get('/pagos/{pago}/recibo_provisional/show','Pagos\ReciboProvisionalController@showReciboProvisional')->name('pagos.recibo_provisional.show')->middleware('auth');

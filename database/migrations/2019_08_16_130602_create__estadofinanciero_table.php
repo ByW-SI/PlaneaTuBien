@@ -15,9 +15,12 @@ class CreateEstadofinancieroTable extends Migration
     {
         Schema::create('estado_financiero', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('adeudo', 10,2);
-            $table->decimal('abono', 10,2);
-            $table->decimal('saldo', 10,2);
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('contratos');
+            $table->decimal('adeudo', 10,2)->nullable();
+            $table->decimal('abono', 10,2)->nullable();
+            $table->decimal('recargo', 10,2)->nullable();
+            $table->decimal('saldo', 10,2)->nullable();
             $table->timestamps();
         });
     }

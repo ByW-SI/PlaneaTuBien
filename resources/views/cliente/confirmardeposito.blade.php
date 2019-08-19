@@ -53,8 +53,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia0" required>
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
-								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		<option id="@php(printf('%03d', $contrato->grupo->id)){{ $contrato->numero_contrato }}" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+								    			@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -63,7 +63,7 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato0" required>
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato0" required readonly>
 								</div>
 							</div>
 							<div class="col-4">
@@ -111,8 +111,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia${pagos[0].id}" required>
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
-								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		<option id="@php(printf('%03d', $contrato->grupo->id)){{ $contrato->numero_contrato }}" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+								    			@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -121,7 +121,7 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[0].id}" value="${pagos[0].contrato}" required>
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${pagos[0].id}" value="${pagos[0].contrato}" required readonly>
 								</div>
 							</div>
 							<div class="col-4">
@@ -150,7 +150,7 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia${pagos[i].id}" required >
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option value="${pagos[i].referencia}">
+								    		<option id="@php(printf('%03d', $contrato->grupo->id)){{ $contrato->numero_contrato }}" value="${pagos[i].referencia}">
 								    			${pagos[i].referencia}
 								    		</option>
 								    	@endforeach
@@ -166,7 +166,7 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Monto</label>
-								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[i].id}" value="${pagos[i].contrato}" required>
+								    <input type="text" name="monto[]" class="form-control monto" id="monto${pagos[i].id}" value="${pagos[i].contrato}" required readonly>
 								</div>
 							</div>
 						</div>
@@ -191,8 +191,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia${i}" required >
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option value="{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}">
-								    			{{ printf('%03d', $contrato->grupo->id)}}{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16))  }}
+								    		<option id="@php(printf('%03d', $contrato->grupo->id)){{ $contrato->numero_contrato }}" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+								    			@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -201,7 +201,7 @@
 							<div class="col-4">
 								<div class="form-group">
 								    <label>Número de Contrato</label>
-								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${i}" required>
+								    <input type="text" name="contrato[]" class="form-control contrato" id="num_contrato${i}" required readonly>
 								</div>
 							</div>
 							<div class="col-4">
@@ -225,11 +225,8 @@
 		$(document).on('change', '.referencia', function() {($(this));
 			let id = $(this).prop('id').replace(/[a-z]+/g, '');
 			pagos[id].referencia = $(this).val();
-			console.log($(this));
-		});
-		$(document).on('change', '.contrato', function() {
-			let id = $(this).prop('id').replace(/[a-z_]+/g, '');
-			pagos[id].contrato = $(this).val();
+			pagos[id].contrato = $(this).find('option:selected').prop('id');
+			$('#num_contrato'+id).val(pagos[id].contrato);
 		});
 		$(document).on('change', '.file', function() {
 			let id = $(this).prop('id').replace(/[a-zA-Z]+/g, '');

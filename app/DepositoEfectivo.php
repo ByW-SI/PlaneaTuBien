@@ -24,6 +24,18 @@ class DepositoEfectivo extends Model
         return $contrato;
     }
 
+    public function grupo()
+    {
+        $grupo_deposito_efectivo = substr($this->concepto, 0, 3);
+         if (is_numeric($grupo_deposito_efectivo)) {
+            $grupo_deposito_efectivo = (int) $grupo_deposito_efectivo;
+            return $grupo_deposito_efectivo;
+        }
+        else {
+            return "0";
+        }
+    }
+
     /**
      * Scope methods
      */
