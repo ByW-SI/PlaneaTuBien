@@ -11,6 +11,7 @@
     <div class="container">
 
         <div class="card mb-5">
+            <h3 class="text-center my-3">ESTADOS DE CUENTA</h3>
             <div class="card-body">
                 {{-- Contenedor excel --}}
                 <div class="row">
@@ -32,11 +33,10 @@
                 </div>
             </div>
             <hr>
-            <div class="card-body">
-                <h3 class="text-center my-3">ESTADOS DE CUENTA</h3>
-
+            {{-- <div class="card-body"> --}}
+                
                 {{-- Tabla de estados de cuenta --}}
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-12">
                         <table class="table table-bordered table-striped" id="example">
                             <thead>
@@ -86,8 +86,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+            {{-- </div> --}}
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>    

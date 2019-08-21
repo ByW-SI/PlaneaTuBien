@@ -42,12 +42,12 @@ class CargarEstadoCuentaExcelController extends Controller
 
     public function esConceptoValido($concepto)
     {
-        if (strpos($concepto, 'DEPOSITO EFECTIVO') !== false) {
-            return true;
-        }
-        if (strpos($concepto, 'DEPOSITO EN EFECTIVO') !== false) {
-            return true;
-        }
+        // if (strpos($concepto, 'DEPOSITO EFECTIVO') !== false) {
+        //     return true;
+        // }
+        // if (strpos($concepto, 'DEPOSITO EN EFECTIVO') !== false) {
+        //     return true;
+        // }
         if (strpos($concepto, 'CE000000') !== false) {
             return true;
         }
@@ -60,8 +60,8 @@ class CargarEstadoCuentaExcelController extends Controller
         $dia = Dater::excelToDateTimeObject($row[0]);
         $row[0] = $dia->format('Y-m-d');
 
-        // Almacenamos el deposito
-        DepositoEfectivo::create([
+        // Almacenamos el deposito SOLO en caso de que no exista
+        DepositoEfectivo::firstOrCreate([
             'dia' => $row[0],
             'concepto' => $row[1],
             'cargo' => $row[2],
@@ -79,13 +79,12 @@ class CargarEstadoCuentaExcelController extends Controller
 
     public function getOnlyReference($string)
     {
-        // Eliminamos la parte izquierda de la cadena
+        // Obtenemos la cadena izquierda a partir de "/"
         $reference = explode("/", $string);
-        $reference = $reference[1];
-
-        // Eliminamos la parte derecha de la cadena
-        $reference = explode(" ", $reference);
         $reference = $reference[0];
+
+        // Obtenemos los ultimos 14 digitos de la cadena
+        $reference = substr($reference, -14);
         
         // Retornamos la referencia
         return $reference;
