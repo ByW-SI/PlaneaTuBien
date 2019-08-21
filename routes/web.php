@@ -237,3 +237,6 @@ Route::resource('polizas','Poliza\PolizaController')->middleware('auth');
 
 // autorización de cotizaciones con inscripcion 0
 Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','show','update','destroy']])->middleware('auth');
+
+
+Route::get('pruebas','PruebasController@index');

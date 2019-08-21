@@ -193,9 +193,7 @@ class PagosController extends Controller
                 
             }
         }
-
         
-
         return $pago;
     }
 

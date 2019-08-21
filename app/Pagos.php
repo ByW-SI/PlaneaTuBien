@@ -34,4 +34,23 @@ class Pagos extends Model
 	public function contrato() {
 		return $this->belongsTo('App\Contrato');
 	}
+
+	public function plan(){
+
+		$contrato = $this->contrato()->first();
+
+        if($contrato){
+            $presolicitud = $contrato->presolicitud()->first();
+
+            if($presolicitud){
+                $cotizacion = $presolicitud->cotizacion()->first();
+
+                if($cotizacion){
+                    $plan = $cotizacion->plan();
+                }
+            }
+		}
+		
+		return $plan;
+	}
 }
