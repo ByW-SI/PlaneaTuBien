@@ -227,6 +227,7 @@ Route::put('/pagos/{pago}/status','Pagos\PagoInscripcionController@changeStatus'
 Route::get('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@formReciboProvisional')->name('pagos.recibo_provisional')->middleware('auth');
 Route::get('/pagos/{pago}/recibo_provisional/show','Pagos\ReciboProvisionalController@showReciboProvisional')->name('pagos.recibo_provisional.show')->middleware('auth');
 Route::post('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@submitReciboProvisional')->name('pagos.submit_recibo_provisional')->middleware('auth');
+Route::get('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@index');
 
 // CODIGOS POSTAL
 Route::get('cp/{cp}','CodigoPostal\CodigoPostalController@getCP')->name('cp.get');
@@ -238,3 +239,6 @@ Route::resource('polizas','Poliza\PolizaController')->middleware('auth');
 
 // autorización de cotizaciones con inscripcion 0
 Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','show','update','destroy']])->middleware('auth');
+
+
+Route::get('pruebas','PruebasController@index');
