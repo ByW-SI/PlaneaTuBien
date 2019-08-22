@@ -17,7 +17,7 @@ class AddMensualidadIdToPagosTable extends Migration
             $table->integer('mensualidad_id')->unsigned()->nullable();
             $table->text('folio')->unsigned()->change();
 
-            $table->foreign('mensualidad_id')->on('id')->reference('mensualidades');
+            $table->foreign('mensualidad_id')->references('id')->on('mensualidades');
         });
     }
 

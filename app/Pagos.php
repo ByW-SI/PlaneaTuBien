@@ -53,4 +53,13 @@ class Pagos extends Model
 		
 		return $plan;
 	}
+
+	/**
+	 * Scope methods
+	 */
+
+	public function ScopeAprobados($query){
+		$status_aprobado = StatusPago::where('nombre','Aprobado')->first();
+		return $query->where('status_id',$status_aprobado->id);
+	}
 }

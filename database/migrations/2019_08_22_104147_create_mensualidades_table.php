@@ -15,15 +15,15 @@ class CreateMensualidadesTable extends Migration
     {
         Schema::create('mensualidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('contrado_id')->unsigned();
+            $table->integer('contrato_id')->unsigned();
             $table->integer('num_mes')->unsigned();
-            $table->integer('cantidad');
+            $table->decimal('cantidad');
             $table->date('fecha');
-            $table->integer('recargo');
+            $table->decimal('recargo');
             $table->boolean('pagado')->default(0);
             $table->timestamps();
 
-            $table->foreign('contrado_id')->references('id')->on('contratos');
+            $table->foreign('contrato_id')->references('id')->on('contratos');
         });
     }
 
