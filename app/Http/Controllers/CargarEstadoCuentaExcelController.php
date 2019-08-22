@@ -30,12 +30,17 @@ class CargarEstadoCuentaExcelController extends Controller
     {
         if ($request->hasFile('excel_file')) {
 
-            $data = \Excel::toArray(null, request()->file('excel_file'));
+            $estados_financieros = \Excel::toArray(null, request()->file('excel_file'))[0];
 
-            foreach ($data[0] as $registro) {
+            foreach ($estados_financieros as $registro) {
                 if ($this->esConceptoValido($registro[1])) {
                     $registro[1] = $this->getOnlyReference($registro[1]);
-                    $this->verifyPago($registro);
+                    $pago = $this->validarPagoSiExsite($registro);
+
+                    if ($pago) {
+                        $this->actualizarEstadoFinancieroDeContrato($registro, $pago);
+                    }
+
                     $this->saveExcelRow($registro);
                 }
             }
@@ -87,61 +92,59 @@ class CargarEstadoCuentaExcelController extends Controller
         return $reference;
     }
 
-    public function verifyPago($registro)
+    public function validarPagoSiExsite($registro)
     {
 
         $referencia_banco = $registro[1];
         $abono_banco = $registro[3];
+
+        $pago = Pagos::where('referencia', $referencia_banco)->where('monto', $abono_banco)->first();
+
+        if ($pago) {
+            $pago->status_id = 1;
+        }
+
+        return $pago;
+    }
+
+    public function actualizarEstadoFinancieroDeContrato($registro, $pago)
+    {
+
+        $referencia_banco = $registro[1];
+        $abono_banco = $registro[3];
+
         $adeudo_siguiente_mes = 0;
         $abono_siguiente_mes = 0;
 
-        // dd($abono_banco);
+        // Obtenemos lo que el usuario deberia pagar
+        $plan = $pago->plan()->first();
+        $contrato = $pago->contrato()->first();
+        $deberia_pagar = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
 
-        $pago = Pagos::where('referencia', $referencia_banco)->where('monto',$abono_banco)->first();
-        // dd($pago);
-
-        // -- Si la referencia y el abono del banco se encuentran en los pagos del usuario
-        if ($pago) {
-            
-            // -- Aprobamos el pago
-            $pago->update(['status',1]);
-
-            $plan = $pago->plan()->first();
-            // dd($plan);
-            $contrato = $pago->contrato()->first();
-            $deberia_pagar = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
-            // dd("A: ".$abono_banco." D: ".$deberia_pagar);
-
-            // -- Si el abono de excel es menor a lo que en realidad debe pagar
-            if ($abono_banco+1 < $deberia_pagar) {
-
-                // -- Generamos adeudo
-                $intereses = $deberia_pagar * 0.03;
-                $iva = $intereses * 0.16;
-                $adeudo_siguiente_mes = $deberia_pagar - $abono_banco + $intereses + $iva;
-            }
-
-            // -- Si el abono de excel es mayor a lo que deberia pagar
-            else if($abono_banco+1 >= $deberia_pagar){
-
-                // -- Generamos un abono para el siguiente mes
-                $abono_siguiente_mes = $abono_banco - $deberia_pagar;
-                // dd($abono_siguiente_mes);
-            }
-
-            // -- Actualizamos el adeudo y abono del cliente
-            $estado_financiero = EstadoFinanciero::firstOrNew(
-                ['contrato_id'=>$pago->contrato_id],
-                ['adeudo'=>0,'abono'=>0,'recargo'=>0,'saldo'=>0]
-            );
-            // dd($estado_financiero);
-            $estado_financiero->adeudo += $adeudo_siguiente_mes;
-            $estado_financiero->abono += $abono_siguiente_mes;
-            $estado_financiero->saldo = $estado_financiero->abono - $estado_financiero->adeudo;
-            // dd($estado_financiero);
-            $estado_financiero->save();
-
+        // Si el abono en el banco es menor a lo que debe pagar generamos un adeudo
+        if ($abono_banco + 1 < $deberia_pagar) {
+            $intereses = $deberia_pagar * 0.03;
+            $iva = $intereses * 0.16;
+            $adeudo_siguiente_mes = $deberia_pagar - $abono_banco + $intereses + $iva;
         }
+
+        // Si el abono en el banco es mayor a lo que deberia pagar, generamos un abono
+        else if ($abono_banco + 1 >= $deberia_pagar) {
+            $abono_siguiente_mes = $abono_banco - $deberia_pagar;
+        }
+
+        // Actualizamos el adeudo y abono del contrato
+        $estado_financiero = EstadoFinanciero::firstOrNew(
+            ['contrato_id' => $pago->contrato_id],
+            ['adeudo' => 0, 'abono' => 0, 'recargo' => 0, 'saldo' => 0]
+        );
+        $estado_financiero->adeudo += $adeudo_siguiente_mes;
+        $estado_financiero->abono += $abono_siguiente_mes;
+        $estado_financiero->saldo = $estado_financiero->abono - $estado_financiero->adeudo;
+        // dd($estado_financiero);
+        $estado_financiero->save();
+
+        // }
 
         // dd('STOP');
     }
