@@ -273,4 +273,9 @@ class PagosController extends Controller
         else
             return false;
     }
+
+    public function imprimirFichaPagoEfectivo(Request $request)
+    {
+        return "OK";
+    }
 }
