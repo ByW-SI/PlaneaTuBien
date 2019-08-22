@@ -56,11 +56,12 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/password/reset/{token}','Auth\ClienteResetPasswordController@showResetForm')->name('cliente.password.reset');
 	Route::get('/corrida_financiera','Cliente\PlanController@corrida')->name('corrida_financiera');
 	Route::get('/pagar','Cliente\PlanController@formPagos')->name('pagar');
-	Route::get('confirmar-pago', 'Cliente\PlanController@confirmarPago')->name('confirmar-pago');
+	//Route::get('confirmar-pago', 'Cliente\PlanController@confirmarPago')->name('confirmar-pago'); Queda inutilizada por el momento
 	Route::get('/confirmar-deposito', 'Cliente\PlanController@formDeposito')->name('confirmardeposito');
 	Route::get('/historial', 'Cliente\PlanController@historial')->name('historial_cliente');
-	Route::resource('Cliente-pagos', 'Cliente\PagosController');
-	Route::post('Cliente-pagos','Cliente\PagosController@storePagosEfectivos')->name('store_pago_efectivo');
+	Route::resource('cliente-pagos', 'Cliente\PagosController');
+	Route::post('Cliente-pagos-efectivo','Cliente\PagosController@storePagosEfectivos')->name('store_pago_efectivo');
+	Route::post('download-pdf', 'Cliente\PagosController@imprimirFichaPagoEfectivo')->name('pago-efectivo-pdf');
 	//Route::resource('cotizacions','Cliente\CotizacionController');
 	//Route::resource('/Pagos', 'Pagos\PagoMensualController')->name('clientes.pagos');
 
