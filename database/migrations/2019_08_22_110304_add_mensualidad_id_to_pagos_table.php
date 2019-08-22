@@ -16,6 +16,8 @@ class AddMensualidadIdToPagosTable extends Migration
         Schema::table('pagos', function (Blueprint $table) {
             $table->integer('mensualidad_id')->unsigned()->nullable();
             $table->text('folio')->unsigned()->change();
+
+            $table->foreign('mensualidad_id')->on('id')->reference('mensualidades');
         });
     }
 
