@@ -12,4 +12,13 @@ class Mensualidad extends Model
     public function pagos(){
         return $this->hasMany('App\Pagos');
     }
+
+    /**
+     * Scope methods
+     */
+
+    public function ScopeLast($query){
+        return $query->orderBy('num_mes','desc');
+    }
+
 }

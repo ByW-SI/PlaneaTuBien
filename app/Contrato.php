@@ -50,4 +50,12 @@ class Contrato extends Model
     {
         return $this->hasOne('App\EstadoFinanciero');
     }
+
+    /**
+     * Scope methods
+     */
+
+    public function scopeRegistrados($query){
+        return $query->where('estado','registrado');
+    }
 }
