@@ -16,25 +16,34 @@ class PruebasController extends Controller
         $nuevo_abono = 0;
         $contratos_registrados = Contrato::registrados()->get();
 
+        // dd($contratos_registrados);
+
         foreach($contratos_registrados as $contrato){
             $ultima_mensualidad = Mensualidad::where('contrato_id',$contrato->id)->last()->first();
 
             if($ultima_mensualidad){
+                // dd($ultima_mensualidad);
                 $nuevo_recargo = $this->getRecargo($ultima_mensualidad);
+                // dd($nuevo_recargo);
                 $nuevo_abono = $this->getAbono($ultima_mensualidad);
+                // dd($nuevo_abono);
+
+                $ultima_mensualidad->update([
+                    'pagado' => 1
+                ]);
+    
+                // dd($ultima_mensualidad);
+
+                $nueva_mensualidad = Mensualidad::create([
+                    "contrato_id" => $ultima_mensualidad->contrato_id,
+                    "num_mes" => $ultima_mensualidad->num_mes+1,
+                    "cantidad" => $ultima_mensualidad->cantidad-$nuevo_abono,
+                    "fecha" => Carbon::now(),
+                    "recargo" => $nuevo_recargo
+                ]);
+
+                dd($nueva_mensualidad);
             }
-
-            $ultima_mensualidad->update([
-                'pagado' => 1
-            ]);
-
-            $nueva_mensualidad = Mensualidad::create([
-                "contrato_id" => $ultima_mensualidad->contrato_id,
-                "num_mes" => $ultima_mensualidad->num_mes+1,
-                "cantidad" => $ultima_mensualidad->monto-$nuevo_abono,
-                "fecha" => Carbon::now(),
-                "recargo" => $nuevo_recargo
-            ]);
         }
 
         return $nueva_mensualidad;
@@ -43,7 +52,7 @@ class PruebasController extends Controller
     public function getRecargo($mensualidad){
         $nuevo_recargo = 0;
 
-        $pagos_de_mensualidad = $mensualidad->pagos()->get();
+        $pagos_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
 
         $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo;
 
@@ -51,6 +60,8 @@ class PruebasController extends Controller
         foreach($pagos_de_mensualidad as $pago){
             $total_pagado_a_mensualidad += $pago->monto;
         }
+
+        // dd($total_pagado_a_mensualidad);
 
         if($total_pagado_a_mensualidad+1 < $debe_pagar){
             $intereses = $debe_pagar * 0.03;
@@ -65,7 +76,7 @@ class PruebasController extends Controller
     public function getAbono($mensualidad){
         $nuevo_abono = 0;
 
-        $pagos_de_mensualidad = $mensualidad->pagos()->get();
+        $pagos_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
 
         $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo;
 

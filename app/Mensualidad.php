@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mensualidad extends Model
 {
     protected $table = "mensualidades";
+<<<<<<< HEAD
 
     protected $fillable=[
     	'id',
@@ -26,8 +27,12 @@ class Mensualidad extends Model
     public function plans(){
     	return $this->belongsTo('App\Contrato');
     }
+=======
+    protected $fillable = ['pagado', 'contrato_id', 'num_mes', 'cantidad', 'fecha', 'recargo'];
+>>>>>>> b4590f35fedb3102a2d71ccd71db02c0485427d6
 
-    public function pagos(){
+    public function pagos()
+    {
         return $this->hasMany('App\Pagos');
     }
 
@@ -35,7 +40,8 @@ class Mensualidad extends Model
      * Scope methods
      */
 
-    public function ScopeLast($query){
-        return $query->orderBy('num_mes','desc');
+    public function ScopeLast($query)
+    {
+        return $query->orderBy('num_mes', 'desc');
     }
 }
