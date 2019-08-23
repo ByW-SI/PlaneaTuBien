@@ -111,12 +111,7 @@
 				  	<!-- FIN Primer Accordion -->
 				@endif
 			@endforeach
-			<!-- ##################################-->
-			@foreach($contratos as $contrato)
-			
-			@endforeach
 			</div>
-			<!--################################################-->
 			<table class="table table-active">
 				<tbody>
 					<tr>
@@ -251,11 +246,11 @@
 				contenido += `<tr>
 							<td></td>
 							<td>
-								${parseFloat($(el).prop('value')).toFixed(2)}
+								$${parseFloat($(el).prop('value')).toFixed(2)}
 								<input type="hidden" name="monto[]" value="${$(el).prop('value')}">
 							</td>
 							<td>
-								$${$(el).prop('name')}
+								${$(el).prop('name')}
 								<input type="hidden" name="num_contrato[]" value="${$(el).prop('value')}">
 							</td>
 							</tr>`;

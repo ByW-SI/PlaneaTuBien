@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Contrato;
 use App\Pagos;
-use App\EstadoFinanciero;
+use App\Mensualidad;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
@@ -84,7 +84,7 @@ class PagosController extends Controller
 
     public function storePagosEfectivos(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $total_referencias = count($request->input('referencia'));
 
         for ($i = 0; $i < $total_referencias; $i++) {
@@ -109,8 +109,22 @@ class PagosController extends Controller
         $monto_pago = $request->monto[$i];
         $contrato = Contrato::find(substr($request->input('contrato')[$i], 3));
 
+        $mensual_adeudos = [];
+        foreach($contrato->mensualidades as $mensualidad){
+            if(!$mensualidad->pagado)
+                $mensual_adeudos[] = $mensualidad;
+        }
+
         if ($this->isValidFechaPago($request->fecha_pago)) {
-            $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+            $total = 0;
+            foreach ($mensual_adeudos as $mensual) {
+                $cantidad_pagada = 0;
+                foreach ($mensual->pagos->aprobado() as $pago) {
+                    $cantidad_pagada += $pago->monto;
+                }
+                $total = ($mensual->cantidad + $mensual->recargo) - $cantidad_pagada;
+            }
+            $monto_pagar = $total;
         }
         else{
             $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
@@ -128,11 +142,11 @@ class PagosController extends Controller
             'fecha_pago' => $request->input('fecha_pago'),
             //'adeudo' => $adeudo,
             //'total' => ($request->monto[$i] + $adeudo),
-            'folio' => $request->input('folio'),
+            'folio' => $request->input('folio')[$i],
             'status_id' => 2,
             'tipopago_id' => 2,
             'referencia' => $request->input('referencia')[$i],
-            'spei' => $request->input('spei'),
+            'spei' => $request->input('spei')[$i],
             'file_comprobante' => $request->input('file_comprobante')[$i],
         ]);
         if(bccomp($monto_pago, $monto_contrato) == -1){

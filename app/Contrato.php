@@ -46,8 +46,7 @@ class Contrato extends Model
         return $this->hasMany('App\Pagos');
     }
 
-    public function estadoFinanciero()
-    {
-        return $this->hasOne('App\EstadoFinanciero');
+    public function mensualidades(){
+        return $this->hasMany('App\Mensualidad');
     }
 }

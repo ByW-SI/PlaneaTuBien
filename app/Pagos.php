@@ -53,4 +53,8 @@ class Pagos extends Model
 		
 		return $plan;
 	}
+
+	public function mensualidad() {
+		return $this->belongsTo('App\Mensualidad');
+	}
 }
