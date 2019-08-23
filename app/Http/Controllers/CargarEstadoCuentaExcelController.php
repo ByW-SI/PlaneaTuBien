@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Contrato;
 use App\DepositoEfectivo;
 use App\EstadoFinanciero;
 use App\Imports\UserImport;
+use App\Mensualidad;
 use App\Pagos;
 use App\Plan;
 use Illuminate\Http\Request;
@@ -38,7 +40,7 @@ class CargarEstadoCuentaExcelController extends Controller
                     $pago = $this->validarPagoSiExsite($registro);
 
                     if ($pago) {
-                        $this->actualizarEstadoFinancieroDeContrato($registro, $pago);
+                        $this->actualizarMensualidad($pago->mensualidad_id);
                     }
 
                     $this->saveExcelRow($registro);
@@ -101,51 +103,42 @@ class CargarEstadoCuentaExcelController extends Controller
         $pago = Pagos::where('referencia', $referencia_banco)->where('monto', $abono_banco)->first();
 
         if ($pago) {
-            $pago->status_id = 1;
+            $pago->update([
+                "status_id" => 1
+            ]);
         }
 
         return $pago;
     }
 
-    public function actualizarEstadoFinancieroDeContrato($registro, $pago)
+    public function actualizarMensualidad($mensualidad_id)
     {
-
-        $referencia_banco = $registro[1];
-        $abono_banco = $registro[3];
 
         $adeudo_siguiente_mes = 0;
         $abono_siguiente_mes = 0;
 
-        // Obtenemos lo que el usuario deberia pagar
-        $plan = $pago->plan()->first();
-        $contrato = $pago->contrato()->first();
-        $deberia_pagar = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+        $mensualidad = Mensualidad::where('id',$mensualidad_id)->first();
+        $pagos_aprobados_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
+        // dd($pagos_aprobados_de_mensualidad);
 
-        // Si el abono en el banco es menor a lo que debe pagar generamos un adeudo
-        if ($abono_banco + 1 < $deberia_pagar) {
-            $intereses = $deberia_pagar * 0.03;
-            $iva = $intereses * 0.16;
-            $adeudo_siguiente_mes = $deberia_pagar - $abono_banco + $intereses + $iva;
+        $total_pagado_a_mensualidad = 0;
+        foreach($pagos_aprobados_de_mensualidad as $pago){
+            $total_pagado_a_mensualidad += $pago->monto;
         }
 
-        // Si el abono en el banco es mayor a lo que deberia pagar, generamos un abono
-        else if ($abono_banco + 1 >= $deberia_pagar) {
-            $abono_siguiente_mes = $abono_banco - $deberia_pagar;
+        // dd($total_pagado_a_mensualidad);
+
+        $total_debe = $mensualidad->cantidad + $mensualidad->recargo;
+
+        if($total_pagado_a_mensualidad >= $total_debe){
+            $mensualidad->update([
+                "pagado" => 1,
+            ]);
         }
 
-        // Actualizamos el adeudo y abono del contrato
-        $estado_financiero = EstadoFinanciero::firstOrNew(
-            ['contrato_id' => $pago->contrato_id],
-            ['adeudo' => 0, 'abono' => 0, 'recargo' => 0, 'saldo' => 0]
-        );
-        $estado_financiero->adeudo += $adeudo_siguiente_mes;
-        $estado_financiero->abono += $abono_siguiente_mes;
-        $estado_financiero->saldo = $estado_financiero->abono - $estado_financiero->adeudo;
-        // dd($estado_financiero);
-        $estado_financiero->save();
+        dd('Debio cambiar mensualidades pagado');
 
-        // }
+        return $mensualidad;
 
-        // dd('STOP');
     }
 }

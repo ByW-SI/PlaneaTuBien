@@ -49,4 +49,12 @@ class Contrato extends Model
     public function mensualidades(){
         return $this->hasMany('App\Mensualidad');
     }
+
+    /**
+     * Scope methods
+     */
+
+    public function scopeRegistrados($query){
+        return $query->where('estado','registrado');
+    }
 }

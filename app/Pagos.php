@@ -11,19 +11,15 @@ class Pagos extends Model
 	protected $fillable = [
 		'id',
 		'contrato_id',
-		'status',
 		'monto',
 		'fecha_pago',
-		'adeudo',
-		'total',
 		'folio',
 		'status_id',
 		'tipopago_id',
-		'tipocarga_id',
-		'empleado_id',
 		'referencia',
 		'spei',
-		'file_comprobante'
+		'file_comprobante',
+		'mensualidad_id'
 	];
 
 	protected $hidden =[
@@ -56,5 +52,13 @@ class Pagos extends Model
 
 	public function mensualidad() {
 		return $this->belongsTo('App\Mensualidad');
+	}
+	/**
+	 * Scope methods
+	 */
+
+	public function ScopeAprobados($query){
+		$status_aprobado = StatusPago::where('nombre','Aprobado')->first();
+		return $query->where('status_id',$status_aprobado->id);
 	}
 }
