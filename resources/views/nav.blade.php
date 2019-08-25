@@ -280,7 +280,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					{{-- <a href="{{route('pagos.busqueda.referencia')}}" class="dropdown-item"><i class="fa fa-search"> <strong> Búsqueda de referencia</strong></i></a> --}}
-					<a class="dropdown-item" href="{{route('pagos.busqueda.referencia')}}"><i class="fa fa-search"></i><strong> Búsqueda de referencia</strong></a>
+					<a class="dropdown-item" href="{{route('pagos.asignar')}}"><i class="fa fa-search"></i><strong> Asignar pagos</strong></a>
 					<a class="dropdown-item" href="{{ route('pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
 					<a class="dropdown-item" href="{{ route('excelpagos') }}"><i class="fa fa-search"></i><strong> Excel</strong></a>
 				</div>

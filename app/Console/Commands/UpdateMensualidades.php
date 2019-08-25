@@ -65,8 +65,10 @@ class UpdateMensualidades extends Command
 
         $nuevo_recargo = 0;
 
-        $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo;
+        $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo - $mensualidad->abono;
         $total_pagado_a_mensualidad = $this->getTotalPagadoAMensualidad($mensualidad);
+
+        // dd($total_pagado_a_mensualidad);
 
         // Si faltó dinero por pagar, obtenemos el nuevo recargo generado
         if ($total_pagado_a_mensualidad + 1 < $debe_pagar) {
@@ -74,6 +76,8 @@ class UpdateMensualidades extends Command
             $iva = $intereses * 0.16;
             $nuevo_recargo = $debe_pagar - $total_pagado_a_mensualidad + $intereses + $iva;
         }
+
+        // dd($nuevo_recargo);
 
         return $nuevo_recargo;
     }
@@ -87,7 +91,7 @@ class UpdateMensualidades extends Command
     {
         $nuevo_abono = 0;
 
-        $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo;
+        $debe_pagar = $mensualidad->cantidad + $mensualidad->recargo - $mensualidad->abono;
         $total_pagado_a_mensualidad = $this->getTotalPagadoAMensualidad($mensualidad);
 
         // Si pagó de más, lo abonamos a la siguiente mensualidad
@@ -105,13 +109,15 @@ class UpdateMensualidades extends Command
      */
     public function getTotalPagadoAMensualidad($mensualidad)
     {
+        $total_pagado_a_mensualidad = 0;
         $pagos_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
 
         // Obtenemos el total pagado a la mensualidad
-        $total_pagado_a_mensualidad = 0;
         foreach ($pagos_de_mensualidad as $pago) {
             $total_pagado_a_mensualidad += $pago->monto;
         }
+
+        return $total_pagado_a_mensualidad;
     }
 
     /**
@@ -129,10 +135,10 @@ class UpdateMensualidades extends Command
 
         Mensualidad::create([
             "contrato_id" => $ultima_mensualidad->contrato_id,
-            "num_mes" => $ultima_mensualidad->num_mes + 1,
-            "cantidad" => $ultima_mensualidad->cantidad - $nuevo_abono,
+            "cantidad" => $ultima_mensualidad->cantidad,
             "fecha" => Carbon::now(),
-            "recargo" => $nuevo_recargo
+            "recargo" => $nuevo_recargo,
+            "abono" => $nuevo_abono,
         ]);
     }
 }
