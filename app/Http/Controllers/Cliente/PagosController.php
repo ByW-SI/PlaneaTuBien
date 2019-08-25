@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Contrato;
 use App\Pagos;
-use App\EstadoFinanciero;
+use App\Mensualidad;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
 
@@ -46,32 +47,18 @@ class PagosController extends Controller
         $date = Carbon::now();
 
         //dd($request->all());
-        for ($i = 0; $i < count($request->monto); $i++) {
+        for ($i = 0; $i < count($request->monto_pagar); $i++) {
 
-            $contrato = $cliente->contratos()->where('id', $request->contrato[$i])->first();
-            if (bccomp($request->monto[$i], $plan->corrida_meses_fijos($contrato->monto)['integrante']['total']) == 0) {
-                if ($this->isValidFechaPago($date)) {
-                    dd('OK Si pasa el pago');
-                } else {
-                    //dd('Fail Se paso la fecha de Pago');
-                    $adeudo = (($request->monto[$i] * 0.03) + ($request->monto[$i] * 0.03) * 0.16);
-                    $folio = str_pad($contrato->grupo->id, 3, "0", STR_PAD_LEFT) . $contrato->numero_contrato;
-                    $pago = Pagos::create([
-                        'contrato_id' => $request->contrato[$i],
-                        'monto' => $request->monto[$i],
-                        'fecha_pago' => $date->toDateString(),
-                        // El calculo del adeudo es de acuerdo al negocio del monto a pagar se le cobra el 3% mas iva de ese 3%
-                        'adeudo' => $adeudo,
-                        'total' => ($request->monto[$i] + $adeudo),
-                        'folio' => $folio,
-                        'status_id' => 2,
-                        'tipopago_id' => 1,
-                        'referencia' => $request->referencia[$i],
-                        'created_at' => $date->toDateTimeString(),
-                        'updated_at' => $date->toDateTimeString()
-                    ]);
-                }
-            }
+            $contrato = $cliente->contratos()->where('id', $request->contratos[$i])->first();
+            $pago = Pagos::create([
+                'contrato_id' => $contrato->id,
+                'monto' => $request->monto_pagar[$i],
+                'fecha_pago' => $date->toDateString(),
+                'status_id' => 1,
+                'tipopago_id' => 1,
+                'referencia' => $request->input('referencia')[$i],
+                'mensualidad_id' => $contrato->mensualidades->last()->id
+            ]);
         }
         return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
     }
@@ -109,13 +96,22 @@ class PagosController extends Controller
         $monto_pago = $request->monto[$i];
         $contrato = Contrato::find(substr($request->input('contrato')[$i], 3));
 
-        if ($this->isValidFechaPago($request->fecha_pago)) {
-            $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
+        $mensual_adeudos = [];
+        foreach($contrato->mensualidades as $mensualidad){
+            if(!$mensualidad->pagado)
+                $mensual_adeudos[] = $mensualidad;
         }
-        else{
-            $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
-            $monto_contrato = $monto_contrato + (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
+
+        $total = 0;
+        foreach ($mensual_adeudos as $mensual) {
+            $cantidad_pagada = 0;
+            foreach ($mensual->pagos()->aprobados()->get() as $pago) {
+                if ($pago) 
+                    $cantidad_pagada += $pago->monto;
+            }
+            $total += ($mensual->cantidad + $mensual->recargo) - $cantidad_pagada;
         }
+        $monto_pagar = $total;
         /*
         * bccomp devuelve 
         * 0 si son igual
@@ -125,74 +121,14 @@ class PagosController extends Controller
         $pago = Pagos::create([
             'contrato_id' => $contrato->id,
             'monto' => $monto_pago,
-            'fecha_pago' => $request->input('fecha_pago'),
-            //'adeudo' => $adeudo,
-            //'total' => ($request->monto[$i] + $adeudo),
-            'folio' => $request->input('folio'),
+            'fecha_pago' => $request->input('fecha_pago')[$i],
+            'folio' => $request->input('folio')[$i],
             'status_id' => 2,
             'tipopago_id' => 2,
             'referencia' => $request->input('referencia')[$i],
-            'spei' => $request->input('spei'),
-            'file_comprobante' => $request->input('file_comprobante')[$i],
+            'spei' => $request->input('spei')[$i],
+            'mensualidad_id' => $contrato->mensualidades->last()->id
         ]);
-        if(bccomp($monto_pago, $monto_contrato) == -1){
-            if ($this->isValidFechaPago($request->fecha_pago)) {
-                $adeudo = $monto_contrato - $monto_pago;
-                $estadoF = EstadoFinanciero::updateOrCreate(
-                    ['contrato_id'=>$contrato->id],
-                    ['contrato_id'=>$contrato->id, 'adeudo'=>$adeudo]
-                );
-                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
-                $estadoF->save();
-            }
-            else{
-                $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
-                $adeudo = $monto_contrato - $monto_pago;
-                $recargo = (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
-                $estadoF = EstadoFinanciero::updateOrCreate(
-                    ['contrato_id'=>$contrato->id],
-                    ['contrato_id'=>$contrato->id, 'adeudo'=>$adeudo, 'recargo'=>$recargo]
-                );
-                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
-                $estadoF->save();
-                
-            }
-        }
-        else if(bccomp($monto_pago, $monto_contrato) == 1){
-            if ($this->isValidFechaPago($request->fecha_pago)) {
-                $abono = $monto_pago - $monto_contrato;
-                $estadoF = EstadoFinanciero::updateOrCreate(
-                    ['contrato_id'=>$contrato->id],
-                    ['contrato_id'=>$contrato->id, 'abono'=>$abono]
-                );
-                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
-                $estadoF->save();
-            }
-            else{
-                $monto_contrato = $plan->corrida_meses_fijos($contrato->monto)['integrante']['total'];
-                $abono = $monto_pago - $monto_contrato;
-                $recargo = (($monto_contrato * 0.03) + ($monto_contrato * 0.03) * 0.16);
-                if($abono > $recargo){
-                    $abono = $abono - $recargo;
-                    $recargo = 0;
-                }
-                elseif($abono < $recargo){
-                    $recargo = $recargo - $abono;
-                    $abono = 0;
-                }
-                else {
-                    $abono = 0;
-                    $recargo = 0;
-                }
-                $estadoF = EstadoFinanciero::updateOrCreate(
-                    ['contrato_id'=>$contrato->id],
-                    ['contrato_id'=>$contrato->id, 'abono'=>$abono, 'recargo'=>$recargo]
-                );
-                $estadoF->saldo = $estadoF->abono - ($estadoF->adeudo + $estadoF->recargo);
-                $estadoF->save();
-                
-            }
-        }
         
         return $pago;
     }
@@ -276,6 +212,14 @@ class PagosController extends Controller
 
     public function imprimirFichaPagoEfectivo(Request $request)
     {
-        return "OK";
+        //dd($request->all());
+        $cliente = auth('cliente')->user()->presolicitud;
+        $data = [];
+        for ($i=0; $i < count($request->ref); $i++) { 
+            $data[] = ['referencia'=>$request->ref[$i], 'monto'=>$request->monto[$i], 'num_contrato'=>$request->num_contrato[$i]];
+        }
+        $pdf = PDF::loadView('cliente.efectivo.pagoEfectivo',['data'=>$data,]);
+        //return $pdf->stream();
+        return $pdf->download('pago_efectivo'.$cliente->nombre.$cliente->paterno.$cliente->materno.".pdf");
     }
 }

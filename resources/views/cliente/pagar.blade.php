@@ -30,6 +30,7 @@
 		PAGA TU MENSUALIDAD
 	</div>
 	<form action="{{ route('cliente-pagos.store') }}" method="POST" class="form-inline">
+		@csrf
 		<div class="card-body col-6 offset-3">
 			@if($cliente->contratos->count() > count($pagos))
 			<div class="accordion" id="accordionContratos">
@@ -45,7 +46,9 @@
 				  	<div class="card">
 				    	<div class="card-header" id="heading{{ $contrato->id }}">
 					      	<h2 class="mb-0">
-					        	<input type="checkbox" class="form-check-input recibo" name="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}" checked="" value="{{ $total }}">
+					        	<input type="checkbox" class="form-check-input recibo" name="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}" id="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $total }}">
+					        	<input type="hidden" name="monto_pagar[]" value="{{ $total }}">
+					        	<input type="hidden" name="contratos[]" value="{{ $contrato->id }}">
 					        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
 					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($total,2)}} @else {{number_format($total,2)}} @endif
 					        	</button>
@@ -100,7 +103,7 @@
 											<td>Referencia</td>
 											<td>
 												@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
-												<input type="hidden" name="referencia[{{$contrato->id}}]" required="" readonly="" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+												<input type="hidden" name="referencia[]" required="" readonly="" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
 											</td>
 										</tr>
 						        	</tbody>
@@ -111,12 +114,7 @@
 				  	<!-- FIN Primer Accordion -->
 				@endif
 			@endforeach
-			<!-- ##################################-->
-			@foreach($contratos as $contrato)
-			
-			@endforeach
 			</div>
-			<!--################################################-->
 			<table class="table table-active">
 				<tbody>
 					<tr>
@@ -249,14 +247,17 @@
 			let contenido ='';
 			$("input.recibo:checked").each(function(index, el) {
 				contenido += `<tr>
-							<td></td>
 							<td>
-								${parseFloat($(el).prop('value')).toFixed(2)}
+								${$(el).prop('id')}
+								<input type="hidden" name="ref[]" value="${$(el).prop('id')}">
+							</td>
+							<td>
+								$${parseFloat($(el).prop('value')).toFixed(2)}
 								<input type="hidden" name="monto[]" value="${$(el).prop('value')}">
 							</td>
 							<td>
-								$${$(el).prop('name')}
-								<input type="hidden" name="num_contrato[]" value="${$(el).prop('value')}">
+								${$(el).prop('name')}
+								<input type="hidden" name="num_contrato[]" value="${$(el).prop('name')}">
 							</td>
 							</tr>`;
 			});

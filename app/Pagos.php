@@ -11,19 +11,15 @@ class Pagos extends Model
 	protected $fillable = [
 		'id',
 		'contrato_id',
-		'status',
 		'monto',
 		'fecha_pago',
-		'adeudo',
-		'total',
 		'folio',
 		'status_id',
 		'tipopago_id',
-		'tipocarga_id',
-		'empleado_id',
 		'referencia',
 		'spei',
-		'file_comprobante'
+		'file_comprobante',
+		'mensualidad_id'
 	];
 
 	protected $hidden =[
@@ -54,6 +50,9 @@ class Pagos extends Model
 		return $plan;
 	}
 
+	public function mensualidad() {
+		return $this->belongsTo('App\Mensualidad');
+	}
 	/**
 	 * Scope methods
 	 */
