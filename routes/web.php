@@ -61,7 +61,7 @@ Route::prefix('clientes')->group(function(){
 	Route::get('/historial', 'Cliente\PlanController@historial')->name('historial_cliente');
 	Route::resource('cliente-pagos', 'Cliente\PagosController');
 	Route::post('Cliente-pagos-efectivo','Cliente\PagosController@storePagosEfectivos')->name('store_pago_efectivo');
-	Route::post('download-pdf', 'Cliente\PagosController@imprimirFichaPagoEfectivo')->name('pago-efectivo-pdf');
+	Route::post('hoja-pago-efectivo', 'Cliente\PagosController@generacionHojaPagoEfectivo')->name('pago-efectivo-control');
 	//Route::resource('cotizacions','Cliente\CotizacionController');
 	//Route::resource('/Pagos', 'Pagos\PagoMensualController')->name('clientes.pagos');
 

@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Contrato;
 use App\Pagos;
 use App\Mensualidad;
+use App\Mail\FichaPagoEfectivoEmail;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 
 class PagosController extends Controller
 {
@@ -60,7 +62,7 @@ class PagosController extends Controller
                 'mensualidad_id' => $contrato->mensualidades->last()->id
             ]);
         }
-        return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
+        return redirect()->route('cliente.dashboard')->with('status', "<h3>!Compleatdo</h3>Se realizo con exito tu pago.");
     }
 
     /**
@@ -80,7 +82,7 @@ class PagosController extends Controller
             $file = $request->file('file_comprobante')[$i];
             $this->storeComprobanteImg($file, $pago);
         }
-        return redirect()->route('cliente.dashboard')->with('status', "Special message goes here");
+        return redirect()->route('cliente.dashboard')->with('status', "Pago registrado correctamente, espera a que se valide");
     }
 
     /**
@@ -210,7 +212,18 @@ class PagosController extends Controller
             return false;
     }
 
-    public function imprimirFichaPagoEfectivo(Request $request)
+    public function generacionHojaPagoEfectivo(Request $request)
+    {
+        if ($request->opcion === "imprimir") {
+            return $this->generarPDFFichaPagoEfectivo($request);
+        }
+        else{
+            $this->enviarMailFichaPagoEfectivo($request);
+            return redirect()->route('cliente.dashboard')->with('status', "Correo enviado con exito.");
+        }
+    }
+
+    public function generarPDFFichaPagoEfectivo(Request $request)
     {
         //dd($request->all());
         $cliente = auth('cliente')->user()->presolicitud;
@@ -220,6 +233,17 @@ class PagosController extends Controller
         }
         $pdf = PDF::loadView('cliente.efectivo.pagoEfectivo',['data'=>$data,]);
         //return $pdf->stream();
-        return $pdf->download('pago_efectivo'.$cliente->nombre.$cliente->paterno.$cliente->materno.".pdf");
+        if ($request->opcion == "imprimir") {
+            return $pdf->download('pago_efectivo'.$cliente->nombre.$cliente->paterno.$cliente->materno.".pdf");
+        }
+        else
+            return $pdf;
+    }
+
+    public function enviarMailFichaPagoEfectivo(Request $request)
+    {
+        $cliente = auth('cliente')->user()->presolicitud;
+        $pdf = $this->generarPDFFichaPagoEfectivo($request);
+        Mail::to($request->correodestino)->send(new FichaPagoEfectivoEmail($pdf, $cliente));
     }
 }

@@ -57,4 +57,10 @@ class Contrato extends Model
     public function scopeRegistrados($query){
         return $query->where('estado','registrado');
     }
+
+    public function getReferenciaAttribute($tipo_pago="1")
+    {
+        $ref_inicio = str_pad($this->grupo->id, 2, "0", STR_PAD_LEFT).str_pad($this->id, 3, "0", STR_PAD_LEFT).$tipo_pago;
+        return $ref_inicio.strtoupper(substr(md5($this->presolicitud->id.$this->id),16));
+    }
 }

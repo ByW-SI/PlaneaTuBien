@@ -24,6 +24,12 @@
 		margin: 30px;
 		color: white;
 	}
+	.btn-enviar {
+		background-color: #28a745;
+		border-radius:2em;
+		margin: 30px;
+		color: white;
+	}
 </style>
 <div class="card">
 	<div class="card-header">
@@ -50,7 +56,7 @@
 					        	<input type="hidden" name="monto_pagar[]" value="{{ $total }}">
 					        	<input type="hidden" name="contratos[]" value="{{ $contrato->id }}">
 					        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
-					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($total,2)}} @else {{number_format($total,2)}} @endif
+					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($total,2)}} @else {{number_format($total,2)}}@endif
 					        	</button>
 					      	</h2>
 				    	</div>
@@ -137,10 +143,11 @@
 			</div>
 		</div>
 	</form>
-	<form action="{{ route('pago-efectivo-pdf') }}" method="POST">
+	<form action="{{ route('pago-efectivo-control') }}" method="POST" id="form-efectivio">
 		@csrf
 		<div class="card-body col-6 offset-3">
 			<div id="div-efectivo" style="display: none;">
+				<input type="hidden" name="opcion" id="opcion">
 				<table class="table table-striped text-center">
 					<thead>
 						<tr>
@@ -163,8 +170,17 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center">
-					<button type="submit" class="btn btn-imprimir"><i class="far fa-credit-card"> Imprimir</i></button>
-					<button type="submit" class="btn btn-correo"><i class="far fa-credit-card"> Enviar por correo</i></button>
+					<button type="submit" class="btn btn-imprimir" id="btn-imprimir"><i class="fas fa-print"> Imprimir</i></button>
+					<button type="submit" class="btn btn-correo" id="btn-correo"><i class="fas fa-envelope"> Enviar por correo</i></button>
+				</div>
+				<div class="col-12" style="display: none;" id="div-correodestino">
+					<div class="form-group text-center">
+						<label class="form-control-label">Ingresa el correo al que quieres enviarlo</label>
+						<input type="email" name="correodestino" id="correodestino" class="form-control" placeholder="email@example.com">
+					</div>
+					<div class="text-center">
+						<button class="btn btn-enviar" id="btn-correo-enviar"><i class="fas fa-check"> Enviar</i></button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -264,5 +280,26 @@
 			$('#tbody-contratos').empty();
 			$('#tbody-contratos').append(contenido);
 		}
+		$('#btn-imprimir').click(function(event) {
+			/* Act on the event */
+			event.preventDefault();
+			$('#opcion').val('imprimir');
+			$('#form-efectivio').eq(0).submit();
+		});
+		$('#btn-correo').click(function(event) {
+			/* Act on the event */
+			event.preventDefault();
+			$('#div-correodestino').prop('style', '');
+			$('#opcion').val('correo');
+		});
+		$('#btn-correo-enviar').click(function(event) {
+			event.preventDefault();
+			if ($('#correodestino').val() != '') {
+				$('#form-efectivio').eq(0).submit();
+			}
+			else {
+				alert('Ingresa un correo');
+			}
+		});
 	</script>
 @endpush
