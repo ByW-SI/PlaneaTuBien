@@ -31,7 +31,7 @@ class PagoDepositoController extends Controller
             'mensualidad_id'=>$mensualidad->id,
         ]);
 
-        // $this->actualizarMensualidad($mensualidad->id);
+        $this->actualizarMensualidad($mensualidad->id);
 
         return redirect()->route('pagos.realizados')->with('status','Se agregó el pago adecuadamente');
     }
@@ -43,6 +43,7 @@ class PagoDepositoController extends Controller
         $abono_siguiente_mes = 0;
 
         $mensualidad = Mensualidad::where('id',$mensualidad_id)->first();
+        // dd($mensualidad);
         $pagos_aprobados_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
         // dd($pagos_aprobados_de_mensualidad);
 
@@ -50,13 +51,20 @@ class PagoDepositoController extends Controller
         foreach($pagos_aprobados_de_mensualidad as $pago){
             $total_pagado_a_mensualidad += $pago->monto;
         }
+        // dd($total_pagado_a_mensualidad);
 
-        $total_debe = $mensualidad->cantidad + $mensualidad->recargo;
+        $total_debe = $mensualidad->cantidad + $mensualidad->recargo - $mensualidad->abono;
+
+        // dd($total_debe);
 
         if($total_pagado_a_mensualidad >= $total_debe){
+            // dd('entro');
             $mensualidad->update([
                 "pagado" => 1,
             ]);
+            dd($mensualidad);
+        }else{
+            // dd('no entro');
         }
 
         return $mensualidad;
