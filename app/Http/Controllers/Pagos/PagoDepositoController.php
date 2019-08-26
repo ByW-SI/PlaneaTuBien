@@ -62,7 +62,7 @@ class PagoDepositoController extends Controller
             $mensualidad->update([
                 "pagado" => 1,
             ]);
-            dd($mensualidad);
+            // dd($mensualidad);
         }else{
             // dd('no entro');
         }
