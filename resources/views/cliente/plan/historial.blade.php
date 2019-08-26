@@ -12,7 +12,7 @@
 	      <h2 class="mb-0">
 	        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
 	          <h5>
-				Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
+				Contrato de folio: {{$contrato->numero_contrato}} con valor de {{number_format($contrato->monto,2)}}
 			</h5>
 	        </button>
 	      </h2>
