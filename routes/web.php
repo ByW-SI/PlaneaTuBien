@@ -42,6 +42,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('usuarios', 'Usuario\UsuarioController')->middleware('auth');
 Route::resource('perfils', 'Perfil\PerfilController')->middleware('auth');
 
+Route::get('cliente/{id}/contratos','Cliente\ClienteContratosController@index');
 
 Route::prefix('clientes')->group(function(){
 	Route::get('/login','Auth\ClienteLoginController@showLoginForm')->name('cliente.login');
@@ -215,6 +216,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PAGOS
+Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');
+Route::get('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
+Route::post('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
 Route::resource('pagos', 'Pagos\PagoInscripcionController',['only'=>['index','show']])->middleware('auth');
 Route::get('excelpagos','CargarEstadoCuentaExcelController@show')->name('excelpagos')->middleware('auth');
 Route::post('excel.store','CargarEstadoCuentaExcelController@store')->name('excel.store')->middleware('auth');
@@ -242,4 +246,5 @@ Route::resource('polizas','Poliza\PolizaController')->middleware('auth');
 Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','show','update','destroy']])->middleware('auth');
 
 
-Route::get('pruebas','PruebasController@index');
+Route::get('pruebas','PruebasController@index')->name('pruebas');
+Route::post('pruebas','PruebasController@probar')->name('prueba.ejecutar');

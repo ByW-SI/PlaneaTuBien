@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Pagos;
 use App\DepositoEfectivo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Presolicitud;
 
 class BuscarReferenciaController extends Controller
 {
     public function index(){
         $depositos_efectivos = array();
-        return view('pagos.asignar.index',compact('depositos_efectivos'));
+        $clientes = null;
+        return view('pagos.asignar.index',compact('depositos_efectivos','clientes'));
     }
 
     public function show(Request $request){
@@ -23,6 +25,8 @@ class BuscarReferenciaController extends Controller
             where('abono',$monto)->
             get();
 
-        return view('pagos.asignar.index',compact('depositos_efectivos'));
+        $clientes = Presolicitud::get();
+
+        return view('pagos.asignar.index',compact('depositos_efectivos','clientes'));
     }
 }

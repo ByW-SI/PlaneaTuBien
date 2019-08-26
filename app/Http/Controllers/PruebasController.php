@@ -12,8 +12,13 @@ use App\Console\Commands\UpdateMensualidades;
 
 class PruebasController extends Controller
 {
-    public function index(UpdateMensualidades $updateMensualidades)
+    public function index()
     {
+        return view('pruebas.mensualidades');
+    }
+
+    public function probar(UpdateMensualidades $updateMensualidades){
         $updateMensualidades->handle();
+        return redirect()->route('pruebas');
     }
 }

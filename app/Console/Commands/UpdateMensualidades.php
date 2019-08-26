@@ -49,7 +49,7 @@ class UpdateMensualidades extends Command
         foreach ($contratos_registrados as $contrato) {
             $ultima_mensualidad = Mensualidad::where('contrato_id', $contrato->id)->last()->first();
             if ($ultima_mensualidad) {
-                $ultima_mensualidad->update(['pagado' => 1]);
+                // $ultima_mensualidad->update(['pagado' => 1]);
                 $this->createMensualidad($ultima_mensualidad);
             }
         }
