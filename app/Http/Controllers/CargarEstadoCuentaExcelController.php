@@ -145,9 +145,6 @@ class CargarEstadoCuentaExcelController extends Controller
             ]);
         }
 
-        // dd('Debio cambiar mensualidades pagado');
-
         return $mensualidad;
-
     }
 }
