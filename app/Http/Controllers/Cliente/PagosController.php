@@ -99,7 +99,7 @@ class PagosController extends Controller
         $contrato = Contrato::find(substr($request->input('contrato')[$i], 3));
 
         $mensual_adeudos = [];
-        foreach($contrato->mensualidades as $mensualidad){
+        foreach($contrato->mensualidades()->get() as $mensualidad){
             if(!$mensualidad->pagado)
                 $mensual_adeudos[] = $mensualidad;
         }

@@ -6,6 +6,7 @@ use App\Contrato;
 use App\DepositoEfectivo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mensualidad;
 use App\Pagos;
 use Illuminate\Support\Carbon;
 
@@ -30,6 +31,34 @@ class PagoDepositoController extends Controller
             'mensualidad_id'=>$mensualidad->id,
         ]);
 
+        // $this->actualizarMensualidad($mensualidad->id);
+
         return redirect()->route('pagos.realizados')->with('status','Se agregó el pago adecuadamente');
+    }
+
+    public function actualizarMensualidad($mensualidad_id)
+    {
+
+        $adeudo_siguiente_mes = 0;
+        $abono_siguiente_mes = 0;
+
+        $mensualidad = Mensualidad::where('id',$mensualidad_id)->first();
+        $pagos_aprobados_de_mensualidad = $mensualidad->pagos()->aprobados()->get();
+        // dd($pagos_aprobados_de_mensualidad);
+
+        $total_pagado_a_mensualidad = 0;
+        foreach($pagos_aprobados_de_mensualidad as $pago){
+            $total_pagado_a_mensualidad += $pago->monto;
+        }
+
+        $total_debe = $mensualidad->cantidad + $mensualidad->recargo;
+
+        if($total_pagado_a_mensualidad >= $total_debe){
+            $mensualidad->update([
+                "pagado" => 1,
+            ]);
+        }
+
+        return $mensualidad;
     }
 }
