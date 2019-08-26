@@ -96,7 +96,7 @@ class PagosController extends Controller
         $cotizacion = $cliente->cotizacion();
         $plan = $cotizacion->plan;
         $monto_pago = $request->monto[$i];
-        $contrato = Contrato::find(substr($request->input('contrato')[$i], 3));
+        $contrato = Contrato::where('numero_contrato', $request->input('contrato')[$i])->first();
 
         $mensual_adeudos = [];
         foreach($contrato->mensualidades as $mensualidad){

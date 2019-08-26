@@ -46,11 +46,11 @@
 				  	<div class="card">
 				    	<div class="card-header" id="heading{{ $contrato->id }}">
 					      	<h2 class="mb-0">
-					        	<input type="checkbox" class="form-check-input recibo" name="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}" id="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $contrato->mensualidades->last()->cantidad }}">
+					        	<input type="checkbox" class="form-check-input recibo" name="{{$contrato->numero_contrato}}" id="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $contrato->mensualidades->last()->cantidad }}">
 					        	<input type="hidden" name="monto_pagar[]" value="{{ $contrato->mensualidades->last()->cantidad }}">
 					        	<input type="hidden" name="contratos[]" value="{{ $contrato->id }}">
 					        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
-					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($contrato->mensualidades->last()->cantidad,2)}} @else {{number_format($contrato->mensualidades->last()->cantidad,2)}}@endif
+					          		Contrato: {{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($contrato->mensualidades->last()->cantidad,2)}} @else {{number_format($contrato->mensualidades->last()->cantidad,2)}}@endif
 					        	</button>
 					      	</h2>
 				    	</div>
@@ -102,8 +102,8 @@
 										<tr>
 											<td>Referencia</td>
 											<td>
-												@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
-												<input type="hidden" name="referencia[]" required="" readonly="" value="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+												{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
+												<input type="hidden" name="referencia[]" required="" readonly="" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
 											</td>
 										</tr>
 						        	</tbody>
@@ -203,7 +203,7 @@
 	                            @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
 	                            <tr>
 	                                <td>
-	                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
+	                                    Contrato de folio: {{$contrato->numero_contrato}}
 	                                </td>
 	                                <td>
 	                                    ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
@@ -225,7 +225,7 @@
 		var contratos = [
 			@foreach($contratos as $contrato)
 			{
-				"numContrato": @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}},
+				"numContrato": {{$contrato->numero_contrato}},
 				"contrato": @json($contrato)
 			},
 			@endforeach

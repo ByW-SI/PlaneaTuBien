@@ -48,12 +48,12 @@
                             @if ($contrato->checklist && $contrato->checklist->status && $contrato->checklist->firmas == 1)
                             <tr>
                                 <td>
-                                    Contrato de folio: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}
+                                    Contrato de folio: {{$contrato->numero_contrato}}
                                 </td>
                                 <td>
                                     ${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}
                                 </td>
-                                <td>$0</td>
+                                <td>$</td>
                                 <td>{{ date("7/m/Y", strtotime("+1 month", strtotime(date('d-m-Y'))))}}</td>
                             </tr>
                             @endif
