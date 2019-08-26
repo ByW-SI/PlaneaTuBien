@@ -42,6 +42,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('usuarios', 'Usuario\UsuarioController')->middleware('auth');
 Route::resource('perfils', 'Perfil\PerfilController')->middleware('auth');
 
+Route::get('cliente/{id}/contratos','Cliente\ClienteContratosController@index');
 
 Route::prefix('clientes')->group(function(){
 	Route::get('/login','Auth\ClienteLoginController@showLoginForm')->name('cliente.login');
@@ -215,6 +216,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PAGOS
+Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');
+Route::get('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
+Route::post('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
 Route::resource('pagos', 'Pagos\PagoInscripcionController',['only'=>['index','show']])->middleware('auth');
 Route::get('excelpagos','CargarEstadoCuentaExcelController@show')->name('excelpagos')->middleware('auth');
 Route::post('excel.store','CargarEstadoCuentaExcelController@store')->name('excel.store')->middleware('auth');
@@ -227,7 +231,8 @@ Route::put('/pagos/{pago}/status','Pagos\PagoInscripcionController@changeStatus'
 Route::get('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@formReciboProvisional')->name('pagos.recibo_provisional')->middleware('auth');
 Route::get('/pagos/{pago}/recibo_provisional/show','Pagos\ReciboProvisionalController@showReciboProvisional')->name('pagos.recibo_provisional.show')->middleware('auth');
 Route::post('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalController@submitReciboProvisional')->name('pagos.submit_recibo_provisional')->middleware('auth');
-Route::get('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@index')->name('pagos.busqueda.referencia');
+Route::get('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@index')->name('pagos.asignar');
+Route::post('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@show')->name('pagos.referencia.buscar');
 
 // CODIGOS POSTAL
 Route::get('cp/{cp}','CodigoPostal\CodigoPostalController@getCP')->name('cp.get');
@@ -241,4 +246,5 @@ Route::resource('polizas','Poliza\PolizaController')->middleware('auth');
 Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','show','update','destroy']])->middleware('auth');
 
 
-Route::get('pruebas','PruebasController@index');
+Route::get('pruebas','PruebasController@index')->name('pruebas');
+Route::post('pruebas','PruebasController@probar')->name('prueba.ejecutar');

@@ -55,6 +55,12 @@ class CargarEstadoCuentaExcelController extends Controller
         if (strpos($concepto, 'CE000000') !== false) {
             return true;
         }
+        if (strpos($concepto, 'DEPOSITO EN EFECTIVO') !== false) {
+            return true;
+        }
+        if (strpos($concepto, 'DEPOSITO EFECTIVO') !== false) {
+            return true;
+        }
         return false;
     }
 
@@ -83,6 +89,11 @@ class CargarEstadoCuentaExcelController extends Controller
 
     public function getOnlyReference($string)
     {
+
+        if (strpos($string, 'CE000000') === false) {
+            return $string;
+        }
+
         // Obtenemos la cadena izquierda a partir de "/"
         $reference = explode("/", $string);
         $reference = $reference[0];
@@ -126,8 +137,6 @@ class CargarEstadoCuentaExcelController extends Controller
             $total_pagado_a_mensualidad += $pago->monto;
         }
 
-        // dd($total_pagado_a_mensualidad);
-
         $total_debe = $mensualidad->cantidad + $mensualidad->recargo;
 
         if($total_pagado_a_mensualidad >= $total_debe){
@@ -136,7 +145,7 @@ class CargarEstadoCuentaExcelController extends Controller
             ]);
         }
 
-        dd('Debio cambiar mensualidades pagado');
+        // dd('Debio cambiar mensualidades pagado');
 
         return $mensualidad;
 
