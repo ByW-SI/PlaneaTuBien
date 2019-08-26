@@ -42,21 +42,15 @@
 			<div class="accordion" id="accordionContratos">
 			@foreach ($contratos as $contrato)
 				@if ($contrato->checklist && $contrato->checklist->status)
-				@php($recargo = (($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] * 0.03) + ($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] * 0.03) * 0.16))
-				@if(!$fecha_pago)
-					@php($total = $plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] + $recargo)
-				@else 
-					@php($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'])
-				@endif
 					<!-- Primer Accordion -->
 				  	<div class="card">
 				    	<div class="card-header" id="heading{{ $contrato->id }}">
 					      	<h2 class="mb-0">
-					        	<input type="checkbox" class="form-check-input recibo" name="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}" id="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $total }}">
-					        	<input type="hidden" name="monto_pagar[]" value="{{ $total }}">
+					        	<input type="checkbox" class="form-check-input recibo" name="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}" id="@php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $contrato->mensualidades->last()->cantidad }}">
+					        	<input type="hidden" name="monto_pagar[]" value="{{ $contrato->mensualidades->last()->cantidad }}">
 					        	<input type="hidden" name="contratos[]" value="{{ $contrato->id }}">
 					        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
-					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($total,2)}} @else {{number_format($total,2)}}@endif
+					          		Contrato: @php(printf('%03d', $contrato->grupo->id)){{$contrato->numero_contrato}}  &nbsp;&nbsp;&nbsp;&nbsp; Monto a pagar: $@if(!$fecha_pago) {{number_format($contrato->mensualidades->last()->cantidad,2)}} @else {{number_format($contrato->mensualidades->last()->cantidad,2)}}@endif
 					        	</button>
 					      	</h2>
 				    	</div>
@@ -93,16 +87,16 @@
 										@if(!$fecha_pago)
 										<tr>
 											<td>Recargo</td>
-											<td>${{number_format($recargo ,2)}}</td>
+											<td>${{number_format($contrato->mensualidades->last()->recargo ,2)}}</td>
 										</tr>
 										<tr>
 											<td>Total</td>
-											<td>${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'] + $recargo,2)}}</td>
+											<td>${{number_format($contrato->mensualidades->last()->cantidad + $contrato->mensualidades->last()->recargo,2)}}</td>
 										</tr>
 										@else
 										<tr>
 											<td>Total</td>
-											<td>${{number_format($plan->corrida_meses_fijos($contrato->monto,$cotizacion->factor_actualizacion)['integrante']['total'],2)}}</td>
+											<td>${{number_format($contrato->mensualidades->last()->cantidad,2)}}</td>
 										</tr>
 										@endif
 										<tr>
