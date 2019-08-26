@@ -46,7 +46,7 @@
 				  	<div class="card">
 				    	<div class="card-header" id="heading{{ $contrato->id }}">
 					      	<h2 class="mb-0">
-					        	<input type="checkbox" class="form-check-input recibo" name="{{$contrato->numero_contrato}}" id="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}" checked="" value="{{ $contrato->mensualidades->last()->cantidad }}">
+					        	<input type="checkbox" class="form-check-input recibo" name="{{$contrato->numero_contrato}}" id="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}" checked="" value="{{ $contrato->mensualidades->last()->cantidad }}">
 					        	<input type="hidden" name="monto_pagar[]" value="{{ $contrato->mensualidades->last()->cantidad }}">
 					        	<input type="hidden" name="contratos[]" value="{{ $contrato->id }}">
 					        	<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $contrato->id }}" aria-expanded="true" aria-controls="collapse{{ $contrato->id }}">
@@ -102,8 +102,8 @@
 										<tr>
 											<td>Referencia</td>
 											<td>
-												{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
-												<input type="hidden" name="referencia[]" required="" readonly="" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
+												{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}
+												<input type="hidden" name="referencia[]" required="" readonly="" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}">
 											</td>
 										</tr>
 						        	</tbody>
