@@ -56,8 +56,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia0" required>
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
-								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
+								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}">
+								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -131,8 +131,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia${pagos[0].id}" required>
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
-								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
+								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}">
+								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -181,7 +181,7 @@
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
 								    		<option id="{{ $contrato->numero_contrato }}" value="${pagos[i].referencia}">
-								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
+								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
@@ -231,8 +231,8 @@
 								    <select class="form-control referencia" name="referencia[]" id="referencia${i}" required >
 								    	<option value="">Seleccionar</option>
 								    	@foreach($contratos as $contrato)
-								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}">
-								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),16)) }}
+								    		<option id="{{ $contrato->numero_contrato }}" value="{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}">
+								    			{{$contrato->numero_contrato}}{{ strtoupper(substr(md5($cliente->id.$cotizacion->id.$contrato->id),23)) }}
 								    		</option>
 								    	@endforeach
 								    </select>
