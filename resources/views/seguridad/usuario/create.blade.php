@@ -44,6 +44,10 @@
                         <input type="text" name="materno" id="materno" class="form-control" required readonly>
                     </div>
                     <div class="form-group col-sm-4">
+                        <label class="control-label">✱Email:</label>
+                        <input type="text" name="email" id="email" class="form-control" required readonly>
+                    </div>
+                    <div class="form-group col-sm-4">
                         <label class="control-label">✱Contraseña:</label>
                         <input type="text" name="password" class="form-control" required="">
                     </div>
@@ -75,50 +79,23 @@
     <br>
     {{-- Lista de empleados no usuarios --}}
     <div class="card">
-        <div class="card-header">Empleados</div>
+        <div class="card-header">
+            <h3>EMPLEADOS</h3>
+        </div>
         {{-- Lista de empleados no usuarios--}}
         <div class="card-body">
             @if(count($empleadosNoUsuarios) > 0)
-            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
-                <tr class="info">
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellido paterno</th>
-                    <th>Apellido materno</th>
-                    <th>RFC</th>
-                    <th>Acción</th>
-                </tr>
-                @foreach($empleadosNoUsuarios as $key => $empleado)
-                    <tr>
-                        <td>{{$key + 1}}</td>
-                        <td>{{$empleado->nombre}}</td>
-                        <td>{{$empleado->paterno}}</td>
-                        <td>{{$empleado->materno}}</td>
-                        <td>{{$empleado->rfc}}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-success text-white agregarUsuario" id-empleado={{$empleado->id}}>
-                                <i class="fa fa-plus"></i> Agregar usuario
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
+                @include('componentes.empleados.lista',['empleados'=>$empleadosNoUsuarios])
             @else
                 <h4>Todos tus empleados ya tienen una cuenta de usuario.</h4>
             @endif
         </div>
-        <div class="card-footer">Footer</div>
+        <div class="card-footer"></div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
 <script>
     $(".agregarUsuario").on("click", function(){
-        // alert('works');
-        // alert($(this).attr('id-empleado'));
 
         const base_url = document.location.origin;
 		var empleado_id = $(this).attr('id-empleado');
@@ -134,6 +111,7 @@
                 $('#name').val(empleado.nombre);
                 $('#paterno').val(empleado.paterno);
                 $('#materno').val(empleado.materno);
+                $('#email').val(empleado.email);
                 $('#formularioNuevoUsuario').show('slow');
 			},
 			error: function(error){
