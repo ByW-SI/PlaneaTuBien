@@ -56,10 +56,11 @@ class UsuarioController extends Controller
             $perfiles = Perfil::whereNotIn('id', [1])->get();
             $arrs = Empleado::get();
             $empleados = [];
+            $empleadosNoUsuarios = Empleado::noUsers()->get();
             foreach ($arrs as $arr)
                 if(!$arr->user)
                     $empleados[] = $arr;
-            return view('seguridad.usuario.create', ['perfiles' => $perfiles, 'empleados' => $empleados]);
+            return view('seguridad.usuario.create', ['perfiles' => $perfiles, 'empleados' => $empleados, 'empleadosNoUsuarios' => $empleadosNoUsuarios]);
         }
         return redirect()->route('denegado');
     }

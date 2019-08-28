@@ -61,7 +61,7 @@
                             @php($j++)
                             @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
                             @else
-                                <td class="col-sm-4" style="border: none; padding: 0px;">
+                                <td  style="border: none; padding: 0px;">
                                     <table class="table table-sm table-hover table-bordered" style="margin-bottom: 0px; background: #fff;">
                                         <tr style="background: #f4f4f4;">
                                             <th class="col-sm-10">

@@ -130,5 +130,14 @@ class Empleado extends Model
         return $this->hasManyThrough('App\ProspectoCRM','App\Prospecto');
 
     }
+
+    /**
+     * Scope methods
+     */
+
+    public function scopeNoUsers($query){
+        $users_id = User::whereNotNull('empleado_id')->pluck('empleado_id')->all();
+        return $query->whereNotIn('id',$users_id);
+    }
     
 }
