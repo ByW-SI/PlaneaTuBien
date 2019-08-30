@@ -76,7 +76,6 @@
             </div>
         </form>
     </div>
-    <br>
     {{-- Lista de empleados no usuarios --}}
     <div class="card">
         <div class="card-header">
