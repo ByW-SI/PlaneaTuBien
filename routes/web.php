@@ -248,3 +248,8 @@ Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','s
 
 Route::get('pruebas','PruebasController@index')->name('pruebas');
 Route::post('pruebas','PruebasController@probar')->name('prueba.ejecutar');
+
+
+
+//+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-
+Route::resource('excel-clientes', 'ClienteExcelController', ['only'=>['index','store']]);
