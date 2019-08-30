@@ -9,12 +9,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 use App\Console\Commands\UpdateMensualidades;
+use App\Empleado;
 
 class PruebasController extends Controller
 {
     public function index()
     {
-        return view('pruebas.mensualidades');
+        $empleados_no_usuarios = Empleado::noUsers()->get();
+        return $empleados_no_usuarios;
+
+
+
+        // return view('pruebas.mensualidades');
     }
 
     public function probar(UpdateMensualidades $updateMensualidades){
