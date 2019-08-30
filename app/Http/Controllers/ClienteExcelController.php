@@ -58,8 +58,8 @@ class ClienteExcelController extends Controller
             foreach ($rows as $key => $row) {
                 if($key >= 2){
                     // dd($row);
-                    // $this->createProspecto($row);
-                    // $this->createPresolicitud($row);
+                    $this->createProspecto($row);
+                    $this->createPresolicitud($row);
                     $this->createPagosInscripcion($row);
                 }
             }
