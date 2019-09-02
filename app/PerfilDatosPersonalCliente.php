@@ -11,10 +11,12 @@ class PerfilDatosPersonalCliente extends Model
     use SoftDeletes;
 
     protected $fillable=[
+		'prospecto_id',
     	'prefijo_1',
 		'paterno_1',
 		'materno_1',
 		'nombre_1',
+		'folio',
 		'ocupacion_1',
 		'empresa_1',
 		'antiguedad_1',
