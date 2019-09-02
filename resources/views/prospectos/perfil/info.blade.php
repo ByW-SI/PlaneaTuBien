@@ -34,7 +34,11 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Asesor:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+                @if($prospecto->asesor)
+                    <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+                @else
+                    <input type="text" class="form-control" value="Sin asesor" readonly="">
+                @endif
             </div>
         </div>
     </div>
@@ -112,13 +116,21 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->monto,2) }}" class="form-control">
+                        @if($cotizacion)
+                            <input type="text" readonly="" value="{{ number_format($cotizacion->monto,2) }}" class="form-control">
+                        @else
+                            <label>--</label>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Ahorro del cliente:</label>
                     <div class="input-group">
-                        <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro : 'N/A' }}" class="form-control">
+                        @if($cotizacion)
+                            <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro : 'N/A' }}" class="form-control">
+                        @else
+                            <input type="text" readonly="" value="--" class="form-control">
+                        @endif
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>   
@@ -126,7 +138,11 @@
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">      Plan:</label>
-                    <input type="text" readonly="" value="{{ $cotizacion->plan->nombre }}" class="form-control">
+                    @if($cotizacion)
+                        <input type="text" readonly="" value="{{ $cotizacion->plan->nombre }}" class="form-control">
+                    @else
+                        <label>--</label>
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -136,25 +152,41 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
+                        @if($cotizacion)
+                            <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
+                        @else
+                            <label>--</label>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Plazo:</label>
                     <div class="input-group">
-                        <input type="text" readonly="" value="{{ $cotizacion->plan->plazo }}" class="form-control">
+                        @if($cotizacion)
+                            <input type="text" readonly="" value="{{ $cotizacion->plan->plazo }}" class="form-control">
+                        @else
+                            <input type="text" readonly="" value="--" class="form-control">
+                        @endif
                         <div class="input-group-append">
                             <span class="input-group-text">meses</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
-                    <label class="col-form-label">{{ $cotizacion->plan->mes_adjudicado }} mensualidades de:</label>
+                    @if($cotizacion)
+                        <label class="col-form-label">{{ $cotizacion->plan->mes_adjudicado }} mensualidades de:</label>
+                    @else
+                        <label class="col-fomr-label">-- mensualidades de:</label>
+                    @endif
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2) }}" class="form-control">
+                        @if($cotizacion)
+                            <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2) }}" class="form-control">
+                        @else
+                            <input type="text" readonly="" value="--" class="form-control">
+                        @endif
                     </div>
                 </div>
             </div>
@@ -167,6 +199,7 @@
                             <th>Monto</th>
                             <th>Mes</th>
                         </tr>
+                    @if($cotizacion)
                         <tr>
                             <td>1</td>
                             <td>{{ $cotizacion->plan->aportacion_1 }}</td>
@@ -205,6 +238,14 @@
                                 <td>Cada junio y diciembre</td>
                             </tr>
                         @endif
+                    @else
+                    <tr>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+                    @endif
                     </table>
                 </div>
             </div>
@@ -215,13 +256,21 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2)}}" class="form-control" readonly="">
+                        @if($cotizacion)
+                            <input type="text" value="{{number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2)}}" class="form-control" readonly="">
+                        @else
+                            <input type="text" value="--" class="form-control">
+                        @endif
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Costo anual de:</label>
                     <div class="input-group">
-                        <input type="text" value="{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}" class="form-control" readonly="">
+                        @if($cotizacion)
+                            <input type="text" value="{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}" class="form-control" readonly="">
+                        @else
+                            <input type="text" value="--" class="form-control">
+                        @endif
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>
@@ -233,7 +282,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{ number_format($cotizacion->inscripcion_total,2) }}" class="form-control" readonly="">
+                        @if($cotizacion)
+                            <input type="text" value="{{ number_format($cotizacion->inscripcion_total,2) }}" class="form-control" readonly="">
+                        @else
+                            <input type="text" value="--" readonly="" class="form-control">
+                        @endif
                     </div>
                 </div>
             </div>

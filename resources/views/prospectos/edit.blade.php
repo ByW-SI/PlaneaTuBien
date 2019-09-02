@@ -80,7 +80,7 @@
                     <label>✱Asesor:</label>
                     <select name="empleado_id" id="asesores" class="form-control" required="">
                         <option value="">Seleccionar</option>
-                        <option value="{{ $prospecto->asesor->id }}" selected="">{{ $prospecto->asesor->nombre }} {{ $prospecto->asesor->paterno }}</option>
+                        <option value="{{ $prospecto->asesor ? $prospecto->asesor->id : "" }}" selected="">@if($prospecto->asesor) {{ $prospecto->asesor->nombre }} {{ $prospecto->asesor->paterno }} @else No tiene asignado un proscpecto @endif</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-3">

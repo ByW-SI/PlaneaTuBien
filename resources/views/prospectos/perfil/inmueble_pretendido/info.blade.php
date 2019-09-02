@@ -7,7 +7,7 @@
 			<div class="col-6">
 				<label>Tipo de inmueble pretendido:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble->tipo_inmueble}}
+					{{$inmueble ? $inmueble->tipo_inmueble : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
@@ -17,7 +17,11 @@
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{number_format($inmueble->precio_aprox,2)}}
+						@if($inmueble)
+							{{number_format($inmueble->precio_aprox,2)}}
+						@else
+							--
+						@endif
 					</label>
 				</div>
 			</div>
@@ -25,7 +29,7 @@
 				<label>Area aproximado del inmueble:</label>
     			<div class="input-group">
 					<label class="form-control" readonly="">
-						{{$inmueble->area_inmueble}}
+						{{$inmueble ? $inmueble->area_inmueble : "--"}}
 					</label>
 					<div class="input-group-append">
 						<span class="input-group-text" id="basic-addon1">m²</span>
@@ -35,13 +39,13 @@
 			<div class="col-6">
 				<label>Estado:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble->estado}}
+					{{$inmueble ? $inmueble->estado : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
 				<label>Colonia:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble->colonia}}
+					{{$inmueble ? $inmueble->colonia : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
@@ -51,7 +55,7 @@
 						<span class="input-group-text" id="basic-addon1">#</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{$inmueble->recamara}}
+						{{$inmueble ? $inmueble->recamara : "--"}}
 					</label>
 				</div>
 			</div>
@@ -62,7 +66,7 @@
 						<span class="input-group-text" id="basic-addon1">#</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{$inmueble->banio}}
+						{{$inmueble ? $inmueble->banio : "--"}}
 					</label>
 				</div>
 			</div>
@@ -73,7 +77,7 @@
 						<span class="input-group-text" id="basic-addon1">#</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{$inmueble->estacionamiento}}
+						{{$inmueble ? $inmueble->estacionamiento : "--"}}
 					</label>
 				</div>
 			</div>
@@ -84,14 +88,14 @@
 						<span class="input-group-text" id="basic-addon1">#</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{$inmueble->jardin}}
+						{{$inmueble ? $inmueble->jardin : "--"}}
 					</label>
 				</div>
 			</div>
 			<div class="col-6">
 				<label>Gastos Notariales:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble->gastos_notariales}}
+					{{$inmueble ? $inmueble->gastos_notariales : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
@@ -101,39 +105,51 @@
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{number_format($inmueble->monto_contratar,2)}}
+						@if($inmueble)
+							{{number_format($inmueble->monto_contratar,2)}}
+						@else
+							--
+						@endif
 					</label>
 				</div>
 			</div>
 			<div class="col-6">
 				<label>¿Cuánto tiempo ha pensado en esta compra?:</label>
 				<label class="form-control" readonly="">
-					{{$inmueble->tiempo_decision}}
+					{{$inmueble ? $inmueble->tiempo_decision : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
 				<label>¿Cuánta prioridad le da a esta meta?:</label>
-				<textarea class="form-control" readonly="">{{$inmueble->prioridad}}</textarea>
+				<textarea class="form-control" readonly="">{{$inmueble ? $inmueble->prioridad : "--"}}</textarea>
 			</div>
 			<div class="col-6">
 				<label>¿La decisión de cumplir su meta depende de alguien más?:</label>
-				<textarea class="form-control" readonly="">{{$inmueble->desicion_propia ? "Si, ".$inmueble->toma_desicion : "No"}}</textarea>
+				@if($inmueble)
+					<textarea class="form-control" readonly="">{{$inmueble->desicion_propia ? "Si, ".$inmueble->toma_desicion : "No"}}</textarea>
+				@else
+					<textarea class="form-control" readonly="">--</textarea>
+				@endif
 			</div>
 			<div class="col-6">
 				<label>¿Porqué no ha logrado su meta?:</label>
-				<textarea class="form-control" readonly="">{{$inmueble->lograr_meta}}</textarea>
+				<textarea class="form-control" readonly="">{{$inmueble ? $inmueble->lograr_meta : "--"}}</textarea>
 			</div>
 			<div class="col-6">
 				<label>Si el día de hoy le ofrecemos una propuesta de esquema de financiamiento adaptada a sus necesidades y posibilidades ¿Lo tomaría? :</label>
-				<textarea class="form-control" readonly="">{{$inmueble->tomaria_desicion ? "Si" : "No "}} {{$inmueble->motivo_tomaria_desicion}}</textarea>
+				@if($inmueble)
+					<textarea class="form-control" readonly="">{{$inmueble->tomaria_desicion ? "Si" : "No "}} {{$inmueble->motivo_tomaria_desicion}}</textarea>
+				@else
+					<textarea class="form-control" readonly="">--</textarea>
+				@endif
 			</div>
 			<div class="col-6">
 				<label>Medio por el cuál se enteró de nosotros: </label>
-				<label class="form-control" readonly="">{{$inmueble->medio_entero}}</label>
+				<label class="form-control" readonly="">{{$inmueble ? $inmueble->medio_entero : "--"}}</label>
 			</div>
 			<div class="col-12">
 				<label>Observaciones: </label>
-				<textarea class="form-control" readonly="">{{$inmueble->observaciones}}</textarea>
+				<textarea class="form-control" readonly="">{{ $inmueble  ? $inmueble->observaciones : "--"}}</textarea>
 			</div>
 		</div>
 	</div>

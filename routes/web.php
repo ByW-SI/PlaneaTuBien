@@ -253,3 +253,4 @@ Route::post('pruebas','PruebasController@probar')->name('prueba.ejecutar');
 
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-
 Route::resource('excel-clientes', 'ClienteExcelController', ['only'=>['index','store']]);
+//http://cie.adquiramexico.com/#/

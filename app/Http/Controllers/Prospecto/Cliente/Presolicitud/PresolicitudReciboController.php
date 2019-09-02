@@ -197,7 +197,10 @@ class PresolicitudReciboController extends Controller
     {
         //
         $cotizacion = $presolicitud->cotizacion();
-        $pagos = $cotizacion->pago_inscripcions()->where('status','aprobado')->get();
+        if($cotizacion)
+          $pagos = $cotizacion->pago_inscripcions()->where('status','aprobado')->get();
+        else 
+          $pagos = null;
         // dd($cotizacion->contratos());
         // if($presolicitud->recibos){
           return view('prospectos.presolicitud.recibo.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pagos'=>$pagos]);

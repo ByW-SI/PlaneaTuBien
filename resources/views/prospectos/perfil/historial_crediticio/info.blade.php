@@ -7,10 +7,10 @@
 			<div class="col-6">
 				<label>¿Tarjeta debito o Cuenta de Ahorro?:</label>
 				<label class="form-control" readonly="">
-					{{ $credito->tarjeta_debito ? "Si" : "No" }}
+					{{ $credito && $credito->tarjeta_debito ? "Si" : "No" }}
 				</label>
 			</div>
-			@if ($credito->tarjeta_debito)
+			@if ($credito && $credito->tarjeta_debito)
 				<div class="col-6">
 					<label>Número de tarjetas:</label>
 	    			
@@ -56,10 +56,10 @@
 			<div class="col-6">
 				<label>¿Tarjeta de credito?:</label>
 				<label class="form-control" readonly="">
-					{{ $credito->tarjeta_credito ? "Si" : "No" }}
+					{{ $credito && $credito->tarjeta_credito ? "Si" : "No" }}
 				</label>
 			</div>
-			@if ($credito->tarjeta_credito)
+			@if ($credito && $credito->tarjeta_credito)
 			<div class="col-6">
 				<label>Tarjetas</label>
 				<span class="form-control" readonly=>{{$credito->numero_tarjeta_credito}}</span>
@@ -154,7 +154,7 @@
 			<div class="col-6">
 				<label>Destino:</label>
 				<label class="form-control" readonly="">
-					{{$credito->destino_1}}
+					{{ $credito ? $credito->destino_1 : "--"}}
 				</label>
 			</div>
 			<div class="col-6 mt-3">
@@ -163,17 +163,21 @@
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
 					<label class="form-control" readonly="">
+						@if($credito)
 						{{number_format($credito->monto_destino_1,2)}}
+						@else
+							--
+						@endif
 					</label>
 					<div class="input-group-append">
-						<span class="input-group-text" id="basic-addon1">{{$credito->tipo_destino_1}}</span>
+						<span class="input-group-text" id="basic-addon1">{{$credito ? $credito->tipo_destino_1 : "--"}}</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-6">
 				<label>Destino:</label>
 				<label class="form-control" readonly="">
-					{{$credito->destino_2}}
+					{{$credito ? $credito->destino_2 : "--"}}
 				</label>
 			</div>
 			<div class="col-6 mt-3">
@@ -182,17 +186,21 @@
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{number_format($credito->monto_destino_2,2)}}
+						@if($credito)
+							{{number_format($credito->monto_destino_2,2)}}
+						@else
+							--
+						@endif
 					</label>
 					<div class="input-group-append">
-						<span class="input-group-text" id="basic-addon1">{{$credito->tipo_destino_2}}</span>
+						<span class="input-group-text" id="basic-addon1">{{$credito ? $credito->tipo_destino_2 : "--"}}</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-6">
 				<label>Destino:</label>
 				<label class="form-control" readonly="">
-					{{$credito->destino_3}}
+					{{ $credito ? $credito->destino_3 : "--"}}
 				</label>
 			</div>
 			<div class="col-6 mt-3">
@@ -201,22 +209,30 @@
 						<span class="input-group-text" id="basic-addon1">$</span>
 					</div>
 					<label class="form-control" readonly="">
-						{{number_format($credito->monto_destino_3,2)}}
+						@if($credito)
+							{{number_format($credito->monto_destino_3,2)}}
+						@else
+							--
+						@endif
 					</label>
 					<div class="input-group-append">
-						<span class="input-group-text" id="basic-addon1">{{$credito->tipo_destino_3}}</span>
+						<span class="input-group-text" id="basic-addon1">{{$credito ? $credito->tipo_destino_3 : "--"}}</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-6">
 				<label>Calificación del cliente:</label>
 				<label class="form-control" readonly="">
+					@if($credito)
 					{{$credito->calificacion_credito}}
+					@else
+						--
+					@endif
 				</label>
 			</div>
 			<div class="col-6">
 				<label>Descripción de calificación:</label>
-				<textarea class="form-control" readonly="">{{$credito->descripcion_calificacion}}</textarea>
+				<textarea class="form-control" readonly="">{{$credito ? $credito->descripcion_calificacion : "--"}}</textarea>
 			</div>
 		</div>
 	</div>

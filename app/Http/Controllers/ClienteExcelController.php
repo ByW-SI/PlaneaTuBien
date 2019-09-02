@@ -56,13 +56,14 @@ class ClienteExcelController extends Controller
         if ($request->hasFile('excel_file')) {
             ini_set('memory_limit', '-1');
             $rows = \Excel::toArray(null, request()->file('excel_file'))[0];
-            dd($rows);
+            // dd($rows);
             foreach ($rows as $key => $row) {
                 if ($key >= 2) {
                     $prospecto = $this->createProspecto($row);
-                    $presolicitud = $this->createPresolicitud($row);
-                    $inscripcion = $this->createPagosInscripcion($row);
                     $perfil_dato_personal_cliente = $this->createPerfilDatoPersonalCliente($row, $prospecto);
+                    $presolicitud = $this->createPresolicitud($row, $perfil_dato_personal_cliente);
+                    $inscripcion = $this->createPagosInscripcion($row);
+
                     $this->createPerfilReferenciaPersonalCliente($row,$perfil_dato_personal_cliente);
                 }
             }
@@ -109,12 +110,12 @@ class ClienteExcelController extends Controller
         return $prospecto;
     }
 
-    public function createPresolicitud($row)
+    public function createPresolicitud($row, $perfil_dato_personal_cliente)
     {
 
         $apellidos = explode(" ", $row[3]);
 
-        $perfil_id = null;
+        $perfil_id = $perfil_dato_personal_cliente->id;
         $folio = $row[12] ? $row[12] : '-';
         $precio_inicial = 0;
         $plazo_contratado = $row[9] ? $row[9] : '-';
@@ -150,7 +151,7 @@ class ClienteExcelController extends Controller
         $enterarse = "-";
 
         $presolicitud = Presolicitud::firstOrCreate([
-            'perfil_id' => null,
+            'perfil_id' => $perfil_id,
             'folio' => strval((int)$folio),
             'precio_inicial' => $precio_inicial,
             'plazo_contratado' => $plazo_contratado,
@@ -181,6 +182,7 @@ class ClienteExcelController extends Controller
             'ingreso_mensual' => $ingreso_mensual,
             'enterarse' => $enterarse,
         ]);
+        return $presolicitud;
     }
 
     public function createPagosInscripcion($row)

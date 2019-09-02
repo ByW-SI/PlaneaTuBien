@@ -34,6 +34,7 @@
                         </thead>
                         @foreach($pagos as $pago)
                             <tbody>
+                                @if($pago->cotizacion)
                                 <tr>
                                     <td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
                                     <td>
@@ -78,6 +79,7 @@
                                             <a href="{{ route('pagos.show',['pago'=>$pago]) }}" class="btn btn-sm mt-2 btn-primary">Ver pago</a>
                                     </td>
                                 </tr>
+                                @endif
                             </tbody>
                         @endforeach
                     </table>

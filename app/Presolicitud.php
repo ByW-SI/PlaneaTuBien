@@ -13,6 +13,7 @@ class Presolicitud extends Model
 
     protected $fillable=[
     	'folio',
+        'perfil_id',
     	'precio_inicial',
 		'plazo_contratado',
 		'plan',
@@ -109,7 +110,7 @@ class Presolicitud extends Model
         if($this->referencias->isNotEmpty()){
             $status+=20;
         }
-        if ($this->cotizacion()->liberar) {
+        if ($this->cotizacion() && $this->cotizacion()->liberar) {
             $status += 20;
         }
         return $status;

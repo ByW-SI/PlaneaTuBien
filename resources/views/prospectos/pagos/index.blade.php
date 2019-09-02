@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="card-body">
-                @if(count($prospecto->pagos) > 0)
+                @if($pagos && count($prospecto->pagos) > 0)
                     <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
                         <tr class="info">
                             <th>Fecha del pago</th>

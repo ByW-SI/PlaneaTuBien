@@ -20,6 +20,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			@if($pagos)
 				@forelse ($pagos as $key=>$pago)
 					<tr>
 						<th scope="row">{{$key+1}}</th>
@@ -61,6 +62,26 @@
 					</tr>
 					@endif
 				@endforelse
+			@else
+				<tr>
+						<th scope="row">N/A</th>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>
+							<div class="d-flex justify-content-center mb-3">
+								
+								<a href="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>'insc_0']) }}" class="btn btn-info btn-sm mr-3">
+									Imprimir Presolicitud
+								</a>
+							
+							</div>
+						</td>
+					</tr>
+			@endif
 			</tbody>
 		</table>
 	</div>

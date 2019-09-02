@@ -19,9 +19,10 @@ class PresolicitudController extends Controller
     {
         //
         if ($prospecto->perfil) {
+            //dd($prospecto->perfil->presolicitud);
             if ($prospecto->perfil->presolicitud) {
                 $presolicitud = $prospecto->perfil->presolicitud;
-                // dd($presolicitud->status);
+                //dd($presolicitud->status);
                 return view('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
             }
             else{
