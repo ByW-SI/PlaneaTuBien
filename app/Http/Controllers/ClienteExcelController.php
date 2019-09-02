@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contrato;
 use App\Cotizacion;
+use App\Grupo;
 use App\PagoInscripcion;
 use App\PerfilDatosPersonalCliente;
 use App\PerfilReferenciaPersonalCliente;
@@ -51,7 +53,7 @@ class ClienteExcelController extends Controller
         * [*] perfil_datos_personal_clientes -> datos redundantes del prospectos ya cuando se tiene su pago de inscripcion
         * [ ] perfil_historial_crediticio_clientes -> datos crediticios del cliente (creo que estos no vienen en el excel)
         * [ ] perfil_inmueble_pretendido_cleintes -> datos del inmueble que pretende comprar (creo que no vienen en el excel)
-        * [ ] perfil_referencia_personal_clientes -> datos de las referencias del cliente estas si vienen 
+        * [*] perfil_referencia_personal_clientes -> datos de las referencias del cliente estas si vienen 
         */
         if ($request->hasFile('excel_file')) {
             ini_set('memory_limit', '-1');
@@ -59,12 +61,16 @@ class ClienteExcelController extends Controller
             // dd($rows);
             foreach ($rows as $key => $row) {
                 if ($key >= 2) {
+
                     $prospecto = $this->createProspecto($row);
                     $perfil_dato_personal_cliente = $this->createPerfilDatoPersonalCliente($row, $prospecto);
-                    $presolicitud = $this->createPresolicitud($row, $perfil_dato_personal_cliente);
-                    $inscripcion = $this->createPagosInscripcion($row);
+                    $presolicitud = $this->createPresolicitud($row);
+                    // dd($presolicitud);
+                    $inscripcion = $this->createPagosInscripcion($row, $prospecto);
+                    $this->createPerfilReferenciaPersonalCliente($row, $perfil_dato_personal_cliente);
+                    $grupo = $this->createGrupo($row);
+                    $this->createContrato($row,$grupo,$presolicitud);
 
-                    $this->createPerfilReferenciaPersonalCliente($row,$perfil_dato_personal_cliente);
                 }
             }
             dd('PDPC CREADO');
@@ -87,9 +93,9 @@ class ClienteExcelController extends Controller
         $email = $row[61] ? $row[61] : "-";
         $monto = $row[37] ? $row[37] : 0;
         $plan = $row[0] ? $row[0] : '-';
-        $sueldo = 0;
-        $gastos = 0;
-        $ahorro = 0;
+        $sueldo = $row[72] ? $row[72] : 0;
+        $gastos = 0; // no se encuentra
+        $ahorro = 0; // no se encuentra
 
 
         // dd($email);
@@ -117,7 +123,7 @@ class ClienteExcelController extends Controller
 
         $perfil_id = $perfil_dato_personal_cliente->id;
         $folio = $row[12] ? $row[12] : '-';
-        $precio_inicial = 0;
+        $precio_inicial = 0; // No aparece en el excel (monto total contratado)
         $plazo_contratado = $row[9] ? $row[9] : '-';
         $plan = $row[0] ? $row[0] : '-';
         $paterno = strtolower($apellidos[count($apellidos) - 2]);
@@ -128,18 +134,19 @@ class ClienteExcelController extends Controller
         $nombre = DB::connection()->getPdo()->quote(utf8_encode($nombre));
         $calle = $row[49] ? $row[49] : '-';
         $numero_ext = $row[50] ? $row[50] : '-';
-        $numero_int = "-";
-        $colonia = explode(",", $row[4])[2];
-        $municipio = explode(",", $row[4])[3];
-        $estado = explode(",", $row[4])[4];
-        $cp = explode(",", $row[4])[5];
+        $numero_int = "-"; // No se encuentra en el excel
+        $colonia = $row[51] ? $row[51] : '-';
+        $municipio = $row[53] ? $row[53] : '-';
+        $estado = $row[52] ? $row[52] : '-';
+        $cp = $row[54] ? $row[54] : '-';
         $rfc = $row[57] ? $row[57] : '-';
         $tel_casa = $row[58] ? $row[58] : '-';
         $tel_celular = $row[60] ? $row[60] : '-';
         $email = $row[61] ? $row[61] : '-';
         // dd(Dater::excelToDateTimeObject($row[62]));
-        // $fecha_nacimiento =  $row[62] && !is_float($row[62]) ? Dater::excelToDateTimeObject($row[62]) : null;
-        $fecha_nacimiento = null;
+        $fecha_nacimiento =  $row[62] ? Dater::excelToDateTimeObject($row[62]) : Carbon::now();
+        $fecha_nacimiento = $fecha_nacimiento->format('Y-m-d');
+
         $lugar_nacimiento = $row[63] ? $row[63] : '-';
         $nacionalidad = $row[64] ? $row[64] : '-';
         $sexo = $row[65] ? $row[65] : '-';
@@ -148,11 +155,16 @@ class ClienteExcelController extends Controller
         $antiguedad_actual = $row[70] ? $row[70] : '-';
         $antiguedad_anterior = $row[71] ? $row[71] : "-";
         $ingreso_mensual = $row[72] ? $row[72] : '-';
-        $enterarse = "-";
+        $enterarse = "-"; // No viene en excel
 
         $presolicitud = Presolicitud::firstOrCreate([
+<<<<<<< HEAD
             'perfil_id' => $perfil_id,
             'folio' => strval((int)$folio),
+=======
+            'perfil_id' => null,
+            'folio' => strval((int) $folio),
+>>>>>>> 61bbdeb1823397f781704f00407565ece1ba8020
             'precio_inicial' => $precio_inicial,
             'plazo_contratado' => $plazo_contratado,
             'plan' => $plan,
@@ -182,10 +194,14 @@ class ClienteExcelController extends Controller
             'ingreso_mensual' => $ingreso_mensual,
             'enterarse' => $enterarse,
         ]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61bbdeb1823397f781704f00407565ece1ba8020
         return $presolicitud;
     }
 
-    public function createPagosInscripcion($row)
+    public function createPagosInscripcion($row, $prospecto)
     {
 
         $apellidos = explode(" ", $row[3]);
@@ -196,22 +212,20 @@ class ClienteExcelController extends Controller
         $apmaterno = strtolower($apellidos[count($apellidos) - 1]);
         $apmaterno = $apmaterno = DB::connection()->getPdo()->quote(utf8_encode($apmaterno));
 
-        $prospecto = Prospecto::where('nombre', $nombre)->where('appaterno', $appaterno)->where('apmaterno', $apmaterno)->first();
         // dd($prospecto);
-        $cotizacion = Cotizacion::where('prospecto_id', $prospecto->id)->first();
         // dd($cotizacion);
 
         $pagoInscripcion = PagoInscripcion::firstOrCreate([
             'prospecto_id' => $prospecto->id,
             'cotizacion_id' => null,
-            'status' => $row[7] ? $row[7] : '-',
-            'monto' => $row[41] && is_float($row[41]) ? $row[41] : 0,
+            'status' => 'aprobado',
+            'monto' => $row[37] ? $row[37] : 0,
             'identificacion' => '-',
             'comprobante' => '-',
             'forma' => $row[40] ? $row[40] : '-',
             'banco' => '-',
-            'referencia' => $row[104] ? $row[104] : '-',
-            'folio' => $row[12] ? $row[12] : '-'
+            'referencia' => '-',
+            'folio' => '-'
         ]);
     }
 
@@ -223,8 +237,8 @@ class ClienteExcelController extends Controller
 
         $perfil_dato_personal_cliente = PerfilDatosPersonalCliente::create([
             'prospecto_id' => $prospecto->id,
-            'folio' => strval((int)$row[12]),
-            'fecha' => Carbon::now(),
+            'folio' => '-', //strval((int)$row[12]),
+            'fecha' => $row[13] ? $row[13] : Carbon::now(),
             'plan' => $row[0],
             'paterno_1' => $row[46],
             'materno_1' => $row[47],
@@ -238,15 +252,15 @@ class ClienteExcelController extends Controller
             'estado_civil' => $row[66],
             'regimen_matrimonial' => null,
             'calle' => $row[49],
-            'numero_ext' => null,
+            'numero_ext' => $row[50],
             'numero_int' => null,
             'colonia' => $row[51],
             'municipio' => $row[53],
             'estado' => $row[52],
-            'cp' => null,
-            'telefono_casa' => $row[105],
+            'cp' =>  $row[54],
+            'telefono_casa' => $row[58],
             'telefono_celular' => $row[60],
-            'telefono_oficina' => null,
+            'telefono_oficina' => $row[59],
             'email' => $row[61],
             'tipo_residencia' => null,
             'habitantes' => null,
@@ -271,45 +285,85 @@ class ClienteExcelController extends Controller
         return $perfil_dato_personal_cliente;
     }
 
-    public function createPerfilReferenciaPersonalCliente($row,$perfil_dato_personal_cliente){
+    public function createPerfilReferenciaPersonalCliente($row, $perfil_dato_personal_cliente)
+    {
         // dd($row[106]);
-        $nombres = explode(" ",$row[104]);
-
-        // if(count($nombres) >= 3){
-        //     dd($nombres);
-        // }
-
+        $nombres = explode(" ", $row[104]);
         $perfilReferenciaPersonalCliente = PerfilReferenciaPersonalCliente::create([
-            "perfil_id"=>$perfil_dato_personal_cliente->id,
-            "paterno"=> count($nombres) >= 3 ? $nombres[0] : null,
-            "materno"=> count($nombres) >= 3 ? $nombres[1] : null,
-            "nombre"=> count($nombres) >= 3 ? $nombres[count($nombres)-1] : null,
-            "parentesco"=>$row[106],
-            "telefono"=>$row[105],
-            "celular"=>null,
+            "perfil_id" => $perfil_dato_personal_cliente->id,
+            "paterno" => count($nombres) >= 3 ? $nombres[0] : null,
+            "materno" => count($nombres) >= 3 ? $nombres[1] : null,
+            "nombre" => count($nombres) >= 3 ? $nombres[count($nombres) - 1] : null,
+            "parentesco" => $row[106],
+            "telefono" => $row[105],
+            "celular" => null,
         ]);
 
-        $nombres = explode(" ",$row[107]);
+        $nombres = explode(" ", $row[107]);
         $perfilReferenciaPersonalCliente = PerfilReferenciaPersonalCliente::create([
-            "perfil_id"=>$perfil_dato_personal_cliente->id,
-            "paterno"=> count($nombres) >= 3 ? $nombres[0] : null,
-            "materno"=> count($nombres) >= 3 ? $nombres[1] : null,
-            "nombre"=> count($nombres) >= 3 ? $nombres[count($nombres)-1] : null,
-            "parentesco"=>$row[109],
-            "telefono"=>$row[108],
-            "celular"=>null,
+            "perfil_id" => $perfil_dato_personal_cliente->id,
+            "paterno" => count($nombres) >= 3 ? $nombres[0] : null,
+            "materno" => count($nombres) >= 3 ? $nombres[1] : null,
+            "nombre" => count($nombres) >= 3 ? $nombres[count($nombres) - 1] : null,
+            "parentesco" => $row[109],
+            "telefono" => $row[108],
+            "celular" => null,
         ]);
 
-        $nombres = explode(" ",$row[110]);
+        $nombres = explode(" ", $row[110]);
         $perfilReferenciaPersonalCliente = PerfilReferenciaPersonalCliente::create([
-            "perfil_id"=>$perfil_dato_personal_cliente->id,
-            "paterno"=> count($nombres) >= 3 ? $nombres[0] : null,
-            "materno"=> count($nombres) >= 3 ? $nombres[1] : null,
-            "nombre"=> count($nombres) >= 3 ? $nombres[count($nombres)-1] : null,
-            "parentesco"=>$row[112],
-            "telefono"=>$row[111],
-            "celular"=>null,
+            "perfil_id" => $perfil_dato_personal_cliente->id,
+            "paterno" => count($nombres) >= 3 ? $nombres[0] : null,
+            "materno" => count($nombres) >= 3 ? $nombres[1] : null,
+            "nombre" => count($nombres) >= 3 ? $nombres[count($nombres) - 1] : null,
+            "parentesco" => $row[112],
+            "telefono" => $row[111],
+            "celular" => null,
         ]);
+    }
+
+    public function createGrupo($row)
+    { 
+        $grupo = Grupo::firstOrCreate([
+            'id'=>16,
+            'fecha_inicio' =>'2019-05-23', 
+            'fecha_fin' =>'2034-05-22',
+            'vigencia' =>180,
+            'contratos' =>500,
+        ]);
+
+        // dd($grupo);
+        return $grupo;
+    }
+
+    public function createContrato($row, $grupo,$presolicitud){
+
+        // $grupo = Grupo::firstOrCreate([
+        //     'id'=>16,
+        // ]);
+
+        // dd($grupo->id.str_pad($row[1],3,"0",STR_PAD_LEFT));
+            // dd(strval($grupo->id));
+            // dd(strval($grupo->id).str_pad(strval($row[1]),3,"0",STR_PAD_LEFT));
+            // dd(strval($row[1]));
+
+            $num_con = strval($grupo->id).str_pad(strval($row[1]),3,"0",STR_PAD_LEFT);
+
+            // dd($num_con);
+
+        $contrato = Contrato::firstOrCreate([
+            // echo str_pad($input, 10, "-=", STR_PAD_LEFT);  // produce "-=-=-Alien"
+            "numero_contrato"=>$num_con,
+            "monto"=>$row[8] ? $row[8] : 0,
+            "estado"=>'-',
+            "grupo_id"=>$grupo->id,
+            "presolicitud_id"=>$presolicitud->id,
+        ]);
+
+            // dd($contrato);
+
+        return $contrato;
+
     }
 
     /**

@@ -8,6 +8,7 @@ class Grupo extends Model
 {
     //
     protected $fillable=[
+        'id',
     	'numero',
     	'fecha_inicio',
     	'fecha_fin',
