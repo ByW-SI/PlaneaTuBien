@@ -9,7 +9,11 @@ class Contrato extends Model
     //
 
     protected $fillable=[
-    	'monto',
+        'monto',
+        'numero_contrato',
+        'estado',
+        'grupo_id',
+        'presolicitud_id',
     ];
     protected $hidden =[
     	'created_at',
@@ -63,8 +67,8 @@ class Contrato extends Model
         $ref_inicio = $this->numero_contrato.$tipo_pago;
         return $ref_inicio.strtoupper(substr(md5($this->presolicitud->id.$this->id),16));
         // J23
-        if($H23 <41962){
-            $result = ((D23 - 1988)*372) + ((C23 - 1)*31) + (B23 - 1)
-        }
+        // if($H23 <41962){
+        //     $result = ((D23 - 1988)*372) + ((C23 - 1)*31) + (B23 - 1)
+        // }
     }
 }
