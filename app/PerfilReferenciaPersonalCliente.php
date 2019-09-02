@@ -12,6 +12,7 @@ class PerfilReferenciaPersonalCliente extends Model
     use SoftDeletes;
 
     protected $fillable=[
+		'perfil_id',
     	'paterno',
 		'materno',
 		'nombre',

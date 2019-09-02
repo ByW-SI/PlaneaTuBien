@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Services\PruebaService;
 use App\Contrato;
 use App\Mensualidad;
 use App\Pagos;
@@ -13,13 +14,19 @@ use App\Empleado;
 
 class PruebasController extends Controller
 {
+
+    public function __construct( PruebaService $pruebaService )
+    {
+        $this->pruebaService = $pruebaService;
+    }
+
     public function index()
     {
-        $empleados_no_usuarios = Empleado::noUsers()->get();
-        return $empleados_no_usuarios;
+        return $this->pruebaService->handle();
 
 
-
+        // $empleados_no_usuarios = Empleado::noUsers()->get();
+        // return $empleados_no_usuarios;
         // return view('pruebas.mensualidades');
     }
 
