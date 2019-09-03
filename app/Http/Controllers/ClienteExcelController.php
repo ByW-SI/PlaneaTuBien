@@ -158,13 +158,8 @@ class ClienteExcelController extends Controller
         $enterarse = "-"; // No viene en excel
 
         $presolicitud = Presolicitud::firstOrCreate([
-<<<<<<< HEAD
             'perfil_id' => $perfil_id,
             'folio' => strval((int)$folio),
-=======
-            'perfil_id' => null,
-            'folio' => strval((int) $folio),
->>>>>>> 61bbdeb1823397f781704f00407565ece1ba8020
             'precio_inicial' => $precio_inicial,
             'plazo_contratado' => $plazo_contratado,
             'plan' => $plan,
@@ -194,10 +189,6 @@ class ClienteExcelController extends Controller
             'ingreso_mensual' => $ingreso_mensual,
             'enterarse' => $enterarse,
         ]);
-<<<<<<< HEAD
-=======
-
->>>>>>> 61bbdeb1823397f781704f00407565ece1ba8020
         return $presolicitud;
     }
 
