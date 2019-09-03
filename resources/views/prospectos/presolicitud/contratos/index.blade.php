@@ -29,15 +29,17 @@
 						      	{{-- <a href="{{ route('prospectos.presolicitud.recibos.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}" class="btn btn-info btn-sm mr-3">Declaración de Salud</a> --}}
 						      	<a href="{{ route('contratos.domiciliacion.index',['contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Formato de Domiciliación</a>
 						      	<a href="{{ route('prospectos.presolicitud.contratos.ficha_deposito',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Ficha de Deposito</a>
-					      		@if ($presolicitud->cotizacion()->tipo_inscripcion == 'inscripcion_total')
-					      			{{-- expr --}}
-					      			<a href="{{ route('prospectos.presolicitud.contratos.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan->nombre}}</a>
-					      		@elseif($presolicitud->cotizacion()->plan->abreviatura == "TC")
-					      			<a href="{{ route('prospectos.presolicitud.contratos.anexo_tanda_clasica',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo Tanda Clasica</a>
-					      		@else
-					      			<a href="{{ route('prospectos.presolicitud.contratos.anexo_inscripcion_diferida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo Inscripcion Diferida</a>
+					      		@if ($presolicitud->cotizacion())
+								  @if ($presolicitud->cotizacion()->tipo_inscripcion == 'inscripcion_total')
+								  {{-- expr --}}
+								  <a href="{{ route('prospectos.presolicitud.contratos.anexo_tanda',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo {{$presolicitud->perfil->cotizacion->plan->nombre}}</a>
+							  @elseif($presolicitud->cotizacion()->plan->abreviatura == "TC")
+								  <a href="{{ route('prospectos.presolicitud.contratos.anexo_tanda_clasica',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo Tanda Clasica</a>
+							  @else
+								  <a href="{{ route('prospectos.presolicitud.contratos.anexo_inscripcion_diferida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">Anexo Inscripcion Diferida</a>
 
-					      		@endif
+							  @endif
+								  @endif
 
 							</div>
 						</td>
