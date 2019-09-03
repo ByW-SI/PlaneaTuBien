@@ -64,7 +64,7 @@ class ClienteExcelController extends Controller
 
                     $prospecto = $this->createProspecto($row);
                     $perfil_dato_personal_cliente = $this->createPerfilDatoPersonalCliente($row, $prospecto);
-                    $presolicitud = $this->createPresolicitud($row);
+                    $presolicitud = $this->createPresolicitud($row, $perfil_dato_personal_cliente);
                     // dd($presolicitud);
                     $inscripcion = $this->createPagosInscripcion($row, $prospecto);
                     $this->createPerfilReferenciaPersonalCliente($row, $perfil_dato_personal_cliente);
