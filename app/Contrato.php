@@ -64,14 +64,7 @@ class Contrato extends Model
 
     public function getReferenciaAttribute($tipo_pago="1")
     {
-<<<<<<< HEAD
-        $ref_inicio = $this->numero_contrato.$tipo_pago;
-        return $ref_inicio.strtoupper(substr(md5($this->presolicitud->id.$this->id),16));
-        // J23
-        // if($H23 <41962){
-        //     $result = ((D23 - 1988)*372) + ((C23 - 1)*31) + (B23 - 1)
-        // }
-=======
+
         // $ref_inicio = $this->numero_contrato.$tipo_pago;
         // return $ref_inicio.strtoupper(substr(md5($this->presolicitud->id.$this->id),16));
         // // J23
@@ -80,6 +73,5 @@ class Contrato extends Model
         // }
         // else
         //     $result = ((D23 - 2014)*372) + ((C23 - 1)*31) + (B23 -1);
->>>>>>> 7f5947c63ba18dae78ce58384f8313a89ed0a751
     }
 }
