@@ -67,19 +67,22 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->input());
         if($this->hasComponent('crear usuario')) {
             $seguridad = $this->hasSecurity(Perfil::find($request->input('perfil_id')));
 
             if($request->input('perfil_id') == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
             else {
+                // dd('2');
                 $rules = [
-                    'perfil_id'=>'required|integer',
-                    'empleado_id'=>'required|integer',
-                    'name'=>'required|alpha',
-                    'password' => 'required|string'
+                    'perfil_id'=>'required',
+                    'empleado_id'=>'required',
+                    'name'=>'required',
+                    'password' => 'required'
                 ];
                 $this->validate($request, $rules);
+                // dd('validate');
                 $inputs = $request->all();
                 $empleado = Empleado::where('id', $inputs['empleado_id'])->first();
                 $usuario = User::create([

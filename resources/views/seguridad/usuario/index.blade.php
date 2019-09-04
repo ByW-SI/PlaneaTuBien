@@ -28,7 +28,7 @@
                         </tr>
                         @foreach($usuarios as $usuario)
                             <tr>
-                                <td>{{ $usuario->perfil->nombre }}</td>
+                                <td>{{ $usuario->perfil ? $usuario->perfil->nombre : null }}</td>
                                 <td>{{ $usuario->empleado->nombre . ' ' . $usuario->empleado->paterno }}</td>
                                 <td>{{ $usuario->email }}</td>
                                 <td>{{ $usuario->empleado->tipo }}</td>
