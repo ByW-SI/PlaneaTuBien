@@ -1,4 +1,4 @@
-@extends('Empleado.show')
+@extends('empleado.show')
 @section('submodulos')
 	{{-- NAV --}}
 <div class="row">  
