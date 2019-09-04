@@ -30,7 +30,7 @@ class EmpleadoVacacionController extends Controller
      */
     public function index(Empleado $empleado)
     {
-        return "Bien";
+        
         $vacaciones = $empleado->vacaciones;
         if($empleado->datos_laborales->isEmpty())
             $antiguedad=0;
@@ -61,6 +61,8 @@ class EmpleadoVacacionController extends Controller
             $diasdisfrutados += $vacacion->dias_tomados;
 
         }
+
+        return "Bien 2";
 
         return view('empleado.vacacion.view',['empleado'=>$empleado, 'vacaciones'=>$vacaciones,'antiguedad'=>$antiguedad,'diastotales'=>$diastotales,'diasdisfrutados'=>$diasdisfrutados]);
     }
