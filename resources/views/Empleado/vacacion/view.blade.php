@@ -1,1 +1,1 @@
-@extends('Empleado.show')
+<h1>Works</h1>
