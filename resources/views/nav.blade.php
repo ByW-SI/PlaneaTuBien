@@ -114,6 +114,9 @@
 							@if($c->nombre == "indice recursos humanos")
 								<a class="dropdown-item" href="{{ route('empleados.index') }}"><i class="fas fa-user-friends"></i><strong> Búsqueda</strong></a>
 							@endif
+							@if($c->nombre == "crear rh")
+								<a class="dropdown-item" href="{{ route('empleados.deleted.list') }}"><i class="fas fa-user-plus"></i><strong> Eliminados</strong></a>
+							@endif
 						@endforeach
 					</div>
 				</li>

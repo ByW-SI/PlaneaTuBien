@@ -1,0 +1,57 @@
+@extends('principal')
+@section('content')
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>EMPLEADOS DADOS DE BAJA</h3>
+            </div>
+            {{-- Tabla de empleados dados de baja --}}
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="tablaClientes">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Nombre</th>
+                            <th class="text-center" scope="col">Apellido paterno</th>
+                            <th class="text-center" scope="col">Apellido materno</th>
+                            <th class="text-center" scope="col">Motivo</th>
+                            <th class="text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($empleadosEliminados as $key => $empleado)
+                        <tr class="text-center">
+                            <td>{{$key + 1}}</td>
+                            <td>{{$empleado->nombre}}</td>
+                            <td>{{$empleado->paterno}}</td>
+                            <td>{{$empleado->materno}}</td>
+                            <td>{{$empleado->motivo_baja}}</td>
+                            <td>
+                                <form action="{{route('empleados.undelete')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$empleado->id}}" name="empleado_id">
+                                    <button type="submit" class="btn btn-warning">
+                                        <strong>restablecer</strong>
+                                    </button>                                    
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+    <script>
+        $(document).ready(function() {
+            $('#tablaClientes').DataTable();
+        } );
+    </script>
+
+@endsection

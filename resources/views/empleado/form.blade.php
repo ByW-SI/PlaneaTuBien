@@ -14,16 +14,16 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="nombre">Nombre:</label>
-					<input type="text" name="nombre" value="{{$empleado->nombre}}" class="form-control">
+					<label for="nombre">✱Nombre:</label>
+					<input type="text" name="nombre" value="{{$empleado->nombre}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="paterno">Apellido Paterno:</label>
-					<input type="text" name="paterno" value="{{$empleado->paterno}}" class="form-control">
+					<label for="paterno">✱Apellido Paterno:</label>
+					<input type="text" name="paterno" value="{{$empleado->paterno}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="materno">Apellido Materno:</label>
-					<input type="text" name="materno" value="{{$empleado->materno}}" class="form-control">
+					<label for="materno">✱Apellido Materno:</label>
+					<input type="text" name="materno" value="{{$empleado->materno}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="fecha_nacimiento">Fecha de nacimiento:</label>
@@ -42,7 +42,7 @@
 					</select>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="email">Correo electronico:</label>
+					<label for="email">Correo electronico (interno):</label>
 					<input type="text" name="email" value="{{$empleado->email}}" class="form-control">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">

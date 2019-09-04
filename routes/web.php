@@ -89,6 +89,8 @@ Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador')->mid
 // AGENTES
 
 Route::resource('empleados','Empleado\EmpleadoController')->middleware('auth');
+Route::post('empleados/undelete','Empleado\EmpleadoController@undelete')->name('empleados.undelete')->middleware('auth');
+Route::get('empleados/deleted/list','Empleado\EmpleadoController@deletedList')->name('empleados.deleted.list')->middleware('auth');
 Route::get('agentes','Empleado\EmpleadoController@indexAgentes')->name('agentes.index')->middleware('auth');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController')->middleware('auth');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController')->middleware('auth');

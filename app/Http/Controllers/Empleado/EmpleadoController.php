@@ -83,6 +83,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('aqui');
         $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
             $empleado->id_jefe = $request->input('gerente');
@@ -144,9 +145,23 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy(Empleado $empleado, Request $request)
     {
+        $empleado->update(['motivo_baja'=>$request->input('motivo')]);
         $empleado->delete();
+        $empleado->user()->first() == null ? : $empleado->user()->first()->delete();
+        return redirect()->route('empleados.index');
+    }
+
+    public function deletedList(Request $request){
+        $empleadosEliminados = Empleado::onlyTrashed()->get();
+        // dd($empleadosEliminados);
+        return view('empleado.eliminados.lista',compact('empleadosEliminados'));
+    }
+
+    public function undelete(Request $request){
+        $empleado = Empleado::withTrashed()->find($request->input('empleado_id'));
+        $empleado->restore();
         return redirect()->route('empleados.index');
     }
 

@@ -1,6 +1,7 @@
 @extends('principal')
 @section('content')
 
+
 <div class="card">
 	<div class="card-header">
 		<div class="row">
@@ -80,13 +81,47 @@
 									@endif
 									@if($editar)
 									<a href="{{ route('empleados.edit',[$empleado]) }}" class="btn btn-warning">
-										✎ Editar
+										Editar
 									</a>
 									@endif
 									@if($eliminar)
-									<button type="button" class="btn btn-danger disabled">
-										<i class="fa fa-times"></i> Baja
-									</button>
+									<button type="button" class="btn btn-danger eliminar" data-toggle="modal" data-target="#exampleModal{{$empleado->id}}" id-empleado={{$empleado->id}}>Eliminar</button>
+									{{-- <form action="{{url('empleados', [$empleado->id])}}" method="POST" class="mt-1">
+										@csrf
+										{{method_field('DELETE')}}
+										<input type="hidden" value="{{$empleado->id}}">
+										<button type="submit" class="btn btn-danger">
+											Eliminar
+										</button>
+									</form> --}}
+
+									{{-- Modal --}}
+									<div class="modal fade" id="exampleModal{{$empleado->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLabel">Eliminar usuario</h5>
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												</div>
+												<div class="modal-body">
+														<form action="{{url('empleados', [$empleado->id])}}" method="POST" class="mt-1">
+															@csrf
+															{{method_field('DELETE')}}
+															<div class="form-group">
+																<label for="motivo" class="col-form-label">Motivo de la baja:</label>
+																<input type="text" class="form-control" name="motivo">
+															</div>
+															<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
+															<button type="submit" class="btn btn-danger">
+																Eliminar
+															</button>
+														</form>
+											  </div>
+											</div>
+										  </div>
+
 									@endif
 								</td>
 							@endif
@@ -97,5 +132,9 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 
 @endsection
