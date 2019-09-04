@@ -62,7 +62,7 @@ class EmpleadoVacacionController extends Controller
 
         }
 
-        return "Bien 2";
+        
 
         return view('empleado.vacacion.view',['empleado'=>$empleado, 'vacaciones'=>$vacaciones,'antiguedad'=>$antiguedad,'diastotales'=>$diastotales,'diasdisfrutados'=>$diasdisfrutados]);
     }
