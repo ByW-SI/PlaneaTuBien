@@ -55,27 +55,27 @@
 						<label class="control-label">
 							Nombre:
 						</label>
-						<input type="text" name="nombre" class="form-control" id="nombre" value="{{$beneficiario->nombre}}">
+						<input type="text" name="nombre" class="form-control" id="nombre" value="{{$beneficiario->nombre}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Apellido Paterno:
 						</label>
-						<input type="text" name="appaterno" class="form-control" id="appaterno" value="{{$beneficiario->appaterno}}">
+						<input type="text" name="appaterno" class="form-control" id="appaterno" value="{{$beneficiario->appaterno}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Apellido Materno:
 						</label>
 
-						<input type="text" name="apmaterno" class="form-control" id="apmaterno" value="{{$beneficiario->apmaterno}}">
+						<input type="text" name="apmaterno" class="form-control" id="apmaterno" value="{{$beneficiario->apmaterno}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Parentesco:
 						</label>
 
-						<input type="text" name="parentesco" class="form-control" id="parentesco" value="{{$beneficiario->parentesco}}">
+						<input type="text" name="parentesco" class="form-control" id="parentesco" value="{{$beneficiario->parentesco}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
@@ -89,14 +89,14 @@
 							Calle:
 						</label>
 
-						<input type="text" name="calle" class="form-control" id="calle" value="{{$beneficiario->calle}}">
+						<input type="text" name="calle" class="form-control" id="calle" value="{{$beneficiario->calle}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Número exterior:
 						</label>
 
-						<input type="text" name="num_ext" class="form-control" id="num_ext" value="{{$beneficiario->num_ext}}">
+						<input type="text" name="num_ext" class="form-control" id="num_ext" value="{{$beneficiario->num_ext}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
@@ -110,28 +110,28 @@
 							Colonia:
 						</label>
 
-						<input type="text" name="colonia" class="form-control" id="colonia" value="{{$beneficiario->colonia}}">
+						<input type="text" name="colonia" class="form-control" id="colonia" value="{{$beneficiario->colonia}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Alcaldía o municipio:
 						</label>
 
-						<input type="text" name="municipio" class="form-control" id="municipio" value="{{$beneficiario->municipio}}">
+						<input type="text" name="municipio" class="form-control" id="municipio" value="{{$beneficiario->municipio}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Estado:
 						</label>
 
-						<input type="text" name="estado" class="form-control" id="estado" value="{{$beneficiario->estado}}">
+						<input type="text" name="estado" class="form-control" id="estado" value="{{$beneficiario->estado}}" required>
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Telefono:
 						</label>
 
-						<input type="text" name="telefono" class="form-control" id="telefono" value="{{$beneficiario->telefono}}">
+						<input type="text" name="telefono" class="form-control" id="telefono" value="{{$beneficiario->telefono}}" required>
 					</div>
 					{{-- <div class="form-group col-3">
 						<label class="control-label">

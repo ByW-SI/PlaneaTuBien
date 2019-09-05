@@ -120,15 +120,15 @@
 				</div>
 				<div class="form-group col-3">
 					<label class="control-label">
-						Unidad medica
+						Otro telefono:
 					</label>
-					<strong><dd>{{$beneficiario->unidad_medica}}</dd></strong>
+					<strong><dd>{{$beneficiario->telefono_2}}</dd></strong>
 				</div>
 				<div class="form-group col-3">
 					<label class="control-label">
-						Turno
+						Celular
 					</label>
-					<strong><dd>{{$beneficiario->turno_atencion}}</dd></strong>
+					<strong><dd>{{$beneficiario->celular}}</dd></strong>
 				</div>
 			</div>
 			<div class="row">

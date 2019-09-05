@@ -63,11 +63,14 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input('puesto_id'));
+        // dd($request->input('cargo'));
         // dd($request->input('tipo'));
         $datoslab = EmpleadoDatoLab::create($request->all());
         $empleado = Empleado::find($request->empleado_id);
-        $empleado->update(['tipo'=>$request->input('tipo')]);
+        $empleado->update([
+            'tipo'=>$request->input('tipo'),
+            'cargo'=>$request->input('cargo')
+            ]);
         // dd($empleado);
 
         // if ($request->puntualidad == 'on') {

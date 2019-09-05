@@ -61,13 +61,39 @@
 				</select>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="area_id"><i class="fas fa-sync"></i> Área: </label>
-				<select type="select" class="form-control" name="area_id" id="area_id">
-				    <option  value="">Sin Definir</option>
-					@foreach ($areas as $area)
-						<option id="{{$area->id}}" value="{{$area->id}}">{{$area->nombre}}</option>
-					@endforeach
-				</select>
+				<label for="cargo">✱Cargo:</label>
+                    <select required class="form-control" id="cargo" name="cargo">
+                        <option value="" {{$empleado->cargo == "" ? "selected" : ""}}>
+                    		Seleccionar
+                    	</option>
+                        <option value="Asesor" {{$empleado->cargo == "Asesor" ? "selected" : ""}}>
+                    		Asesor
+                    	</option>
+                        <option value="Supervisor" {{$empleado->cargo == "Supervisor" ? "selected" : ""}}>
+                    		Supervisor
+                    	</option>
+                        <option value="Gerente" {{$empleado->cargo == "Gerente" ? "selected" : ""}}>
+                    		Gerente
+                    	</option>
+                        <option value="Mesa de trabajo" {{$empleado->cargo == "Mesa de trabajo" ? "selected" : ""}}>
+                    		Mesa de trabajo
+                    	</option>
+                        <option value="Ejecutivo de cuenta" {{$empleado->cargo == "Ejecutivo de cuenta" ? "selected" : ""}}>
+                    		Ejecutivo de cuenta
+                    	</option>
+                        <option value="Juridico" {{$empleado->cargo == "Juridico" ? "selected" : ""}}>
+                    		Jurídico
+                    	</option>
+                        <option value="Contador" {{$empleado->cargo == "Contador" ? "selected" : ""}}>
+                    		Contador
+                    	</option>
+                        <option value="Gerente de area" {{$empleado->cargo == "Gerente de area" ? "selected" : ""}}>
+                    		Gerente de área
+                    	</option>
+                        <option value="Director de area" {{$empleado->cargo == "Director de area" ? "selected" : ""}}>
+                    		Director de área
+                    	</option>
+                    </select>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Tipo:</label>
