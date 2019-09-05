@@ -117,6 +117,8 @@ Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCo
 Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController')->middleware('auth');
 Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked')->middleware('auth');
 
+Route::get('datos-laborales/{id}','Empleado\EmpleadoDatosLaborales@index')->name('datos-laborales')->middleware('auth');
+
 // PROSPECTOS VISTA APARTE
 Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');

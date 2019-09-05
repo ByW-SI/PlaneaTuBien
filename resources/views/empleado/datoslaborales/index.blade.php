@@ -238,6 +238,7 @@
 						<th>Salario nominal</th>
 						<th>Hora de entrada</th>
 						<th>Hora de salida</th>
+						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -249,6 +250,9 @@
 							<td>{{$datoslab->salario_nomina}}</td>
 							<td>{{$datoslab->hora_entrada}}</td>
 							<td>{{$datoslab->hora_salida}}</td>
+							<td>
+								<a href="#" class="btn btn-info">Ver</a>
+							</td>
 						</tr>
 					@endforeach
 				</tbody>
