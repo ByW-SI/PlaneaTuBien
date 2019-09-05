@@ -244,8 +244,8 @@
 					@foreach ($historial as $datoslab)
 						<tr {{--  title="Haz click para más detalles" style="cursor: pointer;" data-toggle="modal" data-target="#modal-info" onclick="buscarDato({{$datoslab->id}})"--}}>
 							<td>{{$datoslab->fecha_contrato}}</td>
-							<td>{{$datoslab->contrato->nombre}}</td>
-							<td>{{$datoslab->puesto->nombre}}</td>
+							<td>{{ !$datoslab->contrato ? : $datoslab->contrato->nombre}}</td>
+							<td>{{ !$datoslab->puesto ? : $datoslab->puesto->nombre}}</td>
 							<td>{{$datoslab->salario_nomina}}</td>
 							<td>{{$datoslab->hora_entrada}}</td>
 							<td>{{$datoslab->hora_salida}}</td>

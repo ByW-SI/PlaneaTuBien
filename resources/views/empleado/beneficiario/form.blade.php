@@ -133,19 +133,29 @@
 
 						<input type="text" name="telefono" class="form-control" id="telefono" value="{{$beneficiario->telefono}}">
 					</div>
-					<div class="form-group col-3">
+					{{-- <div class="form-group col-3">
 						<label class="control-label">
 							Unidad medica
 						</label>
-
 						<input type="text" name="unidad_medica" class="form-control" id="unidad_medica" value="{{$beneficiario->unidad_medica}}">
 					</div>
 					<div class="form-group col-3">
 						<label class="control-label">
 							Turno
 						</label>
-
 						<input type="text" name="turno_atencion" class="form-control" id="turno_atencion" value="{{$beneficiario->turno_atencion}}">
+					</div> --}}
+					<div class="form-group col-3">
+						<label class="control-label">
+							Otro telefono
+						</label>
+						<input type="text" name="telefono_2" class="form-control" id="telefono_2" value="{{$beneficiario->telefono_2}}">
+					</div>
+					<div class="form-group col-3">
+						<label class="control-label">
+							Celular
+						</label>
+						<input type="text" name="celular" class="form-control" id="celular" value="{{$beneficiario->celular}}">
 					</div>
 				</div>
 				<div class="row">

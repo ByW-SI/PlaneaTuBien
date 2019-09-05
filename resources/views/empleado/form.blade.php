@@ -1,5 +1,12 @@
 @extends('principal')
 @section('content')
+
+@if ( session('status') )
+	<div class="alert alert-danger">
+		{{session('status')}}
+	</div>
+@endif
+
 <div class="card card-default">
 	<div class="card-header">
 		<h3 class="title">
@@ -26,8 +33,8 @@
 					<input type="text" name="materno" value="{{$empleado->materno}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="fecha_nacimiento">Fecha de nacimiento:</label>
-					<input type="date" name="fecha_nacimiento" value="{{$empleado->fecha_nacimiento}}" class="form-control">
+					<label for="fecha_nacimiento">✱Fecha de nacimiento:</label>
+					<input type="date" name="fecha_nacimiento" value="{{$empleado->fecha_nacimiento}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="edad">Edad:</label>
@@ -155,8 +162,8 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="rfc">R.F.C.:</label>
-					<input class="form-control" type="text" name="rfc" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" title="Siga el formato: 4 letras seguidas por 6 digitos y 3 caracteres" value="{{$empleado->rfc}}">
+					<label for="rfc">✱R.F.C.:</label>
+					<input class="form-control" type="text" name="rfc" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" title="Siga el formato: 4 letras seguidas por 6 digitos y 3 caracteres" value="{{$empleado->rfc}}" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="telefono">Telefono:</label>

@@ -7,6 +7,7 @@ use App\Sucursal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class EmpleadoController extends Controller
 {
@@ -83,7 +84,17 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('aqui');
+        
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'nullable|unique:empleados',
+            'rfc' => 'required|unique:empleados',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('status','ERROR: El correo o el RFC ya existe en el sistema');
+        }
+
         $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
             $empleado->id_jefe = $request->input('gerente');

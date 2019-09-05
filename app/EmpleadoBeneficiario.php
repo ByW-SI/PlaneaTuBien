@@ -24,7 +24,9 @@ class EmpleadoBeneficiario extends Model
     	'estado',
     	'telefono',
     	'unidad_medica',
-    	'turno_atencion'
+		'turno_atencion',
+		'telefono_2',
+		'celular'
     ];
     protected $hidden=[
     	'created_at',

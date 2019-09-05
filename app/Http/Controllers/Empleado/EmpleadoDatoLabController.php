@@ -23,7 +23,6 @@ class EmpleadoDatoLabController extends Controller
      */
     public function index(Empleado $empleado)
     {
-        //
         $dato_lab= $empleado->datos_laborales->last();
         $historial = $empleado->datos_laborales()->paginate(5);
         return view('empleado.datoslaborales.index',['empleado'=>$empleado,'dato_lab'=>$dato_lab,'historial'=>$historial]);
@@ -64,8 +63,12 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input('puesto_id'));
+        // dd($request->input('tipo'));
         $datoslab = EmpleadoDatoLab::create($request->all());
         $empleado = Empleado::find($request->empleado_id);
+        $empleado->update(['tipo'=>$request->input('tipo')]);
+        // dd($empleado);
 
         // if ($request->puntualidad == 'on') {
         //     # code...

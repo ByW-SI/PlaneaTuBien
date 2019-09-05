@@ -177,6 +177,9 @@ class PerfilController extends Controller
             $seguridad = $this->hasSecurity($perfil);
             if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
+            if( count($perfil->usuarios()->get()) ){
+                return redirect()->back()->with('status','No puedes eliminar un perfil si cuenta con usuarios');
+            }
             $perfil->componentes()->detach();
             $perfil->delete();
             return redirect()->route('perfils.index');

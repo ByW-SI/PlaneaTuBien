@@ -49,7 +49,7 @@
 			<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="fecha_contrato"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de contratación:</label>
-				<input class="form-control" type="date" id="fecha_contrato" name="fecha_contrato" value="" required>
+				<input class="form-control" type="date" id="fecha_contrato" name="fecha_contrato" required value="{{!$empleado->datos_laborales()->first() ? : $empleado->datos_laborales()->first()->fecha_contrato }}" {{ !$empleado->datos_laborales()->first() ? : !$empleado->datos_laborales()->first()->fecha_contrato ? : 'readonly'}}>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="contrato_id"><i class="fas fa-sync"></i> Tipo de contrato:</label>
@@ -70,13 +70,60 @@
 				</select>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="puesto_id"><i class="fas fa-sync"></i> Puesto:</label>
-				<select type="select" name="puesto_id" id="puesto_id" class="form-control" >
-					<option  value="">Sin Definir</option>
-					@foreach ($puestos as $puesto)
-						<option id="{{$puesto->id}}" value="{{$puesto->id}}">{{$puesto->nombre}}</option>
-					@endforeach
-				</select>
+                <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Tipo:</label>
+				<select required class="form-control" id="tipo" name="tipo">
+                        <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
+                        	Seleccionar
+                    	</option>
+                        <option value="Asesor" {{$empleado->tipo == "Asesor" ? "selected" : ""}}>
+                        	Asesor
+                    	</option>
+                        <option value="Supervisor" {{$empleado->tipo == "Supervisor" ? "selected" : ""}}>
+                        	Supervisor
+                    	</option>
+                        <option value="Gerente" {{$empleado->tipo == "Gerente" ? "selected" : ""}}>
+                        	Gerente
+                    	</option>
+                        <option value="TKM" {{$empleado->tipo == "TKM" ? "selected" : ""}}>
+                        	TKM
+                    	</option>
+                        <option value="Becario" {{$empleado->tipo == "Becario" ? "selected" : ""}}>
+                        	Becario
+                    	</option>
+                        <option value="Mesa de control" {{$empleado->tipo == "Mesa de control" ? "selected" : ""}}>
+                        	Mesa de control
+                    	</option>
+                        <option value="Ejecutivo de cuenta" {{$empleado->tipo == "Ejecutivo de cuenta" ? "selected" : ""}}>
+                        	Ejecutivo de cuenta
+                    	</option>
+                        <option value="Juridico" {{$empleado->tipo == "Juridico" ? "selected" : ""}}>
+                        	Jurídico
+                    	</option>
+                        <option value="Contador" {{$empleado->tipo == "Contador" ? "selected" : ""}}>
+                        	Contador
+                    	</option>
+                        <option value="Jefe atención a clientes" {{$empleado->tipo == "Jefe atención a clientes" ? "selected" : ""}}>
+                        	Jefe de atención a clientes
+                    	</option>
+                        <option value="Jefe archivo" {{$empleado->tipo == "Jefe archivo" ? "selected" : ""}}>
+                        	Jefe de archivo
+                    	</option>
+                        <option value="Jefe ventas" {{$empleado->tipo == "Jefe ventas" ? "selected" : ""}}>
+                        	Jefe de ventas
+                    	</option>
+                        <option value="Jefe jurídico" {{$empleado->tipo == "Jefe jurídico" ? "selected" : ""}}>
+                        	Jefe de jurídico
+                    	</option>
+                        <option value="Jefe contabilidad" {{$empleado->tipo == "Jefe contabilidad" ? "selected" : ""}}>
+                        	Jefe de contabilidad
+                    	</option>
+                        <option value="Directivo" {{$empleado->tipo == "Directivo" ? "selected" : ""}}>
+                        	Directivo
+                    	</option>
+                        <option value="Administrador" {{$empleado->tipo == "Administrador" ? "selected" : ""}}>
+                        	Administrador
+                    	</option>
+                    </select>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="lugar_trabajo">Lugar de Trabajo:</label>
