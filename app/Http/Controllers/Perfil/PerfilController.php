@@ -59,7 +59,7 @@ class PerfilController extends Controller
     public function create()
     {
         if($this->hasComponent('crear perfil')) {
-            $modulos = Modulo::get();
+            $modulos = Modulo::where('nombre','<>','agentes')->get();
             return view('seguridad.perfil.create', ['modulos' => $modulos]);
         }
         return redirect()->route('denegado');
@@ -125,7 +125,7 @@ class PerfilController extends Controller
             $seguridad = $this->hasSecurity($perfil);
             if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
-            $modulos = Modulo::get();
+            $modulos = Modulo::where('nombre','<>','agentes')->get();
             return view('seguridad.perfil.edit', ['perfil' => $perfil, 'modulos' => $modulos]);
         }
         return redirect()->route('denegado');
