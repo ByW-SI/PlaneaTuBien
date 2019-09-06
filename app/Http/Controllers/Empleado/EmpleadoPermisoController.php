@@ -17,8 +17,26 @@ class EmpleadoPermisoController extends Controller
      */
     public function index(Empleado $empleado)
     {
+        $totalPermisosPorDia = 0;
+        $totalDiasPermitidos = 0;
+        $totalPermisosPorHora = 0;
+        $totalHorasPermitidas = 0;
+
         $permisos = $empleado->permisos;
-        return view('empleado.permiso.index',['empleado'=>$empleado,'permisos'=>$permisos]);
+        // dd($permisos);
+
+        foreach($permisos as $permiso){
+            if($permiso->tipopermiso == 'dia'){
+                $totalPermisosPorDia += 1;
+                $totalDiasPermitidos += $permiso->diastotales;
+            }
+            if($permiso->tipopermiso == 'hora'){
+                $totalPermisosPorHora += 1;
+                $totalHorasPermitidas += $permiso->horastotales;
+            }
+        }
+
+        return view('empleado.permiso.index',compact('empleado','permisos','totalPermisosPorDia','totalDiasPermitidos','totalPermisosPorHora','totalHorasPermitidas'));
     }
 
     /**

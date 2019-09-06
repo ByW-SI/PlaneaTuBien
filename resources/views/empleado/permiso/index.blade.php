@@ -144,6 +144,37 @@
 						@endforelse
 					</tbody>
 				</table>
+				{{-- Datos generales --}}
+				<div class="row">
+					{{-- Total de permisos por día --}}
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="totalPermisosDia">TOTAL DE PERMISOS POR DÍA</label>
+							<input type="text" readonly value="{{$totalPermisosPorDia}}" class="form-control" id="totalPermisosDia">
+						</div>
+					</div>
+					{{-- Total de días permitidos --}}
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="totalDiasPermitidos">TOTAL DE DÍAS SOLICITADOS</label>
+							<input type="text" readonly value="{{$totalDiasPermitidos}}" class="form-control" id="totalDiasPermitidos">
+						</div>
+					</div>
+					{{-- Total de permisos por hora --}}
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="totalPermisosHora">TOTAL DE PERMISOS POR HORA</label>
+							<input type="text" readonly value="{{$totalPermisosPorHora}}" class="form-control" id="totalPermisosHora">
+						</div>
+					</div>
+					{{-- Total de días permitidos --}}
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="totalHorasPermitidas">TOTAL DE HORAS SOLICITADAS</label>
+							<input type="text" readonly value="{{$totalHorasPermitidas}}" class="form-control" id="totalHorasPermitidas">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

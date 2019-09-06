@@ -55,8 +55,6 @@
 						<label for="tipoindisciplina" class="control-label">Tipo de amonestación</label>
 						<select name="tipofalta" id="tipoindisciplina" class="form-control" required="">
 							<option value="">Seleccione la amonestación que cometio el empleado</option>
-							<option value="retardo">Retardo</option>
-							<option value="retardo_jus">Retardo justificado</option>
 							<option value="amonestacion_verb">Amonestación verbal</option>
 							<option value="amonestacion_escr">Amonestación escrita</option>
 							<option value="suspension">Suspensión de labores</option>

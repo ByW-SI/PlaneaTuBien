@@ -55,8 +55,10 @@
 						<label class="control-label" for="problema" id="lbl_problema">Tipo de falta:</label>
 						<select id="tipofalta" name="tipofalta" class="form-control" required="">
 							<option value="">Seleccione el tipo de falta</option>
-							<option value="justificada">Falta justificada</option>
-							<option value="injustificada">Falta injustificada</option>
+							<option value="retardo justificada">Retardo justificado</option>
+							<option value="retardo injustificada">Retardo injustificado</option>
+							<option value="falta justificada">Falta justificada</option>
+							<option value="falta injustificada">Falta injustificada</option>
 						</select>
 					</div>
 					<div class="col-5">
@@ -91,6 +93,32 @@
 						@endforeach
 					</tbody>
 				</table>
+				<div class="row">
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="">A</label>
+							<input type="text" value="" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="">B</label>
+							<input type="text" value="" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="">C</label>
+							<input type="text" value="" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="col-12 col-md-3">
+						<div class="form-group">
+							<label for="">D</label>
+							<input type="text" value="" class="form-control" readonly>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

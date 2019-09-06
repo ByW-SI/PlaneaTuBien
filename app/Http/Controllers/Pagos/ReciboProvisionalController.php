@@ -228,13 +228,16 @@ class ReciboProvisionalController extends Controller
     }
     public function submitReciboProvisional(Request $request, PagoInscripcion $pago)
     {
+        // dd($request->input());
         $cotizacion = $pago->cotizacion;
     	$prospecto = $cotizacion->prospecto;
     	$presolicitud = $prospecto->perfil->presolicitud;
         $grupos = $cotizacion->plan->grupos;
         // dd($cotizacion->contratos());
+        // dd($cotizacion->plan->grupos()->get());
         foreach ($grupos as $grupo) {
-            if($grupo->contratos > 0 && $grupo->activo == 1){
+            // dd($grupo->contratos);
+            if( $grupo->contratos > 0 && $grupo->activo == 1){
                 $rules=[
                     'monto'=>"required|string",
                     'sucursal'=>"required|max:190",
@@ -276,6 +279,8 @@ class ReciboProvisionalController extends Controller
                   }
                 }
                 return redirect()->route('pagos.index');
+            }else{
+                return redirect()->back();
             }
         }
     }

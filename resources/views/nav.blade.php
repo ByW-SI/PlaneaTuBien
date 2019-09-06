@@ -79,7 +79,7 @@
             @endforeach
 
             {{-- Agentes --}}
-            @foreach(Auth::user()->perfil->componentes as $componente)
+            {{-- @foreach(Auth::user()->perfil->componentes as $componente)
 		        @if($componente->nombre == "indice agentes")
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-target="#agentes">
@@ -97,7 +97,7 @@
 						</div>
 					</li>
 				@endif
-            @endforeach
+            @endforeach --}}
 
 			{{-- Recursos Humanos --}}
 			@foreach(Auth::user()->perfil->componentes as $componente)
@@ -272,9 +272,6 @@
 			@endforeach
 		</ul>
 	</div>
-</nav>
-{{-- Segunda nav para poner elementos debajo --}}
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #081170;">
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown">
@@ -292,3 +289,7 @@
 		</ul>
 	</div>
 </nav>
+{{-- Segunda nav para poner elementos debajo --}}
+{{-- <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #081170;">
+	
+</nav> --}}
