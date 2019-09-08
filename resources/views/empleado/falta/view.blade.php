@@ -55,8 +55,8 @@
 						<label class="control-label" for="problema" id="lbl_problema">Tipo de falta:</label>
 						<select id="tipofalta" name="tipofalta" class="form-control" required="">
 							<option value="">Seleccione el tipo de falta</option>
-							<option value="retardo justificada">Retardo justificado</option>
-							<option value="retardo injustificada">Retardo injustificado</option>
+							<option value="retardo justificado">Retardo justificado</option>
+							<option value="retardo injustificado">Retardo injustificado</option>
 							<option value="falta justificada">Falta justificada</option>
 							<option value="falta injustificada">Falta injustificada</option>
 						</select>
@@ -96,26 +96,26 @@
 				<div class="row">
 					<div class="col-12 col-md-3">
 						<div class="form-group">
-							<label for="">A</label>
-							<input type="text" value="" class="form-control" readonly>
+							<label for=""><strong>Retardos justificados</strong></label>
+							<input type="text" value="{{count($faltas->where('tipofalta','retardo justificado'))}}" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="col-12 col-md-3">
 						<div class="form-group">
-							<label for="">B</label>
-							<input type="text" value="" class="form-control" readonly>
+							<label for=""><strong>Retardos injustificados</strong></label>
+							<input type="text" value="{{count($faltas->where('tipofalta','retardo injustificado'))}}" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="col-12 col-md-3">
 						<div class="form-group">
-							<label for="">C</label>
-							<input type="text" value="" class="form-control" readonly>
+							<label for=""><strong>Falta justificada</strong></label>
+							<input type="text" value="{{count($faltas->where('tipofalta','falta justificada'))}}" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="col-12 col-md-3">
 						<div class="form-group">
-							<label for="">D</label>
-							<input type="text" value="" class="form-control" readonly>
+							<label for=""><strong>Falta insjustificada</strong></label>
+							<input type="text" value="{{count($faltas->where('tipofalta','falta injustificada'))}}" class="form-control" readonly>
 						</div>
 					</div>
 				</div>

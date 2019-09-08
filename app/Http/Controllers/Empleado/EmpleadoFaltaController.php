@@ -31,6 +31,7 @@ class EmpleadoFaltaController extends Controller
     public function index(Empleado $empleado)
     {
         $faltas = $empleado->faltas;
+        // dd(count($faltas->where('tipofalta','falta injustificada')));
         return view('empleado.falta.view',['empleado'=>$empleado,'faltas'=>$faltas]);
     }
 
