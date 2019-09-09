@@ -15,8 +15,10 @@ class EmpleadoPermisoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $totalPermisosPorDia = 0;
         $totalDiasPermitidos = 0;
         $totalPermisosPorHora = 0;

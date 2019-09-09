@@ -117,9 +117,10 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(Empleado $empleado)
+    public function show($id)
     {
-        // dd($empleado);
+        $empleado = Empleado::withTrashed()->find($id);
+        // $posts = Post::withTrashed()->find($id);
         return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
     }
 

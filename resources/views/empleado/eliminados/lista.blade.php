@@ -37,7 +37,10 @@
                                     </button>                                    
                                 </form>
                                 {{-- Botón para mirar el historial del empleado --}}
-                                <a href="{{route('empleados.show.deleted',['id'=>$empleado->id])}}" class="btn btn-info mt-1"><strong>Ver</strong></a>
+                                {{-- <a href="{{route('empleados.show',['id'=>$empleado->id])}}" class="btn btn-info mt-1"><strong>Ver</strong></a> --}}
+                                <a href="{{ route('empleados.show', [$empleado]) }}" class="btn btn-primary mt-1">
+                                    <i class="fa fa-eye"></i> Ver
+                                </a>
                             </td>
                         </tr>
                         @endforeach

@@ -27,8 +27,9 @@ class EmpleadoEmergenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $emergencia = $empleado->emergencia;
         if ($emergencia == null) {
             # code...
@@ -45,8 +46,9 @@ class EmpleadoEmergenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado)
+    public function create($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $emergencia = new EmpleadoEmergencia;
         $edit = false;
         return view('empleado.emergencia.create',['empleado'=>$empleado,'emergencia'=>$emergencia,'edit'=>$edit]);

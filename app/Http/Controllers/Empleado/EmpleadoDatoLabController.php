@@ -21,8 +21,10 @@ class EmpleadoDatoLabController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $dato_lab= $empleado->datos_laborales->last();
         $historial = $empleado->datos_laborales()->paginate(5);
         return view('empleado.datoslaborales.index',['empleado'=>$empleado,'dato_lab'=>$dato_lab,'historial'=>$historial]);

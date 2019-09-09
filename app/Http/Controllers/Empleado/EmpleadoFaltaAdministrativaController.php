@@ -15,8 +15,9 @@ class EmpleadoFaltaAdministrativaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $disciplinas = $empleado->faltas_administrativas;
         return view('empleado.disciplina.index',['empleado'=>$empleado,'disciplinas'=>$disciplinas]);
     }

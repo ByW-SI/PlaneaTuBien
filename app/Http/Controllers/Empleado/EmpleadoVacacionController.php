@@ -28,8 +28,9 @@ class EmpleadoVacacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $vacaciones = $empleado->vacaciones;
         if($empleado->datos_laborales->isEmpty())
             $antiguedad=0;

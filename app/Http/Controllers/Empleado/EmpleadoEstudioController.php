@@ -27,8 +27,9 @@ class EmpleadoEstudioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $estudio = $empleado->estudio;
         if ($estudio == null)
             return redirect()->route('empleados.estudios.create',['empleado'=>$empleado]);
@@ -41,8 +42,9 @@ class EmpleadoEstudioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado)
+    public function create($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $estudio = new EmpleadoEstudio;
         $edit = false;
         

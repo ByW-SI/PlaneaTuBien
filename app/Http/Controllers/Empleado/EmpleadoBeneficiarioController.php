@@ -15,8 +15,9 @@ class EmpleadoBeneficiarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $beneficiario = $empleado->beneficiario;
         // dd($beneficiario);
         if ($beneficiario) {
@@ -31,8 +32,9 @@ class EmpleadoBeneficiarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado)
+    public function create($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $beneficiario = new EmpleadoBeneficiario;
         return view('empleado.beneficiario.form',['empleado'=>$empleado,'beneficiario'=>$beneficiario,'edit'=>false]);
     }
