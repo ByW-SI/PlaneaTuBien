@@ -35,8 +35,11 @@ class EmpleadoDatoLabController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado)
+    public function create($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
+
         $datoslab = new EmpleadoDatoLab;
         $contratos = TipoContrato::get();
         $bajas = TipoBaja::get();
@@ -68,7 +71,7 @@ class EmpleadoDatoLabController extends Controller
         // dd($request->input('cargo'));
         // dd($request->input('tipo'));
         $datoslab = EmpleadoDatoLab::create($request->all());
-        $empleado = Empleado::find($request->empleado_id);
+        $empleado = Empleado::withTrashed()->find($request->empleado_id);
         $empleado->update([
             'tipo'=>$request->input('tipo'),
             'cargo'=>$request->input('cargo')

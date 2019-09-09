@@ -57,8 +57,10 @@ class EmpleadoEstudioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Empleado $empleado)
+    public function store(Request $request,$id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $estudio = new EmpleadoEstudio;
         $estudio->empleado_id = $empleado->id;
         $estudio->escolaridad1 = $request->escolaridad1;
@@ -120,8 +122,10 @@ class EmpleadoEstudioController extends Controller
      * @param  \App\EmpleadoEstudio  $empleadoEstudio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado, $estudio)
+    public function edit($id, $estudio)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $estudio = $empleado->estudio;
         $edit = true;
         return view('empleado.estudio.create',['empleado'=>$empleado,'estudio'=>$estudio,'edit'=>$edit]);
@@ -134,8 +138,10 @@ class EmpleadoEstudioController extends Controller
      * @param  \App\EmpleadoEstudio  $empleadoEstudio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado, $estudio)
+    public function update(Request $request, $id, $estudio)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $estudio = EmpleadoEstudio::findOrFail($estudio);
         $estudio->escolaridad1 = $request->escolaridad1;
         $estudio->institucion1 = $request->institucion1;

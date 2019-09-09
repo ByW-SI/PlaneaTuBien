@@ -52,8 +52,10 @@ class EmpleadoFaltaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Empleado $empleado)
+    public function store(Request $request, $id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $falta = new EmpleadoFalta($request->all());
         $empleado->faltas()->save($falta);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');

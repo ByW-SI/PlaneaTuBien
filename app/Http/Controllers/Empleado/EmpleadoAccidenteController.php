@@ -28,9 +28,10 @@ class EmpleadoAccidenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
-        
+        $empleado = Empleado::withTrashed()->find($id);
+
         $accidentes = $empleado->accidentes()->orderBy('created_at','desc')->get();
         return view('empleado.accidentes.index',['empleado'=>$empleado,'accidentes'=>$accidentes]);
     }
@@ -40,8 +41,10 @@ class EmpleadoAccidenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado)
+    public function create($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $accidente = new EmpleadoAccidente;
         $edit = false;
         return view('empleado.accidentes.create',['empleado'=>$empleado,'accidente'=>$accidente,'edit'=>$edit]);
@@ -53,8 +56,10 @@ class EmpleadoAccidenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Empleado $empleado,Request $request)
+    public function store($id,Request $request)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
          $accidente = new EmpleadoAccidente($request->all());
         $empleado->accidentes()->save($accidente);
         Alert::success('Registro guardado');

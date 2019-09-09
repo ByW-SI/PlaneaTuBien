@@ -130,8 +130,9 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $sucursales = Sucursal::get();
         return view('empleado.form', ['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>true]);  
     }
@@ -143,8 +144,10 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $empleado->update($request->all());
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);

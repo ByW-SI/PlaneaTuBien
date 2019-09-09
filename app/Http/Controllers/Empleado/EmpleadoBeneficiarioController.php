@@ -45,8 +45,9 @@ class EmpleadoBeneficiarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Empleado $empleado, Request $request)
+    public function store($id, Request $request)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $beneficiario = new EmpleadoBeneficiario($request->all());
         $empleado->beneficiario()->save($beneficiario);
         Alert::success('Beneficiario creado correctamente', 'Siga agregando información al empleado');
@@ -70,8 +71,9 @@ class EmpleadoBeneficiarioController extends Controller
      * @param  \App\EmpleadoBeneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado, EmpleadoBeneficiario $beneficiario)
+    public function edit($id, EmpleadoBeneficiario $beneficiario)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         return view('empleado.beneficiario.form',['empleado'=>$empleado,'beneficiario'=>$beneficiario,'edit'=>true]);
     }
 
@@ -82,8 +84,11 @@ class EmpleadoBeneficiarioController extends Controller
      * @param  \App\EmpleadoBeneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado,  EmpleadoBeneficiario $beneficiario)
+    public function update(Request $request, $id,  EmpleadoBeneficiario $beneficiario)
     {
+
+        $empleado = Empleado::withTrashed()->find($id);
+
         $beneficiario->update($request->all());
         Alert::success('Beneficiario actualizado correctamente', 'Siga agregando información al empleado');
         return redirect()->route('empleados.beneficiario.index',['empleado'=>$empleado]);

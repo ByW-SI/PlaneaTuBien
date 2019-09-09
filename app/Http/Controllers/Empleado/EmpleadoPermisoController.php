@@ -57,8 +57,9 @@ class EmpleadoPermisoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Empleado $empleado, Request $request)
+    public function store($id, Request $request)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $permiso = new EmpleadoPermiso($request->all());
         $empleado->permisos()->save($permiso);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
