@@ -119,6 +119,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
+        // dd($empleado);
         return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
     }
 
@@ -168,6 +169,11 @@ class EmpleadoController extends Controller
         $empleadosEliminados = Empleado::onlyTrashed()->get();
         // dd($empleadosEliminados);
         return view('empleado.eliminados.lista',compact('empleadosEliminados'));
+    }
+
+    public function showDeleted($id){
+        $empleado = Empleado::withTrashed()->find($id);
+        return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
     }
 
     public function undelete(Request $request){

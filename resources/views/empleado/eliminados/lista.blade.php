@@ -28,13 +28,16 @@
                             <td>{{$empleado->materno}}</td>
                             <td>{{$empleado->motivo_baja}}</td>
                             <td>
+                                {{-- Botón para restablecer al empleado --}}
                                 <form action="{{route('empleados.undelete')}}" method="POST">
                                     @csrf
                                     <input type="hidden" value="{{$empleado->id}}" name="empleado_id">
                                     <button type="submit" class="btn btn-warning">
-                                        <strong>restablecer</strong>
+                                        <strong>Restablecer</strong>
                                     </button>                                    
                                 </form>
+                                {{-- Botón para mirar el historial del empleado --}}
+                                <a href="{{route('empleados.show.deleted',['id'=>$empleado->id])}}" class="btn btn-info mt-1"><strong>Ver</strong></a>
                             </td>
                         </tr>
                         @endforeach
