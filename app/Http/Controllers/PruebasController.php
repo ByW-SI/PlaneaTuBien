@@ -22,8 +22,9 @@ class PruebasController extends Controller
 
     public function index()
     {
-        return $this->pruebaService->handle();
+        // return $this->pruebaService->handle();
 
+        Contrato::where('id',375)->first()->isValidFechaPago();
 
         // $empleados_no_usuarios = Empleado::noUsers()->get();
         // return $empleados_no_usuarios;

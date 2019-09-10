@@ -101,7 +101,7 @@
 				<div class="row form-group">
 					<div class="col-5 text-center offset-4">
 						<label for="motivo" class="control-label">Especificar motivo:</label>
-						<textarea name="motivo" id="motivo" class="form-control" maxlength="500"></textarea>
+						<textarea name="motivo" id="motivo" class="form-control" maxlength="500" required></textarea>
 					</div>
 				</div>
 				<div class="row form-group">

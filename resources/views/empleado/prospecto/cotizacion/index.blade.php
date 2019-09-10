@@ -112,6 +112,7 @@
                 <div class="col-sm-4">
                     <h5>Cotizaciones:</h5>
                 </div>
+                {{-- {{dd($prospecto->perfil)}} --}}
                 @if (!$prospecto->perfil)
                     <div class="col-sm-4 text-center">
                         <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-success">

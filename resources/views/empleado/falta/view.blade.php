@@ -63,7 +63,7 @@
 					</div>
 					<div class="col-5">
 						<label class="control-label" for="motivo" id="lbl_comen">Especificar el motivo de la falta:</label>
-						<textarea class="form-control" id="id_coment" name="motivo" maxlength="500"></textarea>
+						<textarea class="form-control" id="id_coment" name="motivo" maxlength="500" required></textarea>
 					</div>
 				</div>
 				<div class="row form-group">

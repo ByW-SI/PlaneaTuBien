@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Contrato extends Model
 {
@@ -52,6 +53,27 @@ class Contrato extends Model
 
     public function mensualidades(){
         return $this->hasMany('App\Mensualidad');
+    }
+
+
+    /**
+     * Validation methods
+     */
+
+    public function getFechaPago()
+    {
+        $siguientePago = new Carbon('first day of this month');
+        $siguientePago = $siguientePago->addMonth();
+        $siguientePago = $siguientePago->addDays(6);
+
+        while ($siguientePago->englishDayOfWeek === "Saturday" || $siguientePago->englishDayOfWeek === "Sunday") {
+            /*
+            Aqui ira la condicion de la precarga de dias feriados
+            */
+            $siguientePago->addDay();
+        }
+
+        return $siguientePago->format('Y-m-d');
     }
 
     /**

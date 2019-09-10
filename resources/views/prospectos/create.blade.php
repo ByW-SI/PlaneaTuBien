@@ -24,11 +24,11 @@
             <div class="row row-group">
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Nombre:</label>
-                    <input type="text" class="form-control" value="{{ old('nombre') }}" name="nombre">
+                    <input type="text" class="form-control" value="{{ old('nombre') }}" name="nombre" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Apellido Paterno:</label>
-                    <input type="text" class="form-control" value="{{ old('appaterno') }}" name="appaterno">
+                    <input type="text" class="form-control" value="{{ old('appaterno') }}" name="appaterno" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Apellido Materno:</label>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Correo electronico:</label>
-                    <input type="text" class="form-control" value="{{ old('email') }}" name="email">
+                    <input type="text" class="form-control" value="{{ old('email') }}" name="email" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Telefono:</label>
