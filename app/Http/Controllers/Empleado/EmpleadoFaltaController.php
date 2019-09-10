@@ -28,9 +28,11 @@ class EmpleadoFaltaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $faltas = $empleado->faltas;
+        // dd(count($faltas->where('tipofalta','falta injustificada')));
         return view('empleado.falta.view',['empleado'=>$empleado,'faltas'=>$faltas]);
     }
 
@@ -50,8 +52,10 @@ class EmpleadoFaltaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Empleado $empleado)
+    public function store(Request $request, $id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $falta = new EmpleadoFalta($request->all());
         $empleado->faltas()->save($falta);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');

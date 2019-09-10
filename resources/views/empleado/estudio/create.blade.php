@@ -84,14 +84,13 @@
 					</div>
 					<div class="col-4">
 						<label class="control-label" for="cedula1" id="lbl_cedula">Número de Cédula:</label>
-						<input type="text" class="form-control" id="cedula1" name="cedula1" value="{{ $estudio->cedula1 }}" required>
+						<input type="text" class="form-control" id="cedula1" name="cedula1" value="{{ $estudio->cedula1 }}">
 					</div>
 				</div>
 				<div class="row form-group">
 					<div class="col-4">
 						<label class="control-label">Escolaridad 2:</label>
-						<select type="select" name="escolaridad2" class="form-control" id="escolaridad2"
-						 required>
+						<select type="select" name="escolaridad2" class="form-control" id="escolaridad2">
 							<option value="">Seleccionar</option>
 							<option id="1" value="Primaria" @if ($estudio->escolaridad2 == "Primaria")
 								selected="selected" 
@@ -122,7 +121,7 @@
 					</div>
 					<div class="col-4">
 						<label class="control-label" for="cedula2" id="lbl_cedula">Número de Cédula:</label>
-						<input type="text" class="form-control" id="cedula2" name="cedula2" value="{{ $estudio->cedula2 }}" required>
+						<input type="text" class="form-control" id="cedula2" name="cedula2" value="{{ $estudio->cedula2 }}">
 					</div>
 				</div>
 				<div class="row form-group">

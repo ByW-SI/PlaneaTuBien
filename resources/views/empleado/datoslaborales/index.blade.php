@@ -207,16 +207,18 @@
 				</div>
 			@else
 				<div class="d-flex justify-content-center">
-					<div class="offset-2 col-4">
+					{{-- <div class="offset-2 col-4">
 						<a class="btn btn-warning btn-md" href="{{ route('empleados.laborals.edit',['empleado'=>$empleado,'dato_lab'=>$dato_lab]) }}">
 							<i class="fa fa-pencil"></i><strong>Editar</strong>
 						</a>
-					</div>
-					<div class="col-4">
+					</div> --}}
+					<div class="col-4"></div>
+					<div class="col-4 text-center">
 						<a class="btn btn-success btn-md" href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}">
 							<i class="fa fa-plus"></i><strong>Nuevo</strong>
 						</a>
 					</div>
+					<div class="col-4"></div>
 				</div>
 			@endif
 		@else
@@ -238,17 +240,21 @@
 						<th>Salario nominal</th>
 						<th>Hora de entrada</th>
 						<th>Hora de salida</th>
+						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($historial as $datoslab)
 						<tr {{--  title="Haz click para más detalles" style="cursor: pointer;" data-toggle="modal" data-target="#modal-info" onclick="buscarDato({{$datoslab->id}})"--}}>
 							<td>{{$datoslab->fecha_contrato}}</td>
-							<td>{{$datoslab->contrato->nombre}}</td>
-							<td>{{$datoslab->puesto->nombre}}</td>
+							<td>{{ !$datoslab->contrato ? : $datoslab->contrato->nombre}}</td>
+							<td>{{ !$datoslab->puesto ? : $datoslab->puesto->nombre}}</td>
 							<td>{{$datoslab->salario_nomina}}</td>
 							<td>{{$datoslab->hora_entrada}}</td>
 							<td>{{$datoslab->hora_salida}}</td>
+							<td>
+								<a href="#" class="btn btn-info">Ver</a>
+							</td>
 						</tr>
 					@endforeach
 				</tbody>

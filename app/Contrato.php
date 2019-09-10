@@ -55,6 +55,27 @@ class Contrato extends Model
         return $this->hasMany('App\Mensualidad');
     }
 
+
+    /**
+     * Validation methods
+     */
+
+    public function getFechaPago()
+    {
+        $siguientePago = new Carbon('first day of this month');
+        $siguientePago = $siguientePago->addMonth();
+        $siguientePago = $siguientePago->addDays(6);
+
+        while ($siguientePago->englishDayOfWeek === "Saturday" || $siguientePago->englishDayOfWeek === "Sunday") {
+            /*
+            Aqui ira la condicion de la precarga de dias feriados
+            */
+            $siguientePago->addDay();
+        }
+
+        return $siguientePago->format('Y-m-d');
+    }
+
     /**
      * Scope methods
      */

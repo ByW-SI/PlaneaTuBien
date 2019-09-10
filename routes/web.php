@@ -89,6 +89,9 @@ Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador')->mid
 // AGENTES
 
 Route::resource('empleados','Empleado\EmpleadoController')->middleware('auth');
+Route::post('empleados/undelete','Empleado\EmpleadoController@undelete')->name('empleados.undelete')->middleware('auth');
+Route::get('empleados/deleted/list','Empleado\EmpleadoController@deletedList')->name('empleados.deleted.list')->middleware('auth');
+Route::get('empleados/deleted/show/{id}','Empleado\EmpleadoController@showDeleted')->name('empleados.show.deleted')->middleware('auth');
 Route::get('agentes','Empleado\EmpleadoController@indexAgentes')->name('agentes.index')->middleware('auth');
 Route::resource('empleados.contactos','Empleado\EmpleadoContactoController')->middleware('auth');
 Route::resource('empleados.direcciones','Empleado\EmpleadoDireccionController')->middleware('auth');
@@ -114,6 +117,8 @@ Route::resource('empleados.prospectos','Empleado\EmpleadoProspectoController')->
 Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCotizacionController')->middleware('auth');
 Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController')->middleware('auth');
 Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked')->middleware('auth');
+
+Route::get('datos-laborales/{id}','Empleado\EmpleadoDatosLaborales@index')->name('datos-laborales')->middleware('auth');
 
 // PROSPECTOS VISTA APARTE
 Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');

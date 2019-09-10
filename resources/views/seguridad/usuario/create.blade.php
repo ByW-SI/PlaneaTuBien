@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="control-label">✱Email:</label>
-                        <input type="text" name="email" id="email" class="form-control" required readonly>
+                        <input type="text" name="email" id="email" class="form-control" required>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="control-label">✱Contraseña:</label>
@@ -110,7 +110,16 @@
                 $('#name').val(empleado.nombre);
                 $('#paterno').val(empleado.paterno);
                 $('#materno').val(empleado.materno);
-                $('#email').val(empleado.email);
+
+                if(empleado.email != null){
+                    $('#email').attr('readonly', true);
+                    $('#email').val(empleado.email);
+                }else{
+                    $('#email').attr('readonly', false);
+                    $('#email').val(null);
+                }
+
+                
                 $('#formularioNuevoUsuario').show('slow');
 			},
 			error: function(error){

@@ -15,10 +15,30 @@ class EmpleadoPermisoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
+        $totalPermisosPorDia = 0;
+        $totalDiasPermitidos = 0;
+        $totalPermisosPorHora = 0;
+        $totalHorasPermitidas = 0;
+
         $permisos = $empleado->permisos;
-        return view('empleado.permiso.index',['empleado'=>$empleado,'permisos'=>$permisos]);
+        // dd($permisos);
+
+        foreach($permisos as $permiso){
+            if($permiso->tipopermiso == 'dia'){
+                $totalPermisosPorDia += 1;
+                $totalDiasPermitidos += $permiso->diastotales;
+            }
+            if($permiso->tipopermiso == 'hora'){
+                $totalPermisosPorHora += 1;
+                $totalHorasPermitidas += $permiso->horastotales;
+            }
+        }
+
+        return view('empleado.permiso.index',compact('empleado','permisos','totalPermisosPorDia','totalDiasPermitidos','totalPermisosPorHora','totalHorasPermitidas'));
     }
 
     /**
@@ -37,8 +57,9 @@ class EmpleadoPermisoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Empleado $empleado, Request $request)
+    public function store($id, Request $request)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $permiso = new EmpleadoPermiso($request->all());
         $empleado->permisos()->save($permiso);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');

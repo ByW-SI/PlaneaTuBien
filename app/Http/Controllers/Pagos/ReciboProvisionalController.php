@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pagos;
 use App\Banco;
 use App\Contrato;
 use App\Http\Controllers\Controller;
+use App\Mensualidad;
 use App\PagoInscripcion;
 use App\Recibo;
 use Illuminate\Http\Request;
@@ -228,13 +229,19 @@ class ReciboProvisionalController extends Controller
     }
     public function submitReciboProvisional(Request $request, PagoInscripcion $pago)
     {
+        // dd($request->input());
         $cotizacion = $pago->cotizacion;
     	$prospecto = $cotizacion->prospecto;
     	$presolicitud = $prospecto->perfil->presolicitud;
         $grupos = $cotizacion->plan->grupos;
+
+        // dd($presolicitud->cotizacion()->plan);
+
         // dd($cotizacion->contratos());
+        // dd($cotizacion->plan->grupos()->get());
         foreach ($grupos as $grupo) {
-            if($grupo->contratos > 0 && $grupo->activo == 1){
+            // dd($grupo->contratos);
+            if( $grupo->contratos > 0 && $grupo->activo == 1){
                 $rules=[
                     'monto'=>"required|string",
                     'sucursal'=>"required|max:190",
@@ -248,6 +255,7 @@ class ReciboProvisionalController extends Controller
                     'cuota_periodica'=>"required|string",
                     'total'=>"required|string"
                 ];
+                // dd('aqui');
                 $this->validate($request,$rules);
                 // dd($request->all());
                 $recibo = new Recibo($request->all());
@@ -265,6 +273,9 @@ class ReciboProvisionalController extends Controller
 
                 if ($presolicitud->contratos->isEmpty()) {
                   foreach ($cotizacion->contratos() as $value) {
+
+                    // dd($presolicitud->cotizacion());
+
                     $contrato = new Contrato;
                     $contrato->monto = $value;
                     $contrato->grupo()->associate($grupo->id);
@@ -273,9 +284,20 @@ class ReciboProvisionalController extends Controller
                     $contrato->numero_contrato = 500-$grupo->contratos;
                     $contrato->estado = "registrado";
                     $presolicitud->contratos()->save($contrato);
+                    
+                    $mensualidad = Mensualidad::create([
+                        "contrato_id"=>$contrato->id,
+                        "cantidad"=>$presolicitud->cotizacion()->plan->corrida_meses_fijos($contrato->monto)['integrante']['total'],
+                        "fecha"=>$contrato->getFechaPago(),
+                        "recargo"=>0,
+                        "pagado"=>0,
+                        "abono"=>0
+                    ]);
                   }
                 }
                 return redirect()->route('pagos.index');
+            }else{
+                return redirect()->back();
             }
         }
     }

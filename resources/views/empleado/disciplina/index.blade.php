@@ -25,7 +25,7 @@
                 <a class="nav-link" href="{{ route('empleados.permisos.index' , ['empleado' => $empleado]) }}">Permisos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('empleados.faltas.index' , ['empleado' => $empleado]) }}">Faltas</a>
+                <a class="nav-link" href="{{ route('empleados.faltas.index' , ['empleado' => $empleado]) }}">Faltas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('empleados.estudios.index' , ['empleado' => $empleado]) }}">Estudios</a>
@@ -34,34 +34,36 @@
                 <a class="nav-link" href="{{ route('empleados.emergencias.index' , ['empleado' => $empleado]) }}">Emergencias</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('empleados.disciplinas.index' , ['empleado' => $empleado]) }}">Falta Administrativa</a>
+                <a class="nav-link active" href="{{ route('empleados.disciplinas.index' , ['empleado' => $empleado]) }}">Falta Administrativa</a>
             </li>
         </ul>
     </div>
 </div>
 	<div class="card">
 		<div class="card-header">
-			<h4>Faltas Laborales:</h4>
+			<h4>Reportes de disciplina:</h4>
 		</div>
 		<div class="card-body">
-			<form role="form" method="POST" action="{{ route('empleados.faltas.store',['empleado'=>$empleado]) }}">
+			<form role="form" method="POST" action="{{ route('empleados.disciplinas.store',['empleado'=>$empleado]) }}">
 				@csrf
 				<div class="row form-group">
-					<div class="col-3">
-						<label class="control-label" for="fecha" id="lbl_fecha">Fecha de la falta:</label>
-						<input type="date" class="form-control" id="id_fecha" name="fecha" required>
+					<div class="col-4">
+						<label for="fecha" class="control-label">Fecha de Reporte de Disciplina</label>
+						<input type="date" name="fecha" id="fecha" class="form-control" required="">
 					</div>
-					<div class="col-3">
-						<label class="control-label" for="problema" id="lbl_problema">Tipo de falta:</label>
-						<select id="tipofalta" name="tipofalta" class="form-control" required="">
-							<option value="">Seleccione el tipo de falta</option>
-							<option value="justificada">Falta justificada</option>
-							<option value="injustificada">Falta injustificada</option>
+					<div class="col-4">
+						<label for="tipoindisciplina" class="control-label">Tipo de amonestación</label>
+						<select name="tipofalta" id="tipoindisciplina" class="form-control" required="">
+							<option value="">Seleccione la amonestación que cometio el empleado</option>
+							<option value="amonestacion_verb">Amonestación verbal</option>
+							<option value="amonestacion_escr">Amonestación escrita</option>
+							<option value="suspension">Suspensión de labores</option>
+							<option value="rescicion">Rescición de contrato</option>
 						</select>
 					</div>
-					<div class="col-5">
-						<label class="control-label" for="motivo" id="lbl_comen">Especificar el motivo de la falta:</label>
-						<textarea class="form-control" id="id_coment" name="motivo" maxlength="500"></textarea>
+					<div class="col-4">
+						<label for="motivo" class="control-label">Especifique el motivo</label>
+						<textarea class="form-control" id="problema" name="problema" maxlength="50" required></textarea>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -76,22 +78,29 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr class="table-info">
-							<th scope="col">Fecha</th>
-							<th scope="col">Tipo de falta</th>
-							<th scope="col-2" colspan="2">motivo</th>
+							<th>Fecha del reporte</th>
+							<th>Tipo de disciplina</th>
+							<th>Motivo</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($faltas as $falta)
+						@forelse ($disciplinas as $disciplina)
 							<tr>
-								<td>{{$falta->fecha}}</td>
-								<td>{{$falta->tipofalta}}</td>
-								<td colspan="2">{{$falta->motivo}}</td>
+								<td>{{$disciplina->fecha}}</td>
+								<td>{{$disciplina->tipofalta}}</td>
+								<td>{{$disciplina->problema}}</td>
 							</tr>
-						@endforeach
+						@empty
+							<div class="alert alert-danger" role="alert">
+								El empleado {{$empleado->nombre." ".$empleado->appaterno." ".$empleado->apmaterno}} no tiene registros de altercados
+							</div>
+						@endforelse
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+@endsection
+@section('script')
+
 @endsection

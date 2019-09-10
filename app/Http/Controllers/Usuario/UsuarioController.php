@@ -79,7 +79,8 @@ class UsuarioController extends Controller
                     'perfil_id'=>'required',
                     'empleado_id'=>'required',
                     'name'=>'required',
-                    'password' => 'required'
+                    'password' => 'required',
+                    'email' => 'required'
                 ];
                 $this->validate($request, $rules);
                 // dd('validate');
@@ -87,7 +88,7 @@ class UsuarioController extends Controller
                 $empleado = Empleado::where('id', $inputs['empleado_id'])->first();
                 $usuario = User::create([
                     'name' => $inputs['name'],
-                    'email' => $empleado->email,
+                    'email' => $inputs['email'],
                     'password' => bcrypt($inputs['password']),
                     'perfil_id' => $inputs['perfil_id'],
                     'empleado_id' => $inputs['empleado_id']
@@ -163,11 +164,12 @@ class UsuarioController extends Controller
 
     public function destroy(User $usuario)
     {
+        // dd($usuario);
         if($this->hasComponent('eliminar usuario')) {
-            $usuario = User::find($id);
-            $seguridad = $this->hasSecurity($usuario->perfil);
-            if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
-                return redirect()->route('denegado');
+            // $seguridad = $this->hasSecurity($usuario->perfil);
+            // dd('aqu');
+            // if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN /*&& $seguridad*/))
+                // return redirect()->route('denegado');
             $usuario->delete();
             return redirect()->route('usuarios.index');
         }

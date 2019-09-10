@@ -13,8 +13,14 @@
                 <div class="form-row mt-3">
                     <div class="col-6 offset-3">
                         <div class="input-group">
-                            <select class="custom-select" id="empleado" aria-label="Example select with button addon" name="empleado">
+                            {{-- <select required class="custom-select" id="empleado" aria-label="Example select with button addon" name="empleado">
                                 <option selected>Agente...</option>
+                                @foreach($empleados as $emp)
+                                    <option value="{{ $emp->id }}">{{ $emp->nombre }} {{ $emp->paterno }} {{ $emp->materno }}</option>
+                                @endforeach
+                            </select> --}}
+                            <select name="empleado" class="custom-select" id="listaEmpleados" required>
+                                <option value=""></option>
                                 @foreach($empleados as $emp)
                                     <option value="{{ $emp->id }}">{{ $emp->nombre }} {{ $emp->paterno }} {{ $emp->materno }}</option>
                                 @endforeach

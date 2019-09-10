@@ -13,8 +13,9 @@ class EmpleadoRelacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         return view('empleado.empleados.index', ['empleados'=>$empleado->empleados, 'empleado'=>$empleado]);
     }
 
@@ -50,6 +51,7 @@ class EmpleadoRelacionController extends Controller
      */
     public function store(Request $request, Empleado $empleado)
     {
+        dd($empleado);
         $empleado2 = Empleado::find($request->input('empleado'));
         $empleado2->jefe()->associate($empleado);
         $empleado2->save();

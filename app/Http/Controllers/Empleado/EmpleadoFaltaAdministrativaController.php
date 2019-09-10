@@ -15,8 +15,9 @@ class EmpleadoFaltaAdministrativaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $disciplinas = $empleado->faltas_administrativas;
         return view('empleado.disciplina.index',['empleado'=>$empleado,'disciplinas'=>$disciplinas]);
     }
@@ -37,8 +38,10 @@ class EmpleadoFaltaAdministrativaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Empleado $empleado)
+    public function store(Request $request,$id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $disciplina = new EmpleadoFaltaAdministrativa($request->all());
         $empleado->faltas_administrativas()->save($disciplina);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');

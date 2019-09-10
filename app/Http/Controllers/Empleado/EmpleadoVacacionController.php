@@ -28,8 +28,9 @@ class EmpleadoVacacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Empleado $empleado)
+    public function index($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $vacaciones = $empleado->vacaciones;
         if($empleado->datos_laborales->isEmpty())
             $antiguedad=0;
@@ -80,8 +81,10 @@ class EmpleadoVacacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Empleado $empleado)
+    public function store(Request $request, $id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $vacacion = new EmpleadoVacacion($request->all());
         $empleado->vacaciones()->save($vacacion);
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');

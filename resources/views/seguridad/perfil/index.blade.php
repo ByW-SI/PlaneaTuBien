@@ -1,6 +1,12 @@
 @extends('principal')
 @section('content')
 
+@if ( session('status') )
+    <div class="alert alert-danger">
+        {{session('status')}}
+    </div>
+@endif
+
 <div class="card">
     <div class="card-header">
     	<div class="row">

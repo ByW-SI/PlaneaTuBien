@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Prospecto;
 use App\Empleado;
 use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
+use App\PerfilDatosPersonalCliente;
 use App\Prospecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,9 @@ class ProspectoController extends Controller
     {
         $empleado = Auth::user()->empleado;
         
-        if ($empleado->id > 1 && $empleado->cargo == "Asesor") 
+        if ($empleado->id > 1 && $empleado->cargo == "Asesor"){
             $prospectos = $empleado->prospectos;
+        } 
         elseif ($empleado->id > 1 && $empleado->cargo == "Supervisor") {
             $prospectos = [];
             foreach ($empleado->empleados as $asesores) {
@@ -40,8 +42,12 @@ class ProspectoController extends Controller
                 }
             }
         }
-        else
+        else{
             $prospectos = Prospecto::get();
+        }
+            
+
+        // dd($prospectos);
         
         return view('prospectos.index', ['prospectos' => $prospectos]);
     }
@@ -100,6 +106,7 @@ class ProspectoController extends Controller
      */
     public function store(Request $request)
     {
+        // dd('aqui');
         $rules = [
             'nombre'=>'required|max:191',
             'appaterno'=>'required|max:191',
@@ -127,6 +134,17 @@ class ProspectoController extends Controller
         $prospecto->monto = $request->monto;
         $prospecto->plan = $request->plan;
         $prospecto->save();
+
+        // $PerfilDatosPersonalCliente = PerfilDatosPersonalCliente::create([
+        //     "prospecto_id"=>$prospecto->id,
+        //     "empleado_id"=>$prospecto->empleado_id,
+        //     "salario_1"=>$prospecto->sueldo,
+        //     "ahorros"=>$prospecto->ahorro,
+        //     "plan"=>$prospecto->plan,
+        // ]);
+
+        // dd($PerfilDatosPersonalCliente);
+
         return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
 

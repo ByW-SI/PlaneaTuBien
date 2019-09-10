@@ -7,6 +7,7 @@ use App\Sucursal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class EmpleadoController extends Controller
 {
@@ -83,6 +84,17 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+        
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'nullable|unique:empleados',
+            'rfc' => 'required|unique:empleados',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('status','ERROR: El correo o el RFC ya existe en el sistema');
+        }
+
         $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
             $empleado->id_jefe = $request->input('gerente');
@@ -105,8 +117,10 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(Empleado $empleado)
+    public function show($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+        // $posts = Post::withTrashed()->find($id);
         return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
     }
 
@@ -116,8 +130,9 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
         $sucursales = Sucursal::get();
         return view('empleado.form', ['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>true]);  
     }
@@ -129,8 +144,10 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
+        $empleado = Empleado::withTrashed()->find($id);
+
         $empleado->update($request->all());
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
@@ -144,9 +161,28 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy(Empleado $empleado, Request $request)
     {
+        $empleado->update(['motivo_baja'=>$request->input('motivo')]);
         $empleado->delete();
+        $empleado->user()->first() == null ? : $empleado->user()->first()->delete();
+        return redirect()->route('empleados.index');
+    }
+
+    public function deletedList(Request $request){
+        $empleadosEliminados = Empleado::onlyTrashed()->get();
+        // dd($empleadosEliminados);
+        return view('empleado.eliminados.lista',compact('empleadosEliminados'));
+    }
+
+    public function showDeleted($id){
+        $empleado = Empleado::withTrashed()->find($id);
+        return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
+    }
+
+    public function undelete(Request $request){
+        $empleado = Empleado::withTrashed()->find($request->input('empleado_id'));
+        $empleado->restore();
         return redirect()->route('empleados.index');
     }
 
