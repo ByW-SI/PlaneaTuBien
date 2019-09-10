@@ -207,16 +207,18 @@
 				</div>
 			@else
 				<div class="d-flex justify-content-center">
-					<div class="offset-2 col-4">
+					{{-- <div class="offset-2 col-4">
 						<a class="btn btn-warning btn-md" href="{{ route('empleados.laborals.edit',['empleado'=>$empleado,'dato_lab'=>$dato_lab]) }}">
 							<i class="fa fa-pencil"></i><strong>Editar</strong>
 						</a>
-					</div>
-					<div class="col-4">
+					</div> --}}
+					<div class="col-4"></div>
+					<div class="col-4 text-center">
 						<a class="btn btn-success btn-md" href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}">
 							<i class="fa fa-plus"></i><strong>Nuevo</strong>
 						</a>
 					</div>
+					<div class="col-4"></div>
 				</div>
 			@endif
 		@else

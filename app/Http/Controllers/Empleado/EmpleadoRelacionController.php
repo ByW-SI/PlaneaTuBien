@@ -51,6 +51,7 @@ class EmpleadoRelacionController extends Controller
      */
     public function store(Request $request, Empleado $empleado)
     {
+        dd($empleado);
         $empleado2 = Empleado::find($request->input('empleado'));
         $empleado2->jefe()->associate($empleado);
         $empleado2->save();
