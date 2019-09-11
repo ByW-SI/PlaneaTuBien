@@ -49,13 +49,13 @@
                 <input type="text" class="form-control" value="{{ $empleado->sucursal ? $empleado->sucursal->nombre : 'NA' }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label">Tipo:</label>
+                <label class="control-label">Puesto:</label>
                 <input type="text" class="form-control" value="{{ $empleado->tipo }}" readonly="">
             </div>			
-            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+            {{-- <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label">Cargo:</label>
                 <input type="text" class="form-control" value="{{ $empleado->cargo }}" readonly="">
-            </div>	
+            </div>	 --}}
             @if($empleado->tipo == 'Asesor')
                 <div class="form-group col-4">
                     <label class="control-label">Supervisor:</label>
