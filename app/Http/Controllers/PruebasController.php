@@ -22,7 +22,11 @@ class PruebasController extends Controller
 
     public function index()
     {
-        // return $this->pruebaService->handle();
+        $contrato = Contrato::find(1);
+        $contrato->referencia =1;
+        return $contrato->referencia;
+
+        //return $this->pruebaService->handle();
 
         Contrato::where('id',375)->first()->isValidFechaPago();
 
