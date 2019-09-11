@@ -68,8 +68,6 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input('cargo'));
-        // dd($request->input('tipo'));
         $datoslab = EmpleadoDatoLab::create($request->all());
         $empleado = Empleado::withTrashed()->find($request->empleado_id);
         $empleado->update([

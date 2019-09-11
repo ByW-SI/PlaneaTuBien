@@ -60,7 +60,7 @@
 					@endforeach
 				</select>
             </div>
-			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+			{{-- <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
 				<label for="cargo">✱Cargo:</label>
                     <select required class="form-control" id="cargo" name="cargo">
                         <option value="" {{$empleado->cargo == "" ? "selected" : ""}}>
@@ -94,9 +94,9 @@
                     		Director de área
                     	</option>
                     </select>
-            </div>
+            </div> --}}
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Tipo:</label>
+                <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Puesto:</label>
 				<select required class="form-control" id="tipo" name="tipo">
                         <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
                         	Seleccionar

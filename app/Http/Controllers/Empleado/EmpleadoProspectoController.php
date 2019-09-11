@@ -71,7 +71,6 @@ class EmpleadoProspectoController extends Controller
      */
     public function show(Empleado $empleado, Prospecto $prospecto)
     {
-        //
         if (isset($prospecto->aprobado)) {
             return view('empleado.prospecto.show',['empleado'=>$empleado,'prospecto'=>$prospecto]);
         } else {
