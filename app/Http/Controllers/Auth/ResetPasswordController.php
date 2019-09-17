@@ -36,4 +36,13 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    protected function getResetValidationRules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
+        ];
+    }
 }

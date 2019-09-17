@@ -81,6 +81,9 @@
                     <select name="empleado_id" id="asesores" class="form-control" required="">
                         <option value="">Seleccionar</option>
                         <option value="{{ $prospecto->asesor ? $prospecto->asesor->id : "" }}" selected="">@if($prospecto->asesor) {{ $prospecto->asesor->nombre }} {{ $prospecto->asesor->paterno }} @else No tiene asignado un proscpecto @endif</option>
+                        @foreach ($asesores as $asesor)
+                        <option value="{{$asesor->id}}">{{ $asesor->nombre }} {{ $asesor->paterno }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group col-sm-3">

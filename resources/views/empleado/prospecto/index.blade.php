@@ -58,8 +58,8 @@
 							</td>
 							<td>
 								<div class="row justify-content-around">
-									<a class="btn btn-info" href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Ver</strong></a>
-									{{-- <a class="btn btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Ver</strong></a> --}}
+									{{-- <a class="btn btn-info" href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Ver</strong></a> --}}
+									<a class="btn btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Editar</strong></a>
 									@if ($prospecto->perfil)
 										<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
 											<i class="fas fa-file-invoice"></i>
