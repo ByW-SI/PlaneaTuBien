@@ -7,17 +7,6 @@
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{$presolicitud->status}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$presolicitud->status}}%"></div>
     </div>
   @else
-    {{-- <div class="d-flex justify-content-center"> 
-      <div class="input-group mb-3 w-50 mr-3">
-        <form class="form-inline" action="{{ route('prospectos.presolicitud.recibos.declaracion_salud',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$presolicitud->recibo]) }}" method="POST">
-          @csrf
-          <input type="text" name="folio" id="folio" placeholder="No. de Poliza" class="form-control" required="">
-          <div class="input-group-append">
-            <button class="btn btn-info" type="submit" id="button-addon2">Declaración de salud</button>
-          </div>
-        </form>
-      </div>
-    </div> --}}
     <div class="d-flex justify-content-center">
       <div>
         <a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" class="btn btn-info mr-3">Manual del consumidor</a>

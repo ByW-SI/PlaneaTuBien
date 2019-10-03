@@ -8,7 +8,7 @@
 	<style type="text/css">
 		ul,li,p{
 			font-size: 13px;
-			text-align:justify-all;
+			text-align:justify;
 		}
 		table, td, th {  
 		  border: 1px solid #ddd;
@@ -27,46 +27,46 @@
 </head>
 <body>
 	<div class="container">
+		{{-- LOGOTIPO --}}
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
+				<div class="u-pull-right">
+					<img src="img/logo.png" width="250">
+				</div>
+			</div>
+		</div>
+		{{-- TITULO --}}
+		<div class="row">
+			<div class="twelve columns">
+				<div class="u-pull-right">
+					<p style="color: orange;">MANUAL DEL CONSUMIDOR</p>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
-		</div>
-		<div class="row">
 			<div class="twelve columns">
-				<h6 style="text-align: center;">MANUAL DEL CONSUMIDOR</h6>
-			</div>
-		</div>
-		<div class="row">
-			<div class="twelve columns">
-				<p style="text-align: justify-all;">
+				<p style="text-align: justify;">
 					Gracias por elegirnos en esta importante decisión de tu vida; en Planea Tú Bien ® estamos comprometidos con la transparencia; a continuación te presentamos un resumen de los puntos más importantes que debes saber sobre nuestra empresa.
 				</p>
-				<label style="text-align: left;"><strong>¿QUIÉN ES PLANEA TU BIEN®?</strong></label>
-				<p style="text-align: justify-all;">
+				<label style="text-align: left;"><strong>¿QUIÉN ES PLANEA TU BIEN?</strong></label>
+				<p style="text-align: justify;">
 					Planea Tú Bien S.A. DE C.V. es una empresa autorizada por la Secretaría de Economía bajo el Reglamento de Sistemas de Comercialización publicado en el diario oficial el 10 de marzo del 2006; esto nos obliga a cumplir reglas más estrictas en beneficio de nuestros clientes. Nuestros socios fundadores cuentan con más de 10 años de experiencia en la industria del autofinanciamiento y de la banca en nuestro país.
 				</p>
 				<label style="text-align: left"><strong>CACTERÍSTICAS DEL SISTEMA</strong></label>
-				<p style="text-align:justify-all">
+				<p style="text-align:justify">
 					Planea Tú Bien ® te ofrece autofinanciamiento inmobiliario el cual está autorizado por la Secretaría de Economía. El autofinanciamiento es un esquema colectivo en donde un grupo de personas aporta mensualmente una cantidad de dinero para la obtención del bien inmueble de tu elección. El bien lo obtienes en un periodo máximo de 180 meses. La adjudicación de bienes se realiza de manera mensual por alguno de los métodos establecidos en el contrato de adhesión (Puntuación, Subasta, Secuencial o Liquidación Directa).
 				</p>
-				<p style="text-align:justify-all">
+				<p style="text-align:justify">
 					Los eventos se realizan ante fedatario público y es ahí donde se decide quién o quienes podrán obtener su propiedad. Los eventos se realizaran el tercer jueves de cada mes a las 9:00 am en nuestras oficinas. En caso de que el tercer jueves fuera inhábil, el evento se realizará el día habil inmediato anterior. Para participar en los eventos únicamente necesitas estar al corriente en tus pagos; para poder participar en las subastas necesitas tener por lo menos 4 meses de antigüedad en el sistemas y tener por lo menos 180 puntos. Para participar en el método secuencial necesitas tener 720 puntos el mes inmediato anterior al evento de adjudicación.
 				</p>
-				<p style="text-align:justify-all">
+				<p style="text-align:justify">
 					Para tener la mayor probabilidad de salir adjudicado, lo más importante es acumular la mayor cantidad de puntos: cada aportación de recursos al grupo te da puntos, la mayor cantidad de puntos la obtienes al ser puntual en tus pagos. Si adelantas mensualidades generas los puntos máximos por cada mes adelantado, <strong>el salir adjudicado por lo tanto depende en gran parte de tu esfuerzo.</strong>
 				</p>
-				<p style="text-align:justify-all">
+				<p style="text-align:justify">
 					El monto por contrato séra de entre $300,000 y $500,000 pesos.
 				</p>
 				<label style="text-align: left"><strong>COSTOS DEL SISTEMA</strong></label>
-				<p style="text-align:justify-all">
+				<p style="text-align:justify">
 					Planea Tú Bien ® te ofrece uno de los mejores esquemas para obtener el bien inmueble de tu preferencia, ya que a diferencia de los esquemas tradicionales de financiamiento no te cobre una tasa de interés; eso no quiere decir que no haya costos asociados por participar en nuestro sistema.
 				</p>
 			</div>
@@ -94,46 +94,32 @@
 			</div>
 		</div>
 		<div class="page-break"></div>
+		{{-- LOGOTIPO --}}
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
+				<div class="u-pull-right">
+					<img src="img/logo.png" width="250">
 				</div>
 			</div>
 		</div>
+
+		<br>
+		{{-- TABLA --}}
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
-		</div>
-		<div class="row">
-			<table>
+			<table class="u-full-width">
 				<tbody>
 					<tr>
-						<th>
-							Cuota de inscripción:
-						</th>
-						<td>
-							{{$plan->inscripcion}}% (más IVA)
-						</td>
-						<td>
-							Una sola vez al inicio
-						</td>
+						<th>Cuota de inscripción:</th>
+						<td>{{$plan->inscripcion}}%</td>
+						<td>Una sola vez al inicio</td>
 					</tr>
 					<tr>
-						<th>
-							Cuota de administración: 
-						</th>
-						<td>
-							{{$plan->cuota_admon}}% (más IVA)
-						</td>
-						<td>
-							Mes a mes en tu mensualidad
-						</td>
+						<th>Cuota de administración:</th>
+						<td>{{$plan->cuota_admon}}%</td>
+						<td>Mes a mes en tu mensualidad</td>
 					</tr>
 					<tr>
-						<th>
-							Prima de Seguro de vida Incapacidad Permanente Total e Invalidez:
-						</th>
+						<th>Prima de Seguro de vida Incapacidad Permanente Total e Invalidez:</th>
 						<td> {{$plan->s_v}}%</td>
 						<td>Mes a mes en tu mensualidad</td>
 					</tr>
@@ -192,7 +178,7 @@
 					</div>
 					<div class="eight columns u-pull-right">
 						<label style="text-align:center;">{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</label>
-						<div style="border-bottom: 0.5px solid #B8242B; top:20px; width: 100%;"></div>
+						<div style="border-bottom: 0.5px solid orange; top:20px; width: 100%;"></div>
 					</div>
 				</div>
 				<div class="five columns u-pull-right">

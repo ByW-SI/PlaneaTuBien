@@ -125,6 +125,8 @@ class DocumentosController extends Controller
             case "Tanda 36":
                 $puntos = 630;
                 break;
+            default:
+                $puntos = 0;
         }
 
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_tanda_pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'plan'=>$plan,'contrato'=>$contrato,'cotizacion'=>$cotizacion,"puntos"=>$puntos]);
@@ -136,6 +138,7 @@ class DocumentosController extends Controller
     {
         $cotizacion = $presolicitud->perfil->cotizacion;
         $plan = $cotizacion->plan;
+        $puntos = 0;
         switch ($cotizacion->plan->nombre){
             case "Tanda 1":
                 $puntos = 720;
@@ -172,6 +175,7 @@ class DocumentosController extends Controller
     {
         $cotizacion = $presolicitud->perfil->cotizacion;
         $plan = $cotizacion->plan;
+        $puntos = 0;
         switch ($cotizacion->plan->nombre){
             case "Tanda 1":
                 $puntos = 720;

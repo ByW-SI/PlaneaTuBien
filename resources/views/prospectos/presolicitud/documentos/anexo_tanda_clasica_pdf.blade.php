@@ -46,15 +46,12 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
-		</div>
-		<div class="row">
 			<div class="twelve columns">
 				<h6 class="center"><strong>ANEXO</strong></h6>
 			</div>
 		</div>
 		<div class="row">
-			<div class="twelve columns">
+			<div class="twelve columns" style="background-color: #111; color: #fff">
 				<label class="center"><strong>CARTA DE INSTRUCCIÓN</strong></label>
 			</div>
 		</div>
@@ -74,10 +71,10 @@
 							<p class="right">Valor del bien:</p>
 						</div>
 						<div class="one-half column u-pull-right">
-							<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$presolicitud->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black; margin-top: 10px;"><strong>{{$contrato->grupo->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid orange;"><strong>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid orange; margin-top: 10px;"><strong>{{$presolicitud->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid orange; margin-top: 10px;"><strong>{{$contrato->grupo->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid orange;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
 						</div>
 					</div>
 				</div>
@@ -88,22 +85,15 @@
 						<p class="right">Plazo del Contrato:</p>
 					</div>
 					<div class="one-half column u-pull-right">
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>{{$puntos}} puntos</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
-						<p class="center" style="border-bottom: 0.5px solid black;"><strong>168 meses</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid orange;"><strong>{{$puntos}} puntos</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid orange;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
+						<p class="center" style="border-bottom: 0.5px solid orange;"><strong>168 meses</strong></p>
 						
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="twelve columns">
-				<div class="row" >
-						
-					<p class="center">Aportaciones Extraordinarias 100% a Capital</p>
-				</div>
-			</div>
-		</div>
+		<br>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
@@ -125,6 +115,7 @@
 				</p>
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
@@ -132,6 +123,7 @@
 				</p>
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left" style="padding-left: 25px;">
@@ -139,29 +131,28 @@
 				</p>
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="twelve columns">
-				<p class="justify">
+				<p class="center">
 					<strong>El presente certificado promocional es personal e intransferible, no tiene validez monetaria, no implica ninguna modificación a las cláusulas del contrato de adhesión, ni exime del cumplimiento de las obligaciones contraídas en el mismo.</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
-				<p class="justify">
+				<p class="center">
 					<strong>Al ser un documento de manifestación voluntaria, no pretende modificar el contenido del contrato de adhesión toda vez que siempre prevalecerán las condiciones pactadas en el mismo.</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
-				<p class="justify">
+				<p class="center">
 					<strong>Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes.</strong>
 				</p>
 			</div>
 		</div>
-		<br>
-		<br>
 		<br>
 		<br>
 		<br>
@@ -195,7 +186,7 @@
 				</div>
 				<div class="one-half column u-pull-right">
 					<p class="center"><strong>Nombre y firma del consumidor</strong></p>
-					<div style="border-top: 1px solid black; margin-top: 50px; padding-left: 15px">
+					<div style="border-top: 1px solid orange; margin-top: 50px;">
 						<p class="center">{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</p>
 					</div>
 				</div>

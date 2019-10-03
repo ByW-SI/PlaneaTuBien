@@ -44,34 +44,52 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $rules=[
-            'nombre'=>'required',
-            'plazo'=>'required|integer',
-            'mes_aportacion_adjudicado'=>'required|integer',
-            'mes_adjudicado'=>'required|integer',
-            'plan_meses'=>'required|integer',
-            'actualizaciones'=>'required|integer',
-            'aportacion_1'=>'required|numeric',
-            'mes_1'=>'required|integer',
-            'aportacion_2'=>'required|numeric',
-            'mes_2'=>'required|integer',
-            'aportacion_3'=>'required|numeric',
-            'mes_3'=>'required|integer',
-            'aportacion_liquidacion'=>'required|numeric',
-            'mes_liquidacion'=>'required|integer',
-            'semestral'=>'required|numeric',
-            'anual'=>'required|numeric',
-            'inscripcion'=>'required|numeric',
-            'cuota_admon'=>'required|numeric',
-            's_v'=>'required|numeric',
-            's_d'=>'required|numeric',
-        ];
-        $this->validate($request,$rules);
-        $plan = Plan::create($request->all());
-        foreach ($request->grupos as $grupo_id) {
-            $plan->grupos()->attach($grupo_id);
+        // dd($request->input('tipo_plan'));
+
+        if( $request->input('tipo_plan') == 'plan normal' ){
+            $rules=[
+                'nombre'=>'required',
+                'plazo'=>'required|integer',
+                'mes_aportacion_adjudicado'=>'required|integer',
+                'mes_adjudicado'=>'required|integer',
+                'plan_meses'=>'required|integer',
+                'actualizaciones'=>'required|integer',
+                'aportacion_1'=>'required|numeric',
+                'mes_1'=>'required|integer',
+                'aportacion_2'=>'required|numeric',
+                'mes_2'=>'required|integer',
+                'aportacion_3'=>'required|numeric',
+                'mes_3'=>'required|integer',
+                'aportacion_liquidacion'=>'required|numeric',
+                'mes_liquidacion'=>'required|integer',
+                'semestral'=>'required|numeric',
+                'anual'=>'required|numeric',
+                'inscripcion'=>'required|numeric',
+                'cuota_admon'=>'required|numeric',
+                's_v'=>'required|numeric',
+                's_d'=>'required|numeric',
+            ];
+            $this->validate($request,$rules);
+            $plan = Plan::create($request->all());
+            foreach ($request->grupos as $grupo_id) {
+                $plan->grupos()->attach($grupo_id);
+            }
         }
+
+        if( $request->input('tipo_plan') == 'plan libre' ){
+            $rules=[
+                'nombre'=>'required',
+                'plazo'=>'required|integer',
+                'plan_meses'=>'required|integer',
+
+            ];
+            $this->validate($request,$rules);
+            $plan = Plan::create($request->all());
+            foreach ($request->grupos as $grupo_id) {
+                $plan->grupos()->attach($grupo_id);
+            }
+        }
+        
         return redirect()->route('plans.index');
 
     }

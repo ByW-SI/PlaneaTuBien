@@ -40,52 +40,63 @@
 </head>
 <body>
 	<div class="container">
+		{{-- LOGOTIPO --}}
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
+				<div class="u-pull-right">
+					<img src="img/logo.png" width="200">
 				</div>
 			</div>
 		</div>
+		{{-- NOMBRE DOCUMENTO --}}
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
+			<div class="twelve columns">
+				<div class="u-pull-right">
+					<p style="color: orange; font-size: 1em;"><strong>Carta de bienvenida</strong></p>
+				</div>
+			</div>
 		</div>
 		<div class="row" style="margin-top: 5px;">
 			<div class="twelve columns">
-				<div class="one-half column u-pull-left">
-					<img src="img/carta_bienvenida_header.png" height="50%" width="60%">
-				</div>
-				<div class="one-half column u-pull-right">
-					<label class="right">
-						México, CDMX a {{date('d')}} de {{__(date('F'))}} del {{date('Y')}}
-					</label>
-					<label class="center" style="margin-top: 35px;">
-						<strong>Carta de Bienvenida</strong>
-					</label>
+				<div class="u-pull-right">
+					México, CDMX a {{date('d')}} de {{__(date('F'))}} del {{date('Y')}}
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 5px; margin-left: 25px;">
+		{{-- ESTIMADO CLIENTE --}}
+		<div class="row">
 			<div class="twelve columns">
 				<label class="left">
-					{{$prospecto->perfil->prefijo_1 == "Sr." ? "Estimado cliente:" : "Estimada clienta:"}} 
-					<strong style="border-bottom: 0.5px solid black;">
-						{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
-					</strong>
+					{{$prospecto->perfil->prefijo_1 == "Sr." ? "Estimado cliente:" : "Estimada cliente:"}} 
 				</label>
 			</div>
 		</div>
+		{{--  --}}
+		<div class="row">
+			<div class="twelve columns">
+				<div class="six columns" style="border-bottom: 2px solid orange; margin-left: 40px">
+					<strong>
+						{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
+					</strong>
+				</div>
+			</div>
+		</div>
 		<div class="row" style="margin-top: 5px;">
 			<div class="twelve columns">
 				<p class="justify">
-					Le felicitamos por tomar la decisión de pertenecer a <strong>Planea Tu Bien, S.A. de C.V.</strong> y a través de este medio también te damos la bienvenida al servicio de <strong>Atención a Clientes</strong>, agradecemos por la confianza que ha depositado en nosotros.
+					Le felicitamos por tomar la decisión de pertenecer a <strong>Planea Tu Bien, S.A. de C.V.</strong> 
+					y a través de este medio también te damos la bienvenida al servicio de <strong>Atención a Clientes</strong>, 
+					agradecemos por la confianza que ha depositado en nosotros.
 				</p>
 				<p class="justify">
-					Nuestro compromiso es ofrecerle el mejor servicio, así como satisfacer sus necesidades para adquirir su casa, terreno y/o local comercial.
+					Nuestro compromiso es ofrecerle el mejor servicio, así como satisfacer sus necesidades para adquirir su casa, 
+					terreno y/o local comercial.
 				</p>
 				<p class="justify">
-					Para brindarle un mejor servicio y asesorarlo sobre el funcionamiento del plan de financiamiento que usted ha contratado, a partir de este momento cualquier asunto relacionado con el contrato celebrado con <strong>Planea Tu Bien, S.A. de C.V.</strong> queremos invitarlo a ponerse en contacto con nuestra área de atención a clientes mediantelas siguientes formas:
+					Para brindarle un mejor servicio y asesorarlo sobre el funcionamiento del plan de financiamiento que usted 
+					ha contratado, a partir de este momento cualquier asunto relacionado con el contrato celebrado con 
+					<strong>Planea Tu Bien, S.A. de C.V.</strong> queremos invitarlo a ponerse en contacto con nuestra área de 
+					atención a clientes mediantelas siguientes formas:
 				</p>
 				<p class="justify" style="margin-left: 25px;">
 					Vía correo electrónico:
@@ -119,7 +130,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 10px; margin-right: 50px">
+		<div class="row" style="margin-left: 12px; margin-right: 12px; position: fixed;left: 0;bottom: 100px;width: 100%;">
 			<div class="twelve columns">
 				<div class="one-half column u-pull-left">
 					<label class="center">
@@ -127,13 +138,8 @@
 					</label>
 				</div>
 				<div class="one-half column u-pull-right">
-					<label class="center">________________________________________</label>
-					<label class="center">NOMBRE COMPLETO Y FIRMA DEL CLIENTE</label>
-				</div>
-			</div>
-			<div class="row" style="margin-left: 12px; margin-right: 12px; position: fixed;left: 0;bottom: 40px;width: 100%;">
-				<div class="twelve columns">
-					<img src="img/header_privacidad.png" width="100%" height="25%">
+					<label class="center" style="color: orange">________________________________________</label>
+					<label class="center">NOMBRE Y FIRMA </label>
 				</div>
 			</div>
 		</div>

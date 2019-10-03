@@ -41,17 +41,23 @@
 <body>
 	<div class="container">
 		
+		{{-- LOGOTIPO --}}
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left"></div>
-				<div class="two columns u-pull-right">
-					<img src="img/perfil.png" height="40" width="80">
+				<div class="u-pull-right">
+					<img src="img/logo.png" width="200">
 				</div>
 			</div>
 		</div>
+		{{-- NOMBRE DOCUMENTO --}}
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #B8242B; margin-top: 0px;"></div>
+			<div class="twelve columns">
+				<div class="u-pull-right">
+					<p style="color: orange; font-size: 1em;"><strong>Aviso de privacidad</strong></p>
+				</div>
+			</div>
 		</div>
+		{{-- LUGAR Y FECHA DEL DOCUMENTO --}}
 		<div class="row" style="top: 5px;">
 			<div class="twelve columns">
 				<label class="right">
@@ -59,22 +65,30 @@
 				</label>
 			</div>
 		</div>
+		{{-- NOMBRE DEL PACIENTE --}}
 		<div class="row" style="top: 5px; margin-left: 25px;">
 			<div class="twelve columns">
-				<label class="left">
-					{{$prospecto->perfil->prefijo_1 == "Sr." ? "Estimado:" : "Estimada:"}} 
-					<strong style="border-bottom: 0.5px solid black;">
-						{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
-					</strong>
-				</label>
+				<div class="six columns">
+					<label class="center"> 
+						<strong style="border-bottom: 2px solid orange;">
+							{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}
+						</strong>
+					</label>
+				</div>
+				<div class="six columns"></div>
 			</div>
 		</div>
 		<div class="row" style="top: 25px;">
 			<div class="twelve columns">
+				{{-- PRIMERA COLUMNA DE TEXTO --}}
 				<div class="one-half column u-pull-left">
-					<p class="justify">Recientemente el IFAI, en conformidad con la Ley Federal de Protección de Datos Personales, ha exhortado a todas las organizaciones que recaban datos personales a expedir su Aviso de Privacidad</p>
 					<p class="justify">
-						A través del Aviso de Privacidad las organizaciones reguladas deben establecer claramente qué tipo de datos recaban y el uso que le dan a éstos.
+						Recientemente el IFAI, en conformidad con la Ley Federal de Protección de Datos Personales, 
+						ha exhortado a todas las organizaciones que recaban datos personales a expedir su Aviso de Privacidad.
+					</p>
+					<p class="justify">
+						A través del Aviso de Privacidad las organizaciones reguladas deben establecer claramente qué tipo de 
+						datos recaban y el uso que le dan a éstos.
 					</p>
 					<p class="justify">
 						Asimismo, le informamos:
@@ -106,7 +120,9 @@
 		<div class="row" style="top: 25px;">
 			<div class="twelve columns">
 				<p class="justify">
-					En cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares(la "ley") le informamos los términos y condiciones del Aviso de Privacidad de Planea Tu Bien, S.A. de C.V. (en lo sucesivo PTB) con domicilio en Homero 229 int. 103 Col. Chapultepec Morales C.P. 11570 CDMX.
+					En cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares(la "ley") 
+					le informamos los términos y condiciones del Aviso de Privacidad de Planea Tu Bien, S.A. de C.V. (en lo sucesivo PTB) 
+					con domicilio en Jalapa 17 Int. 301, Col. Roma, C.P. 06700 México, D.F.
 				</p>
 				<p class="justify">
 					Los Datos Personales, como dicho término se define en la Ley, que usted libre y voluntariamente proporcione a PTB están destinados para fines de identificación, promoción, venta, publicidad, estadística, análisis interno, información a clientes y consumidores, cobranza o cualquier otra actividad análoga de conformidad con el objeto social de PTB.
@@ -118,24 +134,20 @@
 					PTB tiene implementadas medidas de seguridad físicas, electrónicas y técnicas para proteger sus Datos Personales, sin embargo, usted tendrá derecho a solicitar su rectificación a partir del 6 de enero de 2012 enviando un fax al 5533-2201 ext. 4 con una copia de su identificación e indicándonos cuáles son los datos que se deberán ser modificados. El plazo para atender su solicitud será de 3 días hábiles.
 				</p>
 				<p class="justify">
-					Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades lesgislativas, políticas internas o nuevos requerimentos para la prestación u ofrecimiento de nuestros servicios o productos. Estas modificaciones estarán disponibles al público en nuestras oficinas ubicadas en Homero 229 int. 103 Col. Chapultepec Morales C.P. 11570 CDMX.
+					Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades lesgislativas, políticas internas o nuevos requerimentos para la prestación u ofrecimiento de nuestros servicios o productos. Estas modificaciones estarán disponibles al público en nuestras oficinas ubicadas en Jalapa 17 Int. 301, Col. Roma, C.P. 06700 México, D.F.
 				</p>
 				<p class="justify">
 					Si considera que su derecho de protección de datos personales ha sido lesionado por alguna conducta de nuestros colaboradores, o presume que en el tratamiento de sus datos personales existe alguna violación a las disposiciones previstas en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, podrá interponer la queja o denuncia correspondiente ante el IFAI.
 				</p>
 			</div>
 		</div>
-		<div class="row">
+		{{-- FIRMA PACIENTE --}}
+		<div class="row" style="margin-left: 12px; margin-right: 12px; position: fixed;left: 0;bottom: 100px;width: 100%;">
 			<div class="twelve columns">
 				<br>
-				<label class="center">________________________________________</label>
+				<label class="center" style="color: orange">________________________________________</label>
 				<label class="center">NOMBRE COMPLETO Y FIRMA DEL CLIENTE</label>
 				<p class="center" style="font-size: 10px;">Para más información, visite este enlace: http://wwww.ifai.gob.mx/Particulares/faq o llame al Tel. 01 800 TELIFAI (01 800 8354324)</p>
-			</div>
-			<div class="row" style="margin-left: 12px; margin-right: 12px; position: fixed;left: 0;bottom: 40px;width: 100%;">
-				<div class="twelve columns">
-					<img src="img/header_privacidad.png" width="100%" height="25%">
-				</div>
 			</div>
 		</div>
 	</div>

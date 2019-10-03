@@ -43,74 +43,205 @@
 </head>
 <body>
 	<div class="container">
+		<br><br>
+		{{-- LOGOTIPO DE CABECERA --}}
 		<div class="row">
 			<div class="twelve columns">
-				<div class="ten columns u-pull-left">
-					<img src="img/ficha_deposito_top.png" height="40" width="80">
+				<div class="u-pull-right">
+					<img src="img/ficha_deposito_top.png" width="200">
 				</div>
 				<div class="two columns u-pull-right">
 				</div>
 			</div>
 		</div>
+		<br><br>
+		{{-- NOMBRE DEL CLIENTE --}}
 		<div class="row">
-			<div class="twelve columns" style="border-top: 2px solid #081170; margin-top: 0px;"></div>
-		</div>
-		<h6 class="center">{{strtoupper($presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno)}}</h6>
-		<div class="row">
-			<div class="twelve columns">
-				<div class="two-thirds column u-pull-left">
-					<div class="one-half column u-pull-left">
-						<label class="center" style="background: #081170; color: white; border-radius: 12px; margin: 5 5px;">FICHA DE DEPÓSITO</label>
-					</div>
-					<div class="one-half column u-pull-right">
-						<p>REALIZA TU PAGO EN CUALQUIER SUCURSAL <img src="img/bbva.png" height="15px" width="70px"></p>
-					</div>
-				</div>
+			<div class="six columns" style="border-bottom: 1px solid orange;">
+				<span>
+					<strong>{{strtoupper($presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno)}}</strong>
+				</span>
 			</div>
 		</div>
+
+		{{-- DATOS --}}
+
 		<div class="row">
 			<div class="twelve columns">
-				<div class="two-thirds column u-pull-left">
-					<div class="one-half column u-pull-left" >
+				<div class="one-half column u-pull-left">
+					<div class="one-half column u-pull-left">
 						<p class="left">Fecha limite de pago:</p>
-						<p class="left">Número de contrato:</p>
-						<p class="left">Número de grupo:</p>
-						<p class="left">Convenio:</p>
-						<p class="left">Numero de referencia:</p>
-						<p class="left">Numero de mensualidad:</p>
-						<p class="left">Aportación al fondo:</p>
-						<p class="left">Cuota de Administracion:</p>
-						<p class="left">IVA cuota de administración:</p>
-						<p class="left">Fondo de contingencia:</p>
-						<p class="left">Prima de seguro de vida</p>
-						<p class="left">Prima de seguro de daños:</p>
-						<p class="left">Importe total a pagar:</p>
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="background: #cccc; border-radius:10px;">Día 7 de cada mes</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->numero_contrato}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->presolicitud->id.$contrato->numero_contrato}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['aportacion'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['cuota_administracion'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['iva'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">$0.00</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sv'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sd'],2)}}</p>
-						<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['total'],2)}}</p>
 					</div>
 				</div>
-				<div class="one-third column u-pull-right">
-					<img src="img/deposito_derecho.png">
+				<div class="one-half column u-pull-right">
+					<div class="one-half column u-pull-left">
+						<p class="left">Número de contrato:</p>
+					</div>
+					<div class="one-half column u-pull-right">
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->numero_contrato}}</p>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
-			<img src="img/deposito_bottom.png">
+			<div class="twelve columns">
+				<div class="one-half column u-pull-left">
+					<div class="one-half column u-pull-left">
+						<p class="left">Número de grupo:</p>
+					</div>
+					<div class="one-half column u-pull-right">
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id}}</p>
+					</div>
+				</div>
+				<div class="one-half column u-pull-right">
+					<div class="one-half column u-pull-left">
+						<p class="left">Convenio:</p>
+					</div>
+					<div class="one-half column u-pull-right">
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->presolicitud->id.$contrato->numero_contrato}}</p>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
+
+		<div class="row">
+			<div class="twelve columns">
+				<div class="one-half column u-pull-left">
+					<div class="one-half column u-pull-left">
+						<p class="left">Numero de referencia:</p>
+					</div>
+					<div class="one-half column u-pull-right">
+						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>						
+					</div>
+				</div>
+				<div class="one-half column u-pull-right">
+					<div class="one-half column u-pull-left">
+							<p class="left">Numero de mensualidad:</p>
+					</div>
+					<div class="one-half column u-pull-right">
+						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns">
+				<div class="one-half column u-pull-left">
+					<div class="one-half column u-pull-left">
+					<p class="left">Aportación al fondo:</p>
+						
+					</div>
+					<div class="one-half column u-pull-right">
+					<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['aportacion'],2)}}</p>
+						
+					</div>
+				</div>
+				<div class="one-half column u-pull-right">
+					<div class="one-half column u-pull-left">
+					<p class="left">Cuota de Administracion:</p>
+						
+					</div>
+					<div class="one-half column u-pull-right">
+					<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['cuota_administracion'],2)}}</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+				<div class="twelve columns">
+					<div class="one-half column u-pull-left">
+						<div class="one-half column u-pull-left">
+							<p class="left">IVA cuota de administración:</p>
+						</div>
+						<div class="one-half column u-pull-right">
+							<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['iva'],2)}}</p>	
+						</div>
+					</div>
+					<div class="one-half column u-pull-right">
+						<div class="one-half column u-pull-left">
+							<p class="left">Fondo de contingencia:</p>	
+						</div>
+						<div class="one-half column u-pull-right">
+							<p class="center" style="background: #cccc; border-radius:10px;">$0.00</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns">
+					<div class="one-half column u-pull-left">
+						<div class="one-half column u-pull-left">
+							<p class="left">Prima de seguro de vida</p>	
+						</div>
+						<div class="one-half column u-pull-right">
+							<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sv'],2)}}</p>
+						</div>
+					</div>
+					<div class="one-half column u-pull-right">
+						<div class="one-half column u-pull-left">
+							<p class="left">Prima de seguro de daños:</p>
+						</div>
+						<div class="one-half column u-pull-right">
+							<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['sd'],2)}}</p>							
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns">
+					<div class="one-half column u-pull-left">
+						<div class="one-half column u-pull-left">	
+							<p class="left">Importe total a pagar:</p>
+						</div>
+						<div class="one-half column u-pull-right">
+							<p class="center" style="background: #cccc; border-radius:10px;">${{number_format($corrida_integrante['total'],2)}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="twelve columns" style="border-bottom: 1px solid orange;">
+					<p><strong>Recuerda</strong></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns">
+					<p class="center" style="font-size: 1em;">
+						<strong>Paga antes del 7</strong> de cada mes y aumenta tus posibilidades de salir adjudicado.
+						<br>
+						<strong>¡Alcanza tu meta y construye un patrimonio depositando puntualmente!</strong>
+					</p>
+				</div>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="twelve columns">
+					<img src="img/ficha_deposito_middle.png" class="u-max-full-width">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns">
+					<img src="img/ficha_deposito_footer.png" class="u-max-full-width">
+				</div>
+			</div>
+
+
 
 </body>
 </html>
