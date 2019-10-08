@@ -1,6 +1,5 @@
 @extends('principal')
 @section('content')
-
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -131,6 +130,18 @@
                             </ul>
                         </div>
                     @endif
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="plan-radio" id="plan-libre" value="libre">
+                        <label class="form-check-label" for="plan-libre">
+                            Plan libre
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="plan-radio" id="plan-normal" value="normal">
+                        <label class="form-check-label" for="plan-normal">
+                            Plan normal
+                        </label>
+                    </div>
                     <div class="row">
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="monto">✱Valor de la propiedad</label>
@@ -149,9 +160,9 @@
                                 {{-- <input class="form-control" type="number" name="monto" id="monto" min="300000" max="20000000" step="50000" required=""> --}}
                             </div>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
                             <label for="ahorro">✱Ahorro del cliente</label>
-                            <select name="ahorro" id="ahorro_cliente" class="form-control" required="">
+                            <select name="ahorro" id="ahorro_cliente" class="form-control input-escondible" required="">
                                 <option value="">Seleccionar</option>
                                 <option value="0">0%</option>
                                 <option value="5">5%</option>
@@ -161,36 +172,36 @@
                                 <option value="40">40%</option>
                             </select>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
                             <label for="plan">✱Plan</label>
-                            <select name="plan" id="plan_cliente" class="form-control" required="">
+                            <select name="plan" id="plan_cliente" class="form-control input-escondible" required="">
                                 <option value="">Seleccionar</option>
                                 @foreach ($planes as $plan)
                                     <option value="{{$plan->id}}">{{$plan->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group escondible">
                             <label for="monto">Porcentaje de descuento </label>
                             <div class="input-group mb-3">
-                                <input class="form-control" type="number" id="descuento_input" name="descuento" min="0" max="30" value="0.00">
+                                <input class="form-control input-escondible" type="number" id="descuento_input" name="descuento" min="0" max="30" value="0.00">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon1">%</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
                             <label class="col-form-label">Promocion:</label>
-                            <select name="promocion" class="form-control" id="promocion_select">
+                            <select name="promocion" class="form-control input-escondible" id="promocion_select">
                                 <option value="">Seleccione una de las promociones</option>
                                     @foreach ($promociones as $promocion)
                                         <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>   
                                     @endforeach   
                             </select>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
                             <label class="col-form-label">Pago de inscripción:</label>
-                            <select name="tipo_inscripcion" class="form-control" id="tipo_inscripcion_select" required="">
+                            <select name="tipo_inscripcion" class="form-control input-escondible" id="tipo_inscripcion_select" required="">
                                 <option value="">Seleccione una opcion</option>
                                 <option value="inscripcion_total">Inscripción Total</option>   
                                 <option value="inscripcion_diferida">Inscripción Diferida</option>   
@@ -198,9 +209,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row" id="promocion_div">
+                    <div class="row escondible" id="promocion_div">
                     </div>
-                    <div id="cotizador">    
+                    <div id="cotizador" class="escondible">    
                     </div>
                 </div>
                 <div class="card-footer">
@@ -220,3 +231,27 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+
+        $('input[name=plan-radio]').change( function(){
+
+            let tipo_plan = $(this).val();
+            console.log(tipo_plan);
+
+            // ESCONDEMOS ALGUNOS INPUTS
+            if(tipo_plan == 'libre'){
+                $('.input-escondible').removeAttr('required');
+                $('.escondible').hide('slow');
+            }
+
+            // MOSTRAMOS ALGUNOS INPUTS
+            if(tipo_plan == 'normal'){
+                $('.escondible').show('slow');
+                $(".input-escondible").prop('required',true);
+            }
+        });
+    });
+</script>
+@endpush

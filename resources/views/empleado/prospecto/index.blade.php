@@ -71,6 +71,9 @@
 										</a>
 									@endif
 									<a class="btn btn-success" href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM</strong></a>
+									@if($prospecto->cotizaciones->first()->plan_id === null)
+										<a href="{{ route('cambio-plan', ['prospecto'=>$prospecto]) }}" class="btn btn-success">Cambiar Plan</a>
+									@endif
 								</div>
 							</td>
 						</tr>
