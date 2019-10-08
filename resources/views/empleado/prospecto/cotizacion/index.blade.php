@@ -135,6 +135,7 @@
                         <th>Acción</th>
                     </tr>
                     @foreach($prospecto->cotizaciones as $cotizacion)
+                    @if($cotizacion->plan_id !== null)
                         <tr>
                             <td>{{ $cotizacion->plan->nombre }}</td>
                             <td>${{ number_format($cotizacion->monto, 2) }}</td>
@@ -162,6 +163,32 @@
                                 
                             </td>
                         </tr>
+                    @else
+                        <tr>
+                            <td>Plan Libre</td>
+                            <td>{{ number_format($cotizacion->monto, 2) }}</td>
+                            <td colspan="4"></td>
+                            <td class="text-center">
+                                @if ($cotizacion->elegir == 0)
+                                    {{-- true expr --}}
+                                    <a href="{{ route('empleados.prospectos.cotizacions.show', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-primary">
+                                        <i class="fa fa-eye"></i> Ver
+                                    </a>
+                                    {{-- <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
+                                        <i class="fa fa-file"></i> PDF
+                                    </a> --}}
+                                    {{-- <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
+                                        <i class="fas fa-envelope"></i> Enviar por correo
+                                    </a> --}}
+                                    <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm mt-3 btn-success"> Seleccionar cotización para crear perfil</a>
+                                @else
+                                    <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-sm mt-3 btn-success">Ver perfil</a>
+                                    {{-- false expr --}}
+                                @endif
+                                
+                            </td>
+                        </tr>
+                    @endif
                     @endforeach
                 </table>
             @else

@@ -120,6 +120,10 @@ Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMCo
 
 Route::get('datos-laborales/{id}','Empleado\EmpleadoDatosLaborales@index')->name('datos-laborales')->middleware('auth');
 
+//Rutas para el cambio de Plan libre a otro Plan
+Route::get('cambio-plan/{prospecto}','Empleado\ActualizacionPlanProspectoController@index')->name('cambio-plan')->middleware('auth');
+
+
 // PROSPECTOS VISTA APARTE
 Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospecto.create');
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
