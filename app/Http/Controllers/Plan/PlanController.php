@@ -44,9 +44,8 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input('tipo_plan'));
 
-        if( $request->input('tipo_plan') == 'plan normal' ){
+        if( $request->input('tipo') == 'normal' ){
             $rules=[
                 'nombre'=>'required',
                 'plazo'=>'required|integer',
@@ -71,20 +70,20 @@ class PlanController extends Controller
             ];
             $this->validate($request,$rules);
             $plan = Plan::create($request->all());
+            // dd($plan);
             foreach ($request->grupos as $grupo_id) {
                 $plan->grupos()->attach($grupo_id);
             }
         }
 
-        if( $request->input('tipo_plan') == 'plan libre' ){
+        if( $request->input('tipo') == 'libre' ){
             $rules=[
                 'nombre'=>'required',
-                'plazo'=>'required|integer',
-                'plan_meses'=>'required|integer',
 
             ];
             $this->validate($request,$rules);
             $plan = Plan::create($request->all());
+            // dd($plan);
             foreach ($request->grupos as $grupo_id) {
                 $plan->grupos()->attach($grupo_id);
             }

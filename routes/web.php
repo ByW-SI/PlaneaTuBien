@@ -122,6 +122,7 @@ Route::get('datos-laborales/{id}','Empleado\EmpleadoDatosLaborales@index')->name
 
 //Rutas para el cambio de Plan libre a otro Plan
 Route::get('cambio-plan/{prospecto}','Empleado\ActualizacionPlanProspectoController@index')->name('cambio-plan')->middleware('auth');
+Route::post('cambio-plan/{prospecto}/{cotizacion}','Empleado\ActualizacionPlanProspectoController@update')->name('cambio-plan-update')->middleware('auth');
 
 
 // PROSPECTOS VISTA APARTE

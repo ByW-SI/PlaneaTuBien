@@ -7,9 +7,14 @@
 	<div class="card-body">
 		<div class="row-group">
 			<div class="d-flex justify-content-center">
-				<form action="#" method="post">
+				<form action="{{route('cambio-plan-update', ['prospecto' => $prospecto, 'cotizacion' => $prospecto->cotizaciones->first()])}}" method="post">
 	                {{ csrf_field() }}
 	                <div class="card-body">
+						@if (session('status'))
+							<div class="alert alert-success" role="alert">
+								{{ session('status') }}
+							</div>
+						@endif
 	                    @if ($errors->any())
 	                        <div class="alert alert-danger">
 	                            <ul>
@@ -26,7 +31,7 @@
 	                                <div class="input-group-prepend">
 	                                    <span class="input-group-text" id="basic-addon1">$</span>
 	                                </div>
-	                                <input class="form-control" type="text" name="monto" id="monto" value="{{ number_format($prospecto->cotizaciones->first()->monto, 2) }}" readonly="" required="">
+	                                <input class="form-control" type="text" name="monto" id="monto" value="{{ number_format($prospecto->cotizaciones->first()->monto, 0) }}" readonly="" required="">
 	                            </div>
 	                        </div>
 	                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">

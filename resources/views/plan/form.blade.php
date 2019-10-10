@@ -18,19 +18,14 @@
 				    </div>
 				@endif
 				<div class="row">
-					<div class="col-12 col-md-4"></div>
-					<div class="col-12 col-md-4">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="">Tipo de plan</label>
-						<select name="tipo_plan" id="tipo_plan" class="form-control" required>
+						<select name="tipo" id="tipo_plan" class="form-control" required>
 							<option value="">Seleccionar</option>
-							<option value="plan libre">Plan libre</option>
-							<option value="plan normal">Plan normal</option>
+							<option value="libre">Plan libre</option>
+							<option value="normal">Plan normal</option>
 						</select>
 					</div>
-					<div class="col-12 col-md-4"></div>
-				</div>
-				<br>
-				<div class="row">
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
 						<label for="nombre">Nombre</label>
 						<input type="text" placeholder="Nombre del plan" name="nombre" value="{{old("nombre")}}" class="form-control" required="">
@@ -40,10 +35,10 @@
 						<input type="text" placeholder="abreviatura del plan" name="abreviatura" value="{{old("abreviatura")}}" class="form-control" required="">
 					</div>
 
-					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group escondible">
 						<label for="plazo">Plazo</label>
 						<div class="input-group mb-3">
-							<input type="number" step="1" name="plazo" value="{{old("plazo")}}" min="1" class="form-control" placeholder="Meses del plan" aria-label=" plan" aria-describedby="basic-addon2" required="">
+							<input type="number" step="1" name="plazo" value="{{old("plazo")}}" min="1" class="form-control input-escondible" placeholder="Meses del plan" aria-label=" plan" aria-describedby="basic-addon2" required="">
 							<div class="input-group-append">
 								<span class="input-group-text " id="basic-addon2">Meses</span>
 							</div>
@@ -76,10 +71,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group escondible">
 						<label for="plan_meses">Plan (en meses)</label>
 						<div class="input-group mb-3">
-							<input type="number" step="1" name="plan_meses" value="{{old("plan_meses")}}" min="1" class="form-control" placeholder="" aria-label=" plan" aria-describedby="basic-addon2" required="">
+							<input type="number" step="1" name="plan_meses" value="{{old("plan_meses")}}" min="1" class="form-control input-escondible" placeholder="" aria-label=" plan" aria-describedby="basic-addon2" required="">
 							<div class="input-group-append">
 								<span class="input-group-text " id="basic-addon2">Meses</span>
 							</div>
@@ -282,13 +277,13 @@
 			var tipo_plan = $('#tipo_plan').val();
 
 			// ESCONDEMOS ALGUNOS INPUTS
-			if(tipo_plan == 'plan libre'){
+			if(tipo_plan == 'libre'){
 				$('.input-escondible').removeAttr('required');
 				$('.escondible').hide('slow');
 			}
 
 			// MOSTRAMOS ALGUNOS INPUTS
-			if(tipo_plan == 'plan normal'){
+			if(tipo_plan == 'normal'){
 				$('.escondible').show('slow');
 				$(".input-escondible").prop('required',true);
 			}

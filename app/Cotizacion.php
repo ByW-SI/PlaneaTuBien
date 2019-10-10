@@ -13,37 +13,16 @@ class Cotizacion extends Model
     
     protected $table = 'cotizacions';
 
-    // protected $fillable = [
-    // 	'id',
-    // 	'prospecto_id',
-    // 	'propiedad',
-    // 	'ahorro',
-    //     'plan',
-    //     'adjudicar',
-    //     'plazo',
-    //     'mensualidad',
-    //     'porc1',
-    //     'porc2',
-    //     'porc3',
-    //     'porc4',
-    //     'monto1',
-    //     'monto2',
-    //     'monto3',
-    //     'monto4',
-    //     'mes1',
-    //     'mes2',
-    //     'mes3',
-    //     'total',
-    //     'anual',
-    //     'inscripcion',
-    // ];
+
     protected $fillable = [
+        'plan_id',
         'folio',
         'monto',
         'elegir',
         'ahorro',
         'descuento',
         'inscripcion',
+        'promocion_id',
         'factor_actualizacion',
         'tipo_inscripcion'
     ];

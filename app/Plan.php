@@ -12,7 +12,8 @@ class Plan extends Model
     protected $fillable=[
     	'nombre',
         'abreviatura',
-    	'plazo',
+        'plazo',
+        'tipo',
     	'mes_aportacion_adjudicado',
     	'mes_adjudicado',
         'mes_s_d',
