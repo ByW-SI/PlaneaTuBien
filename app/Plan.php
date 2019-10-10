@@ -152,7 +152,13 @@ class Plan extends Model
         $mes_actual = date('2018-11-01');
 
         // dd($mes_actual);
-        $aportacion_mes = $monto_financiar/$this->plazo;
+        
+        if( !$this->plazo ){
+            $aportacion_mes = 0; 
+        }else{
+            $monto_financiar/$this->plazo;
+        }
+
         $cuota_admon_mes = $monto_financiar*($this->cuota_admon/100);
         $cuota_admon_mes_iva=$cuota_admon_mes*(16/100);
         $seguro_vida_mes = $monto*($this->s_v/100);
