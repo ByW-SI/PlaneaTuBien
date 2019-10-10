@@ -54,6 +54,9 @@ class EmpleadoProspectoCotizacionController extends Controller
         // $folio = $empleado->id.$prospecto->id.date('dmY');
         // dd($folio);
 
+        // dd( Plan::where('tipo','libre')->first()->id );
+
+
         $request->validate([
             'monto'=>'required|numeric',
             'ahorro'=>"nullable|numeric",
@@ -90,6 +93,8 @@ class EmpleadoProspectoCotizacionController extends Controller
         }
         else {
 
+            // dd('aqui');
+
             $cotizacion = new Cotizacion($request->all());
             $year = date('y');
             for ($i = 0; $i < 9999; $i++) {
@@ -111,6 +116,11 @@ class EmpleadoProspectoCotizacionController extends Controller
         
 
         $verificar = $cotizacion->save();
+
+        $cotizacion->update([
+            'plan_id' => Plan::where('tipo','libre')->first()->id,
+        ]);
+
         if($verificar && sizeof($prospecto->cotizaciones)>=7){
             $prospecto->cotizaciones->first()->delete();
             // dd('se borro');
