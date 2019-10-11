@@ -209,7 +209,7 @@
 		<div class="row">
 			<div class="col-12">
 				<p class="left">
-					Con fundamento en el artículo 22 fracción III del Reglamento de Sistemas de Comercialización, se expide el presente anexo.
+					Con fundamento en el artículo 22 fracción III del Reglamento de Sistemas de Comercialización, se expide el presente anexo. 
 				</p>
 			</div>
 		</div>
@@ -217,7 +217,7 @@
 		<div class="row">
 			<div class="col-12">
 				<p class="left" style="padding-left: 25px;">
-					<strong>Aportaciones Extraodinarias 100% a Capital</strong>
+					<strong>Aportaciones Extraordinarias 100% a Capital</strong>
 				</p>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 		<div class="row">
 			<div class="col-12">
 				<p class="justify">
-					1) % Requerido al mes {{$plan->mes_1}}. 2) % Requerido al mes {{$plan->mes_2}}. 3) % Requerido al mes {{$plan->mes_3}}. 4) % Requerido al mes {{$plan->mes_liquidacion}}. Anual) % Requerido cada Diciembre.
+					1) % Requerido al mes {{$plan->mes_1}}. 2) % Requerido al mes {{$plan->mes_2}}. 3) % Requerido al mes {{$plan->mes_3}}. 4) % Requerido al mes {{$plan->mes_liquidacion}}. Anual) % Requerido cada diciembre.
 				</p>
 			</div>
 		</div>
@@ -265,7 +265,7 @@
 		<div class="row">
 			<div class="col-12">
 				<span class="left">
-					Aportacion Extraordinaria Anual: Esta cantidad el consumidor la pagara hasta el 7 de diciembre de cada año.
+					Aportación Extraordinaria Anual: Esta cantidad el consumidor la pagara hasta el 7 de diciembre de cada año.
 				</span>
 			</div>
 		</div>
@@ -285,7 +285,10 @@
 		<div class="row">
 			<div class="col-12 bg-light">
 				<p class="text-justify">
-					El consumidor adquiere la calidad de adjudicatario en la reunión de adjudicación correspondiente al plazo que haya elegido, al mes inmediato posterior, siempre que sus pagos de cuota periodica total, los realice en los primeros 7 días de cada mes y se consideran puntuales, en caso contrario se considerara ese mes como atraso y se recorrerá su garantía de adjudicación 3 veces al número de meses con atraso. Si ocurriese un atraso, se cumplirá con el número de pagos y montos pactados en el presente anexo, aún sin adquirir la calidad de adjudicatario. Los contratos celebrados en los meses de diciembre y junio, se considerará un mes adicional para ganar el factor de actualización de dicho periodo. <strong>Una vez cubierta la aportacion extraordinaria 1, 2, 3, 4 y anual, se dará cumplimiento a la garantía de adjudicacion, en caso de no cumplir con las condiciones de este anexo, la garantía de adjudicación no se cumplirá</strong>.
+					El consumidor adquiere la calidad de adjudicatario al mes inmediato posterior a la reunión de adjudicación correspondiente al plazo que haya elegido, siempre y cuando los pagos de cuota periódica total los realice puntuales y dentro de los primeros 7 días de cada mes, en caso contrario se considerará pago atrasado y su garantía de adjudicación se recorrerá 3 veces el número de meses con atraso. En los contratos celebrados en los meses de diciembre y junio, se considerará un mes adicional para ganar el factor de actualización de dicho periodo.  <strong> Una vez cubierta la aportación extraordinaria 1, 2, 3, 4 y anual según el plazo
+						aplicable, dentro de los primeros 7 días del mes requerido, en caso contrario se considerará pago atrasado y su garantía de
+						adjudicación se recorrerá 3 veces el número de meses con atraso, en caso de incumplimiento a las condiciones del contrato
+						o del anexo, el Proveedor no podrá cumplir con la garantía de adjudicación</strong>.
 				</p>
 			</div>
 		</div>
@@ -293,7 +296,8 @@
 		<div class="row">
 			<div class="col-12 bg-light">
 				<p class="text-justify">
-					El consumidor instruye a la proveedora PLANEA TU BIEN SA DE CV, que en su calidad de integrante los pagos mensuales de la garantía de adjudicación sean fijos, considerando los factores de actualización del periodo de la misma y cuando adquiera la calidad de adjudicatario, que su mensualidad sea fija, considerando los factores de actualización al plazo contratado y una vez entregado el bien, a esta mensualidad se le agregue el seguro de daños del bien que adquiera y cede el remanente al Proveedor, quedando de la siguiente manera. (En caso de existir un atraso el consumidor se compromete a pagar el número de pagos y montos pactados.)
+					El Consumidor instruye al Proveedor PLANEA TU BIEN, S.A. DE C.V., a que en tanto dure su calidad de integrante los pagos
+					mensuales de la garantía de adjudicación sean fijos considerando el factor de actualización aplicable y una vez que el Consumidor adquiera la calidad de adjudicatario sus pagos mensuales sean fijos considerando el factor de actualización aplicable, asimismo y una vez realizada la entrega del bien, al pago fijo mensual se le agregue el pago de seguro de daños del bien. Por tanto, en este acto y a la liquidación cede el remanente al Proveedor, quedando de la siguiente manera: (En caso de existir un atraso el consumidor se compromete a pagar el número de pagos y montos pactados.)
 				</p>
 			</div>
 		</div>
@@ -328,7 +332,14 @@
 			<div class="col-12">
 				<p class="center">
 					<strong>
-						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes.
+						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a 
+						@php
+							setlocale(LC_ALL, 'es_ES');
+							$fecha = Carbon::parse('03-04-2018');
+							$fecha->format("F"); // Inglés.
+							$mes = $fecha->formatLocalized('%B');// mes en idioma español
+							echo $mes;
+						@endphp
 					</strong>
 				</p>
 			</div>

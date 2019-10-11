@@ -156,7 +156,7 @@ class Plan extends Model
         if( !$this->plazo ){
             $aportacion_mes = 0; 
         }else{
-            $monto_financiar/$this->plazo;
+            $aportacion_mes = $monto_financiar/$this->plazo;
         }
 
         $cuota_admon_mes = $monto_financiar*($this->cuota_admon/100);
