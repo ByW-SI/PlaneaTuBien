@@ -27,6 +27,7 @@ class CotizadorController extends Controller
             // dd($res);
         }
         $planes = Plan::orderBy('nombre','asc')->get();
+        // dd($res);
         return view('cotizador.index',['planes'=>$planes,'request'=>$request,'res'=>$res,'plan_select'=>$plan]);
 
     }
