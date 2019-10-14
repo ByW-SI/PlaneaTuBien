@@ -9,6 +9,7 @@ use App\ProspectoCRM;
 use App\Task;
 use App\TaskSendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CrmGeneralController extends Controller
 {
@@ -19,8 +20,11 @@ class CrmGeneralController extends Controller
      */
     public function index()
     {
+
+        $empleado = Auth::user()->empleado;
+
         $crms = ProspectoCRM::get();
-        return view('crm.index', ['crms' => $crms]);
+        return view('crm.index', ['crms' => $crms, 'empleado' => $empleado]);
     }
 
     /**

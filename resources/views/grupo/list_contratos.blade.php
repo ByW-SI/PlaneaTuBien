@@ -56,10 +56,10 @@
 								<td>{{!$contrato->recibo ? : $contrato->recibo->numero}}</td>
 								<td>
 									<div class="d-flex justify-content-center">
-										<a href="{{route('grupos.listpagos',['contrato'=>$contrato]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
+											{{-- {{route('grupos.listpagos',['contrato'=>$contrato]) }} --}}
+										<a href="#" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
 									</div>
 								</td>
-
 							</tr>
 						@empty
 							<div class="alert alert-info" role="alert">
@@ -77,7 +77,7 @@
                     <a href="{{ route('grupos.index') }}" class="btn btn-success">
                         Regresar
                     </a>
-                </div>
+				</div>
                 
             </div>
         </div>
