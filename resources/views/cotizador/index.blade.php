@@ -237,6 +237,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_cuota_periodica_adjudicado($request->monto),2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto derecho de adjudicación</label>
 						<div class="input-group mb-3 mt-3">
@@ -246,7 +247,6 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_derecho_adjudicacion($request->monto),2)}}</span>
 						</div>
 					</div>
-					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto total a pagar</label>
 						<div class="input-group mb-3 mt-3">
@@ -399,3 +399,12 @@
 		<div class="card-footer"></div>
 	</div>
 @endsection
+
+{{-- 
+Total a pagar = Monto aportaciones extraordinarias + Monto cuota periodica integhrante + monto cuota periodica adjudicado + inscripcion + derecho de adjudicacion
+			  = 280,170.37 + 651,951.07 + 0.0 + 17,400.0 + 19,486.79
+			  = 969,008.24
+
+			  = 195,000.0 + 674,331.42 + 0.0 + 17,400.0 + 19486.79
+			  = 906,218.21
+ --}}

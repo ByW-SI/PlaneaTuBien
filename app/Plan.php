@@ -567,7 +567,10 @@ class Plan extends Model
         }
         $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto,$factor_actualizacion);
         $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto,$factor_actualizacion);
-        $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto,$factor_actualizacion);
+        if ($this->abreviatura !== "TC")
+            $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto,$factor_actualizacion);
+        else
+            $monto_cuota_periodica_adjudicado = 0.0;
         // dd($monto_cuota_periodica_adjudicado);
         $monto_inscripcion_con_iva = $this->monto_inscripcion_con_iva($monto);
         $monto_derecho_adjudicacion = $this->monto_derecho_adjudicacion($monto,$factor_actualizacion);

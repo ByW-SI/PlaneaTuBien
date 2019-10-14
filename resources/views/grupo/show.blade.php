@@ -33,13 +33,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			{{-- <div class="row">
                 <div class="col-4 offset-4 text-center">
                     <a href="{{ route('grupos.listcontratos', ['grupo' =>$grupo]) }}" class="btn btn-primary">
                         Ver status de contratos
                     </a>
                 </div>
-            </div>
+            </div> --}}
             <br>
             <br>
 			<div class="d-flex justify-content-center">
