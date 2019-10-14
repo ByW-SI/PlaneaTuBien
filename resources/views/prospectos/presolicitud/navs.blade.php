@@ -42,9 +42,11 @@
   <li class="nav-item">
     <a class="nav-link {{$active == "Referencias" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.referencias.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">REFERENCIAS PERSONALES</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link {{$active == "Recibo" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">RECIBO PROVISIONAL</a>
-  </li>
+  @if ($presolicitud->cotizacion()->tipo == 'libre')
+    <li class="nav-item">
+      <a class="nav-link {{$active == "Recibo" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">RECIBO PROVISIONAL</a>
+    </li>
+  @endif
   @if (!$presolicitud->contratos->isEmpty())
     <li class="nav-item">
       <a class="nav-link {{$active == "Contratos" ? 'active' :''}}" href="{{ route('prospectos.presolicitud.contratos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" tabindex="-1" aria-disabled="false">CONTRATOS</a>
