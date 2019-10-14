@@ -53,7 +53,7 @@
 								<th scope="row">{{$contrato->numero_contrato}}</th>
 								<td>${{$contrato->monto}}</td>
 								<td>{{$contrato->estado}}</td>
-								<td>{{$contrato->recibo->numero}}</td>
+								<td>{{!$contrato->recibo ? : $contrato->recibo->numero}}</td>
 								<td>
 									<div class="d-flex justify-content-center">
 										<a href="{{route('grupos.listpagos',['contrato'=>$contrato]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
