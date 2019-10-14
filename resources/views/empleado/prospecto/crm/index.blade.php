@@ -149,6 +149,7 @@
                         <th class="text-center">Acción</th>
                     </tr>
                     @forelse ($crms as $crm)
+                    @foreach ($crm->tasks as $tarea)
                         <tr>
                             <td>
                                 {{$crm->fecha_contacto}}
@@ -173,15 +174,12 @@
                                 {{$crm->status}}
                             </td>
                             <td>
-                                @if ($crm->task_send_mail)
-                                    <p>{{$crm->task_send_mail->nombre}} cotizacion #{{$crm->task_send_mail->cotizacion->id}} <input type="checkbox"  {{$crm->task_send_mail->hecho ? 'checked="" disabled=""' : 'disabled=""'}}></p>
-                                @endif
-                                @foreach ($crm->tasks as $tarea)
+                                
                                     <form method="POST" action="{{ route('crms.tareas.tarea_checked',['crm'=>$crm,'tarea'=>$tarea]) }}">
                                         @csrf
                                         <p>{{$tarea->nombre}} <input type="checkbox"  {{$tarea->pivot->hecho ? 'checked="" disabled=""' : ''}} onChange="if(confirm('¿Tarea realizada?')){this.form.submit();}else{this.checked = false}"></p>
                                     </form>
-                                @endforeach
+                                
                             </td>
                             <td>
                                 <div class="row justify-content-around">
@@ -190,6 +188,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     @empty
                     <div class="col alert alert-danger text-center" role="alert">
                         No existe registros para {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apaterno}}, puedes agregar un nuevo registro <a href="{{ route('empleados.prospectos.crms.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="alert-link">aquí</a>.

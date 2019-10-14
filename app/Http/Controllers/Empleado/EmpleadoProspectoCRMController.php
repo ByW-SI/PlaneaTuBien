@@ -70,17 +70,7 @@ class EmpleadoProspectoCRMController extends Controller
         $prospecto->crms()->save($crm);
         if ($request->tareas) {
             foreach ($request->tareas as $tarea) {
-                if ($tarea == "enviar" && $request->cotizacion_id) {
-                    $enviar_mail = new TaskSendMail([
-                        'crm_id'=>$crm->id,
-                        'cotizacion_id'=>$request->cotizacion_id
-                    ]);
-                    $enviar_mail->save();
-                }
-                else{
-                    $crm->tasks()->attach($tarea);
-                    
-                }
+                $crm->tasks()->attach($tarea);
             }
         }
         return redirect()->route('empleados.prospectos.crms.index',['prospecto'=>$prospecto,'empleado'=>$empleado]);

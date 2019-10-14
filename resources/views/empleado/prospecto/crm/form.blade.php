@@ -177,7 +177,7 @@
                     <div class="col-12 col-xs-12 col-md-4 form-group">
                         <label for="tareas">Tareas</label>
                         <select class="select-task form-control" name="tareas[]" id="tareas" multiple="multiple">
-                            <option value="enviar">Enviar cotización por email</option>
+                            {{-- <option value="enviar">Enviar cotización por email</option> --}}
                           @foreach ($tareas as $tarea)
                               <option value="{{$tarea->id}}" title="{{$tarea->descripcion}}">{{$tarea->nombre}}</option>
                           @endforeach
