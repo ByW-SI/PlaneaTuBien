@@ -45,7 +45,7 @@ class PlanController extends Controller
     public function store(Request $request)
     {
 
-        if( $request->input('tipo') == 'normal' ){
+        if( $request->input('tipo') == 'normal' || $request->input('tipo') === 'clasica' ){
             $rules=[
                 'nombre'=>'required',
                 'plazo'=>'required|integer',
@@ -136,7 +136,11 @@ class PlanController extends Controller
      */
     public function destroy(Plan $plan)
     {
-        //
+        foreach ($plan->grupos as $grupo) {
+            $grupo->pivot->delete();
+        }
+        $plan->delete();
+        return $this->index();
     }
 
     public function getPlanes($p_ahorrado)

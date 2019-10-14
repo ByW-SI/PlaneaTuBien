@@ -43,7 +43,13 @@
 								<td>
 									<div class="d-flex justify-content-center">
 										<a href="{{ route('plans.show',['plan'=>$plan]) }}" class="btn btn-info mr-2"><i class="far fa-eye"></i>Ver</a>
-										<a href="" class="btn btn-danger mr-2"><i class="fas fa-level-down-alt"></i>Dar de baja</a>
+										<form method="post" action="{{ route('plans.destroy',['plan'=>$plan]) }}" style="display: inline;">
+	                                        <input type="hidden" name="_method" value="DELETE">
+	                                        {{ csrf_field() }}
+	                                        <button class="btn btn-danger mr-2" type="submit">
+	                                            <i class="fas fa-level-down-alt"></i>Dar de baja
+	                                        </button>
+	                                    </form>
 									</div>
 								</td>
 

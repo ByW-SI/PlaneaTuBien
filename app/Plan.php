@@ -558,6 +558,14 @@ class Plan extends Model
         if ($factor_actualizacion == null) {
             $factor_actualizacion = (float) $this->factor_actualizacion;
         }
+        $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto,$factor_actualizacion);
+        $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto,$factor_actualizacion);
+
+        if ($this->abreviatura !== "TC")
+            $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto,$factor_actualizacion);
+        else
+            $monto_cuota_periodica_adjudicado = 0.0;
+
         $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto, $factor_actualizacion);
         $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto, $factor_actualizacion);
         $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto, $factor_actualizacion);
