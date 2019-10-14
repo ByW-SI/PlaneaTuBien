@@ -70,7 +70,7 @@
 			<div class="twelve columns">
 				<div class="one-half column u-pull-left">
 					<div class="one-half column u-pull-left">
-						<p class="left">Fecha limite de pago:</p>
+						<p class="left">Fecha límite de pago:</p>
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="background: #cccc; border-radius:10px;">Día 7 de cada mes</p>
@@ -112,7 +112,7 @@
 			<div class="twelve columns">
 				<div class="one-half column u-pull-left">
 					<div class="one-half column u-pull-left">
-						<p class="left">Numero de referencia:</p>
+						<p class="left">Número de referencia:</p>
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="background: #cccc; border-radius:10px;">{{$contrato->grupo->id.$contrato->numero_contrato.$presolicitud->cotizacion()->folio}}</p>						
@@ -120,7 +120,7 @@
 				</div>
 				<div class="one-half column u-pull-right">
 					<div class="one-half column u-pull-left">
-							<p class="left">Numero de mensualidad:</p>
+							<p class="left">Número de mensualidad:</p>
 					</div>
 					<div class="one-half column u-pull-right">
 						<p class="center" style="background: #cccc; border-radius:10px;">1 a {{ $corrida_integrante['meses']}}</p>
@@ -143,7 +143,7 @@
 				</div>
 				<div class="one-half column u-pull-right">
 					<div class="one-half column u-pull-left">
-					<p class="left">Cuota de Administracion:</p>
+					<p class="left">Cuota de Administración:</p>
 						
 					</div>
 					<div class="one-half column u-pull-right">

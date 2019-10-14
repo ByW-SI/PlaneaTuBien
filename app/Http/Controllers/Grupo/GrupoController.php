@@ -106,7 +106,7 @@ class GrupoController extends Controller
         return view('grupo.list_contratos',['grupo'=>$grupo, 'contratos' => $contratos]);
     }
 
-    public function showPagos(Grupo $grupo, $contrato)
+    public function showPagos(Grupo $grupo = null, $contrato = null)
     {
         # code...
     }

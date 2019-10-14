@@ -55,7 +55,12 @@ class DocumentosController extends Controller
         $monto = $contrato->monto;
         $cuota_inscripcion = $monto*($plan->inscripcion/100);
         $iva_inscripcion= $cuota_inscripcion*0.16;
-        $aportacion_periodica = $monto/$plan->plazo;
+
+        $aportacion_periodica = 0;
+        if( $plan->plazo != 0 ){
+            $aportacion_periodica = $monto/$plan->plazo;
+        }
+
         $cuota_administracion = $monto*($plan->cuota_admon/100);
         $iva_cuota_admon = $cuota_administracion*0.16;
         $seguro_vida = $monto*($plan->s_v/100);

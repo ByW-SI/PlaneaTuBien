@@ -110,7 +110,7 @@ class Presolicitud extends Model
         if($this->referencias->isNotEmpty()){
             $status+=20;
         }
-        if ($this->cotizacion() && $this->cotizacion()->liberar) {
+        if ( ($this->cotizacion() && $this->cotizacion()->liberar) || $this->cotizacion()->plan->tipo == 'libre' ) {
             $status += 20;
         }
         return $status;

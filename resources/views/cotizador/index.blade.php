@@ -407,4 +407,6 @@ Total a pagar = Monto aportaciones extraordinarias + Monto cuota periodica integ
 
 			  = 195,000.0 + 674,331.42 + 0.0 + 17,400.0 + 19486.79
 			  = 906,218.21
+
+Tanda Clasica 	TC 	168 	1 	2 	1 	1 	3 	25 	18 	0 	3 	0 	6 	0.00 	120 	0.00 	1.00 	3.00 	0.10 	0.06 	0.00 	0 	0 	2019-10-11 12:09:34 	2019-10-11 12:09:34 	NULL 	normal
  --}}

@@ -73,7 +73,7 @@
 						<div class="one-half column u-pull-right">
 							<p class="center" style="border-bottom: 0.5px solid orange;"><strong>{{$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno}}</strong></p>
 							<p class="center" style="border-bottom: 0.5px solid orange; margin-top: 10px;"><strong>{{$presolicitud->id}}</strong></p>
-							<p class="center" style="border-bottom: 0.5px solid orange; margin-top: 10px;"><strong>{{$contrato->grupo->id}}</strong></p>
+							<p class="center" style="border-bottom: 0.5px solid orange; margin-top: 10px;"><strong>Grupo {{$contrato->grupo->id}}</strong></p>
 							<p class="center" style="border-bottom: 0.5px solid orange;"><strong>${{number_format($contrato->monto,2)}}</strong></p>
 						</div>
 					</div>
@@ -180,14 +180,14 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left" style="padding-left: 25px;">
-					<strong>Aportaciones Extraodinarias 100% a Capital</strong>
+					<strong>Aportaciones Extraordinarias 100% a Capital</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="justify">
-					1) % Requerido al mes {{$plan->mes_1}}. 2) % Requerido al mes {{$plan->mes_2}}. 3) % Requerido al mes {{$plan->mes_3}}. 4) % Requerido al mes {{$plan->mes_liquidacion}}. Anual) % Requerido cada Diciembre.
+					1) % Requerido al mes {{$plan->mes_1}}. 2) % Requerido al mes {{$plan->mes_2}}. 3) % Requerido al mes {{$plan->mes_3}}. 4) % Requerido al mes {{$plan->mes_liquidacion}}. Anual) % Requerido cada diciembre.
 				</p>
 			</div>
 		</div>
@@ -222,7 +222,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					Aportacion Extraordinaria Anual: Esta cantidad el consumidor la pagara hasta el 7 de diciembre de cada año.
+					Aportación Extraordinaria Anual: Esta cantidad el consumidor la pagara hasta el 7 de diciembre de cada año.
 				</p>
 			</div>
 		</div>
@@ -236,24 +236,24 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="justify">
-					El consumidor adquiere la calidad de adjudicatario al mes inmediato posterior a la reunión de adjudicación 
-					correspondiente al plazo que haya elegido, siempre y cuando los pagos de cuota periódica total los realice 
-					puntuales y dentro de los primeros 7 días de cada mes, en caso contrario se considerará pago atrasado y su 
-					garantía de adjudicación se recorrerá 3 veces el número de meses con atraso. En los contratos celebrados en 
-					los meses de diciembre y junio, se considerará un mes adicional para ganar el factor de actualización de dicho 
-					periodo. Aun cuando el Consumidor no adquiera la calidad de adjudicatario, éste deberá cumplir con el número 
-					de pagos y montos pactados en el presente anexo. <strong> Una vez cubierta la aportación extraordinaria 1, 2, 3, 4 y anual
-					según el plazo aplicable, dentro de los primeros 7 días del mes requerido, en caso contrario se considerará 
-					pago atrasado y su garantía de adjudicación se recorrerá 3 veces el número de meses con atraso, en caso de 
-					incumplimiento a las condiciones del contrato o del anexo, el Proveedor no podrá cumplir con la garantía de 
-					adjudicación.</strong>
+						El consumidor adquiere la calidad de adjudicatario al mes inmediato posterior a la reunión de adjudicación 
+						correspondiente al plazo que haya elegido, siempre y cuando los pagos de cuota periódica total los realice 
+						puntuales y dentro de los primeros 7 días de cada mes, en caso contrario se considerará pago atrasado y su 
+						garantía de adjudicación se recorrerá 3 veces el número de meses con atraso. En los contratos celebrados en 
+						los meses de diciembre y junio, se considerará un mes adicional para ganar el factor de actualización de dicho 
+						periodo. Aun cuando el Consumidor no adquiera la calidad de adjudicatario, éste deberá cumplir con el número 
+						de pagos y montos pactados en el presente anexo.  <strong> Una vez cubierta la aportación extraordinaria 1, 
+							2, 3, 4 y anual según el plazo aplicable, dentro de los primeros 7 días del mes requerido, en caso contrario 
+							se considerará pago atrasado y su garantía de adjudicación se recorrerá 3 veces el número de meses con atraso,
+							 en caso de incumplimiento a las condiciones del contrato o del anexo, el Proveedor no podrá cumplir con la 
+							 garantía de adjudicación.</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="justify">
-					El consumidor instruye a la proveedora PLANEA TU BIEN SA DE CV, que en su calidad de integrante los pagos mensuales de la garantía de adjudicación sean fijos, considerando los factores de actualización del periodo de la misma y cuando adquiera la calidad de adjudicatario, que su mensualidad sea fija, considerando los factores de actualización al plazo contratado y una vez entregado el bien, a esta mensualidad se le agregue el seguro de daños del bien que adquiera y cede el remanente al Proveedor, quedando de la siguiente manera. (En caso de existir un atraso el consumidor se compromete a pagar el número de pagos y montos pactados.)
+						El consumidor instruye a la proveedora PLANEA TU BIEN SA DE CV, que en su calidad de integrante los pagos mensuales de la garantía de adjudicación sean fijos, considerando los factores de actualización del periodo de la misma y cuando adquiera la calidad de adjudicatario, que su mensualidad sea fija, considerando los factores de actualización al plazo contratado y una vez entregado el bien, a esta mensualidad se le agregue el seguro de daños del bien que adquiera y cede el remanente al Proveedor, quedando de la siguiente manera. (En caso de existir un atraso el consumidor se compromete a pagar el número de pagos y montos pactados.)	
 				</p>
 			</div>
 		</div>
@@ -275,9 +275,7 @@
 			<div class="twelve columns">
 				<p class="center">
 					<strong>
-						Este documento constituye una manifestación expresa de la voluntad del Consumidor por lo que es personal e
-						intransferible, no tiene validez monetaria, no implica ninguna modificación a las cláusulas del contrato de 
-						adhesión, ni exime del cumplimiento de las obligaciones contraídas en el mismo.
+							Este documento constituye una manifestación expresa de la voluntad del Consumidor por lo que es personal e intransferible, no tiene validez monetaria, no implica ninguna modificación a las cláusulas del contrato de adhesión, ni exime del cumplimiento de las obligaciones contraídas en el mismo.
 
 					</strong>
 				</p>
@@ -287,8 +285,7 @@
 			<div class="twelve columns">
 				<p class="center">
 					<strong>
-						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, 
-						error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a {{date('d')}} del {{date('m')}} del {{date('Y')}}
+							Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a {{date('d')}} del {{date('m')}} del {{date('Y')}}
 					</strong>
 				</p>
 			</div>

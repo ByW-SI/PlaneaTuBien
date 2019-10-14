@@ -96,7 +96,7 @@
 					Para brindarle un mejor servicio y asesorarlo sobre el funcionamiento del plan de financiamiento que usted 
 					ha contratado, a partir de este momento cualquier asunto relacionado con el contrato celebrado con 
 					<strong>Planea Tu Bien, S.A. de C.V.</strong> queremos invitarlo a ponerse en contacto con nuestra área de 
-					atención a clientes mediantelas siguientes formas:
+					atención a clientes mediante las siguientes formas:
 				</p>
 				<p class="justify" style="margin-left: 25px;">
 					Vía correo electrónico:

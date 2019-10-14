@@ -81,7 +81,14 @@ class Cotizacion extends Model
     }
     public function getCuotaPeriodicaTotalAttribute()
     {
-        $aportacion_periodica = $this->monto/$this->plan->plazo;
+
+        if( isset($this->plan->plazo) ){
+            $aportacion_periodica = $this->monto/$this->plan->plazo;
+        }else{
+            $aportacion_periodica = 0;
+        }
+
+        
         $cuota_administracion = $this->monto*($this->plan->cuota_admon/100);
         $iva_cuota_admon = $cuota_administracion*0.16;
         $seguro_vida = $this->monto*($this->plan->s_v/100);

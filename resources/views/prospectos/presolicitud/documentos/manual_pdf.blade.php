@@ -50,20 +50,20 @@
 				</p>
 				<label style="text-align: left;"><strong>¿QUIÉN ES PLANEA TU BIEN?</strong></label>
 				<p style="text-align: justify;">
-					Planea Tú Bien S.A. DE C.V. es una empresa autorizada por la Secretaría de Economía bajo el Reglamento de Sistemas de Comercialización publicado en el diario oficial el 10 de marzo del 2006; esto nos obliga a cumplir reglas más estrictas en beneficio de nuestros clientes. Nuestros socios fundadores cuentan con más de 10 años de experiencia en la industria del autofinanciamiento y de la banca en nuestro país.
+					Planea Tu Bien S.A. DE C.V. es una empresa autorizada por la Secretaría de Economía bajo el Reglamento de Sistemas de Comercialización publicado en el diario oficial el 10 de marzo del 2006; esto nos obliga a cumplir reglas más estrictas en beneficio de nuestros clientes. Nuestros socios fundadores cuentan con más de 10 años de experiencia en la industria del autofinanciamiento y de la banca en nuestro país.
 				</p>
 				<label style="text-align: left"><strong>CACTERÍSTICAS DEL SISTEMA</strong></label>
 				<p style="text-align:justify">
-					Planea Tú Bien ® te ofrece autofinanciamiento inmobiliario el cual está autorizado por la Secretaría de Economía. El autofinanciamiento es un esquema colectivo en donde un grupo de personas aporta mensualmente una cantidad de dinero para la obtención del bien inmueble de tu elección. El bien lo obtienes en un periodo máximo de 180 meses. La adjudicación de bienes se realiza de manera mensual por alguno de los métodos establecidos en el contrato de adhesión (Puntuación, Subasta, Secuencial o Liquidación Directa).
+					Planea Tu Bien ® te ofrece autofinanciamiento inmobiliario el cual está autorizado por la Secretaría de Economía. El autofinanciamiento es un esquema colectivo en donde un grupo de personas aporta mensualmente una cantidad de dinero para la obtención del bien inmueble de tu elección. El bien lo obtienes en un periodo máximo de 180 meses. La adjudicación de bienes se realiza de manera mensual por alguno de los métodos establecidos en el contrato de adhesión (Puntuación, Subasta, Secuencial o Liquidación Directa).
 				</p>
 				<p style="text-align:justify">
-					Los eventos se realizan ante fedatario público y es ahí donde se decide quién o quienes podrán obtener su propiedad. Los eventos se realizaran el tercer jueves de cada mes a las 9:00 am en nuestras oficinas. En caso de que el tercer jueves fuera inhábil, el evento se realizará el día habil inmediato anterior. Para participar en los eventos únicamente necesitas estar al corriente en tus pagos; para poder participar en las subastas necesitas tener por lo menos 4 meses de antigüedad en el sistemas y tener por lo menos 180 puntos. Para participar en el método secuencial necesitas tener 720 puntos el mes inmediato anterior al evento de adjudicación.
+					Los eventos se realizan ante fedatario público y es ahí donde se decide quién o quienes podrán obtener su propiedad. Los eventos se realizarán el tercer jueves de cada mes a las 9:00 am en nuestras oficinas. En caso de que el tercer jueves fuera inhábil, el evento se realizará el día hábil inmediato anterior. Para participar en los eventos únicamente necesitas estar al corriente en tus pagos; para poder participar en las subastas necesitas tener por lo menos 4 meses de antigüedad en el sistemas y tener por lo menos 180 puntos. Para participar en el método secuencial necesitas tener 720 puntos el mes inmediato anterior al evento de adjudicación.
 				</p>
 				<p style="text-align:justify">
 					Para tener la mayor probabilidad de salir adjudicado, lo más importante es acumular la mayor cantidad de puntos: cada aportación de recursos al grupo te da puntos, la mayor cantidad de puntos la obtienes al ser puntual en tus pagos. Si adelantas mensualidades generas los puntos máximos por cada mes adelantado, <strong>el salir adjudicado por lo tanto depende en gran parte de tu esfuerzo.</strong>
 				</p>
 				<p style="text-align:justify">
-					El monto por contrato séra de entre $300,000 y $500,000 pesos.
+					El monto por contrato será de entre $300,000 y $500,000 pesos.
 				</p>
 				<label style="text-align: left"><strong>COSTOS DEL SISTEMA</strong></label>
 				<p style="text-align:justify">
@@ -139,13 +139,13 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p>
-					Estos porcentajes se aplican con respecto al Precio de Adjudicación Indexado (Precio del bien contratado actualizado semestralmente de acuerdo al factor de actialización).
+					Estos porcentajes se aplican con respecto al Precio de Adjudicación Indexado (Precio del bien contratado actualizado semestralmente de acuerdo con el factor de actualización).
 				</p>
 				<p>
 					Hay otros costos inherentes a la compra de cualquier bien como gastos de escrituración, avalúos, etc.
 				</p>
 				<label><strong>SEGUROS</strong></label>
-				<p>Para asegurar que tu o tus beneficiarios puedan adquirir el bien elegido, hemos contratado un Seguro de Vida, Incapacidad Permanente Total e invalidez que te protege en caso de incapacidad total o parcial permanete, o fallecimiento.</p>
+				<p>Para asegurar que tu o tus beneficiarios puedan adquirir el bien elegido, hemos contratado un Seguro de Vida, Incapacidad Permanente Total e invalidez que te protege en caso de incapacidad total o parcial permanente, o fallecimiento.</p>
 				<p>
 					Es importante señalar que:
 				</p>

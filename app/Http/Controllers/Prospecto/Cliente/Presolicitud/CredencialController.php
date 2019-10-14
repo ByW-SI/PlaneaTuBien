@@ -28,22 +28,24 @@ class CredencialController extends Controller
      */
     public function create(Presolicitud $presolicitud)
     {
-        //
+        // OBTENEMOS PASSWORD ALEATORIO
         $length = 10;    
         $password = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+
+        // CREAMOS O ACTUALIZAMOS LAS CREDENCIALES DEL USUARIO
         $credencial = ClienteCredential::updateOrCreate(['presolicitud_id'=>$presolicitud->id],[
             'name' =>$presolicitud->nombre." ".$presolicitud->paterno." ".$presolicitud->materno,
             'email'=>$presolicitud->email,
             'password'=>Hash::make($password),
             'presolicitud_id'=>$presolicitud->id
         ]);
-        if ($credencial) {
-            $credencial->sendCredentialNotification($password);
+
+        // ENVIAMOS CORREO AL USUARIO SI LAS CREDENCIALES FUERON ENVIADAS
+        if(!$credencial){
             return back();
         }
-        else{
-            return back();
-        }
+        $credencial->sendCredentialNotification($password);
+        return back();
     }
 
     /**
@@ -111,25 +113,26 @@ class CredencialController extends Controller
      */
     public function update(Prospecto $prospecto,Presolicitud  $presolicitud,Request $request, ClienteCredential $credencial)
     {
-        //
+        // VALIDAMOS LOS DATOS
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:cliente_credentials,id,'.$credencial->id,
         ];
         $this->validate($request, $rules);
+
+        // ACTUALIZAMOS LA CREDENCIAL DEL CLIENTE
         $credencial->update([
             'name' =>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
         ]);
-        if ($credencial) {
-            $credencial->sendCredentialNotification($request->password);
-            return redirect()->route('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
-            
-        } else {
-            
+
+        // NOTIFICAMOS EN CASO DE QUE EXISTA LA CREDENCIAL
+        if(!$credencial){
             return redirect()->route('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
         }
+        $credencial->sendCredentialNotification($request->password);
+        return redirect()->route('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
     }
 
     /**

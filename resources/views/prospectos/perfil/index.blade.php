@@ -10,12 +10,12 @@
 	        <div class="d-flex justify-content-between">
 	        	<h4>Perfil:</h4>   
 	        	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
-	        	@if($cotizacion)
+	        	@if($cotizacion && $cotizacion->plan->tipo != 'libre')
 	        	<a class="btn btn-success" href="{{ route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">Pagos</a>
-	        	@else
-	        	<a class="btn btn-success" href="#">Pagos --</a>
+	        	{{-- @else
+	        	<a class="btn btn-success" href="#">Pagos --</a> --}}
 				@endif
-	        	@if ($cotizacion && $cotizacion->liberar)
+	        	@if ( ($cotizacion && $cotizacion->liberar) || $cotizacion->plan->tipo == 'libre')
 	        		<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
 	        	@endif
 	        </div>

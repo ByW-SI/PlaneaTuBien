@@ -163,7 +163,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 	->name('prospectos.')
 	->group(function(){
 		Route::resource('presolicitud','PresolicitudController',['except'=>['show']])->middleware('auth');
-		// Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
+		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']])->middleware('auth');
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController')->middleware('auth');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController')->middleware('auth');

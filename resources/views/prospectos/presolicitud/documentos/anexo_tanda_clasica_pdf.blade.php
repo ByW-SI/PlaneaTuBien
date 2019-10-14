@@ -111,7 +111,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="justify">
-					El consumidor adquiere la calidad de adjudicatario, en la reunión de adjudicación posterior al cumplimiento del 25% de aportacion extraordinaria del monto actualizado del precio total del bien a adjudicar, así como haya realizado mínimo 18 pagos mensuales consecutivos, este al corriente en sus cuotas periodicas totales correspondientes al mes inmediato anterior, y el 1% anual cada diciembre de aportacion extraordinaria del monto actualizado del precio total del bien a adjudicar.
+					El consumidor adquiere la calidad de adjudicatario, en la reunión de adjudicación posterior al cumplimiento del 25% de aportación extraordinaria del monto actualizado del precio total del bien a adjudicar, así como haya realizado mínimo 18 pagos mensuales consecutivos, este al corriente en sus cuotas periódicas totales correspondientes al mes inmediato anterior, y el 1% anual cada diciembre de aportación extraordinaria del monto actualizado del precio total del bien a adjudicar.
 				</p>
 			</div>
 		</div>
@@ -119,7 +119,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left">
-					El consumidor ratifica a la proveedora PLANEA TU BIEN SA DE CV, que su cuota periodica total, se actualiza de acuerdo al contrato de adhesión, y una vez entregado el bien, a esta mensualidad se le agregue el seguro de daños del bien que adquiera y cede el remanente al Proveedor, quedando de la siguiente manera.
+					El consumidor ratifica a la proveedora PLANEA TU BIEN SA DE CV, que su cuota periódica total, se actualiza de acuerdo al contrato de adhesión, y una vez entregado el bien, a esta mensualidad se le agregue el seguro de daños del bien que adquiera y cede el remanente al Proveedor, quedando de la siguiente manera.
 				</p>
 			</div>
 		</div>
@@ -127,7 +127,7 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="left" style="padding-left: 25px;">
-					Cuota periodica total inicial de ${{number_format($plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion),2)}}
+					Cuota periódica total inicial de ${{number_format($plan->cuota_periodica_integrante($contrato->monto,$cotizacion->factor_actualizacion),2)}}
 				</p>
 			</div>
 		</div>
@@ -135,21 +135,29 @@
 		<div class="row">
 			<div class="twelve columns">
 				<p class="center">
-					<strong>El presente certificado promocional es personal e intransferible, no tiene validez monetaria, no implica ninguna modificación a las cláusulas del contrato de adhesión, ni exime del cumplimiento de las obligaciones contraídas en el mismo.</strong>
+					<strong>
+							El presente certificado promocional es personal e intransferible, no tiene validez monetaria, no implica ninguna
+							modificación a las cláusulas del contrato de adhesión, ni exime del cumplimiento de las obligaciones contraídas en el
+							mismo.								
+					</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="center">
-					<strong>Al ser un documento de manifestación voluntaria, no pretende modificar el contenido del contrato de adhesión toda vez que siempre prevalecerán las condiciones pactadas en el mismo.</strong>
+					<strong>
+							Al ser un documento de manifestación voluntaria, no pretende modificar el contenido del contrato de adhesión toda vez que siempre prevalecerán las condiciones pactadas en el mismo.	
+					</strong>
 				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<p class="center">
-					<strong>Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes.</strong>
+					<strong>
+							Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes.
+					</strong>
 				</p>
 			</div>
 		</div>
