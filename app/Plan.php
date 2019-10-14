@@ -139,6 +139,13 @@ class Plan extends Model
 
     public function cotizador($monto, $factor_actualizacion = null)
     {
+
+        $corrida = [];
+        $total_aportacion_en_mensualidades = 0.00;
+        $total_cuota_administracion = 0.00;
+        $bandera_s_d = false;
+        $salto = false;
+
         // FLOAT: OBTENEMOS FACTOR ACTUALIZACION
         if ($factor_actualizacion == null) {
             $factor_actualizacion = (float) $this->factor_actualizacion;
@@ -159,16 +166,12 @@ class Plan extends Model
             $aportacion_mes = $monto_financiar / $this->plazo;
         }
 
+        // OBTENEMOS EL MONTO DE LA CUOTA Y SEGURO
         $cuota_admon_mes = $monto_financiar * ($this->cuota_admon / 100);
         $cuota_admon_mes_iva = $cuota_admon_mes * (16 / 100);
         $seguro_vida_mes = $monto * ($this->s_v / 100);
         $seguro_desempleo = $monto_adjudicar * ($this->s_d / 100);
-        $corrida = [];
-        // dd($seguro_desempleo);
-        $total_aportacion_en_mensualidades = 0.00;
-        $total_cuota_administracion = 0.00;
-        $bandera_s_d = false;
-        $salto = false;
+        
 
         // SI ES TANDA CLASICA
         if ($this->abreviatura == "TC") {
@@ -327,7 +330,6 @@ class Plan extends Model
             }
         }
 
-        // dd($cuota_periodica_adjudicado);
         $aportacion_adjudicado = $aportacion_adjudicado / ($this->plazo - ($this->mes_s_d - 1));
         $cuota_administracion_adjudicado = $cuota_administracion_adjudicado / ($this->plazo - ($this->mes_s_d - 1));
         $iva_adjudicado = $iva_adjudicado / ($this->plazo - ($this->mes_s_d - 1));
