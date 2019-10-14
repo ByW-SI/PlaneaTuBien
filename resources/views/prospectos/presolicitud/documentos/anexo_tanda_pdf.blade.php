@@ -332,8 +332,19 @@
 			<div class="col-12">
 				<p class="center">
 					<strong>
+<<<<<<< HEAD
 						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a {{date('d')}}/
 						{{date('m')}}/{{date('Y')}}
+=======
+						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a 
+						@php
+							setlocale(LC_ALL, 'es_ES');
+							$fecha = \Carbon\Carbon::parse('03-04-2018');
+							$fecha->format("F"); // Inglés.
+							$mes = $fecha->formatLocalized('%B');// mes en idioma español
+							echo $mes;
+						@endphp
+>>>>>>> 475699ca433c41098f94fb613541fd833c5ec3b7
 					</strong>
 				</p>
 			</div>

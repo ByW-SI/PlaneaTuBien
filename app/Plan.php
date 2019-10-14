@@ -168,9 +168,9 @@ class Plan extends Model
         $total_cuota_administracion=0.00;
         $bandera_s_d = false;
         $salto = false;
-         if($this->abreviatura == "TC"){
+        if($this->abreviatura == "TC"){
             $monto_adjudicar_tc = (float)$monto;
-            $monto_anual = $monto_adjudicar*($this->anual/100);
+            $monto_anual = $monto_adjudicar_tc*($this->anual/100);
             for ($i = 1; $i <= $this->plazo; $i++) {
                 if(date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12")
                 {
@@ -227,6 +227,8 @@ class Plan extends Model
                 $mes_actual = date('Y-m-d',strtotime("+1 month",strtotime($mes_actual)));
                 
             }
+            $monto_financiar = $this->monto_financiar($monto);
+            $monto_adjudicar = $monto;
 
         }
         else{
@@ -560,7 +562,7 @@ class Plan extends Model
 
     public function monto_total_pagar($monto,$factor_actualizacion = null)
     {
-         if ($factor_actualizacion == null) {
+        if ($factor_actualizacion == null) {
             $factor_actualizacion =(float)$this->factor_actualizacion;
         }
         $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto,$factor_actualizacion);
@@ -604,6 +606,7 @@ class Plan extends Model
     }
     
 
+    // RELACIONES
 
 
     public function grupos()

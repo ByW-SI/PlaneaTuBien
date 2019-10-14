@@ -95,6 +95,7 @@
 							<span class="form-control bg-light">{{number_format($res['aportacion_integrante'],2)}}</span>
 						</div>
 					</div>
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Aportación adjudicado</label>
 						<div class="input-group mb-3">
@@ -104,6 +105,7 @@
 							<span class="form-control bg-light">{{number_format($res['aportacion_adjudicado'],2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Cuota periodica integrante</label>
 						<div class="input-group mb-3">
@@ -113,6 +115,7 @@
 							<span class="form-control bg-light">{{number_format($res['cuota_periodica_integrante'],2)}}</span>
 						</div>
 					</div>
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Cuota periodica adjudicado</label>
 						<div class="input-group mb-3">
@@ -122,6 +125,7 @@
 							<span class="form-control bg-light">{{number_format($res['cuota_periodica_adjudicado'],2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Total aportaciones en mensualidades</label>
 						<div class="input-group mb-3">
@@ -167,6 +171,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_1($request->monto),2)}}</span>
 						</div>
 					</div>
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto de aportación extraordinaría 2</label>
 						<div class="input-group mb-3">
@@ -194,6 +199,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_liquidacion($request->monto),2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto de aportación anual</label>
 						<div class="input-group mb-3 mt-3">
@@ -203,6 +209,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_anual($request->monto),2)}}</span>
 						</div>
 					</div>
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto de aportación semestral</label>
 						<div class="input-group mb-3 mt-3">
@@ -239,6 +246,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_derecho_adjudicacion($request->monto),2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto total a pagar</label>
 						<div class="input-group mb-3 mt-3">
