@@ -134,7 +134,7 @@
 					PTB tiene implementadas medidas de seguridad físicas, electrónicas y técnicas para proteger sus Datos Personales, sin embargo, usted tendrá derecho a solicitar su rectificación a partir del 6 de enero de 2012 enviando un fax al 5533-2201 ext. 4 con una copia de su identificación e indicándonos cuáles son los datos que se deberán ser modificados. El plazo para atender su solicitud será de 3 días hábiles.
 				</p>
 				<p class="justify">
-					Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades lesgislativas, políticas internas o nuevos requerimentos para la prestación u ofrecimiento de nuestros servicios o productos. Estas modificaciones estarán disponibles al público en nuestras oficinas ubicadas en Jalapa 17 Int. 301, Col. Roma, C.P. 06700 México, D.F.
+					Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades legislativas, políticas internas o nuevos requerimientos para la prestación u ofrecimiento de nuestros servicios o productos. Estas modificaciones estarán disponibles al público en nuestras oficinas ubicadas en Jalapa 17 Int. 301, Col. Roma, C.P. 06700 México, D.F.
 				</p>
 				<p class="justify">
 					Si considera que su derecho de protección de datos personales ha sido lesionado por alguna conducta de nuestros colaboradores, o presume que en el tratamiento de sus datos personales existe alguna violación a las disposiciones previstas en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, podrá interponer la queja o denuncia correspondiente ante el IFAI.

@@ -332,14 +332,8 @@
 			<div class="col-12">
 				<p class="center">
 					<strong>
-						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a 
-						@php
-							setlocale(LC_ALL, 'es_ES');
-							$fecha = Carbon::parse('03-04-2018');
-							$fecha->format("F"); // Inglés.
-							$mes = $fecha->formatLocalized('%B');// mes en idioma español
-							echo $mes;
-						@endphp
+						Leído que fue el presente y enteradas las partes de su alcance y contenido, manifestando que no existe, dolo, error o mala fe, ni ningún vicio oculto, lo firman de conformidad ambas partes a {{date('d')}}/
+						{{date('m')}}/{{date('Y')}}
 					</strong>
 				</p>
 			</div>

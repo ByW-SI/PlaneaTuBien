@@ -153,9 +153,8 @@ class Plan extends Model
 
         // dd($mes_actual);
         
-        if( !$this->plazo ){
-            $aportacion_mes = 0; 
-        }else{
+        $aportacion_mes = 0;
+        if( $this->plazo ){
             $aportacion_mes = $monto_financiar/$this->plazo;
         }
 

@@ -37,6 +37,9 @@ class CredencialController extends Controller
             'password'=>Hash::make($password),
             'presolicitud_id'=>$presolicitud->id
         ]);
+
+        // dd($credencial);
+
         if ($credencial) {
             $credencial->sendCredentialNotification($password);
             return back();

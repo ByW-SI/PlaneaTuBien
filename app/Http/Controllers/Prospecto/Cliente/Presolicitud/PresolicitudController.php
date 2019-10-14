@@ -23,17 +23,13 @@ class PresolicitudController extends Controller
             if ($prospecto->perfil->presolicitud) {
                 $presolicitud = $prospecto->perfil->presolicitud;
                 //dd($presolicitud->status);
-                return view('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+                return view('prospectos.presolicitud.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
+            } else {
+                return redirect()->route('prospectos.presolicitud.create', ['prospecto' => $prospecto]);
             }
-            else{
-                return redirect()->route('prospectos.presolicitud.create',['prospecto'=>$prospecto]);
-            }
-        }
-        else{
+        } else {
             return back();
         }
-
-
     }
 
     /**
@@ -45,7 +41,7 @@ class PresolicitudController extends Controller
     {
         //
         // dd($prospecto);
-        return view('prospectos.presolicitud.form',['prospecto'=>$prospecto]);
+        return view('prospectos.presolicitud.form', ['prospecto' => $prospecto]);
     }
 
     /**
@@ -56,73 +52,96 @@ class PresolicitudController extends Controller
      */
     public function store(Prospecto $prospecto, Request $request)
     {
-        //
-        $rules= [
-            'paterno'=>'required|max:190',
-            'materno'=>'nullable|max:190',
-            'nombre'=>'required|max:190',
-            'calle'=>'required|max:190',
-            'numero_ext'=>"required|max:190",
-            'numero_int'=>"required|max:190",
-            'colonia'=>'required|max:190',
-            'municipio'=>"required|max:190",
-            'estado'=>"required|max:190",
-            'cp'=>"numeric|required|digits_between:5,7",
-            'rfc'=>"alpha_num|required|max:14",
-            'tel_casa'=>"required|max:15",
-            'tel_oficina'=>"nullable|max:15",
-            'tel_celular'=>"required|max:15",
-            'email'=>"email|required|max:190",
-            'fecha_nacimiento'=>"date|required|after:".date('Y-m-d', strtotime('-64 years')),
-            'lugar_nacimiento'=>"required|max:190",
-            'nacionalidad'=>"required|max:190",
-            'sexo'=>"required|in:Masculino,Femenino",
+
+        $rules = [
+            'paterno' => 'required|max:190',
+            'materno' => 'nullable|max:190',
+            'nombre' => 'required|max:190',
+            'calle' => 'required|max:190',
+            'numero_ext' => "required|max:190",
+            'numero_int' => "required|max:190",
+            'colonia' => 'required|max:190',
+            'municipio' => "required|max:190",
+            'estado' => "required|max:190",
+            'cp' => "numeric|required|digits_between:5,7",
+            'rfc' => "alpha_num|required|max:14",
+            'tel_casa' => "required|max:15",
+            'tel_oficina' => "nullable|max:15",
+            'tel_celular' => "required|max:15",
+            'email' => "email|required|max:190",
+            'fecha_nacimiento' => "date|required|after:" . date('Y-m-d', strtotime('-64 years')),
+            'lugar_nacimiento' => "required|max:190",
+            'nacionalidad' => "required|max:190",
+            'sexo' => "required|in:Masculino,Femenino",
             // 'edad'=>'required|numeric|lte:64',
-            'estado_civil'=>"required|in:Soltero,Casado,Viudo,Divorciado,Unión Libre",
-            'profesion'=>"required|max:190",
-            'empresa'=>"nullable|max:190",
-            'puesto'=>"nullable|max:190",
-            'antiguedad_actual'=>"required|max:190",
-            'antiguedad_anterior'=>"required|max:190",
-            'ingreso_mensual'=>"numeric|required",
-            'enterarse'=>"required|max:190",
+            'estado_civil' => "required|in:Soltero,Casado,Viudo,Divorciado,Unión Libre",
+            'profesion' => "required|max:190",
+            'empresa' => "nullable|max:190",
+            'puesto' => "nullable|max:190",
+            'antiguedad_actual' => "required|max:190",
+            'antiguedad_anterior' => "required|max:190",
+            'ingreso_mensual' => "numeric|required",
+            'enterarse' => "required|max:190",
         ];
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
         $perfil = $prospecto->perfil;
         $presolicitud = new Presolicitud($request->all());
-        $presolicitud->folio = 100+Presolicitud::all()->count();
-        $presolicitud->precio_inicial= $perfil->cotizacion->monto;
-        $presolicitud->plazo_contratado= $perfil->cotizacion->plan->plazo;
-        $presolicitud->plan=$perfil->cotizacion->plan->plan_meses;
+        $presolicitud->folio = 100 + Presolicitud::all()->count();
+        $presolicitud->precio_inicial = $perfil->cotizacion->monto;
+
+        if ($perfil->cotizacion->plan->tipo == 'libre') {
+            $presolicitud->plazo_contratado = 0;
+            $presolicitud->plan = 'libre';
+            $perfil->cotizacion->liberar = 1;
+            $perfil->cotizacion->update([
+                'liberar'=>1
+            ]);
+        } else {
+            $presolicitud->plazo_contratado = $perfil->cotizacion->plan->plazo;
+            $presolicitud->plan = $perfil->cotizacion->plan->plan_meses;
+        }
+
+
+        
         $perfil->presolicitud()->save($presolicitud);
-        $cotizacion =$presolicitud->cotizacion();
+        $cotizacion = $presolicitud->cotizacion();
         $grupos = $cotizacion->plan->grupos;
+
         if ($presolicitud) {
+
             if ($cotizacion->liberar) {
+
                 foreach ($grupos as $grupo) {
-                    if($grupo->contratos > 0 && $grupo->activo == 1){
+
+                    if ($grupo->contratos > 0 && $grupo->activo == 1) {
+
                         if ($presolicitud->contratos->isEmpty()) {
-                          foreach ($cotizacion->contratos() as $value) {
-                            $contrato = new Contrato;
-                            $contrato->monto = $value;
-                            $contrato->grupo()->associate($grupo->id);
-                            $grupo->contratos -= 1;
-                            $grupo->save();
-                            $contrato->numero_contrato = 500-$grupo->contratos;
-                            $contrato->estado = "registrado";
-                            $presolicitud->contratos()->save($contrato);
-                          }
+                            foreach ($cotizacion->contratos() as $value) {
+                                $contrato = new Contrato;
+                                $contrato->monto = $value;
+                                $contrato->grupo()->associate($grupo->id);
+                                $grupo->contratos -= 1;
+                                $grupo->save();
+                                $contrato->numero_contrato = 500 - $grupo->contratos;
+                                $contrato->estado = "registrado";
+                                $presolicitud->contratos()->save($contrato);
+                            }
                         }
                     }
                 }
             }
-            return redirect()->route('prospectos.presolicitud.conyuge.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+
+            // dd('stop');
+
+            return redirect()->route('prospectos.presolicitud.conyuge.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
         }
+
+        // dd('stop 2');
         // var_dump("<br>");
         // dd($request->all());
     }
 
-    
+
 
     /**
      * Display the specified resource.
