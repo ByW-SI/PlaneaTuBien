@@ -26,17 +26,19 @@
 			</div>
 		</div>
 		<div class="row-group">
-			<table class="table table-striped table-bordered" id="crms">
+			<table class="table table-striped table-bordered table-responsive" id="crms">
 				<thead>
 					<tr class="thead-light">
                         <th class="text-center">Prospecto</th>
-                        <th class="text-center">Fecha de contacto</th>
+                        <th class="text-center">Fecha contacto</th>
                         <th class="text-center">Hora</th>
-                        <th class="text-center">Fecha de aviso</th>
-                        <th class="text-center">Telefono</th>
+                        <th class="text-center">Fecha aviso</th>
+						<th class="text-center">Teléfono</th>
+						<th class="text-center">Celular</th>
                         <th class="text-center">Correo</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Tareas</th>
+						<th class="text-center">Tareas</th>
+						<th class="text-center">Detalles</th>
                         <th class="text-center">Acción</th>
                     </tr>
 				</thead>
@@ -56,15 +58,11 @@
                             	{{$crm->fecha_aviso}}
                             </td>
                             <td>
-                                <ul>
-                                	<li>
-                                	    <strong>Telefono: </strong>{{$crm->prospecto->tel}}
-                                	</li>
-                                	<li>
-                                	    <strong>Movil: </strong>{{$crm->prospecto->movil}}
-                                	</li>
-                                </ul>
-                            </td>
+								{{$crm->prospecto->tel}}
+							</td>
+							<td>
+								{{$crm->prospecto->movil}}
+							</td>
                             <td>
                                 {{$crm->prospecto->email}}
                             </td>
@@ -78,10 +76,12 @@
                             </td>
                             <td>
                                 {{$crm->status}}
-                            </td>
+							</td>
+							<td>
+								<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-light" href="{{ route('empleados.prospectos.crms.show',['prospecto'=>$crm->prospecto,'empleado'=>$empleado,'crm'=>$crm]) }}"><i class="fas fa-info-circle"></i><strong> Detalles</strong></a> 
+							</td>
 							<td>
 								<div class="row justify-content-around">
-									<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-light" href="{{ route('empleados.prospectos.crms.show',['prospecto'=>$crm->prospecto,'empleado'=>$empleado,'crm'=>$crm]) }}"><i class="fas fa-info-circle"></i><strong> Detalles</strong></a> 
 									<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-success" href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$crm->prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM del prospecto</strong></a>
                                 </div>
                                 <div class="row justify-content-around">
