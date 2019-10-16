@@ -56,45 +56,11 @@
 				<select type="select" class="form-control" name="contrato_id" id="contrato_id" >
 					<option  value="">Sin Definir</option>
 					@foreach ($contratos as $contrato)
-						<option id="{{$contrato->id}}" value="{{$contrato->id}}">{{$contrato->nombre}}</option>
+						<option id="{{$contrato->id}}" value="{{$contrato->id}}">{{$contrato->codigo}} - {{$contrato->nombre}}</option>
 					@endforeach
 				</select>
-            </div>
-			{{-- <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-				<label for="cargo">✱Cargo:</label>
-                    <select required class="form-control" id="cargo" name="cargo">
-                        <option value="" {{$empleado->cargo == "" ? "selected" : ""}}>
-                    		Seleccionar
-                    	</option>
-                        <option value="Asesor" {{$empleado->cargo == "Asesor" ? "selected" : ""}}>
-                    		Asesor
-                    	</option>
-                        <option value="Supervisor" {{$empleado->cargo == "Supervisor" ? "selected" : ""}}>
-                    		Supervisor
-                    	</option>
-                        <option value="Gerente" {{$empleado->cargo == "Gerente" ? "selected" : ""}}>
-                    		Gerente
-                    	</option>
-                        <option value="Mesa de trabajo" {{$empleado->cargo == "Mesa de trabajo" ? "selected" : ""}}>
-                    		Mesa de trabajo
-                    	</option>
-                        <option value="Ejecutivo de cuenta" {{$empleado->cargo == "Ejecutivo de cuenta" ? "selected" : ""}}>
-                    		Ejecutivo de cuenta
-                    	</option>
-                        <option value="Juridico" {{$empleado->cargo == "Juridico" ? "selected" : ""}}>
-                    		Jurídico
-                    	</option>
-                        <option value="Contador" {{$empleado->cargo == "Contador" ? "selected" : ""}}>
-                    		Contador
-                    	</option>
-                        <option value="Gerente de area" {{$empleado->cargo == "Gerente de area" ? "selected" : ""}}>
-                    		Gerente de área
-                    	</option>
-                        <option value="Director de area" {{$empleado->cargo == "Director de area" ? "selected" : ""}}>
-                    		Director de área
-                    	</option>
-                    </select>
-            </div> --}}
+			</div>
+			{{-- INPUT PUESTO --}}
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Puesto:</label>
 				<select required class="form-control" id="tipo" name="tipo">
@@ -150,7 +116,35 @@
                         	Administrador
                     	</option>
                     </select>
-            </div>
+			</div>
+			
+			{{-- INPUT TIPO JORNADA --}}
+
+			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+				<label class="control-label" for="tipo_jornada_id"><i class="fas fa-sync"></i> Tipo de jornada:</label>
+				<select type="select" class="form-control" name="tipo_jornada_id" id="tipo_jornada_id" >
+					<option  value="">Sin Definir</option>
+					@foreach ($jornadas as $jornada)
+						<option value="{{$jornada->id}}">{{$jornada->codigo}} - {{$jornada->nombre}}</option>
+					@endforeach
+				</select>
+			</div>
+
+			{{-- INPUT RIESGO PUESTO --}}
+
+			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+				<label class="control-label" for="riesgo_puesto"><i class="fas fa-sync"></i> Riesgo puesto:</label>
+				<select type="select" class="form-control" name="riesgo_puesto" id="riesgo_puesto" >
+					<option  value="">Sin Definir</option>
+					<option value="1 - Clase I">1 - Clase I</option>
+					<option value="2 - Clase II">2 - Clase II</option>
+					<option value="3 - Clase III">3 - Clase III</option>
+					<option value="4 - Clase IV">4 - Clase IV</option>
+					<option value="5 - Clase V">5 - Clase V</option>
+					<option value="99 - No aplica">99 - No aplica</option>
+				</select>
+			</div>
+			
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="lugar_trabajo">Lugar de Trabajo:</label>
 				<select type="select" name="lugar_trabajo" class="form-control" id="lugar_trabajo" value="">
@@ -165,13 +159,22 @@
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="salario_dia">Salario Diario:</label>
 				<input class="form-control" type="text" id="salario_dia" name="salario_dia" value="">
-            </div>
+			</div>
+			{{-- INPUT PERIODO PAGA --}}
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="periodo_paga">Periodicidad de Pago:</label>
 				<select type="select" class="form-control" name="periodo_paga" id="periodo_paga">
-					<option id="1" value="Semanal">Semanal</option>
-					<option id="2" value="Quincenal">Quincenal</option>
-					<option id="3" value="Mensual">Mensual</option>
+					<option value="">Seleccionar</option>
+					<option value="01 - Diario">01 - Diario</option>
+					<option value="02 - Semanal">02 - Semanal</option>
+					<option value="03 - Catorcenal">03 - Catorcenal</option>
+					<option value="04 - Quincenal">04 - Quincenal</option>
+					<option value="05 - Mensual">05 - Mensual</option>
+					<option value="06 - Bimestral">06 - Bimestral</option>
+					<option value="07 - Unidad obra">07 - Unidad obra</option>
+					<option value="08 - Comisión">08 - Comisión</option>
+					<option value="09 - Precio alzado">09 - Precio alzado</option>
+					<option value="99 - otra periodicidad">99 - otra periodicidad</option>
 				</select>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
@@ -179,13 +182,23 @@
 				<select class="form-control" type="select" name="prestaciones" id="prestaciones">
 					<option id="1" value="De Ley">De Ley</option>
 				</select>
-            </div>
+			</div>
+			{{-- INPUT REGIMEN CONTRATACION --}}
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="regimen">Régimen de Contratación:</label>
 				<select class="form-control" type="select" name="regimen" id="regimen">
-					<option id="1" value="Sueldos y Salarios">Sueldos y Salarios</option>
-					<option id="2" value="Jubilados">Jubilados</option>
-					<option id="3" value="Pensionados">Pensionados</option>
+					<option value="">Seleccionar</option>
+					<option value="02 - Sueldos">02 - Sueldos</option>
+					<option value="03 - Jubilados">03 - Jubilados</option>
+					<option value="04 - Pensionados">04 - Pensionados</option>
+					<option value="05 - Asimilados Miembros Sociedades Cooperativas Produccion">05 - Asimilados Miembros Sociedades Cooperativas Producción</option>
+					<option value="06 - Asimilados Integrantes Sociedades Asociaciones Civiles">06 - Asimilados Integrantes Sociedades Asociaciones Civiles</option>
+					<option value="07 - Asimilados Miembros consejos">07 - Asimilados Miembros consejos</option>
+					<option value="08 - Asimilados comisionistas">08 - Asimilados comisionistas</option>
+					<option value="09 - Asimilados - Honorarios">09 - Asimilados - Honorarios</option>
+					<option value="10 - Asimilados acciones">10 - Asimilados acciones</option>
+					<option value="11 - Asimilados otros">11 - Asimilados otros</option>
+					<option value="99 - Otro Regimen">99 - Otro Regimen</option>
 				</select>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">

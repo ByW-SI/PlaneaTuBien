@@ -42,7 +42,8 @@ class Empleado extends Model
         'calles',
         'referencia',
         'fecha_baja',
-        'motivo_baja'
+        'motivo_baja',
+        'puesto'
     ];
     protected $hidden = [
         'created_at',

@@ -187,12 +187,12 @@ class EmpleadoController extends Controller
     }
 
     public function buscarGerentes(){
-        $gerentes = Empleado::where('tipo', 'Gerente')->get();
+        $gerentes = Empleado::where('puesto', 'Gerente')->get();
         return view('empleado.listaempleado', ['empleados' => $gerentes]);
     }
 
     public function buscarSupervisores(){
-        $supervisores = Empleado::where('tipo', 'Supervisor')->get();
+        $supervisores = Empleado::where('puesto', 'Supervisor')->get();
         return view('empleado.listaempleado', ['empleados' => $supervisores]);
     }
 

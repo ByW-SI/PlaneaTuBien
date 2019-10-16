@@ -62,7 +62,17 @@
 						@if($dato_lab->contrato==null)
 							<dd><strong>NO DEFINIDO</strong></dd>
 						@else
-							<dd><strong>{{ $dato_lab->contrato->nombre }}</strong></dd>
+							<dd><strong>{{ $dato_lab->contrato->codigo }} - {{ $dato_lab->contrato->nombre }}</strong></dd>
+						@endif
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="control-label">Tipo de jornada:</label>
+						@if($dato_lab->tipo_jornada_id==null)
+							<dd><strong>NO DEFINIDO</strong></dd>
+						@else
+							<dd><strong>{{ $dato_lab->tipo_jornada->codigo }} - {{ $dato_lab->tipo_jornada->nombre }}</strong></dd>
 						@endif
 					</div>
 				</div>
@@ -78,14 +88,22 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
+						<label class="control-label">Riesgo puesto:</label>
+						@if($dato_lab->riesgo_puesto==null)
+							<dd><strong>NO DEFINIDO</strong></dd>
+						@else
+							<dd><strong>{{ $dato_lab->riesgo_puesto }}</strong></dd>
+						@endif
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
 						<label class="control-label">
 							Salario Nóminal:
 						</label>
 						<dd><strong>$ {{ $dato_lab->salario_nomina }}</strong></dd>
 					</div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label class="control-label">
@@ -118,8 +136,6 @@
 						<dd><strong>{{ $dato_lab->regimen }}</strong></dd>
 					</div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label class="control-label">

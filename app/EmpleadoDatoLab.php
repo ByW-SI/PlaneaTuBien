@@ -30,7 +30,9 @@ class EmpleadoDatoLab extends Model
     	'fecha_baja',
     	'baja_id',
     	'comentario_baja',
-    	'puntualidad',
+		'puntualidad',
+		'tipo_jornada_id',
+		'riesgo_puesto',
     ];
 
     protected $hidden=[
@@ -58,6 +60,10 @@ class EmpleadoDatoLab extends Model
     public function puesto()
     {
     	return $this->belongsTo('App\TipoPuesto','puesto_id','id');
-    }
+	}
+	
+	public function tipo_jornada(){
+		return $this->belongsTo('App\TipoJornada','tipo_jornada_id','id');
+	}
 
 }

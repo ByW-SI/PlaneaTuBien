@@ -257,7 +257,6 @@ Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','s
 
 
 Route::get('pruebas','PruebasController@index')->name('pruebas');
-Route::post('pruebas','PruebasController@probar')->name('prueba.ejecutar');
 
 
 

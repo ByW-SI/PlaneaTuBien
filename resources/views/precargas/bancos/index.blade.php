@@ -22,20 +22,19 @@
 						<tr class="table-primary">
 							<th>Nombre</th>
 							<th>Etiqueta</th>
-							{{-- <th>Acción</th> --}}
+							<th>Eliminar</th>
 						</tr>
 						@foreach($bancos as $banco)
 							<tr>
 								<td>{{ $banco->nombre }}</td>
 								<td>{{ $banco->etiqueta ? $banco->etiqueta : 'N/A' }}</td>
-								{{-- <td class="text-center">
-									<a href="{{ route('bancos.show', ['banco' => $banco]) }}" class="btn btn-sm btn-primary">
-										<i class="fa fa-eye"></i> Ver
-									</a>
-									<a href="{{ route('bancos.edit', ['banco' => $banco]) }}" class="btn btn-sm btn-warning">
-										✎ Editar
-									</a>
-								</td> --}}
+								<td class="text-center">
+									<form action="{{url('bancos', ['banco'=>$banco])}}" method="POST">
+										@csrf
+										<input type="hidden" name="_method" value="delete" />
+										<button class="btn btn-danger" type="submit">Eliminar</button>
+									</form>
+								</td>
 							</tr>
 						@endforeach
 					</table>

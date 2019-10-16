@@ -81,8 +81,9 @@ class BancoController extends Controller
      * @param  \App\Banco  $banco
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banco $banco)
+    public function destroy(Request $request, Banco $banco)
     {
-        //
+        $banco->delete();
+        return redirect()->back();
     }
 }

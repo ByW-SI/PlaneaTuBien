@@ -12,7 +12,8 @@ class TipoContrato extends Model
     protected $fillable=[
     	'id',
     	'nombre',
-    	'descripcion',
+        'descripcion',
+        'codigo'
     ];
 
     protected $hidden = [
