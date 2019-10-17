@@ -47,7 +47,7 @@ class EmpleadoDatoLabController extends Controller
         $puestos = TipoPuesto::get();
         $bancos=Banco::get();
         $edit = false;
-        
+
         return view('empleado.datoslaborales.create',[
             'empleado'=>$empleado,
             'bajas'=>$bajas,

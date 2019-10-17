@@ -34,11 +34,11 @@
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="fecha_nacimiento">✱Fecha de nacimiento:</label>
-					<input type="date" name="fecha_nacimiento" value="{{$empleado->fecha_nacimiento}}" class="form-control" required>
+					<input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{$empleado->fecha_nacimiento}}" class="form-control" required>
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="edad">Edad:</label>
-					<input type="number" step="1" name="edad" value="{{$empleado->edad}}" class="form-control">
+					<input type="number" step="1" name="edad" id="edad" value="{{$empleado->edad}}" class="form-control" readonly="">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="sexo">Sexo:</label>
@@ -60,97 +60,6 @@
 							<option value="{{$sucursal->id}}" {{$empleado->sucursal_id == $sucursal->id ? "selected" : ""}} >{{$sucursal->nombre}}</option>
 						@endforeach
 					</select>
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="tipo">✱Tipo de Empleado:</label>
-                    <select required class="form-control" id="tipo" name="tipo">
-                        <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
-                        	Seleccionar
-                    	</option>
-                        <option value="Asesor" {{$empleado->tipo == "Asesor" ? "selected" : ""}}>
-                        	Asesor
-                    	</option>
-                        <option value="Supervisor" {{$empleado->tipo == "Supervisor" ? "selected" : ""}}>
-                        	Supervisor
-                    	</option>
-                        <option value="Gerente" {{$empleado->tipo == "Gerente" ? "selected" : ""}}>
-                        	Gerente
-                    	</option>
-                        <option value="TKM" {{$empleado->tipo == "TKM" ? "selected" : ""}}>
-                        	TKM
-                    	</option>
-                        <option value="Becario" {{$empleado->tipo == "Becario" ? "selected" : ""}}>
-                        	Becario
-                    	</option>
-                        <option value="Mesa de control" {{$empleado->tipo == "Mesa de control" ? "selected" : ""}}>
-                        	Mesa de control
-                    	</option>
-                        <option value="Ejecutivo de cuenta" {{$empleado->tipo == "Ejecutivo de cuenta" ? "selected" : ""}}>
-                        	Ejecutivo de cuenta
-                    	</option>
-                        <option value="Juridico" {{$empleado->tipo == "Juridico" ? "selected" : ""}}>
-                        	Jurídico
-                    	</option>
-                        <option value="Contador" {{$empleado->tipo == "Contador" ? "selected" : ""}}>
-                        	Contador
-                    	</option>
-                        <option value="Jefe atención a clientes" {{$empleado->tipo == "Jefe atención a clientes" ? "selected" : ""}}>
-                        	Jefe de atención a clientes
-                    	</option>
-                        <option value="Jefe archivo" {{$empleado->tipo == "Jefe archivo" ? "selected" : ""}}>
-                        	Jefe de archivo
-                    	</option>
-                        <option value="Jefe ventas" {{$empleado->tipo == "Jefe ventas" ? "selected" : ""}}>
-                        	Jefe de ventas
-                    	</option>
-                        <option value="Jefe jurídico" {{$empleado->tipo == "Jefe jurídico" ? "selected" : ""}}>
-                        	Jefe de jurídico
-                    	</option>
-                        <option value="Jefe contabilidad" {{$empleado->tipo == "Jefe contabilidad" ? "selected" : ""}}>
-                        	Jefe de contabilidad
-                    	</option>
-                        <option value="Directivo" {{$empleado->tipo == "Directivo" ? "selected" : ""}}>
-                        	Directivo
-                    	</option>
-                        <option value="Administrador" {{$empleado->tipo == "Administrador" ? "selected" : ""}}>
-                        	Administrador
-                    	</option>
-                    </select>
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="cargo">✱Cargo:</label>
-                    <select required class="form-control" id="cargo" name="cargo">
-                        <option value="" {{$empleado->cargo == "" ? "selected" : ""}}>
-                    		Seleccionar
-                    	</option>
-                        <option value="Asesor" {{$empleado->cargo == "Asesor" ? "selected" : ""}}>
-                    		Asesor
-                    	</option>
-                        <option value="Supervisor" {{$empleado->cargo == "Supervisor" ? "selected" : ""}}>
-                    		Supervisor
-                    	</option>
-                        <option value="Gerente" {{$empleado->cargo == "Gerente" ? "selected" : ""}}>
-                    		Gerente
-                    	</option>
-                        <option value="Mesa de trabajo" {{$empleado->cargo == "Mesa de trabajo" ? "selected" : ""}}>
-                    		Mesa de trabajo
-                    	</option>
-                        <option value="Ejecutivo de cuenta" {{$empleado->cargo == "Ejecutivo de cuenta" ? "selected" : ""}}>
-                    		Ejecutivo de cuenta
-                    	</option>
-                        <option value="Juridico" {{$empleado->cargo == "Juridico" ? "selected" : ""}}>
-                    		Jurídico
-                    	</option>
-                        <option value="Contador" {{$empleado->cargo == "Contador" ? "selected" : ""}}>
-                    		Contador
-                    	</option>
-                        <option value="Gerente de area" {{$empleado->cargo == "Gerente de area" ? "selected" : ""}}>
-                    		Gerente de área
-                    	</option>
-                        <option value="Director de area" {{$empleado->cargo == "Director de area" ? "selected" : ""}}>
-                    		Director de área
-                    	</option>
-                    </select>
 				</div>
 			</div>
 		</div>
@@ -195,6 +104,23 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+					<label for="cp">Código Postal:</label>
+					<input class="form-control" type="text" name="cp" id="cp" value="{{$empleado->cp}}">
+				</div>
+				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+					<label for="colonia">@if($edit)✱@endif Colonia:</label>
+					<select class="form-control" name="colonia" id="colonia" @if($edit) required="" @endif></select>
+					{{-- <input  type="text"  value="{{$empleado->colonia}}"> --}}
+				</div>
+				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+					<label for="municipio">Alcaldía o municipio:</label>
+					<input class="form-control" type="text" name="municipio" id="municipio" value="{{$empleado->municipio}}" readonly="">
+				</div>
+				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+					<label for="estado">Estado o ciudad</label>
+					<input class="form-control" type="text" name="estado" id="estado" value="{{$empleado->estado}}" readonly="">
+				</div>
+				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="Calle">Calle:</label>
 					<input class="form-control" type="text" name="calle" value="{{$empleado->calle}}">
 				</div>
@@ -205,22 +131,6 @@
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="num_int">Número interior:</label>
 					<input class="form-control" type="text" name="num_int" value="{{$empleado->num_int}}">
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="cp">Código Postal:</label>
-					<input class="form-control" type="text" name="cp" value="{{$empleado->cp}}">
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="colonia">Colonia:</label>
-					<input class="form-control" type="text" name="colonia" value="{{$empleado->colonia}}">
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="municipio">Alcaldía o municipio:</label>
-					<input class="form-control" type="text" name="municipio" value="{{$empleado->municipio}}">
-				</div>
-				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="estado">Estado o ciudad</label>
-					<input class="form-control" type="text" name="estado" value="{{$empleado->estado}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="calles">Entre calles:</label>
@@ -243,3 +153,77 @@
 	</form>
 </div>
 @endsection
+@push('scripts')
+<script>
+	$(document).ready(function() {
+		let cp = $("#cp").val();
+		if(cp != '' && cp.length === 5){
+			$("#colonia").empty();
+			getColonias(cp);
+		}
+	});
+    $('#fecha_nacimiento').on('change', function(event) {
+		$('#edad').val(getEdad($(this).val()));
+	});
+
+	$("#cp").change(function(){
+		let cp = $("#cp").val();
+		if(cp.length === 5){
+			$("#colonia").empty();
+			getColonias(cp);
+		}
+		
+	});
+	$("#colonia").change(function(){
+		var cp = $("#cp").val();
+		var colonia = $("#colonia").val();
+		$.ajax({
+			url: `{{ url('cp') }}/${cp}/${colonia}`,
+			dataType: 'json',
+			success:function(result,status,xhr){
+				let res = result.cp[0];
+				$("#municipio").val(res.municipio);
+				$("#estado").val(res.estado);
+			},
+			error:function(xhr,status,error){
+				$("#municipio").val('');
+				$("#estado").val('');
+			}
+		});
+	});
+
+	function getEdad(fecha) {
+		let fecha_nacimiento = fecha.split('-');
+		fecha_nacimiento = new Date(fecha_nacimiento[0], fecha_nacimiento[1] -1, fecha_nacimiento[2]);
+		let fecha_hoy = new Date();
+		let edad = fecha_hoy.getFullYear() - fecha_nacimiento.getFullYear();
+		let mes = fecha_hoy.getMonth() - fecha_nacimiento.getMonth();
+		if (mes < 0 || ( mes == 0 && fecha_hoy.getDate() < fecha_nacimiento.getDate()))
+			edad--;
+		return edad;
+	}
+
+	function getColonias(cp) {
+		let opt = '';
+		$.ajax({
+			url: `{{ url('cp') }}/${cp}`,
+			dataType: 'json',
+			success:function(result,status,xhr){
+				console.log(result);
+				let res_array = result.cp;
+				res_array.forEach(function(item,index){
+					opt += `<option value="${item.poblacion}">${item.poblacion}</option>`
+				});
+				$("#colonia").append("<option value=''>Seleccione una colonia ó población</option>");
+				$("#colonia").append(opt);
+			},
+			error:function(xhr,status,error){
+				alert(error);
+				$("#colonia").empty();
+				$("#municipio").val('');
+				$("#estado").val('');
+			}
+		});
+	}
+</script>
+@endpush

@@ -60,41 +60,6 @@
 					@endforeach
 				</select>
             </div>
-			{{-- <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-				<label for="cargo">✱Cargo:</label>
-                    <select required class="form-control" id="cargo" name="cargo">
-                        <option value="" {{$empleado->cargo == "" ? "selected" : ""}}>
-                    		Seleccionar
-                    	</option>
-                        <option value="Asesor" {{$empleado->cargo == "Asesor" ? "selected" : ""}}>
-                    		Asesor
-                    	</option>
-                        <option value="Supervisor" {{$empleado->cargo == "Supervisor" ? "selected" : ""}}>
-                    		Supervisor
-                    	</option>
-                        <option value="Gerente" {{$empleado->cargo == "Gerente" ? "selected" : ""}}>
-                    		Gerente
-                    	</option>
-                        <option value="Mesa de trabajo" {{$empleado->cargo == "Mesa de trabajo" ? "selected" : ""}}>
-                    		Mesa de trabajo
-                    	</option>
-                        <option value="Ejecutivo de cuenta" {{$empleado->cargo == "Ejecutivo de cuenta" ? "selected" : ""}}>
-                    		Ejecutivo de cuenta
-                    	</option>
-                        <option value="Juridico" {{$empleado->cargo == "Juridico" ? "selected" : ""}}>
-                    		Jurídico
-                    	</option>
-                        <option value="Contador" {{$empleado->cargo == "Contador" ? "selected" : ""}}>
-                    		Contador
-                    	</option>
-                        <option value="Gerente de area" {{$empleado->cargo == "Gerente de area" ? "selected" : ""}}>
-                    		Gerente de área
-                    	</option>
-                        <option value="Director de area" {{$empleado->cargo == "Director de area" ? "selected" : ""}}>
-                    		Director de área
-                    	</option>
-                    </select>
-            </div> --}}
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Puesto:</label>
 				<select required class="form-control" id="tipo" name="tipo">
@@ -164,7 +129,7 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="salario_dia">Salario Diario:</label>
-				<input class="form-control" type="text" id="salario_dia" name="salario_dia" value="">
+				<input class="form-control" type="text" id="salario_dia" name="salario_dia" value="" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="periodo_paga">Periodicidad de Pago:</label>
@@ -253,80 +218,84 @@
 	</div>
     </form>
 </div>
-
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script type="text/javascript">
-	function getAreas()
-	{
-	  $.ajaxSetup({
-	    headers: {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-	  });
-	  $.ajax({
-	    url: "{{ url('/getareas') }}",
-	    type: "GET",
-	    dataType: "html",
-	  }).done(function(resultado){
-	    $("#area_id").html(resultado);
-	  });
-	}
-	function getContratos(){
-		$.ajaxSetup({
-	    headers: {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-		});
-		$.ajax({
-			url: "{{ url('/getcontratos') }}",
-		    type: "GET",
-		    dataType: "html",
-		}).done(function(resultado){
-		    $("#contrato_id").html(resultado);
-		});
-	}
-	function getPuestos(){
-		$.ajaxSetup({
-	    headers: {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-		});
-		$.ajax({
-			url: "{{ url('/getpuestos') }}",
-		    type: "GET",
-		    dataType: "html",
-		}).done(function(resultado){
-		    $("#puesto_id").html(resultado);
-		});
-	}
-	function getBajas(){
-		$.ajaxSetup({
-	    headers: {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-		});
-		$.ajax({
-			url: "{{ url('/getbajas') }}",
-		    type: "GET",
-		    dataType: "html",
-		}).done(function(resultado){
-		    $("#tipobaja_id").html(resultado);
-		});
-	}
-	function getBancos(){
-		$.ajaxSetup({
-	    headers: {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-		});
-		$.ajax({
-			url: "{{ url('/getbancos') }}",
-		    type: "GET",
-		    dataType: "html",
-		}).done(function(resultado){
-		    $("#banco").html(resultado);
-		});
-	}
-
-</script>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        function getAreas()
+        {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+            url: "{{ url('/getareas') }}",
+            type: "GET",
+            dataType: "html",
+          }).done(function(resultado){
+            $("#area_id").html(resultado);
+          });
+        }
+        function getContratos(){
+            $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                url: "{{ url('/getcontratos') }}",
+                type: "GET",
+                dataType: "html",
+            }).done(function(resultado){
+                $("#contrato_id").html(resultado);
+            });
+        }
+        function getPuestos(){
+            $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                url: "{{ url('/getpuestos') }}",
+                type: "GET",
+                dataType: "html",
+            }).done(function(resultado){
+                $("#puesto_id").html(resultado);
+            });
+        }
+        function getBajas(){
+            $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                url: "{{ url('/getbajas') }}",
+                type: "GET",
+                dataType: "html",
+            }).done(function(resultado){
+                $("#tipobaja_id").html(resultado);
+            });
+        }
+        function getBancos(){
+            $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                url: "{{ url('/getbancos') }}",
+                type: "GET",
+                dataType: "html",
+            }).done(function(resultado){
+                $("#banco").html(resultado);
+            });
+        }
+        $('#salario_nomina').on('change', function(event) {
+            const sal_dia = parseInt($(this).val()) / 30;
+            $('#salario_dia').val(new Intl.NumberFormat("es-MX").format(sal_dia.toFixed(2)));
+        });
+
+    </script>
+@endpush

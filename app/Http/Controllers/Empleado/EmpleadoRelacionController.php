@@ -51,7 +51,7 @@ class EmpleadoRelacionController extends Controller
      */
     public function store(Request $request, Empleado $empleado)
     {
-        dd($empleado);
+        // dd($empleado);
         $empleado2 = Empleado::find($request->input('empleado'));
         $empleado2->jefe()->associate($empleado);
         $empleado2->save();
@@ -98,8 +98,11 @@ class EmpleadoRelacionController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy(Empleado $empleado, $relacion, Request $request)
     {
-        //
+        $subEmpleado = Empleado::find($relacion);
+        $subEmpleado->id_jefe = null;
+        $subEmpleado->save();
+        return redirect()->route('empleados.relaciones.index',['empleado'=>$empleado]);
     }
 }

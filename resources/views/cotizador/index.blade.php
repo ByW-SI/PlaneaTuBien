@@ -16,7 +16,7 @@
 						<select name="plan" id="plan" class="form-control mb-2 mr-sm-2" placeholder="Plan a contratar">
 							<option value="">Seleccione un plan</option>
 							@foreach ($planes as $plan)
-								<option value="{{$plan->id}}" {{$plan_select && $request->plan == $plan_select->id ? 'selected=""' : ''}}>{{$plan->nombre}}</option>
+								<option value="{{$plan->id}}" {{$plan_select && $request->plan == $plan->id ? 'selected=""' : ''}}>{{$plan->nombre}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 			</form>
-			@if ($res)
+			@if ($res && $plan_select->abreviatura !== "PL")
 				<div class="row">
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<h4>{{$plan_select->nombre}}</h4>
@@ -50,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Aportaciones extraordinarias</label>
 						<div class="input-group mb-3">
 							<span class="form-control bg-light">{{$res['aportaciones_extraordinarias']}}</span>
@@ -77,15 +77,17 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
-						<label for="">Monto a adjudicar</label>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text">$</span>
+					@if ($plan_select->abreviatura != "TC")
+						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+							<label for="">Monto a adjudicar</label>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control bg-light">{{$plan_select->abreviatura == "TC"  ? number_format($plan_select->monto_adjudicar_tc($request->monto),2) : number_format($res['monto_adjudicar'],2)}}</span>
 							</div>
-							<span class="form-control bg-light">{{$plan_select->abreviatura == "TC"  ? number_format($plan_select->monto_adjudicar_tc($request->monto),2) : number_format($res['monto_adjudicar'],2)}}</span>
 						</div>
-					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Aportación integrante</label>
 						<div class="input-group mb-3">
@@ -237,7 +239,6 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_cuota_periodica_adjudicado($request->monto),2)}}</span>
 						</div>
 					</div>
-					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto derecho de adjudicación</label>
 						<div class="input-group mb-3 mt-3">
@@ -247,6 +248,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_derecho_adjudicacion($request->monto),2)}}</span>
 						</div>
 					</div>
+					@endif
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto total a pagar</label>
 						<div class="input-group mb-3 mt-3">
@@ -254,6 +256,15 @@
 								<span class="input-group-text">$</span>
 							</div>
 							<span class="form-control bg-light">{{number_format($plan_select->monto_total_pagar($request->monto),2)}}</span>
+						</div>
+					</div>
+					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<label for="">Inscripción</label>
+						<div class="input-group mb-3 mt-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">$</span>
+							</div>
+							<span class="form-control bg-light">{{number_format($plan_select->monto_inscripcion_con_iva($request->monto),2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -280,6 +291,9 @@
 									Aportación
 								</th>
 								<th class="text-center" scope="col">
+									Aportación Anual
+								</th>
+								<th class="text-center" scope="col">
 									Cuota de Administración
 								</th>
 								<th class="text-center" scope="col">
@@ -297,6 +311,7 @@
 							</tr>
 						</thead>
 						<tbody>
+							@php($totales = [0,0,0,0,0,0,0])
 							@foreach ($res['corrida'] as $key=>$mes)
 								<tr>
 									<th class="text-center" scope="row">
@@ -307,6 +322,9 @@
 									</td>
 									<td class="text-center">
 										${{number_format($mes['aportacion'],2)}}
+									</td>
+									<td class="text-center">
+										@if($mes['mes'] === "12")${{number_format($mes['monto_anual'], 2)}} @else $0.00 @endif
 									</td>
 									<td class="text-center">
 										${{number_format($mes['cuota_administracion'],2)}}
@@ -321,10 +339,34 @@
 										${{number_format($mes['sd'],2)}}
 									</td>
 									<td class="text-center">
-										${{number_format($mes['total'],2)}}
+										@if($mes['mes'] === "12" && $plan_select->abreviatura === "TC")
+											${{number_format($mes['total'] + $mes['monto_anual'],2)}}
+										@elseif($mes['mes'] === "12" && $plan_select->abreviatura !== "TC")
+											${{number_format($mes['total'] + $mes['monto_anual'],2)}}
+										@else
+											${{number_format($mes['total'],2)}}
+										@endif
 									</td>
 								</tr>
+									@php($totales[0] += $mes['aportacion'])
+									@if($mes['mes'] == "12") @php($totales[1] += $mes['monto_anual']) @endif
+									@php($totales[2] += $mes['cuota_administracion'])
+									@php($totales[3] += $mes['iva'])
+									@php($totales[4] += $mes['sv'])
+									@php($totales[5] += $mes['sd'])
+									@php($totales[6] += $mes['total'])
 							@endforeach
+							<tr>
+								<td><b>TOTALES</b></td>
+								<td></td>
+								<td class="text-center">${{ number_format($totales[0], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[1], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[2], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[3], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[4], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[5], 2) }}</td>
+								<td class="text-center">${{ number_format($totales[6], 2) }}</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -392,6 +434,23 @@
 								</tr>
 							</tbody>
 						</table>
+					</div>
+				@endif
+			@else
+				@if ($res)
+					<div class="row">
+						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+							<h4>{{$plan_select->nombre}}</h4>
+						</div>
+						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+							<label for="">Monto contratado</label>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<span class="form-control bg-light">{{number_format($request->monto,2)}}</span>
+							</div>
+						</div>
 					</div>
 				@endif
 			@endif

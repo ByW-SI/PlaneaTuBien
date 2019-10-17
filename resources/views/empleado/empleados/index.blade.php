@@ -67,8 +67,12 @@
                         <td>{{$empl->cargo}}</td>
                         <td>{{$empl->sucursal->nombre}}</td>
                         <td>
-                          <button type="button" class="btn btn-warning">Editar</button>
-                          <button type="button" class="btn btn-danger">Baja</button>
+                          <form action="{{route('empleados.relaciones.destroy', ['empleado'=>$empleado, 'relacion'=>$empl])}}" method="POST" class="mt-1">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <input type="hidden" name="sub_empleado" value="{{ $empl->id }}">
+                            <button type="submit" class="btn btn-danger">Baja</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach

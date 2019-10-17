@@ -23,6 +23,7 @@ class ModulosTableSeeder extends Seeder
             array('nombre' => 'promociones'),     // 8
             array('nombre' => 'planes'),          // 9
             array('nombre' => 'grupos'),          // 10
+            array('nombre' => 'pagos'),           // 11
     	);
 
     	Modulo::insert($modulos);

@@ -274,18 +274,32 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-target="#pagos">
-					<i class="fas fa-layer-group"></i><strong> Pagos</strong>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="pagos" id="pagos">
-					{{-- <a href="{{route('pagos.busqueda.referencia')}}" class="dropdown-item"><i class="fa fa-search"> <strong> Búsqueda de referencia</strong></i></a> --}}
-					<a class="dropdown-item" href="{{route('pagos.asignar')}}"><i class="fa fa-search"></i><strong> Asignar pagos</strong></a>
-					<a class="dropdown-item" href="{{route('pagos.realizados')}}"><i class="fa fa-search"></i><strong> Pagos realizados</strong></a>
-					<a class="dropdown-item" href="{{ route('pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
-					<a class="dropdown-item" href="{{ route('excelpagos') }}"><i class="fa fa-search"></i><strong> Excel</strong></a>
-				</div>
-			</li>
+			@foreach(Auth::user()->perfil->componentes as $componente)
+		        @if($componente->nombre == "indice pagos")
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-target="#pagos">
+							<i class="fas fa-layer-group"></i><strong> Pagos</strong>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="pagos" id="pagos">
+							@foreach(Auth::user()->perfil->componentes as $c)
+								{{-- <a href="{{route('pagos.busqueda.referencia')}}" class="dropdown-item"><i class="fa fa-search"> <strong> Búsqueda de referencia</strong></i></a> --}}
+								@if($c->nombre == "asignar pago")
+									<a class="dropdown-item" href="{{route('pagos.asignar')}}"><i class="fa fa-search"></i><strong> Asignar pagos</strong></a>
+								@endif
+								@if($c->nombre == "pagos realizados")
+									<a class="dropdown-item" href="{{route('pagos.realizados')}}"><i class="fa fa-search"></i><strong> Pagos realizados</strong></a>
+								@endif
+								@if($c->nombre == "indice pagos")
+									<a class="dropdown-item" href="{{ route('pagos.index') }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a>
+								@endif
+								@if($c->nombre == "excel pagos")
+									<a class="dropdown-item" href="{{ route('excelpagos') }}"><i class="fa fa-search"></i><strong> Excel</strong></a>
+								@endif
+							@endforeach
+						</div>
+					</li>
+				@endif
+			@endforeach
 		</ul>
 	</div>
 </nav>

@@ -77,6 +77,13 @@ class ComponentesTableSeeder extends Seeder
             array('nombre' => 'ver grupo', 'modulo_id' => 10),
             array('nombre' => 'crear grupo', 'modulo_id' => 10),
             array('nombre' => 'agregar plan', 'modulo_id' => 10),
+             // Pagos
+            array('nombre' => 'indice pagos', 'modulo_id' => 11),
+            array('nombre' => 'ver pago', 'modulo_id' => 11),
+            array('nombre' => 'crear pago', 'modulo_id' => 11),
+            array('nombre' => 'asignar pago', 'modulo_id' => 11),
+            array('nombre' => 'pagos realizados', 'modulo_id' => 11),
+            array('nombre' => 'excel pagos', 'modulo_id' => 11),
     	);
 
     	Componente::insert($componentes);

@@ -23,7 +23,11 @@ class CotizadorController extends Controller
             // $this->cotizar($request->monto,$request->plan);
             $plan = Plan::find($request->plan);
             // dd($plan);
-            $res=$plan->cotizador($request->monto);
+            if ($plan->abreviatura !== "PL")
+                $res=$plan->cotizador($request->monto);
+            else {
+                $res = "Hola";
+            }
             // dd($res);
         }
         $planes = Plan::orderBy('nombre','asc')->get();

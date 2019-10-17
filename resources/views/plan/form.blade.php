@@ -75,7 +75,7 @@
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group escondible">
 						<label for="plan_meses">Plan (en meses)</label>
 						<div class="input-group mb-3">
-							<input type="number" step="1" name="plan_meses" value="{{old("plan_meses")}}" min="1" class="form-control input-escondible" placeholder="" aria-label=" plan" aria-describedby="basic-addon2" required="">
+							<input type="number" step="1" name="plan_meses" id="plan_meses" value="{{old("plan_meses")}}" min="1" class="form-control input-escondible" placeholder="" aria-label=" plan" aria-describedby="basic-addon2" required="">
 							<div class="input-group-append">
 								<span class="input-group-text " id="basic-addon2">Meses</span>
 							</div>
@@ -321,17 +321,14 @@
 				$('#mes_liquidacion').val(0);
 				$('#mes_liquidacion').prop('readonly', true);
 				$('#semestral').val(0);
-				$('#semestral').prop('readonly', true);
 				$('#anual').val(1);
-				$('#anual').prop('readonly', true);
 				$('#inscripcion').val(3);
-				$('#inscripcion').prop('readonly', true);
 				$('#cuota_admon').val(0.10);
-				$('#cuota_admon').prop('readonly', true);
 				$('#s_v').val(0.06);
-				$('#s_v').prop('readonly', true);
 				$('#s_d').val(0);
-				$('#s_d').prop('readonly', true);
+				$('#plan_meses').val('1');
+				$('#plan_meses').parent().parent().hide('slow');
+				
 				
 				
 			}
@@ -363,17 +360,13 @@
 				$('#mes_liquidacion').val('');
 				$('#mes_liquidacion').prop('readonly', false);
 				$('#semestral').val('');
-				$('#semestral').prop('readonly', false);
 				$('#anual').val('');
-				$('#anual').prop('readonly', false);
 				$('#inscripcion').val('');
-				$('#inscripcion').prop('readonly', false);
 				$('#cuota_admon').val('');
-				$('#cuota_admon').prop('readonly', false);
 				$('#s_v').val('');
-				$('#s_v').prop('readonly', false);
 				$('#s_d').val('');
-				$('#s_d').prop('readonly', false);
+				$('#plan_meses').val('');
+				$('#plan_meses').parent().parent().show('slow');
 			}
 		} );
 

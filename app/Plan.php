@@ -234,13 +234,14 @@ class Plan extends Model
             $monto_financiar = $this->monto_financiar($monto);
             $monto_adjudicar = $monto;
         } else {
-
+            $monto_anual = (float)$monto * ($this->anual / 100);
             for ($i = 1; $i <= $this->plazo; $i++) {
                 if (date('m', strtotime($mes_actual)) == "06" || date('m', strtotime($mes_actual)) == "12") {
                     $aportacion_mes = $aportacion_mes * (1 + ($factor_actualizacion / 100));
                     $cuota_admon_mes = $cuota_admon_mes * (1 + ($factor_actualizacion / 100));
                     $cuota_admon_mes_iva = $cuota_admon_mes_iva * (1 + ($factor_actualizacion / 100));
                     $seguro_vida_mes = $seguro_vida_mes * (1 + ($factor_actualizacion / 100));
+                    $monto_anual = $monto_anual * (1 + ($factor_actualizacion / 100));
                 }
                 // if($this->plan_meses+1<$i){
                 if ($this->mes_s_d - 1 < $i) {
@@ -259,6 +260,7 @@ class Plan extends Model
                         'sv' => $seguro_vida_mes,
                         'sd' => $seguro_desempleo,
                         'total' => $aportacion_mes + $cuota_admon_mes + $cuota_admon_mes_iva + $seguro_vida_mes + $seguro_desempleo,
+                        'monto_anual' => $monto_anual //monto de la anualidad
                     ];
                 } else {
                     $mes = [
@@ -269,6 +271,7 @@ class Plan extends Model
                         'sv' => $seguro_vida_mes,
                         'sd' => 0.00,
                         'total' => $aportacion_mes + $cuota_admon_mes + $cuota_admon_mes_iva + $seguro_vida_mes + 0.00,
+                        'monto_anual' => $monto_anual //monto de la anualidad
                     ];
                 }
                 array_push($corrida, $mes);
@@ -566,12 +569,12 @@ class Plan extends Model
         else
             $monto_cuota_periodica_adjudicado = 0.0;
 
-        $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto, $factor_actualizacion);
-        $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto, $factor_actualizacion);
-        $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto, $factor_actualizacion);
-        // dd($monto_cuota_periodica_adjudicado);
+        // dd($monto_aportaciones_extraordinarias);
         $monto_inscripcion_con_iva = $this->monto_inscripcion_con_iva($monto);
-        $monto_derecho_adjudicacion = $this->monto_derecho_adjudicacion($monto, $factor_actualizacion);
+        if($this->abreviatura !== "TC")
+            $monto_derecho_adjudicacion = $this->monto_derecho_adjudicacion($monto, $factor_actualizacion);
+        else
+            $monto_derecho_adjudicacion = 0.0;
         // dd($monto_derecho_adjudicacion);
         $monto_total_pagar = $monto_aportaciones_extraordinarias + $monto_cuota_periodica_integrante + $monto_cuota_periodica_adjudicado + $monto_inscripcion_con_iva + $monto_derecho_adjudicacion;
         return $monto_total_pagar;
