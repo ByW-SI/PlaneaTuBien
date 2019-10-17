@@ -11,6 +11,7 @@ use App\TipoPuesto;
 use App\Sucursal;
 use App\EmpleadoDatoLab;
 use App\Http\Controllers\Controller;
+use App\TipoJornada;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -42,6 +43,7 @@ class EmpleadoDatoLabController extends Controller
 
         $datoslab = new EmpleadoDatoLab;
         $contratos = TipoContrato::get();
+        $jornadas = TipoJornada::get();
         $bajas = TipoBaja::get();
         $areas =   TipoArea::get();
         $puestos = TipoPuesto::get();
@@ -52,6 +54,7 @@ class EmpleadoDatoLabController extends Controller
             'empleado'=>$empleado,
             'bajas'=>$bajas,
             'contratos'=>$contratos,
+            'jornadas'=>$jornadas,
             'datoslab'=>$datoslab,
             'areas'=>$areas, 
             'puestos'=>$puestos,
@@ -74,17 +77,8 @@ class EmpleadoDatoLabController extends Controller
             'tipo'=>$request->input('tipo'),
             'cargo'=>$request->input('cargo')
             ]);
-        // dd($empleado);
 
-        // if ($request->puntualidad == 'on') {
-        //     # code...
-        //     $datoslab->puntualidad = true;
-        //     // dd($request->all());
-        // } else {
-        //     # code...
-        //     $datoslab->puntualidad = false;
-        // }
-    //--------- BAJA --------------------------------
+        // BAJA DE EMPLEADO
         if($request->fechabaja!=null){
             $empleado->delete();
             Alert::success('Baja de Empleado', 'Se redireccionará a la Lista de Empleados');
