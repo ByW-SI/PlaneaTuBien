@@ -52,12 +52,20 @@
 				<input class="form-control" type="date" id="fecha_contrato" name="fecha_contrato" required value="{{!$empleado->datos_laborales()->first() ? : $empleado->datos_laborales()->first()->fecha_contrato }}" {{ !$empleado->datos_laborales()->first() ? : !$empleado->datos_laborales()->first()->fecha_contrato ? : 'readonly'}}>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="contrato_id"><i class="fas fa-sync"></i> Tipo de contrato:</label>
+                <label class="control-label" for="contrato_id"> Tipo de contrato:</label>
 				<select type="select" class="form-control" name="contrato_id" id="contrato_id" >
-					<option  value="">Sin Definir</option>
-					@foreach ($contratos as $contrato)
-						<option id="{{$contrato->id}}" value="{{$contrato->id}}">{{$contrato->codigo}} - {{$contrato->nombre}}</option>
-					@endforeach
+					<option value="">Seleccionar</option>
+                    <option value="01 - Contrato de trabajo por tiempo indeterminado">01 - Contrato de trabajo por tiempo indeterminado</option>
+                    <option value="02 - Contrato de trabajo para obra determinada">02 - Contrato de trabajo para obra determinada</option>
+                    <option value="03 - Contrato de trabajo por tiempo determinado">03 - Contrato de trabajo por tiempo determinado</option>
+                    <option value="04 - Contrato de trabajo por temporada">04 - Contrato de trabajo por temporada</option>
+                    <option value="05 - Contrato de trabajo sujeto a prueba">05 - Contrato de trabajo sujeto a prueba</option>
+                    <option value="06 - Contrato de trabajo con capacitación inicial">06 - Contrato de trabajo con capacitación inicial</option>
+                    <option value="07 - Modalidad de contratación por pago de hora laborada">07 - Modalidad de contratación por pago de hora laborada</option>
+                    <option value="08 - Modalidad de trabajo por comisión laboral">08 - Modalidad de trabajo por comisión laboral</option>
+                    <option value="99 - Modalidades de contratación donde no existe relación de trabajo">99 - Modalidades de contratación donde no existe relación de trabajo</option>
+                    <option value="99 - Jubilación, pensión, retiro">99 - Jubilación, pensión, retiro</option>
+                    <option value="99 - Otro contrato">99 - Otro contrato</option>
 				</select>
 			</div>
 			{{-- INPUT FECHA FIN CONTRATO --}}
@@ -67,7 +75,7 @@
 			</div>
 			{{-- INPUT PUESTO --}}
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Puesto:</label>
+                <label class="control-label" for="tipo"> Puesto:</label>
 				<select required class="form-control" id="tipo" name="tipo">
                         <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
                         	Seleccionar
@@ -126,19 +134,25 @@
 			{{-- INPUT TIPO JORNADA --}}
 
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-				<label class="control-label" for="tipo_jornada_id"><i class="fas fa-sync"></i> Tipo de jornada:</label>
+				<label class="control-label" for="tipo_jornada_id"> Tipo de jornada:</label>
 				<select type="select" class="form-control" name="tipo_jornada_id" id="tipo_jornada_id" >
-					<option  value="">Sin Definir</option>
-					@foreach ($jornadas as $jornada)
-						<option value="{{$jornada->id}}">{{$jornada->codigo}} - {{$jornada->nombre}}</option>
-					@endforeach
+					<option value="">Seleccionar</option>
+                    <option value="01 - Diurna">01 - Diurna</option>
+                    <option value="02 - Nocturna">02 - Nocturna</option>
+                    <option value="03 - Mixta">03 - Mixta</option>
+                    <option value="04 - Por hora">04 - Por hora</option>
+                    <option value="05 - Reducida">05 - Reducida</option>
+                    <option value="06 - Continuada">06 - Continuada</option>
+                    <option value="07 - Partida">07 - Partida</option>
+                    <option value="08 - Por turnos">08 - Por turnos</option>
+                    <option value="99 - Otra Jornada">99 - Otra Jornada</option>
 				</select>
 			</div>
 
 			{{-- INPUT RIESGO PUESTO --}}
 
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-				<label class="control-label" for="riesgo_puesto"><i class="fas fa-sync"></i> Riesgo puesto:</label>
+				<label class="control-label" for="riesgo_puesto"> Riesgo puesto:</label>
 				<select type="select" class="form-control" name="riesgo_puesto" id="riesgo_puesto" >
 					<option  value="">Sin Definir</option>
 					<option value="1 - Clase I">1 - Clase I</option>

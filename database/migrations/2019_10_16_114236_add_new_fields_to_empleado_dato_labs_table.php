@@ -14,7 +14,7 @@ class AddNewFieldsToEmpleadoDatoLabsTable extends Migration
     public function up()
     {
         Schema::table('empleado_dato_labs', function (Blueprint $table) {
-            $table->unsignedBigInteger('tipo_jornada_id')->nullable();
+            $table->integer('tipo_jornada_id')->unsigned()->nullable();
             $table->string('riesgo_puesto')->nullable();
 
             $table->foreign('tipo_jornada_id')->references('id')->on('tipo_jornada')->onDelete('set null');
