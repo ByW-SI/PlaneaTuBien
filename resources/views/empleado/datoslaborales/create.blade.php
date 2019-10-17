@@ -60,6 +60,11 @@
 					@endforeach
 				</select>
 			</div>
+			{{-- INPUT FECHA FIN CONTRATO --}}
+			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4" id="fecha_fin_contrato" style="display: none">
+				<label class="control-label" for="contrato_id"><i class="fas fa-sync"></i> Fecha de fin de contrato:</label>
+				<input type="date" class="form-control" name="fecha_fin_contrato" id="input_fecha_fin_contrato">
+			</div>
 			{{-- INPUT PUESTO --}}
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="tipo"><i class="fas fa-sync"></i> Puesto:</label>
@@ -267,6 +272,10 @@
     </form>
 </div>
 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.js"
+  integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="
+  crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
 	function getAreas()
@@ -340,6 +349,17 @@
 		    $("#banco").html(resultado);
 		});
 	}
+
+	$('#contrato_id').change( function(){
+
+		// SI EL CONTRATO ES POR TIEMPO INDETERMINADO, AÑADIMOS EL CAMPO DE FIN DE CONTRATO, EN CASO CONTRARIO, BORRAMOS EL CAMPO
+		if( $(this).val() == 1 ){
+			$('#fecha_fin_contrato').show('slow');
+		}else{
+			$('#input_fecha_fin_contrato').val(null);
+			$('#fecha_fin_contrato').hide('slow');
+		}
+	} );
 
 </script>
 @endsection

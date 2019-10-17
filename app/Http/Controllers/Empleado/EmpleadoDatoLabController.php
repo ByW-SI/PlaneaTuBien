@@ -77,17 +77,8 @@ class EmpleadoDatoLabController extends Controller
             'tipo'=>$request->input('tipo'),
             'cargo'=>$request->input('cargo')
             ]);
-        // dd($empleado);
 
-        // if ($request->puntualidad == 'on') {
-        //     # code...
-        //     $datoslab->puntualidad = true;
-        //     // dd($request->all());
-        // } else {
-        //     # code...
-        //     $datoslab->puntualidad = false;
-        // }
-    //--------- BAJA --------------------------------
+        // BAJA DE EMPLEADO
         if($request->fechabaja!=null){
             $empleado->delete();
             Alert::success('Baja de Empleado', 'Se redireccionará a la Lista de Empleados');

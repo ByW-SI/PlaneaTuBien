@@ -35,17 +35,20 @@
 						<tr class="table-primary">
 							<th scope="col">Nombre</th>
 							<th scope="col">Descripción</th>
-							<th scope="col">Acción</th>
+							<th scope="col">Editar</th>
+							<th scope="col">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
 						@forelse ($precargas as $precarga)
 						<tr>
 							<th scope="row">{{$precarga->nombre}}</th>
-							<th>{{$precarga->descripcion}}</th>
+							<th>{{$precarga->descripcion ? $precarga->descripcion : $precarga->etiqueta}}</th>
+							<th>
+								<a href="{{ route($editar,['precarga'=>$precarga]) }}" class="btn btn-info"><i class="fas fa-edit"></i> Editar</a>
+							</th>
 							<th>
 								<div class="row justify-content-around">
-									<a href="{{ route($editar,['precarga'=>$precarga]) }}" class="btn btn-info"><i class="fas fa-edit"></i> Editar</a>
 									<form id="delete-{{$precarga->id}}" action="{{ route($borrar,['precarga'=>$precarga]) }}" method="POST" style="display: none;">
 										@csrf
 										@method('DELETE')

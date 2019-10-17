@@ -8,6 +8,18 @@ use App\Http\Controllers\Controller;
 
 class BancoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->titulo="Bancos";
+        $this->index='bancos.index';
+        $this->agregar='bancos.create';
+        $this->guardar ="bancos.store";
+        $this->editar="bancos.edit";
+        $this->actualizar="bancos.update";
+        $this->borrar="bancos.destroy";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +27,13 @@ class BancoController extends Controller
      */
     public function index()
     {
-        $bancos = Banco::get();
-        return view('precargas.bancos.index', ['bancos' => $bancos]);
+        // $bancos = Banco::get();
+        // return view('precargas.bancos.index', ['bancos' => $bancos]);
+
+
+        $bancos = Banco::orderBy('nombre','asc')->paginate(10);
+        return view('precargas.index',['precargas'=>$bancos,'index'=>$this->index, 'agregar'=>$this->agregar, 'editar'=>$this->editar,'borrar'=>$this->borrar,'titulo'=>$this->titulo,'buscar'=>null]);
+        //
     }
 
     /**
@@ -60,7 +77,7 @@ class BancoController extends Controller
      */
     public function edit(Banco $banco)
     {
-        //
+        return view('precargas.form',['precarga'=>$banco, 'titulo'=>$this->titulo, 'edit'=>true,'edit'=>$this->actualizar]);
     }
 
     /**
@@ -72,7 +89,8 @@ class BancoController extends Controller
      */
     public function update(Request $request, Banco $banco)
     {
-        //
+        $banco->update($request->all());
+        return redirect()->route('bancos.index');
     }
 
     /**

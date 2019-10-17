@@ -190,9 +190,6 @@
 							@if($c->nombre == "Bajas")
 								<a class="dropdown-item" href="{{ route('bajas.index') }}"><i class="fas fa-user-times"></i><strong> Bajas</strong></a>
 							@endif
-							@if($c->nombre == "Contratos")
-								<a class="dropdown-item" href="{{ route('contratos.index') }}"><i class="fas fa-file-contract"></i><strong> Contratos</strong></a>
-							@endif
 							@if($c->nombre == "Puestos")
 								<a class="dropdown-item" href="{{ route('puestos.index') }}"><i class="fas fa-users-cog"></i><strong> Puestos</strong></a>
 							@endif
