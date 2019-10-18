@@ -637,7 +637,7 @@
 				<div class="panel-default">
 					<div class="panel-heading">
 						<div class="row">
-								<img class="img" src="img/header.jpg">
+								<img class="img" src="img/logo.png" style="width: 25%">
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
