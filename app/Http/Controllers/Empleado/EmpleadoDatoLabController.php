@@ -28,6 +28,7 @@ class EmpleadoDatoLabController extends Controller
 
         $dato_lab= $empleado->datos_laborales->last();
         $historial = $empleado->datos_laborales()->paginate(5);
+        // dd($dato_lab);
         return view('empleado.datoslaborales.index',['empleado'=>$empleado,'dato_lab'=>$dato_lab,'historial'=>$historial]);
     }
 
@@ -71,15 +72,22 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input());
         $datoslab = EmpleadoDatoLab::create($request->all());
 
-        $datoslab->update(['puesto_id' => $request->input('tipo')]);
+        $datoslab->update([
+            'puesto_id' => $request->input('tipo'),
+            'periodo_paga' => $request->input('periodo_paga'),
+            'regimen' => $request->input('regimen'),
+            ]);
         // dd($datoslab);
         $empleado = Empleado::withTrashed()->find($request->empleado_id);
         $empleado->update([
             'tipo'=>$request->input('tipo'),
             'cargo'=>$request->input('cargo')
             ]);
+
+            // dd($datoslab);
 
         // BAJA DE EMPLEADO
         if($request->fechabaja!=null){
