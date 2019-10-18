@@ -301,7 +301,7 @@
         }
         $('#salario_nomina').on('change', function(event) {
             const sal_dia = parseInt($(this).val()) / 30;
-            $('#salario_dia').val(new Intl.NumberFormat("es-MX").format(sal_dia.toFixed(2)));
+            $('#salario_dia').val( parseFloat(sal_dia).toFixed(2) );
         });
 
 	$('#contrato_id').change( function(){
