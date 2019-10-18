@@ -70,58 +70,11 @@
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="tipo"> Puesto:</label>
 				<select required class="form-control" id="tipo" name="tipo">
-                        <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
-                        	Seleccionar
-                    	</option>
-                        <option value="Asesor" {{$empleado->tipo == "Asesor" ? "selected" : ""}}>
-                        	Asesor
-                    	</option>
-                        <option value="Supervisor" {{$empleado->tipo == "Supervisor" ? "selected" : ""}}>
-                        	Supervisor
-                    	</option>
-                        <option value="Gerente" {{$empleado->tipo == "Gerente" ? "selected" : ""}}>
-                        	Gerente
-                    	</option>
-                        <option value="TKM" {{$empleado->tipo == "TKM" ? "selected" : ""}}>
-                        	TKM
-                    	</option>
-                        <option value="Becario" {{$empleado->tipo == "Becario" ? "selected" : ""}}>
-                        	Becario
-                    	</option>
-                        <option value="Mesa de control" {{$empleado->tipo == "Mesa de control" ? "selected" : ""}}>
-                        	Mesa de control
-                    	</option>
-                        <option value="Ejecutivo de cuenta" {{$empleado->tipo == "Ejecutivo de cuenta" ? "selected" : ""}}>
-                        	Ejecutivo de cuenta
-                    	</option>
-                        <option value="Juridico" {{$empleado->tipo == "Juridico" ? "selected" : ""}}>
-                        	Jurídico
-                    	</option>
-                        <option value="Contador" {{$empleado->tipo == "Contador" ? "selected" : ""}}>
-                        	Contador
-                    	</option>
-                        <option value="Jefe atención a clientes" {{$empleado->tipo == "Jefe atención a clientes" ? "selected" : ""}}>
-                        	Jefe de atención a clientes
-                    	</option>
-                        <option value="Jefe archivo" {{$empleado->tipo == "Jefe archivo" ? "selected" : ""}}>
-                        	Jefe de archivo
-                    	</option>
-                        <option value="Jefe ventas" {{$empleado->tipo == "Jefe ventas" ? "selected" : ""}}>
-                        	Jefe de ventas
-                    	</option>
-                        <option value="Jefe jurídico" {{$empleado->tipo == "Jefe jurídico" ? "selected" : ""}}>
-                        	Jefe de jurídico
-                    	</option>
-                        <option value="Jefe contabilidad" {{$empleado->tipo == "Jefe contabilidad" ? "selected" : ""}}>
-                        	Jefe de contabilidad
-                    	</option>
-                        <option value="Directivo" {{$empleado->tipo == "Directivo" ? "selected" : ""}}>
-                        	Directivo
-                    	</option>
-                        <option value="Administrador" {{$empleado->tipo == "Administrador" ? "selected" : ""}}>
-                        	Administrador
-                    	</option>
-                    </select>
+                    <option value="">Seleccionar</option>
+                    @foreach (App\TipoPuesto::get() as $item)
+                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    @endforeach
+                </select>
 			</div>
 			
 			{{-- INPUT TIPO JORNADA --}}
