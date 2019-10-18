@@ -68,6 +68,16 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
+						<label class="control-label">Fecha fin contrato:</label>
+						@if($dato_lab->fecha_fin_contrato==null)
+							<dd><strong>N/A</strong></dd>
+						@else
+							<dd><strong>{{ $dato_lab->fecha_fin_contrato }}</strong></dd>
+						@endif
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
 						<label class="control-label">Tipo de jornada:</label>
 						@if($dato_lab->tipo_jornada_id==null)
 							<dd><strong>NO DEFINIDO</strong></dd>
