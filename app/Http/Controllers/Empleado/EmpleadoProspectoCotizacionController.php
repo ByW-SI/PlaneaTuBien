@@ -111,15 +111,15 @@ class EmpleadoProspectoCotizacionController extends Controller
             $cotizacion->promocion()->associate(null);
             $factor = FactorActualizacion::where('autorizar',1)->get()->last();
             $cotizacion->factor_actualizacion = ($factor) ? $factor->porcentaje : 3 ;
+            $cotizacion->update([
+                'plan_id' => Plan::where('tipo','libre')->first()->id,
+            ]);
         }
 
         
 
         $verificar = $cotizacion->save();
 
-        $cotizacion->update([
-            'plan_id' => Plan::where('tipo','libre')->first()->id,
-        ]);
 
         if($verificar && sizeof($prospecto->cotizaciones)>=7){
             $prospecto->cotizaciones->first()->delete();
