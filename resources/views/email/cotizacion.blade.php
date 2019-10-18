@@ -10,5 +10,6 @@ Saludos cordiales,
 
 {{$asesor->nombre." ".$asesor->paterno." ".$asesor->materno}}
 
+Teléfono. 55 3683 4999
 {{ config('app.name') }}
 @endcomponent
