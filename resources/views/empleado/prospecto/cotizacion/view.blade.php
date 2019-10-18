@@ -252,7 +252,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" value="{{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}" class="form-control" readonly="">
+                        @if($cotizacion->)
+                        <input type="text" value="{{ number_format($cotizacion->inscripcion) }}" class="form-control" readonly="">
                     </div>
                 </div>
             </div>
