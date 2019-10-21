@@ -607,6 +607,49 @@ class Plan extends Model
         return $sobrecosto_anual;
     }
 
+    /**
+     * Funciones usados para el plan libre y obtener la tabla de pagos minimos
+     */
+    public function getMontoscontratos($monto){
+        $contratos = [];
+        // SI LOS CONTRATOS SON MENORES O IGUALES A 550000 YA QUE NO HAY MULTIPLOS DE 300-500
+        if ($monto == 550000) {
+            array_push($contratos,550000);
+            return $contratos;
+        }
+        else{
+            $contratos_300 = $monto/300000;
+            $residuo = $monto%300000;
+            for ($i = 0; $i < (int)$contratos_300; $i++) {
+                array_push($contratos,300000);
+            }
+            $contratos_mascincuentamil = $residuo/50000;
+            $array = $this->residuo($contratos,$residuo);
+        }
+        // dd($contratos);
+        return $array;
+
+    }
+
+    protected function residuo($array,$residuo)
+    {
+        $contratos_mascincuentamil = $residuo/50000;
+        // dd($contratos_mascincuentamil);
+        for ($i = 0; $i <sizeof($array);$i++) {
+            if($contratos_mascincuentamil != 0){
+                $array[$i] += 50000;
+                $contratos_mascincuentamil -= 1;
+            }
+        }
+        if($contratos_mascincuentamil == 0){
+            return $array;
+        }
+        else{
+            $residuo = $contratos_mascincuentamil*50000;
+            return $this->residuo($array,$residuo);
+        }
+    }
+
 
     // RELACIONES
 

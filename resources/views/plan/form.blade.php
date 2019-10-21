@@ -25,6 +25,7 @@
 							<option value="libre">Plan libre</option>
 							<option value="normal">Plan normal</option>
 							<option value="clasica">Plan Tanda Clásica</option>
+							<option value="tradicional">Plan Tanda Tradicional</option>
 						</select>
 					</div>
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 form-group">
@@ -327,10 +328,48 @@
 				$('#s_v').val(0.06);
 				$('#s_d').val(0);
 				$('#plan_meses').val('1');
+				$('#plan_meses').parent().parent().hide('slow');	
+			}
+			else if(tipo_plan == 'tradicional') {
+				$('.escondible').show();
+				$(".input-escondible").prop('required',true);
+
+				$('#abreviatura').val('TD');
+				$('#abreviatura').prop('readonly', true);
+				$('#plazo').val(168);
+				$('#plazo').prop('readonly', true);
+				$('#mes_aportacion_adjudicado').val('1');
+				$('#mes_aportacion_adjudicado').parent().parent().hide('slow');
+				$('#mes_adjudicado').val('2');
+				$('#mes_adjudicado').parent().parent().hide('slow');
+				$('#mes_s_d').val('1');
+				$('#mes_s_d').parent().parent().hide('slow');
+				$('#actualizaciones').val(0);
+				$('#actualizaciones').prop('readonly', true);
+				$('#aportacion_1').val(0);
+				$('#aportacion_1').prop('readonly', true);
+				$('#mes_1').val(0);
+				$('#mes_1').prop('readonly', true);
+				$('#aportacion_2').val(0);
+				$('#aportacion_2').prop('readonly', true);
+				$('#mes_2').val(0);
+				$('#mes_2').prop('readonly', true);
+				$('#aportacion_3').val(0);
+				$('#aportacion_3').prop('readonly', true);
+				$('#mes_3').val(0);
+				$('#mes_3').prop('readonly', true);
+				$('#aportacion_liquidacion').val(0);
+				$('#aportacion_liquidacion').prop('readonly', true);
+				$('#mes_liquidacion').val(0);
+				$('#mes_liquidacion').prop('readonly', true);
+				$('#semestral').val(0);
+				$('#anual').val(0);
+				$('#inscripcion').val(3);
+				$('#cuota_admon').val(0.10);
+				$('#s_v').val(0.06);
+				$('#s_d').val(0);
+				$('#plan_meses').val('1');
 				$('#plan_meses').parent().parent().hide('slow');
-				
-				
-				
 			}
 			else if(tipo_plan !== 'libre') {
 				$("#abreviatura").val('');

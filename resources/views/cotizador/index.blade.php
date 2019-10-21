@@ -20,9 +20,17 @@
 							@endforeach
 						</select>
 					</div>
-					<div class="col-auto">
+					<div class="col-auto mr-auto">
 						<button type="submit" class="btn btn-primary mb-2">Cotizar</button>
 					</div>
+					@if($res && $plan_select->abreviatura)
+					<div class="col-auto">
+						<a href="{{ route('toPDF',['plan'=>$plan_select, 'monto'=>$request->monto]) }}" class="btn btn-danger mb-2">PDF</a>{{-- 'prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato --}}
+					</div>
+					<div class="col-auto">
+						<button id="pdf" class="btn btn-success mb-2">EXCEL</button>
+					</div>
+					@endif
 				</div>
 			</form>
 			@if ($res && $plan_select->abreviatura !== "PL")
@@ -439,7 +447,7 @@
 			@else
 				@if ($res)
 					<div class="row">
-						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
+						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group offset-4">
 							<h4>{{$plan_select->nombre}}</h4>
 						</div>
 						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -450,6 +458,30 @@
 								</div>
 								<span class="form-control bg-light">{{number_format($request->monto,2)}}</span>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 offset-3">
+							<table class="table table-striped">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">Mínimo</th>
+										<th scope="col">Posible 1</th>
+										<th scope="col">Posible 2</th>
+										<th scope="col">Posible 3</th>
+										<th scope="col">Máximo</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>${{ number_format($res['minimo'], 2) }}</td>
+										<td>${{ number_format($res['posible1'], 2) }}</td>
+										<td>${{ number_format($res['posible2'], 2) }}</td>
+										<td>${{ number_format($res['posible3'], 2) }}</td>
+										<td>${{ number_format($res['maximo'], 2) }}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				@endif
