@@ -84,7 +84,6 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        
 
         $validator = Validator::make($request->all(), [
             'email' => 'nullable|unique:empleados',
@@ -152,6 +151,11 @@ class EmpleadoController extends Controller
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
         $empleado->save();
+
+        is_null($empleado->user) ? : $empleado->user->update(['email'=>$empleado->email]);
+
+        // dd($empleado->user);
+
         return redirect()->route('empleados.index');
     }
 
@@ -164,9 +168,11 @@ class EmpleadoController extends Controller
     public function destroy(Empleado $empleado, Request $request)
     {
         $empleado->update(['motivo_baja'=>$request->input('motivo')]);
+        is_null($empleado->user) ? : $empleado->user->delete();
         $empleado->delete();
-        $empleado->user()->first() == null ? : $empleado->user()->first()->delete();
+  
         return redirect()->route('empleados.index');
+
     }
 
     public function deletedList(Request $request){

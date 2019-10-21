@@ -164,8 +164,8 @@
 					<input class="form-control" type="text" name="cp" id="cp" value="{{$empleado->cp}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="colonia">@if($edit)✱@endif Colonia:</label>
-					<select class="form-control" name="colonia" id="colonia" @if($edit) required="" @endif></select>
+					<label for="colonia">@if($edit)@endif Colonia:</label>
+					<select class="form-control" name="colonia" id="colonia" @if($edit) @endif></select>
 					{{-- <input  type="text"  value="{{$empleado->colonia}}"> --}}
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">

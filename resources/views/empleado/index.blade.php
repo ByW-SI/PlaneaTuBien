@@ -6,7 +6,7 @@
 	<div class="card-header">
 		<div class="row">
 			<div class="col-sm-4">
-				<h4>Agentes:</h4>  
+				<h4>Empleados:</h4>  
 			</div>
 			@php
 			$ver = false;
@@ -29,7 +29,7 @@
 			@if($crear)
 				<div class="col-sm-4 text-center">
 					<a href="{{ route('empleados.create') }}" class="btn btn-success">
-						<i class="fa fa-plus"></i><strong> Agregar Agente</strong>
+						<i class="fa fa-plus"></i><strong> Agregar Empleado</strong>
 					</a>
 				</div>
 			@endif
