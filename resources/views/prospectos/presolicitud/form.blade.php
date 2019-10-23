@@ -54,19 +54,19 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Calle</label>
-					<input type="text" class="form-control" required="" value="{{old('calle')}}" name="calle">
+					<input type="text" class="form-control" required="" value="{{$prospecto->perfil->calle}}" name="calle">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Número Exterior</label>
-					<input type="text" class="form-control" value="{{old('numero_ext')}}" name="numero_ext" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->numero_ext}}" name="numero_ext" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Número Interior</label>
-					<input type="text" class="form-control" value="{{old('numero_int')}}" name="numero_int">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->numero_int}}" name="numero_int">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Código Postal</label>
-					<input type="text" class="form-control" value="{{old('cp')}}" name="cp" id="cp" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->cp}}" name="cp" id="cp" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Colonia o Población</label>
@@ -76,31 +76,31 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Alcaldía o Municipio</label>
-					<input type="text" class="form-control" value="{{old('municipio')}}" name="municipio" id="municipio" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->municipio}}" name="municipio" id="municipio" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Estado</label>
-					<input type="text" class="form-control" value="{{old('estado')}}" name="estado" id="estado" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->estado}}" name="estado" id="estado" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">R.F.C.</label>
-					<input type="text" class="form-control" value="{{old('rfc')}}" name="rfc" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->rfc_1}}" name="rfc" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Teléfono de Casa</label>
-					<input type="text" class="form-control" value="{{old('tel_casa')}}" name="tel_casa" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_casa}}" name="tel_casa" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Teléfono de Oficina</label>
-					<input type="text" class="form-control" value="{{old('tel_oficina')}}" name="tel_oficina">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_oficina}}" name="tel_oficina">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Teléfono Celular</label>
-					<input type="text" class="form-control" value="{{old('tel_celular')}}" name="tel_celular" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_celular}}" name="tel_celular" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Correo Electrónico</label>
-					<input type="email" class="form-control" value="{{old('email')}}" name="email" required="">
+					<input type="email" class="form-control" value="{{$prospecto->perfil->email}}" name="email" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Fecha de Nacimiento</label>
@@ -112,7 +112,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Nacionalidad</label>
-					<input type="text" class="form-control" value="{{old('nacionalidad')}}" name="nacionalidad" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->nacionalidad_1}}" name="nacionalidad" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Sexo</label>
@@ -129,12 +129,12 @@
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Estado Civil</label>
 					<select class="form-control" name="estado_civil" required="">
-						<option value="">Seleccione una opción</option>
-						<option {{old('estado_civil') == 'Soltero' ? 'selected' : ''}}value="Soltero">Soltero</option>
-						<option {{old('estado_civil') == 'Casado' ? 'selected' : ''}}value="Casado">Casado</option>
-						<option {{old('estado_civil') == 'Viudo' ? 'selected' : ''}}value="Viudo">Viudo</option>
-						<option {{old('estado_civil') == 'Divorciado' ? 'selected' : ''}}value="Divorciado">Divorciado</option>
-						<option {{old('estado_civil') == 'Unión Libre' ? 'selected' : ''}}value="Unión Libre">Unión Libre</option>
+						<option value="{{$prospecto->perfil->estado_civil}}">{{$prospecto->perfil->estado_civil}}</option>
+						<option value="Soltero">Soltero</option>
+						<option value="Casado">Casado</option>
+						<option value="Viudo">Viudo</option>
+						<option value="Divorciado">Divorciado</option>
+						<option value="Unión Libre">Unión Libre</option>
 					</select>
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -143,7 +143,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Empresa donde trabaja</label>
-					<input type="text" class="form-control" value="{{old('empresa')}}" name="empresa">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->empresa_1}}" name="empresa">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Puesto</label>
@@ -151,7 +151,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Antigüedad trabajo actual</label>
-					<input type="text" class="form-control" value="{{old('antiguedad_actual')}}" name="antiguedad_actual" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->antiguedad_1}}" name="antiguedad_actual" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Antigüedad trabajo anterior</label>
@@ -159,7 +159,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Ingreso Mensual Familiar</label>
-					<input type="text" class="form-control" value="{{old('ingreso_mensual')}}" name="ingreso_mensual" required="">
+					<input type="text" class="form-control" value="{{$prospecto->perfil->ingreso_total}}" name="ingreso_mensual" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">¿Cómo se entero de nosotros?</label>
