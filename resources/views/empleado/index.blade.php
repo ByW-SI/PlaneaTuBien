@@ -58,7 +58,7 @@
 									<td>{{$empleado->paterno}}</td>
 									<td>{{$empleado->materno}}</td>
 									<td>{{$empleado->created_at}}</td>
-									<td>{{$empleado->id_jefe ? $empleado->jefe->nombre." ". $empleado->jefe->paterno." ".$empleado->jefe->materno : "N/A"}}</td>
+									<td>{{$empleado->jefe ? $empleado->jefe->nombre." ". $empleado->jefe->paterno." ".$empleado->jefe->materno : "N/A"}}</td>
 									<td>
 										<a href="{{ route('empleados.show', [$empleado]) }}" class="btn btn-primary">
 											<i class="fa fa-eye"></i> Ver
