@@ -19,12 +19,14 @@ class ProspectoController extends Controller
      */
     public function index()
     {
+        // dd( Auth::user()->empleado );
         $empleado = Auth::user()->empleado;
         
-        if ($empleado->id > 1 && $empleado->cargo == "Asesor"){
+        if ($empleado->id > 1 && $empleado->tipo == "Asesor"){
             $prospectos = $empleado->prospectos;
+            // dd($prospectos);
         } 
-        elseif ($empleado->id > 1 && $empleado->cargo == "Supervisor") {
+        elseif ($empleado->id > 1 && $empleado->tipo == "Supervisor") {
             $prospectos = [];
             foreach ($empleado->empleados as $asesores) {
                 foreach ($asesores->prospectos as $prospe) {
@@ -32,7 +34,7 @@ class ProspectoController extends Controller
                 }
             }
         }
-        elseif ($empleado->id > 1 && $empleado->cargo == "Gerente") {
+        elseif ($empleado->id > 1 && $empleado->tipo == "Gerente") {
             $prospectos = [];
             foreach ($empleado->empleados as $supervisores) {
                 foreach ($supervisores->empleados as $asesores) {
@@ -45,7 +47,6 @@ class ProspectoController extends Controller
         else{
             $prospectos = Prospecto::get();
         }
-            
 
         // dd($prospectos);
         
