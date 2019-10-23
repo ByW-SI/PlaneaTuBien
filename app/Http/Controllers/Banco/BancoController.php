@@ -89,7 +89,10 @@ class BancoController extends Controller
      */
     public function update(Request $request, Banco $banco)
     {
-        $banco->update($request->all());
+        $banco->update([
+            'nombre'=>$request->nombre,
+            'etiqueta'=>$request->descripcion,
+        ]);
         return redirect()->route('bancos.index');
     }
 

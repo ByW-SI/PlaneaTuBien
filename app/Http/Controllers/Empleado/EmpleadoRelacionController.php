@@ -37,9 +37,12 @@ class EmpleadoRelacionController extends Controller
                 break;            
             
             default:
-                # code...
+                $empleados = null;
                 break;
         }
+
+        // dd(Empleado::);
+
         return view('empleado.empleados.create',['empleado'=>$empleado, 'empleados' => $empleados]);
     }
 

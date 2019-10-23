@@ -94,28 +94,34 @@
 					</tbody>
 				</table>
 				<div class="row">
-					<div class="col-12 col-md-3">
+					<div class="col-12 col-md-2">
 						<div class="form-group">
 							<label for=""><strong>Retardos justificados</strong></label>
 							<input type="text" value="{{count($faltas->where('tipofalta','retardo justificado'))}}" class="form-control" readonly>
 						</div>
 					</div>
-					<div class="col-12 col-md-3">
+					<div class="col-12 col-md-2">
 						<div class="form-group">
 							<label for=""><strong>Retardos injustificados</strong></label>
 							<input type="text" value="{{count($faltas->where('tipofalta','retardo injustificado'))}}" class="form-control" readonly>
 						</div>
 					</div>
-					<div class="col-12 col-md-3">
+					<div class="col-12 col-md-2">
 						<div class="form-group">
 							<label for=""><strong>Falta justificada</strong></label>
 							<input type="text" value="{{count($faltas->where('tipofalta','falta justificada'))}}" class="form-control" readonly>
 						</div>
 					</div>
-					<div class="col-12 col-md-3">
+					<div class="col-12 col-md-2">
 						<div class="form-group">
-							<label for=""><strong>Falta insjustificada</strong></label>
+							<label for=""><strong>Falta injustificada</strong></label>
 							<input type="text" value="{{count($faltas->where('tipofalta','falta injustificada'))}}" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="col-12 col-md-2">
+						<div class="form-group">
+							<label for=""><strong>Faltas por retardos</strong></label>
+							<input type="text" value="{{count($faltas->where('tipofalta','falta por retardos'))}}" class="form-control" readonly>
 						</div>
 					</div>
 				</div>

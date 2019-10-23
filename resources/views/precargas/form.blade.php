@@ -19,7 +19,7 @@
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="descripcion">Descripción:</label>
-					<textarea class="form-control" name="descripcion">{{$precarga->descripcion}}</textarea>
+					<textarea class="form-control" name="descripcion">{{ $precarga->etiqueta ? $precarga->etiqueta : $precarga->descripcion}}</textarea>
 				</div>
 			</div>
 		</div>
