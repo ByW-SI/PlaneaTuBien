@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Mail\CotizacionEnviada;
+use App\Mail\OrderShipped;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Mail;
@@ -71,6 +72,7 @@ class Cotizacion extends Model
         $cotizacion = $this;
         // dd($email);
         Mail::to($email)->send(new CotizacionEnviada($cotizacion,$pdf));
+        //Mail::to($email)->send(new OrderShipped());
     }
 
     public function getInscripcionTotalAttribute()

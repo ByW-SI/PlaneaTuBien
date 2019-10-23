@@ -143,9 +143,21 @@ class PlanController extends Controller
         return $this->index();
     }
 
-    public function getPlanes($p_ahorrado)
+    public function getPlanes(Request $request)
     {
-        $planes = Plan::where('aportacion_1',$p_ahorrado)->orderBy('mes_adjudicado','asc')->get();
-        return response()->json(['planes'=>$planes],201);
+        if($request->abreviatura != "TN")
+            $planes = Plan::where('abreviatura',$request->abreviatura)->get();
+        else{
+            $planes = Plan::where('abreviatura', '!=','TC')
+            ->where('abreviatura', '!=','PL')
+            ->where('abreviatura', '!=','TD')->get();
+        }
+        $array = [];
+        foreach ($planes as $plan) {
+            $array[] = ['id'=>$plan->id, 'nombre'=>$plan->nombre];
+        }
+        return response()->json(['planes'=>$array],201);
     }
+
+
 }

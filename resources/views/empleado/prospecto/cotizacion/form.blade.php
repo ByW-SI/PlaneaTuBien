@@ -130,19 +130,33 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="plan-radio" id="plan-libre" value="libre">
-                        <label class="form-check-label" for="plan-libre">
-                            Plan libre
-                        </label>
+                    <div class="row my-3">
+                        <div class="col-sm-3">
+                            <input type="radio" name="plan-radio" id="plan-libre" value="libre">
+                            <label class="form-check-label" for="plan-libre">
+                                Plan libre
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="radio" name="plan-radio" id="plan-clasica" value="clasica">
+                            <label class="form-check-label" for="plan-clasica">
+                                Tanda Clasica
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="radio" name="plan-radio" id="plan-tradicional" value="tradicional">
+                            <label class="form-check-label" for="plan-tradicional">
+                                Tanda Tradicional
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="radio" name="plan-radio" id="plan-normal" value="normal">
+                            <label class="form-check-label" for="plan-normal">
+                                Plan normal
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="plan-radio" id="plan-normal" value="normal">
-                        <label class="form-check-label" for="plan-normal">
-                            Plan normal
-                        </label>
-                    </div>
-                    <div class="row">
+                    <div class="row escondible">
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="monto">✱Valor de la propiedad</label>
                             <div class="input-group mb-3">
@@ -235,6 +249,8 @@
 <script>
     $(document).ready(function() {
 
+        $('.escondible').hide();
+
         $('input[name=plan-radio]').change( function(){
 
             let tipo_plan = $(this).val();
@@ -242,16 +258,64 @@
 
             // ESCONDEMOS ALGUNOS INPUTS
             if(tipo_plan == 'libre'){
+                getPlanes('PL');
                 $('.input-escondible').removeAttr('required');
                 $('.escondible').hide('slow');
             }
 
             // MOSTRAMOS ALGUNOS INPUTS
             if(tipo_plan == 'normal'){
+                getPlanes('TN');
                 $('.escondible').show('slow');
                 $(".input-escondible").prop('required',true);
+                $('#promocion_select').prop('required',false);
+            }
+
+             // MOSTRAMOS ALGUNOS INPUTS
+            if(tipo_plan == 'clasica'){
+                getPlanes('TC');
+                
+                $('.escondible').show('slow');
+                $(".input-escondible").prop('required',true);
+                $('#promocion_select').prop('required',false);
+            }
+
+             // MOSTRAMOS ALGUNOS INPUTS
+            if(tipo_plan == 'tradicional'){
+                getPlanes('TD');
+                $('.escondible').show('slow');
+                $(".input-escondible").prop('required',true);
+                $('#promocion_select').prop('required',false);
             }
         });
     });
+
+    function getPlanes(abreviaturaPlan) {
+        let planes = [];
+        $.ajax({
+            url: '{{ url('/get-planes') }}',
+            type: 'GET',
+            dataType: 'json',
+            data: {abreviatura: abreviaturaPlan},
+        })
+        .done(function(res) {
+            console.log("success", res);
+            addOptionsPlan(res.planes);
+        })
+        .fail(function(err) {
+            console.log("error", err);
+        });
+        
+    }
+
+    function addOptionsPlan(planes) {
+        $('#plan_cliente').children('option:not(:first)').remove();
+        $.each(planes, function(key, value) {
+             $('#plan_cliente')
+                 .append($("<option></option>")
+                 .attr("value",value.id)
+                 .text(value.nombre));
+        });
+    }
 </script>
 @endpush

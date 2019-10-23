@@ -56,7 +56,7 @@ class Plan extends Model
     }
     public function getAnualTotalAttribute()
     {
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             $anual = $this->anual * 14;
         } else {
             $anual = $this->anual * 10;
@@ -88,7 +88,7 @@ class Plan extends Model
     }
     public function monto_adjudicar_tc($monto)
     {
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             return $this->corrida($monto)[59]['monto_adjudicar'];
         }
     }
@@ -174,7 +174,7 @@ class Plan extends Model
         
 
         // SI ES TANDA CLASICA
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             $monto_adjudicar_tc = (float) $monto;
             $monto_anual = $monto_adjudicar_tc * ($this->anual / 100);
 
@@ -286,7 +286,7 @@ class Plan extends Model
         $iva_integrante = 0.00;
         $sv_integrante = 0.00;
         $sd_integrante = 0.00;
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             for ($i = 0; $i <  1; $i++) {
                 // var_dump($i);
                 $aportacion_integrante += $corrida[$i]['aportacion'];
@@ -415,8 +415,11 @@ class Plan extends Model
         if ($factor_actualizacion == null) {
             $factor_actualizacion = (float) $this->factor_actualizacion;
         }
-        if ($this->abreviatura == "TC") {
-            $monto_adjudicar_25 = $this->monto_adjudicar_tc($monto) * 0.25;
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
+            if($this->abreviatura !== "TD")
+                $monto_adjudicar_25 = $this->monto_adjudicar_tc($monto) * 0.25;
+            else
+                $monto_adjudicar_25 = 0.0;
             $monto_anualidades =
                 $this->corrida($monto)[11]['monto_anual'] +
                 $this->corrida($monto)[23]['monto_anual'] +
@@ -507,7 +510,7 @@ class Plan extends Model
     public function monto_cuota_periodica_integrante($monto, $factor_actualizacion = null)
     {
 
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             $corrida = $this->corrida($monto);
             $monto_cuota_periodica_integrante =  0;
             foreach ($corrida as $value) {
@@ -541,7 +544,7 @@ class Plan extends Model
     public function monto_derecho_adjudicacion($monto, $factor_actualizacion = null)
     {
 
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
             $monto_adjudicar = $this->monto_adjudicar_tc($monto);
             $monto_derecho_adjudicacion = $monto_adjudicar * 0.025 * 1.16;
         } else {
@@ -564,18 +567,17 @@ class Plan extends Model
         $monto_aportaciones_extraordinarias = $this->total_aportaciones_en_extraordin($monto,$factor_actualizacion);
         $monto_cuota_periodica_integrante = $this->monto_cuota_periodica_integrante($monto,$factor_actualizacion);
 
-        if ($this->abreviatura !== "TC")
+        if ($this->abreviatura !== "TC" && $this->abreviatura !== "TD")
             $monto_cuota_periodica_adjudicado = $this->monto_cuota_periodica_adjudicado($monto,$factor_actualizacion);
         else
             $monto_cuota_periodica_adjudicado = 0.0;
 
         // dd($monto_aportaciones_extraordinarias);
         $monto_inscripcion_con_iva = $this->monto_inscripcion_con_iva($monto);
-        if($this->abreviatura !== "TC")
+        if($this->abreviatura !== "TC" && $this->abreviatura !== "TD")
             $monto_derecho_adjudicacion = $this->monto_derecho_adjudicacion($monto, $factor_actualizacion);
         else
             $monto_derecho_adjudicacion = 0.0;
-        // dd($monto_derecho_adjudicacion);
         $monto_total_pagar = $monto_aportaciones_extraordinarias + $monto_cuota_periodica_integrante + $monto_cuota_periodica_adjudicado + $monto_inscripcion_con_iva + $monto_derecho_adjudicacion;
         return $monto_total_pagar;
     }
@@ -583,7 +585,7 @@ class Plan extends Model
     public function sobrecosto($monto, $factor_actualizacion = null)
     {
 
-        if ($this->abreviatura == "TC") {
+        if ($this->abreviatura == "TC" || $this->abreviatura == "TD") {
 
             $monto_total_pagar = $this->monto_total_pagar($monto);
             $monto_adjudicar = $this->monto_adjudicar_tc($monto);
