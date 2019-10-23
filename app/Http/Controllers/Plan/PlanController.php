@@ -45,7 +45,7 @@ class PlanController extends Controller
     public function store(Request $request)
     {
 
-        if( $request->input('tipo') == 'normal' || $request->input('tipo') === 'clasica' ){
+        if( $request->input('tipo') == 'normal' || $request->input('tipo') === 'clasica' || $request->input('tipo') === 'tradicional' ){
             $rules=[
                 'nombre'=>'required',
                 'plazo'=>'required|integer',
