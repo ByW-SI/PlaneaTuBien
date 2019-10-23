@@ -82,8 +82,33 @@
 														{{method_field('DELETE')}}
 														<div class="form-group">
 															<label for="motivo" class="col-form-label">Motivo de la baja:</label>
-															<input type="text" class="form-control" name="motivo">
+															{{-- <input type="text" class="form-control" name="motivo"> --}}
+															<select name="motivo" id="" class="form-control" required>
+																<option value="">Seleccionar</option>
+																<option value="renuncia voluntaria">renuncia voluntaria</option>
+																<option value="motivos personales">motivos personales</option>
+																<option value="mejor oferta laboral">mejor oferta laboral</option>
+																<option value="termino de contrato">termino de contrato</option>
+																<option value="rescision de contrato">rescision de contrato</option>
+																<option value="periodo de prueba">periodo de prueba</option>
+															</select>
 														</div>
+														<div class="form-group">
+																<div class="row">
+																	<div class="col-12 col-sm-4">
+																		<div class="form-check">
+																			<input type="checkbox" class="form-check-input" id="es_reingresable" name="es_reingresable">
+																			<label class="form-check-label" for="es_reingresable">¿Es reingresable?</label>
+																		</div>
+																	</div>
+																	<div class="col-12 col-sm-5">
+																		<div class="form-check">
+																			<input type="checkbox" class="form-check-input" id="es_recomendable" name="es_recomendable">
+																			<label class="form-check-label" for="es_recomendable">¿Es recomendable?</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
 														<button type="submit" class="btn btn-danger">
 															Eliminar

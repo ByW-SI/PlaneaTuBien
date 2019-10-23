@@ -169,6 +169,7 @@ class EmpleadoProspectoCotizacionController extends Controller
         $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
         $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
         // dd($enviar);
+        // dd($enviar);
         // return(new \App\Mail\CotizacionEnviada($cotizacion))->render();
         // dd($cotizacion->task_send_mail);
         if ($cotizacion->task_send_mail) {

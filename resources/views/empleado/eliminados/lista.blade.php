@@ -16,7 +16,10 @@
                             <th class="text-center" scope="col">Apellido paterno</th>
                             <th class="text-center" scope="col">Apellido materno</th>
                             <th class="text-center" scope="col">Motivo</th>
-                            <th class="text-center">Acción</th>
+                            <th class="text-center" scope="col">¿Es reingresable?</th>
+                            <th class="text-center" scope="col">¿Es recomendable?</th>
+                            <th class="text-center">Restablecer</th>
+                            <th class="text-center">Ver</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,19 +30,23 @@
                             <td>{{$empleado->paterno}}</td>
                             <td>{{$empleado->materno}}</td>
                             <td>{{$empleado->motivo_baja}}</td>
+                            <td>{{ $empleado->es_reingresable ? 'SI' : 'NO' }}</td>
+                            <td>{{ $empleado->es_recomendable ? 'SI' : 'NO' }}</td>
                             <td>
                                 {{-- Botón para restablecer al empleado --}}
                                 <form action="{{route('empleados.undelete')}}" method="POST">
                                     @csrf
                                     <input type="hidden" value="{{$empleado->id}}" name="empleado_id">
-                                    <button type="submit" class="btn btn-warning">
-                                        <strong>Restablecer</strong>
+                                    <button type="submit" class="btn btn-success">
+                                        <strong><i class="fas fa-level-up-alt"></i></strong>
                                     </button>                                    
                                 </form>
+                            </td>
+                            <td>
                                 {{-- Botón para mirar el historial del empleado --}}
                                 {{-- <a href="{{route('empleados.show',['id'=>$empleado->id])}}" class="btn btn-info mt-1"><strong>Ver</strong></a> --}}
                                 <a href="{{ route('empleados.show', [$empleado]) }}" class="btn btn-primary mt-1">
-                                    <i class="fa fa-eye"></i> Ver
+                                    <i class="fa fa-eye"></i>
                                 </a>
                             </td>
                         </tr>

@@ -65,7 +65,7 @@
                         <td>{{$empl->id}} </td>
                         <td>{{$empl->nombre}}</td>
                         <td>{{$empl->cargo}}</td>
-                        <td>{{$empl->sucursal->nombre}}</td>
+                        <td>{{ $empl->sucursal ? $empl->sucursal->nombre : ""}}</td>
                         <td>
                           <form action="{{route('empleados.relaciones.destroy', ['empleado'=>$empleado, 'relacion'=>$empl])}}" method="POST" class="mt-1">
                             @csrf

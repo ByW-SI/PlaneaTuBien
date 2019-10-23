@@ -192,8 +192,8 @@
                         </div>
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
                             <label class="col-form-label">Promocion:</label>
-                            <select name="promocion" class="form-control input-escondible" id="promocion_select">
-                                <option value="">Seleccione una de las promociones</option>
+                            <select name="promocion" class="form-control" id="promocion_select">
+                                <option value="">Ninguna</option>
                                     @foreach ($promociones as $promocion)
                                         <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>   
                                     @endforeach   

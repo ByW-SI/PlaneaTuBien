@@ -52,10 +52,9 @@
 				<input class="form-control" type="date" id="fecha_contrato" name="fecha_contrato" required value="{{!$empleado->datos_laborales()->first() ? : $empleado->datos_laborales()->first()->fecha_contrato }}" {{ !$empleado->datos_laborales()->first() ? : !$empleado->datos_laborales()->first()->fecha_contrato ? : 'readonly'}}>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="contrato_id"> Tipo de contrato:</label>
+                <label class="control-label" for="contrato_id">Tipo de contrato:</label>
 				<select type="select" class="form-control" name="contrato_id" id="contrato_id" >
                 <option value="">Seleccionar</option>
-
 					@foreach (App\TipoContrato::get() as $contrato)
                         <option value="{{$contrato->id}}">{{$contrato->nombre}}</option>
                     @endforeach
@@ -139,7 +138,9 @@
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="prestaciones">Prestaciones:</label>
 				<select class="form-control" type="select" name="prestaciones" id="prestaciones">
-					<option id="1" value="De Ley">De Ley</option>
+                    <option value="De Ley">De Ley</option>
+                    <option value="De Ley">Superiores a la ley</option>
+                    <option value="De Ley">Sin prestaciones</option>
 				</select>
 			</div>
 			{{-- INPUT REGIMEN CONTRATACION --}}
@@ -306,9 +307,7 @@
 
 	$('#contrato_id').change( function(){
 
-		// SI EL CONTRATO ES POR TIEMPO INDETERMINADO, AÑADIMOS EL CAMPO DE FIN DE CONTRATO, EN CASO CONTRARIO, BORRAMOS EL CAMPO
-        // console.log( $(this).val() );
-		if( $(this).val() == 1 ){
+		if( $(this).val() == 3 ){
 			$('#fecha_fin_contrato').show('slow');
 		}else{
 			$('#input_fecha_fin_contrato').val(null);

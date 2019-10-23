@@ -13,14 +13,9 @@
                 <div class="form-row mt-3">
                     <div class="col-6 offset-3">
                         <div class="input-group">
-                            {{-- <select required class="custom-select" id="empleado" aria-label="Example select with button addon" name="empleado">
-                                <option selected>Agente...</option>
-                                @foreach($empleados as $emp)
-                                    <option value="{{ $emp->id }}">{{ $emp->nombre }} {{ $emp->paterno }} {{ $emp->materno }}</option>
-                                @endforeach
-                            </select> --}}
+                            @if (!is_null($empleados))
                             <select name="empleado" class="custom-select" id="listaEmpleados" required>
-                                <option value=""></option>
+                                <option value="">Seleccionar</option>
                                 @foreach($empleados as $emp)
                                     <option value="{{ $emp->id }}">{{ $emp->nombre }} {{ $emp->paterno }} {{ $emp->materno }}</option>
                                 @endforeach
@@ -28,9 +23,18 @@
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-outline-success" type="button">Agregar</button>
                             </div>
+                            @else
+                            <div class="alert alert-danger">
+                                No hay empleados por asignar.
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="card-footer">
+                <p class="small">Para los supervisores: Aparecen solo los asesores sin un jefe asignado</p>
+                <p class="small">Para los gerentes: Aparecen solo los supervisores sin un jefe asignado</p>
             </div>
 
         </form>

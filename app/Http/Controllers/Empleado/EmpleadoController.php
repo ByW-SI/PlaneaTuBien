@@ -167,7 +167,13 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado, Request $request)
     {
-        $empleado->update(['motivo_baja'=>$request->input('motivo')]);
+ 
+        $empleado->update([
+            'motivo_baja' => $request->motivo,
+            'es_recomendable' => $request->es_reingresable ? 1 : 0,
+            'es_reingresable' => $request->es_recomendable ? 1 : 0,
+            ]);
+
         is_null($empleado->user) ? : $empleado->user->delete();
         $empleado->delete();
   
