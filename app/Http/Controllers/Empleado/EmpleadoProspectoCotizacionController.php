@@ -167,6 +167,7 @@ class EmpleadoProspectoCotizacionController extends Controller
 
     public function sendMail(Empleado $empleado,Prospecto $prospecto,Cotizacion $cotizacion){
         $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        // $pdf= '';  Se uso para una prueba de email TODO: borrar despues
         $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
         // dd($enviar);
         // dd($enviar);

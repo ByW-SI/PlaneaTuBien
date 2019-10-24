@@ -85,7 +85,7 @@
 							</div>
 						</div>
 					</div>
-					@if ($plan_select->abreviatura != "TC")
+					@if ($plan_select->abreviatura != "TC" && $plan_select->abreviatura != "TD")
 						<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 							<label for="">Monto a adjudicar</label>
 							<div class="input-group mb-3">
@@ -219,7 +219,7 @@
 							<span class="form-control bg-light">{{number_format($plan_select->monto_aportacion_anual($request->monto),2)}}</span>
 						</div>
 					</div>
-					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC" && $plan_select->abreviatura !== "TD")
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
 						<label for="">Monto de aportación semestral</label>
 						<div class="input-group mb-3 mt-3">
@@ -378,7 +378,7 @@
 						</tbody>
 					</table>
 				</div>
-				@if ($plan_select->abreviatura != "TC")
+				@if ($plan_select->abreviatura != "TC" && $plan_select->abreviatura != "TD")
 					{{-- expr --}}
 					<div class="row">
 						<table class="table table-bordered table-striped">

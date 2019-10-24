@@ -73,6 +73,7 @@ Route::prefix('clientes')->group(function(){
 
 // PLANES
 Route::resource('plans','Plan\PlanController')->middleware('auth');
+Route::get('/get-planes','Plan\PlanController@getPlanes')->middleware('auth');
 
 // GRUPOS
 Route::resource('grupos','Grupo\GrupoController')->middleware('auth');
