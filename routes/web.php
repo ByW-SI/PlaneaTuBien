@@ -109,6 +109,7 @@ Route::resource('empleados.accidentes','Empleado\EmpleadoAccidenteController');
 Route::resource('empleados.beneficiario','Empleado\EmpleadoBeneficiarioController',['only'=>['index','create','store','edit','update']]);
 Route::resource('empleados.permisos','Empleado\EmpleadoPermisoController');
 Route::resource('empleados.faltas','Empleado\EmpleadoFaltaController');
+Route::post('empleados/faltas/actualizar','Empleado\EmpleadoFaltaController@actualizar')->name('empleados.faltas.actualizar');
 Route::resource('empleados.vacacions','Empleado\EmpleadoVacacionController');
 Route::resource('empleados.estudios','Empleado\EmpleadoEstudioController');
 Route::resource('empleados.emergencias','Empleado\EmpleadoEmergenciaController');

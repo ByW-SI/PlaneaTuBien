@@ -188,7 +188,7 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="clabe">CLABE:</label>
-				<input class="form-control" type="clabe" name="clabe" id="clabe" value="">
+				<input minlength="18" maxlength="18" name="clabe" class="form-control">
             </div>
 		</div>
 	</div>
