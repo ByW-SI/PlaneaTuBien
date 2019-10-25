@@ -156,7 +156,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row escondible">
+                    <div class="row">
                         <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="monto">✱Valor de la propiedad</label>
                             <div class="input-group mb-3">
@@ -186,7 +186,7 @@
                                 <option value="40">40%</option>
                             </select>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group escondible">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
                             <label for="plan">✱Plan</label>
                             <select name="plan" id="plan_cliente" class="form-control input-escondible" required="">
                                 <option value="">Seleccionar</option>
@@ -225,7 +225,7 @@
                     </div>
                     <div class="row escondible" id="promocion_div">
                     </div>
-                    <div id="cotizador" class="escondible">    
+                    <div id="cotizador">    
                     </div>
                 </div>
                 <div class="card-footer">
@@ -261,6 +261,7 @@
                 getPlanes('PL');
                 $('.input-escondible').removeAttr('required');
                 $('.escondible').hide('slow');
+                $('#cotizador').empty();
             }
 
             // MOSTRAMOS ALGUNOS INPUTS
@@ -287,6 +288,13 @@
                 $(".input-escondible").prop('required',true);
                 $('#promocion_select').prop('required',false);
             }
+        });
+
+        $('#plan_cliente').on('change', function() {
+            getCotizacionLibre();
+        });
+        $('#monto').on('change', function() {
+            getCotizacionLibre();
         });
     });
 
@@ -316,6 +324,48 @@
                  .attr("value",value.id)
                  .text(value.nombre));
         });
+    }
+
+    function getCotizacionLibre() {
+        if($('input[name=plan-radio]:checked').val() == 'libre' && $('#monto').val() != ''){
+            let monto = $('#monto').val();
+            let plan = $('#plan_cliente').val();
+            $.ajax({
+                url: `/cotizacion/monto/${monto}/plan/${plan}`,
+                type: 'GET',
+                dataType: 'json',
+            })
+            .done(function(res) {
+                console.log("success", res);
+                $('#cotizador').empty();
+                let html = `<div class="col-sm-6 offset-3"><table class="table table-striped">
+                                <thead class="thead-dark ">
+                                    <tr>
+                                        <th>Mínimo</th>
+                                        <th>Posible 1</th>
+                                        <th>Posible 2</th>
+                                        <th>Posible 3</th>
+                                        <th>Máximo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$${new Intl.NumberFormat('es-MX').format(res.minimo)}</td>
+                                        <td>$${new Intl.NumberFormat('es-MX').format(res.posible1)}</td>
+                                        <td>$${new Intl.NumberFormat('es-MX').format(res.posible2)}</td>
+                                        <td>$${new Intl.NumberFormat('es-MX').format(res.posible3)}</td>
+                                        <td>$${new Intl.NumberFormat('es-MX').format(res.maximo)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>`;
+                $('#cotizador').html(html)
+            })
+            .fail(function(err) {
+                console.log("error", err);
+            });
+            
+        }
     }
 </script>
 @endpush

@@ -141,7 +141,9 @@
                             <td>${{ number_format($cotizacion->monto, 2) }}</td>
                             <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}</td>
                             <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}%</td>
-                            <td>{{$cotizacion->plan->mes_aportacion_adjudicado." meses de $".number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2)}}</td>
+                            <td>
+                                {{$cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD" ? $cotizacion->plan->mes_aportacion_adjudicado." meses de " : "mensualidades de "}}${{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2)}}
+                            </td>
                             <td>
                                 @if($cotizacion->promocion)
                                     @if($cotizacion->promocion->tipo_monto == "porcentaje")

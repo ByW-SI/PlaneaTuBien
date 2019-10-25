@@ -85,6 +85,7 @@ Route::resource('factors','Plan\FactorActualizacionController',['except'=>['show
 
 // COTIZADOR
 Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador')->middleware('auth');
+Route::get('cotizacion/monto/{monto}/plan/{planlibre}','Plan\CotizadorController@getCotizacionPlanLibre')->middleware('auth');
 Route::get('export-pdf','Plan\CotizadorController@exportPDF')->name('toPDF')->middleware('auth');
 Route::get('export-excel','Plan\CotizadorController@exportExcel')->name('toEXCEL')->middleware('auth');
 

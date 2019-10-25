@@ -76,6 +76,8 @@ class CotizadorController extends Controller
 
     public function getCotizacionPlanLibre($monto, $plan)
     {
+        if(gettype($plan) == "string")
+            $plan = Plan::find($plan);
         $res = $plan->getMontoscontratos($monto);
         $aux;
         foreach ($res as $monto) {

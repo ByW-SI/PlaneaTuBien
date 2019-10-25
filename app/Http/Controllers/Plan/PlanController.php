@@ -6,6 +6,7 @@ use App\Plan;
 use App\Grupo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CotizadorController;
 
 class PlanController extends Controller
 {
@@ -145,8 +146,9 @@ class PlanController extends Controller
 
     public function getPlanes(Request $request)
     {
-        if($request->abreviatura != "TN")
+        if($request->abreviatura != "TN"){
             $planes = Plan::where('abreviatura',$request->abreviatura)->get();
+        }
         else{
             $planes = Plan::where('abreviatura', '!=','TC')
             ->where('abreviatura', '!=','PL')
