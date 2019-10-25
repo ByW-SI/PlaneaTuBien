@@ -111,7 +111,7 @@
 				</select>
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label class="control-label" for="salario_nomina"><i class="fa fa-asterisk" aria-hidden="true"></i>Salario Nóminal:</label>
+                <label class="control-label" for="salario_nomina"><i class="fa fa-asterisk" aria-hidden="true"></i>Salario Nominal:</label>
 				<input class="form-control" type="text" id="salario_nomina" name="salario_nomina" value="" required>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
@@ -312,8 +312,14 @@
             });
         }
         $('#salario_nomina').on('change', function(event) {
-            const sal_dia = parseInt($(this).val()) / 30;
-            $('#salario_dia').val( parseFloat(sal_dia).toFixed(2) );
+            const sal_dia = parseFloat($(this).val()) / 30;
+            $('#salario_dia').val( new Intl.NumberFormat("es-MX").format(sal_dia.toFixed(2)) );
+
+
+    //         salario_diario = parseFloat($('#salario-diario-input').val());
+	// salario_diario = new Intl.NumberFormat("es-MX").format(salario_diario.toFixed(2));
+	// $('#salario-diario').html('$'+salario_diario);
+
         });
 
 	$('#contrato_id').change( function(){

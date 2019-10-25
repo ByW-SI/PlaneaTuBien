@@ -72,16 +72,24 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(TipoPuesto::find( $request->input('tipo') )->nombre);
-        $datoslab = EmpleadoDatoLab::create($request->all());
-        $puesto = TipoPuesto::find( $request->input('tipo') )->nombre;
 
+        // FORMATEAMOS EL SALARIO
+        $salario_dia =  str_replace(',', '', $request->salario_dia);
+
+
+        // ACTUALIZAMOS LOS DATOS LABORALES
+        $datoslab = EmpleadoDatoLab::create($request->except('salario_dia'));
+        $datoslab->update([
+            'salario_dia'=>$salario_dia
+        ]);
+        $puesto = TipoPuesto::find( $request->input('tipo') )->nombre;
         $datoslab->update([
             'puesto_id' => $request->input('tipo'),
             'periodo_paga' => $request->input('periodo_paga'),
             'regimen' => $request->input('regimen'),
         ]);
-        // dd($datoslab);
+
+        // ACTUALIZAMOS EL EMPLEADO
         $empleado = Empleado::withTrashed()->find($request->empleado_id);
         $empleado->update([
             'tipo' => $puesto,
