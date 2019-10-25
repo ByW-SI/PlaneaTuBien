@@ -149,6 +149,7 @@
                 </div>
             </div>
             <div class="row">
+                @if($cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD")
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Monto a adjudicar:</label>
                     <div class="input-group">
@@ -158,6 +159,7 @@
                         <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
                     </div>
                 </div>
+                @endif
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Plazo:</label>
                     <div class="input-group">
@@ -168,7 +170,7 @@
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
-                    <label class="col-form-label">{{ $cotizacion->plan->mes_s_d-1 }} mensualidades de:</label>
+                    <label class="col-form-label">@if($cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD"){{ $cotizacion->plan->mes_s_d-1 }} @endif mensualidades de:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
@@ -253,11 +255,41 @@
                             <span class="input-group-text">$</span>
                         </div>
                         @if($cotizacion->inscripcion)
-                        <input type="text" value="{{ number_format($cotizacion->inscripcion,2) }}" class="form-control" readonly="">
+                            <input type="text" value="{{ number_format($inscripcion,2) }}" class="form-control" readonly="">
                         @else
                         <input type="text" value="{{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}" class="form-control" readonly="">
                         @endif
                     </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>Monto de promoción:</label>
+                     <div class="input-group">
+                        <input class="form-control" value="{{ $cotizacion->promocion->monto }}" readonly="">    
+                        <div class="input-group-append">
+                            <span class="input-group-text">{{ $cotizacion->promocion->tipo_monto == "porcentaje" ? "%" : "MXN" }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label>Tipo de promoción:</label>
+                    <span class="input-group-text" id="tipo_promo">{{ $cotizacion->promocion->tipo_promocion->nombre }}</span>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                    <label>Valido:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">De: </span>
+                        </div>
+                        <input type="text" class="form-control"  value="{{ $cotizacion->promocion->valido_inicio }}" readonly="">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">hasta:</span>
+                        </div>
+                        <input type="text" class="form-control" value="{{ $cotizacion->promocion->valido_fin }}" readonly="">
+                    </div>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label>Tipo de promoción:</label>
+                    <textarea class="form-control" readonly>{{ $cotizacion->promocion->descripcion }}</textarea>
                 </div>
             </div>
         </div>

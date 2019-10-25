@@ -7,6 +7,7 @@ use App\Promocion;
 use App\TipoPromocion;
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 
 class PromocionController extends Controller
 {
@@ -139,7 +140,10 @@ class PromocionController extends Controller
     }
     public function getPromo(Promocion $promocion)
     {
-        $promocion->tipo_promocion;
-        return response()->json(['promocion'=>$promocion],201);
+        $fecha_actual = Carbon::now();
+        if($fecha_actual >= $promocion->valido_inicio && $fecha_actual <= $promocion->valido_fin)
+            return response()->json(['promocion'=>$promocion],201);
+        else
+            return response()->json(['err'=>'no valida'],400);
     }
 }

@@ -114,7 +114,8 @@ $("#ahorro_cliente").change(function(){
 function cotizar() {
     // body...
     var descuento =$("#descuento_input").val();
-    if (descuento == "") {
+    console.log('Descuento', descuento);
+    if (descuento == "" || descuento > 30) {
         descuento = 0;
     }
     var monto =$("#monto").val();
