@@ -26,6 +26,7 @@
 								<th>Apellido Materno</th>
 								<th>Email</th>
 								<th>Asesor</th>
+								<th>Asignar asesor</th>
 								<th>Acción</th>
 							</tr>
 						</thead>
@@ -37,10 +38,12 @@
 									<td>{{ $prospecto->apmaterno ? $prospecto->apmaterno : 'N/A' }}</td>
 									<td>{{ $prospecto->email ? $prospecto->email : 'N/A' }}</td>
 									<td>{{$prospecto->asesor ? $prospecto->asesor->nombre." ".$prospecto->asesor->paterno." ".$prospecto->asesor->materno : "Sin asignar"}}</td>
-									<td class="text-center">
+									<td>
 										@if (!$prospecto->asesor && (Auth::user()->empleado->cargo == '' || Auth::user()->empleado->cargo == 'Supervisor'))
 											<a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn btn-sm btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
 										@endif
+									</td>
+									<td class="text-center">
 										@foreach(Auth::user()->perfil->componentes as $componente)
 											@if ($componente->nombre == "ver prospecto")
 											<a href="{{ route('prospectos.show', ['prospecto' => $prospecto]) }}" class="btn btn-sm btn-primary">

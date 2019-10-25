@@ -111,7 +111,8 @@
 						<label class="control-label">
 							Salario Nóminal:
 						</label>
-						<dd><strong>$ {{ $dato_lab->salario_nomina }}</strong></dd>
+						<input type="hidden" value="{{$dato_lab->salario_nomina}}" id="salario_nominal_input">
+						<dd><strong id="salario_nominal">$ {{ $dato_lab->salario_nomina }}</strong></dd>
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -295,4 +296,15 @@
 		</div>
 	</div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>   
+<script>
+
+function currencyFormat(num) {
+  return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+// console.log( currencyFormat($('#salario_nominal_input').val()) );
+
+</script>
+
 @endsection

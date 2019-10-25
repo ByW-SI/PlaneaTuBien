@@ -21,20 +21,20 @@ class ProspectoController extends Controller
     {
         // dd( Auth::user()->empleado );
         $empleado = Auth::user()->empleado;
-        
-        if ($empleado->id > 1 && $empleado->tipo == "Asesor"){
+
+        if ($empleado->id == 1) {
+            $prospectos = Prospecto::get();
+        } elseif ($empleado->tipo == "Asesor") {
             $prospectos = $empleado->prospectos;
             // dd($prospectos);
-        } 
-        elseif ($empleado->id > 1 && $empleado->tipo == "Supervisor") {
+        } elseif ($empleado->tipo == "Supervisor") {
             $prospectos = [];
             foreach ($empleado->empleados as $asesores) {
                 foreach ($asesores->prospectos as $prospe) {
                     $prospectos[] = $prospe;
                 }
             }
-        }
-        elseif ($empleado->id > 1 && $empleado->tipo == "Gerente") {
+        } elseif ($empleado->tipo == "Gerente") {
             $prospectos = [];
             foreach ($empleado->empleados as $supervisores) {
                 foreach ($supervisores->empleados as $asesores) {
@@ -43,13 +43,12 @@ class ProspectoController extends Controller
                     }
                 }
             }
-        }
-        else{
-            $prospectos = Prospecto::get();
+        }else{
+            $prospectos = $empleado->prospectos;
         }
 
         // dd($prospectos);
-        
+
         return view('prospectos.index', ['prospectos' => $prospectos]);
     }
 
@@ -71,7 +70,7 @@ class ProspectoController extends Controller
     public function formprospecto(Request $request)
     {
         // dd($request->alert->status);
-        return view('prospectos.formprospecto',['alert'=>$request->alert]);
+        return view('prospectos.formprospecto', ['alert' => $request->alert]);
     }
 
     /**
@@ -80,22 +79,23 @@ class ProspectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function submitprospecto(Request $request){
+    public function submitprospecto(Request $request)
+    {
         $rules = [
-            'nombre'=>'required|max:191',
-            'appaterno'=>'required|max:191',
-            'apmaterno'=>'nullable|max:191',
-            'sexo'=>'nullable|in:["","Hombre","Mujer"]',
-            'email'=>"required|e-mail",
-            'tel'=>"nullable|numeric",
-            'movil'=>"nullable|numeric",
-            'monto'=>"required|numeric",
-            'plan'=>'required'
+            'nombre' => 'required|max:191',
+            'appaterno' => 'required|max:191',
+            'apmaterno' => 'nullable|max:191',
+            'sexo' => 'nullable|in:["","Hombre","Mujer"]',
+            'email' => "required|e-mail",
+            'tel' => "nullable|numeric",
+            'movil' => "nullable|numeric",
+            'monto' => "required|numeric",
+            'plan' => 'required'
         ];
         // dd($this->validate($request,$rules));
         $prospecto = Prospecto::create($request->all());
         event(new ProspectoCreated($prospecto));
-        return redirect()->route('prospecto.create',['alert'=>['status'=>"success",'message'=>"Muy pronto un asesor se comunicará contigo"]]);
+        return redirect()->route('prospecto.create', ['alert' => ['status' => "success", 'message' => "Muy pronto un asesor se comunicará contigo"]]);
         // dd($request->all());
     }
 
@@ -109,27 +109,27 @@ class ProspectoController extends Controller
     {
         // dd('aqui');
         $rules = [
-            'nombre'=>'required|max:191',
-            'appaterno'=>'required|max:191',
-            'apmaterno'=>'nullable|max:191',
-            'sexo'=>'nullable|in:,Hombre,Mujer',
-            'email'=>"required|e-mail",
-            'tel'=>"nullable|numeric",
-            'movil'=>"nullable|numeric",
-            'sueldo'=>'required|numeric',
-            'ahorro'=>'required|numeric',
-            'calificacion'=>'required|numeric',
-            'aprobado'=>'required|boolean',
-            'monto'=>'required|numeric',
-            'gastos'=>'required|numeric',
-            'plan' =>' required|in:15 años,10 años,6 años,5 años,3 años',
+            'nombre' => 'required|max:191',
+            'appaterno' => 'required|max:191',
+            'apmaterno' => 'nullable|max:191',
+            'sexo' => 'nullable|in:,Hombre,Mujer',
+            'email' => "required|e-mail",
+            'tel' => "nullable|numeric",
+            'movil' => "nullable|numeric",
+            'sueldo' => 'required|numeric',
+            'ahorro' => 'required|numeric',
+            'calificacion' => 'required|numeric',
+            'aprobado' => 'required|boolean',
+            'monto' => 'required|numeric',
+            'gastos' => 'required|numeric',
+            'plan' => ' required|in:15 años,10 años,6 años,5 años,3 años',
         ];
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
         $prospecto = new Prospecto($request->all());
         $prospecto->empleado_id = (Auth::user()->empleado->id == 1 ? null : Auth::user()->empleado->id);
         $prospecto->sueldo = $request->sueldo;
         $prospecto->ahorro = $request->ahorro;
-        $prospecto->gastos=$request->gastos;
+        $prospecto->gastos = $request->gastos;
         $prospecto->calificacion = $request->calificacion;
         $prospecto->aprobado = $request->aprobado;
         $prospecto->monto = $request->monto;
@@ -176,7 +176,7 @@ class ProspectoController extends Controller
     {
         // dd($prospecto);
         $asesores = Empleado::where('cargo', 'Asesor')->get();
-        return view('prospectos.asesor.form',['prospecto'=>$prospecto,'asesores'=>$asesores]);
+        return view('prospectos.asesor.form', ['prospecto' => $prospecto, 'asesores' => $asesores]);
     }
 
     /**
@@ -192,5 +192,4 @@ class ProspectoController extends Controller
         $prospecto->update($request->all());
         return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
-
 }
