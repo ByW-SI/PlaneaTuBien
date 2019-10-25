@@ -45,7 +45,8 @@
 									<th class="text-center" scope="col">Nombre</th>
 									<th class="text-center" scope="col">Apellido paterno</th>
 									<th class="text-center" scope="col">Apellido materno</th>
-									<th class="text-center" scope="col">Fecha de alta</th>
+									<th class="text-center" scope="col">Alta</th>
+									<th class="text-center" scope="col">Puesto</th>
 									<th class="text-center" scope="col">Jefe</th>
 									<th class="text-center">Acción</th>
 								</tr>
@@ -58,6 +59,7 @@
 									<td>{{$empleado->paterno}}</td>
 									<td>{{$empleado->materno}}</td>
 									<td>{{$empleado->created_at}}</td>
+									<td>{{$empleado->tipo}}</td>
 									<td>{{$empleado->jefe ? $empleado->jefe->nombre." ". $empleado->jefe->paterno." ".$empleado->jefe->materno : "N/A"}}</td>
 									<td>
 										<a href="{{ route('empleados.show', [$empleado]) }}" class="btn btn-primary">

@@ -111,8 +111,8 @@
 						<label class="control-label">
 							Salario Nóminal:
 						</label>
-						<input type="hidden" value="{{$dato_lab->salario_nomina}}" id="salario_nominal_input">
-						<dd><strong id="salario_nominal">$ {{ $dato_lab->salario_nomina }}</strong></dd>
+						<input type="hidden" value="{{$dato_lab->salario_nomina}}" id="salario-nominal-input">
+						<dd><strong id="salario-nominal"></strong></dd>
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -120,7 +120,16 @@
 						<label class="control-label">
 							Salario Diario
 						</label>
-						<dd><strong>$ {{ $dato_lab->salario_dia }}</strong></dd>
+						<input type="hidden" id="salario-diario-input" value="{{$dato_lab->salario_dia}}">
+						<dd><strong id="salario-diario"></strong></dd>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="control-label">
+							Porcentaje en vales de despensa
+						</label>
+						<dd><strong>{{ $dato_lab->porcentaje_vales_despensa }}%</strong></dd>
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -250,7 +259,7 @@
 			@endif
 		@else
 			<div class="alert alert-warning" role="alert">
-				El agente {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}} aún no tiene registro laboral. <a href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}" class="alert-link">Por favor, cree un nuevo registro aquí</a>.
+				El empleado {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}} aún no tiene registro laboral. <a href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}" class="alert-link">Por favor, cree un nuevo registro aquí</a>.
 			</div>
 		@endif
 	</div>
@@ -304,6 +313,21 @@ function currencyFormat(num) {
 }
 
 // console.log( currencyFormat($('#salario_nominal_input').val()) );
+
+
+
+</script>
+
+<script>
+
+	salario_diario = parseFloat($('#salario-diario-input').val());
+	salario_diario = new Intl.NumberFormat("es-MX").format(salario_diario.toFixed(2));
+	$('#salario-diario').html('$'+salario_diario);
+
+	// salario-nominal-input
+	salario_nominal = parseFloat($('#salario-nominal-input').val());
+	salario_nominal = new Intl.NumberFormat("es-MX").format(salario_nominal.toFixed(2));
+	$('#salario-nominal').html('$'+salario_nominal);
 
 </script>
 

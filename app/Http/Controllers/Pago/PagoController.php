@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Pago;
 
 use App\Prospecto;
-use App\Pago;
+use App\Pagos;
+use App\PagoInscripcion;
 use App\Banco;
 use App\Events\PagoCreated;
 use Illuminate\Http\Request;
@@ -60,6 +61,18 @@ class PagoController extends Controller
     public function follow(Prospecto $prospecto, Pago $pago) {
         $bancos = Banco::get();
         return view('prospectos.pagos.follow', ['prospecto' => $prospecto, 'bancos' => $bancos, 'pago' => $pago]);
+    }
+
+    public function aprobar(Request $request, $id){
+        
+        $pago_inscripcion = PagoInscripcion::find($id);
+        $pago_inscripcion->update([
+            'status'=>'aprobado'
+        ]);
+        // dd($pago_inscripcion);
+
+        return redirect()->back();
+
     }
     
 }

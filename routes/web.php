@@ -135,6 +135,7 @@ Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospec
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
+Route::post('pagos/{id}/aprobar','Pago\PagoController@aprobar')->middleware('auth')->name('aprobar.pago');
 Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth');
 Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create')->middleware('auth');
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController')->middleware('auth');
@@ -143,6 +144,8 @@ Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\Coti
 Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail')->middleware('auth');
 Route::resource('prospectos.pagos', 'Pago\PagoController')->middleware('auth');
 Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow')->middleware('auth');
+
+
 
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController')->middleware('auth');

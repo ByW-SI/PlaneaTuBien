@@ -27,6 +27,7 @@
 						<th class="text-center" scope="col">Forma de pago</th>
 						<th class="text-center" scope="col">Folio de cotización</th>
 						<th class="text-center" scope="col">Estado del pago</th>
+						<th class="text-center" scope="col">Aprobar</th>
 						<th class="text-center" scope="col">Monto total a pagar</th>
 					</tr>
 				</thead>
@@ -38,24 +39,15 @@
 								<td class="text-center">{{$pago->forma}}</td>
 								<td class="text-center">{{$pago->referencia}}</td>
 								<td class="text-center">{{ucwords($pago->status)}}</td>
+								<td class="text-center">
+									@if ($pago->status == 'registrado')
+									<form action="{{route('aprobar.pago', ['id'=>$pago->id])}}" method="POST">
+										@csrf
+										<button type="submit" class="btn btn-success">Aprobar</button>
+									</form>
+									@endif
+								</td>
 								<td class="text-center">${{number_format($pago->monto,2)}}</td>
-								{{-- <td class="text-center">
-									<div class="d-flex justify-content-around">
-										@if ($pago->status == "registrado" )
-											<form method="POST" id="estatus{{$pago->id}}" class="{{$pago->status != 'registrado' ? 'd-none' : ''}}"  action="{{ route('prospectos.cotizacions.pagos.update_status',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) }}">
-												@csrf
-												@method('PUT')
-												<select name="status" class="form-control" id="selectStatus{{$pago->id}}" onchange="cambiarstatus({{$pago->id}})">
-													<option value="registrado" {{$pago->status == "registrado" ? 'selected=""' : ''}} >Registrado</option>
-													<option value="aprobado" {{$pago->status == "aprobado" ? 'selected=""' : ''}} >Aprobado</option>
-													<option value="rechazado" {{$pago->status == "rechazado" ? 'selected=""' : ''}} >Rechazado</option>
-												</select>
-											</form>
-										@endif
-										<a href="#" class="btn btn-info">Ver pago</a>
-										<a href="#" class="btn btn-warning">Editar pago</a>
-									</div>
-								</td> --}}
 							</tr>
 						@empty
 							<div class="alert alert-danger" role="alert">
@@ -63,21 +55,21 @@
 						</div>
 						@endforelse
 						<tr>
-							<th colspan="4" class="text-center">Inscripción Total</th>
+							<th colspan="5" class="text-center">Inscripción Total</th>
 							<th class="text-center">${{number_format($cotizacion->inscripcion_total,2)}}</th>
 						</tr>
 						<tr>
-							<th colspan="4" class="text-center">Cuota Periodica Total:</th>
+							<th colspan="5" class="text-center">Cuota Periodica Total:</th>
 							<th class="text-center">${{number_format($cotizacion->cuota_periodica_total,2)}}</th>
 						</tr>
 						@if ($cotizacion->inscripcionFaltante() >= 0)
 							<tr>
-								<th colspan="4" class="text-center">Falta</th>
+								<th colspan="5" class="text-center">Falta</th>
 								<th class="text-center">${{number_format($cotizacion->inscripcionFaltante(),2)}}</th>
 							</tr>
 						@else
 							<tr>
-								<th colspan="4" class="text-center">Saldo a favor</th>
+								<th colspan="5" class="text-center">Saldo a favor</th>
 								<th class="text-center">${{number_format($cotizacion->inscripcionFaltante()*-1,2)}}</th>
 							</tr>
 						@endif
