@@ -12,6 +12,7 @@ use App\Plan;
 use App\FactorActualizacion;
 use App\Events\Cotizacion0Created;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EmpleadoProspectoCotizacionController extends Controller
 {
@@ -23,9 +24,6 @@ class EmpleadoProspectoCotizacionController extends Controller
     public function index(Empleado $empleado,Prospecto $prospecto)
     {
 
-        // $cotizaciones = $prospecto->cotizaciones;
-        // dd();
-
         return view('empleado.prospecto.cotizacion.index', ['empleado'=>$empleado, 'prospecto' => $prospecto]);
     }
 
@@ -36,7 +34,8 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function create(Empleado $empleado,Prospecto $prospecto)
     {
-        $promociones = Promocion::orderBy('valido_inicio','desc')->get();
+        $fecha_actual = Carbon::now();
+        $promociones = Promocion::where('valido_inicio', '<=', $fecha_actual->toDateString())->orderBy('valido_inicio','desc')->get();
         $planes = Plan::orderBy('mes_adjudicado','asc')->get();
         // return view('empleado.prospecto.cotizacion.create', ['empleado'=>$empleado,'prospecto' => $prospecto,'promociones'=>$promociones]);
         return view('empleado.prospecto.cotizacion.form', ['empleado'=>$empleado,'prospecto' => $prospecto,'promociones'=>$promociones,'planes'=>$planes]);
@@ -50,7 +49,6 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function store(Empleado $empleado,Prospecto $prospecto, Request $request)
     {
-
         // $folio = $empleado->id.$prospecto->id.date('dmY');
         // dd($folio);
 
@@ -143,7 +141,19 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function show(Empleado $empleado,Prospecto $prospecto, Cotizacion $cotizacion)
     {
-        return view('empleado.prospecto.cotizacion.view', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        $inscripcion = 0;
+        if($cotizacion->promocion){
+            if ($cotizacion->promocion->tipo_monto === "porcentaje") {
+                $inscripcion = $cotizacion->inscripcion - ($cotizacion->inscripcion * ($cotizacion->promocion->monto / 100));
+            }
+            elseif ($cotizacion->promocion->tipo_monto === "efectivo") {
+                $inscripcion = $cotizacion->inscripcion - $cotizacion->promocion->monto;
+            }
+            else{
+                $inscripcion = $cotizacion->inscripcion;
+            }
+        }
+        return view('empleado.prospecto.cotizacion.view', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion, 'inscripcion'=>$inscripcion]);
     }
 
     /**
