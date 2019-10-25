@@ -34,6 +34,7 @@ class EmpleadoDatoLab extends Model
 		'puntualidad',
 		'tipo_jornada_id',
 		'riesgo_puesto',
+		'porcentaje_vales_despensa',
     ];
 
     protected $hidden=[

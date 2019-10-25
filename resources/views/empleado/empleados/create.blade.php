@@ -11,7 +11,7 @@
 
                 {{ csrf_field() }}
                 <div class="form-row mt-3">
-                    <div class="col-6 offset-3">
+                    <div class="col-6">
                         <div class="input-group">
                             @if (!is_null($empleados))
                             <select name="empleado" class="custom-select" id="listaEmpleados" required>
@@ -33,8 +33,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                <p class="small">Para los supervisores: Aparecen solo los asesores sin un jefe asignado</p>
-                <p class="small">Para los gerentes: Aparecen solo los supervisores sin un jefe asignado</p>
+                <div class="alert alert-secondary" role="alert">
+                <p>Para los gerentes: Aparecen solo los supervisores sin un jefe asignado</p>
+                <p>Para los supervisores: Aparecen solo los asesores sin un jefe asignado</p>
+                  </div>
             </div>
 
         </form>

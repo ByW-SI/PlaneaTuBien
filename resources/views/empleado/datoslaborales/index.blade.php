@@ -126,6 +126,14 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label class="control-label">
+							Porcentaje en vales de despensa
+						</label>
+						<dd><strong>{{ $dato_lab->porcentaje_vales_despensa }}%</strong></dd>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="control-label">
 							Periodicidad de pago:
 						</label>
 						<dd><strong>{{ $dato_lab->periodo_paga }}</strong></dd>
@@ -250,7 +258,7 @@
 			@endif
 		@else
 			<div class="alert alert-warning" role="alert">
-				El agente {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}} aún no tiene registro laboral. <a href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}" class="alert-link">Por favor, cree un nuevo registro aquí</a>.
+				El empleado {{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}} aún no tiene registro laboral. <a href="{{ route('empleados.laborals.create',['empleado'=>$empleado]) }}" class="alert-link">Por favor, cree un nuevo registro aquí</a>.
 			</div>
 		@endif
 	</div>

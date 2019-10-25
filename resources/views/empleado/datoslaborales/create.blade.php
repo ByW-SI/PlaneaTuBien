@@ -116,8 +116,19 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="salario_dia">Salario Diario:</label>
-				<input class="form-control" type="text" id="salario_dia" name="salario_dia" value="">
-			</div>
+				<input class="form-control" type="text" id="salario_dia" name="salario_dia" value="" readonly>
+            </div>
+            {{-- INPUT PORCENTAJE VALES DE DESPENSA --}}
+            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+                <label class="control-label" for="porcentaje_vales_despensa">Porcentaje en vales de despensa:</label>
+				<select type="select" class="form-control" name="porcentaje_vales_despensa" id="porcentaje_vales_despensa">
+					<option value="0">0%</option>
+					<option value="5">5%</option>
+					<option value="10">10%</option>
+					<option value="15">15%</option>
+					<option value="20">20%</option>
+				</select>
+            </div>
 			{{-- INPUT PERIODO PAGA --}}
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label class="control-label" for="periodo_paga">Periodicidad de Pago:</label>

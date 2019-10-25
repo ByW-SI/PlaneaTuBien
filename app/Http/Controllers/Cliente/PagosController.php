@@ -196,6 +196,10 @@ class PagosController extends Controller
         //
     }
 
+    public function aprobar( Request $request, Pago $pago){
+        dd( $pago );
+    }
+
     public function isValidFechaPago($fecha)
     {
         $start = new Carbon('first day of this month');
