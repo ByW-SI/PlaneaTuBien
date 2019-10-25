@@ -26,10 +26,10 @@ class EmpleadoDatoLabController extends Controller
     {
         $empleado = Empleado::withTrashed()->find($id);
 
-        $dato_lab= $empleado->datos_laborales->last();
+        $dato_lab = $empleado->datos_laborales->last();
         $historial = $empleado->datos_laborales()->paginate(5);
         // dd($dato_lab);
-        return view('empleado.datoslaborales.index',['empleado'=>$empleado,'dato_lab'=>$dato_lab,'historial'=>$historial]);
+        return view('empleado.datoslaborales.index', ['empleado' => $empleado, 'dato_lab' => $dato_lab, 'historial' => $historial]);
     }
 
     /**
@@ -48,20 +48,20 @@ class EmpleadoDatoLabController extends Controller
         $bajas = TipoBaja::get();
         $areas =   TipoArea::get();
         $puestos = TipoPuesto::get();
-        $bancos=Banco::get();
+        $bancos = Banco::get();
         $edit = false;
 
-        return view('empleado.datoslaborales.create',[
-            'empleado'=>$empleado,
-            'bajas'=>$bajas,
-            'contratos'=>$contratos,
-            'jornadas'=>$jornadas,
-            'datoslab'=>$datoslab,
-            'areas'=>$areas, 
-            'puestos'=>$puestos,
-            'edit'=>$edit,
-            'bancos'=>$bancos]);
-        
+        return view('empleado.datoslaborales.create', [
+            'empleado' => $empleado,
+            'bajas' => $bajas,
+            'contratos' => $contratos,
+            'jornadas' => $jornadas,
+            'datoslab' => $datoslab,
+            'areas' => $areas,
+            'puestos' => $puestos,
+            'edit' => $edit,
+            'bancos' => $bancos
+        ]);
     }
 
     /**
@@ -72,32 +72,34 @@ class EmpleadoDatoLabController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->input());
+        // dd(TipoPuesto::find( $request->input('tipo') )->nombre);
         $datoslab = EmpleadoDatoLab::create($request->all());
+        $puesto = TipoPuesto::find( $request->input('tipo') )->nombre;
 
         $datoslab->update([
             'puesto_id' => $request->input('tipo'),
             'periodo_paga' => $request->input('periodo_paga'),
             'regimen' => $request->input('regimen'),
-            ]);
+        ]);
         // dd($datoslab);
         $empleado = Empleado::withTrashed()->find($request->empleado_id);
         $empleado->update([
-            'tipo'=>$request->input('tipo'),
-            'cargo'=>$request->input('cargo')
-            ]);
+            'tipo' => $puesto,
+            'cargo' => $puesto,
+            'puesto' => $puesto,
+        ]);
 
-            // dd($datoslab);
+        // dd($datoslab);
 
         // BAJA DE EMPLEADO
-        if($request->fechabaja!=null){
+        if ($request->fechabaja != null) {
             $empleado->delete();
             Alert::success('Baja de Empleado', 'Se redireccionará a la Lista de Empleados');
             return redirect()->route('empleados.index');
-        }else{
+        } else {
             $empleado->datos_laborales()->save($datoslab);
             Alert::info('Datos laborales creado', 'Siga agregando información al empleado');
-            return redirect()->route('empleados.laborals.index',['empleado'=>$empleado]);
+            return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
         }
     }
 

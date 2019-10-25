@@ -32,8 +32,25 @@ class EmpleadoFaltaController extends Controller
     {
         $empleado = Empleado::withTrashed()->find($id);
         $faltas = $empleado->faltas;
-        // dd(count($faltas->where('tipofalta','falta injustificada')));
-        return view('empleado.falta.view',['empleado'=>$empleado,'faltas'=>$faltas]);
+        
+        $meses = array(
+            "01" => "enero",
+            "02" => "febrero",
+            "03" => "marzo",
+            "04" => "abril",
+            "05" => "mayo",
+            "06" => "junio",
+            "07" => "enero",
+            "08" => "febrero",
+            "09" => "marzo",
+            "10" => "octubre",
+            "11" => "mayo",
+            "12" => "junio"
+        );
+
+        $mes_actual = $meses[date('m')];
+
+        return view('empleado.falta.view',['empleado'=>$empleado,'faltas'=>$faltas, 'mes_actual' => $mes_actual]);
     }
 
     /**
@@ -59,15 +76,13 @@ class EmpleadoFaltaController extends Controller
 
         $empleado = Empleado::withTrashed()->find($id);
 
-        // return count($empleado->faltas()->where('tipofalta', 'like', '%retardo%')->whereMonth('updated_at', date('m'))->get());
-
 
         $falta = new EmpleadoFalta($request->all());
         $empleado->faltas()->save($falta);
 
-        $total_retardos_este_mes = count($empleado->faltas()->where('tipofalta', 'like', '%retardo%')->whereMonth('updated_at', date('m'))->get());
+        $total_retardos_este_mes = count($empleado->faltas()->where('tipofalta', 'like', '%retardo%')->whereMonth('fecha', date('m'))->get());
         $num_faltas_por_retardos_que_deberia = intdiv( $total_retardos_este_mes, 3 );
-        $num_faltas_por_retardos_que_tiene = count($empleado->faltas()->where('tipofalta', 'falta por retardos')->whereMonth('updated_at', date('m'))->get());
+        $num_faltas_por_retardos_que_tiene = count($empleado->faltas()->where('tipofalta', 'falta por retardos')->whereMonth('fecha', date('m'))->get());
 
         // dd($num_faltas_por_retardos_que_tiene);
         if( $num_faltas_por_retardos_que_tiene < $num_faltas_por_retardos_que_deberia ){
@@ -116,7 +131,16 @@ class EmpleadoFaltaController extends Controller
      */
     public function update(Request $request, EmpleadoFalta $empleadoFalta)
     {
-        //
+    }
+
+    public function actualizar(Request $request)
+    {
+        $falta = EmpleadoFalta::find( $request->falta_id );
+        // dd($falta);
+
+        $falta->update($request->all());
+        
+        return redirect()->back()->with('status','¡La falta ha sido actualizada!');
     }
 
     /**

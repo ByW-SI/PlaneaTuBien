@@ -89,7 +89,7 @@
 																<option value="motivos personales">motivos personales</option>
 																<option value="mejor oferta laboral">mejor oferta laboral</option>
 																<option value="termino de contrato">termino de contrato</option>
-																<option value="rescision de contrato">rescision de contrato</option>
+																<option value="rescisión de contrato">rescisión de contrato</option>
 																<option value="periodo de prueba">periodo de prueba</option>
 															</select>
 														</div>
