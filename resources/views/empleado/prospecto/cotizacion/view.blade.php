@@ -137,7 +137,7 @@
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Ahorro del cliente:</label>
                     <div class="input-group">
-                        <input type="text" readonly="" value="{{ $cotizacion->ahorro }}" class="form-control">
+                        <input type="text" readonly="" value="{{ $cotizacion->ahorro ? $cotizacion->ahorro : '0' }}" class="form-control">
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>
                         </div>   
@@ -148,6 +148,7 @@
                     <input type="text" readonly="" value="{{ $cotizacion->plan->nombre }}" class="form-control">
                 </div>
             </div>
+            @if($cotizacion->plan->abreviatura != "PL")
             <div class="row">
                 @if($cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD")
                 <div class="form-group col-sm-4">
@@ -229,69 +230,101 @@
                     </table>
                 </div>
             </div>
+            @endif
             <div class="row">
-                <div class="form-group col-sm-4">
-                    <label class="col-form-label">Total de aportaciones:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input type="text" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['total_aportacion'],2) }}" class="form-control" readonly="">
-                    </div>
-                </div>
-                <div class="form-group col-sm-4">
-                    <label class="col-form-label">Costo anual de:</label>
-                    <div class="input-group">
-                        <input type="text" value="{{ $cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion) }}" class="form-control" readonly="">
-                        <div class="input-group-append">
-                            <span class="input-group-text">%</span>
+                @if($cotizacion->plan->abreviatura != "PL")
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Total de aportaciones:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['total_aportacion'],2) }}" class="form-control" readonly="">
                         </div>
                     </div>
-                </div>
-                <div class="form-group col-sm-4">
-                    <label class="col-form-label">Inscripción:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        @if($cotizacion->inscripcion)
-                            <input type="text" value="{{ number_format($inscripcion,2) }}" class="form-control" readonly="">
-                        @else
-                        <input type="text" value="{{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}" class="form-control" readonly="">
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label>Monto de promoción:</label>
-                     <div class="input-group">
-                        <input class="form-control" value="{{ $cotizacion->promocion->monto }}" readonly="">    
-                        <div class="input-group-append">
-                            <span class="input-group-text">{{ $cotizacion->promocion->tipo_monto == "porcentaje" ? "%" : "MXN" }}</span>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Costo anual de:</label>
+                        <div class="input-group">
+                            <input type="text" value="{{ $cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion) }}" class="form-control" readonly="">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group col-sm-5">
-                    <label>Tipo de promoción:</label>
-                    <span class="input-group-text" id="tipo_promo">{{ $cotizacion->promocion->tipo_promocion->nombre }}</span>
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                    <label>Valido:</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">De: </span>
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Inscripción:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            @if($cotizacion->inscripcion)
+                                <input type="text" value="{{ number_format($inscripcion,2) }}" class="form-control" readonly="">
+                            @else
+                            <input type="text" value="{{ number_format($cotizacion->plan->monto_inscripcion_con_iva($cotizacion->monto),2) }}" class="form-control" readonly="">
+                            @endif
                         </div>
-                        <input type="text" class="form-control"  value="{{ $cotizacion->promocion->valido_inicio }}" readonly="">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">hasta:</span>
-                        </div>
-                        <input type="text" class="form-control" value="{{ $cotizacion->promocion->valido_fin }}" readonly="">
                     </div>
-                </div>
-                <div class="form-group col-sm-5">
-                    <label>Tipo de promoción:</label>
-                    <textarea class="form-control" readonly>{{ $cotizacion->promocion->descripcion }}</textarea>
-                </div>
+                    <div class="form-group col-sm-3">
+                        <label>Monto de promoción:</label>
+                         <div class="input-group">
+                            <input class="form-control" value="{{ $cotizacion->promocion->monto }}" readonly="">    
+                            <div class="input-group-append">
+                                <span class="input-group-text">{{ $cotizacion->promocion->tipo_monto == "porcentaje" ? "%" : "MXN" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @if($cotizacion->promocion)
+                    <div class="form-group col-sm-5">
+                        <label>Tipo de promoción:</label>
+                        <span class="input-group-text" id="tipo_promo">{{ $cotizacion->promocion->tipo_promocion->nombre }}</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label>Valido:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">De: </span>
+                            </div>
+                            <input type="text" class="form-control"  value="{{ $cotizacion->promocion->valido_inicio }}" readonly="">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">hasta:</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $cotizacion->promocion->valido_fin }}" readonly="">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-5">
+                        <label>Tipo de promoción:</label>
+                        <textarea class="form-control" readonly>{{ $cotizacion->promocion->descripcion }}</textarea>
+                    </div>
+                @endif
             </div>
+            <!-- TABLA DE PAGOS MINIMOS Y MAXIMOS PARA PLAN LIBRE-->
+            @if($cotizacion->plan->abreviatura == "PL")
+                <div class="row my-3">
+                    <div class="col-sm-6 offset-3">
+                        <table class="table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Mínimo</th>
+                                    <th>Posible 1</th>
+                                    <th>Posible 2</th>
+                                    <th>Posible 3</th>
+                                    <th>Máximo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${{ $tablaPL['minimo'] }}</td>
+                                    <td>${{ $tablaPL['posible1'] }}</td>
+                                    <td>${{ $tablaPL['posible2'] }}</td>
+                                    <td>${{ $tablaPL['posible3'] }}</td>
+                                    <td>${{ $tablaPL['maximo'] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <div class="card-footer">

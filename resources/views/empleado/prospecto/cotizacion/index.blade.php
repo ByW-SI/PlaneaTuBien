@@ -139,32 +139,41 @@
                         <tr>
                             <td>{{ $cotizacion->plan->nombre }}</td>
                             <td>${{ number_format($cotizacion->monto, 2) }}</td>
-                            <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}</td>
-                            <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}%</td>
-                            <td>
-                                {{$cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD" ? $cotizacion->plan->mes_aportacion_adjudicado." meses de " : "mensualidades de "}}${{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2)}}
-                            </td>
-                            <td>
-                                @if($cotizacion->promocion)
-                                    @if($cotizacion->promocion->tipo_monto == "porcentaje")
-                                        ${{number_format($cotizacion->inscripcion - ($cotizacion->inscripcion * ($cotizacion->promocion->monto / 100)),2)}}
-                                    @else
-                                        ${{number_format($cotizacion->inscripcion - $cotizacion->promocion->monto,2)}}
+                            @if($cotizacion->plan->abreviatura !== "PL")
+                                <td>${{ number_format($cotizacion->plan->monto_total_pagar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}</td>
+                                <td>{{$cotizacion->plan->sobrecosto_anual($cotizacion->monto,$cotizacion->factor_actualizacion)}}%</td>
+                                <td>
+                                    {{$cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD" ? $cotizacion->plan->mes_aportacion_adjudicado." meses de " : "mensualidades de "}}${{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2)}}
+                                </td>
+                                <td>
+                                    @if($cotizacion->promocion)
+                                        @if($cotizacion->promocion->tipo_monto == "porcentaje")
+                                            ${{number_format($cotizacion->inscripcion - ($cotizacion->inscripcion * ($cotizacion->promocion->monto / 100)),2)}}
+                                        @else
+                                            ${{number_format($cotizacion->inscripcion - $cotizacion->promocion->monto,2)}}
+                                        @endif
                                     @endif
-                                @endif
-                            </td>
+                                </td>
+                            @else
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                            @endif
                             <td class="text-center">
                                 @if ($cotizacion->elegir == 0)
                                     {{-- true expr --}}
                                     <a href="{{ route('empleados.prospectos.cotizacions.show', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-primary">
                                         <i class="fa fa-eye"></i> Ver
                                     </a>
+                                    @if($cotizacion->plan->abreviatura != "PL")
                                     <a href="{{ route('prospectos.cotizacions.pdf', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
                                         <i class="fa fa-file"></i> PDF
                                     </a>
                                     <a href="{{ route('empleados.prospectos.cotizacions.pdf.sendMail', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm mt-3 btn-outline-secondary">
                                         <i class="fas fa-envelope"></i> Enviar por correo
                                     </a>
+                                    @endif
                                     <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm mt-3 btn-success"> Seleccionar cotización para crear perfil</a>
                                 @else
                                     <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-sm mt-3 btn-success">Ver perfil</a>

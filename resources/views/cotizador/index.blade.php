@@ -25,10 +25,10 @@
 					</div>
 					@if($res && $plan_select->abreviatura)
 					<div class="col-auto">
-						<a href="{{ route('toPDF',['plan'=>$plan_select, 'monto'=>$request->monto]) }}" class="btn btn-danger mb-2">PDF</a>{{-- 'prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato --}}
+						<a href="#" class="btn btn-danger mb-2">PDF</a>{{-- route('toPDF',['plan'=>$plan_select, 'monto'=>$request->monto]) --}}
 					</div>
 					<div class="col-auto">
-						<button id="pdf" class="btn btn-success mb-2">EXCEL</button>
+						<a href="#" class="btn btn-success mb-2">EXCEL</a>
 					</div>
 					@endif
 				</div>

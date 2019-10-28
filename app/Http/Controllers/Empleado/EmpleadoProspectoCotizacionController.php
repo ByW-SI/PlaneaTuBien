@@ -64,7 +64,7 @@ class EmpleadoProspectoCotizacionController extends Controller
             'tipo_inscripcion'=>'string|nullable',
 
         ]);
-        //dd($request->all());
+        dd($request->all());
         if ($request->plan) {
             $plan = Plan::find($request->plan);
             $promocion = Promocion::find($request->promocion);
@@ -141,6 +141,10 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function show(Empleado $empleado,Prospecto $prospecto, Cotizacion $cotizacion)
     {
+        $tablaPL = null;
+        if($cotizacion->plan->abreviatura == "PL"){
+            $tablaPL = $this->getTablaPlanLibre($cotizacion->monto, $cotizacion->plan);
+        }
         $inscripcion = 0;
         if($cotizacion->promocion){
             if ($cotizacion->promocion->tipo_monto === "porcentaje") {
@@ -153,7 +157,7 @@ class EmpleadoProspectoCotizacionController extends Controller
                 $inscripcion = $cotizacion->inscripcion;
             }
         }
-        return view('empleado.prospecto.cotizacion.view', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion, 'inscripcion'=>$inscripcion]);
+        return view('empleado.prospecto.cotizacion.view', ['empleado'=>$empleado,'prospecto' => $prospecto, 'cotizacion' => $cotizacion, 'inscripcion'=>$inscripcion, 'tablaPL'=>$tablaPL]);
     }
 
     /**
@@ -194,5 +198,44 @@ class EmpleadoProspectoCotizacionController extends Controller
         else{
             return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
         }
+    }
+
+    private function getTablaPlanLibre($monto, $plan)
+    {
+        if(gettype($plan) == "string")
+            $plan = Plan::find($plan);
+        $res = $plan->getMontoscontratos($monto);
+        $aux;
+        foreach ($res as $monto) {
+            switch ($monto) {
+                case 300000:
+                    $aux[] = ['minimo'=>1000,'posible1'=>2000,'posible2'=>3000,'posible3'=>4000,'maximo'=>5000];
+                    break;
+                case 350000:
+                    $aux[] = ['minimo'=>2100,'posible1'=>3100,'posible2'=>4100,'posible3'=>5100,'maximo'=>5600];
+                    break;
+                case 400000:
+                    $aux[] = ['minimo'=>2400,'posible1'=>3400,'posible2'=>4400,'posible3'=>5400,'maximo'=>6400];
+                    break;
+                case 450000:
+                    $aux[] = ['minimo'=>2700,'posible1'=>3700,'posible2'=>4700,'posible3'=>5700,'maximo'=>7200];
+                    break;
+                case 500000:
+                    $aux[] = ['minimo'=>3000,'posible1'=>4000,'posible2'=>5000,'posible3'=>6000,'maximo'=>8000];
+                    break;
+                case 550000:
+                    $aux[] = ['minimo'=>3000,'posible1'=>4000,'posible2'=>5000,'posible3'=>6000,'maximo'=>8000];
+                    break;
+            }
+        }
+        $res = ['minimo'=>0,'posible1'=>0,'posible2'=>0,'posible3'=>0,'maximo'=>0];;
+        foreach ($aux as $contrato) {
+            $res['minimo'] += $contrato['minimo'];
+            $res['posible1'] += $contrato['posible1'];
+            $res['posible2'] += $contrato['posible2'];
+            $res['posible3'] += $contrato['posible3'];
+            $res['maximo'] += $contrato['maximo'];
+        }
+        return $res;
     }
 }
