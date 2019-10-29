@@ -64,7 +64,6 @@ class EmpleadoProspectoCotizacionController extends Controller
             'tipo_inscripcion'=>'string|nullable',
 
         ]);
-        dd($request->all());
         if ($request->plan) {
             $plan = Plan::find($request->plan);
             $promocion = Promocion::find($request->promocion);

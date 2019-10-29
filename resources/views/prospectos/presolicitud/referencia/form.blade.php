@@ -14,29 +14,28 @@
 			        </ul>
 			    </div>
 			@endif
-			@for ($i = 0; $i <= 2; $i++)
-				{{-- expr --}}
+			@for($i = 0; $i < $prospecto->perfil->referencia_personals->count(); $i++)
 				<label>Referencia #{{$i+1}}</label>
 				<div class="row">
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Apellido Paterno</label>
-						<input type="text" class="form-control" name="paterno[{{$i}}]" required="" value="{{old('paterno.'.$i)}}">
+						<input type="text" class="form-control" name="paterno[{{$i}}]" required="" value="{{$prospecto->perfil->referencia_personals[$i]->paterno}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Apellido Materno</label>
-						<input type="text" class="form-control" name="materno[{{$i}}]" value="{{old('materno.'.$i.'')}}">
+						<input type="text" class="form-control" name="materno[{{$i}}]" value="{{$prospecto->perfil->referencia_personals[$i]->materno}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Nombre(s)</label>
-						<input type="text" class="form-control" name="nombre[{{$i}}]" required="" value="{{old('nombre.'.$i)}}">
+						<input type="text" class="form-control" name="nombre[{{$i}}]" required="" value="{{$prospecto->perfil->referencia_personals[$i]->nombre}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Telefono</label>
-						<input type="text" step="1" min="0" class="form-control" name="telefono[{{$i}}]" required="" value="{{old('telefono.'.$i)}}">
+						<input type="text" step="1" min="0" class="form-control" name="telefono[{{$i}}]" required="" value="{{$prospecto->perfil->referencia_personals[$i]->telefono}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Parentesco</label>
-						<input type="text" step="1" min="0" class="form-control" name="parentesco[{{$i}}]" required="" value="{{old('parentesco.'.$i)}}">
+						<input type="text" step="1" min="0" class="form-control" name="parentesco[{{$i}}]" required="" value="{{$prospecto->perfil->referencia_personals[$i]->parentesco}}">
 					</div>
 				</div>
 			@endfor

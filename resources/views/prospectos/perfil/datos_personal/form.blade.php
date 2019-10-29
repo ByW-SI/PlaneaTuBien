@@ -10,7 +10,9 @@
 	        <div class="d-flex justify-content-between">
 	        	<h4>Perfil:</h4>   
 	        	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
-	        	<a class="btn btn-success" href="{{ route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">Pagos</a>
+	        	@if($cotizacion->plan->abreviatura != "PL")
+	        		<a class="btn btn-success" href="{{ route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">Pagos</a>
+	        	@endif
 	        	@if ($cotizacion && $cotizacion->liberar)
 	        		<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success">Presolicitud</a>
 	        	@endif
@@ -78,7 +80,7 @@
 		  			@csrf
 			  		<div class="card-body">
 			  			<div class="row-group row">
-			  				<div class="form-group col-12 col-md-6">
+			  				<div class="form-group col-12 col-md-12">
 			  					<label for="cliente">Cliente</label>
 			  					<div class="input-group">
 									<select class="custom-select" name="prefijo_1" id="prefijo_1" required="">
@@ -88,7 +90,9 @@
 										<option value="Srta." {{$datos_personal->prefijo_1 == "Srta." ? "selected=''" : ( old('prefijo_1') == "Srta." ? "selected=''" :"")}}>Srta.</option>
 									</select>
 									<div class="input-group-append w-75">
-									<input type="text" class="form-control" name="nombre_completo_1" id="nombre_completo_1" value="{{$datos_personal->nombre_completo_1}}" required="">
+									<input type="text" class="form-control" name="nombre_1" id="nombre_1" value="{{$datos_personal->nombre_1}}" required="">
+									<input type="text" class="form-control" name="paterno_1" id="paterno_1" value="{{$datos_personal->paterno_1}}" required="">
+									<input type="text" class="form-control" name="materno_1" id="materno_1" value="{{$datos_personal->materno_1}}" required="">
 									</div>
 								</div>
 			  				</div>
@@ -186,10 +190,43 @@
 			  				@endif
 			  			</div>
 			  			<div class="row-group row">
-			  				<div class="form-group col-12 col-md-6">
-			  					<label for="direccion">Dirección</label>
-			  					<textarea class="form-control" name="direccion" required="">{{$datos_personal->direccion}}</textarea>
-			  				</div>
+			  				<div class="form-group row">
+			  					<!-- DIRECCION-->
+					    		<label for="direccion" class="col-form-label col-sm-2">Direccion:</label>
+					    		<div class="col-sm-10">
+					    			<div class="input-group">
+					    				<div class="input-group-prepend">
+					    					<span class="input-group-text">✱ Calle</span>
+					    				</div>
+					    				<input type="text" name="calle" id="calle" class="form-control w-25" placeholder="Calle" required="" value="{{$datos_personal->calle}}">
+					    			</div>
+					    			<div class="input-group">
+					    				<div class="input-group-prepend">
+					    					<span class="input-group-text">✱ Número ext.</span>
+					    				</div>
+				    					<input type="text" name="numero_ext" class="form-control" required="" value="{{$datos_personal->numero_ext}}">
+					    				<div class="input-group-prepend">
+					    					<span class="input-group-text"> Número int.</span>
+					    				</div>
+				    					<input type="text" name="numero_int" class="form-control" value="{{$datos_personal->numero_int}}">
+					    			</div>
+					    		</div>
+					    		<div class="col-sm-10 offset-sm-2">
+					    			<div class="input-group">
+					    				<input type="text" name="cp" id="cp" class="form-control" placeholder="Código Postal" required="" value="{{$datos_personal->cp}}">
+					    				<select class="form-control" name="colonia" id="colonia" required="">
+											<option>Seleccione una colonía ó población</option>
+										</select>
+					    			</div>
+					    		</div>
+					    		<div class="col-sm-10 offset-sm-2">
+				    				<div class="input-group">
+					    				<input type="text" class="form-control" placeholder="Alcaldía o Municipio" value="{{$datos_personal->municipio}}" name="municipio" id="municipio" required="" readonly="">
+					    				<input type="text" class="form-control" placeholder="Estado" value="{{$datos_personal->estado}}" name="estado" id="estado" required="" readonly="">
+					    			</div>
+					    		</div>
+					    	</div>
+					    	<!-- FIN DIRECCION-->
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="telefono_casa">Teléfono de casa</label>
 			  					<input type="text" class="form-control" name="telefono_casa" value="{{$datos_personal->telefono_casa}}" required="">
@@ -338,6 +375,10 @@
 @endsection
 @push('scripts')
 	<script type="text/javascript">
+		$(document).ready(function() {
+			getColonias();
+		});
+
 		$("#estado_civil").on("change",function(){
 			var estado_civil = $("#estado_civil").val();
 			$("#pareja_form").empty();
@@ -401,6 +442,58 @@
 			}
 			
 			$("#pareja_form").append(html_row);
-		})
+		});
+
+		$("#cp").change(function(){
+			getColonias();
+		});
+		$("#colonia").change(function(){
+			var cp = $("#cp").val();
+			var colonia = $("#colonia").val();
+			$.ajax({
+				url: `{{ url('cp') }}/${cp}/${colonia}`,
+				dataType: 'json',
+				success:function(result,status,xhr){
+					let res = result.cp[0];
+					$("#municipio").val(res.municipio);
+					$("#estado").val(res.estado);
+				},
+				error:function(xhr,status,error){
+					alert(error);
+				}
+			});
+		});
+
+		function getColonias() {
+			var cp = $("#cp").val();
+			$("#colonia").empty();
+			$("#colonia").append("<option>Seleccione una colonía ó población</option>");
+			$.ajax({
+				url: `{{ url('cp') }}/${cp}`,
+				dataType: 'json',
+				success:function(result,status,xhr){
+					console.log(result);
+					let res_array = result.cp;
+					res_array.forEach(function(item,index){
+						var opt = `<option value="${item.poblacion}">${item.poblacion}</option>`
+						$("#colonia").append(opt)
+					});
+					setColoniaDefault();
+				},
+				error:function(xhr,status,error){
+					alert(error);
+				}
+			});
+		}
+
+		function setColoniaDefault() {
+			let colonia = '{{ $datos_personal->colonia }}';
+			$("#colonia").children().each(function(index, el) {
+				if($(el).val() == colonia){
+					$(el).attr("selected",true);
+				}
+			});
+
+		}
 	</script>
 @endpush

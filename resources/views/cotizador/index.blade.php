@@ -73,7 +73,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>
 							</div>
-							<span class="form-control bg-light">{{number_format($res['monto_financiar']),2}}</span>
+							<span class="form-control bg-light">{{number_format($res['monto_financiar'], 2)}}</span>
 						</div>
 					</div>
 					<div class="col-12 col-xs-12 col-md-2 col-lg-2 col-xl-2 form-group">
@@ -105,7 +105,7 @@
 							<span class="form-control bg-light">{{number_format($res['aportacion_integrante'],2)}}</span>
 						</div>
 					</div>
-					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC" && $plan_select->abreviatura !== "TD")
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
 						<label for="">Aportación adjudicado</label>
 						<div class="input-group mb-3">
@@ -125,9 +125,9 @@
 							<span class="form-control bg-light">{{number_format($res['cuota_periodica_integrante'],2)}}</span>
 						</div>
 					</div>
-					@if(isset($plan_select) && $plan_select->abreviatura !== "TC")
+					@if(isset($plan_select) && $plan_select->abreviatura !== "TC" && $plan_select->abreviatura !== "TD")
 					<div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3 form-group">
-						<label for="">Cuota periodica adjudicado</label>
+						<label for="">Cuota periodica adjudicado {{ $plan_select->abreviatura }}</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">$</span>

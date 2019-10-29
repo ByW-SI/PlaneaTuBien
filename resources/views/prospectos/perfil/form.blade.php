@@ -65,56 +65,56 @@
 								<option value="Srta." {{old('prefijo_1' == "Srta." ? 'selected=""' : '')}}>Srta.</option>
 							</select>
 							<div class="input-group-append w-75">
-								<input type="text" name="nombre_1" id="nombre_1" placeholder="Nombre" value="{{old("nombre_1") ? old('nombre_1') : $prospecto->nombre}}" class="form-control" required="">
-								<input type="text" name="paterno_1" id="paterno_1" placeholder="Apellido Paterno" value="{{ old("paterno_1") ? old("paterno_1") : $prospecto->appaterno}}" class="form-control" required="">
-								<input type="text" name="materno_1" id="materno_1" placeholder="Apellido Materno" value="{{ old("materno_1") ? old("materno_1") : $prospecto->apmaterno}}" class="form-control">
+								<input type="text" name="nombre_1" id="nombre_1" placeholder="Nombre" value="{{old("nombre_1") ? old('nombre_1') : $prospecto->nombre}}" class="form-control" required="" readonly="">
+								<input type="text" name="paterno_1" id="paterno_1" placeholder="Apellido Paterno" value="{{ old("paterno_1") ? old("paterno_1") : $prospecto->appaterno}}" class="form-control" required="" readonly="">
+								<input type="text" name="materno_1" id="materno_1" placeholder="Apellido Materno" value="{{ old("materno_1") ? old("materno_1") : $prospecto->apmaterno}}" class="form-control" readonly="">
 							</div>
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="ocupacion_1" class="col-form-label col-sm-2">Ocupación:</label>
+		    		<label for="ocupacion_1" class="col-form-label col-sm-2">✱ Ocupación:</label>
 		    		<div class="col-sm-10">
 		    			<input type="text" name="ocupacion_1" class="form-control" id="ocupacion_1" value="{{old('ocupacion_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="empresa_1" class="col-form-label col-sm-2">Empresa:</label>
+		    		<label for="empresa_1" class="col-form-label col-sm-2">✱ Empresa:</label>
 		    		<div class="col-sm-10">
 		    			<input type="text" name="empresa_1" class="form-control" id="empresa_1" value="{{old('empresa_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="antiguedad_1" class="col-form-label col-sm-3">Antigüedad:</label>
+		    		<label for="antiguedad_1" class="col-form-label col-sm-3">✱ Antigüedad:</label>
 		    		<div class="col-sm-9">
 		    			<input type="text" name="antiguedad_1" class="form-control" id="antiguedad_1" value="{{old('antiguedad_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="salario_1" class="col-form-label col-sm-2">Salario:</label>
+		    		<label for="salario_1" class="col-form-label col-sm-2">✱ Salario:</label>
 		    		<div class="col-sm-10">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="">
+							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="" readonly="">
 						</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="rfc_1" class="col-form-label col-sm-2">RFC:</label>
+		    		<label for="rfc_1" class="col-form-label col-sm-2">✱ RFC:</label>
 		    		<div class="col-sm-10">
 		    			<input type="text" name="rfc_1" class="form-control" id="rfc_1" value="{{old('rfc_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="nacionalidad_1" class="col-form-label col-sm-3">Nacionalidad:</label>
+		    		<label for="nacionalidad_1" class="col-form-label col-sm-3">✱ Nacionalidad:</label>
 		    		<div class="col-sm-9">
 		    			<input type="text" name="nacionalidad_1" class="form-control" id="nacionalidad_1" value="{{old('nacionalidad_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="estado_civil" class="col-form-label col-sm-3">Estado civil:</label>
+		    		<label for="estado_civil" class="col-form-label col-sm-3">✱ Estado civil:</label>
 		    		<div class="col-sm-9">
 		    			<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="estado_civil" id="Soltero" value="Soltero" {{old('estado_civil') == "Soltero" ? 'checked=""' : ''}} required="">
@@ -141,7 +141,7 @@
 	    		<div id="pareja">
 	    			@if (old('estado_civil') == "Casado" || old('estado_civil') == "Unión Libre")
 	    				<div class="form-group row" id="regimen_matrimonial">
-			    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">Régimen matrimonial:</label>
+			    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">✱ Régimen matrimonial:</label>
 			    			<div class="col-sm-8">
 			    				<div class="form-check form-check-inline mt-1">
 									<input class="form-check-input" type="radio" name="regimen_matrimonial" id="Sociedad Conyugal" value="Sociedad Conyugal" required="" {{old('regimen_matrimonial') == "Sociedad Conyugal" ? 'checked=""' : ''}}>
@@ -154,7 +154,7 @@
 			    			</div>
 			    		</div>
 		    			<div class="form-group row">
-		    				<h5 class="card-title col-12">Datos de la pareja:</h5>
+		    				<h5 class="card-title col-12">✱ Datos de la pareja:</h5>
 		    			</div>
 		    			<div class="form-group row">
 				    		<div class="col-12">
@@ -174,25 +174,25 @@
 				    		</div>
 				    	</div>
 		    			<div class="form-group row">
-				    		<label for="ocupacion_2" class="col-form-label col-sm-2">Ocupación:</label>
+				    		<label for="ocupacion_2" class="col-form-label col-sm-2">✱ Ocupación:</label>
 				    		<div class="col-sm-10">
 				    			<input type="text" name="ocupacion_2" class="form-control" id="ocupacion_2" value="{{old('ocupacion_2')}}" placeholder="Ocupación de la pareja"  required="">
 				    		</div>
 				    	</div>
 				    	<div class="form-group row">
-				    		<label for="empresa_2" class="col-form-label col-sm-2">Empresa:</label>
+				    		<label for="empresa_2" class="col-form-label col-sm-2">✱ Empresa:</label>
 				    		<div class="col-sm-10">
 				    			<input type="text" name="empresa_2" class="form-control" id="empresa_2" value="{{old('empresa_2')}}" placeholder="Empresa en la que labora de la pareja"  required="">
 				    		</div>
 				    	</div>
 				    	<div class="form-group row">
-				    		<label for="antiguedad_2" class="col-form-label col-sm-3">Antigüedad:</label>
+				    		<label for="antiguedad_2" class="col-form-label col-sm-3">✱ Antigüedad:</label>
 				    		<div class="col-sm-9">
 				    			<input type="text" name="antiguedad_2" class="form-control" id="antiguedad_2" placeholder="Antigüedad en la empresa" value="{{old('antiguedad_2')}}" required="">
 				    		</div>
 				    	</div>
 				    	<div class="form-group row">
-				    		<label for="salario_2" class="col-form-label col-sm-2">Salario:</label>
+				    		<label for="salario_2" class="col-form-label col-sm-2">✱ Salario:</label>
 				    		<div class="col-sm-10">
 				    			<div class="input-group">
 									<div class="input-group-prepend">
@@ -209,7 +209,7 @@
 				    		</div>
 				    	</div>
 				    	<div class="form-group row">
-				    		<label for="nacionalidad_2" class="col-form-label col-sm-3">Nacionalidad:</label>
+				    		<label for="nacionalidad_2" class="col-form-label col-sm-3">✱ Nacionalidad:</label>
 				    		<div class="col-sm-9">
 				    			<input type="text" name="nacionalidad_2" class="form-control" id="nacionalidad_2" placeholder="Nacionalidad de la pareja" value="{{old('nacionalidad_2')}}" required="">
 				    		</div>
@@ -221,15 +221,15 @@
 		    		<div class="col-sm-10">
 		    			<div class="input-group">
 		    				<div class="input-group-prepend">
-		    					<span class="input-group-text">Calle</span>
+		    					<span class="input-group-text">✱ Calle</span>
 		    				</div>
 		    				<input type="text" name="calle" id="calle" class="form-control w-25" placeholder="Calle" required="">
 		    				<div class="input-group-prepend">
-		    					<span class="input-group-text">#</span>
+		    					<span class="input-group-text">✱ Número ext.</span>
 		    				</div>
 	    					<input type="text" name="numero_ext" class="form-control" required="">
 		    				<div class="input-group-prepend">
-		    					<span class="input-group-text">Int.</span>
+		    					<span class="input-group-text"> Número int.</span>
 		    				</div>
 	    					<input type="text" name="numero_int" class="form-control">
 		    			</div>
@@ -244,17 +244,17 @@
 		    		</div>
 		    		<div class="col-sm-10 offset-sm-2">
 	    				<div class="input-group">
-		    				<input type="text" class="form-control" placeholder="Alcaldía o Municipio" value="{{old('municipio')}}" name="municipio" id="municipio" required="">
-		    				<input type="text" class="form-control" placeholder="Estado" value="{{old('estado')}}" name="estado" id="estado" required="">
+		    				<input type="text" class="form-control" placeholder="Alcaldía o Municipio" value="{{old('municipio')}}" name="municipio" id="municipio" required="" readonly="">
+		    				<input type="text" class="form-control" placeholder="Estado" value="{{old('estado')}}" name="estado" id="estado" required="" readonly="">
 		    			</div>
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="telefono_casa" class="col-form-label col-sm-2">Teléfono de casa:</label>
+		    		<label for="telefono_casa" class="col-form-label col-sm-2">✱ Teléfono de casa:</label>
 		    		<div class="col-sm-4">
 		    			<input type="text" name="telefono_casa" class="form-control" id="telefono_casa" value="{{old('telefono_casa') ? old('telefono_casa') : $prospecto->tel}}" required="">
 		    		</div>
-		    		<label for="telefono_celular" class="col-form-label col-sm-2">Teléfono celular:</label>
+		    		<label for="telefono_celular" class="col-form-label col-sm-2">✱ Teléfono celular:</label>
 		    		<div class="col-sm-4">
 		    			<input type="text" name="telefono_celular" class="form-control" id="telefono_celular" value="{{old('telefono_celular') ? old('telefono_celular') : $prospecto->movil}}" required="">
 		    		</div>
@@ -264,13 +264,13 @@
 		    		<div class="col-sm-4">
 		    			<input type="text" name="telefono_oficina" class="form-control" id="telefono_oficina" value="{{old('telefono_oficina')}}">
 		    		</div>
-		    		<label for="email" class="col-form-label col-sm-2">Email:</label>
+		    		<label for="email" class="col-form-label col-sm-2">✱ Email:</label>
 		    		<div class="col-sm-4">
-		    			<input type="email" name="email" class="form-control" id="email" value="{{old('email') ? old('email') : $prospecto->email}}" required="">
+		    			<input type="email" name="email" class="form-control" id="email" value="{{old('email') ? old('email') : $prospecto->email}}" required="" readonly="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="tipo_residencia" class="col-form-label col-sm-3">Residencia Actual:</label>
+		    		<label for="tipo_residencia" class="col-form-label col-sm-3">✱ Residencia Actual:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="tipo_residencia" id="Casa" value="Casa" {{old('tipo_residencia') == 'Casa' ? 'checked=""' : ''}} required="">
@@ -301,7 +301,7 @@
 	    			</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="habitantes" class="col-form-label col-sm-2">Número de habitantes:</label>
+		    		<label for="habitantes" class="col-form-label col-sm-2">✱ Número de habitantes:</label>
 		    		<div class="col-sm-4">
 		    			<input type="number" name="habitantes" min="1" step="1" value="{{old('habitantes')}}" class="form-control" id="habitantes" required="">
 		    		</div>
@@ -316,13 +316,13 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="tiempo_viviendo" class="col-form-label col-sm-3">¿Cuánto tiempo lleva viviendo ahí?:</label>
+		    		<label for="tiempo_viviendo" class="col-form-label col-sm-3">✱ ¿Cuánto tiempo lleva viviendo ahí?:</label>
 		    		<div class="col-sm-9">
 		    			<input type="text" name="tiempo_viviendo" class="form-control" id="tiempo_viviendo" value="{{old('tiempo_viviendo')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="hijos" class="col-form-label col-sm-3">Hijos:</label>
+		    		<label for="hijos" class="col-form-label col-sm-3">✱ Hijos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="hijos" id="hijos_si" value="1" {{old('hijos') == "1" ? 'checked=""' : ''}} required="">
@@ -339,7 +339,7 @@
 	    			</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="dependientes_economicos" class="col-form-label col-sm-3">Dependientes económicos:</label>
+		    		<label for="dependientes_economicos" class="col-form-label col-sm-3">✱ Dependientes económicos:</label>
 	    			<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="dependientes_economicos" id="dependientes_economicos_si" value="1" {{old('dependientes_economicos') == "1" ? 'checked=""' : ''}} required="">
@@ -365,7 +365,7 @@
 		    				<input type="number" name="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0">
 						</div>
 		    		</div>
-		    		<label for="ingreso_total" class="col-form-label col-sm-2">Ingresos totales:</label>
+		    		<label for="ingreso_total" class="col-form-label col-sm-2">✱ Ingresos totales:</label>
 		    		<div class="col-sm-4">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
@@ -376,7 +376,7 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="ahorro_inicial" class="col-form-label col-sm-9">¿Cuenta con algún tipo de enganche o ahorro destinado para iniciar?</label>
+		    		<label for="ahorro_inicial" class="col-form-label col-sm-9">✱ ¿Cuenta con algún tipo de enganche o ahorro destinado para iniciar?</label>
 		    		<div class="col-sm-3">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="ahorro_inicial" id="ahorro_inicial_si" {{old('ahorro_inicial') == "1" ? 'checked=""' : ''}} value="1" required="">
@@ -395,7 +395,7 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="ahorra" class="col-form-label col-sm-2">¿Ahorra?</label>
+		    		<label for="ahorra" class="col-form-label col-sm-2">✱ ¿Ahorra?</label>
 					<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="ahorra" id="ahorra_si" value="1" {{old('ahorra') == "" ? 'checked=""' : ''}} required="">
@@ -423,7 +423,7 @@
 	    			</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="otro_participante" class="col-form-label col-sm-5">¿Alguna otra persona participará en la compra?</label>
+		    		<label for="otro_participante" class="col-form-label col-sm-5">✱ ¿Alguna otra persona participará en la compra?</label>
 					<div class="col-sm-1">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="otro_participante" id="otro_participante_si" value="1" required="" {{old('otro_participante') == "1" ? 'checked=""' : ''}}>
@@ -444,7 +444,7 @@
 		    </div>
 		    <div class="card-body">
 		    	<div class="form-group row">
-		    		<label for="tarjeta_debito" class="col-form-label col-sm-6">Tarjeta de Débito o Cuenta de Ahorro:</label>
+		    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1" required="" {{old('tarjeta_debito') == "1" ? 'checked=""' : ''}}>
@@ -478,7 +478,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="en_buro_credito" class="col-form-label col-sm-3">Buró de Crédito:</label>
+					<label for="en_buro_credito" class="col-form-label col-sm-3">✱ Buró de Crédito:</label>
 					<div class="col-sm-3">
 						<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1" required="" {{old('en_buro_credito') == '1' ? 'checked=""' : ''}}>
@@ -495,7 +495,7 @@
 				</div>
 				<hr>
 				<div class="form-group row">
-		    		<label for="tarjeta_credito" class="col-form-label col-sm-6">Tarjeta de Crédito:</label>
+		    		<label for="tarjeta_credito" class="col-form-label col-sm-6">✱ Tarjeta de Crédito:</label>
 	    			<div class="col-sm-2">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1" required=""  {{old('tarjeta_credito') == '1' ? 'checked=""' : ''}}>
@@ -540,7 +540,7 @@
 				</div>
 				<hr>
 				<div class="form-group row">
-					<label for="destino_1" class="col-form-label col-sm-2">Destino:</label>
+					<label for="destino_1" class="col-form-label col-sm-2">✱ Destino:</label>
 					<div class="col-sm-4">
 						<input type="text" name="destino_1" class="form-control" value="{{old('destino_1')}}" required="">
 					</div>
@@ -564,7 +564,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="destino_2" class="col-form-label col-sm-2">Destino:</label>
+					<label for="destino_2" class="col-form-label col-sm-2">✱ Destino:</label>
 					<div class="col-sm-4">
 						<input type="text" name="destino_2" class="form-control" value="{{old('destino_2')}}" required="">
 					</div>
@@ -588,7 +588,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="destino_3" class="col-form-label col-sm-2">Destino:</label>
+					<label for="destino_3" class="col-form-label col-sm-2">✱ Destino:</label>
 					<div class="col-sm-4">
 						<input type="text" name="destino_3" class="form-control" required="" value="{{old('destino_3')}}">
 					</div>
@@ -612,7 +612,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="calificacion_credito" class="col-form-label col-sm-6">Calificación del cliente:</label>
+					<label for="calificacion_credito" class="col-form-label col-sm-6">✱ Calificación del cliente:</label>
 					<div class="col-sm-6">
 						<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_bien" value="Bien" required=""  {{old('calificacion_credito') == 'Bien' ? 'checked=""' : ''}}>
@@ -636,7 +636,7 @@
 				</div>
 		    </div>
 		    <div class="card-header">
-		    	Inmueble Pretendido:
+		    	✱ Inmueble Pretendido:
 		    </div>
 		    <div class="card-body">
 		    	<div class="form-group row">
@@ -675,7 +675,7 @@
 					</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="precio_aprox" class="col-form-label col-sm-3">Precio Aproximado:</label>
+		    		<label for="precio_aprox" class="col-form-label col-sm-3">✱ Precio Aproximado:</label>
 		    		<div class="col-sm-4">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
@@ -684,7 +684,7 @@
 							<input type="number" step="any" min="0" class="form-control" value="{{old('precio_aprox') ? old('precio_aprox') : $cotizacion->monto}}" name="precio_aprox" id="precio_aprox" required="">
 						</div>
 		    		</div>
-		    		<label for="area_inmueble" class="col-form-label col-sm-2">Area:</label>
+		    		<label for="area_inmueble" class="col-form-label col-sm-2">✱ Area:</label>
 		    		<div class="col-sm-3">
 		    			<div class="input-group">
 							<input type="number" step="any" min="0" class="form-control" name="area_inmueble" id="area_inmueble" required="" value="{{old('area_inmueble')}}">
@@ -695,31 +695,31 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="estado" class="col-form-label col-sm-2">Estado:</label>
+		    		<label for="estado" class="col-form-label col-sm-2">✱ Estado:</label>
 		    		<div class="col-sm-4">
 		    			<input type="text" name="estado" class="form-control" value="{{old('estado')}}" required="">
 		    		</div>
-		    		<label for="colonia" class="col-form-label col-sm-2">Colonia:</label>
+		    		<label for="colonia" class="col-form-label col-sm-2">✱ Colonia:</label>
 		    		<div class="col-sm-4">
 		    			<input type="text" name="colonia" class="form-control" value="{{old('colonia')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label class="col-form-label col-sm-3" for="recamara">Recámaras:</label>
+		    		<label class="col-form-label col-sm-3" for="recamara">✱ Recámaras:</label>
 		    		<div class="col-sm-3">
 		    			<input type="number" min="0" name="recamara" class="form-control" value="{{old('recamara')}}" required="">
 		    		</div>
-		    		<label class="col-form-label col-sm-3" for="banio">Baños:</label>
+		    		<label class="col-form-label col-sm-3" for="banio">✱ Baños:</label>
 		    		<div class="col-sm-3">
 		    			<input type="number" min="0" step="any" name="banio" class="form-control" value="{{old('banio')}}" required="">
 		    		</div>
 				</div>
 		    	<div class="form-group row">
-		    		<label class="col-form-label col-sm-3" for="estacionamiento">Lugares de Estacionamiento:</label>
+		    		<label class="col-form-label col-sm-3" for="estacionamiento">✱ Lugares de Estacionamiento:</label>
 		    		<div class="col-sm-3">
 		    			<input type="number" min="0" value="0" name="estacionamiento" class="form-control" required="" value="{{old('estacionamiento')}}">
 		    		</div>
-		    		<label class="col-form-label col-sm-3" for="jardin">Jardin:</label>
+		    		<label class="col-form-label col-sm-3" for="jardin">✱ Jardin:</label>
 		    		<div class="col-sm-3">
 		    			<input type="number" min="0" value="0" name="jardin" class="form-control" required="" value="{{old('jardin')}}">
 		    		</div>
@@ -729,7 +729,7 @@
 		    		<div class="col-sm-3">
 		    			<input type="text" name="gastos_notariales" class="form-control" value="{{old('gastos_notariales')}}">
 		    		</div>
-		    		<label class="col-form-label col-sm-2" for="monto_contratar">Monto a contratar:</label>
+		    		<label class="col-form-label col-sm-2" for="monto_contratar">✱ Monto a contratar:</label>
 		    		<div class="col-sm-5">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
@@ -740,19 +740,19 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="tiempo_decision" class="col-form-label col-sm-12">¿Cuánto tiempo ha pensado en esta compra?</label>
+		    		<label for="tiempo_decision" class="col-form-label col-sm-12">✱ ¿Cuánto tiempo ha pensado en esta compra?</label>
 		    		<div class="col-sm-12">
 		    			<input type="text" name="tiempo_decision" class="form-control" required="" value="{{old('tiempo_decision')}}">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label class="col-form-label col-sm-12" for="prioridad">¿Cuánta prioridad le da a esta meta?</label>
+		    		<label class="col-form-label col-sm-12" for="prioridad">✱ ¿Cuánta prioridad le da a esta meta?</label>
 		    		<div class="col-sm-12">
 		    			<input type="text" name="prioridad" class="form-control" required="" value="{{old('prioridad')}}">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label class="col-form-label col-sm-9" for="desicion_propia">¿La decisión de cumplir su meta depende de alguien más?</label>
+		    		<label class="col-form-label col-sm-9" for="desicion_propia">✱ ¿La decisión de cumplir su meta depende de alguien más?</label>
 		    		<div class="col-sm-3">
 		    			<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="desicion_propia" id="desicion_propia_si" value="1" required="" {{old('desicion_propia') == "1" ? 'checked=""' : '' }}>
@@ -775,7 +775,7 @@
 		    	</div>
 		    	<div class="form-group row">
 		    		<label class="col-form-label col-sm-9" for="tomaria_desicion">
-		    			Si el día de hoy le ofrecemos una propuesta de esquema de financiamiento adaptada a sus necesidades y posibilidades ¿Lo tomaría? 
+		    			✱ Si el día de hoy le ofrecemos una propuesta de esquema de financiamiento adaptada a sus necesidades y posibilidades ¿Lo tomaría? 
 		    		</label>
 		    		<div class="col-sm-3 mt-4">
 		    			<div class="form-check form-check-inline mt-1">
@@ -792,7 +792,7 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="medio_entero" class="col-form-label col-sm-6">Medio por el cuál se enteró de nosotros:</label>
+		    		<label for="medio_entero" class="col-form-label col-sm-6">✱ Medio por el cuál se enteró de nosotros:</label>
 		    		<div class="col-sm-6">
 		    			<select name="medio_entero" id="medio_entero" required="" class="form-control">
 							<option value="">Medío por el que se entero de nosotros</option>
@@ -810,7 +810,7 @@
 			<div class="card-body">
 				<h4>Referencia #1</h4>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="nombre_completo[1]">Nombre:</label>
+					<label class="col-form-label col-sm-2" for="nombre_completo[1]">✱ Nombre:</label>
 					<div class="form-group col-sm-10 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="nombre[1]" id="nombre[1]" placeholder="Nombre" value="{{old("nombre_1")}}" class="form-control" required="">
@@ -820,11 +820,11 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="parentesco[1]">Parentesco:</label>
+					<label class="col-form-label col-sm-2" for="parentesco[1]">✱ Parentesco:</label>
 					<div class="form-group col-sm-2 pr-0 pl-0">
 						<input type="text" name="parentesco[1]" value="{{old('parentesco[1]')}}" class="form-control" required="">
 					</div>
-					<label class="col-form-label col-sm-2" for="telefono[1]">Telefonos:</label>
+					<label class="col-form-label col-sm-2" for="telefono[1]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="telefono[1]" value="{{old('telefono[1]')}}" class="form-control" placeholder="Particular" required="">
@@ -834,7 +834,7 @@
 				</div>
 				<h4>Referencia #2</h4>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="nombre_completo[2]">Nombre:</label>
+					<label class="col-form-label col-sm-2" for="nombre_completo[2]">✱ Nombre:</label>
 					<div class="form-group col-sm-10 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="nombre[2]" id="nombre[2]" placeholder="Nombre" value="{{old("nombre_1")}}" class="form-control" required="">
@@ -844,11 +844,11 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="parentesco[2]">Parentesco:</label>
+					<label class="col-form-label col-sm-2" for="parentesco[2]">✱ Parentesco:</label>
 					<div class="form-group col-sm-2 pr-0 pl-0">
 						<input type="text" name="parentesco[2]" value="{{old('parentesco[2]')}}" class="form-control" required="">
 					</div>
-					<label class="col-form-label col-sm-2" for="telefono[2]">Telefonos:</label>
+					<label class="col-form-label col-sm-2" for="telefono[2]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="telefono[2]" value="{{old('telefono[2]')}}" class="form-control" placeholder="Particular" required="">
@@ -858,7 +858,7 @@
 				</div>
 				<h4>Referencia #3</h4>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="nombre_completo[3]">Nombre:</label>
+					<label class="col-form-label col-sm-2" for="nombre_completo[3]">✱ Nombre:</label>
 					<div class="form-group col-sm-10 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="nombre[3]" id="nombre[3]" placeholder="Nombre" value="{{old("nombre_1")}}" class="form-control" required="">
@@ -868,11 +868,11 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-form-label col-sm-2" for="parentesco[3]">Parentesco:</label>
+					<label class="col-form-label col-sm-2" for="parentesco[3]">✱ Parentesco:</label>
 					<div class="form-group col-sm-2 pr-0 pl-0">
 						<input type="text" name="parentesco[3]" value="{{old('parentesco[3]')}}" class="form-control" required="">
 					</div>
-					<label class="col-form-label col-sm-2" for="telefono[3]">Telefonos:</label>
+					<label class="col-form-label col-sm-2" for="telefono[3]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
 							<input type="text" name="telefono[3]" value="{{old('telefono[3]')}}" class="form-control" placeholder="Particular" required="">
@@ -913,7 +913,7 @@
     		if(val == "Casado" || val == "Unión Libre"){
     			var html_row = `
     			<div class="form-group row" id="regimen_matrimonial">
-	    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">Régimen matrimonial:</label>
+	    			<label for="regimen_matrimonial" class="col-form-label col-sm-4">✱ Régimen matrimonial:</label>
 	    			<div class="col-sm-8">
 	    				<div class="form-check form-check-inline mt-1">
 							<input class="form-check-input" type="radio" name="regimen_matrimonial" id="Sociedad Conyugal" value="Sociedad Conyugal" required="" {{old('regimen_matrimonial') == "Sociedad Conyugal" ? 'checked=""' : ''}}>
@@ -926,7 +926,7 @@
 	    			</div>
 	    		</div>
     			<div class="form-group row">
-    				<h5 class="card-title col-12">Datos de la pareja:</h5>
+    				<h5 class="card-title col-12">✱ Datos de la pareja:</h5>
     			</div>
     			<div class="form-group row">
 		    		<div class="col-12">
@@ -946,25 +946,25 @@
 		    		</div>
 		    	</div>
     			<div class="form-group row">
-		    		<label for="ocupacion_2" class="col-form-label col-sm-2">Ocupación:</label>
+		    		<label for="ocupacion_2" class="col-form-label col-sm-2">✱ Ocupación:</label>
 		    		<div class="col-sm-10">
 		    			<input type="text" name="ocupacion_2" class="form-control" id="ocupacion_2" value="{{old('ocupacion_2')}}" placeholder="Ocupación de la pareja"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="empresa_2" class="col-form-label col-sm-2">Empresa:</label>
+		    		<label for="empresa_2" class="col-form-label col-sm-2">✱ Empresa:</label>
 		    		<div class="col-sm-10">
 		    			<input type="text" name="empresa_2" class="form-control" id="empresa_2" value="{{old('empresa_2')}}" placeholder="Empresa en la que labora de la pareja"  required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="antiguedad_2" class="col-form-label col-sm-3">Antigüedad:</label>
+		    		<label for="antiguedad_2" class="col-form-label col-sm-3">✱ Antigüedad:</label>
 		    		<div class="col-sm-9">
 		    			<input type="text" name="antiguedad_2" class="form-control" id="antiguedad_2" placeholder="Antigüedad en la empresa" value="{{old('antiguedad_2')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="salario_2" class="col-form-label col-sm-2">Salario:</label>
+		    		<label for="salario_2" class="col-form-label col-sm-2">✱ Salario:</label>
 		    		<div class="col-sm-10">
 		    			<div class="input-group">
 							<div class="input-group-prepend">
@@ -981,7 +981,7 @@
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
-		    		<label for="nacionalidad_2" class="col-form-label col-sm-3">Nacionalidad:</label>
+		    		<label for="nacionalidad_2" class="col-form-label col-sm-3">✱ Nacionalidad:</label>
 		    		<div class="col-sm-9">
 		    			<input type="text" name="nacionalidad_2" class="form-control" id="nacionalidad_2" placeholder="Nacionalidad de la pareja" value="{{old('nacionalidad_2')}}" required="">
 		    		</div>

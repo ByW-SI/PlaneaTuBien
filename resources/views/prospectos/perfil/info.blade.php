@@ -56,7 +56,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->sueldo}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->sueldo, 2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -65,7 +65,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->ahorro}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->ahorro, 2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -91,7 +91,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{$prospecto->monto}}">
+                    <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->monto, 2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
@@ -146,23 +146,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-sm-4">
-                    <label class="col-form-label">Monto a adjudicar:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
+                @if(isset($cotizacion) && $cotizacion->plan->abreviatura != "PL" && $cotizacion->plan->abreviatura != "TC" && $cotizacion->plan->abreviatura != "TD")
+                    <div class="form-group col-sm-4">
+                        <label class="col-form-label">Monto a adjudicar:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            @if($cotizacion)
+                                <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
+                            @else
+                                <label>--</label>
+                            @endif
                         </div>
-                        @if($cotizacion)
-                            <input type="text" readonly="" value="{{ number_format($cotizacion->plan->monto_adjudicar($cotizacion->monto,$cotizacion->factor_actualizacion),2) }}" class="form-control">
-                        @else
-                            <label>--</label>
-                        @endif
                     </div>
-                </div>
+                @endif
                 <div class="form-group col-sm-4">
                     <label class="col-form-label">Plazo:</label>
                     <div class="input-group">
-                        @if($cotizacion)
+                        @if($cotizacion && $cotizacion->plan->abreviatura != "PL")
                             <input type="text" readonly="" value="{{ $cotizacion->plan->plazo }}" class="form-control">
                         @else
                             <input type="text" readonly="" value="--" class="form-control">
@@ -172,24 +174,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-4">
-                    @if($cotizacion)
-                        <label class="col-form-label">{{ $cotizacion->plan->mes_adjudicado }} mensualidades de:</label>
-                    @else
-                        <label class="col-fomr-label">-- mensualidades de:</label>
-                    @endif
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
+                @if(isset($cotizacion) && $cotizacion->plan->abreviatura != "PL")
+                    <div class="form-group col-sm-4">
                         @if($cotizacion)
-                            <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2) }}" class="form-control">
+                            <label class="col-form-label">{{ $cotizacion->plan->mes_adjudicado }} mensualidades de:</label>
                         @else
-                            <input type="text" readonly="" value="--" class="form-control">
+                            <label class="col-fomr-label">-- mensualidades de:</label>
                         @endif
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            @if($cotizacion)
+                                <input type="text" readonly="" value="{{ number_format($cotizacion->plan->cotizador($cotizacion->monto,$cotizacion->factor_actualizacion)['cuota_periodica_integrante'],2) }}" class="form-control">
+                            @else
+                                <input type="text" readonly="" value="--" class="form-control">
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
+            @if(isset($cotizacion) && $cotizacion->plan->abreviatura != "PL")
             <div class="row">
                 <div class="col-sm-12">
                     <table class="table table-stripped table-hover table-bordered">
@@ -290,6 +295,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
     <div class="card-footer">

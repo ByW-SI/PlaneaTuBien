@@ -21,12 +21,12 @@
 						  		<label>Beneficiario</label>
 						  	</div>
 						  	<div class="p-2 flex-shrink-1 bd-highlight">
-						  		<a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus"></i></a>
+						  		<a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
 						  	</div>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">Apellido Paterno</label>
+						<label for="">✱ Apellido Paterno</label>
 						<input type="text" class="form-control" name="paterno[]" required="" value="{{old('paterno')}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -34,19 +34,19 @@
 						<input type="text" class="form-control" name="materno[]" value="{{old('materno')}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">Nombre(s)</label>
+						<label for="">✱ Nombre(s)</label>
 						<input type="text" class="form-control" name="nombre[]" required="" value="{{old('nombre')}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">Edad</label>
+						<label for="">✱ Edad</label>
 						<input type="number" step="1" min="0" class="form-control" name="edad[]" required="" value="{{old('edad')}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">Parentesco</label>
+						<label for="">✱ Parentesco</label>
 						<input type="text" step="1" min="0" class="form-control" name="parentesco[]" required="" value="{{old('parentesco')}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-						<label for="">Porcentaje del bien</label>
+						<label for="">✱ Porcentaje del bien</label>
 						<div class="input-group">
 							<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
 					        <div class="input-group-append">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-				<label for="">Apellido Paterno</label>
+				<label for="">✱ Apellido Paterno</label>
 				<input type="text" class="form-control" name="paterno[]" required="" value="{{old('paterno')}}">
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -93,19 +93,19 @@
 				<input type="text" class="form-control" name="materno[]" value="{{old('materno')}}">
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-				<label for="">Nombre(s)</label>
+				<label for="">✱ Nombre(s)</label>
 				<input type="text" class="form-control" name="nombre[]" required="" value="{{old('nombre')}}">
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-				<label for="">Edad</label>
+				<label for="">✱ Edad</label>
 				<input type="number" step="1" min="0" class="form-control" name="edad[]" required="" value="{{old('edad')}}">
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-				<label for="">Parentesco</label>
+				<label for="">✱ Parentesco</label>
 				<input type="text" step="1" min="0" class="form-control" name="parentesco[]" required="" value="{{old('parentesco')}}">
 			</div>
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-				<label for="">Porcentaje del bien</label>
+				<label for="">✱ Porcentaje del bien</label>
 				<div class="input-group">
 					<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
 			        <div class="input-group-append">

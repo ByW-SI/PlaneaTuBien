@@ -264,6 +264,7 @@
                             @endif
                         </div>
                     </div>
+                    @if($cotizacion->promocion)
                     <div class="form-group col-sm-3">
                         <label>Monto de promoción:</label>
                          <div class="input-group">
@@ -273,6 +274,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endif
                 @if($cotizacion->promocion)
                     <div class="form-group col-sm-5">

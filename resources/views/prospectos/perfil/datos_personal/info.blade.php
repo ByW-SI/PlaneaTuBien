@@ -7,7 +7,7 @@
 			<div class="col-6">
 				<label>Cliente:</label>
 				<label class="form-control" readonly="">
-					{{$personal->prefijo_1." ".$personal->nombre_completo_1}}
+					{{$personal->prefijo_1." ".$personal->nombre_1." ".$personal->paterno_1." ".$personal->materno_1}}
 				</label>
 			</div>
 			<div class="col-6">
@@ -115,10 +115,59 @@
 					</label>
 				</div>
 			@endif
-			<div class="col-6">
-				<label>Dirección:</label>
-    			<textarea class="form-control" readonly="">{{$personal->direccion}}</textarea>
-			</div>
+			<!--+-+-+-+-+-DIRECCION+-+-+-+-+-+--->
+			<label for="direccion" class="col-form-label col-sm-2">Direccion:</label>
+    		<div class="col-sm-10">
+    			<div class="input-group">
+    				<div class="input-group-prepend">
+    					<span class="input-group-text">Calle</span>
+    				</div>
+    				<label class="form-control w-25">
+    					{{ $personal->calle }}
+    				</label>
+    			</div>
+    			<div class="input-group">
+    				<div class="input-group-prepend">
+    					<span class="input-group-text">Número ext.</span>
+    				</div>
+					<label class="form-control w-25">
+    					{{ $personal->numero_ext }}
+    				</label>
+    				<div class="input-group-prepend">
+    					<span class="input-group-text">Número int.</span>
+    				</div>
+					<label class="form-control w-25">
+    					{{ $personal->numero_int }}
+    				</label>
+    			</div>
+    		</div>
+    		<div class="col-sm-10 offset-sm-2">
+    			<div class="input-group">
+    				<div class="input-group-prepend">
+    					<span class="input-group-text">CP</span>
+    				</div>
+					<label class="form-control w-25">{{ $personal->cp }}</label>
+					<div class="input-group-prepend">
+	    				<span class="input-group-text">Colonia</span>
+	    			</div>
+					<label class="form-control w-25">{{ $personal->colonia }}</label>
+    			</div>
+    		</div>
+    		<div class="col-sm-10 offset-sm-2">
+				<div class="input-group">
+					<span class="input-group-text">Alcaldía o Municipio</span>
+    				<label class="form-control w-25">
+						{{ $personal->municipio }}
+					</label>
+    			</div>
+    			<div class="input-group">
+					<span class="input-group-text">Estado</span>
+    				<label class="form-control w-25">
+						{{ $personal->estado }}
+					</label>
+    			</div>
+    		</div>
+			<!--+-+-+-+-+-FIN DIRECCION+-+-+-+-+-+--->
 			<div class="col-6">
 				<label>Teléfono de casa:</label>
     			<label class="form-control" readonly="">

@@ -59,7 +59,7 @@ class PresolicitudController extends Controller
             'nombre' => 'required|max:190',
             'calle' => 'required|max:190',
             'numero_ext' => "required|max:190",
-            'numero_int' => "required|max:190",
+            'numero_int' => "nullable|max:190",
             'colonia' => 'required|max:190',
             'municipio' => "required|max:190",
             'estado' => "required|max:190",
