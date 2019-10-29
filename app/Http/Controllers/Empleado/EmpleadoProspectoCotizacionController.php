@@ -49,10 +49,6 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function store(Empleado $empleado,Prospecto $prospecto, Request $request)
     {
-        // $folio = $empleado->id.$prospecto->id.date('dmY');
-        // dd($folio);
-
-        // dd( Plan::where('tipo','libre')->first()->id );
 
 
         $request->validate([
@@ -67,9 +63,6 @@ class EmpleadoProspectoCotizacionController extends Controller
         if ($request->plan) {
             $plan = Plan::find($request->plan);
             $promocion = Promocion::find($request->promocion);
-        
-            // $folio = $prospecto->id.$plan->abreviatura.(sizeOf($prospecto->cotizaciones)+1);
-            // dd($cotizacion->inscripcion);
             $cotizacion = new Cotizacion($request->all());
             $cotizacion->inscripcion= floatval(str_replace(',', '', str_replace('', '.', $cotizacion->inscripcion)));
             $year = date('y');
@@ -90,7 +83,6 @@ class EmpleadoProspectoCotizacionController extends Controller
         }
         else {
 
-            // dd('aqui');
 
             $cotizacion = new Cotizacion($request->all());
             $year = date('y');
@@ -113,22 +105,16 @@ class EmpleadoProspectoCotizacionController extends Controller
             ]);
         }
 
-        
-
         $verificar = $cotizacion->save();
 
 
         if($verificar && sizeof($prospecto->cotizaciones)>=7){
             $prospecto->cotizaciones->first()->delete();
-            // dd('se borro');
         }
 
         if($cotizacion->tipo_inscripcion && $cotizacion->tipo_inscripcion == "0_inscripcion_inicial"){
             event(new Cotizacion0Created($cotizacion));
-            // dd('si entro');
         }
-        
-        // dd('fin');
         return redirect()->route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]);
     }
 
@@ -182,10 +168,6 @@ class EmpleadoProspectoCotizacionController extends Controller
         $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
         // $pdf= '';  Se uso para una prueba de email TODO: borrar despues
         $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
-        // dd($enviar);
-        // dd($enviar);
-        // return(new \App\Mail\CotizacionEnviada($cotizacion))->render();
-        // dd($cotizacion->task_send_mail);
         if ($cotizacion->task_send_mail) {
             $task=$cotizacion->task_send_mail;
             $task->hecho=1;
