@@ -6,6 +6,8 @@ use App\Plan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\CustomCotizacionExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CotizadorController extends Controller
 {
@@ -127,12 +129,23 @@ class CotizadorController extends Controller
             // dd($res);
         }
         $pdf = PDF::loadView('cotizador.pdf', ['plan'=>$plan, 'monto'=>$request->monto, 'res'=>$res]);
-        return $pdf->stream();
-        //return $pdf->download('manual_del_consumidor' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . "contrato.pdf");
+        //return $pdf->stream();
+        return $pdf->download('cotizacion'. date('d/m/Y-h-i-s'). ".pdf");
     }
-    public function exportExcel()
+    public function exportExcel(Request $request)
     {
-        # code...
+        if($request->monto && $request->plan){
+            $plan = Plan::find($request->plan);
+            
+            if ($plan->abreviatura !== "PL")
+                $res=$plan->cotizador($request->monto);
+            else {
+                $res = $this->getCotizacionPlanLibre($request->monto, $plan);
+            }
+            // dd($res);
+        }
+
+        return Excel::download(new CustomCotizacionExport($plan, $request->monto, $res), 'cotizacion'.date('d-m-Y-h-i-s').'.xlsx');
     }
     // public function cotizar($monto,$plan){
         

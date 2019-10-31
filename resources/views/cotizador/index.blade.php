@@ -25,10 +25,10 @@
 					</div>
 					@if($res && $plan_select->abreviatura)
 					<div class="col-auto">
-						<a href="#" class="btn btn-danger mb-2">PDF</a>{{-- route('toPDF',['plan'=>$plan_select, 'monto'=>$request->monto]) --}}
+						<a href="{{ route('toPDF',['plan'=>$plan_select, 'monto'=>$request->monto]) }}"  class="btn btn-danger mb-2">PDF</a>{{--  --}}
 					</div>
 					<div class="col-auto">
-						<a href="#" class="btn btn-success mb-2">EXCEL</a>
+						<a href="{{ route('toEXCEL', ['plan'=>$plan_select, 'monto'=>$request->monto]) }}" class="btn btn-success mb-2">EXCEL</a>
 					</div>
 					@endif
 				</div>
@@ -311,7 +311,7 @@
 									Seguro de vida
 								</th>
 								<th class="text-center" scope="col">
-									Seguro de desastres
+									Seguro de daños
 								</th>
 								<th class="text-center" scope="col">
 									Total
@@ -379,7 +379,6 @@
 					</table>
 				</div>
 				@if ($plan_select->abreviatura != "TC" && $plan_select->abreviatura != "TD")
-					{{-- expr --}}
 					<div class="row">
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -389,7 +388,7 @@
 									<th class="text-center" scope="col">Cuota de Administración</th>
 									<th class="text-center" scope="col">IVA</th>
 									<th class="text-center" scope="col">Seguro de vida</th>
-									<th class="text-center" scope="col">Seguro de desastres</th>
+									<th class="text-center" scope="col">Seguro de daños</th>
 									<th class="text-center" scope="col">Total</th>
 								</tr>
 							</thead>
