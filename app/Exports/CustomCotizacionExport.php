@@ -5,8 +5,12 @@ namespace App\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
 
-class CustomCotizacionExport implements FromView, ShouldAutoSize
+class CustomCotizacionExport extends DefaultValueBinder implements FromView, ShouldAutoSize, WithCustomValueBinder
 {
 	protected $plan;
     protected $monto;
@@ -26,6 +30,18 @@ class CustomCotizacionExport implements FromView, ShouldAutoSize
             'monto' => $this->monto,
             'res'   => $this->res
     	]);
+    }
+
+    public function bindValue(Cell $cell, $value)
+    {
+        if (is_numeric($value)) {
+            $cell->setValueExplicit($value, DataType::TYPE_NUMERIC);
+
+            return true;
+        }
+
+        // else return default behavior
+        return parent::bindValue($cell, $value);
     }
 
 }
