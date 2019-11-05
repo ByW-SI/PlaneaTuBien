@@ -28,6 +28,9 @@ class PerfilController extends Controller
         //dd($prospecto->cotizaciones->last()->plan->cotizador(1100000));
         $perfils      = PerfilDatosPersonalCliente::all();
         $perfil  = $perfils->last();
+        if (!isset($cotizacion->id)) {
+            $cotizacion = null;
+        }
         if ($perfil == null) {
             $folio=1;
         }

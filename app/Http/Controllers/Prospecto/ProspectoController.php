@@ -157,7 +157,8 @@ class ProspectoController extends Controller
      */
     public function show(Prospecto $prospecto)
     {
-        return view('prospectos.view', ['prospecto' => $prospecto]);
+        $empleado = Auth::user()->empleado;
+        return view('prospectos.view', ['prospecto' => $prospecto, 'empleado'=>$empleado]);
     }
 
     /**

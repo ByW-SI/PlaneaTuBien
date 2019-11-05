@@ -18,12 +18,28 @@ class CrmGeneralController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $empleado = Auth::user()->empleado;
 
-        $crms = ProspectoCRM::get();
+         if($request->desde && $request->hasta){
+            $crms = ProspectoCRM::whereBetween('fecha_contacto',[$request->desde,$request->hasta])->orderBy('fecha_aviso','asc')->get();
+        }
+        elseif ($request->desde && !$request->hasta) {
+            // dd("si entra");
+            $crms = ProspectoCRM::where('fecha_contacto','>=',$request->desde)->orderBy('fecha_aviso','asc')->get();
+        }
+        elseif ($request->hasta && !$request->desde) {
+            // dd("si entra");
+            $crms = ProspectoCRM::where('fecha_contacto','<=',$request->hasta)->orderBy('fecha_aviso','asc')->get();
+        }
+        else{
+            $crms = ProspectoCRM::orderBy('fecha_aviso','asc')->get();
+            
+        }
+
+         $crms = ProspectoCRM::get();
         return view('crm.index', ['crms' => $crms, 'empleado' => $empleado]);
     }
 

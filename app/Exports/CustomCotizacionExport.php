@@ -36,7 +36,6 @@ class CustomCotizacionExport extends DefaultValueBinder implements FromView, Sho
     {
         if (is_numeric($value)) {
             $cell->setValueExplicit($value, DataType::TYPE_NUMERIC);
-
             return true;
         }
 

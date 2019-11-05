@@ -1,29 +1,29 @@
 <div class="row">
     <div class="form-group col-sm-4">
         <label>Nombre:</label>
-        <dd>{{ $prospecto->nombre }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->nombre }}</dd>
     </div>
     <div class="form-group col-sm-4">
         <label>Apellido Paterno:</label>
-        <dd>{{ $prospecto->appaterno }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->appaterno }}</dd>
     </div>
     <div class="form-group col-sm-4">
         <label>Apellido Materno:</label>
-        <dd>{{ $prospecto->apmaterno ? $prospecto->apmaterno : 'N/A' }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->apmaterno ? $prospecto->apmaterno : 'N/A' }}</dd>
     </div>
 </div>
 <div class="row">
     <div class="form-group col-sm-4">
         <label>Sexo:</label>
-        <dd>{{ $prospecto->sexo ? $prospecto->sexo : 'N/A' }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->sexo ? $prospecto->sexo : 'N/A' }}</dd>
     </div>
     <div class="form-group col-sm-4">
         <label>Email:</label>
-        <dd>{{ $prospecto->email }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->email }}</dd>
     </div>
     <div class="form-group col-sm-4">
         <label>Teléfono Móvil:</label>
-        <dd>{{ $prospecto->movil ? $prospecto->movil : 'N/A' }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->movil ? $prospecto->movil : 'N/A' }}</dd>
     </div>
 </div>
 <hr>
@@ -35,11 +35,11 @@
     </div>
     <div class="form-group col-sm-4">
         <label for="monto">Monto solicitado:</label>
-        <dd>{{$prospecto->monto}}</dd>
+        <dd class="form-control" readonly="">{{number_format($prospecto->monto, 2)}}</dd>
     </div>
     <div class="form-group col-sm-4">
         <label for="plan">Plan:</label>
-        <dd>{{$prospecto->plan}}</dd>
+        <dd class="form-control" readonly="">{{$prospecto->plan}}</dd>
     </div>
 </div>
 <hr>
@@ -51,15 +51,14 @@
     </div>
     <div class="form-group offset-sm-3 col-sm-4">
         <label>Asesor:</label>
-        <dd>{{ $prospecto->asesor ? $prospecto->asesor->nombre . ' ' . $prospecto->asesor->paterno : 'No hay asesor asignado' }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->asesor ? $prospecto->asesor->nombre . ' ' . $prospecto->asesor->paterno : 'No hay asesor asignado' }}</dd>
         
     </div>
     <div class="form-group col-sm-4">
         <label>Fecha de asignación:</label>
-        <dd>{{ $prospecto->fecha_asignado ? $prospecto->fecha_asignado : 'No hay fecha asignada' }}</dd>
+        <dd class="form-control" readonly="">{{ $prospecto->fecha_asignado ? $prospecto->fecha_asignado : 'No hay fecha asignada' }}</dd>
     </div>
     <div class="form-group col-sm-12 d-flex justify-content-center">
-        <a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn mt-3 btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
-        
+        <a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn m-3 btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
     </div>
 </div>

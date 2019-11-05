@@ -137,11 +137,11 @@
                     </div>
                     <div class="col-12 col-xs-12 col-md-4 form-group">
                         <label for="fecha_contacto">Fecha de contacto:</label>
-                        <input type="date" class="form-control" name="fecha_contacto" required="required" min="{{ date('Y-m-d', strtotime('+2 Days')) }}" max="{{ date('Y-m-d', strtotime('+2 Months')) }}">
+                        <input type="date" class="form-control" name="fecha_contacto" id="fecha_contacto" required="required" min="{{ date('Y-m-d', strtotime('+2 Days')) }}" max="{{ date('Y-m-d', strtotime('+2 Months')) }}">
                     </div>
                     <div class="col-12 col-xs-12 col-md-4 form-group">
                         <label for="fecha_aviso">Fecha de aviso:</label>
-                        <input type="date" class="form-control" name="fecha_aviso" required="required" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('+2 Months')) }}">
+                        <input type="date" class="form-control" name="fecha_aviso" id="fecha_aviso" required="required" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d', strtotime('+2 Months')) }}" disabled="">
                     </div>
                     <div class="col-12 col-xs-12 col-md-4 form-group">
                         <label for="hora_contacto">Hora de contacto:</label>
@@ -206,15 +206,76 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="d-flex justify-content-around">
-                        <h5 class="text-danger text-left">✱Campos Requeridos</h5>
+            <div >
+                <h5 class="text-danger text-right">✱Campos Requeridos</h5>
+                <div class="text-center my-2">
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-check"></i> Guardar
                     </button>
                 </div>
             </div>
         </form>
+        <hr>
+        <div class="row-group">
+            <table class="table table-striped table-bordered" id="crms">
+                <thead>
+                    <tr class="thead-light">
+                        <th class="text-center">Prospecto</th>
+                        <th class="text-center" style="white-space:nowrap;">Fecha contacto</th>
+                        <th class="text-center">Hora</th>
+                        <th class="text-center" style="white-space:nowrap;">Fecha aviso</th>
+                        <th class="text-center">Teléfono</th>
+                        <th class="text-center">Celular</th>
+                        <th class="text-center">Correo</th>
+                        <th class="text-center">Tarea</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Proceso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($crms as $crm)
+                        <tr class="text-center">
+                            <td style="white-space:nowrap;">
+                                {{$crm->prospecto->nombre." ".$crm->prospecto->appaterno." ".$crm->prospecto->apaterno}}
+                            </td>
+                            <td>
+                                {{$crm->fecha_contacto}}
+                            </td>
+                            <td>
+                                {{$crm->hora_contacto}}
+                            </td>
+                            <td style="white-space:nowrap;">
+                                {{$crm->fecha_aviso}}
+                            </td>
+                            <td>
+                                {{$crm->prospecto->tel}}
+                            </td>
+                            <td>
+                                {{$crm->prospecto->movil}}
+                            </td>
+                            <td>
+                                {{$crm->prospecto->email}}
+                            </td>
+                            <td>
+                                @foreach ($crm->tasks as $tarea)
+                                    <p title="{{$tarea->descripcion}}">{{$tarea->nombre}} {{$tarea->pivot->hecho ? '(hecha)' : '(pendiente)'}}</p>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{$crm->status}}
+                            </td>
+                            <td>
+                                <a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-light" href="{{ route('empleados.prospectos.crms.show',['prospecto'=>$crm->prospecto,'empleado'=>$empleado,'crm'=>$crm]) }}"><i class="fas fa-info-circle"></i></a> 
+                            </td>
+                        </tr>
+                    @empty
+                        <div class="alert alert-warning" role="alert">
+                            No se encontraron registros
+                        </div>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
@@ -233,7 +294,46 @@
                 $("#cotizacion_id").removeAttr('required');
                 $("#cotizacion").css('display',"none");
             }
-        })
+        });
+
+        $('#crms').DataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
     });
+
+    $('#fecha_contacto').change(function() {
+        let contacto = $('#fecha_contacto').val();
+        nuevaFecha = contacto.split('-');
+        // se resta un mes por el modo que empeiza los mese en el objeto Date y se resta un dia para comenzar la fecha de aviso
+        let aviso = new Date(nuevaFecha[0], nuevaFecha[1] - 1, nuevaFecha[2] - 1);
+        $('#fecha_aviso').val('');
+        $('#fecha_aviso').attr("min", aviso.toISOString().split('T')[0]);
+        $('#fecha_aviso').attr("max", contacto);
+        $('#fecha_aviso').prop('disabled', false);
+    });
+
     </script>
 @endpush

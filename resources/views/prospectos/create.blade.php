@@ -23,11 +23,11 @@
         <div class="card-body">
             <div class="row row-group">
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                    <label>Nombre:</label>
+                    <label>✱ Nombre:</label>
                     <input type="text" class="form-control" value="{{ old('nombre') }}" name="nombre" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                    <label>Apellido Paterno:</label>
+                    <label>✱ Apellido Paterno:</label>
                     <input type="text" class="form-control" value="{{ old('appaterno') }}" name="appaterno" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
@@ -35,15 +35,15 @@
                     <input type="text" class="form-control" value="{{ old('apmaterno') }}" name="apmaterno">
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                    <label>Sexo:</label>
-                    <select class="form-control" name="sexo">
+                    <label>✱ Sexo:</label>
+                    <select class="form-control" name="sexo" required="">
                         <option value="">Seleccionar</option>
                         <option value="Hombre" {{old('sexo') == "Hombre" ? "selected" : ""}}>Hombre</option>
                         <option value="Mujer" {{old('sexo') == "Mujer" ? "selected" : ""}}>Mujer</option>
                     </select>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                    <label>Correo electronico:</label>
+                    <label>✱ Correo electronico:</label>
                     <input type="text" class="form-control" value="{{ old('email') }}" name="email" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
@@ -68,7 +68,7 @@
         <div class="card-body">
             <div class="row row-group">
                 <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-                    <label for="sueldo">Sueldo mensual del prospecto:</label>
+                    <label for="sueldo">✱ Sueldo mensual del prospecto:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">$</span>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-                    <label for="sueldo">Gastos mensual del prospecto:</label>
+                    <label for="sueldo">✱ Gastos mensual del prospecto:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">$</span>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-                    <label for="ahorro">Ahorro neto del prospecto:</label>
+                    <label for="ahorro">✱ Ahorro neto del prospecto:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">$</span>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
-                    <label for="calificacion">Calificación del prospecto:</label>
+                    <label for="calificacion">✱ Calificación del prospecto:</label>
                     <input class="form-control" type="number" name="calificacion" step="1" min="0" max="10" value="{{old('calificacion')}}" required>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-4">
@@ -118,7 +118,7 @@
         <div class="card-body">
             <div class="row row-group">
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-                    <label for="monto">Monto que desea obtener/ monto que puede obtener:</label>
+                    <label for="monto">✱ Monto que desea obtener/ monto que puede obtener:</label>
                     <select name="monto" class="form-control" id="monto" required>
                         <option value="">Seleccionar</option>
                         @for($i = 300000; $i <= 20000000; $i += 50000)
@@ -127,7 +127,7 @@
                     </select>
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-                    <label for="plan">Plan que desea obtener/ plan que puede obtener:</label>
+                    <label for="plan">✱ Plan que desea obtener/ plan que puede obtener:</label>
                     <select name="plan" class="form-control" id="plan" required>
                         <option value="">Seleccionar</option>
                         <option value="15 años" {{old('plan') == "15 años" ? "selected" : ""}}>15 años</option>
@@ -140,11 +140,16 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-success" id="basic-addon1">
-                    <i class="fas fa-save"></i>
-                    <strong> Guardar</strong>
-                </button>
+            <div class=" justify-content-center">
+                <div class=" text-right text-danger">
+                    ✱Campos Requeridos.
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success" id="basic-addon1">
+                        <i class="fas fa-save"></i>
+                        <strong> Guardar</strong>
+                    </button>
+                </div>
             </div>
         </div>
     </form>

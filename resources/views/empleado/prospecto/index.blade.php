@@ -32,6 +32,7 @@
 						<th scope="col" class="text-center">Perfil</th>
 						<th scope="col" class="text-center">Presolicitud</th>
 						<th scope="col" class="text-center">CRM</th>
+						<th scope="col" class="text-center">Cotización</th>
 						<th scope="col" class="text-center">Acción</th>
 					</tr>
 				</thead>
@@ -55,26 +56,36 @@
 								{{$prospecto->calificacion ? $prospecto->calificacion : "Sin calificar"}}
 							</td>
 							<td class="text-center">
-								<a class="btn btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Editar</strong></a>
+								<a class="btn btn-warning" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}">✎<strong> Editar</strong></a>
 							</td>
 							<td class="text-center">
 								@if ($prospecto->perfil)
-									<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-										<i class="fas fa-file-invoice"></i>
+									<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+										<i class="far fa-eye"></i>
 										<strong> Perfil</strong>
+									</a>
+								@else
+									<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success">
+										<i class="fa fa-plus"></i>
+										Perfil
 									</a>
 								@endif
 							</td>
 							<td class="text-center">
 								@if ($prospecto->perfil)
-									<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-										<i class="fas fa-file-contract"></i>
+									<a href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+										<i class="far fa-eye"></i>
 										<strong> Presolicitud</strong>
 									</a>
 								@endif
 							</td>
 							<td class="text-center">
-								<a class="btn btn-success" href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM</strong></a>
+								<a class="btn btn-success" href="{{ route('empleados.prospectos.crms.create',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="fa fa-plus"></i><strong> CRM</strong></a>
+							</td>
+							<td>
+								<a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-sm btn-success">
+		                            <i class="fa fa-plus"></i><strong> Cotización</strong>
+		                        </a>
 							</td>
 							<td class="text-center">
 								<div class="row justify-content-around">

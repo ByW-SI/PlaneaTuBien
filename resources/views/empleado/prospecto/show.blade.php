@@ -20,6 +20,27 @@
 	</div>
 	<div class="card-header">
 		<h5>Datos generales del prospecto:</h5>
+		<div class="d-flex justify-content-around">
+			<a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+				<i class="far fa-calendar-check"></i>
+				<strong> C.R.M.</strong>
+			</a>
+			<a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-warning" id="basic-addon1">
+				<i class="fas fa-user-edit"></i>
+				<strong> Editar prospecto</strong>
+			</a>
+			<a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+				<i class="fas fa-file-invoice-dollar"></i>
+				<strong> Cotizador</strong>
+			</a>
+			@if ($prospecto->perfil)
+				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
+					<i class="fas fa-file-invoice"></i>
+					<strong> Perfil</strong>
+				</a>
+			
+			@endif
+		</div>
 	</div>
 	<div class="card-body">
 		<div class="row row-group">
@@ -124,27 +145,7 @@
 		</div>
 	</div>
 	<div class="card-footer">
-		<div class="d-flex justify-content-around">
-			<a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-				<i class="far fa-calendar-check"></i>
-				<strong> C.R.M.</strong>
-			</a>
-			<a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-				<i class="fas fa-user-edit"></i>
-				<strong> Editar prospecto</strong>
-			</a>
-			<a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
-				<i class="fas fa-file-invoice-dollar"></i>
-				<strong> Cotizador</strong>
-			</a>
-			@if ($prospecto->perfil)
-				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
-					<i class="fas fa-file-invoice"></i>
-					<strong> Perfil</strong>
-				</a>
-			
-			@endif
-		</div>
+
 	</div>
 </div>
 @endsection

@@ -41,7 +41,6 @@
 						<th class="text-center">Proceso</th>
 						<th class="text-center">Detalles</th>
 						<th class="text-center">CRM</th>
-                        <th class="text-center">Acción</th>
                     </tr>
 				</thead>
 				<tbody>
@@ -83,12 +82,12 @@
 								<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-light" href="{{ route('empleados.prospectos.crms.show',['prospecto'=>$crm->prospecto,'empleado'=>$empleado,'crm'=>$crm]) }}"><i class="fas fa-info-circle"></i></a> 
 							</td>
 							<td style="white-space:nowrap;">
-								<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-success" href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$crm->prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM</strong></a>
+								<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-success" href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$crm->prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> Ver CRM</strong></a>
 							</td>
 							<td>
                                 <div class="row justify-content-around">
 									<a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$crm->prospecto]) }}"><i class="far fa-eye"></i><strong> Prospecto</strong></a>
-                                    <a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-success" href="{{ route('empleados.prospectos.crms.create', ['empleado'=>$empleado,'prospecto' => $crm->prospecto]) }}"><i class="fas fa-calendar-plus"></i></i><strong> Nuevo</strong></a>
+                                    <a class="btn btn-sm mt-1 mb-1 ml-1 mr-1 btn-success" href="{{ route('empleados.prospectos.crms.create', ['empleado'=>$empleado,'prospecto' => $crm->prospecto]) }}"><i class="fas fa-calendar-plus"></i></i><strong> Nuevo CRM</strong></a>
 								</div>
 							</td>
 						</tr>
@@ -109,7 +108,32 @@
     <script>
         $(document).ready(function() {
             // console.log($('#corrdia'));
-            $('#crms').DataTable();
+            $('#crms').DataTable({
+				"language": {
+					"sProcessing": "Procesando...",
+					"sLengthMenu": "Mostrar _MENU_ registros",
+					"sZeroRecords": "No se encontraron resultados",
+					"sEmptyTable": "Ningún dato disponible en esta tabla",
+					"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+					"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+					"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+					"sInfoPostFix": "",
+					"sSearch": "Buscar:",
+					"sUrl": "",
+					"sInfoThousands": ",",
+					"sLoadingRecords": "Cargando...",
+					"oPaginate": {
+						"sFirst": "Primero",
+						"sLast": "Último",
+						"sNext": "Siguiente",
+						"sPrevious": "Anterior"
+					},
+					"oAria": {
+						"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+						"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+					}
+				}
+			});
         } );
     </script>
 

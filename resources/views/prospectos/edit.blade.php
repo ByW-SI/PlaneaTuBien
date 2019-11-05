@@ -47,16 +47,12 @@
             </div>
             <div class="row">
                 <div class="form-group col-sm-3">
-                    <label>✱RFC:</label>
-                    <input type="text" class="form-control" name="rfc" required="" value="{{ $prospecto->rfc }}">
-                </div>
-                <div class="form-group col-sm-3">
                     <label>✱Email:</label>
                     <input type="text" class="form-control" name="email" required="" value="{{ $prospecto->email }}">
                 </div>
                 <div class="form-group col-sm-3">
                     <label>✱Teléfono:</label>
-                    <input type="text" class="form-control" name="telefono" required="" value="{{ $prospecto->telefono }}">
+                    <input type="text" class="form-control" name="telefono" required="" value="{{ $prospecto->tel }}">
                 </div>
                 <div class="form-group col-sm-3">
                     <label>✱Teléfono Móvil:</label>
@@ -88,11 +84,15 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label>✱Ingreso mensual:</label>
-                    <input type="text" class="form-control" name="ingreso" required="" value="{{ $prospecto->ingreso }}">
+                    <input type="text" class="form-control" name="ingreso" required="" value="{{ $prospecto->sueldo }}">
                 </div>
                 <div class="form-group col-sm-3">
                     <label>✱Gasto mensual:</label>
-                    <input type="text" class="form-control" name="gasto" required="" value="{{ $prospecto->gasto }}">
+                    <input type="text" class="form-control" name="gasto" required="" value="{{ $prospecto->gastos }}">
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>✱Ahorro mensual:</label>
+                    <input type="text" class="form-control" name="gasto" required="" value="{{ $prospecto->ahorro }}">
                 </div>
             </div>
             </div>

@@ -21,7 +21,7 @@ class EmpleadoProspectoCRMController extends Controller
     {
         //
         // dd($prospecto);
-        $prospecto = $empleado->prospectos()->findOrFail($prospecto->id);
+        // $prospecto = $empleado->prospectos()->findOrFail($prospecto->id);
         if($request->desde && $request->hasta){
             $crms=$prospecto->crms()->whereBetween('fecha_contacto',[$request->desde,$request->hasta])->orderBy('fecha_aviso','asc')->paginate(5);
         }
@@ -49,12 +49,28 @@ class EmpleadoProspectoCRMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Empleado $empleado,Prospecto $prospecto)
+    public function create(Empleado $empleado,Prospecto $prospecto, Request $request)
     {
         //
+        if($request->desde && $request->hasta){
+            $crms=$prospecto->crms()->whereBetween('fecha_contacto',[$request->desde,$request->hasta])->orderBy('fecha_aviso','asc')->paginate(5);
+        }
+        elseif ($request->desde && !$request->hasta) {
+            // dd("si entra");
+            $crms=$prospecto->crms()->where('fecha_contacto','>=',$request->desde)->orderBy('fecha_aviso','asc')->paginate(5);
+        }
+        elseif ($request->hasta && !$request->desde) {
+            // dd("si entra");
+            $crms=$prospecto->crms()->where('fecha_contacto','<=',$request->hasta)->orderBy('fecha_aviso','asc')->paginate(5);
+        }
+        else{
+            $crms=$prospecto->crms()->orderBy('fecha_aviso','asc')->paginate(5);
+            
+        }
+
         $tareas = Task::orderBy('nombre','asc')->get();
         $cotizaciones = $prospecto->cotizaciones;
-        return view('empleado.prospecto.crm.form',['empleado'=>$empleado,'prospecto'=>$prospecto,'tareas'=>$tareas,'edit'=>false,'cotizaciones'=>$cotizaciones]);
+        return view('empleado.prospecto.crm.form',['empleado'=>$empleado,'prospecto'=>$prospecto,'tareas'=>$tareas,'edit'=>false,'cotizaciones'=>$cotizaciones, 'crms'=>$crms]);
     }
 
     /**

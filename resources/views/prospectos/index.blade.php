@@ -27,6 +27,8 @@
 								<th>Email</th>
 								<th>Asesor</th>
 								<th>Asignar asesor</th>
+								<th>Cotización</th>
+								<th scope="col" class="text-center">CRM</th>
 								<th>Acción</th>
 							</tr>
 						</thead>
@@ -42,6 +44,14 @@
 										@if (!$prospecto->asesor && (Auth::user()->empleado->cargo == '' || Auth::user()->empleado->cargo == 'Supervisor'))
 											<a href="{{ route('prospectos.asesor.create',['prospecto'=>$prospecto]) }}" class="btn btn-sm btn-success"><i class="fas fa-user-tie"></i> Asignar asesor</a>
 										@endif
+									</td>
+									<td>
+				                        <a href="{{ route('empleados.prospectos.cotizacions.create', ['empleado'=>Auth::user()->empleado,'prospecto' => $prospecto]) }}" class="btn btn-sm btn-success">
+				                            <i class="fa fa-plus"></i><strong> Cotización</strong>
+				                        </a>
+									</td>
+									<td>
+										<a class="btn btn-sm btn-success" href="{{ route('empleados.prospectos.crms.index',['empleado'=>Auth::user()->empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-calendar-alt"></i><strong> CRM</strong></a>
 									</td>
 									<td class="text-center">
 										@foreach(Auth::user()->perfil->componentes as $componente)

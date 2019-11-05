@@ -21,6 +21,8 @@ class Prospecto extends Model
         'monto',
         'plan',
         'gastos',
+        'sueldo',
+        'ahorro',
         'fecha_asignado',
     ];
 
