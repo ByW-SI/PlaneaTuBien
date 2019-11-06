@@ -21,6 +21,9 @@
 	<div class="card-header">
 		<h5>Datos generales del prospecto:</h5>
 		<div class="d-flex justify-content-around">
+			<a href="{{ route('empleados.prospectos.index',['empleado'=>$empleado]) }}" class="btn btn-primary">
+                        <i class="fa fa-bars"></i><strong> Lista de Prospectos</strong>
+                    </a>
 			<a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
 				<i class="far fa-calendar-check"></i>
 				<strong> C.R.M.</strong>

@@ -28,6 +28,7 @@
 						<th scope="col" class="text-center">Teléfono</th>
 						<th scope="col" class="text-center">Estado</th>
 						<th scope="col" class="text-center">Calificación</th>
+						<th scope="col" class="text-center">Ver</th>
 						<th scope="col" class="text-center">Editar</th>
 						<th scope="col" class="text-center">Perfil</th>
 						<th scope="col" class="text-center">Presolicitud</th>
@@ -56,7 +57,10 @@
 								{{$prospecto->calificacion ? $prospecto->calificacion : "Sin calificar"}}
 							</td>
 							<td class="text-center">
-								<a class="btn btn-warning" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}">✎<strong> Editar</strong></a>
+								<a class="btn btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Ver</strong></a>
+							</td>
+							<td class="text-center">
+								<a class="btn btn-warning" href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}">✎<strong> Editar</strong></a>
 							</td>
 							<td class="text-center">
 								@if ($prospecto->perfil)
