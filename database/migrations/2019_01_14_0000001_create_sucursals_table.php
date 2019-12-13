@@ -22,6 +22,7 @@ class CreateSucursalsTable extends Migration
             $table->string('calle');
             $table->string('numext');
             $table->string('numint')->nullable();
+            $table->String('colonia');
             $table->string('cp');
             $table->string('estado');
             $table->string('delegacion');
