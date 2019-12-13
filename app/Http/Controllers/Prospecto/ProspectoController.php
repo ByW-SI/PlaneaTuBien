@@ -90,7 +90,7 @@ class ProspectoController extends Controller
             'tel' => "nullable|numeric",
             'movil' => "nullable|numeric",
             'monto' => "required|numeric",
-            'plan' => 'required'
+            'plan' => 'required',
         ];
         // dd($this->validate($request,$rules));
         $prospecto = Prospecto::create($request->all());
@@ -114,6 +114,7 @@ class ProspectoController extends Controller
             'apmaterno' => 'nullable|max:191',
             'sexo' => 'nullable|in:,Hombre,Mujer',
             'email' => "required|e-mail",
+            'rfc' => 'required|unique:prospectos,rfc',
             'tel' => "nullable|numeric",
             'movil' => "nullable|numeric",
             'sueldo' => 'required|numeric',

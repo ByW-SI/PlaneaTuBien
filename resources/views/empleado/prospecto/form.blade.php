@@ -14,9 +14,15 @@
 		<h4>
 			Prospecto: {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 		</h4>
+		@if($prospecto->asesor)
 		<h4>
 			Asesor: {{$prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno}}
 		</h4>
+		@else
+		<h4>
+			Asesor: Sin asesor.
+		</h4>
+		@endif
 	</div>
 	<div class="card-header">
 		<h5>Datos generales del prospecto:</h5>
@@ -27,40 +33,48 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-	                <label>Nombre:</label>
-	                <input type="text" class="form-control" value="{{ $prospecto->nombre }}" name="nombre">
+	                <label>✱ Nombre:</label>
+	                <input type="text" class="form-control" value="{{ $prospecto->nombre }}" name="nombre" required="">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-	                <label>Apellido Paterno:</label>
-	                <input type="text" class="form-control" value="{{ $prospecto->appaterno }}" name="appaterno">
+	                <label>✱ Apellido Paterno:</label>
+	                <input type="text" class="form-control" value="{{ $prospecto->appaterno }}" name="appaterno" required="">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
 	                <label>Apellido Materno:</label>
 	                <input type="text" class="form-control" value="{{ $prospecto->apmaterno }}" name="apmaterno">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-	                <label>Sexo:</label>
-	                <select class="form-control" name="sexo">
+	                <label>✱ Sexo:</label>
+	                <select class="form-control" name="sexo" required="">
 						<option value="">Seleccionar</option>
 	                    <option value="Hombre" {{$prospecto->sexo == "Hombre" ? "selected" : ""}}>Hombre</option>
 	                    <option value="Mujer" {{$prospecto->sexo == "Mujer" ? "selected" : ""}}>Mujer</option>
 					</select>
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-	                <label>Correo electronico:</label>
-	                <input type="text" class="form-control" value="{{ $prospecto->email }}" name="email">
+	                <label>✱ Correo electronico:</label>
+	                <input type="text" class="form-control" value="{{ $prospecto->email }}" name="email" required="">
+	            </div>
+	            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+	                <label>✱ RFC:</label>
+	                <input type="text" class="form-control" value="{{ $prospecto->rfc }}" name="rfc" maxlength="13" pattern="[A-za-z]{4}[0-9]{6}([a-zA-Z0-9]{3})?" required="">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
 	                <label>Telefono:</label>
 	                <input type="text" class="form-control" value="{{ $prospecto->tel }}" name="tel">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-	                <label>Telefono movil:</label>
-	                <input type="text" class="form-control" value="{{ $prospecto->movil }}" name="movil">
+	                <label>✱ Telefono movil:</label>
+	                <input type="text" class="form-control" value="{{ $prospecto->movil }}" name="movil" required="">
 	            </div>
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
 	                <label>Asesor:</label>
+	                @if($prospecto->asesor)
 	                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+	                @else
+	                <input type="text" class="form-control" value="Sin asesor" readonly="">
+	                @endif
 	            </div>
 			</div>
 		</div>
@@ -72,7 +86,7 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-					<label for="sueldo">Sueldo mensual del prospecto:</label>
+					<label for="sueldo">✱ Sueldo mensual del prospecto:</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">$</span>
@@ -81,7 +95,7 @@
 					</div>
 				</div>
 				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-					<label for="sueldo">Gastos mensual del prospecto:</label>
+					<label for="sueldo">✱ Gastos mensual del prospecto:</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">$</span>
@@ -90,7 +104,7 @@
 					</div>
 				</div>
 				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-					<label for="ahorro">Ahorro neto del prospecto:</label>
+					<label for="ahorro">✱ Ahorro neto del prospecto:</label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">$</span>
@@ -99,7 +113,7 @@
 					</div>
 				</div>
 				<div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
-					<label for="calificacion">Calificación del prospecto:</label>
+					<label for="calificacion">✱ Calificación del prospecto:</label>
 					<input class="form-control" type="number" name="calificacion" step="1" min="0" max="10" value="{{$prospecto->calificacion}}" required>
 				</div>
 				<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-4">
@@ -123,7 +137,7 @@
 		<div class="card-body">
 			<div class="row row-group">
 				<div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-	                <label for="monto">Monto que desea obtener/ monto que puede obtener:</label>
+	                <label for="monto">✱ Monto que desea obtener/ monto que puede obtener:</label>
 					<select name="monto" class="form-control" id="monto" required>
 						<option value="">Seleccionar</option>
 	                    @for($i = 300000; $i <= 20000000; $i += 50000)
@@ -132,7 +146,7 @@
 	                </select>
 	            </div>
 	            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-					<label for="plan">Plan que desea obtener/ plan que puede obtener:</label>
+					<label for="plan">✱ Plan que desea obtener/ plan que puede obtener:</label>
 					<select name="plan" class="form-control" id="plan" required>
 	            		<option value="">Seleccionar</option>
 	            		<option value="15 años" {{$prospecto->plan == "15 años" ? "selected" : ""}}>15 años</option>

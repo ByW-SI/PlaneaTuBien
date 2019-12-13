@@ -4,7 +4,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{error}}</li>
+                <li>{{$error}}</li>
             @endforeach
         </ul>
     </div>
@@ -45,6 +45,10 @@
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>✱ Correo electronico:</label>
                     <input type="text" class="form-control" value="{{ old('email') }}" name="email" required>
+                </div>
+                <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+                    <label>✱ RFC:</label>
+                    <input type="text" class="form-control" value="{{ old('rfc') }}" name="rfc" maxlength="13" pattern="[A-za-z]{4}[0-9]{6}([a-zA-Z0-9]{3})?" required="">
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Telefono:</label>

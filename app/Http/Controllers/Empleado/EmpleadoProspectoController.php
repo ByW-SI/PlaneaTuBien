@@ -39,8 +39,10 @@ class EmpleadoProspectoController extends Controller
         //                 })->get();       
         // }
         // dd($prospectos);
-
-        $prospectos = $empleado->prospectos()->get();
+        if($empleado->tipo === "Admin" )
+            $prospectos = Prospecto::get();
+        else
+            $prospectos = $empleado->prospectos()->get();
         // dd($prospectos);
 
         return view('empleado.prospecto.index', ['empleado' => $empleado, 'prospectos' => $prospectos, 'buscar' => $request->buscar]);
