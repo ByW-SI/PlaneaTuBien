@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRecomendableReingresableToEmpleadosTable extends Migration
+class CreateTiposJornadasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddRecomendableReingresableToEmpleadosTable extends Migration
      */
     public function up()
     {
-        Schema::table('empleados', function (Blueprint $table) {
-            $table->boolean('es_reingresable')->default(1)->nullable();
-            $table->boolean('es_recomendable')->default(1)->nullable();
+        Schema::enableForeignKeyConstraints();
+        Schema::create('tipo_jornada', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nombre');
+            $table->string('codigo');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ class AddRecomendableReingresableToEmpleadosTable extends Migration
      */
     public function down()
     {
-        Schema::table('empleados', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tipos_jornadas');
     }
 }

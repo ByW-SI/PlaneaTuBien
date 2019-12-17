@@ -17,6 +17,7 @@ class Sucursal extends Model
     	'calle',
     	'numext',
     	'numint',
+        'colonia',
     	'cp',
     	'estado',
     	'delegacion',

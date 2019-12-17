@@ -13,11 +13,12 @@ class AddNewFieldsToEmpleadoDatoLabsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::table('empleado_dato_labs', function (Blueprint $table) {
-            $table->integer('tipo_jornada_id')->unsigned()->nullable();
+            $table->unsignedInteger('tipo_jornada_id');
+            // $table->foreign('tipo_jornada_id')->references('id')->on('tipo_jornada')->onDelete('set null');
             $table->string('riesgo_puesto')->nullable();
 
-            $table->foreign('tipo_jornada_id')->references('id')->on('tipo_jornada')->onDelete('set null');
         });
     }
 

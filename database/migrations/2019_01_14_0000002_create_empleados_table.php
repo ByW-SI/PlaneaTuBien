@@ -15,7 +15,7 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo');
+            $table->string('tipo')->nullable();
             $table->string('nombre');
             $table->string('paterno');
             $table->string('materno')->nullable();
@@ -26,6 +26,7 @@ class CreateEmpleadosTable extends Migration
             $table->integer('sucursal_id')->unsigned()->nullable();
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->string('cargo')->nullable();
+            $table->string('puesto')->nullable();
             $table->integer('id_jefe')->unsigned()->nullable();
             $table->foreign('id_jefe')->references('id')->on('empleados');
             $table->string('status')->nullable();
@@ -35,17 +36,10 @@ class CreateEmpleadosTable extends Migration
             $table->string('nss')->nullable();
             $table->string('curp')->nullable();
             $table->string('infonavit')->nullable();
-            $table->string('cp')->nullable();
-            $table->string('calle')->nullable();
-            $table->string('num_ext')->nullable();
-            $table->string('num_int')->nullable();
-            $table->string('colonia')->nullable();
-            $table->string('municipio')->nullable();
-            $table->string('estado')->nullable();
-            $table->string('calles')->nullable();
-            $table->string('referencia')->nullable();
             $table->string('fecha_baja')->nullable();
             $table->text('motivo_baja')->nullable();
+            $table->boolean('es_reingresable')->default(1)->nullable();
+            $table->boolean('es_recomendable')->default(1)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

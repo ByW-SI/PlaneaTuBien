@@ -15,6 +15,7 @@ class CreateProspectosTable extends Migration
     {
         Schema::create('prospectos', function (Blueprint $table) {
             $table->increments('id');
+            // Datos basicos para dar de alta
             $table->integer('empleado_id')->unsigned()->nullable();
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->string('nombre');
@@ -22,16 +23,20 @@ class CreateProspectosTable extends Migration
             $table->string('apmaterno')->nullable();
             $table->string('sexo')->nullable();
             $table->string('email');
-            $table->string('tel');
-            $table->string('movil')->nullable();
-            $table->decimal('monto',10,2);
-            $table->string('plan');
-            $table->integer('calificacion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('celular');
+            // Datos para el seguimiento de llamadas
             $table->decimal('sueldo',10,2)->default(0.00);
-            $table->decimal('gastos',10,2)->default(0.00);
-            $table->decimal('ahorro',10,2)->default(0.00);
-            $table->boolean('aprobado')->nullable();
-            $table->date('fecha_asignado')->nullable();
+            $table->string('estado_civil')->nullable();
+            $table->integer('edad')->nullable();
+            $table->string('nombreConyuge')->nullable();
+            $table->integer('edadConyuge')->nullable();
+            $table->decimal('montoProyecto',10,2)->nullable();
+            $table->string('celular_2')->nullable();
+            $table->string('telefonoOficina')->nullable();
+            $table->string('telefonoConyugue')->nullable();
+            $table->string('telefonoCasa')->nullable();
+            $table->string('email_2')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

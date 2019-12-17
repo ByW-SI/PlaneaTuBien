@@ -20,13 +20,14 @@ class CreateEmpleadodireccionsTable extends Migration
             $table->foreign('empleado_id')->references('id')->on('empleados');
 
             $table->string('calle');
-            $table->string('interior');
+            $table->string('interior')->nullable();
             $table->string('exterior');
             $table->string('colonia');
             $table->string('delegacion');
             $table->string('estado');
             $table->string('cp');
-            
+            $table->string('calles')->nullable();
+            $table->string('referencia')->nullable();
             $table->timestamps();
         });
     }

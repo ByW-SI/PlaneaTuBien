@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
 use App\Sucursal;
+use App\EmpleadoDireccion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -94,6 +95,7 @@ class EmpleadoController extends Controller
             return redirect()->back()->with('status','ERROR: El correo o el RFC ya existe en el sistema');
         }
 
+        /** Pendiennte por ver si todavia se ocupa este codigo ultima fecha: 17/12/2019**/
         $empleado = Empleado::create($request->all());
         if(!empty($request->input('gerente'))){
             $empleado->id_jefe = $request->input('gerente');
@@ -104,8 +106,11 @@ class EmpleadoController extends Controller
             $empleado->save();
 
         }
-         $sucursal = Sucursal::find($request->sucursal);
+        /** Fin Pendiennte **/
+        $sucursal = Sucursal::find($request->sucursal);
+        // $direccion = EmpleadoDireccion::create($request->all());
         $empleado->sucursal()->associate($sucursal);
+        $empleado->direcciones()->create($request->all());
         $empleado->save();
         return redirect()->route('empleados.index');
     }

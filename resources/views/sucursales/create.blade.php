@@ -27,8 +27,8 @@
 					<input type="text" class="form-control" name="abreviatura" required="" maxlength="4">
 	            </div>
 	            <div class="form-group col-sm-4">
-					<label class="control-label">✱Responsable:</label>
-					<input type="text" class="form-control" name="responsable" required="">
+					<label class="control-label">Responsable:</label>
+					<input type="text" class="form-control" name="responsable">
 	            </div>
 	        </div>
 	        <div class="row">
@@ -62,6 +62,10 @@
 	        	</div>
 	        </div>
 	        <div class="row">
+	        	<div class="form-group col-sm-4">
+					<label class="control-label">✱Colonia:</label>
+					<input type="text" class="form-control" name="colonia" required="">
+	        	</div>
 	        	<div class="form-group col-sm-4">
 					<label class="control-label">✱Código Postal:</label>
 					<input type="text" class="form-control" name="cp" required="">
