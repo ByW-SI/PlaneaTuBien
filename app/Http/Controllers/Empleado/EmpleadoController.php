@@ -108,9 +108,11 @@ class EmpleadoController extends Controller
         }
         /** Fin Pendiennte **/
         $sucursal = Sucursal::find($request->sucursal);
-        // $direccion = EmpleadoDireccion::create($request->all());
         $empleado->sucursal()->associate($sucursal);
-        $empleado->direcciones()->create($request->all());
+
+        if($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
+            $empleado->direccion()->create($request->all());
+
         $empleado->save();
         return redirect()->route('empleados.index');
     }
@@ -155,6 +157,10 @@ class EmpleadoController extends Controller
         $empleado->update($request->all());
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
+        //dd($request->all());
+        if($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
+            $empleado->direccion->update($request->all());
+
         $empleado->save();
 
         is_null($empleado->user) ? : $empleado->user->update(['email'=>$empleado->email]);

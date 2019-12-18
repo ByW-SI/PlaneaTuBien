@@ -87,16 +87,18 @@ class ProspectoController extends Controller
             'apmaterno' => 'nullable|max:191',
             'sexo' => 'nullable|in:["","Hombre","Mujer"]',
             'email' => "required|e-mail",
-            'tel' => "nullable|numeric",
-            'movil' => "nullable|numeric",
-            'monto' => "required|numeric",
-            'plan' => 'required',
+            'telefono' => "nullable|numeric",
+            'celular' => "required|numeric",
         ];
         // dd($this->validate($request,$rules));
         $prospecto = Prospecto::create($request->all());
         event(new ProspectoCreated($prospecto));
-        return redirect()->route('prospecto.create', ['alert' => ['status' => "success", 'message' => "Muy pronto un asesor se comunicará contigo"]]);
-        // dd($request->all());
+        return redirect()->route('prospecto.create', [
+            'alert' => [
+                'status' => "success",
+                'message' => "Muy pronto un asesor se comunicará contigo"
+            ]
+        ]);
     }
 
     /**
@@ -107,45 +109,19 @@ class ProspectoController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('aqui');
         $rules = [
             'nombre' => 'required|max:191',
             'appaterno' => 'required|max:191',
             'apmaterno' => 'nullable|max:191',
             'sexo' => 'nullable|in:,Hombre,Mujer',
             'email' => "required|e-mail",
-            'rfc' => 'required|unique:prospectos,rfc',
-            'tel' => "nullable|numeric",
-            'movil' => "nullable|numeric",
-            'sueldo' => 'required|numeric',
-            'ahorro' => 'required|numeric',
-            'calificacion' => 'required|numeric',
-            'aprobado' => 'required|boolean',
-            'monto' => 'required|numeric',
-            'gastos' => 'required|numeric',
-            'plan' => ' required|in:15 años,10 años,6 años,5 años,3 años',
+            'telefono' => "nullable|numeric",
+            'celular' => "required|numeric"
         ];
         $this->validate($request, $rules);
         $prospecto = new Prospecto($request->all());
         $prospecto->empleado_id = (Auth::user()->empleado->id == 1 ? null : Auth::user()->empleado->id);
-        $prospecto->sueldo = $request->sueldo;
-        $prospecto->ahorro = $request->ahorro;
-        $prospecto->gastos = $request->gastos;
-        $prospecto->calificacion = $request->calificacion;
-        $prospecto->aprobado = $request->aprobado;
-        $prospecto->monto = $request->monto;
-        $prospecto->plan = $request->plan;
         $prospecto->save();
-
-        // $PerfilDatosPersonalCliente = PerfilDatosPersonalCliente::create([
-        //     "prospecto_id"=>$prospecto->id,
-        //     "empleado_id"=>$prospecto->empleado_id,
-        //     "salario_1"=>$prospecto->sueldo,
-        //     "ahorros"=>$prospecto->ahorro,
-        //     "plan"=>$prospecto->plan,
-        // ]);
-
-        // dd($PerfilDatosPersonalCliente);
 
         return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }

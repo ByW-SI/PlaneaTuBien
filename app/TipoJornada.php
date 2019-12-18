@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoJornada extends Model
 {
-    protected $table = "tipos_jornadas";
+    protected $table = "tipo_jornada";
 
     protected $fillable = ['nombre', 'codigo'];
 }

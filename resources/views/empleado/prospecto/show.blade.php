@@ -24,7 +24,7 @@
 			<a href="{{ route('empleados.prospectos.index',['empleado'=>$empleado]) }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Prospectos</strong>
                     </a>
-			<a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+			<a href="{{-- route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) --}}" class="btn btn-info" id="basic-addon1">
 				<i class="far fa-calendar-check"></i>
 				<strong> C.R.M.</strong>
 			</a>
@@ -32,7 +32,7 @@
 				<i class="fas fa-user-edit"></i>
 				<strong> Editar prospecto</strong>
 			</a>
-			<a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
+			<a href="{{-- route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) --}}" class="btn btn-info" id="basic-addon1">
 				<i class="fas fa-file-invoice-dollar"></i>
 				<strong> Cotizador</strong>
 			</a>
@@ -69,82 +69,20 @@
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Telefono:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->tel }}" readonly="">
+                <input type="text" class="form-control" value="{{ $prospecto->telefono }}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Telefono movil:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->movil }}" readonly="">
+                <input type="text" class="form-control" value="{{ $prospecto->celular }}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Asesor:</label>
                 <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
             </div>
-		</div>
-	</div>
-	
-	<div class="card-header">
-		<h4>
-			Estudio socioeconómico
-		</h4>
-	</div>
-	<div class="card-body">
-		<div class="row row-group">
-			<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-				<label for="sueldo">Sueldo mensual del prospecto:</label>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">$</span>
-					</div>
-					<input class="form-control" readonly="" type="text" value="{{number_format($prospecto->sueldo,2)}}">
-				</div>
-			</div><div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-				<label for="sueldo">Gastos mensual del prospecto:</label>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">$</span>
-					</div>
-					<input class="form-control" readonly="" type="text" value="{{number_format($prospecto->gastos,2)}}">
-				</div>
-			</div>
-			<div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
-				<label for="ahorro">Ahorro neto del prospecto:</label>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">$</span>
-					</div>
-					<input class="form-control" readonly="" type="text" value="{{number_format($prospecto->ahorro,2)}}">
-				</div>
-			</div>
-			<div class="form-group col-12 col-xs-12 col-md-4 offset-md-2 col-lg-4 offset-lg-2 col-xl-4  offset-xl-2">
-				<label for="calificacion">Calificación del prospecto:</label>
-				<input class="form-control" readonly="" type="text" value="{{$prospecto->calificacion}}">
-			</div>
-			<div class="form-group col-12 col-xs-12 col-md-12 col-lg-4 col-xl-4">
-				<label for="estado">Estado del prospecto:</label>
-				<input class="form-control" readonly="" type="text" value="{{$prospecto->aprobado ? 'Aprobado' : 'No Aprobado'}}" >
-			</div>
-		</div>
-	</div>
-	<div class="card-header">
-		<h4>
-			Datos del prestamo
-		</h4>
-	</div>
-	<div class="card-body">
-		<div class="row row-group">
-			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-                <label for="monto">Monto que desea obtener/ monto que puede obtener:</label>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">$</span>
-					</div>
-					<input class="form-control" readonly="" type="text" value="{{number_format($prospecto->monto,2)}}">
-				</div>
+            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
+                <label>Estatus Prospecto:</label>
+                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
             </div>
-            <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
-				<label for="plan">Plan que desea obtener/ plan que puede obtener:</label>
-				<input class="form-control" readonly="" type="text" value="{{$prospecto->plan}}" >
-			</div>
 		</div>
 	</div>
 	<div class="card-footer">

@@ -77,11 +77,7 @@ class EmpleadoProspectoController extends Controller
      */
     public function show(Empleado $empleado, Prospecto $prospecto)
     {
-        if (isset($prospecto->aprobado)) {
-            return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto]);
-        } else {
-            return redirect()->route('empleados.prospectos.edit', ['prospecto' => $prospecto, 'empleado' => $empleado]);
-        }
+        return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto]);
     }
 
     /**

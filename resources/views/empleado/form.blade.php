@@ -161,40 +161,39 @@
 			<div class="row row-group">
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="cp">Código Postal:</label>
-					<input class="form-control" type="text" name="cp" id="cp" value="{{$empleado->cp}}">
+					<input class="form-control" type="text" name="cp" id="cp" value="{{$empleado->direccion ? $empleado->direccion->cp : ''}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="colonia">@if($edit)@endif Colonia:</label>
 					<select class="form-control" name="colonia" id="colonia" @if($edit) @endif></select>
-					{{-- <input  type="text"  value="{{$empleado->colonia}}"> --}}
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="municipio">Alcaldía o municipio:</label>
-					<input class="form-control" type="text" name="municipio" id="municipio" value="{{$empleado->municipio}}" readonly="">
+					<label for="delegacion">Alcaldía o municipio:</label>
+					<input class="form-control" type="text" name="delegacion" id="delegacion" value="{{$empleado->direccion ? $empleado->direccion->delegacion : ''}}" readonly="">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="estado">Estado o ciudad</label>
-					<input class="form-control" type="text" name="estado" id="estado" value="{{$empleado->estado}}" readonly="">
+					<input class="form-control" type="text" name="estado" id="estado" value="{{$empleado->direccion ? $empleado->direccion->estado : ''}}" readonly="">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="Calle">Calle:</label>
-					<input class="form-control" type="text" name="calle" value="{{$empleado->calle}}">
+					<input class="form-control" type="text" name="calle" value="{{$empleado->direccion ? $empleado->direccion->calle : ''}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="num_ext">Número exterior:</label>
-					<input class="form-control" type="text" name="num_ext" value="{{$empleado->num_ext}}">
+					<label for="exterior">Número exterior:</label>
+					<input class="form-control" type="text" name="exterior" value="{{$empleado->direccion ? $empleado->direccion->exterior : ''}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="num_int">Número interior:</label>
-					<input class="form-control" type="text" name="num_int" value="{{$empleado->num_int}}">
+					<label for="interior">Número interior:</label>
+					<input class="form-control" type="text" name="interior" value="{{$empleado->direccion ? $empleado->direccion->interior : ''}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="calles">Entre calles:</label>
-					<input class="form-control" type="text" name="calles" value="{{$empleado->calles}}">
+					<input class="form-control" type="text" name="calles" value="{{$empleado->direccion ? $empleado->direccion->calles : ''}}">
 				</div>
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="referencia">Referencia adicional</label>
-					<input class="form-control" type="text" name="referencia" value="{{$empleado->referencia}}">
+					<input class="form-control" type="text" name="referencia" value="{{$empleado->direccion ? $empleado->direccion->referencia : ''}}">
 				</div>
 			</div>
 		</div>
@@ -238,11 +237,11 @@
 			dataType: 'json',
 			success:function(result,status,xhr){
 				let res = result.cp[0];
-				$("#municipio").val(res.municipio);
+				$("#delegacion").val(res.municipio);
 				$("#estado").val(res.estado);
 			},
 			error:function(xhr,status,error){
-				$("#municipio").val('');
+				$("#delegacion").val('');
 				$("#estado").val('');
 			}
 		});

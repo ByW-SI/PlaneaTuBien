@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             ComponentePerfilTableSeeder::class,
             EmpleadosTableSeeder::class,
             UsersTableSeeder::class,
-            StatusPagoSeeder::class
+            SucursalsTableSeeder::class
         ]);
     }
 }

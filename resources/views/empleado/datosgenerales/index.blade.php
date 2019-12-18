@@ -82,39 +82,39 @@
 		<div class="row row-group">
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Calle:</label>
-                <input type="text" class="form-control" value="{{ $empleado->calle }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->calle : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Número exterior:</label>
-                <input type="text" class="form-control" value="{{ $empleado->num_ext }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->exterior : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Número interior:</label>
-                <input type="text" class="form-control" value="{{ $empleado->num_int }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->interior : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Código postal:</label>
-                <input type="text" class="form-control" value="{{ $empleado->cp }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->cp : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Colonia:</label>
-                <input type="text" class="form-control" value="{{ $empleado->colonia }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->colonia : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Alcaldía o municipio:</label>
-                <input type="text" class="form-control" value="{{ $empleado->municipio }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->delegacion : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Estado o ciudad:</label>
-                <input type="text" class="form-control" value="{{ $empleado->estado }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->estado : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Entre calles:</label>
-                <input type="text" class="form-control" value="{{ $empleado->calles }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->calles : ''}}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Referencia adicional:</label>
-                <input type="text" class="form-control" value="{{ $empleado->referencia }}" readonly="">
+                <input type="text" class="form-control" value="{{ $empleado->direccion ? $empleado->direccion->referencia : ''}}" readonly="">
             </div>
 		</div>
 	</div>

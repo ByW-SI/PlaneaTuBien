@@ -59,8 +59,8 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadoContacto');
     }
 
-    public function direcciones(){
-        return $this->hasMany('App\EmpleadoDireccion');
+    public function direccion(){
+        return $this->hasOne('App\EmpleadoDireccion');
     }
 
     public function accidentes(){
