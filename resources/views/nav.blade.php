@@ -69,6 +69,9 @@
 	                            @if($c->nombre == "crear prospecto")
 								<a class="dropdown-item" href="{{ route('prospectos.create') }}"><i class="fa fa-plus"></i><strong> Alta</strong></a>
 								@endif
+								@if($c->nombre == "alta excel prospecto")
+								<a class="dropdown-item" href="{{ route('prospectos.alta.excel') }}"><i class="fas fa-file-excel"></i><strong> Alta Excel</strong></a>
+								@endif
 								@if($c->nombre == "indice prospectos")
 								<a class="dropdown-item" href="{{ route('empleados.prospectos.index',['empleado'=>Auth::user()->empleado]) }}"><i class="fa fa-search"></i><strong> Búsqueda</strong></a> {{--  --}}
 								@endif

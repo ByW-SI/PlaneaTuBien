@@ -170,4 +170,40 @@ class ProspectoController extends Controller
         $prospecto->update($request->all());
         return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
     }
+
+    /**
+     * Muestra la vista para dar de alta por Excel.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function createExcel()
+    {
+        return view('prospectos.createExcel');
+    }
+
+    public function storeExcel(Request $request)
+    {
+        if ($request->hasFile('excel_file')) {
+            ini_set('memory_limit', '-1');
+            $rows = \Excel::toArray(null, request()->file('excel_file'))[0];
+            dd($rows);
+            foreach ($rows as $key => $row) {
+                if ($key >= 2) {
+
+                    $prospecto = $this->createProspecto($row);
+                    $perfil_dato_personal_cliente = $this->createPerfilDatoPersonalCliente($row, $prospecto);
+                    $presolicitud = $this->createPresolicitud($row, $perfil_dato_personal_cliente);
+                    // dd($presolicitud);
+                    $inscripcion = $this->createPagosInscripcion($row, $prospecto);
+                    $this->createPerfilReferenciaPersonalCliente($row, $perfil_dato_personal_cliente);
+                    $grupo = $this->createGrupo($row);
+                    $this->createContrato($row,$grupo,$presolicitud);
+
+                }
+            }
+            dd('PDPC CREADO');
+        }
+        return redirect()->back()->with('error', "Error al subir el archivo");
+        //return redirect()->route('excelpagos')->with('status', "Se cargo correctamente el archivo.");
+    }
 }

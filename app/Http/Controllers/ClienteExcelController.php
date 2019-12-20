@@ -1,5 +1,5 @@
 <?php
-
+// TODO: Eliminar este controlador se movio al modulo de alta prospectos excel.
 namespace App\Http\Controllers;
 
 use App\Contrato;

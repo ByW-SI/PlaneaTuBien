@@ -135,8 +135,10 @@ Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospec
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
-Route::post('pagos/{id}/aprobar','Pago\PagoController@aprobar')->middleware('auth')->name('aprobar.pago');
 Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth');
+Route::get('prospectos/create/excel', 'Prospecto\ProspectoController@createExcel')->name('prospectos.alta.excel')->middleware('auth');
+Route::post('prospectos/create/excel', 'Prospecto\ProspectoController@storeExcel')->name('prospectos.store.excel')->middleware('auth');
+Route::post('pagos/{id}/aprobar','Pago\PagoController@aprobar')->middleware('auth')->name('aprobar.pago');
 Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create')->middleware('auth');
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController')->middleware('auth');
 Route::resource('prospectos.cotizacions', 'Prospecto\CotizacionController')->middleware('auth');
