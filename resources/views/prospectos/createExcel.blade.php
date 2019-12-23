@@ -9,6 +9,13 @@
         </ul>
     </div>
 @endif
+@if(Session::has('status'))
+    <div class="alert alert-success" role="alert">
+        <ul>
+            {{ Session::get('status') }}
+        </ul>
+    </div>
+@endif
     <div class="container">
 
         <div class="card mb-5">

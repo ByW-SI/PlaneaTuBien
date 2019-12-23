@@ -123,7 +123,6 @@ Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCo
 Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController')->middleware('auth');
 Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked')->middleware('auth');
 
-Route::get('datos-laborales/{id}','Empleado\EmpleadoDatosLaborales@index')->name('datos-laborales')->middleware('auth');
 
 //Rutas para el cambio de Plan libre a otro Plan
 Route::get('cambio-plan/{prospecto}','Empleado\ActualizacionPlanProspectoController@index')->name('cambio-plan')->middleware('auth');
@@ -138,6 +137,8 @@ Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('pros
 Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth');
 Route::get('prospectos/create/excel', 'Prospecto\ProspectoController@createExcel')->name('prospectos.alta.excel')->middleware('auth');
 Route::post('prospectos/create/excel', 'Prospecto\ProspectoController@storeExcel')->name('prospectos.store.excel')->middleware('auth');
+Route::get('prospectos/asignar/asesor', 'Prospecto\ProspectoController@viewAsignar')->name('prospectos.asignar.asesor')->middleware('auth');
+Route::post('prospectos/asignar/asesor', 'Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asignar.asesor.store')->middleware('auth');
 Route::post('pagos/{id}/aprobar','Pago\PagoController@aprobar')->middleware('auth')->name('aprobar.pago');
 Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create')->middleware('auth');
 Route::resource('prospectos.documentos', 'Prospecto\DocumentoController')->middleware('auth');

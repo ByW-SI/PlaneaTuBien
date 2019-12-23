@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Prospecto;
 use App\Empleado;
 use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
-use App\PerfilDatosPersonalCliente;
 use App\Prospecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -150,11 +149,24 @@ class ProspectoController extends Controller
         return view('prospectos.edit', ['prospecto' => $prospecto, 'asesores' => $asesores]);
     }
 
-    public function asignarAsesor(Prospecto $prospecto)
+    public function viewAsignar()
     {
-        // dd($prospecto);
         $asesores = Empleado::where('cargo', 'Asesor')->get();
-        return view('prospectos.asesor.form', ['prospecto' => $prospecto, 'asesores' => $asesores]);
+        $prospectos = Prospecto::whereNull('empleado_id')->get();
+
+        return view('prospectos.asignar', compact('asesores', 'prospectos'));
+    }
+
+    public function asignarAsesor(Request $request)
+    {
+        $asesor = Empleado::find($request->asesor);
+        foreach($request->prospectos as $prospecto){
+            $prospecto = Prospecto::find($prospecto);
+            $prospecto->asesor()->associate($asesor);
+            $prospecto->save();
+        }
+        $prospectos = Prospecto::whereNull('empleado_id')->get();
+        return response(['prospectos' => $prospectos], 200);
     }
 
     /**
@@ -183,27 +195,60 @@ class ProspectoController extends Controller
 
     public function storeExcel(Request $request)
     {
-        if ($request->hasFile('excel_file')) {
-            ini_set('memory_limit', '-1');
-            $rows = \Excel::toArray(null, request()->file('excel_file'))[0];
-            dd($rows);
-            foreach ($rows as $key => $row) {
-                if ($key >= 2) {
+        $validate = $request->validate([
+            'excel_file' => 'required|file|mimes:xlsx'
+        ], [  // Mensajes en caso de error.
+            'required' => 'El archivo es requerido.',
+            'file' => 'Debe ingresar un archivo',
+            'mimes' => 'El archivo debe tener extension .xlsx'
+        ]);
 
-                    $prospecto = $this->createProspecto($row);
-                    $perfil_dato_personal_cliente = $this->createPerfilDatoPersonalCliente($row, $prospecto);
-                    $presolicitud = $this->createPresolicitud($row, $perfil_dato_personal_cliente);
-                    // dd($presolicitud);
-                    $inscripcion = $this->createPagosInscripcion($row, $prospecto);
-                    $this->createPerfilReferenciaPersonalCliente($row, $perfil_dato_personal_cliente);
-                    $grupo = $this->createGrupo($row);
-                    $this->createContrato($row,$grupo,$presolicitud);
+        ini_set('memory_limit', '-1');
+        $rows = \Excel::toArray(null, request()->file('excel_file'))[0];
+        // Quitamos el primer elemento del array, Los encabezados
+        array_shift($rows);
 
-                }
-            }
-            dd('PDPC CREADO');
+        foreach ($rows as $key => $row) {
+
+            $prospecto = $this->createProspecto($row);
+
         }
-        return redirect()->back()->with('error', "Error al subir el archivo");
-        //return redirect()->route('excelpagos')->with('status', "Se cargo correctamente el archivo.");
+        return redirect()->back()->with('status', "Se cargo correctamente el archivo.");
+    }
+
+    /**
+     * Valida que los campos no sean cadenas vacias ni que tenga columnas
+     * nulas, crea un prospecto y lo devuelve, en caso de que tenga una
+     * cadena vacia o una columna nula regresa null
+     *
+     * @return App\Prospecto | null
+     */
+    public function createProspecto($row)
+    {
+        if($row[0] != '' && $row[1] != '' && $row[2] != '' && $row[3] != ''
+            && $row[4] != '' && $row[5] != '') 
+        {
+
+            $nombre    = ucfirst(trim($row[0]));
+            $appaterno = ucfirst(trim($row[1]));
+            $apmaterno = ucfirst(trim($row[2]));
+            $email     = trim($row[3]);
+            $celular   = trim(strval($row[4]));
+            $telefono  = trim(strval($row[5]));
+
+            $prospecto = Prospecto::firstOrCreate([
+                "nombre"    => $nombre,
+                "appaterno" => $appaterno,
+                "apmaterno" => $apmaterno,
+                "email"     => $email,
+                "celular"   => $celular,
+                "telefono"  => $telefono
+            ]);
+
+            return $prospecto;
+
+        } else {
+            return null;
+        }
     }
 }
