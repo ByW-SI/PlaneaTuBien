@@ -122,7 +122,9 @@ class ProspectoController extends Controller
         $prospecto->empleado_id = (Auth::user()->empleado->id == 1 ? null : Auth::user()->empleado->id);
         $prospecto->save();
 
-        return redirect()->route('prospectos.show', ['prospecto' => $prospecto]);
+        $prospectos = Prospecto::get();
+
+        return view('empleado.prospecto.index', ['empleado' => Auth::user()->empleado, 'prospectos' => $prospectos]);
     }
 
     /**

@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>Asesor:</label>
-                    <input type="text" class="form-control" value="{{ $asesor->fullname }}" readonly="">
+                    <input type="text" class="form-control" value="{{ $asesor->id == 1 ? "" : $asesor->fullname }}" readonly="">
                 </div>
             </div>
         </div>

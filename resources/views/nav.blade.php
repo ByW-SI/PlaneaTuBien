@@ -85,6 +85,9 @@
 								<a class="dropdown-item" href="{{ route('prospectos.asignar.asesor') }}">
 									<i class="fas fa-user-tie"></i><strong> Asignar Asesor</strong>
 								</a>
+								<a class="dropdown-item" href="{{ route('prospectos.asignar.asesor') }}">
+									<i class="fa fa-phone-alt"></i><strong>	Seguimiento llamadas</strong>
+								</a>
 						</div>
 					</li>
 				@endif

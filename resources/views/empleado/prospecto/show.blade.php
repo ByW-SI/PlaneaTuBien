@@ -15,7 +15,7 @@
 			Prospecto: {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 		</h4>
 		<h4>
-			Asesor: {{$prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno}}
+			Asesor: {{$prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
 		</h4>
 	</div>
 	<div class="card-header">
@@ -24,18 +24,18 @@
 			<a href="{{ route('empleados.prospectos.index',['empleado'=>$empleado]) }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Prospectos</strong>
                     </a>
-			<a href="{{-- route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) --}}" class="btn btn-info" id="basic-addon1">
+			{{-- <a href=" route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto])" class="btn btn-info" id="basic-addon1">
 				<i class="far fa-calendar-check"></i>
 				<strong> C.R.M.</strong>
-			</a>
+			</a> --}}
 			<a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}" class="btn btn-warning" id="basic-addon1">
 				<i class="fas fa-user-edit"></i>
 				<strong> Editar prospecto</strong>
 			</a>
-			<a href="{{-- route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) --}}" class="btn btn-info" id="basic-addon1">
+			{{-- <a href=" route('empleados.prospectos.cotizacions.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) " class="btn btn-info" id="basic-addon1">
 				<i class="fas fa-file-invoice-dollar"></i>
 				<strong> Cotizador</strong>
-			</a>
+			</a> --}}
 			@if ($prospecto->perfil)
 				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-success" id="basic-addon1">
 					<i class="fas fa-file-invoice"></i>
@@ -77,11 +77,11 @@
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Asesor:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+                <input type="text" class="form-control" value="{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : "No asignado" }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Estatus Prospecto:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+                <input type="text" class="form-control" value="{{ $prospecto->asesor ? 'Seguimiento Llamada' : 'Sin asesor' }}" readonly="">
             </div>
 		</div>
 	</div>

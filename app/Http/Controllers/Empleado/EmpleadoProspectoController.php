@@ -108,25 +108,11 @@ class EmpleadoProspectoController extends Controller
             'apmaterno' => 'nullable|max:191',
             'sexo' => 'nullable|in:,Hombre,Mujer',
             'email' => "required|e-mail",
-            'tel' => "nullable|numeric",
-            'movil' => "nullable|numeric",
-            'sueldo' => 'required|numeric',
-            'ahorro' => 'required|numeric',
-            'calificacion' => 'required|numeric',
-            'aprobado' => 'required|boolean',
-            'monto' => 'required|numeric',
-            'gastos' => 'required|numeric',
-            'plan' => ' required|in:15 años,10 años,6 años,5 años,3 años',
+            'telefono' => "nullable|numeric",
+            'celular' => "nullable|numeric",
         ];
         $this->validate($request, $rules);
         $prospecto->update($request->all());
-        $prospecto->sueldo = $request->sueldo;
-        $prospecto->ahorro = $request->ahorro;
-        $prospecto->gastos = $request->gastos;
-        $prospecto->calificacion = $request->calificacion;
-        $prospecto->aprobado = $request->aprobado;
-        $prospecto->monto = $request->monto;
-        $prospecto->plan = $request->plan;
         $prospecto->save();
         return redirect()->route('empleados.prospectos.show', ['prospecto' => $prospecto, 'empleado' => $empleado]);
     }

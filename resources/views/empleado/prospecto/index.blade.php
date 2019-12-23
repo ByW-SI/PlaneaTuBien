@@ -27,14 +27,13 @@
 						<th scope="col" class="text-center">Cliente</th>
 						<th scope="col" class="text-center">Teléfono</th>
 						<th scope="col" class="text-center">Estado</th>
-						<th scope="col" class="text-center">Calificación</th>
 						<th scope="col" class="text-center">Ver</th>
 						<th scope="col" class="text-center">Editar</th>
-						<th scope="col" class="text-center">Perfil</th>
+						{{-- <th scope="col" class="text-center">Perfil</th>
 						<th scope="col" class="text-center">Presolicitud</th>
 						<th scope="col" class="text-center">CRM</th>
 						<th scope="col" class="text-center">Cotización</th>
-						<th scope="col" class="text-center">Acción</th>
+						<th scope="col" class="text-center">Acción</th> --}}
 					</tr>
 				</thead>
 				<tbody>
@@ -43,18 +42,13 @@
 							<td scope="col" class="text-center">
 								{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 							</td>
-							<td>{{$prospecto->tel}}</td>
+							<td>{{$prospecto->celular}}</td>
 							<td class="text-center">
-								@if ($prospecto->aprobado == 1)
-									Aprobado
-								@elseif($prospecto->aprobado == null)
-									Sin definir
+								@if ($prospecto->empleado_id != null)
+									Seguimiento Llamada									
 								@else
-									No aprobado
+									Sin asesor
 								@endif
-							</td>
-							<td class="text-center">
-								{{$prospecto->calificacion ? $prospecto->calificacion : "Sin calificar"}}
 							</td>
 							<td class="text-center">
 								<a class="btn btn-info" href="{{ route('empleados.prospectos.show',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"><i class="far fa-eye"></i><strong> Ver</strong></a>
@@ -62,7 +56,7 @@
 							<td class="text-center">
 								<a class="btn btn-warning" href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}">✎<strong> Editar</strong></a>
 							</td>
-							<td class="text-center">
+							{{-- <td class="text-center">
 								@if ($prospecto->perfil)
 									<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-info" id="basic-addon1">
 										<i class="far fa-eye"></i>
@@ -99,7 +93,7 @@
 										@endif
 									@endif
 								</div>
-							</td>
+							</td> --}}
 						</tr>
 					@empty
 						<div class="alert alert-warning" role="alert">
