@@ -11,6 +11,7 @@ class Prospecto extends Model
     protected $fillable = [
         'id',
         'empleado_id',
+        'estatus_id',
         'nombre',
         'appaterno',
         'apmaterno',
@@ -46,8 +47,14 @@ class Prospecto extends Model
         return $this->nombre." ".$this->appaterno." ".$this->apmaterno;
     }
 
-    public function asesor() {
-        return $this->belongsTo('App\Empleado', 'empleado_id');
+    public function asesores() {
+        return $this->belongsToMany('App\Empleado')
+                    ->using('App\EmpleadoProspecto')
+                    ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
+    }
+
+    public function estatus() {
+        return $this->belongsTo('App\EstatusProspecto');
     }
 
     public function documentos() {

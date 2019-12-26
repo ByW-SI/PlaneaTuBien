@@ -16,8 +16,10 @@ class CreateProspectosTable extends Migration
         Schema::create('prospectos', function (Blueprint $table) {
             $table->increments('id');
             // Datos basicos para dar de alta
-            $table->integer('empleado_id')->unsigned()->nullable();
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            // $table->integer('empleado_id')->unsigned()->nullable();
+            // $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->integer('estatus_id')->unsigned()->nullable();
+            $table->foreign('estatus_id')->references('id')->on('estatus_prospecto');
             $table->string('nombre');
             $table->string('appaterno');
             $table->string('apmaterno')->nullable();

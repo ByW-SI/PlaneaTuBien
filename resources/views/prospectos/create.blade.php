@@ -35,14 +35,6 @@
                     <input type="text" class="form-control" value="{{ old('apmaterno') }}" name="apmaterno">
                 </div>
                 <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                    <label>✱ Sexo:</label>
-                    <select class="form-control" name="sexo" required="">
-                        <option value="">Seleccionar</option>
-                        <option value="Hombre" {{old('sexo') == "Hombre" ? "selected" : ""}}>Hombre</option>
-                        <option value="Mujer" {{old('sexo') == "Mujer" ? "selected" : ""}}>Mujer</option>
-                    </select>
-                </div>
-                <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                     <label>✱ Correo electronico:</label>
                     <input type="text" class="form-control" value="{{ old('email') }}" name="email" required>
                 </div>

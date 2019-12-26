@@ -60,10 +60,6 @@
                 <input type="text" class="form-control" value="{{ $prospecto->apmaterno }}" readonly="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label>Sexo:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->sexo }}" readonly="">
-            </div>
-			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Correo electronico:</label>
                 <input type="text" class="form-control" value="{{ $prospecto->email }}" readonly="">
             </div>

@@ -45,16 +45,8 @@
                 <input type="text" name="apmaterno" class="form-control" value="{{ $prospecto->apmaterno }}">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label>✱ Sexo:</label>
-                <select class="form-control" name="sexo" required="">
-                    <option value="">Seleccionar</option>
-                    <option value="Hombre" {{$prospecto->sexo && $prospecto->sexo  == "Hombre"? "selected" : ""}}>Hombre</option>
-                    <option value="Mujer" {{$prospecto->sexo && $prospecto->sexo  == "Mujer" ? "selected" : ""}}>Mujer</option>
-                </select>
-            </div>
-			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>✱ Correo electronico:</label>
-                <input type="text" name="email" class="form-control" value="{{ $prospecto->email }}" required=""
+                <input type="text" name="email" class="form-control" value="{{ $prospecto->email }}" required="">
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Telefono:</label>

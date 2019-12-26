@@ -112,7 +112,6 @@ class ProspectoController extends Controller
             'nombre' => 'required|max:191',
             'appaterno' => 'required|max:191',
             'apmaterno' => 'nullable|max:191',
-            'sexo' => 'nullable|in:,Hombre,Mujer',
             'email' => "required|e-mail",
             'telefono' => "nullable|numeric",
             'celular' => "required|numeric"
@@ -154,7 +153,7 @@ class ProspectoController extends Controller
     public function viewAsignar()
     {
         $asesores = Empleado::where('cargo', 'Asesor')->get();
-        $prospectos = Prospecto::whereNull('empleado_id')->get();
+        $prospectos = Prospecto::whereNull('estatus_id')->get();
 
         return view('prospectos.asignar', compact('asesores', 'prospectos'));
     }
@@ -164,10 +163,12 @@ class ProspectoController extends Controller
         $asesor = Empleado::find($request->asesor);
         foreach($request->prospectos as $prospecto){
             $prospecto = Prospecto::find($prospecto);
-            $prospecto->asesor()->associate($asesor);
+            $prospecto->asesores()->attach($asesor, ['activo' => 1, 'temporal' => 0]);
+            // Se asigna el estatus en seguimiento llamada
+            $prospecto->estatus()->associate(1);
             $prospecto->save();
         }
-        $prospectos = Prospecto::whereNull('empleado_id')->get();
+        $prospectos = Prospecto::whereNull('estatus_id')->get();
         return response(['prospectos' => $prospectos], 200);
     }
 

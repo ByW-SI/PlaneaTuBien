@@ -118,7 +118,9 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadoFaltaAdministrativa');   
     }
     public function prospectos(){
-        return $this->hasMany('App\Prospecto','empleado_id','id');
+        return $this->belongsToMany('App\Prospecto')
+                    ->using('App\EmpleadoProspecto')
+                    ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
     }
     public function crms(){
         return $this->hasManyThrough('App\ProspectoCRM','App\Prospecto');

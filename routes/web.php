@@ -147,6 +147,8 @@ Route::get('prospectos/{prospecto}/cotizacions/{cotizacion}/pdf','Prospecto\Coti
 Route::get('empleado/{empleado}/prospectos/{prospecto}/cotizacions/{cotizacion}/sendmail','Empleado\EmpleadoProspectoCotizacionController@sendMail')->name('empleados.prospectos.cotizacions.pdf.sendMail')->middleware('auth');
 Route::resource('prospectos.pagos', 'Pago\PagoController')->middleware('auth');
 Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@follow')->name('prospectos.pagos.follow')->middleware('auth');
+	// PROSPECTOS - SEGUIMIENTO DE LLAMADAS.
+Route::get('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasController@index')->name('seguimiento.llamadas.index')->middleware('auth');
 
 
 

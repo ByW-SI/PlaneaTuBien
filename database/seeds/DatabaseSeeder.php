@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             SucursalsTableSeeder::class,
             TipoContratoSeeder::class,
-            TipoJornadaSeeder::class
+            TipoJornadaSeeder::class,
+            BancosSeeder::class,
+            EstatusProspectoSeeder::class
         ]);
     }
 }
