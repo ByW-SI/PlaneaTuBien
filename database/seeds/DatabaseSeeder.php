@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             TipoContratoSeeder::class,
             TipoJornadaSeeder::class,
             BancosSeeder::class,
-            EstatusProspectoSeeder::class
+            EstatusProspectoSeeder::class,
+            ResultadoLlamadasSeeder::class
         ]);
     }
 }

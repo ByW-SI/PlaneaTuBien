@@ -25,4 +25,8 @@ class SeguimientoLlamadas extends Model
         return $this->belongsTo('App\SeguimientoLlamadas');
     }
 
+    public function citas(){
+        return $this->hasMany('App\Citas', 'seguimientoLlamada_id');
+    }
+
 }

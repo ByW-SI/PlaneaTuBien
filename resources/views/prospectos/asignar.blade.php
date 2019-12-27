@@ -16,68 +16,68 @@
                 </button>
             </div>
         </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <form method="post" id="formdata">
-                    @csrf
-                    <h5 class="text-center"><strong>Prospectos</strong></h5>
-                    <div class="table-responsive">
-                        <table id="prospectosTable" class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido paterno</th>
-                                    <th>Apellido materno</th>
-                                    <th>Correo</th>
-                                    <th>Seleccionar</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cuerpoProspectos">
-                                @foreach($prospectos as $prospecto)
-                                <tr>
-                                    <td>{{ $prospecto->nombre }}</td>
-                                    <td>{{ $prospecto->appaterno }}</td>
-                                    <td>{{ $prospecto->apmaterno }}</td>
-                                    <td>{{ $prospecto->email }}</td>
-                                    <td>
-                                        <input type="checkbox" name="prospecto_id[]" value="{{ $prospecto->id }}">
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    </form>
-                </div>
-                <div class="col-sm-6">
-                    <h5 class="text-center"><strong>Asesores</strong></h5>
-                    <table id="asesoresTable" class="table table-striped table-hover">
+        <div class="row">
+            <div class="col-sm-6">
+                <form method="post" id="formdata">
+                @csrf
+                <h5 class="text-center"><strong>Prospectos</strong></h5>
+                <div class="table-responsive">
+                    <table id="prospectosTable" class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre completo</th>
+                                <th>Nombre</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
                                 <th>Correo</th>
                                 <th>Seleccionar</th>
-                                <th>Acción</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($asesores as $asesor)
+                        <tbody id="cuerpoProspectos">
+                            @foreach($prospectos as $prospecto)
                             <tr>
-                                <td>{{ $asesor->FullName }}</td>
-                                <td>{{ $asesor->email }}</td>
+                                <td>{{ $prospecto->nombre }}</td>
+                                <td>{{ $prospecto->appaterno }}</td>
+                                <td>{{ $prospecto->apmaterno }}</td>
+                                <td>{{ $prospecto->email }}</td>
                                 <td>
-                                    <input type="hidden" value="{{ $asesor->id }}">
-                                    <button type="button" class="btn btn-sm btn-success asignar">Asignar</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-warning reasignar">Reasignar</button>
+                                    <input type="checkbox" name="prospecto_id[]" value="{{ $prospecto->id }}">
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>        
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h5 class="text-center"><strong>Asesores</strong></h5>
+                <table id="asesoresTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre completo</th>
+                            <th>Correo</th>
+                            <th>Seleccionar</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($asesores as $asesor)
+                        <tr>
+                            <td>{{ $asesor->FullName }}</td>
+                            <td>{{ $asesor->email }}</td>
+                            <td>
+                                <input type="hidden" value="{{ $asesor->id }}">
+                                <button type="button" class="btn btn-sm btn-success asignar">Asignar</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-warning reasignar">Reasignar</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>        
     </div>
 </div>
 

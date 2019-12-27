@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Prospecto;
+use App\ResultadoLlamada;
 
 class SeguimientoLlamadasController extends Controller
 {
@@ -16,12 +17,13 @@ class SeguimientoLlamadasController extends Controller
      */
     public function index()
     {
+    	$estatusLlamada = ResultadoLlamada::get();
     	$empleado = Auth::user()->empleado;
         if ($empleado->tipo == 'Admin') {
         	$prospectos = Prospecto::where('estatus_id', '1')->get();
         } else {
         	$prospectos = $empleado->prospectos;
         }
-        return view('prospectos.seguimientoLlamadas.index', compact('prospectos'));
+        return view('prospectos.seguimientoLlamadas.index', compact('prospectos', 'estatusLlamada'));
     }
 }
