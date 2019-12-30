@@ -150,6 +150,7 @@ Route::get('prospectos/{prospecto}/pagos/{pago}/follow', 'Pago\PagoController@fo
 	// PROSPECTOS - SEGUIMIENTO DE LLAMADAS.
 Route::get('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasController@index')->name('seguimiento.llamadas.index')->middleware('auth');
 Route::post('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasController@store')->name('seguimiento.llamadas.store')->middleware('auth');
+Route::post('seguimiento/llamadas/nocalificado', 'Prospecto\Seguimiento\SeguimientoLlamadasController@noCalificado')->name('seguimiento.llamadas.nocalificado')->middleware('auth');
 
 
 

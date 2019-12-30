@@ -48,7 +48,7 @@
             						<input type="date" name="fecha_contacto[]" class="form-control" value="{{  date("Y-m-d") }}" readonly="">
             					</td>
             					<td style="display: inline-block; width: 150px;">
-            						<select name="resultado_llamada_id[]" class="form-control" required="">
+            						<select name="resultado_llamada_id[]" class="form-control estatus" >
             							<option value="">Seleccionar</option>
             							@foreach($estatusLlamada as $codigo)
 	            							<option value="{{ $codigo->id }}">{{ $codigo->nombre.' ('.$codigo->codigo.')' }}</option>
@@ -56,7 +56,7 @@
             						</select>
             					</td>
             					<td>
-            						<input type="date" name="fecha_siguiente_contacto[]" class="form-control" min="{{  date("Y-m-d") }}">
+            						<input type="date" name="fecha_siguiente_contacto[]" class="form-control fecha_sig_cont" min="{{  date("Y-m-d") }}">
             					</td>
             					<!-- FECHAS ANTERIORES -->
             					@foreach($seguimientoLlamadas[$key] as $reg)
@@ -82,8 +82,12 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
-	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script> 
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        const DATO_FALSO_ID = 2;
+        const NO_INTERESA_ID = 7;
+
     	$(document).ready(function() {
     		var table = $('#seguimientotable').DataTable({
     			"columnDefs": [{
@@ -116,6 +120,67 @@
 	                }
 	            }
 	        });
+
+            $('input.fecha_sig_cont').on('change', function() {
+                let fechaSeguimiento = $(this).val();
+                let fila = $(this).parents('tr');
+                let estatusId = parseInt($(this).parents('tr').find('select.estatus option:selected').val(), 10);
+                guardarSeguimiento(fechaSeguimiento, estatusId, fila);
+                
+            });
+
+            $('.estatus').on('change', function() {
+                let estatusId = parseInt($(this).find('option:selected').val(), 10);
+                let fila = $(this).parents('tr');
+                // La fecha es '' si aun no se ha seleccionado una.
+                let fechaSeguimiento = $(this).parents('tr').find('input.fecha_sig_cont').val();
+                guardarSeguimiento(fechaSeguimiento, estatusId, fila);
+            });
+
+            function guardarSeguimiento(fechaSeguimiento, estatusId, fila){
+
+                if(fechaSeguimiento !== '' && estatusId !== ''){
+                    if(estatusId === DATO_FALSO_ID || estatusId === NO_INTERESA_ID){
+                        guardarNoCalificado(fechaSeguimiento, estatusId, fila);
+                    }
+                }
+            }
+
+            function guardarNoCalificado(fechaSeguimiento, estatusId, fila) {
+                const prospecto = $(fila).find('input[type=hidden]').val();
+                const fecha_actual = $(fila).find('input[type=date]').eq(0).val();
+                const comentario = $(fila).find('textarea').val();
+                console.log(comentario);
+
+                $.ajax({
+                    url: '{{ route('seguimiento.llamadas.nocalificado') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        fechaSeguimiento,
+                        estatusId,
+                        prospecto,
+                        fecha_actual,
+                        comentario
+                    },
+                })
+                .done(function(res) {
+                    console.log("success", res);
+                    if(res.prospecto){
+                        const prospecto = res.prospecto;
+                        swal('Atención', `El prospecto ${prospecto.nombre} ${prospecto.appaterno} ${prospecto.apmaterno
+                        } fue movido a No Calificados`, 'warning');
+                    }
+                })
+                .fail(function(err) {
+                    console.log("error", err);
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
     	});
+
     </script>
 @endsection

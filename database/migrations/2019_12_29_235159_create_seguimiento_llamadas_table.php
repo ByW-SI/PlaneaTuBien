@@ -23,7 +23,7 @@ class CreateSeguimientoLlamadasTable extends Migration
             $table->foreign('resultado_llamada_id')->references('id')->on('resultado_llamadas');
             $table->date('fecha_siguiente_contacto');
             $table->date('fecha_contacto');
-            $table->text('comentario');
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

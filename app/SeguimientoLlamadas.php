@@ -11,6 +11,7 @@ class SeguimientoLlamadas extends Model
 	protected $fillable = [
         'id',
         'asesor_id',
+        'prospecto_id',
         'resultado_llamada_id',
         'fecha_contacto',
         'fecha_siguiente_contacto',
@@ -32,7 +33,7 @@ class SeguimientoLlamadas extends Model
 
     public function resultadoLLamada()
     {
-        return $this->hasOne('App\ResultadoLlamada');
+        return $this->belongsTo('App\ResultadoLlamada');
     }
 
     public function citas(){
