@@ -15,16 +15,25 @@ class CreateEmpleadoDatoLabsTable extends Migration
     {
         Schema::create('empleado_dato_labs', function (Blueprint $table) {
             $table->increments('id');
+
             $table->unsignedInteger('empleado_id')->nullable();
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('set null');
+
             $table->unsignedInteger('contrato_id')->nullable();
             $table->foreign('contrato_id')->references('id')->on('tipo_contratos')->onDelete('set null');
+
             $table->unsignedInteger('area_id')->nullable();
             $table->foreign('area_id')->references('id')->on('tipo_areas')->onDelete('set null');
+
             $table->unsignedInteger('puesto_id')->nullable();
             $table->foreign('puesto_id')->references('id')->on('tipo_puestos')->onDelete('set null');
+
             $table->unsignedInteger('baja_id')->nullable();
             $table->foreign('baja_id')->references('id')->on('tipo_bajas')->onDelete('set null');
+
+            $table->unsignedInteger('tipo_jornada_id')->nullable();
+            $table->foreign('tipo_jornada_id')->references('id')->on('tipo_jornada')->onDelete('set null');
+
             $table->string('periodo_paga')->nullable();
             $table->string('regimen')->nullable();
             $table->string('lugar_trabajo')->nullable();
@@ -41,6 +50,9 @@ class CreateEmpleadoDatoLabsTable extends Migration
             $table->date('fecha_baja')->nullable();
             $table->text('comentario_baja')->nullable();
             $table->boolean('puntualidad')->default(false);
+            $table->string('riesgo_puesto')->nullable();
+            $table->date('fecha_fin_contrato')->nullable();
+            $table->integer('porcentaje_vales_despensa')->nullable()->default(0);
             $table->timestampsTz();
             $table->softDeletes();
 

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TipoContrato extends Model
 {
-    //
     use SoftDeletes;
     protected $fillable=[
     	'id',

@@ -77,5 +77,9 @@ class Prospecto extends Model
         return $this->hasOne('App\PerfilDatosPersonalCliente','prospecto_id','id');
     }
 
+    public function seguimientoLlamadas(){
+        return $this->hasMany('App\SeguimientoLlamadas', 'prospecto_id', 'id');
+    }
+
 
 }

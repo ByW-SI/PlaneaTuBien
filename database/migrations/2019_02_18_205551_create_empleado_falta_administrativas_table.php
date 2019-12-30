@@ -21,7 +21,6 @@ class CreateEmpleadoFaltaAdministrativasTable extends Migration
             $table->text('comentarios')->nullable();
             $table->text('problema')->nullable();
             $table->string('tipofalta');
-            $table->string('reporto');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,7 +16,7 @@ class CreateDepositosEfectivosTable extends Migration
         Schema::create('depositos_efectivos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('dia');
-            $table->text('concepto');
+            $table->text('concepto')->nullable();
             $table->decimal('cargo',9,2)->nullable();
             $table->decimal('abono',9,2)->nullable();
             $table->decimal('saldo',9,2)->nullable();

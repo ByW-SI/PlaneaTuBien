@@ -57,7 +57,6 @@
                             <th>Nombre completo</th>
                             <th>Correo</th>
                             <th>Seleccionar</th>
-                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,9 +67,6 @@
                             <td>
                                 <input type="hidden" value="{{ $asesor->id }}">
                                 <button type="button" class="btn btn-sm btn-success asignar">Asignar</button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-warning reasignar">Reasignar</button>
                             </td>
                         </tr>
                         @endforeach

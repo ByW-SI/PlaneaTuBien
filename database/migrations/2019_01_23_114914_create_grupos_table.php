@@ -15,11 +15,11 @@ class CreateGruposTable extends Migration
     {
         Schema::create('grupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
-            $table->unsignedInteger('vigencia')->default(180);
-            $table->unsignedInteger('contratos')->default(500);
-            $table->boolean('activo')->default(1);
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
+            $table->unsignedInteger('vigencia')->nullable()->default(180);
+            $table->unsignedInteger('contratos')->nullable()->default(500);
+            $table->boolean('activo')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

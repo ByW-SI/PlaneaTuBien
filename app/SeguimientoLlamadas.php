@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeguimientoLlamadas extends Model
 {
-	protected $table = 'prospectos';
+	protected $table = 'seguimiento_llamadas';
 
 	protected $fillable = [
         'id',
-        'empleado_id',
-        'clavePreautorizacion',
-        'fecha_cita',
-        'numTarjetas'
+        'asesor_id',
+        'resultado_llamada_id',
+        'fecha_contacto',
+        'fecha_siguiente_contacto',
+        'comentario'
     ];
     
     protected $hidden=[
@@ -22,7 +23,16 @@ class SeguimientoLlamadas extends Model
     ];
 
     public function asesor(){
-        return $this->belongsTo('App\SeguimientoLlamadas');
+        return $this->belongsTo('App\EmpleadoProspecto');
+    }
+
+    public function prospecto(){
+        return $this->belongsTo('App\Prospecto');
+    }
+
+    public function resultadoLLamada()
+    {
+        return $this->hasOne('App\ResultadoLlamada');
     }
 
     public function citas(){

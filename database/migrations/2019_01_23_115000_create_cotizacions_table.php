@@ -22,14 +22,14 @@ class CreateCotizacionsTable extends Migration
             $table->string('folio');
             $table->string('monto');
             $table->boolean('elegir')->default(0);
-            $table->unsignedInteger('ahorro')->default(0);
-            $table->unsignedInteger('plan_id')->references('id')->on('plans');
+            $table->unsignedInteger('ahorro')->nullable()->default(0);
+            $table->unsignedInteger('plan_id')->nullable()->references('id')->on('plans');
             $table->foreign('plan_id')->references('id')->on('plans');
             // se agrego despues
             $table->decimal('descuento',5,2)->default(0.00);    
             $table->decimal('inscripcion',8,2)->default(0.00);
             $table->decimal('factor_actualizacion')->default(3);
-            $table->string('tipo_inscripcion');
+            $table->string('tipo_inscripcion')->nullable();
             $table->boolean('liberar')->default(0);
             $table->timestamps();
             $table->softDeletes();

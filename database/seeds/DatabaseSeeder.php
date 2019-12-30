@@ -23,7 +23,14 @@ class DatabaseSeeder extends Seeder
             TipoJornadaSeeder::class,
             BancosSeeder::class,
             EstatusProspectoSeeder::class,
-            ResultadoLlamadasSeeder::class
+            ResultadoLlamadasSeeder::class,
+            TipoCitasAsistidasSeeder::class,
+            TipoMedioSeeder::class,
+            TipoReferenciaBancariaSeeder::class,
+            TipoInstitucionBancariaSeeder::class,
+            TipoEstadoCivilSeeder::class,
+            TipoSituacionInmobiliariaSeeder::class,
+            TipoResultadoConfirmacionCitaSeeder::class
         ]);
     }
 }

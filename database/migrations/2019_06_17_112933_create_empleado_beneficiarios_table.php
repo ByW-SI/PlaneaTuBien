@@ -29,8 +29,10 @@ class CreateEmpleadoBeneficiariosTable extends Migration
             $table->string('municipio');
             $table->string('estado');
             $table->string('telefono');
-            $table->string('unidad_medica');
-            $table->string('turno_atencion');
+            $table->string('celular')->nullable();
+            $table->string('telefono_2')->nullable();
+            $table->string('unidad_medica')->nullable();
+            $table->string('turno_atencion')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,6 +17,7 @@ class CreateTipoContratosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion')->nullable();
+            $table->string('codigo');
             $table->softDeletes();
             $table->timestamps();
         });

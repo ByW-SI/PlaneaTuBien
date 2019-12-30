@@ -15,7 +15,7 @@ class CreatePresolicitudsTable extends Migration
     {
         Schema::create('presolicituds', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('perfil_id');
+            $table->unsignedInteger('perfil_id')->nullable();
             $table->foreign('perfil_id')->references('id')->on('perfil_datos_personal_clientes');
             $table->string('folio');
             $table->decimal('precio_inicial',11,2);
@@ -42,7 +42,7 @@ class CreatePresolicitudsTable extends Migration
             // EMAIL
             $table->string('email');
             // NACIMIENTO
-            $table->date('fecha_nacimiento');
+            $table->date('fecha_nacimiento')->nullable();
             $table->string('lugar_nacimiento');
             $table->string('nacionalidad');
             $table->string('sexo');

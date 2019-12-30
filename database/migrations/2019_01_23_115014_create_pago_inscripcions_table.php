@@ -17,7 +17,7 @@ class CreatePagoInscripcionsTable extends Migration
             $table->increments('id');
             $table->integer('prospecto_id')->unsigned();
             $table->foreign('prospecto_id')->references('id')->on('prospectos');
-            $table->integer('cotizacion_id')->unsigned();
+            $table->integer('cotizacion_id')->unsigned()->nullable();
             $table->foreign('cotizacion_id')->references('id')->on('cotizacions');
             $table->string('status')->default('registrado');
             // $table->string('tipo')

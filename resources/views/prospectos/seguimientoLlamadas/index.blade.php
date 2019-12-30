@@ -5,6 +5,8 @@
         	<div class="card-header">
             	<h3 class="text-center my-3">Seguimiento llamadas</h3>
         	</div>
+            <form action="{{ route('seguimiento.llamadas.store') }}" method="POST">
+            @csrf()
             <div class="card-body">
         		<table class="table table-striped table-hover" id="seguimientotable"  style="width:100%">
         			<thead>
@@ -31,49 +33,51 @@
         				</tr>
         			</thead>
         			<tbody>
-        				@foreach($prospectos as $prospecto)
+        				@foreach($prospectos as $key => $prospecto)
             				<tr>
             					<th scope="row">{{ $prospecto->fullName }}</th>
             					<th scope="row">{{ $prospecto->celular }}</th>
             					<th scope="row">{{ $prospecto->telefono }}</th>
             					<td>
             						<div class="form-group" style="display: block; width: 150px;">
-									    <textarea class="form-control" name="comentario" rows="3" maxlength="500"></textarea>
+									    <textarea class="form-control" name="comentario[]" rows="3" maxlength="500"></textarea>
+                                        <input type="hidden" name="prospecto_id[]" value="{{ $prospecto->id }}">
 									</div>
             					</td>
             					<td>
-            						<input type="date" name="fecha_actual" class="form-control" value="{{  date("Y-m-d") }}" readonly="">
+            						<input type="date" name="fecha_contacto[]" class="form-control" value="{{  date("Y-m-d") }}" readonly="">
             					</td>
             					<td style="display: inline-block; width: 150px;">
-            						<select name="estatus" class="form-control" required="">
+            						<select name="resultado_llamada_id[]" class="form-control" required="">
             							<option value="">Seleccionar</option>
             							@foreach($estatusLlamada as $codigo)
-	            							<option value="{{ $codigo->codigo }}">{{ $codigo->nombre.' ('.$codigo->codigo.')' }}</option>
+	            							<option value="{{ $codigo->id }}">{{ $codigo->nombre.' ('.$codigo->codigo.')' }}</option>
             							@endforeach
             						</select>
             					</td>
             					<td>
-            						<input type="date" name="fecha_seguimiento" class="form-control" min="{{  date("Y-m-d") }}">
+            						<input type="date" name="fecha_siguiente_contacto[]" class="form-control" min="{{  date("Y-m-d") }}">
             					</td>
             					<!-- FECHAS ANTERIORES -->
-            					@for($i = 0; $i < 4; $i++)
-	            					<td>{{ isset($prospecto->asesores->last()->pivot->seguimientoLlamadas[$i]) ? $prospecto->asesores->last()->pivot->seguimientoLlamadas[$i]->citas->last() : ''}}</td>
-	            					<td></td>
-	            					<td></td>
-	            					<td></td>
-	            					<td></td>
-	            					<td></td>
-            					@endfor
+            					@foreach($seguimientoLlamadas[$key] as $reg)
+	            					<td>
+                                        {{ $reg[0] }}
+                                    </td>
+	            					<td>{{ $reg[1] }}</td>
+	            					<td>{{ $reg[2] }}</td>
+            					@endforeach
             				</tr>
         				@endforeach
+                        
         			</tbody>
         		</table>
             </div>
             <div class="card-footer">
             	<div class="text-center">
-            		<button class="btn btn-success">Guardar</button>
+            		<button class="btn btn-success" type="submit">Guardar</button>
             	</div>
             </div>
+            </form>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
