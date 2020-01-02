@@ -20,38 +20,10 @@ class SeguimientoLlamadasController extends Controller
     {
     	$estatusLlamada = ResultadoLlamada::get();
     	$empleado = Auth::user()->empleado;
-        if ($empleado->tipo == 'Admin') {
-        	$prospectos = Prospecto::where('estatus_id', '1')->get();
-        } else {
-        	$prospectos = $empleado->prospectos->where('estatus_id', '1')->get();
-        }
-        $seguimientoLlamadas = [];
 
-        // Obtenemos los registros de las llamadas de cada prospecto, solo los ultimos 4
-        foreach ($prospectos as $key => $value) {
-            $aux = [];
-            //dd($value->asesores->last()->pivot->seguimientoLlamadas->where('prospecto_id', $value->id));
-            $segLlamada = $value->seguimientoLlamadas;
-            //dd($segLlamada);
-            for ($i=0; $i < 4; $i++) { 
-                if(isset($segLlamada[$i])){
-                	//dd($segLlamada[$i]->resultado_llamada_id);
-                    $aux[] = [
-                        $segLlamada[$i]->fecha_contacto,
-                        ResultadoLlamada::find($segLlamada[$i]->resultado_llamada_id)->codigo,
-                        $segLlamada[$i]->fecha_siguiente_contacto
-                    ];
-                } else {
-                    $aux[] = [
-                        '',
-                        '',
-                        ''
-                    ];
-                }
-            }
-           $seguimientoLlamadas[] = $aux;
-        }
-        //dd($seguimientoLlamadas);
+    	$prospectos = $this->getProspectosXEstatus("1");
+    	$seguimientoLlamadas = $this->getSeguimientoLlamadaProspectos($prospectos);
+
         return view('prospectos.seguimientoLlamadas.index', compact('prospectos', 'estatusLlamada', 'seguimientoLlamadas'));
     }
 
@@ -96,6 +68,52 @@ class SeguimientoLlamadasController extends Controller
         $prospecto->estatus_id = $request->estatusId;
         $prospecto->save();
 
-        return response()->json(['prospecto' => $prospecto], 200);
+        $prospectos = $this->getProspectosXEstatus("1");
+        $seguimiento = $this->getSeguimientoLlamadaProspectos($prospectos);
+
+        return response()->json(['prospecto' => $prospecto, "seguimiento" => $seguimiento, "prospectos" => $prospectos], 200);
+    }
+
+    public function getProspectosXEstatus($estatus_id)
+    {
+    	if ($empleado->tipo == 'Admin') {
+    		$prospectos = Prospecto::where('estatus_id', '1')->get();
+    	}
+    	else {
+    		$prospectos = $empleado->prospectos->where('estatus_id', $estatus_id)->get();
+    	}
+
+    	return $prospectos;
+    }
+
+    public function getSeguimientoLlamadaProspectos($prospectos)
+    {
+    	$seguimientoLlamadas = [];
+
+        // Obtenemos los registros de las llamadas de cada prospecto, solo los ultimos 4
+        foreach ($prospectos as $key => $value) {
+            $aux = [];
+            $segLlamada = $value->seguimientoLlamadas;
+
+            for ($i=0; $i < 4; $i++) { 
+                if(isset($segLlamada[$i])){
+                	//dd($segLlamada[$i]->resultado_llamada_id);
+                    $aux[] = [
+                        $segLlamada[$i]->fecha_contacto,
+                        ResultadoLlamada::find($segLlamada[$i]->resultado_llamada_id)->codigo,
+                        $segLlamada[$i]->fecha_siguiente_contacto
+                    ];
+                } else {
+                    $aux[] = [
+                        '',
+                        '',
+                        ''
+                    ];
+                }
+            }
+           $seguimientoLlamadas[] = $aux;
+        }
+
+        return $seguimientoLlamadas;
     }
 }

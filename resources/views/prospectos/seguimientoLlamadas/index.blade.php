@@ -172,6 +172,21 @@
                         swal('Atención', `El prospecto ${prospecto.nombre} ${prospecto.appaterno} ${prospecto.apmaterno
                         } fue movido a No Calificados`, 'warning');
                     }
+                    table.clear();
+                    let filas = [];
+
+                    for(let i = 0; i < res.prospectos.length; i++){
+                    filas.push([
+                        `${res.prospectos[i].nombre} ${res.prospectos[i].appaterno} ${res.prospectos[i].apmaterno}`,
+                        res.prospectos[i].celular,
+                        res.prospectos[i].telefono,
+                        `<div class="form-group" style="display: block; width: 150px;">
+                            <textarea class="form-control" name="comentario[]" rows="3" maxlength="500"></textarea>
+                            <input type="hidden" name="prospecto_id[]" value="${ res.prospectos[i].id }">
+                        </div>`,
+                        `<input type="date" name="fecha_contacto[]" class="form-control" value="${new Date.now() }" readonly="">`,
+                    ]);
+                }
                 })
                 .fail(function(err) {
                     console.log("error", err);
