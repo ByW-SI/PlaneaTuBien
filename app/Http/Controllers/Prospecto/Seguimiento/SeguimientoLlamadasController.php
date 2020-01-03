@@ -19,7 +19,6 @@ class SeguimientoLlamadasController extends Controller
     public function index()
     {
     	$estatusLlamada = ResultadoLlamada::get();
-    	$empleado = Auth::user()->empleado;
 
     	$prospectos = $this->getProspectosXEstatus("1");
     	$seguimientoLlamadas = $this->getSeguimientoLlamadaProspectos($prospectos);
@@ -76,6 +75,8 @@ class SeguimientoLlamadasController extends Controller
 
     public function getProspectosXEstatus($estatus_id)
     {
+        $empleado = Auth::user()->empleado;
+
     	if ($empleado->tipo == 'Admin') {
     		$prospectos = Prospecto::where('estatus_id', '1')->get();
     	}
@@ -93,6 +94,7 @@ class SeguimientoLlamadasController extends Controller
         // Obtenemos los registros de las llamadas de cada prospecto, solo los ultimos 4
         foreach ($prospectos as $key => $value) {
             $aux = [];
+            dd($value->seguimientoLlamadas);
             $segLlamada = $value->seguimientoLlamadas;
 
             for ($i=0; $i < 4; $i++) { 
