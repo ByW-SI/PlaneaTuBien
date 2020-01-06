@@ -15,14 +15,10 @@ class CreateCitasTable extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('seguimientoLlamada_id')->unsigned()->nullable();
-            $table->foreign('seguimientoLlamada_id')->references('id')->on('seguimiento_llamadas');
-            $table->date('fechaSiguienteContacto');
-            $table->time('HoraSiguienteContacto');
-            $table->date('fechaSiguienteCita');
-            $table->time('HoraSiguienteCita');
-            $table->text('comentarios')->nullable();
-            $table->string('estatusLlamada');
+            $table->integer('prospecto_id')->unsigned()->nullable();
+            $table->foreign('prospecto_id')->references('id')->on('prospectos');
+            $table->string('clave_preautorizacion');
+            $table->date('fecha_cita');
             $table->timestamps();
         });
     }

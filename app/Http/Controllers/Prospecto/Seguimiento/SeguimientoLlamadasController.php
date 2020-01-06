@@ -60,6 +60,7 @@ class SeguimientoLlamadasController extends Controller
     	$seguimiento = SeguimientoLlamadas::create([
             'fecha_contacto' => $request->fecha_actual,
             'fecha_siguiente_contacto' => $request->fechaSeguimiento,
+            'asesor_id' => $prospecto->asesores()->where('activo', '1')->get()->last()->id,
             'comentario' => $request->comentario,
             'resultado_llamada_id' => $request->estatusId,
             'prospecto_id' => $prospecto->id
@@ -94,7 +95,6 @@ class SeguimientoLlamadasController extends Controller
         // Obtenemos los registros de las llamadas de cada prospecto, solo los ultimos 4
         foreach ($prospectos as $key => $value) {
             $aux = [];
-            dd($value->seguimientoLlamadas);
             $segLlamada = $value->seguimientoLlamadas;
 
             for ($i=0; $i < 4; $i++) { 

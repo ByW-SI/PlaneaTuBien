@@ -28,7 +28,9 @@ class CreateProspectosTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('celular');
             // Datos para el seguimiento de llamadas
-            $table->decimal('sueldo',10,2)->default(0.00);
+            $table->string('sueldo',10,2)->nullable();
+            $table->string('situacionInmobiliario')->nullable();
+            $table->string('numeroTarjetas')->nullable();
             $table->string('estado_civil')->nullable();
             $table->integer('edad')->nullable();
             $table->string('nombreConyuge')->nullable();

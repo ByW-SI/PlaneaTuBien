@@ -40,7 +40,7 @@
             					<th scope="row">{{ $prospecto->telefono }}</th>
             					<td>
             						<div class="form-group" style="display: block; width: 150px;">
-									    <textarea class="form-control" name="comentario[]" rows="3" maxlength="500"></textarea>
+									    <textarea class="form-control" name="comentario[]" rows="3" maxlength="500">{{ $prospecto->seguimientoLlamadas->count() > 0 && $prospecto->seguimientoLlamadas->last()->comentario !== null ? $prospecto->seguimientoLlamadas->last()->comentario : ""}}</textarea>
                                         <input type="hidden" name="prospecto_id[]" value="{{ $prospecto->id }}">
 									</div>
             					</td>
@@ -78,6 +78,7 @@
             	</div>
             </div>
             </form>
+            @include('prospectos.seguimientoLlamadas.modalCrearCita')
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -87,8 +88,17 @@
     <script>
         const DATO_FALSO_ID = 2;
         const NO_INTERESA_ID = 7;
+        const CITA_CALIFICADA_ID = 9;
+        const CITA_NO_CALIFICADA_ID = 10;
+
+        var opcionesSeguimiento = [
+            @foreach($estatusLlamada as $codigo)
+                { id: {{ $codigo->id }}, valor: '{{ $codigo->nombre.' ('.$codigo->codigo.')' }}' },
+            @endforeach
+        ];
 
     	$(document).ready(function() {
+            console.log(opcionesSeguimiento);
     		var table = $('#seguimientotable').DataTable({
     			"columnDefs": [{
 		            "orderable": false,
@@ -142,6 +152,9 @@
                 if(fechaSeguimiento !== '' && estatusId !== ''){
                     if(estatusId === DATO_FALSO_ID || estatusId === NO_INTERESA_ID){
                         guardarNoCalificado(fechaSeguimiento, estatusId, fila);
+                    } else if(estatusId === CITA_CALIFICADA_ID || CITA_NO_CALIFICADA_ID) {
+                        $('#citaModal').modal('show');
+                        guardarCita(fechaSeguimiento, estatusId, fila);
                     }
                 }
             }
@@ -172,28 +185,57 @@
                         swal('Atención', `El prospecto ${prospecto.nombre} ${prospecto.appaterno} ${prospecto.apmaterno
                         } fue movido a No Calificados`, 'warning');
                     }
+
                     table.clear();
                     let filas = [];
 
                     for(let i = 0; i < res.prospectos.length; i++){
-                    filas.push([
-                        `${res.prospectos[i].nombre} ${res.prospectos[i].appaterno} ${res.prospectos[i].apmaterno}`,
-                        res.prospectos[i].celular,
-                        res.prospectos[i].telefono,
-                        `<div class="form-group" style="display: block; width: 150px;">
-                            <textarea class="form-control" name="comentario[]" rows="3" maxlength="500"></textarea>
-                            <input type="hidden" name="prospecto_id[]" value="${ res.prospectos[i].id }">
-                        </div>`,
-                        `<input type="date" name="fecha_contacto[]" class="form-control" value="${new Date.now() }" readonly="">`,
-                    ]);
-                }
+                        let datosSeguimiento = [];
+                        let datosEstatus     = '';
+
+                        for (j = 0; j < opcionesSeguimiento.length; j++) {
+                            datosEstatus += `<option value="${ opcionesSeguimiento[j].id }">${ opcionesSeguimiento[j].valor }</option>`;
+                        }
+
+                        datosSeguimiento = [
+                            `${res.prospectos[i].nombre} ${res.prospectos[i].appaterno} ${res.prospectos[i].apmaterno}`,
+                            res.prospectos[i].celular,
+                            res.prospectos[i].telefono,
+                            `<div class="form-group" style="display: block; width: 150px;">
+                                <textarea class="form-control" name="comentario[]" rows="3" maxlength="500"></textarea>
+                                <input type="hidden" name="prospecto_id[]" value="${ res.prospectos[i].id }">
+                            </div>`,
+                            `<input type="date" name="fecha_contacto[]" class="form-control" value="${ Date.now() }" readonly="">`,
+                            `<td style="display: inline-block; width: 150px;">
+                                <select name="resultado_llamada_id[]" class="form-control estatus" >
+                                    <option value="">Seleccionar</option>
+                                    ${ datosEstatus }
+                                </select>
+                            </td>`,
+                            `<td>
+                                <input type="date" name="fecha_siguiente_contacto[]" class="form-control fecha_sig_cont" min="${ Date.now() }">
+                            </td>`,
+                            datosSeguimiento
+                        ];
+
+                        for (let j =  0; j < res.seguimiento[i].length; j++) {
+                            datosSeguimiento.push(
+                                `<td>${ res.seguimiento[i][j][0]}</td>`,
+                                `<td>${ res.seguimiento[i][j][1] }</td>`,
+                                `<td>${ res.seguimiento[i][j][2] }</td>`,
+                            );
+                        }
+
+                        filas.push(datosSeguimiento);
+                    }
+                    table.rows.add(filas).draw();
                 })
                 .fail(function(err) {
                     console.log("error", err);
-                })
-                .always(function() {
-                    console.log("complete");
                 });
+            }
+
+            function guardarCita(fechaSeguimiento, estatusId, fila) {
             }
     	});
 
