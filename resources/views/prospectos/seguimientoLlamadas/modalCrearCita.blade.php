@@ -1,5 +1,5 @@
 <form action="{{route('citas.store')}}" method="POST">
-  <div class="modal fade" id="citaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade modalCrearCita" id="citaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" prospectoId={{$prospecto->id}}>
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
       <div class="modal-content">
@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           @csrf
-          <input type="text" name="prospecto_id" value="{{$prospecto->id}}">
+          <input type="hidden" name="prospecto_id" value="{{$prospecto->id}}">
           <!-- FILA-->
           <div class="form-row">
             <div class="form-group col-sm-4">
