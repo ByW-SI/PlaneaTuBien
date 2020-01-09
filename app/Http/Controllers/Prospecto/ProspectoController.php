@@ -42,7 +42,7 @@ class ProspectoController extends Controller
                     }
                 }
             }
-        }else{
+        } else {
             $prospectos = $empleado->prospectos;
         }
 
@@ -122,6 +122,13 @@ class ProspectoController extends Controller
         $this->validate($request, $rules);
         $prospecto = new Prospecto($request->all());
         $prospecto->empleado_id = (Auth::user()->empleado->id == 1 ? null : Auth::user()->empleado->id);
+        $prospecto->estatus_id = 1;
+        $prospecto->save();
+
+        // $prospecto = Prospecto::find($prospecto);
+        $prospecto->asesores()->attach($prospecto->empleado_id, ['activo' => 1, 'temporal' => 0]);
+        // Se asigna el estatus en seguimiento llamada
+        $prospecto->estatus()->associate(1);
         $prospecto->save();
 
         $prospectos = Prospecto::get();
@@ -138,7 +145,7 @@ class ProspectoController extends Controller
     public function show(Prospecto $prospecto)
     {
         $empleado = Auth::user()->empleado;
-        return view('prospectos.view', ['prospecto' => $prospecto, 'empleado'=>$empleado]);
+        return view('prospectos.view', ['prospecto' => $prospecto, 'empleado' => $empleado]);
     }
 
     /**
@@ -164,12 +171,15 @@ class ProspectoController extends Controller
     public function asignarAsesor(Request $request)
     {
         $asesor = Empleado::find($request->asesor);
-        foreach($request->prospectos as $prospecto){
+        foreach ($request->prospectos as $prospecto) {
             $prospecto = Prospecto::find($prospecto);
             $prospecto->asesores()->attach($asesor, ['activo' => 1, 'temporal' => 0]);
             // Se asigna el estatus en seguimiento llamada
             $prospecto->estatus()->associate(1);
             $prospecto->save();
+            $prospecto->update([
+                'empleado_id' => $asesor->id,
+            ]);
         }
         $prospectos = Prospecto::whereNull('estatus_id')->get();
         return response(['prospectos' => $prospectos], 200);
@@ -217,7 +227,6 @@ class ProspectoController extends Controller
         foreach ($rows as $key => $row) {
 
             $prospecto = $this->createProspecto($row);
-
         }
         return redirect()->back()->with('status', "Se cargo correctamente el archivo.");
     }
@@ -231,9 +240,10 @@ class ProspectoController extends Controller
      */
     public function createProspecto($row)
     {
-        if($row[0] != '' && $row[1] != '' && $row[2] != '' && $row[3] != ''
-            && $row[4] != '' && $row[5] != '') 
-        {
+        if (
+            $row[0] != '' && $row[1] != '' && $row[2] != '' && $row[3] != ''
+            && $row[4] != '' && $row[5] != ''
+        ) {
 
             $nombre    = ucfirst(trim($row[0]));
             $appaterno = ucfirst(trim($row[1]));
@@ -252,7 +262,6 @@ class ProspectoController extends Controller
             ]);
 
             return $prospecto;
-
         } else {
             return null;
         }

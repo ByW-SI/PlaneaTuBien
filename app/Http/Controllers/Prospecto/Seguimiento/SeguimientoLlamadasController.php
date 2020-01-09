@@ -78,12 +78,14 @@ class SeguimientoLlamadasController extends Controller
     {
         $empleado = Auth::user()->empleado;
 
+        // dd($empleado->prospectos()->get());
+
     	if ($empleado->tipo == 'Admin') {
     		$prospectos = Prospecto::where('estatus_id', '1')->get();
     	}
     	else {
-    		$prospectos = $empleado->prospectos->where('estatus_id', $estatus_id)->get();
-    	}
+    		$prospectos = $empleado->prospectos()->where('estatus_id', $estatus_id)->get();
+        }
 
     	return $prospectos;
     }
