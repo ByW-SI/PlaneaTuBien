@@ -22,7 +22,7 @@ class Prospecto extends Model
         'sueldo',
         'estado_civil',
         'edad',
-        'nombreConyugue',
+        'nombreConyuge',
         'edadConyugue',
         'montoProyecto',
         'celular_2',
@@ -30,6 +30,7 @@ class Prospecto extends Model
         'telefonoConyugue',
         'telefonoCasa',
         'email_2',
+        'numeroTarjetas'
     ];
 
     protected $hidden=[
@@ -51,6 +52,14 @@ class Prospecto extends Model
         return $this->belongsToMany('App\Empleado')
                     ->using('App\EmpleadoProspecto')
                     ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
+    }
+
+    public function asesor(){
+        return $this->asesores()->having('pivot_temporal', '0');
+    }
+
+    public function empleado(){
+        return $this->belongsTo('App\Empleado');
     }
 
     public function estatus() {

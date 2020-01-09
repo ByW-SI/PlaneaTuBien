@@ -152,7 +152,9 @@ Route::get('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasCon
 Route::post('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasController@store')->name('seguimiento.llamadas.store')->middleware('auth');
 Route::post('seguimiento/llamadas/nocalificado', 'Prospecto\Seguimiento\SeguimientoLlamadasController@noCalificado')->name('seguimiento.llamadas.nocalificado')->middleware('auth');
 
-
+// CITAS
+Route::get('citas', 'Cita\CitaController@index')->name('citas.index');
+Route::post('citas/store', 'Cita\CitaController@store')->name('citas.store');
 
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController')->middleware('auth');

@@ -108,6 +108,9 @@ class ProspectoController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd(Auth::user()->empleado->id);
+
         $rules = [
             'nombre' => 'required|max:191',
             'appaterno' => 'required|max:191',

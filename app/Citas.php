@@ -10,17 +10,17 @@ class Citas extends Model
 
 	protected $fillable = [
         'id',
-        'seguimientoLlamada_id',
-        'fechaSiguienteContacto',
-        'HoraSiguienteContacto',
-        'fechaSiguienteCita',
-        'HoraSiguienteCita',
-        'comentarios',
-        'estatusLlamada'
+        'prospecto_id',
+        'clave_preautorizacion',
+        'fecha_cita'
     ];
     
     protected $hidden=[
         'created_at',
         'updated_at'
     ];
+
+    public function prospecto(){
+        return $this->belongsTo('App\Prospecto');
+    }
 }

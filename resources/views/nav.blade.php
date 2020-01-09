@@ -88,6 +88,9 @@
 								<a class="dropdown-item" href="{{ route('seguimiento.llamadas.index') }}">
 									<i class="fa fa-phone"></i><strong>	Seguimiento llamadas</strong>
 								</a>
+								<a class="dropdown-item" href="{{ route('citas.index') }}">
+									<i class="fa fa-calendar"></i><strong>	Seguimiento citas</strong>
+								</a>
 						</div>
 					</li>
 				@endif

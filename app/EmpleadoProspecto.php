@@ -8,8 +8,8 @@ class EmpleadoProspecto extends Pivot
 {
     protected $table = 'empleado_prospecto';
 
-    public function seguimientoLlamadas(){
+    public function seguimientoLlamadas()
+    {
         return $this->hasMany('App\SeguimientoLlamadas', 'asesor_id', 'empleado_id');
     }
-
 }
