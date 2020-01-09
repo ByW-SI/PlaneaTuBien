@@ -10,6 +10,7 @@
                 <table class="table table-striped table-hover" id="citas">
                     <thead>
                         <tr class="text-center">
+                            <th>Status</th>
                             <th>Prospecto</th>
                             <th>Asesor</th>
                             <th>Fecha cita</th>
@@ -21,6 +22,7 @@
                     <tbody>
                         @foreach ($citas as $cita)
                         <tr>
+                            <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
                             <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}} {{$cita->prospecto->apmaterno}}</td>
                             <td>{{$cita->prospecto->asesor()->first()->nombre}}  {{$cita->prospecto->asesor()->first()->paterno}} {{$cita->prospecto->asesor->first()->materno}}</td>
                             <td>{{$cita->fecha_cita}}</td>

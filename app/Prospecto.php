@@ -40,9 +40,11 @@ class Prospecto extends Model
         'empleado_id',
 
     ];
+
     protected $dates=[
         'deleted_at'
     ];
+
     public function getFullNameAttribute()
     {
         return $this->nombre." ".$this->appaterno." ".$this->apmaterno;
@@ -89,6 +91,4 @@ class Prospecto extends Model
     public function seguimientoLlamadas(){
         return $this->hasMany('App\SeguimientoLlamadas', 'prospecto_id', 'id');
     }
-
-
 }
