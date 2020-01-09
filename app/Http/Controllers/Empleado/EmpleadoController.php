@@ -8,7 +8,8 @@ use App\EmpleadoDireccion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Services\Empleado\StoreEmpleadoService;
+
 
 class EmpleadoController extends Controller
 {
@@ -20,7 +21,6 @@ class EmpleadoController extends Controller
         $this->middleware('empleados:editar rh')->only(['edit', 'update']);
         $this->middleware('empleados:ver rh')->only('show');
         $this->middleware('empleados:eliminar rh')->only('destroy');
-
     }
 
     /**
@@ -31,7 +31,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleados = Empleado::whereNotIn('id', [1])->get();
-        return view('empleado.index', ['empleados'=>$empleados]);
+        return view('empleado.index', ['empleados' => $empleados]);
     }
 
     /**
@@ -56,12 +56,12 @@ class EmpleadoController extends Controller
                     }
                 }
                 break;
-            
+
             default:
                 $empleados = $empleados->where('cargo', "Asesor")->get();
                 break;
         }
-        return view('empleado.index', ['empleados'=>$empleados]);
+        return view('empleado.index', ['empleados' => $empleados]);
     }
 
     /**
@@ -73,7 +73,7 @@ class EmpleadoController extends Controller
     {
         $sucursales = Sucursal::get();
         $empleado = new Empleado;
-        return view('empleado.form',['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>false]);
+        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'edit' => false]);
         // return view('empleado.create', ['sucursales' => $sucursales]);
     }
 
@@ -85,35 +85,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'email' => 'nullable|unique:empleados',
-            'rfc' => 'required|unique:empleados',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->with('status','ERROR: El correo o el RFC ya existe en el sistema');
-        }
-
-        /** Pendiennte por ver si todavia se ocupa este codigo ultima fecha: 17/12/2019**/
-        $empleado = Empleado::create($request->all());
-        if(!empty($request->input('gerente'))){
-            $empleado->id_jefe = $request->input('gerente');
-            $empleado->save();
-        }
-        if(!empty($request->input('supervisor'))){
-            $empleado->id_jefe = $request->input('supervisor');
-            $empleado->save();
-
-        }
-        /** Fin Pendiennte **/
-        $sucursal = Sucursal::find($request->sucursal);
-        $empleado->sucursal()->associate($sucursal);
-
-        if($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
-            $empleado->direccion()->create($request->all());
-
-        $empleado->save();
+        $storeEmpleadoService = new StoreEmpleadoService($request);
         return redirect()->route('empleados.index');
     }
 
@@ -127,7 +99,7 @@ class EmpleadoController extends Controller
     {
         $empleado = Empleado::withTrashed()->find($id);
         // $posts = Post::withTrashed()->find($id);
-        return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
+        return view('empleado.datosgenerales.index', ['empleado' => $empleado]);
     }
 
     /**
@@ -140,7 +112,7 @@ class EmpleadoController extends Controller
     {
         $empleado = Empleado::withTrashed()->find($id);
         $sucursales = Sucursal::get();
-        return view('empleado.form', ['sucursales'=>$sucursales,'empleado'=>$empleado,'edit'=>true]);  
+        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'edit' => true]);
     }
 
     /**
@@ -158,12 +130,12 @@ class EmpleadoController extends Controller
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
         //dd($request->all());
-        if($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
+        if ($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
             $empleado->direccion->update($request->all());
 
         $empleado->save();
 
-        is_null($empleado->user) ? : $empleado->user->update(['email'=>$empleado->email]);
+        is_null($empleado->user) ?: $empleado->user->update(['email' => $empleado->email]);
 
         // dd($empleado->user);
 
@@ -178,60 +150,63 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado, Request $request)
     {
- 
+
         $empleado->update([
             'motivo_baja' => $request->motivo,
             'es_recomendable' => $request->es_reingresable ? 1 : 0,
             'es_reingresable' => $request->es_recomendable ? 1 : 0,
-            ]);
+        ]);
 
-        is_null($empleado->user) ? : $empleado->user->delete();
+        is_null($empleado->user) ?: $empleado->user->delete();
         $empleado->delete();
-  
-        return redirect()->route('empleados.index');
 
+        return redirect()->route('empleados.index');
     }
 
-    public function deletedList(Request $request){
+    public function deletedList(Request $request)
+    {
         $empleadosEliminados = Empleado::onlyTrashed()->get();
         // dd($empleadosEliminados);
-        return view('empleado.eliminados.lista',compact('empleadosEliminados'));
+        return view('empleado.eliminados.lista', compact('empleadosEliminados'));
     }
 
-    public function showDeleted($id){
+    public function showDeleted($id)
+    {
         $empleado = Empleado::withTrashed()->find($id);
-        return view('empleado.datosgenerales.index', ['empleado'=>$empleado]);
+        return view('empleado.datosgenerales.index', ['empleado' => $empleado]);
     }
 
-    public function undelete(Request $request){
+    public function undelete(Request $request)
+    {
         $empleado = Empleado::withTrashed()->find($request->input('empleado_id'));
         $empleado->restore();
         return redirect()->route('empleados.index');
     }
 
-    public function buscarGerentes(){
+    public function buscarGerentes()
+    {
         $gerentes = Empleado::where('puesto', 'Gerente')->get();
         return view('empleado.listaempleado', ['empleados' => $gerentes]);
     }
 
-    public function buscarSupervisores(){
+    public function buscarSupervisores()
+    {
         $supervisores = Empleado::where('puesto', 'Supervisor')->get();
         return view('empleado.listaempleado', ['empleados' => $supervisores]);
     }
 
-    public function getAsesores(Request $request) {
+    public function getAsesores(Request $request)
+    {
         $query = $request->input('query');
         $wordsquery = explode(' ', $query);
-        $asesores = Empleado::where(function($q) use($wordsquery) {
+        $asesores = Empleado::where(function ($q) use ($wordsquery) {
             foreach ($wordsquery as $word) {
                 $q->orWhere('nombre', 'LIKE', "%$word%")
-                  ->orWhere('paterno', 'LIKE', "%$word%")
-                  ->orWhere('materno', 'LIKE', "%$word%");
+                    ->orWhere('paterno', 'LIKE', "%$word%")
+                    ->orWhere('materno', 'LIKE', "%$word%");
             }
         });
         $asesores = $asesores->where('tipo', 'Asesor')->get();
         return view('empleado.asesores', ['asesores' => $asesores]);
     }
-
-
 }

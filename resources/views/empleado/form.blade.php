@@ -61,9 +61,9 @@
 						@endforeach
 					</select>
 				</div>
-				{{-- <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="tipo">✱Puesto:</label>
-                    <select required class="form-control" id="tipo" name="tipo">
+                    <select required class="form-control" id="tipo" name="puesto">
                         <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
                         	Seleccionar
                     	</option>
@@ -116,7 +116,7 @@
                         	Administrador
                     	</option>
                     </select>
-				</div> --}}
+				</div>
 			</div>
 		</div>
 		<div class="card-header">
