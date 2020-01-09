@@ -4,6 +4,8 @@
 
 <div class="container">
 
+    <h3 class="text-center text-uppercase text-muted"> SEGUIMIENTO DE CITAS/PENDIENTES</h3>
+
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
