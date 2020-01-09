@@ -13,6 +13,7 @@
                             <th>Prospecto</th>
                             <th>Asesor</th>
                             <th>Fecha cita</th>
+                            <th>Hora</th>
                             <th>Confirmar</th>
                             <th>Cancelar</th>
                         </tr>
@@ -23,6 +24,7 @@
                             <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}} {{$cita->prospecto->apmaterno}}</td>
                             <td>{{$cita->prospecto->asesor()->first()->nombre}}  {{$cita->prospecto->asesor()->first()->paterno}} {{$cita->prospecto->asesor->first()->materno}}</td>
                             <td>{{$cita->fecha_cita}}</td>
+                            <td>{{$cita->hora}}</td>
                             <td>
                                 <a href="#" class="btn btn-success">Aceptar</a>
                             </td>

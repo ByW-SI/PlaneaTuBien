@@ -24,7 +24,6 @@ class StoreCitaService
         if ($this->estaDefinidaLaFechaDeCita()) {
             $this->actualizarStatusProspecto('Cita');
         } else {
-            dd('no esta definida');
             $this->actualizarStatusProspecto('Pendiente');
         }
     }
@@ -59,6 +58,7 @@ class StoreCitaService
             'prospecto_id' => $request->prospecto_id,
             'clave_preautorizacion' => $request->clave_preautorizacion,
             'fecha_cita' => $request->fecha_cita,
+            'hora' => $request->hora
         ]);
     }
 

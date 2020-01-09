@@ -14,15 +14,19 @@
           <input type="hidden" name="prospecto_id" value="{{$prospecto->id}}">
           <!-- FILA-->
           <div class="form-row">
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
               <label for="recipient-name" class="col-form-label">Clave de Preautorizacion:</label>
               <input type="text" class="form-control" value="POLJH/LP/3/0300" name="clave_preautorizacion">
             </div>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
               <label for="message-text" class="col-form-label">Fecha de cita:</label>
               <input type="date" name="fecha_cita" class="form-control">
             </div>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
+              <label for="message-text" class="col-form-label">Hora cita:</label>
+              <input type="time" name="hora" class="form-control">
+            </div>
+            <div class="form-group col-sm-3">
               <label for="message-text" class="col-form-label">Número de tarjetas:</label>
               <input type="text" name="numeroTarjeta" class="form-control">
             </div>

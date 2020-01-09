@@ -12,7 +12,8 @@ class Citas extends Model
         'id',
         'prospecto_id',
         'clave_preautorizacion',
-        'fecha_cita'
+        'fecha_cita',
+        'hora'
     ];
     
     protected $hidden=[
