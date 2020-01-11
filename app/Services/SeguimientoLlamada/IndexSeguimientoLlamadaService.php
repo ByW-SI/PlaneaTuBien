@@ -6,7 +6,7 @@ use App\Prospecto;
 use App\ResultadoLlamada;
 use Illuminate\Support\Facades\Auth;
 
-class IndexSeguimientoLLamadaService
+class IndexSeguimientoLlamadaService
 {
     protected $seguimientoLlamadas;
     protected $estatusLlamada;

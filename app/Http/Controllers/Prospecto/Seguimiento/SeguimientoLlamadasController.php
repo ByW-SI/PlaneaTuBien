@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Prospecto;
 use App\ResultadoLlamada;
 use App\SeguimientoLlamadas;
-use App\Services\SeguimientoLlamada\IndexSeguimientoLLamadaService;
+use App\Services\SeguimientoLlamada\IndexSeguimientoLlamadaService;
 
 class SeguimientoLlamadasController extends Controller
 {
@@ -19,7 +19,7 @@ class SeguimientoLlamadasController extends Controller
      */
     public function index()
     {
-        $indexSeguimientoLLamadaService = new IndexSeguimientoLLamadaService();
+        $indexSeguimientoLLamadaService = new IndexSeguimientoLlamadaService();
         $prospectos = $indexSeguimientoLLamadaService->getProspectos();
         $estatusLlamada = $indexSeguimientoLLamadaService->getEstastusLlamada();
         $seguimientoLlamadas = $indexSeguimientoLLamadaService->getSeguimientoLLamadas();
