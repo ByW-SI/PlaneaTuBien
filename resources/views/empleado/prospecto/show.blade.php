@@ -15,7 +15,7 @@
 			Prospecto: {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 		</h4>
 		<h4>
-			Asesor: {{$prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
+			Asesor: {{ count($prospecto->asesor) ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
 		</h4>
 	</div>
 	<div class="card-header">
@@ -73,7 +73,7 @@
             </div>
 			<div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Asesor:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : "No asignado" }}" readonly="">
+                <input type="text" class="form-control" value="{{ count($prospecto->asesor) ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : "No asignado" }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Estatus Prospecto:</label>

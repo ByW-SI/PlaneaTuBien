@@ -163,7 +163,7 @@ class ProspectoController extends Controller
     public function viewAsignar()
     {
         $asesores = Empleado::where('cargo', 'Asesor')->get();
-        $prospectos = Prospecto::whereNull('estatus_id')->get();
+        $prospectos = Prospecto::doesnthave('asesores')->get();
 
         return view('prospectos.asignar', compact('asesores', 'prospectos'));
     }
