@@ -73,7 +73,8 @@ class EmpleadoController extends Controller
     {
         $sucursales = Sucursal::get();
         $empleado = new Empleado;
-        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'edit' => false]);
+        $gerentes = Empleado::get();
+        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'gerentes' => $gerentes, 'edit' => false]);
         // return view('empleado.create', ['sucursales' => $sucursales]);
     }
 

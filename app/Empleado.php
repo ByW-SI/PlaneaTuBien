@@ -165,6 +165,10 @@ class Empleado extends Model
         return $query->whereNotIn('id', $users_id);
     }
 
+    public function gerentes($query){
+        return $query->where('cargo','Gerente');
+    }
+
     /**
      * ========
      * BOOLEANS

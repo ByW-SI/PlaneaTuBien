@@ -37,6 +37,10 @@ class StoreEmpleadoService
             'tipo' => $request->puesto,
         ]);
 
+        $empleado->update([
+            'id_jefe' => $request->jefe_id
+        ]);
+
         /** Fin Pendiennte **/
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
