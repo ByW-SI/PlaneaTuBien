@@ -14,6 +14,7 @@
                         <tr class="text-center">
                             <th>Status</th>
                             <th>Prospecto</th>
+                            <th>Clave de preautorizacion</th>
                             <th>Asesor</th>
                             <th>Fecha cita</th>
                             <th>Hora</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
                             <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}} {{$cita->prospecto->apmaterno}}</td>
+                            <td>{{$cita->clave_preautorizacion}}</td>
                             <td>{{$cita->prospecto->asesor()->first()->nombre}}  {{$cita->prospecto->asesor()->first()->paterno}} {{$cita->prospecto->asesor->first()->materno}}</td>
                             <td>{{$cita->fecha_cita}}</td>
                             <td>{{$cita->hora}}</td>
