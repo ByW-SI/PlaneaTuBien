@@ -40,7 +40,9 @@
                         <th scope="row">{{ $prospecto->telefono }}</th>
                         <td nowrap>
                             <div class="form-group" style="display: block; width: 150px;">
-                                <textarea class="form-control inputComentario" name="comentario[]" rows="3" maxlength="500" prospectoId="{{$prospecto->id}}">{{ $prospecto->seguimientoLlamadas->count() > 0 && $prospecto->seguimientoLlamadas->last()->comentario !== null ? $prospecto->seguimientoLlamadas->last()->comentario : ""}}</textarea>
+                                <textarea class="form-control inputComentario" name="comentario[]" rows="3"
+                                    maxlength="500"
+                                    prospectoId="{{$prospecto->id}}">{{ $prospecto->seguimientoLlamadas->count() > 0 && $prospecto->seguimientoLlamadas->last()->comentario !== null ? $prospecto->seguimientoLlamadas->last()->comentario : ""}}</textarea>
                                 <input type="hidden" name="prospecto_id[]" value="{{ $prospecto->id }}">
                             </div>
                         </td>
@@ -50,10 +52,12 @@
                         </td>
                         {{-- INPUT STATUS --}}
                         <td style="display: inline-block; width: 150px;">
-                            <select name="resultado_llamada_id[]" class="form-control estatus inputEstatus" prospectoId="{{$prospecto->id}}">
+                            <select name="resultado_llamada_id[]" class="form-control estatus inputEstatus"
+                                prospectoId="{{$prospecto->id}}">
                                 <option value="">Seleccionar</option>
                                 @foreach($estatusLlamada as $codigo)
-                                <option value="{{ $codigo->id }}">{{ $codigo->nombre.' ('.$codigo->codigo.')' }}</option>
+                                <option value="{{ $codigo->id }}">{{ $codigo->nombre.' ('.$codigo->codigo.')' }}
+                                </option>
                                 @endforeach
                             </select>
                         </td>
@@ -132,15 +136,20 @@ $(document).ready(function() {
     console.log( $('#perteneceAUsuarioAutenticado').val() );
 });
 
-$(document).on('change', '.fechaSeguimiento', async function(){
+$(document).on('focusout', '.fechaSeguimiento', async function(){
     prospectoId = $(this).attr('prospectoId');
     response = await actualizarDatosProspecto(prospectoId);
-    console.log('respuesta despues de guardar', response);
-    if(requiereCita(prospectoId) ){
-        mostrarModalCrear(prospectoId);
-    }else{
-        location.reload(true);
+    // console.log('fecha seguimiento lenfght', ();
+
+    if(($(this).val()).length){
+        if(requiereCita(prospectoId) ){
+            mostrarModalCrear(prospectoId);
+        }else{
+            location.reload(true);
+        }
     }
+
+    
 });
 
 $(document).on('change', '.modalCrearCitaInput', function(){
