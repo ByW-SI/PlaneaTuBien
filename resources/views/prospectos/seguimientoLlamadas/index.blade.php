@@ -175,8 +175,8 @@ async function actualizarDatosProspecto(prospectoId){
         prospectoId: prospectoId,
         fechaSeguimiento: fechaSeguimiento
         },
-    success:function(request){
-        // return request;
+    success:function(response){
+        console.log(response);
      },
 });
 
