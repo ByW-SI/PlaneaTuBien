@@ -23,14 +23,6 @@ class User extends Authenticatable
         'email',
         'password'
     ];
-    
-    public function perfil() {
-        return $this->belongsTo('App\Perfil');
-    }
-
-    public function empleado() {
-        return $this->belongsTo('App\Empleado');
-    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,4 +32,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function perfil() {
+        return $this->belongsTo('App\Perfil');
+    }
+
+    public function empleado() {
+        return $this->belongsTo('App\Empleado');
+    }
 }

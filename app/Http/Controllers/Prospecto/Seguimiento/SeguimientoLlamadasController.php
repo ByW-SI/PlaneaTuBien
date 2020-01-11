@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Prospecto;
 use App\ResultadoLlamada;
 use App\SeguimientoLlamadas;
+use App\Services\SeguimientoLlamada\IndexSeguimientoLLamadaService;
 
 class SeguimientoLlamadasController extends Controller
 {
@@ -18,10 +19,12 @@ class SeguimientoLlamadasController extends Controller
      */
     public function index()
     {
-    	$estatusLlamada = ResultadoLlamada::get();
+        $indexSeguimientoLLamadaService = new IndexSeguimientoLLamadaService();
+        $prospectos = $indexSeguimientoLLamadaService->getProspectos();
+        $estatusLlamada = $indexSeguimientoLLamadaService->getEstastusLlamada();
+        $seguimientoLlamadas = $indexSeguimientoLLamadaService->getSeguimientoLLamadas();
 
-    	$prospectos = $this->getProspectosXEstatus("1");
-    	$seguimientoLlamadas = $this->getSeguimientoLlamadaProspectos($prospectos);
+        // return Prospecto::where('estatus_id',1)->has('asesores')->get();
 
         return view('prospectos.seguimientoLlamadas.index', compact('prospectos', 'estatusLlamada', 'seguimientoLlamadas'));
     }

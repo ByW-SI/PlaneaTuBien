@@ -44,30 +44,35 @@ class Empleado extends Model
         'deleted_at'
     ];
 
-    protected $dates=['deleted_at'];
+    protected $dates = ['deleted_at'];
 
     public function getFullNameAttribute()
     {
-        return $this->nombre." ".$this->paterno." ".$this->materno;
+        return $this->nombre . " " . $this->paterno . " " . $this->materno;
     }
 
-    public function clientes() {
+    public function clientes()
+    {
         return $this->hasOne('App\Cliente');
     }
 
-    public function contactos(){
+    public function contactos()
+    {
         return $this->hasMany('App\EmpleadoContacto');
     }
 
-    public function direccion(){
+    public function direccion()
+    {
         return $this->hasOne('App\EmpleadoDireccion');
     }
 
-    public function accidentes(){
+    public function accidentes()
+    {
         return $this->hasMany('App\EmpleadoAccidente');
     }
 
-    public function beneficiario(){
+    public function beneficiario()
+    {
         return $this->hasOne('App\EmpleadoBeneficiario');
     }
 
@@ -76,32 +81,39 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadoPermiso');
     }
 
-    public function faltas(){
+    public function faltas()
+    {
         return $this->hasMany('App\EmpleadoFalta');
     }
 
 
-    public function jefe(){
+    public function jefe()
+    {
         return $this->belongsTo('App\Empleado', 'id_jefe', 'id');
     }
 
-    public function empleados(){
+    public function empleados()
+    {
         return $this->hasMany('App\Empleado', 'id_jefe', 'id');
     }
 
-    public function sucursal(){
+    public function sucursal()
+    {
         return $this->belongsTo('App\Sucursal');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne('App\User');
     }
 
-    public function datos_laborales(){
+    public function datos_laborales()
+    {
         return $this->hasMany('App\EmpleadoDatoLab');
     }
 
-    public function estudio(){
+    public function estudio()
+    {
         return $this->hasOne('App\EmpleadoEstudio');
     }
     public function emergencia()
@@ -115,25 +127,52 @@ class Empleado extends Model
 
     public function faltas_administrativas()
     {
-        return $this->hasMany('App\EmpleadoFaltaAdministrativa');   
+        return $this->hasMany('App\EmpleadoFaltaAdministrativa');
     }
-    public function prospectos(){
+    public function prospectos()
+    {
         return $this->belongsToMany('App\Prospecto')
-                    ->using('App\EmpleadoProspecto')
-                    ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
+            ->using('App\EmpleadoProspecto')
+            ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
     }
-    public function crms(){
-        return $this->hasManyThrough('App\ProspectoCRM','App\Prospecto');
-
+    public function crms()
+    {
+        return $this->hasManyThrough('App\ProspectoCRM', 'App\Prospecto');
     }
 
     /**
-     * Scope methods
+     * ==========
+     * ATTRIBUTES
+     * ==========
      */
 
-    public function scopeNoUsers($query){
-        $users_id = User::whereNotNull('empleado_id')->pluck('empleado_id')->all();
-        return $query->whereNotIn('id',$users_id);
+    public function getInicialesAttribute()
+    {
+        $inicialNombre = $this->nombre ? $this->nombre[0] : '';
+        $inicialPaterno = $this->paterno ? $this->paterno[0] : '';
+        return $inicialNombre . $inicialPaterno;
     }
-    
+
+    /**
+     * =============
+     * SCOPE METHODS
+     * =============
+     */
+
+    public function scopeNoUsers($query)
+    {
+        $users_id = User::whereNotNull('empleado_id')->pluck('empleado_id')->all();
+        return $query->whereNotIn('id', $users_id);
+    }
+
+    /**
+     * ========
+     * BOOLEANS
+     * ========
+     */
+
+    public function esAdmin()
+    {
+        return $this->tipo == 'Admin' ? true : false;
+    }
 }

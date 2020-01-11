@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Prospecto extends Model
 {
@@ -33,7 +34,7 @@ class Prospecto extends Model
         'numeroTarjetas'
     ];
 
-    protected $hidden=[
+    protected $hidden = [
         'created_at',
         'updated_at',
         'deleted_at',
@@ -41,54 +42,82 @@ class Prospecto extends Model
 
     ];
 
-    protected $dates=[
+    protected $dates = [
         'deleted_at'
     ];
 
     public function getFullNameAttribute()
     {
-        return $this->nombre." ".$this->appaterno." ".$this->apmaterno;
+        return $this->nombre . " " . $this->appaterno . " " . $this->apmaterno;
     }
 
-    public function asesores() {
+    public function asesores()
+    {
         return $this->belongsToMany('App\Empleado')
-                    ->using('App\EmpleadoProspecto')
-                    ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
+            ->using('App\EmpleadoProspecto')
+            ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
     }
 
-    public function asesor(){
+    public function asesor()
+    {
         return $this->asesores()->having('pivot_temporal', '0');
     }
 
-    public function empleado(){
+    public function empleado()
+    {
         return $this->belongsTo('App\Empleado');
     }
 
-    public function estatus() {
+    public function estatus()
+    {
         return $this->belongsTo('App\EstatusProspecto');
     }
 
-    public function documentos() {
+    public function documentos()
+    {
         return $this->hasOne('App\Documento');
     }
 
-    public function cotizaciones() {
+    public function cotizaciones()
+    {
         return $this->hasMany('App\Cotizacion');
     }
 
-    public function pago_inscripcions() {
+    public function pago_inscripcions()
+    {
         return $this->hasMany('App\PagoInscripcion');
     }
 
-    public function crms(){
-        return $this->hasMany('App\ProspectoCRM')->orderBy('fecha_aviso','asc');
+    public function crms()
+    {
+        return $this->hasMany('App\ProspectoCRM')->orderBy('fecha_aviso', 'asc');
     }
 
-    public function perfil(){
-        return $this->hasOne('App\PerfilDatosPersonalCliente','prospecto_id','id');
+    public function perfil()
+    {
+        return $this->hasOne('App\PerfilDatosPersonalCliente', 'prospecto_id', 'id');
     }
 
-    public function seguimientoLlamadas(){
+    public function seguimientoLlamadas()
+    {
         return $this->hasMany('App\SeguimientoLlamadas', 'prospecto_id', 'id');
+    }
+
+    /**
+     * ========
+     * BOOLEANS
+     * ========
+     */
+
+    public function perteneceAUsuarioAutenticado()
+    {
+
+        if (is_null(Auth::user()->empleado)) {
+            return false;
+        }
+
+        return $this->asesor()->find(Auth::user()->empleado->id)
+            ? true
+            : false;
     }
 }

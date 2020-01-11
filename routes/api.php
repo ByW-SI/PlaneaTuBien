@@ -21,5 +21,6 @@ Route::get('planes/{p_ahorrado}','Plan\PlanController@getPlanes');
 Route::get('cotizar/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@calcular');
 Route::get('inscripcion/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@inscripcion');
 
+Route::post('seguimiento_llamadas/store', 'Api\ApiSeguimientoLLamadaController@store');
 
 Route::get('empleados/{id}','Empleado\ApiEmpleadoController@getEmpleado');
