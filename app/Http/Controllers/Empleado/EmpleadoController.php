@@ -113,7 +113,8 @@ class EmpleadoController extends Controller
     {
         $empleado = Empleado::withTrashed()->find($id);
         $sucursales = Sucursal::get();
-        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'edit' => true]);
+        $gerentes = Empleado::get();
+        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'gerentes' => $gerentes, 'edit' => true]);
     }
 
     /**

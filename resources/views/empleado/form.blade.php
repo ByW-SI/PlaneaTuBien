@@ -58,8 +58,8 @@
 
 				{{-- CONTENEDOR INPUT SUCURSAL --}}
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-					<label for="sucursal">Sucursal:</label>
-					<select class="form-control" name="sucursal">
+					<label for="sucursal">✱Sucursal:</label>
+					<select class="form-control" name="sucursal" required>
 						<option value="" {{$empleado->sucursal_id == "" ? "selected" : ""}}>Seleccione la sucursal
 						</option>
 						@foreach ($sucursales as $sucursal)
