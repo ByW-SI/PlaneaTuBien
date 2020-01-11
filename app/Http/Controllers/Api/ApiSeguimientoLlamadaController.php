@@ -12,10 +12,10 @@ class ApiSeguimientoLlamadaController extends Controller
 {
     public function store(Request $request)
     {
+        $prospecto = Prospecto::find($request->prospectoId);
+        $resultadoLLamada = ResultadoLlamada::find($request->estatus);
 
         try {
-            $prospecto = Prospecto::find($request->prospectoId);
-            $resultadoLLamada = ResultadoLlamada::find($request->estatus);
             SeguimientoLlamadas::create([
                 'asesor_id' => $prospecto->asesor()->first()->id,
                 'prospecto_id' => $prospecto->id,
