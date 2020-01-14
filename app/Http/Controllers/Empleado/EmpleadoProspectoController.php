@@ -16,34 +16,10 @@ class EmpleadoProspectoController extends Controller
      */
     public function index(Empleado $empleado, Request $request)
     {
-        // if ($request->buscar) {
-        //     $wordsquery = explode(" ",$request->buscar);
-        //     $prospectos=$empleado->prospectos()
-        //                 ->where(function ($query)use ($wordsquery)
-        //                 {
-        //                     foreach ($wordsquery as $word) {
-        //                         $query = $query->orWhere('nombre', 'like', "%{$word}%")
-        //                                         ->orWhere('appaterno', 'like', "%{$word}%")
-        //                                         ->orWhere('apmaterno', 'like', "%{$word}%");
-        //                     }
-        //                     $query->where('aprobado',1)
-        //                         ->orWhereNull('aprobado');
-        //                 })->get();   
-        // }
-        // else{
-        //     $prospectos=$empleado->prospectos()
-        //                 ->where(function ($query)
-        //                 {
-        //                     $query->where('aprobado',1)
-        //                         ->orWhereNull('aprobado');
-        //                 })->get();       
-        // }
-        // dd($prospectos);
         if($empleado->tipo === "Admin" )
             $prospectos = Prospecto::get();
         else
-            $prospectos = $empleado->prospectos()->get();
-        // dd($prospectos);
+            $prospectos = $empleado->prospectos;
 
         return view('empleado.prospecto.index', ['empleado' => $empleado, 'prospectos' => $prospectos, 'buscar' => $request->buscar]);
     }

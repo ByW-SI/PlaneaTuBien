@@ -131,9 +131,7 @@ class ProspectoController extends Controller
         $prospecto->estatus()->associate(1);
         $prospecto->save();
 
-        $prospectos = Prospecto::get();
-
-        return view('empleado.prospecto.index', ['empleado' => Auth::user()->empleado, 'prospectos' => $prospectos]);
+        return redirect()->route('empleados.prospectos.index', ['id' => Auth::user()->empleado]);
     }
 
     /**
