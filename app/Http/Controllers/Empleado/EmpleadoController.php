@@ -131,6 +131,7 @@ class EmpleadoController extends Controller
         $empleado->update($request->all());
         $sucursal = Sucursal::find($request->sucursal);
         $empleado->sucursal()->associate($sucursal);
+        $empleado->id_jefe = $request->jefe_id;
         //dd($request->all());
         if ($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
             $empleado->direccion->update($request->all());
