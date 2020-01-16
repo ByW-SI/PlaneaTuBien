@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('empleados/{empleado}/prospectos','Empleado\ApiEmpleadoController@getProspectos');
+
 Route::get('planes/{p_ahorrado}','Plan\PlanController@getPlanes');
 Route::get('cotizar/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@calcular');
 Route::get('inscripcion/{monto}/{plan_id}/{descuento}','Plan\CotizadorController@inscripcion');

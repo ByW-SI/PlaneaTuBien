@@ -14,4 +14,9 @@ class ApiEmpleadoController extends Controller
         // return response()->json(['id'=>'ok'],200);
         return response()->json($empleado,200);
     }
+
+    public function getProspectos(Empleado $empleado){
+    	return response()->json($empleado->prospectos);
+    	// return $empleado->prospectos;
+    }
 }

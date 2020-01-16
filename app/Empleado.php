@@ -165,8 +165,9 @@ class Empleado extends Model
         return $query->whereNotIn('id', $users_id);
     }
 
-    public function gerentes($query){
-        return $query->where('cargo','Gerente');
+    public function gerentes($query)
+    {
+        return $query->where('cargo', 'Gerente');
     }
 
     /**
@@ -178,5 +179,10 @@ class Empleado extends Model
     public function esAdmin()
     {
         return $this->tipo == 'Admin' ? true : false;
+    }
+
+    public function tieneProspecto(Prospecto $prospecto)
+    {
+        return !is_null($this->prospectos()->find($prospecto->id));
     }
 }

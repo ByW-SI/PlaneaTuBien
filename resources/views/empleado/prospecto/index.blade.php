@@ -24,7 +24,9 @@
 			<table class="table table-striped table-bordered" id="prospectos-table">
 				<thead>
 					<tr>
+						<th scope="col" class="text-center">Id</th>
 						<th scope="col" class="text-center">Cliente</th>
+						<th scope="col" class="text-center">Asesor</th>
 						<th scope="col" class="text-center">Teléfono</th>
 						<th scope="col" class="text-center">Estado</th>
 						<th scope="col" class="text-center">Ver</th>
@@ -39,8 +41,12 @@
 				<tbody>
 					@forelse ($prospectos as $prospecto)
 						<tr>
+							<td>{{$prospecto->id}}</td>
 							<td scope="col" class="text-center">
 								{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
+							</td>
+							<td>
+								{{$prospecto->asesor ? $prospecto->asesor->nombre : 'N/D'}}
 							</td>
 							<td>{{$prospecto->celular}}</td>
 							<td class="text-center">

@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 
 use App\Console\Commands\UpdateMensualidades;
 use App\Empleado;
+use App\Prospecto;
 use App\TipoContrato;
 use App\TipoJornada;
 
@@ -18,6 +19,9 @@ class PruebasController extends Controller
 {
     public function index()
     {
-        return Empleado::with('jefe')->get();
+        $asesor = Empleado::find(3);
+        $prospecto = Prospecto::find(4);
+        dd($asesor->tieneProspecto($prospecto));
+        return $asesor->tieneProspecto($prospecto);
     }
 }

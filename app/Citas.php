@@ -13,7 +13,8 @@ class Citas extends Model
         'prospecto_id',
         'clave_preautorizacion',
         'fecha_cita',
-        'hora'
+        'hora',
+        'esta_confirmada'
     ];
     
     protected $hidden=[
@@ -24,4 +25,15 @@ class Citas extends Model
     public function prospecto(){
         return $this->belongsTo('App\Prospecto');
     }
+
+    /**
+     * =====
+     * SCOPE
+     * =====
+     */
+
+    public function scopeConfirmadas($query){
+        return $query->where('esta_confirmada',1);
+    }
+
 }

@@ -171,13 +171,16 @@ class ProspectoController extends Controller
         $asesor = Empleado::find($request->asesor);
         foreach ($request->prospectos as $prospecto) {
             $prospecto = Prospecto::find($prospecto);
-            $prospecto->asesores()->attach($asesor, ['activo' => 1, 'temporal' => 0]);
-            // Se asigna el estatus en seguimiento llamada
-            $prospecto->estatus()->associate(1);
-            $prospecto->save();
-            $prospecto->update([
-                'empleado_id' => $asesor->id,
-            ]);
+
+            if (!$asesor->tieneProspecto($prospecto)) {
+                $prospecto->asesores()->attach($asesor, ['activo' => 1, 'temporal' => 0]);
+                // Se asigna el estatus en seguimiento llamada
+                $prospecto->estatus()->associate(1);
+                $prospecto->save();
+                $prospecto->update([
+                    'empleado_id' => $asesor->id,
+                ]);
+            }
         }
         $prospectos = Prospecto::whereNull('estatus_id')->get();
         return response(['prospectos' => $prospectos], 200);

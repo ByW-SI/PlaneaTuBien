@@ -60,7 +60,7 @@ class Prospecto extends Model
 
     public function asesor()
     {
-        return $this->asesores()->having('pivot_temporal', '0');
+        return $this->belongsTo('App\Empleado', 'empleado_id', 'id');
     }
 
     public function empleado()
