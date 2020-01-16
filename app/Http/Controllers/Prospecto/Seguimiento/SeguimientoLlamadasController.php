@@ -24,6 +24,8 @@ class SeguimientoLlamadasController extends Controller
         $estatusLlamada = $indexSeguimientoLLamadaService->getEstastusLlamada();
         $seguimientoLlamadas = $indexSeguimientoLLamadaService->getSeguimientoLLamadas();
 
+        // return $prospectos->pluck('asesor')->pluck('sucursal');
+
         // return Prospecto::where('estatus_id',1)->has('asesores')->get();
 
         return view('prospectos.seguimientoLlamadas.index', compact('prospectos', 'estatusLlamada', 'seguimientoLlamadas'));

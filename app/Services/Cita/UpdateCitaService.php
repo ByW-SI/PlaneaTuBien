@@ -2,35 +2,52 @@
 
 namespace App\Services\Cita;
 
+use App\CitaCancelada;
 use App\EstatusProspecto;
 use App\Prospecto;
+use App\SeguimientoLlamadas;
+use Carbon\Carbon;
 
 class UpdateCitaService
 {
 
     protected $request;
+    protected $route;
+
     protected $cita;
     protected $prospecto;
+    protected $asesor;
+    protected $seguimientoLLamada;
 
     public function __construct($request, $cita)
     {
         $this->setCita($cita);
         $this->setProspecto($cita);
+        $this->setAsesor($this->prospecto);
         $this->setRequest($request);
         $this->actualizarProspecto($request);
 
         if ($this->confirmoCita()) {
             $this->actualizarEstatusProspecto('Cita Confirmada');
+            $this->establecerRutaDeCitasConfirmadas();
             $this->confirmarCita();
         }
-
+        
         if ($this->reagendoCita()) {
-            $this->actualizarEstatusProspecto('Cita Pendiente Reprogramar');
+            $this->actualizarFechaCita();
+            $this->establecerRutaDeCitas();
         }
 
-        if($this->reagendoLlamada()){
-            // $this->prospectoACitaPendiente();
+        if ($this->reagendoLlamada()) {
+            $this->reagendarLLamada();
+            $this->establecerRutaDeCitasReprogramables();
         }
+
+        if($this->canceloCita()){
+            $this->crearCitaCancelada();
+            $this->establecerRutaDeCitasCanceladas();
+        }
+        // dd('doesnt work');
     }
 
     /**
@@ -39,17 +56,61 @@ class UpdateCitaService
      * =======
      */
 
-    public function confirmarCita(){
+    public function crearCitaCancelada(){
+        $this->citaCancelada = CitaCancelada::create([
+            'cita_id' => $this->cita->id,
+            'comentario' => $this->request->comentarioCancelacion,
+            'asesor_confirmador_id' => $this->request->idAsesorQueConfirma,
+            'tipo_cancelacion' => $this->request->opcionCancelacion,
+        ]);
+    }
+
+    public function reagendarLlamada(){
+        $this->seguimientoLLamada = SeguimientoLlamadas::create([
+            'asesor_id' => $this->asesor->id,
+            'prospecto_id' => $this->prospecto->id,
+            'resultado_llamada_id' => 4,
+            'fecha_contacto' => Carbon::now(),
+            'fecha_siguiente_contacto' => $this->request->nuevaFechaLlamada,
+            'comentario' => 'Reprogramar cita',
+        ]);
+    }
+
+    public function establecerRutaDeCitasCanceladas(){
+        $this->route = 'citas.canceladas.index';
+    }
+
+    public function establecerRutaDeCitasReprogramables(){
+        $this->route = 'citas.reprogramables.index';
+    }
+
+    public function establecerRutaDeCitas(){
+        $this->route = 'citas.index';
+    }
+
+    public function establecerRutaDeCitasConfirmadas(){
+        $this->route = 'citas.confirmadas';
+    }
+
+    public function actualizarFechaCita()
+    {
+        $this->cita->update([
+            'fecha_cita' => $this->request->nuevaFechaCita,
+        ]);
+    }
+
+    public function confirmarCita()
+    {
         $this->cita->update([
             'esta_confirmada' => 1,
         ]);
     }
 
-    public function actualizarEstatusProspecto($nombreEstatus){
+    public function actualizarEstatusProspecto($nombreEstatus)
+    {
         $this->prospecto->update([
             'estatus_id' => EstatusProspecto::where('nombre', $nombreEstatus)->first()->id
         ]);
-        
     }
 
     // public function prospectoA
@@ -82,6 +143,16 @@ class UpdateCitaService
 
     /**
      * =======
+     * GETTERS
+     * =======
+     */
+
+    public function getRoute(){
+        return $this->route;
+    }
+
+    /**
+     * =======
      * SETTERS
      * =======
      */
@@ -96,8 +167,13 @@ class UpdateCitaService
         $this->prospecto = $cita->prospecto;
     }
 
-    public function setCita($cita){
+    public function setCita($cita)
+    {
         $this->cita = $cita;
+    }
+
+    public function setAsesor($prospecto){
+        $this->asesor = $this->prospecto->asesor;
     }
 
     /**
@@ -116,7 +192,12 @@ class UpdateCitaService
         return $this->request->accion == 'reagendar cita';
     }
 
-    public function reagendoLlamada(){
+    public function reagendoLlamada()
+    {
         return $this->request->accion == 'llamar para reagendar';
+    }
+
+    public function canceloCita(){
+        return $this->request->accion == 'cancelar cita';
     }
 }

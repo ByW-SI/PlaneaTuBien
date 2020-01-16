@@ -8,7 +8,7 @@ class Citas extends Model
 {
     protected $table = 'citas';
 
-	protected $fillable = [
+    protected $fillable = [
         'id',
         'prospecto_id',
         'clave_preautorizacion',
@@ -16,14 +16,20 @@ class Citas extends Model
         'hora',
         'esta_confirmada'
     ];
-    
-    protected $hidden=[
+
+    protected $hidden = [
         'created_at',
         'updated_at'
     ];
 
-    public function prospecto(){
+    public function prospecto()
+    {
         return $this->belongsTo('App\Prospecto');
+    }
+
+    public function citaCancelada()
+    {
+        return $this->hasOne('App\CitaCancelada', 'cita_id', 'id');
     }
 
     /**
@@ -32,8 +38,17 @@ class Citas extends Model
      * =====
      */
 
-    public function scopeConfirmadas($query){
-        return $query->where('esta_confirmada',1);
+    public function scopeNoConfirmadas($query){
+        return $query->where('esta_confirmada',0);
     }
 
+    public function scopeConfirmadas($query)
+    {
+        return $query->where('esta_confirmada', 1);
+    }
+
+    public function scopeCanceladas($query)
+    {
+        return $query->has('citaCancelada');
+    }
 }

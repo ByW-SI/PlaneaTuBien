@@ -153,6 +153,8 @@ Route::post('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasCo
 Route::post('seguimiento/llamadas/nocalificado', 'Prospecto\Seguimiento\SeguimientoLlamadasController@noCalificado')->name('seguimiento.llamadas.nocalificado')->middleware('auth');
 
 // CITAS
+Route::get('citas/canceladas', 'Cita\CitaController@canceladas')->name('citas.canceladas.index');
+Route::get('citas/reprogramables', 'Cita\CitaController@reprogramables')->name('citas.reprogramables.index');
 Route::get('citas/confirmadas', 'Cita\CitaController@confirmadas')->name('citas.confirmadas');
 Route::get('citas', 'Cita\CitaController@index')->name('citas.index');
 Route::post('citas/store', 'Cita\CitaController@store')->name('citas.store');

@@ -35,7 +35,7 @@
                             <td>{{$cita->hora}}</td>
                             <td>
                                 {{-- <a href="#" class="btn btn-primary">VER</a> --}}
-                                @include('citas.modals.edit', ['cita' => $cita])
+                                @include('citas.modals.edit', ['cita' => $cita, 'asesores'=>$asesores])
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target=".modalCitas-{{$cita->prospecto->id}}">
                                     Ver
@@ -68,25 +68,26 @@
         var table = $('#citas').DataTable();
         } );
 
-    // $(document).on('change', '.inputAccion', function(){
+    $(document).on('change', '.inputAccion', function(){
 
-    //     const accion = $(this).val();
-    //     const prospectoId = $(this).attr('prospectoId');
-    //     console.log(accion);
+        const accion = $(this).val();
+        const prospectoId = $(this).attr('prospectoId');
 
-    //     if(accion == 'reagendar cita'){
-    //         mostrarInputsReagendarCita(prospectoId);
-    //     }
+        ocultarInputsExtra();
 
-    //     if(accion == 'llamar para reagendar'){
-    //         mostrarInputsLlamarParaReagendar(prospectoId);
-    //     }
+        if(accion == 'reagendar cita'){
+            mostrarInputsReagendarCita(prospectoId);
+        }
 
-    //     if(accion == 'cancelar cita'){
-    //         mostrarInputsCancelarCita(prospectoId);
-    //     }
+        if(accion == 'llamar para reagendar'){
+            mostrarInputsLlamarParaReagendar(prospectoId);
+        }
 
-    // });
+        if(accion == 'cancelar cita'){
+            mostrarInputsCancelarCita(prospectoId);
+        }
+
+    });
 
 /**
 * =========
@@ -94,34 +95,30 @@
 * =========
 */
 
-// function mostrarInputsReagendarCita(prospectoId){
-//     $(`.inputsExtra[prospectoId=${prospectoId}]`).html(`
-//         <label>Nueva fecha de cita</label>
-//         <input name="nuevaFechaCita" class="form-control" type="date">
-//     `);
-// }
+function ocultarInputsExtra(){
+    $(`.contenedorInputExtra`).each( function(){
+        $(this).hide();
+    } );
+}
 
-// function mostrarInputsLlamarParaReagendar(prospectoId){
-//     $(`.inputsExtra[prospectoId=${prospectoId}]`).html(`
-//         <label>Nueva fecha de llamada</label>
-//         <input name="nuevaFechaLlamada" class="form-control" type="date">
-//     `);
-// }
+function mostrarInputsReagendarCita(prospectoId){
+    $(`.contenedorInputNuevaFechaCita[prospectoId=${prospectoId}]`).show();
+}
 
-// function mostrarInputsCancelarCita(prospectoId){
-//     $(`.inputsExtra[prospectoId=${prospectoId}]`).html(`
-//         <label>comentarios</label>
-//         <textarea name="comentarios" class="form-control" type="date"></textarea>
-//         <label>Asesor que confirma</label>
-//         <select type="text" name="idAsesorQueConfirma" class="form-control">
-//             <option value="1">Asesor</option>
-//         </select>
-//         <label>Asesor del prospecto</label>
-//         <input type="text" name="asesorProspecto" class="form-control">
-//         <label>Opción de cancelación</label>
-//         <input type="text" name="opcionCancelacion" class="form-control">
-//     `);
-// }
+function mostrarInputsLlamarParaReagendar(prospectoId){
+    $(`.contenedorInputNuevaFechaLlamada[prospectoId=${prospectoId}]`).show();
+}
+
+function mostrarInputsLlamarParaReagendar(prospectoId){
+    $(`.contenedorInputNuevaFechaLlamada[prospectoId=${prospectoId}]`).show();
+}
+
+function mostrarInputsCancelarCita(prospectoId){
+    $(`.contenedorInputComentario[prospectoId=${prospectoId}]`).show();
+    $(`.contenedorInputAsesorQueConfirma[prospectoId=${prospectoId}]`).show();
+    $(`.contenedorInputAsesorDelProspecto[prospectoId=${prospectoId}]`).show();
+    $(`.contenedorInputOpcionesCancelacion[prospectoId=${prospectoId}]`).show();
+}
 
 </script>
 

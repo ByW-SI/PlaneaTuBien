@@ -103,6 +103,10 @@ class Prospecto extends Model
         return $this->hasMany('App\SeguimientoLlamadas', 'prospecto_id', 'id');
     }
 
+    public function citas(){
+        return $this->hasMany('App\Citas');
+    }
+
     /**
      * ========
      * BOOLEANS

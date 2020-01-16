@@ -170,6 +170,10 @@ class Empleado extends Model
         return $query->where('cargo', 'Gerente');
     }
 
+    public function scopeAsesores($query){
+        return $query->where('cargo','Asesor');
+    }
+
     /**
      * ========
      * BOOLEANS
