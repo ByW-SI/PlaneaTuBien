@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h3 class="text-center text-uppercase text-muted mt-4"> SEGUIMIENTO DE CITAS/PENDIENTES</h3>
+    <h3 class="text-center text-uppercase text-muted mt-4"> SEGUIMIENTO DE CITAS</h3>
 
     <div class="card">
         <div class="card-body">
