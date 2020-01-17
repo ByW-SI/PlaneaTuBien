@@ -18,7 +18,7 @@ class CitaController extends Controller
     {
         $citas = Citas::noConfirmadas()->get();
 
-        $citas = Citas::whereHas('prospecto', function ($query) {
+        $citas = Citas::noCanceladas()->whereHas('prospecto', function ($query) {
             return $query->whereHas('estatus', function ($query) {
                 return $query->where('nombre', 'Cita');
             });

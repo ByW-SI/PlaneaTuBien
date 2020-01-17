@@ -51,4 +51,8 @@ class Citas extends Model
     {
         return $query->has('citaCancelada');
     }
+
+    public function scopeNoCanceladas($query){
+        return $query->doesntHave('citaCancelada');
+    }
 }
