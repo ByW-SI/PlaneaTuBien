@@ -40,6 +40,7 @@ class UpdateCitaService
 
         if ($this->reagendoLlamada()) {
             $this->reagendarLLamada();
+            $this->actualizarEstatusProspecto('Reagendar cita');
             $this->establecerRutaDeCitasReprogramables();
         }
 

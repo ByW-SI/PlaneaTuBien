@@ -17,6 +17,13 @@ class CitaController extends Controller
     public function index()
     {
         $citas = Citas::noConfirmadas()->get();
+
+        $citas = Citas::whereHas('prospecto', function ($query) {
+            return $query->whereHas('estatus', function ($query) {
+                return $query->where('nombre', 'Cita');
+            });
+        })->get();
+
         $asesores = Empleado::asesores()->get();
         return view('citas.index', compact('citas', 'asesores'));
     }
@@ -42,12 +49,11 @@ class CitaController extends Controller
 
     public function reprogramables()
     {
-        $citas = null;
-        $seguimientoLLamadas = SeguimientoLlamadas::where('comentario', 'Reprogramar cita')->get();
-
-        if ($seguimientoLLamadas) {
-            $citas = $seguimientoLLamadas->pluck('prospecto')->flatten()->pluck('citas')->flatten()->where('esta_confirmada', 0)->unique();
-        }
+        $citas = Citas::whereHas('prospecto', function ($query) {
+            return $query->whereHas('estatus', function ($query) {
+                return $query->where('nombre', 'Reagendar cita');
+            });
+        })->get();
 
         return view('citas.reprogramables.index', compact('citas'));
     }
