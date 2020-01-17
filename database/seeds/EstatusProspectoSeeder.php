@@ -16,12 +16,13 @@ class EstatusProspectoSeeder extends Seeder
         	array('nombre' => 'Seguimiento Llamada'),
         	array('nombre' => 'Pendiente'),
         	array('nombre' => 'Cita'),
-        	array('nombre' => 'No calificadp'),
         	array('nombre' => 'Cita Confirmada'),
+        	array('nombre' => 'No calificado'),
         	array('nombre' => 'Reagendar cita'),
         	array('nombre' => 'No califica'),
         	array('nombre' => 'Cotizando'),
         	array('nombre' => 'Pagos'),
+        	array('nombre' => 'Cita Cancelada'),
         );
 
         EstatusProspecto::insert($estatusProspectos);

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h3 class="text-center text-uppercase text-muted">CITAS CANCELADAS</h3>
+    <h3 class="text-center text-uppercase text-muted">LISTA NEGRA</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-hover" id="citas">
@@ -30,14 +30,8 @@
                             {{$cita->prospecto->asesor->first()->materno}}</td>
                         <td>{{$cita->fecha_cita}}</td>
                         <td>{{$cita->hora}}</td>
-                        <td>
-                            {{-- <a href="#" class="btn btn-primary">VER</a> --}}
-                            {{-- @include('citas.modals.edit', ['cita' => $cita])
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target=".modalCitas-{{$cita->prospecto->id}}">
-                            Ver
-                            </button> --}}
-                        </td>
+                        {{-- <td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>

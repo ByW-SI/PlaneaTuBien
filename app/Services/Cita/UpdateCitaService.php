@@ -29,8 +29,8 @@ class UpdateCitaService
 
         if ($this->confirmoCita()) {
             $this->actualizarEstatusProspecto('Cita Confirmada');
-            $this->establecerRutaDeCitasConfirmadas();
             $this->confirmarCita();
+            $this->establecerRutaDeCitasConfirmadas();
         }
         
         if ($this->reagendoCita()) {
@@ -43,9 +43,10 @@ class UpdateCitaService
             $this->actualizarEstatusProspecto('Reagendar cita');
             $this->establecerRutaDeCitasReprogramables();
         }
-
+        
         if($this->canceloCita()){
             $this->crearCitaCancelada();
+            $this->actualizarEstatusProspecto('Cita Cancelada');
             $this->establecerRutaDeCitasCanceladas();
         }
         // dd('doesnt work');

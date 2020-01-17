@@ -17,7 +17,7 @@ class SeguimientoLlamadas extends Model
         'fecha_siguiente_contacto',
         'comentario'
     ];
-    
+
     protected $hidden=[
         'created_at',
         'updated_at'

@@ -108,6 +108,31 @@ class Prospecto extends Model
     }
 
     /**
+     * =============
+     * SCOPE METHODS
+     * =============
+     */
+
+    public function scopeWhereEstatusPendiente($query){
+        return $query->whereHas('estatus', function($query){
+                return $query->where('nombre','Pendiente');
+            });
+    }
+
+    public function scopeWhereEstatusCita($query){
+        return $query->whereHas('estatus', function($query){
+                return $query->where('nombre','Cita');
+            });
+    }
+
+
+    public function scopeWhereEstatusCitaCancelada($query){
+        return $query->whereHas('estatus', function($query){
+                return $query->where('nombre','Cita Cancelada');
+            });
+    }
+
+    /**
      * ========
      * BOOLEANS
      * ========

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Prospecto;
 use App\SeguimientoLlamadas;
 use App\Services\Cita\StoreCitaService;
+use App\Services\Cita\updateCitaPendienteService;
 use App\Services\Cita\UpdateCitaService;
 
 class CitaController extends Controller
@@ -16,12 +17,8 @@ class CitaController extends Controller
 
     public function index()
     {
-        $citas = Citas::noConfirmadas()->get();
-
         $citas = Citas::noCanceladas()->whereHas('prospecto', function ($query) {
-            return $query->whereHas('estatus', function ($query) {
-                return $query->where('nombre', 'Cita');
-            });
+            return $query->whereEstatusCita();
         })->get();
 
         $asesores = Empleado::asesores()->get();
@@ -60,7 +57,27 @@ class CitaController extends Controller
 
     public function canceladas()
     {
-        $citas = Citas::has('citaCancelada')->get();
+        $citas = Citas::whereHas('prospecto', function($query){
+            return $query->whereEstatusCitaCancelada();
+        })->has('citaCancelada')->get();
+
         return view('citas.canceladas.index', compact('citas'));
+    }
+
+    public function pendientes()
+    {
+        $citas = Citas::whereHas('prospecto', function ($query) {
+            return $query->whereEstatusPendiente();
+        })->with('prospecto.estatus')->get();
+
+        $asesores = Empleado::asesores()->get();
+
+        return view('citas.pendientes.index', compact('citas', 'asesores'));
+    }
+
+    public function updatePendientes(Request $request, Citas $citas)
+    {
+        $updateCitaPendienteService = new updateCitaPendienteService($request, $citas);
+        return redirect()->route($updateCitaPendienteService->getRoute());
     }
 }
