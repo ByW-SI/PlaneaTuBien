@@ -51,7 +51,7 @@
 							<td>{{$prospecto->celular}}</td>
 							<td class="text-center">
 								@if ($prospecto->empleado_id != null)
-									Seguimiento Llamada									
+									{{$prospecto->estatus->nombre}}
 								@else
 									Sin asesor
 								@endif
