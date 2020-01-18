@@ -34,7 +34,7 @@ class StoreSeguimientoLlamadaService
         try {
             $this->crearSeguimientoLlamada();
 
-            if ($this->clienteNoHaRespondido()) {
+            if ($this->clienteNoApto()) {
                 $this->crearCita();
                 $this->crearCitaCancelada();
                 $this->actualizarEstatusProspecto('Cita Cancelada');
@@ -129,18 +129,18 @@ class StoreSeguimientoLlamadaService
      * ========
      */
 
-    public function clienteNoHaRespondido()
+    public function clienteNoApto()
     {
-        if ($this->resultadoLLamada->nombre == 'No contesta') {
+        if ($this->resultadoLLamada->nombre == 'Dato Falso') {
             return true;
         }
-        if ($this->resultadoLLamada->nombre == 'Contestadora') {
+        if ($this->resultadoLLamada->nombre == 'No interesa') {
             return true;
         }
-        if ($this->resultadoLLamada->nombre == 'Deje Recado') {
+        if ($this->resultadoLLamada->nombre == 'Dato repetido') {
             return true;
         }
-        if ($this->resultadoLLamada->nombre == 'Ocupado') {
+        if ($this->resultadoLLamada->nombre == 'No cubre con perfil') {
             return true;
         }
         return false;
