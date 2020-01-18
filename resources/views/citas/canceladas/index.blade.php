@@ -11,11 +11,10 @@
                     <tr class="text-center">
                         <th>Status</th>
                         <th>Prospecto</th>
-                        <th>Clave de preautorizacion</th>
                         <th>Asesor</th>
-                        <th>Fecha cita</th>
-                        <th>Hora</th>
-                        {{-- <th>Ver</th> --}}
+                        <th>Comentario</th>
+                        <th>Asesor que confirma</th>
+                        <th>Opción de cancelación</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,14 +23,12 @@
                         <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
                         <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
                             {{$cita->prospecto->apmaterno}}</td>
-                        <td>{{$cita->clave_preautorizacion}}</td>
                         <td>{{$cita->prospecto->asesor()->first()->nombre}}
                             {{$cita->prospecto->asesor()->first()->paterno}}
                             {{$cita->prospecto->asesor->first()->materno}}</td>
-                        <td>{{$cita->fecha_cita}}</td>
-                        <td>{{$cita->hora}}</td>
-                        {{-- <td>
-                        </td> --}}
+                        <td>{{$cita->citaCancelada->comentario}}</td>
+                        <td>{{$cita->citaCancelada->asesor->nombre}}</td>
+                        <td>{{$cita->citaCancelada->tipo_cancelacion}}</td>
                     </tr>
                     @endforeach
                 </tbody>
