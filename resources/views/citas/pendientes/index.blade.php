@@ -70,7 +70,8 @@
                                                         <div class="col-12 mt-2">
                                                             <label for=""
                                                                 class="text-uppercase text-muted">Acción</label>
-                                                            <select name="accion" class="form-control" required>
+                                                            <select name="accion" class="form-control inputAccion"
+                                                                citaId="{{$cita->id}}" required>
                                                                 <option value="">Seleccionar</option>
                                                                 <option value="CONFIRMAR FECHA">Confirmar fecha</option>
                                                                 <option value="CANCELAR CITA">Cancelar</option>
@@ -79,24 +80,27 @@
                                                             </select>
                                                         </div>
                                                         {{-- INPUT FECHA CITA --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputFechaCita"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Fecha de
                                                                 cita</label>
                                                             <input type="date" name="fechaCita" class="form-control">
                                                         </div>
                                                         {{-- INPUT COMENTARIO --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputComentario"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for=""
                                                                 class="text-uppercase text-muted">Comentario</label>
                                                             <textarea name="comentarioCancelacion" cols="30" rows="10"
                                                                 class="form-control"></textarea>
                                                         </div>
                                                         {{-- INPUT ASESOR QUE CONFIRMA --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputIdAsesorQueConfirma"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Asesor que
                                                                 confirma</label>
                                                             <select name="idAsesorQueConfirma" class="form-control">
-                                                                <option value=""></option>
+                                                                <option value="">Seleccionar</option>
                                                                 @foreach ($asesores as $asesor)
                                                                 <option value="{{$asesor->id}}">{{$asesor->nombre}}
                                                                 </option>
@@ -105,13 +109,16 @@
                                                             {{-- <input type="text" name="" class="form-control"> --}}
                                                         </div>
                                                         {{-- ASESOR PROSPECTO --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputAsesorDeProspecto"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Asesor del
                                                                 prospecto</label>
-                                                            <input type="text" class="form-control" readonly>
+                                                            <input type="text" class="form-control" readonly
+                                                                value="{{$cita->prospecto->asesor->nombre}} {{$cita->prospecto->asesor->paterno}} {{$cita->prospecto->asesor->materno}}">
                                                         </div>
                                                         {{-- OPCIONES CANCELACIÓN --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputOpcionCancelacion"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Opción de
                                                                 cancelación</label>
                                                             <select name="opcionCancelacion" class="form-control">
@@ -122,7 +129,8 @@
                                                             </select>
                                                         </div>
                                                         {{-- VOLVER A LLAMAR --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputNuevaFechaLlamada"
+                                                            style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Nueva fecha
                                                                 llamada</label>
                                                             <input type="date" name="reagendarLlamada"
@@ -145,9 +153,9 @@
                                     Llamadas
                                 </button>
                                 {{-- MODAL BOTON LLAMADAS --}}
-                                <div class="modal fade" id="modal-llamadas-{{$cita->prospecto->id}}" tabindex="-1"
-                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                <div class="modal fade bd-example-modal-lg" id="modal-llamadas-{{$cita->prospecto->id}}"
+                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">LLAMADAS DE {{$cita->prospecto->nombre}}
@@ -160,10 +168,33 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        @foreach ($cita->prospecto->seguimientoLlamadas as $llamada)
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Resultado</th>
+                                                                    <th scope="col">Fecha de contacto</th>
+                                                                    <th scope="col">Fecha de siguiente contacto</th>
+                                                                    <th scope="col">Comentario</th>
+                                                                    <th scope="col"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($cita->prospecto->seguimientoLlamadas as
+                                                                $llamada)
+                                                                <tr>
+                                                                    <td nowrap>{{!$llamada->resultadoLLamada ? '' : $llamada->resultadoLLamada->nombre}}</td>
+                                                                    <td nowrap>{{$llamada->fecha_contacto}}</td>
+                                                                    <td nowrap>{{$llamada->fecha_siguiente_contacto}}</td>
+                                                                    <td nowrap>{{$llamada->comentario}}</td>
+                                                                    <td nowrap></td>
+                                                                </tr>
+                                                                @endforeach
+                                                                {{-- @foreach ($cita->prospecto->seguimientoLlamadas as $llamada)
+                                                            </tbody>
+                                                        </table>
                                                         {{$llamada->fecha_siguiente_contacto}}
-                                                        <br>
-                                                        @endforeach
+                                                                <br>
+                                                                @endforeach --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -190,6 +221,63 @@
     $(document).ready( function(){
         var table = $('#citas').DataTable();
         } );
+
+    $(document).on('change', '.inputAccion', function(){
+        const accion = $(this).val();
+        const citaId = $(this).attr('citaId');
+
+        console.log({
+            mensaje: 'CAMBIAR INPUTS',
+            accion: accion,
+            citaId: citaId
+        });
+
+        ocultarInputsExtra(citaId);
+
+        if(accion == 'CONFIRMAR FECHA'){
+            mostrarInputsConfirmarFecha(citaId);
+        }
+
+        if(accion == 'CANCELAR CITA'){
+            mostrarInputsCancelacion(citaId);
+        }
+
+        if(accion == 'REAGENDAR LLAMADA'){
+            mostrarInputsReagendarLlamada(citaId);
+        }
+
+    });
+
+    /*
+    * =========
+    * FUNCTIONS
+    * =========
+    */
+
+    function ocultarInputsExtra(citaId){
+        $(`.contenedorInputFechaCita[citaId=${citaId}]`).hide('slow');
+        $(`.contenedorInputComentario[citaId=${citaId}]`).hide('slow');
+        $(`.contenedorInputIdAsesorQueConfirma[citaId=${citaId}]`).hide('slow');
+        $(`.contenedorInputAsesorDeProspecto[citaId=${citaId}]`).hide('slow');
+        $(`.contenedorInputOpcionCancelacion[citaId=${citaId}]`).hide('slow');
+        $(`.contenedorInputNuevaFechaLlamada[citaId=${citaId}]`).hide('slow');
+    }
+
+    function mostrarInputsConfirmarFecha(citaId){
+        $(`.contenedorInputFechaCita[citaId=${citaId}]`).show('slow');
+    }
+
+    function mostrarInputsCancelacion(citaId){
+        $(`.contenedorInputComentario[citaId=${citaId}]`).show('slow');
+        $(`.contenedorInputIdAsesorQueConfirma[citaId=${citaId}]`).show('slow');
+        $(`.contenedorInputAsesorDeProspecto[citaId=${citaId}]`).show('slow');
+        $(`.contenedorInputOpcionCancelacion[citaId=${citaId}]`).show('slow');
+    }
+
+    function mostrarInputsReagendarLlamada(citaId){
+        $(`.contenedorInputNuevaFechaLlamada[citaId=${citaId}]`).show('slow');
+    }
+
 </script>
 
 @endsection
