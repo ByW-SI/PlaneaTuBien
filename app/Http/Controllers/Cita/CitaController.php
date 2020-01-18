@@ -9,8 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Prospecto;
 use App\SeguimientoLlamadas;
 use App\Services\Cita\StoreCitaService;
-use App\Services\Cita\updateCitaPendienteService;
-use App\Services\Cita\UpdateCitaService;
+use App\Services\Cita\UpdateCitaPendienteService;
 
 class CitaController extends Controller
 {
@@ -77,7 +76,7 @@ class CitaController extends Controller
 
     public function updatePendientes(Request $request, Citas $citas)
     {
-        $updateCitaPendienteService = new updateCitaPendienteService($request, $citas);
+        $updateCitaPendienteService = new UpdateCitaPendienteService($request, $citas);
         return redirect()->route($updateCitaPendienteService->getRoute());
     }
 }
