@@ -12,10 +12,10 @@
                         <tr class="text-center">
                             <th>Status</th>
                             <th>Prospecto</th>
+                            <th>Fecha cita</th>
                             <th>Teléfono</th>
                             <th>Celular</th>
                             <th>Asesor</th>
-                            <th>Fecha cita</th>
                             <th>Hora</th>
                             <th>Acción</th>
                             <th>Llamadas</th>
@@ -29,16 +29,16 @@
                             {{-- PROSPECTO --}}
                             <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
                                 {{$cita->prospecto->telefono}}</td>
+                            {{-- INPUT FECHA CITA --}}
+                            <td nowrap>{{$cita->fecha_cita}}</td>
                             {{-- TELÉFONO --}}
-                            <td nowrap>{{$cita->clave_preautorizacion}}</td>
+                            <td nowrap>{{$cita->prospecto->telefono}}</td>
                             {{-- CELULAR --}}
                             <td nowrap>{{$cita->prospecto->celular}}</td>
                             {{-- ASESOR --}}
                             <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
                                 {{$cita->prospecto->asesor()->first()->paterno}}
                                 {{$cita->prospecto->asesor->first()->materno}}</td>
-                            {{-- INPUT FECHA CITA --}}
-                            <td nowrap>{{$cita->fecha_cita}}</td>
                             {{-- INPUT HORA --}}
                             <td nowrap>{{$cita->hora}}</td>
                             {{-- INPUT ACCIÓN --}}

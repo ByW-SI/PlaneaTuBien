@@ -8,7 +8,7 @@ use App\SeguimientoLlamadas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class updateCitaPendienteService
+class UpdateCitaPendienteService
 {
 
     protected $request;
