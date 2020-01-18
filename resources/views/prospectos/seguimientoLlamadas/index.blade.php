@@ -157,11 +157,26 @@ $(document).on('change', '.modalCrearCitaInput', function(){
     modificarInputClavePreautorizacion(prospectoId);
 });
 
+// $(document).on('change', '.inputSueldo', function(){
+
+    
+
+
+
+//     console.log({
+//         mensaje: 'CAMBIARA PREAUTORIZACION',
+//         sueldo: sueldo,
+//         formato: formato
+//     });
+// });
+
 /**
 * =========
 * FUNCIONES
 * =========
 */
+
+
 
 async function actualizarDatosProspecto(prospectoId){
 
@@ -203,12 +218,11 @@ function modificarInputClavePreautorizacion(prospectoId){
         inicialesGerente = $(`.inicialesJefe[prospectoId=${prospectoId}]`).val();
         numeroTarjetas = $(`.numeroTarjetas[prospectoId=${prospectoId}]`).val();
         inicialesAsesor = $(`.inicialesAsesor[prospectoId=${prospectoId}]`).val();
-        sueldo = $(`.sueldo[prospectoId=${prospectoId}]`).val();
         $(`.clavePreautorizacion[prospectoId=${prospectoId}]`).val(
             inicialesOficina + inicialesGerente + "/" + 
             inicialesAsesor + "/" +
             numeroTarjetas + "/" + 
-            sueldo + "/" +
+            getSueldoFormateado(prospectoId) + "/" +
             prospectoId
             );
     }else{
@@ -217,18 +231,34 @@ function modificarInputClavePreautorizacion(prospectoId){
         numeroTarjetas = $(`.numeroTarjetas[prospectoId=${prospectoId}]`).val();
         inicialesUsuario = $(`.inicialesUsuario[prospectoId=${prospectoId}]`).val();
         inicialesAsesor = $(`.inicialesAsesor[prospectoId=${prospectoId}]`).val();
-        sueldo = $(`.sueldo[prospectoId=${prospectoId}]`).val();
         $(`.clavePreautorizacion[prospectoId=${prospectoId}]`).val(
             inicialesOficina + inicialesGerente + "/" + 
             inicialesUsuario + inicialesAsesor + "/" +
             numeroTarjetas + "/" + 
-            sueldo + "/" +
+            getSueldoFormateado(prospectoId) + "/" +
             prospectoId
             );
     }
 
     // console.log('oficina',  $(`.inputOficinaAsesor[prospectoId=${prospectoId}]`).val() );
 
+}
+
+function getSueldoFormateado(prospectoId){
+    const sueldo = $(`.inputSueldo[prospectoId=${prospectoId}]`).val();
+    let formato = (parseInt(sueldo/100)).toString();
+
+    while (formato.length < 4) {
+        formato = '0' + formato;
+    }
+
+    console.log({
+        mensaje: 'CAMBIARA PREAUTORIZACION',
+        sueldo: sueldo,
+        formato: formato
+    });
+
+    return formato;
 }
 
 function mostrarModalCrear(prospectoId){

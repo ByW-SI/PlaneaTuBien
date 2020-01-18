@@ -60,8 +60,7 @@
           <div class="form-row">
             <div class="form-group col-sm-4">
               <label for="message-text" class="col-form-label">Cuánto gana al mes:</label>
-              <input type="text" name="sueldo" class="form-control sueldo modalCrearCitaInput" prospectoId={{$prospecto->id}}
-                maxlength="4" pattern="[0-9]{4}">
+              <input type="text" name="sueldo" class="form-control sueldo modalCrearCitaInput inputSueldo" prospectoId={{$prospecto->id}}>
             </div>
             <div class="form-group col-sm-4">
               <label for="message-text" class="col-form-label">Estado civil:</label>
