@@ -22,6 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($citas as $cita)
                         <tr>
                             {{-- ESTATUS --}}
@@ -182,19 +183,18 @@
                                                                 @foreach ($cita->prospecto->seguimientoLlamadas as
                                                                 $llamada)
                                                                 <tr>
-                                                                    <td nowrap>{{!$llamada->resultadoLLamada ? '' : $llamada->resultadoLLamada->nombre}}</td>
+                                                                    <td nowrap>
+                                                                        {{!$llamada->resultadoLLamada ? '' : $llamada->resultadoLLamada->nombre}}
+                                                                    </td>
                                                                     <td nowrap>{{$llamada->fecha_contacto}}</td>
-                                                                    <td nowrap>{{$llamada->fecha_siguiente_contacto}}</td>
+                                                                    <td nowrap>{{$llamada->fecha_siguiente_contacto}}
+                                                                    </td>
                                                                     <td nowrap>{{$llamada->comentario}}</td>
                                                                     <td nowrap></td>
                                                                 </tr>
                                                                 @endforeach
-                                                                {{-- @foreach ($cita->prospecto->seguimientoLlamadas as $llamada)
                                                             </tbody>
                                                         </table>
-                                                        {{$llamada->fecha_siguiente_contacto}}
-                                                                <br>
-                                                                @endforeach --}}
                                                     </div>
                                                 </div>
                                             </div>

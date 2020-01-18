@@ -237,7 +237,16 @@ function mostrarModalCrear(prospectoId){
 
 function requiereCita(prospectoId){
     const opcion = getEstatusSeleccionado();
-    return opcion.includes('Cita');
+
+    if(opcion.includes('Cita Calificada')){
+        return true;
+    }
+
+    if(opcion.includes('Cita No Calificada')){
+        return true;
+    }
+
+    return false;
 }
 
 function getEstatusSeleccionado(){

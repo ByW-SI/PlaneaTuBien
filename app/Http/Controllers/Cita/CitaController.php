@@ -65,9 +65,12 @@ class CitaController extends Controller
 
     public function pendientes()
     {
+
         $citas = Citas::whereHas('prospecto', function ($query) {
             return $query->whereEstatusPendiente();
         })->with('prospecto.estatus')->get();
+
+        // return $citas;
 
         $asesores = Empleado::asesores()->get();
 
