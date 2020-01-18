@@ -27,7 +27,7 @@
                             {{$cita->prospecto->asesor()->first()->paterno}}
                             {{$cita->prospecto->asesor->first()->materno}}</td>
                         <td>{{$cita->citaCancelada->comentario}}</td>
-                        <td>{{$cita->citaCancelada->asesor->nombre}}</td>
+                        <td>{{!$cita->citaCancelada->asesor ? '' : $cita->citaCancelada->asesor->nombre}}</td>
                         <td>{{$cita->citaCancelada->tipo_cancelacion}}</td>
                     </tr>
                     @endforeach

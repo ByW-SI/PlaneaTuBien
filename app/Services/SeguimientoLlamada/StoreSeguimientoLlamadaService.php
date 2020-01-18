@@ -23,13 +23,13 @@ class StoreSeguimientoLlamadaService
     protected $resultadoLLamada;
     protected $seguimientoLlamada;
 
-
-
     public function __construct(Request $request)
     {
         $this->setRequest($request);
         $this->prospecto = Prospecto::find($request->prospectoId);
         $this->resultadoLLamada = ResultadoLlamada::find($request->estatus);
+
+        
 
         try {
             $this->crearSeguimientoLlamada();
@@ -39,15 +39,13 @@ class StoreSeguimientoLlamadaService
                 $this->crearCitaCancelada();
                 $this->actualizarEstatusProspecto('Cita Cancelada');
             }
-            
+
             if ($this->requiereCitaPendiente()) {
                 $this->crearCita();
                 $this->actualizarEstatusProspecto('Pendiente');
             }
 
-            $this->setResponse([
-                'status' => 'success'
-            ]);
+            // $this->setResponse($this->cita->toArray());
         } catch (\Exception $e) {
             $this->setResponse([
                 'status' => 'error',
@@ -84,7 +82,7 @@ class StoreSeguimientoLlamadaService
     public function crearCita()
     {
         $this->cita = Citas::create([
-            'prospecto_id' => $this->prospecto,
+            'prospecto_id' => $this->prospecto->id,
             'clave_preautorizacion' => '',
         ]);
     }
