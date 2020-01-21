@@ -36,7 +36,8 @@ class UpdateCitaPendienteService
 
         if ($this->reagendoLlamada()) {
             $this->reagendarLLamada();
-            $this->establecerRutaDeCitasPendientes();
+            $this->actualizarEstatusProspecto('Volver A Llamar');
+            $this->establecerRutaDeCitasPendientesReprogramar();
         }
 
         if ($this->canceloCita()) {
@@ -64,9 +65,9 @@ class UpdateCitaPendienteService
         $this->route = 'citas.index';
     }
 
-    public function establecerRutaDeCitasPendientes()
+    public function establecerRutaDeCitasPendientesReprogramar()
     {
-        $this->route = 'citas.pendientes.index';
+        $this->route = 'citas.pendientes.reprogramar.index';
     }
 
     public function establecerRutaDeCitasCanceladas()
@@ -100,6 +101,7 @@ class UpdateCitaPendienteService
 
     public function reagendarLlamada()
     {
+        // dd($this->request->reagendarLlamada);
         $this->seguimientoLLamada = SeguimientoLlamadas::create([
             'asesor_id' => $this->asesor->id,
             'prospecto_id' => $this->prospecto->id,

@@ -108,6 +108,12 @@
 					<a class="dropdown-item" href="{{ route('citas.pendientes.index') }}">
 						<i class="fa fa-calendar"></i><strong>Citas pendientes</strong>
 					</a>
+					<a class="dropdown-item" href="{{ route('citas.pendientes.reprogramar.index') }}">
+						<i class="fa fa-calendar"></i><strong>Citas pendientes reprogramar</strong>
+					</a>
+					<a class="dropdown-item" href="{{ route('volver_a_llamar.index') }}">
+						<i class="fa fa-calendar"></i><strong>Volver a llamar</strong>
+					</a>
 				</div>
 			</li>
 			@endif

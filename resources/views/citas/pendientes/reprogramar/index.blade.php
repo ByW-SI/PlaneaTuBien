@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="container">
-    <h3 class="text-center text-uppercase text-muted">LISTA NEGRA</h3>
+
+    <h3 class="text-center text-uppercase text-muted mt-4">CITAS PENDIENTES REPROGRAMAR</h3>
+
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -12,28 +14,24 @@
                         <tr class="text-center">
                             <th>Status</th>
                             <th>Prospecto</th>
+                            <th>Clave de preautorizacion</th>
                             <th>Asesor</th>
-                            <th>Comentario</th>
-                            <th>Asesor que confirma</th>
-                            <th>Opción de cancelación</th>
-                            <th>Acción</th>
+                            <th>Fecha cita</th>
+                            <th>Hora</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($citas as $cita)
                         <tr>
-                            <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td>
-                            <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
+                            <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
+                            <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
                                 {{$cita->prospecto->apmaterno}}</td>
-                            <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
+                            <td>{{$cita->clave_preautorizacion}}</td>
+                            <td>{{$cita->prospecto->asesor()->first()->nombre}}
                                 {{$cita->prospecto->asesor()->first()->paterno}}
                                 {{$cita->prospecto->asesor->first()->materno}}</td>
-                            <td nowrap>{{$cita->citaCancelada->comentario}}</td>
-                            <td nowrap>{{!$cita->citaCancelada->asesor ? '' : $cita->citaCancelada->asesor->nombre}}</td>
-                            <td nowrap>{{$cita->citaCancelada->tipo_cancelacion}}</td>
-                            <td nowrap>
-                                <a href="{{route('citas.canceladas.reactivar', ['citas' => $cita->id])}}" class="btn btn-success">REACTIVAR</a>
-                            </td>
+                            <td>{{$cita->fecha_cita}}</td>
+                            <td>{{$cita->hora}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -41,17 +39,12 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script>
-    $(document).ready( function(){
-        var table = $('#citas').DataTable();
-        } );
-</script>
 
 @endsection

@@ -134,7 +134,7 @@
                                                             style="display: none;" citaId="{{$cita->id}}">
                                                             <label for="" class="text-uppercase text-muted">Nueva fecha
                                                                 llamada</label>
-                                                            <input type="date" name="reagendarLlamada"
+                                                            <input type="date" name="nuevaFechaLlamada"
                                                                 class="form-control">
                                                         </div>
                                                     </div>

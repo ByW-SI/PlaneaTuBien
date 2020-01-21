@@ -29,7 +29,7 @@ class StoreSeguimientoLlamadaService
         $this->prospecto = Prospecto::find($request->prospectoId);
         $this->resultadoLLamada = ResultadoLlamada::find($request->estatus);
 
-        
+
 
         try {
             $this->crearSeguimientoLlamada();
@@ -43,6 +43,10 @@ class StoreSeguimientoLlamadaService
             if ($this->requiereCitaPendiente()) {
                 $this->crearCita();
                 $this->actualizarEstatusProspecto('Pendiente');
+            }
+            
+            if ($this->requiereVolverALlamar()) {
+                $this->actualizarEstatusProspecto('Volver A Llamar');
             }
 
             // $this->setResponse($this->cita->toArray());
@@ -126,6 +130,11 @@ class StoreSeguimientoLlamadaService
      * BOOLEANS
      * ========
      */
+
+    public function requiereVolverALlamar()
+    {
+        return $this->resultadoLLamada->nombre == 'Volver a llamar';
+    }
 
     public function clienteNoApto()
     {

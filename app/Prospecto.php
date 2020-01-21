@@ -132,6 +132,18 @@ class Prospecto extends Model
             });
     }
 
+    public function scopeWhereEstatusVolverALlamar($query){
+        return $query->whereHas('estatus', function($query){
+                return $query->where('nombre','Volver A Llamar');
+            });
+    }
+
+    public function scopeWhereEstatusCitaPendienteReprogramar($query){
+        return $query->whereHas('estatus', function($query){
+                return $query->where('nombre','Cita Pendiente Reprogramar');
+            });
+    }
+
     /**
      * ========
      * BOOLEANS

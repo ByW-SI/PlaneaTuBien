@@ -6,10 +6,10 @@ use App\Citas;
 use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Prospecto;
-use App\SeguimientoLlamadas;
+use App\Services\Cita\ReactivarCitaService;
 use App\Services\Cita\StoreCitaService;
 use App\Services\Cita\UpdateCitaPendienteService;
+use App\Services\Cita\UpdateCitaService;
 
 class CitaController extends Controller
 {
@@ -56,11 +56,17 @@ class CitaController extends Controller
 
     public function canceladas()
     {
-        $citas = Citas::whereHas('prospecto', function($query){
+        $citas = Citas::whereHas('prospecto', function ($query) {
             return $query->whereEstatusCitaCancelada();
         })->has('citaCancelada')->get();
 
         return view('citas.canceladas.index', compact('citas'));
+    }
+
+    public function reactivar(Citas $citas)
+    {
+        $reactivarCitaService = new ReactivarCitaService($citas);
+        return redirect()->route('citas.pendientes.reprogramar.index');
     }
 
     public function pendientes()
@@ -75,6 +81,13 @@ class CitaController extends Controller
         $asesores = Empleado::asesores()->get();
 
         return view('citas.pendientes.index', compact('citas', 'asesores'));
+    }
+
+    public function pendientesReprogramar(){
+        $citas = Citas::whereHas('prospecto', function($query){
+            return $query->whereEstatusCitaPendienteReprogramar();
+        } )->get();
+        return view('citas.pendientes.reprogramar.index', compact('citas'));
     }
 
     public function updatePendientes(Request $request, Citas $citas)

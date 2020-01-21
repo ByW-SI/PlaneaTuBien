@@ -38,22 +38,19 @@ class SeguimientoLlamadasController extends Controller
      */
     public function store(Request $request)
     {
+        $prospecto = Prospecto::find($request->prospecto_id);
+        $asesor = $prospecto->asesor;
 
-        foreach ($request->prospecto_id as $key => $prospecto) {
-            $prospecto = Prospecto::find($prospecto);
-            if(isset($request->fecha_contacto[$key]) && isset($request->resultado_llamada_id[$key])){
-	            $seguimiento = SeguimientoLlamadas::create([
-	                'fecha_contacto' => $request->fecha_contacto[$key],
-	                'fecha_siguiente_contacto' => $request->fecha_siguiente_contacto[$key],
-	                'comentario' => $request->comentario[$key],
-	                'resultado_llamada_id' => $request->resultado_llamada_id[$key],
-	                'prospecto_id' => $prospecto->id
-	            ]);
-	            $seguimiento->asesor()->associate($prospecto->asesores()->where('activo', '1')->get()->last()->id);
-	            $seguimiento->save();
-        	}
-        }
-        return redirect()->action('Prospecto\Seguimiento\SeguimientoLlamadasController@index');
+        SeguimientoLlamadas::create([
+            'asesor_id' => $asesor->id,
+            'prospecto_id' => $prospecto->id,
+            'resultado_llamada_id' => $request->resultado_llamada_id,
+            'fecha_siguiente_contacto' => $request->fecha_siguiente_contacto,
+            'fecha_contacto' => $request->fecha_contacto,
+            'comentario' => $request->comentario,
+        ]);
+
+        return redirect()->route('seguimiento.llamadas.index');
     }
 
     public function noCalificado(Request $request)
