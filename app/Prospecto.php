@@ -161,4 +161,8 @@ class Prospecto extends Model
             ? true
             : false;
     }
+
+    public function tieneCita(){
+        return count($this->citas) ? true : false;
+    }
 }

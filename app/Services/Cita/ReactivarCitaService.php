@@ -16,8 +16,9 @@ class ReactivarCitaService
         $this->setCita($cita);
         $this->setProspecto($cita->prospecto);
 
-        $this->actualizarEstatusProspecto('Cita Pendiente Reprogramar');
+        $this->actualizarEstatusProspecto('Seguimiento Llamada');
         $this->eliminarCitaCancelada();
+        $this->eliminarCitas();
     }
 
     /**
@@ -36,6 +37,10 @@ class ReactivarCitaService
     public function eliminarCitaCancelada()
     {
         $this->cita->citaCancelada->delete();
+    }
+
+    public function eliminarCitas(){
+        $this->cita = $this->prospecto->citas()->delete();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Empleado;
 use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
+use App\Services\Prospecto\DestroyProspectoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -133,6 +134,11 @@ class ProspectoController extends Controller
 
         return redirect()->route('empleados.prospectos.index', ['id' => Auth::user()->empleado]);
     }
+
+    public function destroy(Prospecto $prospecto){
+        $destroyProspectoService = new DestroyProspectoService($prospecto);
+        return redirect()->back();
+    }    
 
     /**
      * Display the specified resource.

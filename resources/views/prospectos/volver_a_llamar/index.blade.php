@@ -1,5 +1,10 @@
 @extends('principal')
 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @section('content')
 
 <div class="container">
@@ -12,18 +17,19 @@
                         <tr class="text-center">
                             <th>Prospecto</th>
                             <th>Ver llamada</th>
-                            <th>Reagendar llamada</th>
+                            <th>Acción</th>
+                            <th>Agendar cita</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($prospectos as $prospecto)
                         <tr>
                             {{-- PROSPECTO --}}
-                            <td>
+                            <td class="text-center">
                                 {{$prospecto->nombre}} {{$prospecto->appaterno}} {{$prospecto->apmaterno}}
                             </td>
                             {{-- VER LLAMADA --}}
-                            <td>
+                            <td class="text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#modal-llamadas-{{$prospecto->id}}">
                                     Llamadas
@@ -83,11 +89,11 @@
                                 </div>
                             </td>
                             {{-- REAGENDAR LLAMADA --}}
-                            <td>
+                            <td class="text-center">
 
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#modal-reagendar-llamada-{{$prospecto->id}}">
-                                    Reagendar llamada
+                                    Acción
                                 </button>
                                 {{-- MODAL BOTON LLAMADAS --}}
                                 <div class="modal fade bd-example-modal-lg"
@@ -105,7 +111,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{route('seguimiento.llamadas.store')}}" method="POST">
+                                                <form action="{{route('volver_a_llamar.store')}}" method="POST">
                                                     @csrf
                                                     <div class="row">
                                                         {{-- ASESOR DEL PROSPECTO --}}
@@ -122,30 +128,30 @@
                                                         <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">Resultado de
                                                                 llamada</label>
-                                                            <input type="text" name="resultado_llamada_id"
-                                                                class="form-control">
-                                                        </div>
-                                                        {{-- FECHA DE CONTACTO --}}
-                                                        <div class="col-12 mt-2">
-                                                            <label for="" class="text-uppercase text-muted">Fecha de
-                                                                contacto</label>
-                                                            <input type="date" name="fecha_contacto"
-                                                                class="form-control">
+                                                            <select name="accion"
+                                                                class="form-control inputResultadoLlamada"
+                                                                prospectoId={{$prospecto->id}}>
+                                                                <option value="">Seleccionar</option>
+                                                                <option value="VOLVER A LLAMAR">VOLVER A LLAMAR</option>
+                                                                <option value="CANCELAR CITA">CANCELAR CITA</option>
+                                                                {{-- @foreach ($resultados_llamadas as $resultado)
+                                                                    <option value="{{$resultado->id}}">{{$resultado->nombre}}
+                                                                </option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                            {{-- <input type="text" name="resultado_llamada_id"
+                                                                class="form-control"> --}}
                                                         </div>
                                                         {{-- FECHA DE SIGUIENTE CONTACTO --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-12 mt-2 contenedorInputFechaSiguienteContacto"
+                                                            prospectoId={{$prospecto->id}} style="display:none">
                                                             <label for="" class="text-uppercase text-muted">Fecha de
                                                                 siguiente contacto</label>
                                                             <input type="date" name="fecha_siguiente_contacto"
-                                                                class="form-control">
+                                                                class="form-control inputFechaSiguienteContacto"
+                                                                prospectoId={{$prospecto->id}}>
                                                         </div>
-                                                        {{-- FECHA DE SIGUIENTE CONTACTO --}}
-                                                        <div class="col-12 mt-2">
-                                                            <label for=""
-                                                                class="text-uppercase text-muted">Comentario</label>
-                                                            <textarea name="comentario" class="form-control" id=""
-                                                                cols="30" rows="5"></textarea>
-                                                        </div>
+
                                                         <br>
                                                         <hr>
                                                         <br>
@@ -161,6 +167,15 @@
                                 </div>
 
                             </td>
+                            {{-- AGENDAR CITA --}}
+                            <td>
+                                <button type="submit" class="btn btn-success botonAgendarCita"
+                                    prospectoId={{$prospecto->id}}>
+                                    Agendar cita
+                                </button>
+                                @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' =>
+                                $prospecto])
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -170,15 +185,41 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <script>
     $(document).ready( function(){
         var table = $('#citas').DataTable();
         } );
+
+    $(document).on('change', '.inputResultadoLlamada', function(){
+
+        const prospectoId = $(this).attr('prospectoId');
+        const accion = $(this).val();
+
+        $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).hide('slow');
+
+        if(accion == 'VOLVER A LLAMAR'){
+            $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).show('slow');
+        }
+
+        console.log({
+            prospectoId,
+            accion
+        });
+
+    });
+
+    $(document).on('click', '.botonAgendarCita', function(){
+        const prospectoId = $(this).attr('prospectoId');
+        console.log({
+            prospectoId
+        });
+
+        mostrarModalCrear(prospectoId);
+
+        // $(`.modalCrearCita[prospectoId=${prospectoId}]`).modal('show');
+
+    });
+
 </script>
 
 @endsection

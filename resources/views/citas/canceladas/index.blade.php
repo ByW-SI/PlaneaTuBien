@@ -16,7 +16,8 @@
                             <th>Comentario</th>
                             <th>Asesor que confirma</th>
                             <th>Opción de cancelación</th>
-                            <th>Acción</th>
+                            <th>Reactivar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,10 +30,21 @@
                                 {{$cita->prospecto->asesor()->first()->paterno}}
                                 {{$cita->prospecto->asesor->first()->materno}}</td>
                             <td nowrap>{{$cita->citaCancelada->comentario}}</td>
-                            <td nowrap>{{!$cita->citaCancelada->asesor ? '' : $cita->citaCancelada->asesor->nombre}}</td>
+                            <td nowrap>{{!$cita->citaCancelada->asesor ? '' : $cita->citaCancelada->asesor->nombre}}
+                            </td>
                             <td nowrap>{{$cita->citaCancelada->tipo_cancelacion}}</td>
                             <td nowrap>
-                                <a href="{{route('citas.canceladas.reactivar', ['citas' => $cita->id])}}" class="btn btn-success">REACTIVAR</a>
+                                <a href="{{route('citas.canceladas.reactivar', ['citas' => $cita->id])}}"
+                                    class="btn btn-success">REACTIVAR</a>
+                            </td>
+                            <td nowrap>
+                                <form action="{{route('prospectos.destroy', ['id'=>$cita->prospecto])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        ELIMINAR
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

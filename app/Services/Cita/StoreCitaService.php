@@ -17,8 +17,18 @@ class StoreCitaService
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->crearCita($request);
+
         $this->setProspecto($request);
+
+        // dd($this->prospecto->tieneCita());
+        
+        if($this->prospecto->tieneCita()){
+            $this->actualizarCita($this->prospecto);
+        }else{
+            $this->crearCita($request);
+        }
+
+        // dd($this->cita);
         $this->actualizarProspecto($request);
 
         if ($this->estaDefinidaLaFechaDeCita()) {
@@ -26,6 +36,8 @@ class StoreCitaService
         } else {
             $this->actualizarStatusProspecto('Pendiente');
         }
+
+        // dd($this->prospecto->citas);
     }
 
     /**
@@ -85,6 +97,14 @@ class StoreCitaService
      * SETTERS
      * =======
      */
+
+    public function actualizarCita($prospecto){
+        $this->cita = $prospecto->citas()->first()->update([
+            'clave_preautorizacion' => $this->request->clave_preautorizacion,
+            'fecha_cita' => $this->request->fecha_cita,
+            'hora' => $this->request->hora
+        ]);
+    }
 
     public function setProspecto($request)
     {

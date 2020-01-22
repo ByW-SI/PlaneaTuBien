@@ -1,5 +1,10 @@
 @extends('principal')
 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @section('content')
 
 <div class="container">
@@ -19,10 +24,10 @@
                             <th>Hora</th>
                             <th>Acción</th>
                             <th>Llamadas</th>
+                            <th>Agendar cita</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($citas as $cita)
                         <tr>
                             {{-- ESTATUS --}}
@@ -39,7 +44,8 @@
                             {{-- ASESOR --}}
                             <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
                                 {{$cita->prospecto->asesor()->first()->paterno}}
-                                {{$cita->prospecto->asesor->first()->materno}}</td>
+                                {{$cita->prospecto->asesor->first()->materno}}
+                            </td>
                             {{-- INPUT HORA --}}
                             <td nowrap>{{$cita->hora}}</td>
                             {{-- INPUT ACCIÓN --}}
@@ -74,18 +80,10 @@
                                                             <select name="accion" class="form-control inputAccion"
                                                                 citaId="{{$cita->id}}" required>
                                                                 <option value="">Seleccionar</option>
-                                                                <option value="CONFIRMAR FECHA">Confirmar fecha</option>
                                                                 <option value="CANCELAR CITA">Cancelar</option>
                                                                 <option value="REAGENDAR LLAMADA">Volver a llamar
                                                                 </option>
                                                             </select>
-                                                        </div>
-                                                        {{-- INPUT FECHA CITA --}}
-                                                        <div class="col-12 mt-2 contenedorInputFechaCita"
-                                                            style="display: none;" citaId="{{$cita->id}}">
-                                                            <label for="" class="text-uppercase text-muted">Fecha de
-                                                                cita</label>
-                                                            <input type="date" name="fechaCita" class="form-control">
                                                         </div>
                                                         {{-- INPUT COMENTARIO --}}
                                                         <div class="col-12 mt-2 contenedorInputComentario"
@@ -147,7 +145,7 @@
                                     </div>
                                 </div>
                             </td>
-                            {{-- LLAMADAS --}}
+                            {{-- AGENDAR CITA --}}
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#modal-llamadas-{{$cita->prospecto->id}}">
@@ -202,6 +200,13 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                <button type="submit" class="btn btn-success botonAgendarCita" prospectoId={{$cita->prospecto->id}}>
+                                    Agendar cita
+                                </button>
+                                @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' =>
+                                $cita->prospecto])
+                            </td>
 
                         </tr>
                         @endforeach
@@ -234,10 +239,6 @@
 
         ocultarInputsExtra(citaId);
 
-        if(accion == 'CONFIRMAR FECHA'){
-            mostrarInputsConfirmarFecha(citaId);
-        }
-
         if(accion == 'CANCELAR CITA'){
             mostrarInputsCancelacion(citaId);
         }
@@ -245,6 +246,18 @@
         if(accion == 'REAGENDAR LLAMADA'){
             mostrarInputsReagendarLlamada(citaId);
         }
+
+    });
+
+    $(document).on('click', '.botonAgendarCita', function(){
+        const prospectoId = $(this).attr('prospectoId');
+        console.log({
+            prospectoId
+        });
+
+        mostrarModalCrear(prospectoId);
+
+        // $(`.modalCrearCita[prospectoId=${prospectoId}]`).modal('show');
 
     });
 
@@ -261,10 +274,6 @@
         $(`.contenedorInputAsesorDeProspecto[citaId=${citaId}]`).hide('slow');
         $(`.contenedorInputOpcionCancelacion[citaId=${citaId}]`).hide('slow');
         $(`.contenedorInputNuevaFechaLlamada[citaId=${citaId}]`).hide('slow');
-    }
-
-    function mostrarInputsConfirmarFecha(citaId){
-        $(`.contenedorInputFechaCita[citaId=${citaId}]`).show('slow');
     }
 
     function mostrarInputsCancelacion(citaId){

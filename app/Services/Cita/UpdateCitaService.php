@@ -25,6 +25,7 @@ class UpdateCitaService
         $this->setProspecto($cita);
         $this->setAsesor($this->prospecto);
         $this->setRequest($request);
+
         $this->actualizarProspecto($request);
 
         if ($this->confirmoCita()) {
@@ -32,8 +33,13 @@ class UpdateCitaService
             $this->confirmarCita();
             $this->establecerRutaDeCitasConfirmadas();
         }
-        
+
         if ($this->reagendoCita()) {
+
+            if (!$this->tieneFechaLaNuevaCita()) {
+                $this->actualizarEstatusProspecto('Pendiente');
+            }
+
             $this->actualizarFechaCita();
             $this->establecerRutaDeCitas();
         }
@@ -43,8 +49,8 @@ class UpdateCitaService
             $this->actualizarEstatusProspecto('Reagendar cita');
             $this->establecerRutaDeCitasReprogramables();
         }
-        
-        if($this->canceloCita()){
+
+        if ($this->canceloCita()) {
             $this->crearCitaCancelada();
             $this->actualizarEstatusProspecto('Cita Cancelada');
             $this->establecerRutaDeCitasCanceladas();
@@ -58,7 +64,8 @@ class UpdateCitaService
      * =======
      */
 
-    public function crearCitaCancelada(){
+    public function crearCitaCancelada()
+    {
         $this->citaCancelada = CitaCancelada::create([
             'cita_id' => $this->cita->id,
             'comentario' => $this->request->comentarioCancelacion,
@@ -67,7 +74,8 @@ class UpdateCitaService
         ]);
     }
 
-    public function reagendarLlamada(){
+    public function reagendarLlamada()
+    {
         $this->seguimientoLLamada = SeguimientoLlamadas::create([
             'asesor_id' => $this->asesor->id,
             'prospecto_id' => $this->prospecto->id,
@@ -78,19 +86,23 @@ class UpdateCitaService
         ]);
     }
 
-    public function establecerRutaDeCitasCanceladas(){
+    public function establecerRutaDeCitasCanceladas()
+    {
         $this->route = 'citas.canceladas.index';
     }
 
-    public function establecerRutaDeCitasReprogramables(){
+    public function establecerRutaDeCitasReprogramables()
+    {
         $this->route = 'citas.reprogramables.index';
     }
 
-    public function establecerRutaDeCitas(){
+    public function establecerRutaDeCitas()
+    {
         $this->route = 'citas.index';
     }
 
-    public function establecerRutaDeCitasConfirmadas(){
+    public function establecerRutaDeCitasConfirmadas()
+    {
         $this->route = 'citas.confirmadas';
     }
 
@@ -149,7 +161,8 @@ class UpdateCitaService
      * =======
      */
 
-    public function getRoute(){
+    public function getRoute()
+    {
         return $this->route;
     }
 
@@ -174,7 +187,8 @@ class UpdateCitaService
         $this->cita = $cita;
     }
 
-    public function setAsesor($prospecto){
+    public function setAsesor($prospecto)
+    {
         $this->asesor = $this->prospecto->asesor;
     }
 
@@ -199,7 +213,13 @@ class UpdateCitaService
         return $this->request->accion == 'llamar para reagendar';
     }
 
-    public function canceloCita(){
+    public function canceloCita()
+    {
         return $this->request->accion == 'cancelar cita';
+    }
+
+    public function tieneFechaLaNuevaCita()
+    {
+        return $this->request->nuevaFechaCita ? true : false;
     }
 }

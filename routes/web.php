@@ -153,6 +153,7 @@ Route::post('seguimiento/llamadas', 'Prospecto\Seguimiento\SeguimientoLlamadasCo
 Route::post('seguimiento/llamadas/nocalificado', 'Prospecto\Seguimiento\SeguimientoLlamadasController@noCalificado')->name('seguimiento.llamadas.nocalificado')->middleware('auth');
 
 // CITAS
+Route::post('volver-a-llamar', 'VolverALlamarController@store')->name('volver_a_llamar.store');
 Route::get('volver-a-llamar', 'VolverALlamarController@index')->name('volver_a_llamar.index');
 Route::put('citas/pendientes/{citas}/update', 'Cita\CitaController@updatePendientes')->name('citas.pendientes.update');
 Route::get('citas/pendientes/reprogramar', 'Cita\CitaController@pendientesReprogramar')->name('citas.pendientes.reprogramar.index');
