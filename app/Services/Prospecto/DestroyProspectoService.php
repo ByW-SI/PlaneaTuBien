@@ -5,6 +5,7 @@ namespace App\Services\Prospecto;
 use App\CitaCancelada;
 use App\EmpleadoProspecto;
 use App\Prospecto;
+use App\SeguimientoLlamadas;
 
 class DestroyProspectoService
 {
@@ -16,18 +17,22 @@ class DestroyProspectoService
         $this->setProspecto($prospecto);
 
 
-        // $this->eliminarSeguimientoLlamadas();
-        // $this->eliminarCitaCancelada();
-        // $this->eliminarCita();
+        $this->eliminarSeguimientoLlamadas();
+        $this->eliminarCitaCancelada();
+        $this->eliminarCita();
         // $this->eliminarCotizaciones();
-        // $this->desasignarAsesores();
-        // $this->eliminarProspecto();
+        $this->desasignarAsesores();
         // dd($this->prospecto->seguimientoLlamadas()->get());
-        dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->update([
-            'empleado_id' => null
-        ]));
-        dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->get());
-        dd($this->prospecto->asesores);
+        // dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->update([
+            //     'empleado_id' => null
+        // ]));
+        
+        // ELIMNACION DE SEGUIMIENTO LLAMADAS
+        
+        // dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->get()->pluck('seguimientoLlamadas')->flatten()->pluck('id'));
+        
+        $this->eliminarProspecto();
+        // dd($this->prospecto);
     }
 
     /**
@@ -39,6 +44,7 @@ class DestroyProspectoService
     public function desasignarAsesores()
     {
         $this->prospecto->asesores()->detach($this->prospecto->id);
+        EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->delete();
     }
 
     public function eliminarCotizaciones()
@@ -49,6 +55,7 @@ class DestroyProspectoService
     public function eliminarSeguimientoLlamadas()
     {
         $this->prospecto->seguimientoLlamadas()->delete();
+        SeguimientoLlamadas::whereIn('id', EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->get()->pluck('seguimientoLlamadas')->flatten()->pluck('id'))->delete();
     }
 
     public function eliminarCitaCancelada()
@@ -63,7 +70,7 @@ class DestroyProspectoService
 
     public function eliminarProspecto()
     {
-        $this->prospecto->delete();
+        Prospecto::find($this->prospecto->id)->delete();
     }
 
     /**
