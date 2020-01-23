@@ -135,10 +135,11 @@ class ProspectoController extends Controller
         return redirect()->route('empleados.prospectos.index', ['id' => Auth::user()->empleado]);
     }
 
-    public function destroy(Prospecto $prospecto){
+    public function destroy(Prospecto $prospecto)
+    {
         $destroyProspectoService = new DestroyProspectoService($prospecto);
         return redirect()->back();
-    }    
+    }
 
     /**
      * Display the specified resource.

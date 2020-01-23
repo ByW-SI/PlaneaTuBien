@@ -66,7 +66,7 @@ class CitaController extends Controller
     public function reactivar(Citas $citas)
     {
         $reactivarCitaService = new ReactivarCitaService($citas);
-        return redirect()->route('citas.pendientes.reprogramar.index');
+        return redirect()->route('seguimiento.llamadas.index');
     }
 
     public function pendientes()
