@@ -7,10 +7,10 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="citas">
+                <table class="table table-striped table-hover" id="citas" style="white-space: nowrap">
                     <thead>
                         <tr class="text-center">
-                            <th>Status</th>
+                            {{-- <th>Status</th> --}}
                             <th>Prospecto</th>
                             <th>Asesor</th>
                             <th>Comentario</th>
@@ -23,7 +23,7 @@
                     <tbody>
                         @foreach ($citas as $cita)
                         <tr>
-                            <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td>
+                            {{-- <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td> --}}
                             <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
                                 {{$cita->prospecto->apmaterno}}</td>
                             <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}

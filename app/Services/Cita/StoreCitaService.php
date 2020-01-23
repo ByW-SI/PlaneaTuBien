@@ -20,7 +20,7 @@ class StoreCitaService
 
         $this->setProspecto($request);
 
-        // dd($this->prospecto->tieneCita());
+        // dd($this->estaDefinidaLaFechaDeCita());
         
         if($this->prospecto->tieneCita()){
             $this->actualizarCita($this->prospecto);

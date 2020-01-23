@@ -154,24 +154,6 @@
 </form>
 
 <script>
-  /**
-    * =======
-    * EVENTOS
-    * =======
-    */
-    
-    $(document).ready(function() {
-        var table = $('#seguimientotable').DataTable();
-    
-        console.log( $('#perteneceAUsuarioAutenticado').val() );
-    });
-    
-    
-    
-    $(document).on('change', '.modalCrearCitaInput', function(){
-        prospectoId = $(this).attr('prospectoId');
-        modificarInputClavePreautorizacion(prospectoId);
-    });
     
     // $(document).on('change', '.inputSueldo', function(){
     

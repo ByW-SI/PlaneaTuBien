@@ -21,28 +21,27 @@
                                 <th>Asesor</th>
                                 <th>Fecha cita</th>
                                 <th>Hora</th>
-                                {{-- <th>Ver</th> --}}
+                                <th>Agendar cita</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($citas as $cita)
                             <tr>
-                                <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
-                                <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
+                                <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td>
+                                <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
                                     {{$cita->prospecto->apmaterno}}</td>
-                                <td>{{$cita->clave_preautorizacion}}</td>
-                                <td>{{$cita->prospecto->asesor()->first()->nombre}}
+                                <td nowrap>{{$cita->clave_preautorizacion}}</td>
+                                <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
                                     {{$cita->prospecto->asesor()->first()->paterno}}
                                     {{$cita->prospecto->asesor->first()->materno}}</td>
-                                <td>{{$cita->fecha_cita}}</td>
-                                <td>{{$cita->hora}}</td>
-                                <td>
-                                    {{-- <a href="#" class="btn btn-primary">VER</a> --}}
-                                    {{-- @include('citas.modals.edit', ['cita' => $cita])
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                                data-target=".modalCitas-{{$cita->prospecto->id}}">
-                                    Ver
-                                    </button> --}}
+                                <td nowrap>{{$cita->fecha_cita}}</td>
+                                <td nowrap>{{$cita->hora}}</td>
+                                <td nowrap>
+                                    <button type="submit" class="btn btn-success botonAgendarCita"
+                                        prospectoId={{$cita->prospecto->id}}>
+                                        Agendar cita
+                                    </button>
+                                    @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' => $cita->prospecto])
                                 </td>
                             </tr>
                             @endforeach
@@ -62,7 +61,57 @@
 <script>
     $(document).ready( function(){
         var table = $('#citas').DataTable();
-        } );
+    } );
+
+    $(document).on('change', '.inputResultadoLlamada', function(){
+
+const prospectoId = $(this).attr('prospectoId');
+const accion = $(this).val();
+
+$(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).hide('slow');
+
+if(accion == 'VOLVER A LLAMAR'){
+    $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).show('slow');
+}
+
+console.log({
+    prospectoId,
+    accion
+});
+
+});
+
+$(document).on('click', '.botonAgendarCita', function(){
+const prospectoId = $(this).attr('prospectoId');
+console.log({
+    prospectoId
+});
+
+mostrarModalCrear(prospectoId);
+
+// $(`.modalCrearCita[prospectoId=${prospectoId}]`).modal('show');
+
+});
+
+/**
+* =======
+* EVENTOS
+* =======
+*/
+
+$(document).ready(function() {
+var table = $('#seguimientotable').DataTable();
+
+console.log( $('#perteneceAUsuarioAutenticado').val() );
+});
+
+
+
+$(document).on('change', '.modalCrearCitaInput', function(){
+prospectoId = $(this).attr('prospectoId');
+modificarInputClavePreautorizacion(prospectoId);
+});
+
 </script>
 
 @endsection

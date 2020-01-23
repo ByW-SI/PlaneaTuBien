@@ -3,6 +3,7 @@
 namespace App\Services\Prospecto;
 
 use App\CitaCancelada;
+use App\EmpleadoProspecto;
 use App\Prospecto;
 
 class DestroyProspectoService
@@ -15,12 +16,18 @@ class DestroyProspectoService
         $this->setProspecto($prospecto);
 
 
-        $this->eliminarSeguimientoLlamadas();
+        // $this->eliminarSeguimientoLlamadas();
         // $this->eliminarCitaCancelada();
         // $this->eliminarCita();
-        $this->eliminarCotizaciones();
-        // $this->eliminarProspecto();
+        // $this->eliminarCotizaciones();
         // $this->desasignarAsesores();
+        // $this->eliminarProspecto();
+        // dd($this->prospecto->seguimientoLlamadas()->get());
+        dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->update([
+            'empleado_id' => null
+        ]));
+        dd(EmpleadoProspecto::where('prospecto_id',$this->prospecto->id)->get());
+        dd($this->prospecto->asesores);
     }
 
     /**
@@ -29,9 +36,9 @@ class DestroyProspectoService
      * =======
      */
 
-    public function desasignarAsesores(){
-        $this->
-        $this->prospecto->asesores()->detach();
+    public function desasignarAsesores()
+    {
+        $this->prospecto->asesores()->detach($this->prospecto->id);
     }
 
     public function eliminarCotizaciones()
