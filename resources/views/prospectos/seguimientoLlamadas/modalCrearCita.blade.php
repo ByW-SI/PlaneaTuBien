@@ -220,8 +220,7 @@
                 inicialesOficina + inicialesGerente + "/" + 
                 inicialesAsesor + "/" +
                 numeroTarjetas + "/" + 
-                getSueldoFormateado(prospectoId) + "/" +
-                prospectoId
+                getSueldoFormateado(prospectoId)
                 );
         }else{
             inicialesOficina = $(`.oficinaIniciales[prospectoId=${prospectoId}]`).val();
@@ -233,8 +232,7 @@
                 inicialesOficina + inicialesGerente + "/" + 
                 inicialesUsuario + inicialesAsesor + "/" +
                 numeroTarjetas + "/" + 
-                getSueldoFormateado(prospectoId) + "/" +
-                prospectoId
+                getSueldoFormateado(prospectoId)
                 );
         }
     

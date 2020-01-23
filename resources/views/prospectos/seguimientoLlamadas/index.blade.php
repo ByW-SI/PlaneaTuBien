@@ -100,6 +100,13 @@
 
 
 <script>
+
+    /**
+    * ======
+    * EVENTS
+    * ======
+    */
+
     $(document).on('focusout', '.fechaSeguimiento', async function(){
         prospectoId = $(this).attr('prospectoId');
         response = await actualizarDatosProspecto(prospectoId);
@@ -112,6 +119,12 @@
                 location.reload(true);
             }
         }
+    });
+    
+    
+    $(document).on('change', '.modalCrearCitaInput', function(){
+        prospectoId = $(this).attr('prospectoId');
+        modificarInputClavePreautorizacion(prospectoId);
     });
 
 </script>
