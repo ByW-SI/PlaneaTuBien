@@ -53,7 +53,10 @@ class EmpleadoProspectoController extends Controller
      */
     public function show(Empleado $empleado, Prospecto $prospecto)
     {
-        return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto]);
+        $asesoresTemporales = $prospecto->asesores()
+            ->where('temporal',1)
+            ->get();
+        return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto, 'asesoresTemporales' => $asesoresTemporales]);
     }
 
     /**
