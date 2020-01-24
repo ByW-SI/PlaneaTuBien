@@ -138,6 +138,7 @@ Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth
 Route::get('prospectos/create/excel', 'Prospecto\ProspectoController@createExcel')->name('prospectos.alta.excel')->middleware('auth');
 Route::post('prospectos/create/excel', 'Prospecto\ProspectoController@storeExcel')->name('prospectos.store.excel')->middleware('auth');
 Route::get('prospectos/asignar/asesor', 'Prospecto\ProspectoController@viewAsignar')->name('prospectos.asignar.asesor')->middleware('auth');
+Route::post('prospectos/asignar/asesor-temporal', 'Prospecto\ProspectoController@asignarAsesorTemporal')->name('prospectos.asignar_asesor_temporal')->middleware('auth');
 Route::post('prospectos/asignar/asesor', 'Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asignar.asesor.store')->middleware('auth');
 Route::post('pagos/{id}/aprobar','Pago\PagoController@aprobar')->middleware('auth')->name('aprobar.pago');
 Route::get('prospectos/{prospecto}/asesor/create','Prospecto\ProspectoController@asignarAsesor')->name('prospectos.asesor.create')->middleware('auth');

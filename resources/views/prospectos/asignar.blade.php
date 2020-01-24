@@ -54,30 +54,36 @@
             {{-- CONTENEDOR TABLA ASESORES --}}
             <div class="col-sm-6">
                 <h5 class="text-center"><strong>Asesores</strong></h5>
-                <table id="asesoresTable" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nombre completo</th>
-                            <th>Correo</th>
-                            <th>Prospectos</th>
-                            <th>Seleccionar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($asesores as $asesor)
-                        <tr>
-                            <td>{{ $asesor->FullName }}</td>
-                            <td>{{ $asesor->email }}</td>
-                            <td><button class="btn btn-primary botonVerAsesor" asesorId="{{$asesor->id}}">Ver</button>
-                            </td>
-                            <td>
-                                <input type="hidden" value="{{ $asesor->id }}">
-                                <button type="button" class="btn btn-sm btn-success asignar" asesorId="{{$asesor->id}}">Asignar</button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="asesoresTable" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre completo</th>
+                                <th>Correo</th>
+                                <th>Prospectos</th>
+                                <th>Seleccionar</th>
+                                <th>Temporal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($asesores as $asesor)
+                            <tr>
+                                <td>{{ $asesor->FullName }}</td>
+                                <td>{{ $asesor->email }}</td>
+                                <td><button class="btn btn-primary botonVerAsesor" asesorId="{{$asesor->id}}">Ver</button>
+                                </td>
+                                <td>
+                                    <input type="hidden" value="{{ $asesor->id }}">
+                                    <button type="button" class="btn btn-sm btn-success asignar" asesorId="{{$asesor->id}}">Asignar</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success asignarTemporal" asesorId={{$asesor->id}}>Temporal</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
             {{-- CONTENEDOR TABLA PROSPECTOS DEL ASESOR SELECCIONADO --}}
             <div class="col-sm-6">
@@ -220,27 +226,37 @@
                 },
             })
             .done(function(res) {
-            //     // console.log("success", res);
-            //     $('#alert').prop('style', 'display:block;');
-            //     $('#alert').empty();
-            //     $('#alert').append(`<div class="alert alert-success" role="alert">
-            //     <strong>Exito!</strong> Se asigno al asesor correctamente.
-            //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            //         <span aria-hidden="true">&times;</span>
-            //     </button>
-            // </div>`);
-            //     table.clear();
-            //     let filas = [];
-            //     for(let i = 0; i < res.prospectos.length; i++){
-            //         filas.push([
-            //             res.prospectos[i].nombre,
-            //             res.prospectos[i].appaterno,
-            //             res.prospectos[i].apmaterno,
-            //             res.prospectos[i].email,
-            //             `<input type="checkbox" name="prospecto_id[]" value="${res.prospectos[i].id}">`
-            //         ]);
-            //     }
-            //     table.rows.add(filas).draw();
+                location.reload();
+            })
+            .fail(function(err) {
+                console.log("error", err);
+            });
+        });
+
+        $('.asignarTemporal').click(function() {
+            console.log('asesor seleccionado', $(this).attr('asesorId'));
+            let prospectos = [];
+            $('#formdata').find('input[type=checkbox]:checked').each(function(index, el) {
+                prospectos.push($(el).val());
+            });
+
+            $('#formdata2').find('input[type=checkbox]:checked').each(function(index, el) {
+                prospectos.push($(el).val());
+                console.log('works formdata2');
+            });
+            
+            $.ajax({
+                url: '{{ route('prospectos.asignar_asesor_temporal') }}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    prospectos: prospectos,
+                    asesor: $(this).attr('asesorId')
+                },
+            })
+            .done(function(res) {
+                console.log(res.request.asesor);
                 location.reload();
             })
             .fail(function(err) {

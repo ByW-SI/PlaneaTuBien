@@ -7,6 +7,7 @@ use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
 use App\Services\Prospecto\AsignarAsesorService;
+use App\Services\Prospecto\AsignarAsesorTemporalService;
 use App\Services\Prospecto\DestroyProspectoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -169,7 +170,7 @@ class ProspectoController extends Controller
     public function viewAsignar()
     {
         $asesores = Empleado::where('cargo', 'Asesor')->get();
-        $prospectos = Prospecto::doesnthave('asesores')->get();
+        $prospectos = Prospecto::doesnthave('asesor')->get();
 
         return view('prospectos.asignar', compact('asesores', 'prospectos'));
     }
@@ -185,6 +186,19 @@ class ProspectoController extends Controller
             return response()->json([
                 'message' => $th
             ]);
+        }
+    }
+
+    public function asignarAsesorTemporal(Request $request)
+    {
+        try {
+            //code...
+            $asignarAsesorTemporalService = new AsignarAsesorTemporalService($request);
+            return response()->json([
+                'request' => $request->input()
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
         }
     }
 

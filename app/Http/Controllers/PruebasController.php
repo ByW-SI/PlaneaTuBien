@@ -9,14 +9,9 @@ class PruebasController extends Controller
 {
     public function index()
     {
-        $empleadoProspecto = EmpleadoProspecto::where('prospecto_id', 2)->update([
-            'temporal' => 1
-        ]);
-        // EmpleadoProspecto::whereIn('id', $empleadoProspecto)->delete();
-        // EmpleadoProspecto::where('prospecto_id', 2)->delete();
-        return EmpleadoProspecto::where('prospecto_id', 2)->get();
-        $prospecto = Prospecto::with('asesores')->find(2);
-        // $prospecto->asesores()->detach();
-        return $prospecto->asesores()->get();
+        return Prospecto::where('id', 26)
+            ->with('asesores')
+            ->with('asesor')
+            ->get();
     }
 }

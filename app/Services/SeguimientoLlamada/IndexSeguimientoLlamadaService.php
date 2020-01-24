@@ -31,10 +31,18 @@ class IndexSeguimientoLlamadaService
     public function setProspectos()
     {
         if ($this->empleado->esAdmin()) {
-            $this->prospectos = Prospecto::where('estatus_id',1)->has('asesores')->get();
+            $this->prospectos = Prospecto::where('estatus_id',1)
+                ->has('asesores')
+                ->has('asesor')
+                ->get();
             return;
         }
-        $this->prospectos = $this->empleado->prospectos()->where('estatus_id',1)->has('asesores')->get();
+        $this->prospectos = $this->empleado
+            ->prospectos()
+            ->where('estatus_id',1)
+            ->has('asesores')
+            ->has('asesor')
+            ->get();
     }
 
     public function getProspectosXEstatus($estatus_id)
