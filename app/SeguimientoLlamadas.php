@@ -6,28 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeguimientoLlamadas extends Model
 {
-	protected $table = 'seguimiento_llamadas';
+    protected $table = 'seguimiento_llamadas';
 
-	protected $fillable = [
+    protected $fillable = [
         'id',
         'asesor_id',
         'prospecto_id',
         'resultado_llamada_id',
         'fecha_contacto',
         'fecha_siguiente_contacto',
-        'comentario'
+        'comentario',
+        'responsable_id'
     ];
 
-    protected $hidden=[
+    protected $hidden = [
         'created_at',
         'updated_at'
     ];
 
-    public function asesor(){
+    public function asesor()
+    {
         return $this->belongsTo('App\EmpleadoProspecto');
     }
 
-    public function prospecto(){
+    public function prospecto()
+    {
         return $this->belongsTo('App\Prospecto');
     }
 
@@ -36,8 +39,12 @@ class SeguimientoLlamadas extends Model
         return $this->belongsTo('App\ResultadoLlamada');
     }
 
-    public function citas(){
+    public function citas()
+    {
         return $this->hasMany('App\Citas', 'seguimientoLlamada_id');
     }
 
+    public function responsable(){
+        return $this->belongsTo('App\Empleado');
+    }
 }

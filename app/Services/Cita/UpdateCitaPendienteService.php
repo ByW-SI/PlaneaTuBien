@@ -7,6 +7,7 @@ use App\EstatusProspecto;
 use App\SeguimientoLlamadas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateCitaPendienteService
 {
@@ -36,8 +37,8 @@ class UpdateCitaPendienteService
 
         if ($this->reagendoLlamada()) {
             $this->reagendarLLamada();
-            $this->actualizarEstatusProspecto('Volver A Llamar');
-            $this->establecerRutaDeCitasPendientesReprogramar();
+            // $this->actualizarEstatusProspecto('Volver A Llamar');
+            $this->establecerRutaDeCitasPendientes();
         }
 
         if ($this->canceloCita()) {
@@ -54,7 +55,8 @@ class UpdateCitaPendienteService
      */
 
 
-    public function establecerFechaCita(){
+    public function establecerFechaCita()
+    {
         $this->cita->update([
             'fecha_cita' => $this->request->fechaCita,
         ]);
@@ -65,9 +67,9 @@ class UpdateCitaPendienteService
         $this->route = 'citas.index';
     }
 
-    public function establecerRutaDeCitasPendientesReprogramar()
+    public function establecerRutaDeCitasPendientes()
     {
-        $this->route = 'citas.pendientes.reprogramar.index';
+        $this->route = 'citas.pendientes.index';
     }
 
     public function establecerRutaDeCitasCanceladas()
@@ -108,7 +110,8 @@ class UpdateCitaPendienteService
             'resultado_llamada_id' => 4,
             'fecha_contacto' => Carbon::now(),
             'fecha_siguiente_contacto' => $this->request->nuevaFechaLlamada,
-            'comentario' => 'Reprogramar cita',
+            'comentario' => 'Pendiente por llamar',
+            'responsable_id' => Auth::user()->empleado->id,
         ]);
     }
 

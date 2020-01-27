@@ -162,6 +162,7 @@ Route::get('citas/pendientes', 'Cita\CitaController@pendientes')->name('citas.pe
 Route::get('citas/{citas}/canceladas/reactivar', 'Cita\CitaController@reactivar')->name('citas.canceladas.reactivar');
 Route::get('citas/canceladas', 'Cita\CitaController@canceladas')->name('citas.canceladas.index');
 Route::get('citas/reprogramables', 'Cita\CitaController@reprogramables')->name('citas.reprogramables.index');
+Route::post('citas/confirmadas/{citas}/update', 'Cita\CitaController@confirmadasUpdate')->name('citas.confirmadas.update');
 Route::get('citas/confirmadas', 'Cita\CitaController@confirmadas')->name('citas.confirmadas');
 Route::get('citas', 'Cita\CitaController@index')->name('citas.index');
 Route::post('citas/store', 'Cita\CitaController@store')->name('citas.store');

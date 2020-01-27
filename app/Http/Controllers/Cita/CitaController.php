@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Cita\ReactivarCitaService;
 use App\Services\Cita\StoreCitaService;
+use App\Services\Cita\UpdateCitaConfirmadaService;
 use App\Services\Cita\UpdateCitaPendienteService;
 use App\Services\Cita\UpdateCitaService;
 
@@ -83,10 +84,11 @@ class CitaController extends Controller
         return view('citas.pendientes.index', compact('citas', 'asesores'));
     }
 
-    public function pendientesReprogramar(){
-        $citas = Citas::whereHas('prospecto', function($query){
+    public function pendientesReprogramar()
+    {
+        $citas = Citas::whereHas('prospecto', function ($query) {
             return $query->whereEstatusCitaPendienteReprogramar();
-        } )->get();
+        })->get();
         return view('citas.pendientes.reprogramar.index', compact('citas'));
     }
 
@@ -94,5 +96,11 @@ class CitaController extends Controller
     {
         $updateCitaPendienteService = new UpdateCitaPendienteService($request, $citas);
         return redirect()->route($updateCitaPendienteService->getRoute());
+    }
+
+    public function confirmadasUpdate(Request $request, Citas $citas)
+    {
+        $updateCitaConfirmadaService = new UpdateCitaConfirmadaService($citas);
+        return redirect()->back();
     }
 }

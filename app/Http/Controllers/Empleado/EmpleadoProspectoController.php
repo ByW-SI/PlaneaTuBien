@@ -16,10 +16,14 @@ class EmpleadoProspectoController extends Controller
      */
     public function index(Empleado $empleado, Request $request)
     {
-        if($empleado->tipo === "Admin" )
+        if ($empleado->tipo === "Admin") {
             $prospectos = Prospecto::get();
-        else
-            $prospectos = $empleado->prospectos;
+        } else {
+            $prospectos = $empleado->prospectos()
+                // ->where('temporal', 0)
+                // ->orWhere('')
+                ->get();
+        }
 
         return view('empleado.prospecto.index', ['empleado' => $empleado, 'prospectos' => $prospectos, 'buscar' => $request->buscar]);
     }
@@ -54,7 +58,7 @@ class EmpleadoProspectoController extends Controller
     public function show(Empleado $empleado, Prospecto $prospecto)
     {
         $asesoresTemporales = $prospecto->asesores()
-            ->where('temporal',1)
+            ->where('temporal', 1)
             ->get();
         return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto, 'asesoresTemporales' => $asesoresTemporales]);
     }

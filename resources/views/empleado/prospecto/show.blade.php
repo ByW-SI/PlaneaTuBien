@@ -110,7 +110,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
-							@forelse ($asesoresTemporales as $asesor)
+							@if (!empty($asesoresTemporales))
 							<table id="asesores" class="table">
 								<thead class="thead-dark">
 									<tr>
@@ -121,6 +121,7 @@
 									</tr>
 								</thead>
 								<tbody>
+									@forelse ($asesoresTemporales as $asesor)
 									<tr>
 										<td>{{$asesor->id}}</td>
 										<td>{{$asesor->nombre}} {{$asesor->appaterno}} {{$asesor->apmaterno}}</td>
@@ -134,6 +135,11 @@
 									@endforelse
 								</tbody>
 							</table>
+							@else
+							<div class="alert alert-info">
+								No cuenta con asesores temporales.
+							</div>
+							@endif
 						</div>
 					</div>
 				</div>

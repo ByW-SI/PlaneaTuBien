@@ -31,7 +31,7 @@ class UpdateCitaService
         if ($this->confirmoCita()) {
             $this->actualizarEstatusProspecto('Cita Confirmada');
             $this->confirmarCita();
-            $this->establecerRutaDeCitasConfirmadas();
+            $this->establecerRutaDeCitas();
         }
 
         if ($this->reagendoCita()) {

@@ -29,7 +29,7 @@
                             <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
                                 {{$cita->prospecto->asesor()->first()->paterno}}
                                 {{$cita->prospecto->asesor->first()->materno}}</td>
-                            <td nowrap>{{$cita->citaCancelada->comentario}}</td>
+                            <td nowrap>{{$cita->prospecto->seguimientoLlamadas()->orderBy('id','desc')->first()->comentario}}</td>
                             <td nowrap>{{!$cita->citaCancelada->asesor ? '' : $cita->citaCancelada->asesor->nombre}}
                             </td>
                             <td nowrap>{{$cita->citaCancelada->tipo_cancelacion}}</td>

@@ -12,41 +12,44 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-striped table-hover" id="citas">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Status</th>
-                                <th>Prospecto</th>
-                                <th>Clave de preautorizacion</th>
-                                <th>Asesor</th>
-                                <th>Fecha cita</th>
-                                <th>Hora</th>
-                                <th>Agendar cita</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($citas as $cita)
-                            <tr>
-                                <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td>
-                                <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
-                                    {{$cita->prospecto->apmaterno}}</td>
-                                <td nowrap>{{$cita->clave_preautorizacion}}</td>
-                                <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
-                                    {{$cita->prospecto->asesor()->first()->paterno}}
-                                    {{$cita->prospecto->asesor->first()->materno}}</td>
-                                <td nowrap>{{$cita->fecha_cita}}</td>
-                                <td nowrap>{{$cita->hora}}</td>
-                                <td nowrap>
-                                    <button type="submit" class="btn btn-success botonAgendarCita"
-                                        prospectoId={{$cita->prospecto->id}}>
-                                        Agendar cita
-                                    </button>
-                                    @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' => $cita->prospecto])
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="citas">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Status</th>
+                                    <th>Prospecto</th>
+                                    <th>Clave de preautorizacion</th>
+                                    <th>Asesor</th>
+                                    <th>Fecha cita</th>
+                                    <th>Hora</th>
+                                    <th>Agendar cita</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($citas as $cita)
+                                <tr>
+                                    <td nowrap>{{$cita->prospecto->estatus()->first()->nombre}}</td>
+                                    <td nowrap>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
+                                        {{$cita->prospecto->apmaterno}}</td>
+                                    <td nowrap>{{$cita->clave_preautorizacion}}</td>
+                                    <td nowrap>{{$cita->prospecto->asesor()->first()->nombre}}
+                                        {{$cita->prospecto->asesor()->first()->paterno}}
+                                        {{$cita->prospecto->asesor->first()->materno}}</td>
+                                    <td nowrap>{{$cita->fecha_cita}}</td>
+                                    <td nowrap>{{$cita->hora}}</td>
+                                    <td nowrap>
+                                        <button type="submit" class="btn btn-success botonAgendarCita"
+                                            prospectoId={{$cita->prospecto->id}}>
+                                            Agendar cita
+                                        </button>
+                                        @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' =>
+                                        $cita->prospecto])
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
