@@ -32,6 +32,7 @@ class ComponentesTableSeeder extends Seeder
             array('nombre' => 'alta excel prospecto', 'modulo_id' => 2),
             array('nombre' => 'editar prospecto', 'modulo_id' => 2),
             array('nombre' => 'eliminar prospecto', 'modulo_id' => 2),
+            array('nombre' => 'editar cita', 'modulo_id' => 2),
             // Agentes
             array('nombre' => 'indice agentes', 'modulo_id' => 3),
             array('nombre' => 'ver agente', 'modulo_id' => 3),

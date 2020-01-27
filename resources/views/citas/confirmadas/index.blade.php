@@ -34,10 +34,13 @@
                             <td>{{$cita->hora}}</td>
                             <td>
                                 {{-- BOTON ASISITIO --}}
+                                @if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar cita')->first())
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target=".asistio-cita-{{$cita->id}}">
                                     Asistió
                                 </button>
+                                    
+                                @endif
                                 {{-- MODAL ASISTIO --}}
                                 <div class="modal fade asistio-cita-{{$cita->id}}" id="exampleModalCenter" tabindex="-1"
                                     role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -53,41 +56,50 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <label for="" class="text-uppercase text-muted">
-                                                            asesor
-                                                        </label>
-                                                        <input type="text" class="form-control"
-                                                            value="{{$cita->prospecto->asesor->nombre}}" readonly>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <label for="" class="text-uppercase text-muted">
-                                                            reasignar
-                                                        </label>
-                                                        <input type="text" class="form-control" name="nuevoAsesorId">
-                                                    </div>
-                                                    <div class="col-12">
+                                            <form action="{{route('citas.confirmadas.asistio', ['id'=>$cita])}}"
+                                                method="POST">
+                                                <div class="modal-body">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label for="" class="text-uppercase text-muted">
+                                                                asesor
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                value="{{$cita->prospecto->asesor->nombre}}" readonly>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="" class="text-uppercase text-muted">
+                                                                reasignar
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                name="nuevoAsesorId">
+                                                        </div>
+                                                        {{-- <div class="col-12">
                                                         <label for="" class="text-uppercase text-muted">
                                                             comentario
                                                         </label>
                                                         <textarea name="comentario" cols="30" rows="5" class="form-control"></textarea>
+                                                    </div> --}}
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-success">GUARDAR</button>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-success" type="submit">GUARDAR</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </td>
+                            {{-- NO ASISTIO --}}
                             <td>
+                                @if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar cita')->first())
                                 <form action="{{route('citas.confirmadas.update',['id'=>$cita->id])}}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">No asistió</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

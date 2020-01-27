@@ -6,6 +6,7 @@ use App\Citas;
 use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Cita\AsistirCitaService;
 use App\Services\Cita\ReactivarCitaService;
 use App\Services\Cita\StoreCitaService;
 use App\Services\Cita\UpdateCitaConfirmadaService;
@@ -102,5 +103,12 @@ class CitaController extends Controller
     {
         $updateCitaConfirmadaService = new UpdateCitaConfirmadaService($citas);
         return redirect()->back();
+    }
+
+    public function asistir(Request $request, Citas $citas)
+    {
+        $asistirCitaService = new AsistirCitaService($request, $citas);
+        // dd($citas->prospecto->id);
+        return redirect()->route('crear-perfil-sin-cotizacion', ['prospecto' => $citas->prospecto->id]);
     }
 }
