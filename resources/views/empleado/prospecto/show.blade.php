@@ -32,7 +32,6 @@
 			</div>
 			<div class="card-body">
 				<span class="text-uppercase">
-					{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 					{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
 
 				</span>
