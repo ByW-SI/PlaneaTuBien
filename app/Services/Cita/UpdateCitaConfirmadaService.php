@@ -22,7 +22,10 @@ class UpdateCitaConfirmadaService
         $this->setAsesor($this->prospecto->asesor);
 
         if ($this->noAsistio()) { // AUN NO ESTÁ IMPLEMENTADO
+            $this->reagendarLlamada();
             $this->actualizarEstatusProspecto('Reagendar cita');
+            $this->desconfirmarCita();
+            // dd($this->prospecto);
         }
     }
 
@@ -40,8 +43,15 @@ class UpdateCitaConfirmadaService
             'resultado_llamada_id' => 4,
             'fecha_contacto' => Carbon::now(),
             'fecha_siguiente_contacto' => date('Y-m-d'),
-            'comentario' => 'No asistió',
+            'comentario' => 'No asistió a cita',
         ]);
+    }
+
+    public function desconfirmarCita(){
+        $this->cita->update([
+            'esta_confirmada' => 0
+        ]);
+        $this->cita->save();
     }
 
     public function actualizarEstatusProspecto($nombreEstatus)
@@ -49,6 +59,7 @@ class UpdateCitaConfirmadaService
         $this->prospecto->update([
             'estatus_id' => EstatusProspecto::where('nombre', $nombreEstatus)->first()->id
         ]);
+        $this->prospecto->save();
     }
 
     /**

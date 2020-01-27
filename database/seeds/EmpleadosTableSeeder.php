@@ -12,15 +12,27 @@ class EmpleadosTableSeeder extends Seeder
      */
     public function run()
     {
-        
-        $empleado = [
+
+        Empleado::create([
             'tipo' => 'Admin',
-        	'nombre' => 'Dummy',
+            'nombre' => 'Dummy',
             'paterno' => 'Dummy',
             'email' => 'admin@planea.com',
-        ];
+        ]);
 
-        Empleado::create($empleado);
-
+        // Empleado::create([
+        //     'tipo' => 'Asesor',
+        //     'cargo' => 'Asesor',
+        //     'puesto' => 'Asesor',
+        //     'nombre' => 'Sandra',
+        //     'paterno' => 'Gutierrez',
+        //     'materno' => 'Campuzano',
+        //     'fecha_nacimiento' => '1989/02/20',
+        //     'sexo' => 'Mujer',
+        //     'email' => 'sandy@planea.com',
+        //     'sucursal_id' => 1,
+        //     'id_jefe' => 1,
+        //     'edad' => 29,
+        // ]);
     }
 }
