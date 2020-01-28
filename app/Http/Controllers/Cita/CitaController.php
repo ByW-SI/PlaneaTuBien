@@ -42,7 +42,8 @@ class CitaController extends Controller
     public function confirmadas()
     {
         $citas = Citas::confirmadas()->get();
-        return view('citas.confirmadas.index', compact('citas'));
+        $asesores = Empleado::asesores()->get();
+        return view('citas.confirmadas.index', compact('citas','asesores'));
     }
 
     public function reprogramables()

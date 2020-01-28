@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Empleado\StoreEmpleadoService;
-
+use App\Services\Empleado\UpdateEmpleadoService;
 
 class EmpleadoController extends Controller
 {
@@ -124,24 +124,9 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Empleado $empleado)
     {
-        $empleado = Empleado::withTrashed()->find($id);
-
-        $empleado->update($request->all());
-        $sucursal = Sucursal::find($request->sucursal);
-        $empleado->sucursal()->associate($sucursal);
-        $empleado->id_jefe = $request->jefe_id;
-        //dd($request->all());
-        if ($request->cp && $request->colonia && $request->estado && $request->delegacion && $request->calle)
-            $empleado->direccion->update($request->all());
-
-        $empleado->save();
-
-        is_null($empleado->user) ?: $empleado->user->update(['email' => $empleado->email]);
-
-        // dd($empleado->user);
-
+        $updateEmpleadoService = new UpdateEmpleadoService($request, $empleado);
         return redirect()->route('empleados.index');
     }
 

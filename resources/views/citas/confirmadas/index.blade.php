@@ -62,21 +62,27 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="row">
-                                                        <div class="col-12">
+                                                        <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">
                                                                 asesor
                                                             </label>
                                                             <input type="text" class="form-control"
                                                                 value="{{$cita->prospecto->asesor->nombre}}" readonly>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">
-                                                                reasignar
+                                                                reasignar asesor
                                                             </label>
-                                                            <input type="text" class="form-control"
-                                                                name="nuevoAsesorId">
+                                                            <select name="nuevoAsesorId" class="form-control" required>
+                                                                <option value="">Seleccionar</option>
+                                                                @foreach ($asesores as $asesor)
+                                                                    <option value="{{$asesor->id}}">{{$asesor->nombre}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            {{-- <input type="text" class="form-control"
+                                                                name="nuevoAsesorId"> --}}
                                                         </div>
-                                                        {{-- <div class="col-12">
+                                                        {{-- <div class="col-12 mt-2">
                                                         <label for="" class="text-uppercase text-muted">
                                                             comentario
                                                         </label>
