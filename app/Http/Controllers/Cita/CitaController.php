@@ -7,6 +7,11 @@ use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Cita\AsistirCitaService;
+use App\Services\Cita\IndexCitaCanceladaService;
+use App\Services\Cita\IndexCitaConfirmadaService;
+use App\Services\Cita\IndexCitaPendienteService;
+use App\Services\Cita\IndexCitaReprogramableService;
+use App\Services\Cita\IndexCitaService;
 use App\Services\Cita\ReactivarCitaService;
 use App\Services\Cita\StoreCitaService;
 use App\Services\Cita\UpdateCitaConfirmadaService;
@@ -16,12 +21,10 @@ use App\Services\Cita\UpdateCitaService;
 class CitaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $citas = Citas::noCanceladas()->whereHas('prospecto', function ($query) {
-            return $query->whereEstatusCita();
-        })->get();
-
+        $indexCitaService = new IndexCitaService($request);
+        $citas = $indexCitaService->getCitas();
         $asesores = Empleado::asesores()->get();
         return view('citas.index', compact('citas', 'asesores'));
     }
@@ -39,30 +42,25 @@ class CitaController extends Controller
         return redirect()->route($updateCitaService->getRoute());
     }
 
-    public function confirmadas()
+    public function confirmadas(Request $request)
     {
-        $citas = Citas::confirmadas()->get();
+        $indexCitaConfirmadaService = new IndexCitaConfirmadaService($request);
+        $citas = $indexCitaConfirmadaService->getCitas();
         $asesores = Empleado::asesores()->get();
-        return view('citas.confirmadas.index', compact('citas','asesores'));
+        return view('citas.confirmadas.index', compact('citas', 'asesores'));
     }
 
-    public function reprogramables()
+    public function reprogramables(Request $request)
     {
-        $citas = Citas::whereHas('prospecto', function ($query) {
-            return $query->whereHas('estatus', function ($query) {
-                return $query->where('nombre', 'Reagendar cita');
-            });
-        })->get();
-
+        $indexCitaReprogramableService = new IndexCitaReprogramableService($request);
+        $citas = $indexCitaReprogramableService->getCitas();
         return view('citas.reprogramables.index', compact('citas'));
     }
 
-    public function canceladas()
+    public function canceladas(Request $request)
     {
-        $citas = Citas::whereHas('prospecto', function ($query) {
-            return $query->whereEstatusCitaCancelada();
-        })->has('citaCancelada')->get();
-
+        $indexCitaCanceladaService = new IndexCitaCanceladaService($request);
+        $citas = $indexCitaCanceladaService->getCitas();
         return view('citas.canceladas.index', compact('citas'));
     }
 
@@ -72,14 +70,10 @@ class CitaController extends Controller
         return redirect()->route('seguimiento.llamadas.index');
     }
 
-    public function pendientes()
+    public function pendientes(Request $request)
     {
-
-        $citas = Citas::whereHas('prospecto', function ($query) {
-            return $query->whereEstatusPendiente();
-        })->with('prospecto.estatus')->get();
-
-        // return $citas;
+        $indexCitaPendienteService = new IndexCitaPendienteService($request);
+        $citas = $indexCitaPendienteService->getCitas();
 
         $asesores = Empleado::asesores()->get();
 

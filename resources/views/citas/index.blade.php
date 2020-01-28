@@ -4,50 +4,87 @@
 
 <div class="container">
 
-    <h3 class="text-center text-uppercase text-muted mt-4"> SEGUIMIENTO DE CITAS</h3>
+    <h3 class="text-center text-uppercase text-muted mt-4">SEGUIMIENTO DE CITAS</h3>
 
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover" id="citas">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Status</th>
-                            <th>Prospecto</th>
-                            <th>Clave de preautorizacion</th>
-                            <th>Asesor</th>
-                            <th>Fecha cita</th>
-                            <th>Hora</th>
-                            <th>Ver</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($citas as $cita)
-                        <tr>
-                            <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
-                            <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
-                                {{$cita->prospecto->apmaterno}}</td>
-                            <td>{{$cita->clave_preautorizacion}}</td>
-                            <td>{{$cita->prospecto->asesor()->first()->nombre}}
-                                {{$cita->prospecto->asesor()->first()->paterno}}
-                                {{$cita->prospecto->asesor->first()->materno}}</td>
-                            <td>{{$cita->fecha_cita}}</td>
-                            <td>{{$cita->hora}}</td>
-                            <td>
-                                {{-- <a href="#" class="btn btn-primary">VER</a> --}}
-                                @include('citas.modals.edit', ['cita' => $cita, 'asesores'=>$asesores])
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target=".modalCitas-{{$cita->prospecto->id}}">
-                                    Ver
-                                </button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="row">
+        {{-- CONTENEDOR FILTRO DE FECHA --}}
+        @csrf
+        <div class="col-12 col-md-6">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h5 class="text-center text-uppercase text-muted m-0">FILTRO POR FECHA DE CITA</h5>
+                </div>
+                <form action="{{route('citas.index')}}" method="GET">
+                    <div class="card-body">
+                        <div class="row">
+                            {{-- CONTENEDOR INPUT FECHA INICIO --}}
+                            <div class="col-6 my-1">
+                                <label for="" class="text-uppercase text-muted">FECHA INICIO</label>
+                                <input type="date" class="form-control" name="fechaCitaInicio" value="{{request()->input('fechaCitaInicio')}}">
+                            </div>
+                            {{-- CONTENEDOR INPUT FECHA FIN --}}
+                            <div class="col-6 my-1">
+                                <label for="" class="text-uppercase text-muted">FECHA FIN</label>
+                                <input type="date" class="form-control" name="fechaCitaFin" value="{{request()->input('fechaCitaFin')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-success btn-sm rounded-0">BUSCAR</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <div class="row mt-4">
+        {{-- CONTENEDOR TABLA DE CITAS --}}
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="citas">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Status</th>
+                                    <th>Prospecto</th>
+                                    <th>Clave de preautorizacion</th>
+                                    <th>Asesor</th>
+                                    <th>Fecha cita</th>
+                                    <th>Hora</th>
+                                    <th>Ver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($citas as $cita)
+                                <tr>
+                                    <td>{{$cita->prospecto->estatus()->first()->nombre}}</td>
+                                    <td>{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}}
+                                        {{$cita->prospecto->apmaterno}}</td>
+                                    <td>{{$cita->clave_preautorizacion}}</td>
+                                    <td>{{$cita->prospecto->asesor()->first()->nombre}}
+                                        {{$cita->prospecto->asesor()->first()->paterno}}
+                                        {{$cita->prospecto->asesor->first()->materno}}</td>
+                                    <td>{{$cita->fecha_cita}}</td>
+                                    <td>{{$cita->hora}}</td>
+                                    <td>
+                                        {{-- <a href="#" class="btn btn-primary">VER</a> --}}
+                                        @include('citas.modals.edit', ['cita' => $cita, 'asesores'=>$asesores])
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target=".modalCitas-{{$cita->prospecto->id}}">
+                                            Ver
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -57,8 +94,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-
-/**
+    /**
 * ======
 * EVENTS
 * ======

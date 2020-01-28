@@ -9,7 +9,41 @@
 
 <div class="container">
     <h3 class="text-center text-uppercase text-muted">CITAS PENDIENTES</h3>
-    <div class="card">
+
+    <div class="row">
+        {{-- CONTENEDOR FILTRO DE FECHA --}}
+        <div class="col-12 col-md-6">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h5 class="text-center text-uppercase text-muted m-0">FILTRO POR FECHA DE CANCELACIÓN</h5>
+                </div>
+                <form action="{{route('citas.pendientes.index')}}" method="GET">
+                    @csrf
+                    <div class="card-body">
+                        <div class="row">
+                            {{-- CONTENEDOR INPUT FECHA INICIO --}}
+                            <div class="col-6 my-1">
+                                <label for="" class="text-uppercase text-muted">FECHA INICIO</label>
+                                <input type="date" class="form-control" name="fechaCitaInicio"
+                                    value="{{request()->input('fechaCitaInicio')}}">
+                            </div>
+                            {{-- CONTENEDOR INPUT FECHA FIN --}}
+                            <div class="col-6 my-1">
+                                <label for="" class="text-uppercase text-muted">FECHA FIN</label>
+                                <input type="date" class="form-control" name="fechaCitaFin"
+                                    value="{{request()->input('fechaCitaFin')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-success btn-sm rounded-0">BUSCAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="citas">
@@ -171,11 +205,16 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col" style="white-space: nowrap">Resultado</th>
-                                                                        <th scope="col" style="white-space: nowrap">Fecha de contacto</th>
-                                                                        <th scope="col" style="white-space: nowrap">Fecha de siguiente contacto</th>
-                                                                        <th scope="col" style="white-space: nowrap">Comentario</th>
-                                                                        <th scope="col" style="white-space: nowrap">Asesor que realizó la acción</th>
+                                                                        <th scope="col" style="white-space: nowrap">
+                                                                            Resultado</th>
+                                                                        <th scope="col" style="white-space: nowrap">
+                                                                            Fecha de contacto</th>
+                                                                        <th scope="col" style="white-space: nowrap">
+                                                                            Fecha de siguiente contacto</th>
+                                                                        <th scope="col" style="white-space: nowrap">
+                                                                            Comentario</th>
+                                                                        <th scope="col" style="white-space: nowrap">
+                                                                            Asesor que realizó la acción</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -186,10 +225,13 @@
                                                                             {{!$llamada->resultadoLLamada ? '' : $llamada->resultadoLLamada->nombre}}
                                                                         </td>
                                                                         <td nowrap>{{$llamada->fecha_contacto}}</td>
-                                                                        <td nowrap>{{$llamada->fecha_siguiente_contacto}}
+                                                                        <td nowrap>
+                                                                            {{$llamada->fecha_siguiente_contacto}}
                                                                         </td>
                                                                         <td nowrap>{{$llamada->comentario}}</td>
-                                                                        <td nowrap>{{is_null($llamada->responsable) ? '' : $llamada->responsable->nombre}}</td>
+                                                                        <td nowrap>
+                                                                            {{is_null($llamada->responsable) ? '' : $llamada->responsable->nombre}}
+                                                                        </td>
                                                                     </tr>
                                                                     @endforeach
                                                                 </tbody>
@@ -203,7 +245,8 @@
                                 </div>
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-success botonAgendarCita" prospectoId={{$cita->prospecto->id}}>
+                                <button type="submit" class="btn btn-success botonAgendarCita"
+                                    prospectoId={{$cita->prospecto->id}}>
                                     Agendar cita
                                 </button>
                                 @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto' =>
