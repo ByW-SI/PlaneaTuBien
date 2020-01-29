@@ -14,6 +14,7 @@ class IndexCitaConfirmadaService
     {
         $this->setCitas();
         $this->filtrarCitasPorFechaDeInicio($request->fechaCitaInicio);
+        $this->filtrarCitasPorFechaDeFin($request->fechaCitaFin);
     }
 
     /**
