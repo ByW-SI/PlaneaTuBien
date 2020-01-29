@@ -43,8 +43,7 @@
           <div class="form-row">
             <div class="form-group col-sm-3">
               <label for="recipient-name" class="col-form-label">Clave de Preautorizacion:</label>
-              <input type="text" class="form-control clavePreautorizacion" value="POLJH/LP/3/0300"
-                name="clave_preautorizacion" prospectoId="{{$prospecto->id}}" readonly>
+              <input type="text" class="form-control clavePreautorizacion" value="{{$prospecto->citas()->first() ? $prospecto->citas()->first()->clave_preautorizacion : ''}}" name="clave_preautorizacion" prospectoId="{{$prospecto->id}}" readonly>
             </div>
             <div class="form-group col-sm-3">
               <label for="message-text" class="col-form-label">Fecha de cita:</label>
@@ -58,7 +57,7 @@
             <div class="form-group col-sm-3">
               <label for="message-text" class="col-form-label">Número de tarjetas:</label>
               <input type="text" name="numeroTarjeta" class="form-control numeroTarjetas modalCrearCitaInput"
-                prospectoId={{$prospecto->id}}>
+                prospectoId={{$prospecto->id}} value="{{$prospecto->numeroTarjetas}}">
             </div>
           </div>
           <!-- FILA-->
@@ -66,7 +65,7 @@
             <div class="form-group col-sm-4">
               <label for="message-text" class="col-form-label">Cuánto gana al mes:</label>
               <input type="text" name="sueldo" class="form-control sueldo modalCrearCitaInput inputSueldo"
-                prospectoId={{$prospecto->id}}>
+                prospectoId={{$prospecto->id}} value="{{$prospecto->sueldo}}">
             </div>
             <div class="form-group col-sm-4">
               <label for="message-text" class="col-form-label">Estado civil:</label>

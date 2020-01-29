@@ -58,8 +58,8 @@ class EmpleadoProspectoCotizacionController extends Controller
             'descuento'=>'nullable|numeric',
             'promocion'=>'nullable|numeric',
             'tipo_inscripcion'=>'string|nullable',
-
         ]);
+        
         if ($request->plan) {
             $plan = Plan::find($request->plan);
             $promocion = Promocion::find($request->promocion);

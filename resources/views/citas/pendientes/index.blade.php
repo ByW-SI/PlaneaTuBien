@@ -301,9 +301,15 @@
         });
 
         mostrarModalCrear(prospectoId);
+        modificarInputClavePreautorizacion(prospectoId);
 
         // $(`.modalCrearCita[prospectoId=${prospectoId}]`).modal('show');
 
+    });
+
+    $(document).on('change', '.modalCrearCitaInput', function(){
+        prospectoId = $(this).attr('prospectoId');
+        modificarInputClavePreautorizacion(prospectoId);
     });
 
     /*

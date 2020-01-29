@@ -104,6 +104,6 @@ class CitaController extends Controller
     {
         $asistirCitaService = new AsistirCitaService($request, $citas);
         // dd($citas->prospecto->id);
-        return redirect()->route('crear-perfil-sin-cotizacion', ['prospecto' => $citas->prospecto->id]);
+        return redirect()->route('empleados.prospectos.cotizacions.create', ['empleado' => $citas->prospecto->asesor->id, 'prospecto' => $citas->prospecto->id]);
     }
 }

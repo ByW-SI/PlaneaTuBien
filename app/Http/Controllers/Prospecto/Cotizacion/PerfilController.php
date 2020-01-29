@@ -88,6 +88,7 @@ class PerfilController extends Controller
             $inmueble->tipo_inmueble = $request->otro_name;
             // $inmueble->save();
         }
+
         $perfil->inmueble_pretendido()->save($inmueble);
         for ($i = 0; $i < sizeof($request->nombre) ; $i++) {
             $referencia = new PerfilReferenciaPersonalCliente([
@@ -100,6 +101,7 @@ class PerfilController extends Controller
             ]);
             $perfil->referencia_personals()->save($referencia);
         }
+
         $cotizacion->elegir = 1;
         $cotizacion->save();
 
