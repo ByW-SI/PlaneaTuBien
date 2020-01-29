@@ -49,8 +49,6 @@ class EmpleadoProspectoCotizacionController extends Controller
      */
     public function store(Empleado $empleado,Prospecto $prospecto, Request $request)
     {
-
-
         $request->validate([
             'monto'=>'required|numeric',
             'ahorro'=>"nullable|numeric",

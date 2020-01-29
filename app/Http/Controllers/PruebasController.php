@@ -9,9 +9,7 @@ class PruebasController extends Controller
 {
     public function index()
     {
-        return Prospecto::where('id', 26)
-            ->with('asesores')
-            ->with('asesor')
-            ->get();
+        $prospecto = Prospecto::with('cotizaciones')->find(3);
+        return $prospecto;
     }
 }
