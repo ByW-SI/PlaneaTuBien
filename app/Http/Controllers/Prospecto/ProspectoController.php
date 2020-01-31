@@ -7,6 +7,7 @@ use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
 use App\Services\Prospecto\AsignarAsesorService;
+use App\Services\Prospecto\AsignarAsesorTemporalIndefinidoService;
 use App\Services\Prospecto\AsignarAsesorTemporalService;
 use App\Services\Prospecto\DestroyProspectoService;
 use Illuminate\Http\Request;
@@ -194,6 +195,18 @@ class ProspectoController extends Controller
         try {
             //code...
             $asignarAsesorTemporalService = new AsignarAsesorTemporalService($request);
+            return response()->json([
+                'request' => $request->input()
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
+    }
+
+    public function asignarAsesorTemporalIndefinido(Request $request){
+        try {
+            //code...
+            $asignarAsesorTemporalIndefinidoService = new AsignarAsesorTemporalIndefinidoService($request);
             return response()->json([
                 'request' => $request->input()
             ]);

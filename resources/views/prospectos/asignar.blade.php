@@ -62,7 +62,8 @@
                                 <th>Correo</th>
                                 <th>Prospectos</th>
                                 <th>Seleccionar</th>
-                                <th>Temporal</th>
+                                <th>Temporal definido</th>
+                                <th>Temporal indefinido</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,14 +71,21 @@
                             <tr>
                                 <td>{{ $asesor->FullName }}</td>
                                 <td>{{ $asesor->email }}</td>
-                                <td><button class="btn btn-primary botonVerAsesor" asesorId="{{$asesor->id}}">Ver</button>
+                                <td><button class="btn btn-primary botonVerAsesor"
+                                        asesorId="{{$asesor->id}}">Ver</button>
                                 </td>
                                 <td>
                                     <input type="hidden" value="{{ $asesor->id }}">
-                                    <button type="button" class="btn btn-sm btn-success asignar" asesorId="{{$asesor->id}}">Asignar</button>
+                                    <button type="button" class="btn btn-sm btn-success asignar"
+                                        asesorId="{{$asesor->id}}">Asignar</button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-success asignarTemporal" asesorId={{$asesor->id}}>Temporal</button>
+                                    <button type="button" class="btn btn-sm btn-success asignarTemporal"
+                                        asesorId={{$asesor->id}}>Temporal</button>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success asignarTemporalIndefinido"
+                                        asesorId={{$asesor->id}}>Temporal indefinido</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -90,6 +98,14 @@
                 <form method="post" id="formdata2">
                     @csrf
                     <h5 class="text-center"><strong>Prospectos</strong></h5>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="seleccionarTodos">
+                                <label class="form-check-label" for="seleccionarTodos">Seleccionar todos</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         {{-- TABLA PROSPECTOS --}}
                         <table id="tablaProspectosAsesor" class="table table-striped table-hover">
@@ -176,7 +192,7 @@
             }
         });
 
-        $('#tablaProspectosAsesor').DataTable({
+        var tablaProspectosAsesor = $('#tablaProspectosAsesor').DataTable({
             "language": {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ registros",
@@ -204,7 +220,7 @@
         });
 
         $('.asignar').click(function() {
-            console.log('asesor seleccionado', $(this).attr('asesorId'));
+            // console.log('asesor seleccionado', $(this).attr('asesorId'));
             let prospectos = [];
             $('#formdata').find('input[type=checkbox]:checked').each(function(index, el) {
                 prospectos.push($(el).val());
@@ -212,7 +228,7 @@
 
             $('#formdata2').find('input[type=checkbox]:checked').each(function(index, el) {
                 prospectos.push($(el).val());
-                console.log('works formdata2');
+                // console.log('works formdata2');
             });
             
             $.ajax({
@@ -233,8 +249,32 @@
             });
         });
 
+        /*
+        * ================================
+        * SELECCIONAR TODOS LOS PROSPECTOS
+        * ================================
+        */
+
+        $(document).on('change', '#seleccionarTodos', function(){
+            if($(this).is(":checked")){
+                $('.inputSeleccionarProspecto').each(function(){
+                    $(this).prop('checked', true);
+                });
+            }else{
+                $('.inputSeleccionarProspecto').each(function(){
+                    $(this).prop('checked', false);
+                });
+            }
+        });        
+
+        /*
+        * ===============
+        * ASESOR TEMPORAL
+        * ===============
+        */
+
         $('.asignarTemporal').click(function() {
-            console.log('asesor seleccionado', $(this).attr('asesorId'));
+            // console.log('asesor seleccionado', $(this).attr('asesorId'));
             let prospectos = [];
             $('#formdata').find('input[type=checkbox]:checked').each(function(index, el) {
                 prospectos.push($(el).val());
@@ -242,11 +282,53 @@
 
             $('#formdata2').find('input[type=checkbox]:checked').each(function(index, el) {
                 prospectos.push($(el).val());
-                console.log('works formdata2');
+                // console.log('works formdata2');
             });
             
             $.ajax({
                 url: '{{ route('prospectos.asignar_asesor_temporal') }}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    prospectos: prospectos,
+                    asesor: $(this).attr('asesorId')
+                },
+            })
+            .done(function(res) {
+                // console.log(res.request.asesor);
+                location.reload();
+            })
+            .fail(function(err) {
+                console.log("error", err);
+            });
+        });
+
+        /*
+        * ==========================
+        * ASESOR TEMPORAL INDEFINIDO
+        * ==========================
+        */
+
+        $('.asignarTemporalIndefinido').click(function() {
+            // console.log('asesor seleccionado', $(this).attr('asesorId'));
+            let prospectos = [];
+            $('#formdata').find('input[type=checkbox]:checked').each(function(index, el) {
+                prospectos.push($(el).val());
+            });
+
+            $('#formdata2').find('input[type=checkbox]:checked').each(function(index, el) {
+                prospectos.push($(el).val());
+                // console.log('works formdata2');
+            });
+
+            // console.log({
+            //     event: 'BOTON ASIGNARTEMPORALINDEFINIDO CLICKEADO',
+            //     asesor: $(this).attr('asesorId')
+            // });
+            
+            $.ajax({
+                url: '{{ route('prospectos.asignar_asesor_temporal_indefinido') }}',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -263,6 +345,7 @@
                 console.log("error", err);
             });
         });
+
     } );
 
     $(document).on('click', '.botonVerAsesor', async function(){
@@ -281,31 +364,50 @@
 */
 
 function quitarProspectos(){
-    $('#tbodyProspectosDeAsesor').empty();
+    var tablaProspectosAsesor = $('#tablaProspectosAsesor').DataTable();
+    tablaProspectosAsesor.clear();
+    tablaProspectosAsesor.draw();
 }
 
 function appendProspecto(prospecto){
-    $('#tbodyProspectosDeAsesor').append(`
-                <tr>
-                    <td>${prospecto.nombre}</td>
-                    <td>${prospecto.appaterno}</td>
-                    <td>${prospecto.apmaterno}</td>
-                    <td>${prospecto.email}</td>
-                    <td>
-                        <input type="checkbox" name="prospecto_id[]" value="${prospecto.id}">
-                    </td>
-                </tr>
-            `);
+
+    var tablaProspectosAsesor = $('#tablaProspectosAsesor').DataTable();
+
+    // console.log(
+    //     prospecto.nombre
+    // );
+    
+    tablaProspectosAsesor.row.add([
+        prospecto.nombre,
+        prospecto.appaterno,
+        prospecto.apmaterno,
+        prospecto.email,
+        `<input type="checkbox" name="prospecto_id[]" value="${prospecto.id}" class="inputSeleccionarProspecto">`
+        ]);
+
+    tablaProspectosAsesor.draw();
+
+    // $('#tbodyProspectosDeAsesor').append(`
+    //             <tr>
+    //                 <td>${prospecto.nombre}</td>
+    //                 <td>${prospecto.appaterno}</td>
+    //                 <td>${prospecto.apmaterno}</td>
+    //                 <td>${prospecto.email}</td>
+    //                 <td>
+    //                     <input type="checkbox" name="prospecto_id[]" value="${prospecto.id}">
+    //                 </td>
+    //             </tr>
+    //         `);
 }
 
 async function getProspectos(asesorId){
-    console.log('entro en funcion get prospectos');
+    // console.log('entro en funcion get prospectos');
     const url = window.location.origin + `/api/empleados/${asesorId}/prospectos`;
-    console.log('url',url);
+    // console.log('url',url);
     const response = await $.ajax({
     url:url,  
     success:function(response) {
-      console.log('response',response);
+    //   console.log('response',response);
     }
   });
 

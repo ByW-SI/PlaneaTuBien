@@ -19,10 +19,14 @@ class EmpleadoProspectoController extends Controller
         if ($empleado->tipo === "Admin") {
             $prospectos = Prospecto::get();
         } else {
+            // dd(date('Y-m-d'));
             $prospectos = $empleado->prospectos()
-                // ->where('temporal', 0)
-                // ->orWhere('')
-                ->get();
+                ->whereHas('asesores', function($query){
+                    return $query->where('fechaFinTemporal','>=',date('Y-m-d'))
+                        ->orWhere('fechaFinTemporal',null);
+                })
+                // ->orWhere('fechaFinTemporal',null)
+                ->get()->unique();
         }
 
         return view('empleado.prospecto.index', ['empleado' => $empleado, 'prospectos' => $prospectos, 'buscar' => $request->buscar]);
