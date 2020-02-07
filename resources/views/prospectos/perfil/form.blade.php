@@ -5,7 +5,8 @@
     @include('prospectos.perfil.info')
   </div>
   <div class="col">
-	<form method="POST" action="{{ route('prospectos.cotizacions.perfils.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" id="perfil">
+	{{-- <form method="POST" action="{{ route('prospectos.cotizacions.perfils.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" id="perfil"> --}}
+	<form method="POST" action="{{ route('prospectos.perfils.store',['prospecto'=>$prospecto]) }}" id="perfil">
 		@csrf
 	    <div class="card">
 			<div class="card-header">
@@ -52,11 +53,7 @@
 		    	<div class="row mb-3">
 			    	<label for="plan" class="offset-5 col-sm-2 col-form-label">Plan:</label>
 				    <div class="col">
-				    	@if($cotizacion)
-				      		<input type="tet" class="form-control" id="plan" name="plan" placeholder="plan" value="{{$cotizacion->plan->nombre}}" readonly="">
-				      	@else
 				      		<label>--</label>
-				      	@endif
 				    </div>
 		    	</div>
 		    	<div class="form-group row">
@@ -685,11 +682,11 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							@if($cotizacion)
-							<input type="number" step="any" min="0" class="form-control" value="{{old('precio_aprox') ? old('precio_aprox') : $cotizacion->monto}}" name="precio_aprox" id="precio_aprox" required="">
-							@else
+							{{-- @if($cotizacion) --}}
+							{{-- <input type="number" step="any" min="0" class="form-control" value="{{old('precio_aprox') ? old('precio_aprox') : $cotizacion->monto}}" name="precio_aprox" id="precio_aprox" required=""> --}}
+							{{-- @else --}}
 							<input type="number" step="any" min="0" class="form-control" value="{{old('precio_aprox') ? old('precio_aprox') : 0}}" name="precio_aprox" id="precio_aprox" required="">
-							@endif
+							{{-- @endif --}}
 						</div>
 		    		</div>
 		    		<label for="area_inmueble" class="col-form-label col-sm-2">✱ Area:</label>
@@ -743,11 +740,11 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							@if($cotizacion)
-							<input type="number" step="any" min="0" step="any" value="{{$cotizacion->monto}}" class="form-control" name="monto_contratar" id="monto_contratar" required="">
-							@else
+							{{-- @if($cotizacion) --}}
+							{{-- <input type="number" step="any" min="0" step="any" value="{{$cotizacion->monto}}" class="form-control" name="monto_contratar" id="monto_contratar" required=""> --}}
+							{{-- @else --}}
 							<input type="number" step="any" min="0" step="any" value="" class="form-control" name="monto_contratar" id="monto_contratar" required="">
-							@endif
+							{{-- @endif --}}
 						</div>
 		    		</div>
 		    	</div>

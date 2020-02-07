@@ -28,9 +28,7 @@ class PerfilController extends Controller
         //dd($prospecto->cotizaciones->last()->plan->cotizador(1100000));
         $perfils      = PerfilDatosPersonalCliente::all();
         $perfil  = $perfils->last();
-        if (!isset($cotizacion->id)) {
-            $cotizacion = null;
-        }
+        
         if ($perfil == null) {
             $folio=1;
         }
@@ -38,7 +36,7 @@ class PerfilController extends Controller
             $folio=$perfil->id+1;
         }
         $bancos = Banco::orderBy('nombre','asc')->get();
-        return view('prospectos.perfil.form',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion, 'folio'=>$folio,'bancos'=>$bancos]);
+        return view('prospectos.perfil.form',['prospecto'=>$prospecto, 'folio'=>$folio,'bancos'=>$bancos]);
     }
 
     /**
@@ -47,7 +45,7 @@ class PerfilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Prospecto $prospecto, Cotizacion $cotizacion,Request $request)
+    public function store(Prospecto $prospecto, Request $request)
     {
         // dd($request->all());
         $perfil = new PerfilDatosPersonalCliente($request->all());
@@ -56,7 +54,7 @@ class PerfilController extends Controller
         $perfil->clave= $request->clave;
         $perfil->plan = $request->plan;
         $perfil->prospecto_id = $prospecto->id;
-        $perfil->cotizacion_id = $cotizacion->id;
+        // $perfil->cotizacion_id = $cotizacion->id;
         $perfil->empleado_id = $request->asesor_id;
         $perfil->save();
         $h_crediticio= new PerfilHistorialCrediticioCliente([
@@ -102,28 +100,28 @@ class PerfilController extends Controller
             $perfil->referencia_personals()->save($referencia);
         }
 
-        $cotizacion->elegir = 1;
-        $cotizacion->save();
+        // $cotizacion->elegir = 1;
+        // $cotizacion->save();
 
-        $resultado_cotizador = $cotizacion->plan->cotizador($cotizacion->monto, $cotizacion->factor_actualizacion);
-        $resultado_cotizador['cotizacion_id'] = $cotizacion->id;
-        Datos_de_Cotizacion::create($resultado_cotizador);
-        foreach ($resultado_cotizador['corrida'] as $corrida) {
-            Corrida::create([
-                'cotizacion_id' => $cotizacion->id,
-                'mes' => $corrida['mes'],
-                'aportacion' => $corrida['aportacion'],
-                'cuota_administracion' => $corrida['cuota_administracion'],
-                'iva' => $corrida['iva'],
-                'seguro_vida' => $corrida['sv'],
-                'seguro_desastres' => $corrida['sd'],
-                'total' => $corrida['total']
-            ]);
-        }
-        $cotizaciones = $prospecto->cotizaciones()->where('elegir',0)->get();
-        foreach ($cotizaciones as $cot) {
-            $cot->delete();
-        }
+        // $resultado_cotizador = $cotizacion->plan->cotizador($cotizacion->monto, $cotizacion->factor_actualizacion);
+        // $resultado_cotizador['cotizacion_id'] = $cotizacion->id;
+        // Datos_de_Cotizacion::create($resultado_cotizador);
+        // foreach ($resultado_cotizador['corrida'] as $corrida) {
+            // Corrida::create([
+                // 'cotizacion_id' => $cotizacion->id,
+                // 'mes' => $corrida['mes'],
+                // 'aportacion' => $corrida['aportacion'],
+                // 'cuota_administracion' => $corrida['cuota_administracion'],
+                // 'iva' => $corrida['iva'],
+                // 'seguro_vida' => $corrida['sv'],
+                // 'seguro_desastres' => $corrida['sd'],
+                // 'total' => $corrida['total']
+            // ]);
+        // }
+        // $cotizaciones = $prospecto->cotizaciones()->where('elegir',0)->get();
+        // foreach ($cotizaciones as $cot) {
+            // $cot->delete();
+        // }
         return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
 
 

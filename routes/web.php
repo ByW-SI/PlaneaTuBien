@@ -175,7 +175,7 @@ Route::resource('sucursals', 'Sucursal\SucursalController')->middleware('auth');
 
 // CREAR PERFIL CON PROSPECTO Y COTIZACION
 
-Route::resource('prospectos.cotizacions.perfils','Prospecto\Cotizacion\PerfilController',['only'=>['create','store']])->middleware('auth');
+Route::resource('prospectos.perfils','Prospecto\Cotizacion\PerfilController',['only'=>['create','store']])->middleware('auth');
 Route::get('prospectos/{prospecto}/perfils/create','Prospecto\Cotizacion\PerfilController@create')->name('crear-perfil-sin-cotizacion')->middleware('auth');
 
 Route::namespace('Prospecto\Cliente\Perfil')
