@@ -56,9 +56,14 @@
 				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}"
 					class="btn btn-success" id="basic-addon1">
 					<i class="fas fa-file-invoice"></i>
-					<strong> Perfil</strong>
+					<strong> Ver Perfil</strong>
 				</a>
-
+				@else
+				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}"
+					class="btn btn-success" id="basic-addon1">
+					<i class="fas fa-file-invoice"></i>
+					<strong> Crear Perfil</strong>
+				</a>
 				@endif
 			</div>
 			<div class="card-body">
