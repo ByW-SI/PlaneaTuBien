@@ -122,6 +122,15 @@
                                                                         name="nuevoAsesorId"> --}}
                                                                 </div>
                                                                 <div class="col-12 mt-2">
+                                                                    <label for="" class="text-uppercase text-muted">
+                                                                        Acción
+                                                                    </label>
+                                                                    <select name="accion" id="" required class="form-control">
+                                                                        <option value="CREAR PERFIL">Crear perfil</option>
+                                                                        <option value="CREAR COTIZACION">Crear cotización</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-12 mt-2">
                                                                     <label for="" class="text-uppercase text-muted">COMENTARIO</label>
                                                                     <textarea id="" cols="30" rows="5" class="form-control"></textarea>
                                                                 </div>

@@ -52,7 +52,7 @@ class PresolicitudController extends Controller
      */
     public function store(Prospecto $prospecto, Request $request)
     {
-
+        // dd($request->input());
         $rules = [
             'paterno' => 'required|max:190',
             'materno' => 'nullable|max:190',
@@ -85,8 +85,14 @@ class PresolicitudController extends Controller
         ];
         $this->validate($request, $rules);
         $perfil = $prospecto->perfil;
+        $perfil->update([
+            'cotizacion_id' => $request->cotizacion_id
+        ]);
+        $perfil->save();
+        // return $perfil;
         $presolicitud = new Presolicitud($request->all());
         $presolicitud->folio = 100 + Presolicitud::all()->count();
+        // return $prospecto->cotizaciones()->first();
         $presolicitud->precio_inicial = $perfil->cotizacion->monto;
 
         if ($perfil->cotizacion->plan->tipo == 'libre') {

@@ -174,7 +174,7 @@
                                         <i class="fas fa-envelope"></i> Enviar por correo
                                     </a>
                                     @endif
-                                    <a href="{{ route('prospectos.cotizacions.perfils.create',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}" class="btn btn-sm mt-3 btn-success"> Seleccionar cotización para crear perfil</a>
+                                    <a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-sm mt-3 btn-success"> Seleccionar cotización para crear perfil</a>
                                 @else
                                     <a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}" class="btn btn-sm mt-3 btn-success">Ver perfil</a>
                                     {{-- false expr --}}

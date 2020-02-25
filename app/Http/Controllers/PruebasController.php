@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\EmpleadoProspecto;
-use App\Prospecto;
+use App\Grupo;
 
 class PruebasController extends Controller
 {
     public function index()
     {
-        $prospecto = Prospecto::with('cotizaciones')->find(3);
-        return $prospecto;
+        $grupo = Grupo::with('contrato')->first();
+        return $grupo;
+        return view('pruebas.index');
     }
 }

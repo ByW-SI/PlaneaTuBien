@@ -54,8 +54,8 @@
                                 <option value="">Seleccionar</option>
                                 <option id="optionConfirmarCita" value="confirmar cita">CONFIRMAR CITA</option>
                                 <option id="optionReagendarCita" value="reagendar cita">REAGENDAR CITA</option>
-                                <option id="optionLlamarParaReagendar" value="llamar para reagendar">LLAMAR PARA
-                                    REAGENDAR</option>
+                                {{-- <option id="optionLlamarParaReagendar" value="llamar para reagendar">LLAMAR PARA
+                                    REAGENDAR</option> --}}
                                 <option id="optionCancelarCita" value="cancelar cita">CANCELAR CITA</option>
                             </select>
                         </div>

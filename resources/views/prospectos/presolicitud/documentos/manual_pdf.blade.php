@@ -110,17 +110,17 @@
 				<tbody>
 					<tr>
 						<th>Cuota de inscripción:</th>
-						<td>{{$plan->inscripcion}}%</td>
+						<td>{{$plan->inscripcion ? $plan->inscripcion : '0.0'}}%</td>
 						<td>Una sola vez al inicio</td>
 					</tr>
 					<tr>
 						<th>Cuota de administración:</th>
-						<td>{{$plan->cuota_admon}}%</td>
+						<td>{{$plan->cuota_admon ? $plan->cuota_admon : '0.0'}}%</td>
 						<td>Mes a mes en tu mensualidad</td>
 					</tr>
 					<tr>
 						<th>Prima de Seguro de vida Incapacidad Permanente Total e Invalidez:</th>
-						<td> {{$plan->s_v}}%</td>
+						<td> {{$plan->s_v ? $plan->s_v : '0.0'}}%</td>
 						<td>Mes a mes en tu mensualidad</td>
 					</tr>
 					<tr>
@@ -130,7 +130,7 @@
 					</tr>
 					<tr>
 						<th>Prima de seguro de daños del bien:</th>
-						<td>{{$plan->s_d}}%</td>
+						<td>{{$plan->s_d ? $plan->s_d : '0.0'}}%</td>
 						<td>Mes a mes en tu mensualidad una vez asignada tu propiedad</td>
 					</tr>
 				</tbody>

@@ -14,6 +14,8 @@ class AsistirCitaService
     
     protected $nuevoAsesor;
 
+    protected $route;
+
     public function __construct(Request $request, Citas $cita)
     {
         $this->setCita($cita);
@@ -23,6 +25,7 @@ class AsistirCitaService
         if ($this->existeNuevoAsesor()) {
             $this->reasignarAsesor();
         }
+
     }
 
     /**
@@ -46,6 +49,16 @@ class AsistirCitaService
         );
 
         $this->prospecto->save();
+    }
+
+    /**
+     * =======
+     * GETTERS
+     * =======
+     */
+
+    public function getRoute(){
+
     }
 
     /**

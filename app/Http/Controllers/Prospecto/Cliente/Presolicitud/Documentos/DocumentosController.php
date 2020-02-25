@@ -84,7 +84,7 @@ class DocumentosController extends Controller
     {
 
         $poliza = Poliza::where('fecha_fin', '>', date('Y-m-d'))->first();
-        $pdf = PDF::loadView('prospectos.presolicitud.documentos.declaracion_salud_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'folio' => $poliza->folio]);
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.declaracion_salud_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'folio' => $poliza ? $poliza->folio : null]);
         // return $pdf->stream();
         return $pdf->download('declaracion_salud' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . ".pdf");
     }

@@ -836,8 +836,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[1]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input type="text" name="telefono[1]" value="{{old('telefono[1]')}}" class="form-control" placeholder="Particular" required="">
-							<input type="text" name="celular[1]" value="{{old('celular[1]')}}" class="form-control" placeholder="Celular" required="">
+							<input numeroReferencia="1" type="text" name="telefono[1]" value="{{old('telefono[1]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="1" type="text" name="celular[1]" value="{{old('celular[1]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>
@@ -860,8 +860,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[2]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input type="text" name="telefono[2]" value="{{old('telefono[2]')}}" class="form-control" placeholder="Particular" required="">
-							<input type="text" name="celular[2]" value="{{old('celular[2]')}}" class="form-control" placeholder="Celular" required="">
+							<input numeroReferencia="2" type="text" name="telefono[2]" value="{{old('telefono[2]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="2" type="text" name="celular[2]" value="{{old('celular[2]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>
@@ -884,8 +884,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[3]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input type="text" name="telefono[3]" value="{{old('telefono[3]')}}" class="form-control" placeholder="Particular" required="">
-							<input type="text" name="celular[3]" value="{{old('celular[3]')}}" class="form-control" placeholder="Celular" required="">
+							<input numeroReferencia="3" type="text" name="telefono[3]" value="{{old('telefono[3]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="3" type="text" name="celular[3]" value="{{old('celular[3]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>
@@ -914,7 +914,40 @@
 	        $('.select-bancos').select2();
 	    });
     </script>
-    <script type="text/javascript">
+	<script type="text/javascript">
+	
+		$(document).on("change", ".numeroReferencia", function(){
+
+			numeroReferencia = $(this).attr("numeroReferencia");
+			inputs = $(`.numeroReferencia[numeroreferencia=${numeroReferencia}]`);
+			valor_01 = inputs[0].value;
+			valor_02 = inputs[1].value;
+
+			if( valor_01 == "" && valor_02 == "" ){
+				console.log('AMBOS VACIOS');
+				$.each(inputs, function(idx, input){
+					$(input).prop('required',true);
+					console.log( $(input) )
+				} );
+			}else{
+				console.log('Al menos uno lleno');
+				$.each(inputs, function(idx, input){
+					$(input).prop('required', false);
+					console.log( $(input) )
+				} );
+			}
+
+				datos = {
+				'REFERENCIA': {
+					numeroReferencia,
+					inputs
+				}
+			};
+
+			console.log(datos);
+
+		});
+
     	$('#perfil input[name=estado_civil]').on('change', function() {
     		var val = $('input[name=estado_civil]:checked', '#perfil').val();
     		// alert(val);

@@ -7,6 +7,7 @@ use App\Prospecto;
 use App\Presolicitud;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Referencia\StoreReferenciaService;
 
 class PresolicitudReferenciaController extends Controller
 {
@@ -45,26 +46,9 @@ class PresolicitudReferenciaController extends Controller
      */
     public function store(Prospecto $prospecto, Presolicitud $presolicitud,Request $request)
     {
-        //
-        $rules =[
-            'paterno.*'=>'required|max:190',
-            'materno.*'=>'nullable|max:190',
-            'nombre.*'=>'required|max:190',
-            'telefono.*'=>'required|max:15',
-            'parentesco.*'=>'required|max:190',
-        ];
-        $this->validate($request,$rules);
-        for ($i = 0; $i <=2 ; $i++) {
-            $referencia = new Referencia([
-                'paterno'=>$request->paterno[$i],
-                'materno'=>$request->materno[$i],
-                'nombre'=>$request->nombre[$i],
-                'telefono'=>$request->telefono[$i],
-                'parentesco'=>$request->parentesco[$i]
-            ]);
-            $presolicitud->referencias()->save($referencia);
-        }
-        return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        $storeReferenciaService = new StoreReferenciaService($prospecto, $presolicitud, $request);
+        return redirect()->route('prospectos.presolicitud.contratos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        // return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
     }
 
     /**
