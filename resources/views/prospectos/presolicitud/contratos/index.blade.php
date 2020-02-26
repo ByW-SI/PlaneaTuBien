@@ -19,7 +19,59 @@
 						@forelse ($presolicitud->contratos as $contrato)
 						<tr>
 							<th scope="row">{{$contrato->numero_contrato}}</th>
-							<td>{{$contrato->grupo->id}}</td>
+							<td>
+								{{$contrato->grupo->id}}
+
+								{{-- BOTON EDITAR GRUPO --}}
+								<button type="button" class="btn btn-warning" data-toggle="modal"
+									data-target="#modal-editar-grupo-{{$contrato->id}}">
+									{{-- <i class="fa fa-pencil" aria-hidden="true"></i> --}}
+									editar
+								</button>
+
+								{{-- MODAL EDITAR GRUPO --}}
+								<div class="modal fade" id="modal-editar-grupo-{{$contrato->id}}" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">{{$contrato->id}}</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<form
+												action="{{route('contratos.grupo.update',['contrato' => $contrato->id])}}"
+												method="POST">
+												@method('PUT')
+												@csrf
+												<div class="modal-body">
+													<div class="row">
+														<div class="col-12">
+															<label for="" class="text-muted text-uppercase">Nuevo
+																grupo</label>
+															<select name="nuevoGrupo" id="" required
+																class="form-control">
+																@foreach ($grupos as $grupo)
+																<option value="{{$grupo->id}}"
+																	{{$contrato->grupo->id == $grupo->id ? 'selected' : ''}}>
+																	{{$grupo->id}}</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-success">Guardar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+
+							</td>
 							<td>${{number_format($contrato->monto,2)}}</td>
 							<td>
 								<div class="d-flex justify-content-center mb-3">

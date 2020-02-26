@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud\Documentos;
 
 use App\Contrato;
+use App\Grupo;
 use App\Http\Controllers\Controller;
 use App\Poliza;
 use App\Presolicitud;
@@ -16,7 +17,8 @@ class DocumentosController extends Controller
 
     public function index(Prospecto $prospecto, Presolicitud $presolicitud)
     {
-        return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
+        $grupos = Grupo::get();
+        return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
     /**
      * Display a listing of the resource.

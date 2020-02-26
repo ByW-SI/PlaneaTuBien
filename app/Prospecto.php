@@ -103,7 +103,8 @@ class Prospecto extends Model
         return $this->hasMany('App\SeguimientoLlamadas', 'prospecto_id', 'id');
     }
 
-    public function citas(){
+    public function citas()
+    {
         return $this->hasMany('App\Citas');
     }
 
@@ -113,35 +114,40 @@ class Prospecto extends Model
      * =============
      */
 
-    public function scopeWhereEstatusPendiente($query){
-        return $query->whereHas('estatus', function($query){
-                return $query->where('nombre','Pendiente');
-            });
+    public function scopeWhereEstatusPendiente($query)
+    {
+        return $query->whereHas('estatus', function ($query) {
+            return $query->where('nombre', 'Pendiente');
+        });
     }
 
-    public function scopeWhereEstatusCita($query){
-        return $query->whereHas('estatus', function($query){
-                return $query->where('nombre','Cita');
-            });
+    public function scopeWhereEstatusCita($query)
+    {
+        return $query->whereHas('estatus', function ($query) {
+            return $query->where('nombre', 'Cita');
+        });
     }
 
 
-    public function scopeWhereEstatusCitaCancelada($query){
-        return $query->whereHas('estatus', function($query){
-                return $query->where('nombre','Cita Cancelada');
-            });
+    public function scopeWhereEstatusCitaCancelada($query)
+    {
+        return $query->whereHas('estatus', function ($query) {
+            return $query->where('nombre', 'Cita Cancelada');
+        });
     }
 
-    public function scopeWhereEstatusVolverALlamar($query){
-        return $query->whereHas('estatus', function($query){
-                return $query->where('nombre','Volver A Llamar');
-            });
+    public function scopeWhereEstatusVolverALlamar($query)
+    {
+        return $query->whereHas('estatus', function ($query) {
+            return $query->where('nombre', 'Volver A Llamar');
+        });
     }
 
-    public function scopeWhereEstatusCitaPendienteReprogramar($query){
-        return $query->whereHas('estatus', function($query){
-                return $query->where('nombre','Cita Pendiente Reprogramar');
-            });
+    public function scopeWhereEstatusCitaPendienteReprogramar($query)
+    {
+        return $query->whereHas('estatus', function ($query) {
+            return $query->where('nombre', 'Cita Pendiente Reprogramar');
+        });
     }
 
     /**
@@ -162,7 +168,13 @@ class Prospecto extends Model
             : false;
     }
 
-    public function tieneCita(){
+    public function tieneCita()
+    {
         return count($this->citas) ? true : false;
+    }
+
+    public function tienePerfil()
+    {
+        return is_null($this->perfil) ? false : true;
     }
 }

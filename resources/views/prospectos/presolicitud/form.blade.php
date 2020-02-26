@@ -243,14 +243,14 @@
 													<div class="modal-body">
 														<div class="row">
 															<div class="col-12 col-lg-6">
-																<label for="">Etiqueta</label>
-																<input type="text" class="form-control">
+																<label for="">Monto</label>
+																<input type="number" value="0.0" step="0.1" name="pagoInscripcion[{{$cotizacion->id}}]" class="form-control" min="{{$cotizacion->monto}}">
 															</div>
 														</div>
 													</div>
 													<div class="modal-footer">
 														{{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-														<button type="button" class="btn btn-primary">Save changes</button>
+														{{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
 													</div>
 												</div>
 											</div>
@@ -321,7 +321,7 @@
 					$("#estado").val(res.estado);
 				},
 				error:function(xhr,status,error){
-					alert(error);
+					// alert(error);
 				}
 			});
 		});
@@ -343,7 +343,7 @@
 					setColoniaDefault();
 				},
 				error:function(xhr,status,error){
-					alert(error);
+					// alert(error);
 				}
 			});
 		}

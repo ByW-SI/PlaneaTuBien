@@ -75,6 +75,8 @@ Route::prefix('clientes')->group(function(){
 Route::resource('plans','Plan\PlanController')->middleware('auth');
 Route::get('/get-planes','Plan\PlanController@getPlanes')->middleware('auth');
 
+Route::put('/contratos/{contrato}/grupo','Contrato\ContratoController@updateGrupo')->name('contratos.grupo.update');
+
 // GRUPOS
 Route::resource('grupos','Grupo\GrupoController')->middleware('auth');
 Route::get('grupos/{grupo}/contratos', 'Grupo\GrupoController@listContratos')->name('grupos.listcontratos')->middleware('auth');

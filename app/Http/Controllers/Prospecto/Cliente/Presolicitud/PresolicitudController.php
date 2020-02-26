@@ -39,8 +39,11 @@ class PresolicitudController extends Controller
      */
     public function create(Prospecto $prospecto)
     {
-        //
-        // dd($prospecto);
+        // dd(!$prospecto->tienePerfil());
+        if(!$prospecto->tienePerfil()){
+            return redirect()->back();
+        }
+
         return view('prospectos.presolicitud.form', ['prospecto' => $prospecto]);
     }
 
@@ -52,7 +55,7 @@ class PresolicitudController extends Controller
      */
     public function store(Prospecto $prospecto, Request $request)
     {
-        // dd($request->input());
+        dd($request->input());
         $rules = [
             'paterno' => 'required|max:190',
             'materno' => 'nullable|max:190',
