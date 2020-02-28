@@ -53,29 +53,31 @@
             </div>
             <div class="card-body">
                 @if(count($prospecto->cotizaciones) > 0)
-                    <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-                        <tr class="info">
-                            <th>Valor de la propiedad</th>
-                            <th>Plan</th>
-                            <th>Total</th>
-                            <th>Acción</th>
-                        </tr>
-                        @foreach($prospecto->cotizaciones as $cotizacion)
-                            <tr>
-                                <td>${{ number_format($cotizacion->propiedad, 2) }}</td>
-                                <td>{{ $cotizacion->plan }}</td>
-                                <td>${{ $cotizacion->total }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('prospectos.cotizacions.show', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-eye"></i> Ver
-                                    </a>
-                                    <a href="{{ route('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa fa-file"></i> PDF
-                                    </a>
-                                </td>
+                    <div class="table-responsive">
+                        <table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+                            <tr class="info">
+                                <th>Valor de la propiedad</th>
+                                <th>Plan</th>
+                                <th>Total</th>
+                                <th>Acción</th>
                             </tr>
-                        @endforeach
-                    </table>
+                            @foreach($prospecto->cotizaciones as $cotizacion)
+                                <tr>
+                                    <td>${{ number_format($cotizacion->propiedad, 2) }}</td>
+                                    <td>{{ $cotizacion->plan->nombre }}</td>
+                                    <td>${{ $cotizacion->monto }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('prospectos.cotizacions.show', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-eye"></i> Ver
+                                        </a>
+                                        <a href="{{ route('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]) }}" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fa fa-file"></i> PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
                 @else
                     <h4>No hay cotizaciones disponibles.</h4>
                 @endif

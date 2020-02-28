@@ -52,6 +52,11 @@
 					<i class="fas fa-user-edit"></i>
 					<strong> Editar prospecto</strong>
 				</a>
+				<a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$prospecto->empleado->id,'prospecto'=>$prospecto]) }}"
+					class="btn btn-success" id="basic-addon1">
+					<i class="fas fa-file-invoice"></i>
+					<strong> Cotizaciones</strong>
+				</a>
 				@if ($prospecto->perfil)
 				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}"
 					class="btn btn-success" id="basic-addon1">
