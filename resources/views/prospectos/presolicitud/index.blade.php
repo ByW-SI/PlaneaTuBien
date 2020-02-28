@@ -11,9 +11,9 @@
 			<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
 				<label for="">Precio inicial</label>
 				<div class="input-group mb-3">
-				  	<div class="input-group-prepend">
-				    	<span class="input-group-text" id="basic-addon1">$</span>
-				  	</div>
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">$</span>
+					</div>
 					<label class="form-control bg-light">{{number_format($presolicitud->precio_inicial,2)}}</label>
 				</div>
 			</div>
@@ -21,9 +21,9 @@
 				<label for="">Plazo contratado</label>
 				<div class="input-group mb-3">
 					<label class="form-control bg-light">{{$presolicitud->plazo_contratado,2}}</label>
-				  	<div class="input-group-append">
-				    	<span class="input-group-text" id="basic-addon1">Meses</span>
-				  	</div>
+					<div class="input-group-append">
+						<span class="input-group-text" id="basic-addon1">Meses</span>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group">
@@ -31,6 +31,66 @@
 				<label class="form-control bg-light">{{$presolicitud->plan}}</label>
 			</div>
 			<div class="col-12">
+				<p>
+					<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+						aria-expanded="false" aria-controls="collapseExample">
+						Cambiar cotización
+					</button>
+				</p>
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body">
+						<div class="row">
+							<div class="col-12">
+								<div class="row">
+									@foreach ($prospecto->cotizaciones as $cotizacion)
+									<div class="col-12 col-md-4 mt-3">
+										<div class="card {{$presolicitud->perfil->cotizacion->id == $cotizacion->id ? 'border border-success' : ''}}">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-6 mt-3">
+														<label for="" class="text-uppercase text-muted">ID
+															COTIZACIÓN</label>
+														<input type="text" readonly value="{{$cotizacion->id}}"
+															class="form-control">
+													</div>
+													<div class="col-6 mt-3">
+														<label for="" class="text-uppercase text-muted">Monto</label>
+														<input type="text" readonly value="{{$cotizacion->monto}}"
+															class="form-control">
+													</div>
+													<div class="col-6 mt-3">
+														<label for="" class="text-uppercase text-muted">Plan</label>
+														<input type="text" readonly
+															value="{{$cotizacion->plan->nombre}}" class="form-control">
+													</div>
+													{{-- <div class="col-6 mt-3">
+														<label for=""
+															class="text-uppercase text-muted">Diferencia</label>
+														<input type="text" readonly value="3500" class="form-control">
+													</div> --}}
+												</div>
+												<div class="row">
+													<div class="col-6 mt-3">
+														<form action="{{route('presolicitudes.cotizaciones.cambiar',['presolictud' => $presolicitud->id])}}" method="POST">
+															@csrf
+															@method('PUT')
+															<input type="text" name="cotizacion_id" value="{{$cotizacion->id}}" class="form-control d-none">
+															<button type="submit" class="btn btn-primary">Cambiar</button>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									@endforeach
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 mt-2">
 				<h5>
 					Solicitante
 				</h5>

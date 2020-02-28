@@ -194,6 +194,9 @@ Route::namespace('Prospecto\Cliente\Perfil')
 		// PRESOLICITUD
 		Route::get('/presolicitud/pdf','DatosPersonalesController@presolicitud')->name('presolicitud');
 	});
+
+Route::put('presolicitudes/{presolicitud}/modificar-cotizacion','Prospecto\Cliente\Presolicitud\PresolicitudController@modificarCotizacion')->name('presolicitudes.cotizaciones.cambiar');
+
 Route::namespace('Prospecto\Cliente\Presolicitud')
 	->prefix('prospectos/{prospecto}')
 	->name('prospectos.')

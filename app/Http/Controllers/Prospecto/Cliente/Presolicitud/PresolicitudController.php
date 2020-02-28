@@ -206,6 +206,13 @@ class PresolicitudController extends Controller
         //
     }
 
+    public function modificarCotizacion(Request $request, Presolicitud $presolicitud){
+        $presolicitud->perfil->update([
+            'cotizacion_id' => $request->input('cotizacion_id')
+        ]);
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
