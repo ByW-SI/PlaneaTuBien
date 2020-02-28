@@ -6,6 +6,7 @@ use App\Contrato;
 use App\Cotizacion;
 use App\Http\Controllers\Controller;
 use App\PagoInscripcion;
+use App\Pagos;
 use App\Presolicitud;
 use App\Prospecto;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class PresolicitudController extends Controller
     public function create(Prospecto $prospecto)
     {
         // dd(!$prospecto->tienePerfil());
-        if(!$prospecto->tienePerfil()){
+        if (!$prospecto->tienePerfil()) {
             return redirect()->back();
         }
 
@@ -61,7 +62,7 @@ class PresolicitudController extends Controller
 
         $cotizacion = Cotizacion::find($request->cotizacion_id);
 
-        if(!$cotizacion->pago_inscripcions->count()){
+        if (!$cotizacion->pago_inscripcions->count()) {
             return redirect()->back();
         }
 
@@ -112,7 +113,7 @@ class PresolicitudController extends Controller
             $presolicitud->plan = 'libre';
             $perfil->cotizacion->liberar = 1;
             $perfil->cotizacion->update([
-                'liberar'=>1
+                'liberar' => 1
             ]);
         } else {
             $presolicitud->plazo_contratado = $perfil->cotizacion->plan->plazo;
@@ -120,7 +121,7 @@ class PresolicitudController extends Controller
         }
 
 
-        
+
         $perfil->presolicitud()->save($presolicitud);
         $cotizacion = $presolicitud->cotizacion();
         $grupos = $cotizacion->plan->grupos;
@@ -206,7 +207,31 @@ class PresolicitudController extends Controller
         //
     }
 
-    public function modificarCotizacion(Request $request, Presolicitud $presolicitud){
+    public function modificarCotizacion(Request $request, Presolicitud $presolicitud)
+    {
+
+        $diferenciaInscripcion = floatVal($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion)
+            - Cotizacion::find($request->input('cotizacion_id'))->inscripcion;
+
+        // if ($diferenciaInscripcion > 0) {
+        //     $pago = Pagos::create([
+        //         'contrato_id' => $presolicitud->contrato,
+        //         'monto',
+        //         'fecha_pago',
+        //         'folio',
+        //         'status_id',
+        //         'tipopago_id',
+        //         'referencia',
+        //         'spei',
+        //         'file_comprobante',
+        //         'mensualidad_id'
+        //     ]);
+        // }
+
+        $presolicitud->perfil->cotizacion->pago_inscripcions()->update([
+            'cotizacion_id' => $request->input('cotizacion_id')
+        ]);
+
         $presolicitud->perfil->update([
             'cotizacion_id' => $request->input('cotizacion_id')
         ]);

@@ -43,8 +43,14 @@
 							<div class="col-12">
 								<div class="row">
 									@foreach ($prospecto->cotizaciones as $cotizacion)
+									{{-- {{$presolicitud->perfil->cotizacion->totalPagadoDeInscripcion}} --}}
+									{{-- {{$cotizacion->inscripcion}} --}}
+									{{-- {{floatval($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion) - 300}}
+									--}}
+									{{-- {{}} --}}
 									<div class="col-12 col-md-4 mt-3">
-										<div class="card {{$presolicitud->perfil->cotizacion->id == $cotizacion->id ? 'border border-success' : ''}}">
+										<div
+											class="card {{$presolicitud->perfil->cotizacion->id == $cotizacion->id ? 'border border-success' : ''}}">
 											<div class="card-body">
 												<div class="row">
 													<div class="col-6 mt-3">
@@ -63,19 +69,32 @@
 														<input type="text" readonly
 															value="{{$cotizacion->plan->nombre}}" class="form-control">
 													</div>
-													{{-- <div class="col-6 mt-3">
-														<label for=""
-															class="text-uppercase text-muted">Diferencia</label>
-														<input type="text" readonly value="3500" class="form-control">
-													</div> --}}
+													<div class="col-6 mt-3">
+														<label for="" class="text-uppercase text-muted">Diferencia
+															inscripción</label>
+														<input type="text" readonly
+															class="form-control {{ floatval($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion) - $cotizacion->inscripcion < 0 ? 'is-invalid' : 'is-valid' }}"
+															value="{{floatval($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion) - $cotizacion->inscripcion}}">
+														@if (
+														floatval($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion)
+														- $cotizacion->inscripcion > 0 )
+														<div class="valid-feedback">
+															La diferencia será abonada al siguiente pago.
+														</div>
+														@endif
+													</div>
 												</div>
 												<div class="row">
 													<div class="col-6 mt-3">
-														<form action="{{route('presolicitudes.cotizaciones.cambiar',['presolictud' => $presolicitud->id])}}" method="POST">
+														<form
+															action="{{route('presolicitudes.cotizaciones.cambiar',['presolictud' => $presolicitud->id])}}"
+															method="POST">
 															@csrf
 															@method('PUT')
-															<input type="text" name="cotizacion_id" value="{{$cotizacion->id}}" class="form-control d-none">
-															<button type="submit" class="btn btn-primary">Cambiar</button>
+															<input type="text" name="cotizacion_id"
+																value="{{$cotizacion->id}}" class="form-control d-none">
+															<button type="submit"
+																class="btn btn-primary">Cambiar</button>
 														</form>
 													</div>
 												</div>

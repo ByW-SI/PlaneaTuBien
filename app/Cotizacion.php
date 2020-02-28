@@ -179,6 +179,16 @@ class Cotizacion extends Model
     }
 
     /**
+     * ==========
+     * ATTRIBUTES
+     * ==========
+     */
+
+    public function getTotalPagadoDeInscripcionAttribute(){
+        return $this->pago_inscripcions->pluck('monto')->flatten()->sum();
+    }
+
+    /**
      * ========
      * BOOLEANS
      * ========

@@ -203,8 +203,10 @@
 									@else
 									<div class="col-12 mt-2">
 										<div class="alert alert-info">
-											No tienen ningúna presolicitud
+											No tienen ningúna presolicitud.
 										</div>
+										Para generar una presolicitud
+										es necesario crear un perfil y contar con al menos una cotización.
 									</div>
 									@endif
 								</div>
