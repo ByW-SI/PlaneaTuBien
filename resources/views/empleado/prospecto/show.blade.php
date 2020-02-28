@@ -59,10 +59,17 @@
 					<strong> Ver Perfil</strong>
 				</a>
 				@else
-				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}"
-					class="btn btn-success" id="basic-addon1">
+				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success"
+					id="basic-addon1">
 					<i class="fas fa-file-invoice"></i>
 					<strong> Crear Perfil</strong>
+				</a>
+				@endif
+				@if ($prospecto->perfil && $prospecto->cotizaciones)
+				<a href="{{ route('prospectos.presolicitud.create',['prospecto'=>$prospecto]) }}"
+					class="btn btn-primary" id="basic-addon1">
+					<i class="fas fa-file-invoice"></i>
+					<strong> Generar presolicitud</strong>
 				</a>
 				@endif
 			</div>

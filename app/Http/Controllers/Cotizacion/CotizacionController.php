@@ -12,7 +12,7 @@ class CotizacionController extends Controller
         // dd($cotizacion);
         // dd($request->input());
 
-        return $cotizacion->perfil->presolicitud;
+        // return $cotizacion->perfil->presolicitud;
 
         $cotizacion->update([
             'plan_id' => $request->input('plan_id')
