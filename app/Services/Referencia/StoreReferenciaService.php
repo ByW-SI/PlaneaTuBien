@@ -20,9 +20,8 @@ class StoreReferenciaService
         $this->prospecto = $prospecto;
         $this->presolicitud = $presolicitud;
         $this->request = $request;
-        // dd('voy aqui');
         $this->crearReferencias($request);
-        $this->crearContrato();
+        $this->crearContrato($request);
     }
 
     /**
@@ -31,12 +30,12 @@ class StoreReferenciaService
      * =======
      */
 
-    public function crearContrato(){
+    public function crearContrato($request){
         Contrato::create([
             'numero_contrato' => count( Contrato::get() ) + 1,
             'monto' => $this->presolicitud->perfil->cotizacion,
             'estado' => 'registrado',
-            'grupo_id' => 1,
+            'grupo_id' => $request->grupo ? $request->grupo : 1,
             'presolicitud_id' => $this->presolicitud->id,
         ]);
     }

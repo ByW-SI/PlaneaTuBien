@@ -242,9 +242,21 @@
 													</div>
 													<div class="modal-body">
 														<div class="row">
-															<div class="col-12 col-lg-6">
-																<label for="">Monto</label>
-																<input type="number" value="0.0" step="0.1" name="pagoInscripcion[{{$cotizacion->id}}]" class="form-control" min="{{$cotizacion->monto}}">
+															<div class="col-12">
+																@if (!$cotizacion->pago_inscripcions->count())
+																<div class="alert alert-danger">
+																	La cotización aún no tiene ningún pago de
+																	inscripción. <br>
+																	<a class="btn btn-primary" href="{{route('prospectos.cotizacions.pagos.create',['prospecto'=>$cotizacion->prospecto->id,'cotizacions'=>$cotizacion->id])}}">
+																		Realizar pago
+																	</a>
+																</div>
+																@else
+																<div class="alert alert-success">
+																	La cotización puede ser seleccionada ya que cuenta con un pago
+																	de inscripción. <br>
+																</div>
+																@endif
 															</div>
 														</div>
 													</div>

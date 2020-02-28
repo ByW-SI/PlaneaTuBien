@@ -177,4 +177,11 @@ class Cotizacion extends Model
             return $this->residuo($array,$residuo);
         }
     }
+
+    /**
+     * ========
+     * BOOLEANS
+     * ========
+     */
+
 }

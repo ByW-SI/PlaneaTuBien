@@ -90,7 +90,7 @@ Route::get('cotizador','Plan\CotizadorController@index')->name('cotizador')->mid
 Route::get('cotizacion/monto/{monto}/plan/{planlibre}','Plan\CotizadorController@getCotizacionPlanLibre')->middleware('auth');
 Route::get('export-pdf','Plan\CotizadorController@exportPDF')->name('toPDF')->middleware('auth');
 Route::get('export-excel','Plan\CotizadorController@exportExcel')->name('toEXCEL')->middleware('auth');
-
+Route::put('cotizaciones/{cotizacion}/plan/update','Cotizacion\CotizacionController@updatePlan')->name('cotizaciones.planes.update');
 
 // AGENTES
 
@@ -125,6 +125,7 @@ Route::resource('empleados.prospectos.cotizacions','Empleado\EmpleadoProspectoCo
 Route::resource('empleados.prospectos.crms','Empleado\EmpleadoProspectoCRMController')->middleware('auth');
 Route::post('crms/{crm}/tareas/{tarea}/checked','Empleado\EmpleadoProspectoCRMController@tareaChecked')->name('crms.tareas.tarea_checked')->middleware('auth');
 
+Route::get('prospectos/en-presolicitud','Prospecto\ProspectoController@enPresolicitud')->name('prospectos.en_presolicitud.index')->middleware('auth');
 
 //Rutas para el cambio de Plan libre a otro Plan
 Route::get('cambio-plan/{prospecto}','Empleado\ActualizacionPlanProspectoController@index')->name('cambio-plan')->middleware('auth');
@@ -174,6 +175,7 @@ Route::put('citas/{citas}/update', 'Cita\CitaController@update')->name('citas.up
 
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController')->middleware('auth');
+
 
 // CREAR PERFIL CON PROSPECTO Y COTIZACION
 

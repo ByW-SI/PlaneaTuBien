@@ -72,7 +72,8 @@
 						<div class="input group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required="">
+						<input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" name="monto" id="monto" required="">
+						{{-- <input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required=""> --}}
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 use App\ChecklistFolder;
 use App\Http\Controllers\Controller;
 use App\Contrato;
+use App\Integrante;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -47,7 +48,6 @@ class ChecklistFolderController extends Controller
      */
     public function store(Contrato $contrato, Request $request)
     {
-        //
         $checklist_array = array();
         if ($request->ficha_deposito_path && $request->file('ficha_deposito_path')->isValid()) {
             $ficha_deposito_path = $request->ficha_deposito_path->storeAs('contrato/'.$contrato->id, 'ficha_deposito.'.$request->ficha_deposito_path->extension(), 'public');
@@ -109,6 +109,16 @@ class ChecklistFolderController extends Controller
         $checklist = ChecklistFolder::updateOrCreate([
             'contrato_id'=>$contrato->id
         ],$checklist_array);
+
+        if($checklist->estaCompleto()){
+            // dd($contrato->presolicitud->perfil->prospecto->id);
+            $integrante = Integrante::create([
+                'prospecto_id' => $contrato->presolicitud->perfil->prospecto->id
+            ]);
+        }
+
+        // dd($checklist->estaCompleto());
+
         return redirect()->route('contratos.checklist.index',['contrato'=>$contrato]);
         // dd($ficha_deposito_path );
     }

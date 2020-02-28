@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 
 use App\Contrato;
+use App\Cotizacion;
 use App\Http\Controllers\Controller;
+use App\PagoInscripcion;
 use App\Presolicitud;
 use App\Prospecto;
 use Illuminate\Http\Request;
@@ -55,7 +57,14 @@ class PresolicitudController extends Controller
      */
     public function store(Prospecto $prospecto, Request $request)
     {
-        dd($request->input());
+        // dd($request->input());
+
+        $cotizacion = Cotizacion::find($request->cotizacion_id);
+
+        if(!$cotizacion->pago_inscripcions->count()){
+            return redirect()->back();
+        }
+
         $rules = [
             'paterno' => 'required|max:190',
             'materno' => 'nullable|max:190',
@@ -139,6 +148,17 @@ class PresolicitudController extends Controller
                     }
                 }
             }
+
+            // $pagoInscripcion = PagoInscripcion::create([
+            //     'prospecto_id' => ,
+            //     'cotizacion_id' => ,
+            //     'status' => ,
+            //     'monto' => ,
+            //     'identificacion' => ,
+            //     'comprobante' => ,
+            //     'prospecto_id' => ,
+            //     'prospecto_id' => ,
+            // ]);
 
             // dd('stop');
 

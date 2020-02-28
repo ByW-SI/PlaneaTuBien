@@ -25,6 +25,7 @@
 				<thead>
 					<tr>
 						<th scope="col" class="text-center">Id</th>
+						<th scope="col" class="text-center">¿Es integrante?</th>
 						<th scope="col" class="text-center">Cliente</th>
 						<th scope="col" class="text-center">Asesor</th>
 						<th scope="col" class="text-center">Teléfono</th>
@@ -42,6 +43,7 @@
 					@forelse ($prospectos as $prospecto)
 						<tr>
 							<td>{{$prospecto->id}}</td>
+							<td>{{$prospecto->esIntegrante() ? 'Sí' : 'No'}}</td>
 							<td scope="col" class="text-center">
 								{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
 							</td>

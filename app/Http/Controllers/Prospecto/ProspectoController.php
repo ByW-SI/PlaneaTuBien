@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Prospecto;
 use App\Empleado;
 use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
+use App\Plan;
+use App\Presolicitud;
 use App\Prospecto;
 use App\Services\Prospecto\AsignarAsesorService;
 use App\Services\Prospecto\AsignarAsesorTemporalIndefinidoService;
@@ -65,6 +67,16 @@ class ProspectoController extends Controller
         $asesor = Auth::user()->empleado;
         return view('prospectos.create', ['asesor' => $asesor]);
     }
+
+    public function enPresolicitud(){
+        $prospectos = Prospecto::has('perfil')->has('cotizaciones')->get();
+        $presolicitudes = Presolicitud::whereHas('perfil', function($query){
+            return $query->has('cotizacion');
+        })->get();
+        $planes = Plan::get();
+        return view('prospectos.en_presolicitud.index', compact('prospectos','presolicitudes','planes'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

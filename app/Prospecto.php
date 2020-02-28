@@ -46,6 +46,11 @@ class Prospecto extends Model
         'deleted_at'
     ];
 
+    public function integrante()
+    {
+        return $this->hasOne('App\Integrante');
+    }
+
     public function getFullNameAttribute()
     {
         return $this->nombre . " " . $this->appaterno . " " . $this->apmaterno;
@@ -176,5 +181,10 @@ class Prospecto extends Model
     public function tienePerfil()
     {
         return is_null($this->perfil) ? false : true;
+    }
+
+    public function esIntegrante()
+    {
+        return is_null($this->integrante) ? false : true;
     }
 }

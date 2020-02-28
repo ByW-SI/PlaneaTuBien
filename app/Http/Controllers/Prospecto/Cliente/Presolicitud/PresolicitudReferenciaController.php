@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 
+use App\Grupo;
 use App\Referencia;
 use App\Prospecto;
 use App\Presolicitud;
@@ -34,8 +35,8 @@ class PresolicitudReferenciaController extends Controller
      */
     public function create(Prospecto $prospecto, Presolicitud $presolicitud)
     {
-        //
-        return view('prospectos.presolicitud.referencia.form',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        $grupos = Grupo::get();
+        return view('prospectos.presolicitud.referencia.form',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud, 'grupos' => $grupos]);
     }
 
     /**
