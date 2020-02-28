@@ -213,18 +213,22 @@ class PresolicitudController extends Controller
         $diferenciaInscripcion = floatVal($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion)
             - Cotizacion::find($request->input('cotizacion_id'))->inscripcion;
 
+        // return $presolicitud->contratos;
+
         // if ($diferenciaInscripcion > 0) {
         //     $pago = Pagos::create([
-        //         'contrato_id' => $presolicitud->contrato,
-        //         'monto',
-        //         'fecha_pago',
-        //         'folio',
-        //         'status_id',
-        //         'tipopago_id',
-        //         'referencia',
-        //         'spei',
-        //         'file_comprobante',
-        //         'mensualidad_id'
+        //         'monto' => $diferenciaInscripcion,
+        //         'fecha_pago' => date('Y-m-d'),
+        //         'folio' => Pagos::get()->count(),
+        //         'status_id' => 'aceptado',
+        //         'tipopago_id' => '',
+        //         'referencia' => 'referencia',
+        //         'spei' => 'spei',
+        //         'file_comprobante' => 'file',
+        //         'mensualidad_id' => null
+        //     ]);
+        //     $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->update([
+        //         'monto' => $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->monto - $diferenciaInscripcion
         //     ]);
         // }
 
