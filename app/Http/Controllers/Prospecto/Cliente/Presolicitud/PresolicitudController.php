@@ -210,27 +210,31 @@ class PresolicitudController extends Controller
     public function modificarCotizacion(Request $request, Presolicitud $presolicitud)
     {
 
+
+
         $diferenciaInscripcion = floatVal($presolicitud->perfil->cotizacion->totalPagadoDeInscripcion)
             - Cotizacion::find($request->input('cotizacion_id'))->inscripcion;
 
+        // dd($diferenciaInscripcion);
+
         // return $presolicitud->contratos;
 
-        // if ($diferenciaInscripcion > 0) {
-        //     $pago = Pagos::create([
-        //         'monto' => $diferenciaInscripcion,
-        //         'fecha_pago' => date('Y-m-d'),
-        //         'folio' => Pagos::get()->count(),
-        //         'status_id' => 'aceptado',
-        //         'tipopago_id' => '',
-        //         'referencia' => 'referencia',
-        //         'spei' => 'spei',
-        //         'file_comprobante' => 'file',
-        //         'mensualidad_id' => null
-        //     ]);
-        //     $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->update([
-        //         'monto' => $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->monto - $diferenciaInscripcion
-        //     ]);
-        // }
+        if ($diferenciaInscripcion > 0) {
+            $pago = Pagos::create([
+                'monto' => $diferenciaInscripcion,
+                'fecha_pago' => date('Y-m-d'),
+                'folio' => Pagos::get()->count(),
+                'status_id' => 1,
+                'tipopago_id' => 1,
+                'referencia' => 'referencia',
+                'spei' => 'spei',
+                'file_comprobante' => 'file',
+                'mensualidad_id' => null
+            ]);
+            $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->update([
+                'monto' => $presolicitud->perfil->cotizacion->pago_inscripcions()->first()->monto - $diferenciaInscripcion
+            ]);
+        }
 
         $presolicitud->perfil->cotizacion->pago_inscripcions()->update([
             'cotizacion_id' => $request->input('cotizacion_id')

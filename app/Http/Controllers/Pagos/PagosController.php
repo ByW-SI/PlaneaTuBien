@@ -26,7 +26,7 @@ class PagosController extends Controller
     {
         $fecha_inicio = $request->input('fecha_inicio');
         $fecha_final = $request->input('fecha_final');
-        $pagos = Pagos::where('fecha_pago', '>=', $fecha_inicio)->where('fecha_pago', '<=', $fecha_final)->aprobados()->get();
+        $pagos = Pagos::where('fecha_pago', '>=', $fecha_inicio)->where('fecha_pago', '<=', $fecha_final)->get();
         return $pagos;
     }
 

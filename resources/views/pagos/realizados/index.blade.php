@@ -59,7 +59,7 @@
                             <td>{{$pago->fecha_pago}}</td>
                             <td></td>
                             <td>{{$pago->monto}}</td>
-                            <td>{{$pago->mensualidad()->first()->cantidad}}</td>
+                            <td>{{$pago->mensualidad ? $pago->mensualidad()->first()->cantidad : 'N/D'}}</td>
                         </tr>
                         @endforeach
                     </tbody>
