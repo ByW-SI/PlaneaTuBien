@@ -58,7 +58,9 @@
                                             <th>Asesor</th>
                                             <th>Fecha cita</th>
                                             <th>Hora</th>
+                                            <th>Acción</th>
                                             <th>Agendar cita</th>
+                                            <th>Llamadas</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,6 +76,90 @@
                                             <td nowrap>{{$cita->fecha_cita}}</td>
                                             <td nowrap>{{$cita->hora}}</td>
                                             <td nowrap>
+                                                {{-- BOTON ACCION --}}
+                                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                                    data-target="#modal-accion-{{$cita->id}}">
+                                                    Acción
+                                                </button>
+                                                {{-- MODAL BOTON ACCION --}}
+                                                <div class="modal fade bd-example-modal-lg"
+                                                    id="modal-accion-{{$cita->id}}" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">
+                                                                    REAGENDAR LLAMADA
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form
+                                                                    action="{{route('citas.reprogramables.store',['citas'=>$cita->id])}}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <div class="row">
+                                                                        {{-- PROSPECTO --}}
+                                                                        <input type="hidden" name="prospecto_id"
+                                                                            value="{{$cita->id}}">
+                                                                        {{-- RESULTADO DE LA LLAMADA --}}
+                                                                        <div class="col-6 mt-2">
+                                                                            <label for=""
+                                                                                class="text-uppercase text-muted">Resultado
+                                                                                de
+                                                                                llamada</label>
+                                                                            <select name="accion"
+                                                                                class="form-control inputResultadoLlamada"
+                                                                                citaId={{$cita->id}}>
+                                                                                <option value="">Seleccionar</option>
+                                                                                <option value="SEGUIMIENTO LLAMADA">
+                                                                                    SEGUIMIENTO LLAMADA</option>
+                                                                                <option value="CANCELAR CITA">LISTA
+                                                                                    NEGRA</option>
+                                                                            </select>
+                                                                            {{-- <input type="text" name="resultado_llamada_id"
+                                                                                class="form-control"> --}}
+                                                                        </div>
+                                                                        {{-- FECHA DE SIGUIENTE CONTACTO --}}
+                                                                        <div class="col-12 mt-2 contenedorInputFechaSiguienteContacto"
+                                                                            citaId={{$cita->id}} style="display:none">
+                                                                            <label for=""
+                                                                                class="text-uppercase text-muted">Fecha
+                                                                                de
+                                                                                siguiente contacto</label>
+                                                                            <input type="date"
+                                                                                name="fecha_siguiente_contacto"
+                                                                                class="form-control inputFechaSiguienteContacto"
+                                                                                citaId={{$cita->id}}>
+                                                                        </div>
+                                                                        {{-- COMENTARIO --}}
+                                                                        <div class="col-12 mt-2 contenedorInputComentario"
+                                                                            citaId={{$cita->id}} style="display:none">
+                                                                            <label for=""
+                                                                                class="text-uppercase text-muted">Comentario</label>
+                                                                            <textarea name="comentario" id="" cols="30"
+                                                                                rows="2"
+                                                                                class="form-control"></textarea>
+                                                                        </div>
+
+                                                                        <br>
+                                                                        <hr>
+                                                                        <br>
+                                                                        <div class="col-12 mt-2">
+                                                                            <button type="submit"
+                                                                                class="btn btn-success">GUARDAR</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td nowrap>
                                                 <button type="submit" class="btn btn-success botonAgendarCita"
                                                     prospectoId={{$cita->prospecto->id}}>
                                                     Agendar cita
@@ -81,6 +167,42 @@
                                                 @include('prospectos.seguimientoLlamadas.modalCrearCita', ['prospecto'
                                                 =>
                                                 $cita->prospecto])
+                                            </td>
+                                            <td nowrap>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#modal-llamadas-{{$cita->prospecto->id}}">
+                                                    Llamadas
+                                                </button>
+                                                {{-- MODAL BOTON LLAMADAS --}}
+                                                <div class="modal fade bd-example-modal-lg"
+                                                    id="modal-llamadas-{{$cita->prospecto->id}}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">LLAMADAS DE
+                                                                    {{$cita->prospecto->nombre}}
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="table-responsive">
+                                                                            @include('componentes.llamadas.historial.table',
+                                                                            ['llamadas' =>
+                                                                            $cita->prospecto->seguimientoLlamadas])
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach

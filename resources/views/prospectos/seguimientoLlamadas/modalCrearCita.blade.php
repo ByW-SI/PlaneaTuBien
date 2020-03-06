@@ -41,20 +41,24 @@
           </div>
           {{-- FILA --}}
           <div class="form-row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <label for="recipient-name" class="col-form-label">Clave de Preautorizacion:</label>
               <input type="text" class="form-control clavePreautorizacion" value="{{$prospecto->citas()->first() ? $prospecto->citas()->first()->clave_preautorizacion : ''}}" name="clave_preautorizacion" prospectoId="{{$prospecto->id}}" readonly>
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4 contenedorInputFechaCita" prospectoId={{$prospecto->id}}>
               <label for="message-text" class="col-form-label">Fecha de cita:</label>
-              <input type="date" name="fecha_cita" class="form-control modalCrearCitaInput"
+              <input type="date" name="fecha_cita" class="form-control modalCrearCitaInput inputFechaCita"
                 prospectoId={{$prospecto->id}}>
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4 contenedorInputHoraCita" prospectoId={{$prospecto->id}}>
               <label for="message-text" class="col-form-label">Hora cita:</label>
-              <input type="time" name="hora" class="form-control modalCrearCitaInput" prospectoId={{$prospecto->id}}>
+              <input type="time" name="hora" class="form-control modalCrearCitaInput inputHoraCita" prospectoId={{$prospecto->id}}>
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4 contenedorInputFechaLlamada" prospectoId={{$prospecto->id}}>
+              <label for="message-text" class="col-form-label">Fecha llamada</label>
+              <input type="date" name="fecha_llamada" class="form-control modalCrearCitaInput inputFechaLlamada" prospectoId={{$prospecto->id}}>
+            </div>
+            <div class="form-group col-sm-4">
               <label for="message-text" class="col-form-label">Número de tarjetas:</label>
               <input type="text" name="numeroTarjeta" class="form-control numeroTarjetas modalCrearCitaInput"
                 prospectoId={{$prospecto->id}} value="{{$prospecto->numeroTarjetas}}">
@@ -154,19 +158,54 @@
 
 <script>
     
-    // $(document).on('change', '.inputSueldo', function(){
+    $(document).on('change','.inputFechaLlamada', function(){
+
+      prospectoId = $(this).attr('prospectoId');
+
+      contenedorInputFechaCita = $(`.contenedorInputFechaCita[prospectoId=${prospectoId}]`);
+      contenedorInputHoraCita = $(`.contenedorInputHoraCita[prospectoId=${prospectoId}]`);
+      inputFechaLlamadaTieneValor = $(this).val() != "";
+
+      if(inputFechaLlamadaTieneValor){
+        contenedorInputFechaCita.val("");
+        contenedorInputFechaCita.hide();
+        contenedorInputHoraCita.val("");
+        contenedorInputHoraCita.hide();
+      }else{
+        contenedorInputFechaCita.show();
+        contenedorInputHoraCita.show();
+      }
+
+      console.log({
+        message: 'CAMBIO FECHA LLAMADA',
+        prospectoId,
+        inputFechaLlamadaTieneValor,
+        contenedorInputFechaCita
+      });
+
+    });
     
-        
-    
-    
-    
-    //     console.log({
-    //         mensaje: 'CAMBIARA PREAUTORIZACION',
-    //         sueldo: sueldo,
-    //         formato: formato
-    //     });
-    // });
-    
+    $(document).on('change', '.inputFechaCita', function(){
+
+      prospectoId = $(this).attr('prospectoId');
+
+      contenedorInputFechaLlamada = $(`.contenedorInputFechaLlamada[prospectoId=${prospectoId}]`);
+      inputFechaCitaTieneValor = $(this).val() != "";
+
+      if(inputFechaCitaTieneValor){
+        contenedorInputFechaLlamada.val("");
+        contenedorInputFechaLlamada.hide();
+      }else{
+        contenedorInputFechaLlamada.show();
+      }
+
+      console.log({
+        message: 'CAMBIO FECHA CITA',
+        prospectoId
+      });
+
+    });
+
     /**
     * =========
     * FUNCIONES

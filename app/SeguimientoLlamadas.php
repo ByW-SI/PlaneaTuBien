@@ -36,7 +36,7 @@ class SeguimientoLlamadas extends Model
 
     public function resultadoLLamada()
     {
-        return $this->belongsTo('App\ResultadoLlamada');
+        return $this->belongsTo('App\ResultadoLlamada', 'resultado_llamada_id');
     }
 
     public function citas()

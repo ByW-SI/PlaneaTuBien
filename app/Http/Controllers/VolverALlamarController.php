@@ -13,6 +13,7 @@ class VolverALlamarController extends Controller
     {
         $prospectos = Prospecto::whereEstatusVolverALlamar()->get();
         $resultados_llamadas = ResultadoLlamada::get();
+
         return view('prospectos.volver_a_llamar.index', compact('prospectos', 'resultados_llamadas'));
     }
 

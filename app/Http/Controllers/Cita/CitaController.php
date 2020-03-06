@@ -13,6 +13,7 @@ use App\Services\Cita\IndexCitaPendienteService;
 use App\Services\Cita\IndexCitaReprogramableService;
 use App\Services\Cita\IndexCitaService;
 use App\Services\Cita\ReactivarCitaService;
+use App\Services\Cita\StoreCitaReprogramableService;
 use App\Services\Cita\StoreCitaService;
 use App\Services\Cita\UpdateCitaConfirmadaService;
 use App\Services\Cita\UpdateCitaPendienteService;
@@ -55,6 +56,11 @@ class CitaController extends Controller
         $indexCitaReprogramableService = new IndexCitaReprogramableService($request);
         $citas = $indexCitaReprogramableService->getCitas();
         return view('citas.reprogramables.index', compact('citas'));
+    }
+
+    public function reprogramablesStore(Request $request, Citas $citas){
+        $storeCitaReprogramableService = new StoreCitaReprogramableService($request, $citas);
+        return redirect()->route( $storeCitaReprogramableService->getRoute() );
     }
 
     public function canceladas(Request $request)

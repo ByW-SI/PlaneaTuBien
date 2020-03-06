@@ -65,9 +65,9 @@ class IndexSeguimientoLlamadaService
         $this->seguimientoLlamadas = [];
 
         // Obtenemos los registros de las llamadas de cada prospecto, solo los ultimos 4
-        foreach ($this->prospectos as $key => $value) {
+        foreach ($this->prospectos as $key => $prospecto) {
             $aux = [];
-            $segLlamada = $value->seguimientoLlamadas;
+            $segLlamada = $prospecto->seguimientoLlamadas()->orderBy('id','desc')->get();
 
             for ($i = 0; $i < 4; $i++) {
                 if (isset($segLlamada[$i])) {

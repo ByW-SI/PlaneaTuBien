@@ -16,6 +16,8 @@
                     <thead>
                         <tr class="text-center">
                             <th>Prospecto</th>
+                            <th>Teléfono</th>
+                            <th>Celular</th>
                             <th>Ver llamada</th>
                             <th>Acción</th>
                             <th>Agendar cita</th>
@@ -27,6 +29,14 @@
                             {{-- PROSPECTO --}}
                             <td class="text-center">
                                 {{$prospecto->nombre}} {{$prospecto->appaterno}} {{$prospecto->apmaterno}}
+                            </td>
+                            {{-- TELEFONO --}}
+                            <td>
+                                {{$prospecto->telefono ?: 'N/D'}}
+                            </td>
+                            {{-- CELULAR --}}
+                            <td>
+                                {{$prospecto->celular ?: 'N/D'}}
                             </td>
                             {{-- VER LLAMADA --}}
                             <td class="text-center">
@@ -54,11 +64,10 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th scope="col">Resultado</th>
+                                                                        <th scope="col">Status</th>
                                                                         <th scope="col">Fecha de contacto</th>
                                                                         <th scope="col">Fecha de siguiente contacto</th>
                                                                         <th scope="col">Comentario</th>
-                                                                        <th scope="col"></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -66,16 +75,13 @@
                                                                     $llamada)
                                                                     <tr>
                                                                         <td nowrap>
-                                                                            {{!$llamada->resultadoLLamada ? '' : $llamada->resultadoLLamada->nombre}}
+                                                                            {{$llamada->resultadoLLamada->codigo}}
                                                                         </td>
                                                                         <td nowrap>{{$llamada->fecha_contacto}}</td>
                                                                         <td nowrap>
                                                                             {{$llamada->fecha_siguiente_contacto}}
                                                                         </td>
                                                                         <td nowrap>{{$llamada->comentario}}</td>
-                                                                        <td nowrap>
-                                                                            {{!$llamada->resultadoLLamada ? "" : $llamada->resultadoLLamada->nombre}}
-                                                                        </td>
                                                                     </tr>
                                                                     @endforeach
                                                                 </tbody>
@@ -115,7 +121,7 @@
                                                     @csrf
                                                     <div class="row">
                                                         {{-- ASESOR DEL PROSPECTO --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-6 mt-2">
                                                             <label for=""
                                                                 class="text-uppercase text-muted">Asesor</label>
                                                             <input type="text" value="{{$prospecto->asesor->nombre}}"
@@ -125,7 +131,7 @@
                                                         <input type="hidden" name="prospecto_id"
                                                             value="{{$prospecto->id}}">
                                                         {{-- RESULTADO DE LA LLAMADA --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-6 mt-2">
                                                             <label for="" class="text-uppercase text-muted">Resultado de
                                                                 llamada</label>
                                                             <select name="accion"
@@ -133,11 +139,7 @@
                                                                 prospectoId={{$prospecto->id}}>
                                                                 <option value="">Seleccionar</option>
                                                                 <option value="VOLVER A LLAMAR">VOLVER A LLAMAR</option>
-                                                                <option value="CANCELAR CITA">CANCELAR CITA</option>
-                                                                {{-- @foreach ($resultados_llamadas as $resultado)
-                                                                    <option value="{{$resultado->id}}">{{$resultado->nombre}}
-                                                                </option>
-                                                                @endforeach --}}
+                                                                <option value="CANCELAR CITA">LISTA NEGRA</option>
                                                             </select>
                                                             {{-- <input type="text" name="resultado_llamada_id"
                                                                 class="form-control"> --}}
@@ -150,6 +152,14 @@
                                                             <input type="date" name="fecha_siguiente_contacto"
                                                                 class="form-control inputFechaSiguienteContacto"
                                                                 prospectoId={{$prospecto->id}}>
+                                                        </div>
+                                                        {{-- COMENTARIO --}}
+                                                        <div class="col-12 mt-2 contenedorInputComentario"
+                                                            prospectoId={{$prospecto->id}} style="display:none">
+                                                            <label for=""
+                                                                class="text-uppercase text-muted">Comentario</label>
+                                                            <textarea name="comentario" id="" cols="30" rows="2"
+                                                                class="form-control"></textarea>
                                                         </div>
 
                                                         <br>
@@ -196,9 +206,11 @@
         const accion = $(this).val();
 
         $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).hide('slow');
+        $(`.contenedorInputComentario[prospectoId=${prospectoId}]`).hide('slow');
 
         if(accion == 'VOLVER A LLAMAR'){
             $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).show('slow');
+            $(`.contenedorInputComentario[prospectoId=${prospectoId}]`).show('slow');
         }
 
         console.log({

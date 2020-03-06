@@ -5,7 +5,9 @@ namespace App\Services\Cita;
 use App\Citas;
 use App\EstatusProspecto;
 use App\Prospecto;
+use App\SeguimientoLlamadas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoreCitaService
 {
@@ -13,6 +15,8 @@ class StoreCitaService
     protected $cita;
     protected $prospecto;
     protected $request;
+
+    protected $seguimientoLlamada;
 
     public function __construct(Request $request)
     {
@@ -34,6 +38,7 @@ class StoreCitaService
         if ($this->estaDefinidaLaFechaDeCita()) {
             $this->actualizarStatusProspecto('Cita');
         } else {
+            $this->agendarNuevaLlamada($request);
             $this->actualizarStatusProspecto('Pendiente');
         }
 
@@ -78,6 +83,17 @@ class StoreCitaService
     {
         $this->prospecto->update([
             'estatus_id' => EstatusProspecto::where('nombre', $nombreStatus)->first()->id,
+        ]);
+    }
+
+    public function agendarNuevaLlamada($request){
+        $this->seguimientoLlamada=SeguimientoLlamadas::create([
+            'asesor_id' => $this->prospecto->asesor->id,
+            'prospecto_id' => $this->prospecto->id,
+            'resultado_llamada_id' => 9,
+            'fecha_siguiente_contacto' => $request->fecha_llamada,
+            'fecha_contacto' => date('Y-m-d'),
+            'comentario' => 'Pendiente por definir fecha de cita',
         ]);
     }
 

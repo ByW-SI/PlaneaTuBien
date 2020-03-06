@@ -5,6 +5,16 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<style>
+    .background-success {
+        background-color: #E6FCDD !important;
+    }
+
+    .background-error {
+        background-color: #F9EBEB !important;
+    }
+</style>
+
 @section('content')
 <div class="mx-3">
     <div class="card mb-5">
@@ -15,11 +25,12 @@
         {{-- @csrf --}}
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="seguimientotable" style="width:100%">
+                <table class="table table-hover" id="seguimientotable" style="width:100%">
                     <thead>
                         <tr class="text-center">
                             <th scope="col">Nombre</th>
                             <th scope="col">Celular</th>
+                            <th></th>
                             <th scope="col">Telefono</th>
                             <th class="table-danger" style=" width: 150px;">Comentario</th>
                             <th class="table-primary">Fecha actual</th>
@@ -37,13 +48,17 @@
                             <th class="table-warning">Fecha actual</th>
                             <th class="table-warning">Estatus</th>
                             <th class="table-warning">Fecha Seguimiento</th>
+                            <th class="table-warning">Llamadas</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($prospectos as $key => $prospecto)
-                        <tr>
+                        <tr
+                            class="{{ date('Y-m-d') == $seguimientoLlamadas[$key][0][2] ? 'background-success' : '' }}  {{date('Y-m-d') > $seguimientoLlamadas[$key][0][2] ? 'background-error' : ''}}">
+
                             <th scope="row">{{ $prospecto->fullName }}</th>
                             <th scope="row">{{ $prospecto->celular }}</th>
+                            <th>{{ $seguimientoLlamadas[$key][0][2] }}</th>
                             <th scope="row">{{ $prospecto->telefono }}</th>
                             <td nowrap>
                                 <div class="form-group" style="display: block; width: 150px;">
@@ -76,12 +91,45 @@
                             </td>
                             <!-- FECHAS ANTERIORES -->
                             @foreach($seguimientoLlamadas[$key] as $reg)
+                            {{-- {{dd($reg)}} --}}
                             <td nowrap>
                                 {{ $reg[0] }}
                             </td>
                             <td nowrap>{{ $reg[1] }}</td>
                             <td nowrap>{{ $reg[2] }}</td>
                             @endforeach
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#modal-llamadas-{{$prospecto->id}}">
+                                    Llamadas
+                                </button>
+                                {{-- MODAL BOTON LLAMADAS --}}
+                                <div class="modal fade bd-example-modal-lg" id="modal-llamadas-{{$prospecto->id}}"
+                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">LLAMADAS DE
+                                                    {{$prospecto->nombre}}
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="table-responsive">
+                                                            @include('componentes.llamadas.historial.table', ['llamadas' => $prospecto->seguimientoLlamadas])
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
 
@@ -98,9 +146,19 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+    $(document).ready( function(){
+        var table = $('#seguimientotable').DataTable();
+        } );
+</script>
 
+
+<script>
     /**
     * ======
     * EVENTS

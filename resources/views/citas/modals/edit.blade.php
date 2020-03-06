@@ -4,7 +4,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{$cita->prospecto->nombre}} {{$cita->prospecto->appaterno}} {{$cita->prospecto->apmaterno}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{$cita->prospecto->nombre}}
+                    {{$cita->prospecto->appaterno}} {{$cita->prospecto->apmaterno}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,7 +17,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">*Nombre</label>
-                            <input type="text" name="nombre" class="form-control" value="{{$cita->prospecto->nombre}}" required>
+                            <input type="text" name="nombre" class="form-control" value="{{$cita->prospecto->nombre}}"
+                                required>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">*Apellido paterno</label>
@@ -30,7 +32,8 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">Correo electrónico</label>
-                            <input type="text" name="email" class="form-control" value="{{$cita->prospecto->email}}" required>
+                            <input type="text" name="email" class="form-control" value="{{$cita->prospecto->email}}"
+                                required>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">Teléfono</label>
@@ -39,13 +42,14 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">Celular</label>
-                            <input type="text" name="celular" class="form-control"
-                                value="{{$cita->prospecto->celular}}" required>
+                            <input type="text" name="celular" class="form-control" value="{{$cita->prospecto->celular}}"
+                                required>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">Asesor</label>
                             <input type="text" name="asesor_id" class="form-control"
-                                value="{{$cita->prospecto->empleado->nombre}} {{$cita->prospecto->empleado->appaterno}} {{$cita->prospecto->empleado->apmaterno}}" readonly>
+                                value="{{$cita->prospecto->empleado->nombre}} {{$cita->prospecto->empleado->appaterno}} {{$cita->prospecto->empleado->apmaterno}}"
+                                readonly>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4 mt-2">
                             <label for="">Acción</label>
@@ -60,24 +64,35 @@
                             </select>
                         </div>
                         {{-- INPUT NUEVA FECHA CITA --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputExtra contenedorInputNuevaFechaCita" style="display: none;" prospectoId="{{$cita->prospecto->id}}">
-                            <label for="">Nueva fecha de cita</label>
-                            <input type="date" class="form-control inputNuevaFechaCita" name="nuevaFechaCita"  >
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputExtra contenedorInputNuevaFechaCita"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                            <label for="">fecha de cita</label>
+                            <input type="date" class="form-control inputNuevaFechaCita" name="nuevaFechaCita">
+                        </div>
+                        {{-- INPUT HORA CITA --}}
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputExtra contenedorInputNuevaHoraCita"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                            <label for="">Hora de cita</label>
+                            <input type="time" class="form-control inputNuevaHoraCita" name="nuevaHoraCita">
                         </div>
                         {{-- INPUT NUEVA FECHA LLLAMADA --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputNuevaFechaLlamada contenedorInputExtra" style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputNuevaFechaLlamada contenedorInputExtra"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
                             <label for="">Nueva fecha de llamada</label>
-                            <input type="date" class="form-control inputNuevaFechaLlamada" name="nuevaFechaLlamada" >
+                            <input type="date" class="form-control inputNuevaFechaLlamada" name="nuevaFechaLlamada">
                         </div>
                         {{-- INPUT COMENTARIOS --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputComentario contenedorInputExtra"style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputComentario contenedorInputExtra"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
                             <label for="">Comentarios</label>
-                            <textarea name="comentarioCancelacion" class="form-control inputComentarioCancelacion" ></textarea>
+                            <textarea name="comentarioCancelacion"
+                                class="form-control inputComentarioCancelacion"></textarea>
                         </div>
                         {{-- INPUT ASESOR QUE CONFIRMA --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputAsesorQueConfirma contenedorInputExtra" style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputAsesorQueConfirma contenedorInputExtra"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
                             <label for="">ASESOR QUE CONFIRMA</label>
-                            <select name="idAsesorQueConfirma" class="form-control inputIdAsesorQueConfirma" >
+                            <select name="idAsesorQueConfirma" class="form-control inputIdAsesorQueConfirma">
                                 <option value="">Seleccionar</option>
                                 @foreach ($asesores as $asesor)
                                 <option value="{{$asesor->id}}">{{$asesor->nombre}}</option>
@@ -86,14 +101,17 @@
                             {{-- <input type="text" class="form-control" name="idAsesorQueConfirma"> --}}
                         </div>
                         {{-- INPUT ASESOR DEL PROSPECTO --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputAsesorDelProspecto contenedorInputExtra" style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputAsesorDelProspecto contenedorInputExtra"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
                             <label for="">ASESOR DEL PROSPECTO</label>
-                            <input type="text" class="form-control inputAsesorDelProspecto" readonly value="{{$cita->prospecto->empleado->nombre}}" >
+                            <input type="text" class="form-control inputAsesorDelProspecto" readonly
+                                value="{{$cita->prospecto->empleado->nombre}}">
                         </div>
                         {{-- INPUT OPCIONES CANCELACIÓN --}}
-                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputOpcionesCancelacion contenedorInputExtra" style="display: none;" prospectoId="{{$cita->prospecto->id}}">
+                        <div class="col-12 col-sm-6 col-lg-4 mt-2 contenedorInputOpcionesCancelacion contenedorInputExtra"
+                            style="display: none;" prospectoId="{{$cita->prospecto->id}}">
                             <label for="">OPCIONES DE CANCELACIÓN</label>
-                            <select name="opcionCancelacion" class="form-control opcionesCancelacion " >
+                            <select name="opcionCancelacion" class="form-control opcionesCancelacion ">
                                 <option value="">Seleccionar</option>
                                 <option value="x1">x1</option>
                                 <option value="x2">x2</option>
@@ -103,7 +121,7 @@
                         </div>
                         <hr>
                         <br>
-                        <div class="col-12">
+                        <div class="col-12 mt-2">
                             <button type="submit" class="btn btn-success">
                                 Guardar
                             </button>

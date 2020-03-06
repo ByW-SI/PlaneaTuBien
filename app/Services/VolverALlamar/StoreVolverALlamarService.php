@@ -80,7 +80,7 @@ class StoreVolverALlamarService
             'resultado_llamada_id' => 4,
             'fecha_contacto' => Carbon::now(),
             'fecha_siguiente_contacto' => $this->request->fecha_siguiente_contacto,
-            'comentario' => 'Reprogramar cita',
+            'comentario' => $this->request->comentario,
         ]);
     }
 

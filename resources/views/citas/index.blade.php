@@ -139,6 +139,7 @@ function ocultarInputsExtra(){
 
 function mostrarInputsReagendarCita(prospectoId){
     $(`.contenedorInputNuevaFechaCita[prospectoId=${prospectoId}]`).show();
+    $(`.contenedorInputNuevaHoraCita[prospectoId=${prospectoId}]`).show();
 }
 
 function mostrarInputsLlamarParaReagendar(prospectoId){

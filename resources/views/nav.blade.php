@@ -103,7 +103,7 @@
 						<i class="fa fa-calendar"></i><strong>Lista negra</strong>
 					</a>
 					<a class="dropdown-item" href="{{ route('citas.reprogramables.index') }}">
-						<i class="fa fa-calendar"></i><strong> Reprogramar cita</strong>
+						<i class="fa fa-calendar"></i><strong>Reagendar cita</strong>
 					</a>
 					<a class="dropdown-item" href="{{ route('citas.pendientes.index') }}">
 						<i class="fa fa-calendar"></i><strong>Citas pendientes</strong>

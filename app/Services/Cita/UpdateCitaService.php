@@ -22,6 +22,7 @@ class UpdateCitaService
     public function __construct($request, $cita)
     {
         $this->setCita($cita);
+        // dd($this->cita);
         $this->setProspecto($cita);
         $this->setAsesor($this->prospecto);
         $this->setRequest($request);
@@ -110,6 +111,7 @@ class UpdateCitaService
     {
         $this->cita->update([
             'fecha_cita' => $this->request->nuevaFechaCita,
+            'hora' => $this->request->nuevaHoraCita,
         ]);
     }
 
