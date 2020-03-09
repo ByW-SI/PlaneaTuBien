@@ -31,7 +31,7 @@
                 <input type="text" class="form-control" value="{{ $prospecto->sexo }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
-                <label>Correo electronico:</label>
+                <label>Correo electrónico:</label>
                 <input type="text" class="form-control" value="{{ $prospecto->email }}" readonly="">
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <div class="card-header">
+    {{-- <div class="card-header">
         <h4>
             Datos del prestamo
         </h4>
@@ -108,7 +108,7 @@
                 <input class="form-control" readonly="" type="text" value="{{$prospecto->plan}}">
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="card">
         <div class="card-header">
             <div class="row">
