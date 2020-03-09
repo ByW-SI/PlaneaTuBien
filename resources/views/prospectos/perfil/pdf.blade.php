@@ -51,7 +51,7 @@
 						    				{{$perfil->clave}}
 						    			</label>
 						    			<label style="border-bottom: 0.5px solid #ccc; text-align: center;">
-						    				{{$perfil->cotizacion->plan->nombre}}
+						    				{{$perfil->cotizacion ? $perfil->cotizacion->plan->nombre : ''}}
 						    			</label>
 						    		</div>
 					    			

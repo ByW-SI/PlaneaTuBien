@@ -10,7 +10,7 @@
 	        <div class="d-flex justify-content-between">
 	        	<h4>Perfil:</h4>   
 	        	<a href="{{ route('prospectos.perfil.pdf',['prospecto'=>$prospecto]) }}" class="btn btn-success">Imprimir perfil</a>
-	        	@if($cotizacion->plan->abreviatura != "PL")
+	        	@if($cotizacion && $cotizacion->plan->abreviatura != "PL")
 	        		<a class="btn btn-success" href="{{ route('prospectos.cotizacions.pagos.index',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">Pagos</a>
 	        	@endif
 	        	@if ($cotizacion && $cotizacion->liberar)

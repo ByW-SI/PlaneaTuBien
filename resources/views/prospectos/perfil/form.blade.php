@@ -105,7 +105,7 @@
 		    	<div class="form-group row">
 		    		<label for="rfc_1" class="col-form-label col-sm-2">✱ RFC:</label>
 		    		<div class="col-sm-10">
-		    			<input type="text" name="rfc_1" class="form-control" id="rfc_1" value="{{old('rfc_1')}}" required="">
+		    			<input type="text" name="rfc_1" minlength="13" maxlength="13" class="form-control" id="rfc_1" value="{{old('rfc_1')}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">

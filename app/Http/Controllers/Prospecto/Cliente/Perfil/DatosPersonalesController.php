@@ -30,7 +30,6 @@ class DatosPersonalesController extends Controller
      */
     public function pdf(Prospecto $prospecto)
     {
-        //
         $perfil = $prospecto->perfil;
         // return view('prospectos.perfil.pdf',['perfil'=>$perfil]);
         $pdf = PDF::loadView('prospectos.perfil.pdf',['perfil'=>$perfil]);
