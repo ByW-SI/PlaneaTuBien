@@ -7,6 +7,7 @@ use App\Empleado;
 use App\Http\Controllers\Controller;
 use App\Prospecto;
 use App\Plan;
+use App\Services\Cotizacion\CotizarPlanLibreService;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
@@ -70,24 +71,32 @@ class CotizacionController extends Controller
         //
     }
 
-    public function pdf(Prospecto $prospecto, Cotizacion $cotizacion) {
+    public function pdf(Prospecto $prospecto, Cotizacion $cotizacion)
+    {
         $date = date('d-m-Y');
-        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion])->setPaper('a4', 'landscape');
+
+        $posiblesCotizacionesPlanLibre = [];
+        if ($cotizacion->plan->abreviatura == "PL") {
+            $cotizarPlanLibreService = new CotizarPlanLibreService($cotizacion->monto, $cotizacion->plan);
+            $posiblesCotizacionesPlanLibre = $cotizarPlanLibreService->get();
+            // return $posiblesCotizacionesPlanLibre;
+        }
+
+        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion, 'posiblesCotizacionesPlanLibre' => $posiblesCotizacionesPlanLibre])->setPaper('a4', 'landscape');
         // return $pdf->stream();
         return $pdf->download('cotizacion' . $date . '.pdf');
     }
 
-    public function sendMail(Prospecto $prospecto,Cotizacion $cotizacion){
+    public function sendMail(Prospecto $prospecto, Cotizacion $cotizacion)
+    {
         $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
-        $enviar = $cotizacion->enviarCotizacion($prospecto->email,$pdf);
+        $enviar = $cotizacion->enviarCotizacion($prospecto->email, $pdf);
         // dd($enviar);
         // return(new \App\Mail\CotizacionEnviada($cotizacion))->render();
-        if($enviar){
+        if ($enviar) {
             return redirect()->route('prospectos.cotizacions.index', ['prospecto' => $prospecto]);
-        }
-        else{
+        } else {
             return redirect()->route('prospectos.cotizacions.index', ['prospecto' => $prospecto]);
         }
     }
-
 }

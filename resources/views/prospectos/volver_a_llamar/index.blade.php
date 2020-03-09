@@ -140,6 +140,8 @@
                                                                 <option value="">Seleccionar</option>
                                                                 <option value="VOLVER A LLAMAR">VOLVER A LLAMAR</option>
                                                                 <option value="CANCELAR CITA">LISTA NEGRA</option>
+                                                                <option value="SEGUIMIENTO LLAMADA">SEGUIMIENTO LLAMADA
+                                                                </option>
                                                             </select>
                                                             {{-- <input type="text" name="resultado_llamada_id"
                                                                 class="form-control"> --}}
@@ -208,7 +210,7 @@
         $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).hide('slow');
         $(`.contenedorInputComentario[prospectoId=${prospectoId}]`).hide('slow');
 
-        if(accion == 'VOLVER A LLAMAR'){
+        if(accion == 'VOLVER A LLAMAR' || accion == 'SEGUIMIENTO LLAMADA'){
             $(`.contenedorInputFechaSiguienteContacto[prospectoId=${prospectoId}]`).show('slow');
             $(`.contenedorInputComentario[prospectoId=${prospectoId}]`).show('slow');
         }

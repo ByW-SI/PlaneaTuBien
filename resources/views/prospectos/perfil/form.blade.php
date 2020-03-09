@@ -253,17 +253,17 @@
 		    	<div class="form-group row">
 		    		<label for="telefono_casa" class="col-form-label col-sm-2">✱ Teléfono de casa:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="telefono_casa" class="form-control" id="telefono_casa" value="{{old('telefono_casa') ? old('telefono_casa') : $prospecto->tel}}" required="">
+		    			<input type="text" name="telefono_casa" minlength="10" maxlength="10" class="form-control" id="telefono_casa" value="{{old('telefono_casa') ? old('telefono_casa') : $prospecto->tel}}" required="">
 		    		</div>
 		    		<label for="telefono_celular" class="col-form-label col-sm-2">✱ Teléfono celular:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="telefono_celular" class="form-control" id="telefono_celular" value="{{old('telefono_celular') ? old('telefono_celular') : $prospecto->movil}}" required="">
+		    			<input type="text" name="telefono_celular" minlength="10" maxlength="10" class="form-control" id="telefono_celular" value="{{old('telefono_celular') ? old('telefono_celular') : $prospecto->movil}}" required="">
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
 		    		<label for="telefono_oficina" class="col-form-label col-sm-2">Teléfono de oficina:</label>
 		    		<div class="col-sm-4">
-		    			<input type="text" name="telefono_oficina" class="form-control" id="telefono_oficina" value="{{old('telefono_oficina')}}">
+		    			<input type="text" name="telefono_oficina" minlength="10" maxlength="10" class="form-control" id="telefono_oficina" value="{{old('telefono_oficina')}}">
 		    		</div>
 		    		<label for="email" class="col-form-label col-sm-2">✱ Email:</label>
 		    		<div class="col-sm-4">
@@ -804,11 +804,14 @@
 		    		<label for="medio_entero" class="col-form-label col-sm-6">✱ Medio por el cuál se enteró de nosotros:</label>
 		    		<div class="col-sm-6">
 		    			<select name="medio_entero" id="medio_entero" required="" class="form-control">
-							<option value="">Medío por el que se entero de nosotros</option>
+							@foreach ($mediosDeContacto as $medioDeContacto)
+								<option value="{{$medioDeContacto->id}}">{{$medioDeContacto->nombre}}</option>
+							@endforeach
+							{{-- <option value="">Medío por el que se entero de nosotros</option>
 							<option value="Internet" {{old('medio_entero') == "Internet" ? 'checked=""' : '' }}>Internet</option>
 							<option value="T.V." {{old('medio_entero') == "T.V." ? 'checked=""' : '' }}>T.V.</option>
 							<option value="Periodico" {{old('medio_entero') == "Periodico" ? 'checked=""' : '' }}>Periodico</option>
-							<option value="Otro" {{old('medio_entero') == "Otro" ? 'checked=""' : '' }}>Otro</option>
+							<option value="Otro" {{old('medio_entero') == "Otro" ? 'checked=""' : '' }}>Otro</option> --}}
 						</select>
 		    		</div>
 		    	</div>
@@ -836,8 +839,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[1]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input numeroReferencia="1" type="text" name="telefono[1]" value="{{old('telefono[1]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
-							<input numeroReferencia="1" type="text" name="celular[1]" value="{{old('celular[1]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
+							<input numeroReferencia="1" type="text" name="telefono[1]" minlength="10" maxlength="10" value="{{old('telefono[1]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="1" type="text" name="celular[1]" minlength="10" maxlength="10" value="{{old('celular[1]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>
@@ -860,8 +863,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[2]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input numeroReferencia="2" type="text" name="telefono[2]" value="{{old('telefono[2]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
-							<input numeroReferencia="2" type="text" name="celular[2]" value="{{old('celular[2]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
+							<input numeroReferencia="2" type="text" name="telefono[2]" minlength="10" maxlength="10" value="{{old('telefono[2]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="2" type="text" name="celular[2]" minlength="10" maxlength="10" value="{{old('celular[2]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>
@@ -884,8 +887,8 @@
 					<label class="col-form-label col-sm-2" for="telefono[3]">✱ Telefonos:</label>
 					<div class="form-group col-sm-6 pr-0 pl-0">
 						<div class="input-group">
-							<input numeroReferencia="3" type="text" name="telefono[3]" value="{{old('telefono[3]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
-							<input numeroReferencia="3" type="text" name="celular[3]" value="{{old('celular[3]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
+							<input numeroReferencia="3" type="text" name="telefono[3]" minlength="10" maxlength="10" value="{{old('telefono[3]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+							<input numeroReferencia="3" type="text" name="celular[3]" minlength="10" maxlength="10" value="{{old('celular[3]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 						</div>
 					</div>
 				</div>

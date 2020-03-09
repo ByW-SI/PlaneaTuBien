@@ -36,6 +36,12 @@ class StoreVolverALlamarService
             $this->crearCitaCancelada();
             $this->actualizarStatusProspecto('Cita Cancelada');
         }
+
+        if($this->dioSeguimientoALlamada()){
+
+            $this->actualizarStatusProspecto('Seguimiento Llamada');
+            $this->crearNuevoSeguimientoDeLlamada();
+        }
     }
 
     /**
@@ -43,6 +49,17 @@ class StoreVolverALlamarService
      * METHODS
      * =======
      */
+
+    public function crearNuevoSeguimientoDeLlamada(){
+        $this->seguimientoLlamada = SeguimientoLlamadas::create([
+            'asesor_id' => $this->prospecto->asesor->id,
+            'prospecto_id' => $this->prospecto->id,
+            'resultado_llamada_id' => 4,
+            'fecha_siguiente_contacto' => $this->request->fecha_siguiente_contacto,
+            'fecha_contacto' => date('Y-m-d'),
+            'comentario' => $this->request->comentario
+        ]);
+    }
 
     public function actualizarStatusProspecto($nombreStatus)
     {
@@ -98,6 +115,10 @@ class StoreVolverALlamarService
     public function canceloCita()
     {
         return $this->request->accion == 'CANCELAR CITA';
+    }
+
+    public function dioSeguimientoALlamada(){
+        return $this->request->accion == 'SEGUIMIENTO LLAMADA';
     }
 
     /**

@@ -132,25 +132,25 @@
                     @endif
                     <div class="row my-3">
                         <div class="col-sm-3">
-                            <input type="radio" name="plan-radio" id="plan-libre" value="libre">
+                            <input type="radio" class="inputTipoPlan" name="plan-radio" id="plan-libre" value="libre">
                             <label class="form-check-label" for="plan-libre">
                                 Plan libre
                             </label>
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="plan-radio" id="plan-clasica" value="clasica">
+                            <input type="radio" class="inputTipoPlan" name="plan-radio" id="plan-clasica" value="clasica">
                             <label class="form-check-label" for="plan-clasica">
                                 Tanda Clasica
                             </label>
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="plan-radio" id="plan-tradicional" value="tradicional">
+                            <input type="radio" class="inputTipoPlan" name="plan-radio" id="plan-tradicional" value="tradicional">
                             <label class="form-check-label" for="plan-tradicional">
                                 Tanda Tradicional
                             </label>
                         </div>
                         <div class="col-sm-3">
-                            <input type="radio" name="plan-radio" id="plan-normal" value="normal">
+                            <input type="radio" class="inputTipoPlan" name="plan-radio" id="plan-normal" value="normal">
                             <label class="form-check-label" for="plan-normal">
                                 Plan normal
                             </label>
@@ -186,7 +186,7 @@
                                 <option value="40">40%</option>
                             </select>
                         </div>
-                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group">
+                        <div class="col-12 col-xs-12 col-md-4 col-lg-4 col-xl-3 form-group" id="contenedorInputPlanCliente" style="display:none;">
                             <label for="plan">✱Plan</label>
                             <select name="plan" id="plan_cliente" class="form-control input-escondible" required="">
                                 <option value="">Seleccionar</option>
@@ -296,6 +296,10 @@
         $('#monto').on('change', function() {
             getCotizacionLibre();
         });
+    });
+
+    $(document).on('change', '.inputTipoPlan', function(){
+        $('#contenedorInputPlanCliente').show('slow');
     });
 
     function getPlanes(abreviaturaPlan) {

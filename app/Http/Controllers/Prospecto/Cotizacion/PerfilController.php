@@ -7,6 +7,7 @@ use App\Cotizacion;
 use App\Datos_de_Cotizacion;
 use App\Corrida;
 use App\Http\Controllers\Controller;
+use App\MedioContacto;
 use App\PerfilDatosPersonalCliente;
 use App\PerfilHistorialCrediticioCliente;
 use App\PerfilInmueblePretendidoCliente;
@@ -36,7 +37,10 @@ class PerfilController extends Controller
             $folio=$perfil->id+1;
         }
         $bancos = Banco::orderBy('nombre','asc')->get();
-        return view('prospectos.perfil.form',['prospecto'=>$prospecto, 'folio'=>$folio,'bancos'=>$bancos]);
+
+        $mediosDeContacto = MedioContacto::get();
+
+        return view('prospectos.perfil.form',['prospecto'=>$prospecto, 'folio'=>$folio,'bancos'=>$bancos, 'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**

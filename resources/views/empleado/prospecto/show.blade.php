@@ -47,6 +47,12 @@
 				<a href="{{ route('empleados.prospectos.index',['empleado'=>$empleado]) }}" class="btn btn-primary">
 					<i class="fa fa-bars"></i><strong> Lista de Prospectos</strong>
 				</a>
+				{{-- CRM --}}
+				<a href="{{ route('empleados.prospectos.crms.index',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"
+					class="btn btn-primary" id="basic-addon1">
+					<i class="fas fa-user-edit"></i>
+					<strong> CRM</strong>
+				</a>
 				<a href="{{ route('empleados.prospectos.edit',['empleado'=>$empleado,'prospecto'=>$prospecto]) }}"
 					class="btn btn-warning" id="basic-addon1">
 					<i class="fas fa-user-edit"></i>

@@ -177,6 +177,8 @@ Route::put('citas/{citas}/update', 'Cita\CitaController@update')->name('citas.up
 // SUCURSALES
 Route::resource('sucursals', 'Sucursal\SucursalController')->middleware('auth');
 
+// MEDIOS CONTACTO
+Route::resource('medios_contacto', 'MedioContactoController')->middleware('auth');
 
 // CREAR PERFIL CON PROSPECTO Y COTIZACION
 
