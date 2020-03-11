@@ -82,7 +82,14 @@ class CotizacionController extends Controller
             // return $posiblesCotizacionesPlanLibre;
         }
 
-        $pdf = PDF::loadView('prospectos.cotizacions.pdf', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion, 'posiblesCotizacionesPlanLibre' => $posiblesCotizacionesPlanLibre])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView(
+            'prospectos.cotizacions.pdf', 
+            [
+                'prospecto' => $prospecto,
+                'cotizacion' => $cotizacion,
+                'posiblesCotizacionesPlanLibre' => $posiblesCotizacionesPlanLibre
+            ]
+            )->setPaper('a4', 'landscape');
         // return $pdf->stream();
         return $pdf->download('cotizacion' . $date . '.pdf');
     }

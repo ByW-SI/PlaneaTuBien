@@ -57,7 +57,7 @@
 		</div>
 		<div class="row">
 			<div class="twelve columns">
-				<label class="center"><strong>PLAN: {{$prospecto->perfil->plan}}</strong></label>
+				<label class="center"><strong>PLAN: {{$prospecto->perfil->cotizacion->plan->nombre}}</strong></label>
 			</div>
 		</div>
 		<div class="row">
@@ -179,7 +179,7 @@
 			<div class="twelve columns">
 				<p class="center">
 					<strong>
-						Ciudad de México a la fecha de celebración
+						Ciudad de México a {{date('d-m-Y')}}
 					</strong>
 				</p>
 			</div>
