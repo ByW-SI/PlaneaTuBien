@@ -210,6 +210,8 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController')->middleware('auth');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController')->middleware('auth');
 		Route::resource('presolicitud.referencias','PresolicitudReferenciaController')->middleware('auth');
+		// Premio de mensualidades
+		Route::get('/presolicitud/{presolicitud}/contratos/{contrato}/premio_mensualidades_adelantadas','Documentos\DocumentosController@premioMensualidadesAdelantadas')->name('contratos.premios_mensualidades_adelantadas');
 		// aviso de privacidad
 		Route::get('/presolicitud/{presolicitud}/aviso_privacidad','Documentos\DocumentosController@avisoPrivacidad')->name('presolicitud.aviso_privacidad');
 		// carta de bienvenida

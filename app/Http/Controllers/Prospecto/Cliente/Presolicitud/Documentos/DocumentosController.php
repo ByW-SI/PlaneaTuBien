@@ -222,6 +222,46 @@ class DocumentosController extends Controller
         return $pdf->download('anexo_plan_libre' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . 'contrato_' . $contrato->numero_contrato . 'contrato_' . $contrato->numero_contrato . ".pdf");
     }
 
+    public function premioMensualidadesAdelantadas(Prospecto $prospecto, Presolicitud $presolicitud, Contrato $contrato){
+        $cotizacion = $presolicitud->perfil->cotizacion;
+        $plan = $cotizacion->plan;
+        switch ($cotizacion->plan->nombre) {
+            case "Tanda 1":
+                $puntos = 720;
+                break;
+            case "Tanda 2":
+                $puntos = 720;
+                break;
+            case "Tanda 3":
+                $puntos = 720;
+                break;
+            case "Tanda 6":
+                $puntos = 720;
+                break;
+            case "Tanda 12":
+                $puntos = 630;
+                break;
+            case "Tanda 12":
+                $puntos = 630;
+                break;
+            case "Tanda 18":
+                $puntos = 540;
+                break;
+            case "Tanda 24":
+                $puntos = 630;
+                break;
+            case "Tanda 36":
+                $puntos = 630;
+                break;
+            default:
+                $puntos = 0;
+        }
+
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.premio_mensualidades_adelantadas', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'plan' => $plan, 'contrato' => $contrato, 'cotizacion' => $cotizacion, "puntos" => $puntos]);
+        // return $pdf->stream();
+        return $pdf->download('premio_mensualidades_adelantadas' . $plan->nombre . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . 'contrato_' . $contrato->numero_contrato . ".pdf");
+    }
+
     public function anexoInscripcionDiferida(Prospecto $prospecto, Presolicitud $presolicitud, Contrato $contrato)
     {
         $cotizacion = $presolicitud->perfil->cotizacion;
