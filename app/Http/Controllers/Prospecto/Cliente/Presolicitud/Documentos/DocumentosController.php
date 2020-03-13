@@ -99,6 +99,17 @@ class DocumentosController extends Controller
         // return $pdf->stream();
         return $pdf->download('ficha_deposito' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . "contrato" . $contrato->numero_contrato . ".pdf");
     }
+
+    public function fichaDepositoPlanLibre(Prospecto $prospecto, Presolicitud $presolicitud, Contrato $contrato)
+    {
+        $plan = $presolicitud->cotizacion()->plan;
+        $corrida_integrante = $plan->corrida_meses_fijos($contrato->monto, $presolicitud->cotizacion()->factor_actualizacion)['integrante'];
+        // dd($corrida_integrante);
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.ficha_deposito_plan_libre_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'contrato' => $contrato, 'plan' => $plan, 'corrida_integrante' => $corrida_integrante]);
+        // return $pdf->stream();
+        return $pdf->download('ficha_deposito' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . "contrato" . $contrato->numero_contrato . ".pdf");
+    }
+
     public function formatoDomicilio(Prospecto $prospecto, Presolicitud $presolicitud, Contrato $contrato)
     {
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.domiciliacion_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud])->setPaper('a4', 'landscape');

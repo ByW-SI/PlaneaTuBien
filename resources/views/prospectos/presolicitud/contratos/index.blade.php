@@ -100,11 +100,17 @@
 									<a href="{{ route('prospectos.presolicitud.contratos.anexo_tanda_clasica',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}"
 										class="btn btn-info btn-sm mr-3">Anexo Tanda Clasica</a>
 									@else
-									<a href="{{ route('prospectos.presolicitud.contratos.anexo_inscripcion_diferida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}"
-										class="btn btn-info btn-sm mr-3">Anexo Inscripcion Diferida</a>
+									<a href="{{ route('prospectos.presolicitud.contratos.anexo_inscripcion_diferida',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}" class="btn btn-info btn-sm mr-3">
+										Anexo Inscripcion Diferida
+									</a>
 
 									@endif
 									@endif
+
+									<a class="btn btn-info btn-sm mr-3" href="{{ route('prospectos.presolicitud.contratos.anexo_plan_libre',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato'=>$contrato]) }}">
+										Anexo Plan libre
+									</a>
+
 
 								</div>
 							</td>

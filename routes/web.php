@@ -204,6 +204,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 	->prefix('prospectos/{prospecto}')
 	->name('prospectos.')
 	->group(function(){
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_plan_libre','Documentos\DocumentosController@anexoPlanLibre')->name('presolicitud.contratos.anexo_plan_libre');
 		Route::resource('presolicitud','PresolicitudController',['except'=>['show']])->middleware('auth');
 		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']])->middleware('auth');
@@ -229,9 +230,9 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::get('/presolicitud/{presolicitud}/declaracion_salud','Documentos\DocumentosController@declaracionSalud')->name('presolicitud.declaracion_salud');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/domiciliacion','Documentos\DocumentosController@formatoDomicilio')->name('presolicitud.contratos.domiciliacion');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/ficha_deposito','Documentos\DocumentosController@fichaDeposito')->name('presolicitud.contratos.ficha_deposito');
+		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/ficha_deposito_plan_libre','Documentos\DocumentosController@fichaDepositoPlanLibre')->name('presolicitud.contratos.ficha_deposito_plan_libre');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.contratos.anexo_tanda');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda_clasica','Documentos\DocumentosController@anexoTandaClasica')->name('presolicitud.contratos.anexo_tanda_clasica');
-		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_plan_libre','Documentos\DocumentosController@anexoPlanLibre')->name('presolicitud.contratos.anexo_plan_libre');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.contratos.anexo_inscripcion_diferida');
 
 	});
