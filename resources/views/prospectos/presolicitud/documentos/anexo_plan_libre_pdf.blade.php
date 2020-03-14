@@ -124,8 +124,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>1</td>
-							<td>2</td>
+							<td>${{$opcionesCotizacion['minimo']}}</td>
+							<td>${{$opcionesCotizacion['maximo']}}</td>
 						</tr>
 					</tbody>
 				</table>

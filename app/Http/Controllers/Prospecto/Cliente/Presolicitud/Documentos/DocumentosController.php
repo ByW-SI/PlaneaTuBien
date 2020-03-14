@@ -9,6 +9,7 @@ use App\Poliza;
 use App\Presolicitud;
 use App\Prospecto;
 use App\Recibo;
+use App\Services\Cotizacion\CotizarPlanLibreService;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
@@ -229,7 +230,13 @@ class DocumentosController extends Controller
                 $puntos = 630;
                 break;
         }
-        $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_plan_libre_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'plan' => $plan, 'contrato' => $contrato, 'cotizacion' => $cotizacion, "puntos" => $puntos]);
+
+        $cotizadorPlanLibre = new CotizarPlanLibreService( $presolicitud->perfil->cotizacion->monto , $plan);
+        $opcionesCotizacion = $cotizadorPlanLibre->get();
+
+        // dd($opcionesCotizacion);
+
+        $pdf = PDF::loadView('prospectos.presolicitud.documentos.anexo_plan_libre_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'plan' => $plan, 'contrato' => $contrato, 'cotizacion' => $cotizacion, "puntos" => $puntos, 'opcionesCotizacion' => $opcionesCotizacion]);
         return $pdf->download('anexo_plan_libre' . $prospecto->nombre . $prospecto->appaterno . $prospecto->apmaterno . 'contrato_' . $contrato->numero_contrato . 'contrato_' . $contrato->numero_contrato . ".pdf");
     }
 
