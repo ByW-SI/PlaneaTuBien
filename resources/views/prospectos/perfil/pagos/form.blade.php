@@ -5,31 +5,35 @@
 		<h4>
 			{{$edit ? "Actualizar Pago" : "Nuevo Pago"}}
 		</h4>
-		<span>Tipo de inscripción: {{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
+		<span>Tipo de inscripción:
+			{{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
 	</div>
-	<form method="POST" action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
+	<form method="POST"
+		action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
 		@csrf
 		@if ($edit)
-			@method('PUT')
+		@method('PUT')
 		@endif
 		<div class="card-body">
 			@if ($errors->any())
-			    <div class="alert alert-danger">
-			        <ul>
-			            @foreach ($errors->all() as $error)
-			                <li>{{ $error }}</li>
-			            @endforeach
-			        </ul>
-			    </div>
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
 			@endif
 			<div class="row">
 				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
 					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}" name="referencia" id="referencia">
+					<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}"
+						name="referencia" id="referencia">
 				</div>
 				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
 					<label for="folio">Folio</label>
-					<input type="text" class="form-control" step="any" min="0" value="{{$folio}}" name="folio" id="folio" readonly="">
+					<input type="text" class="form-control" step="any" min="0" value="{{$folio}}" name="folio"
+						id="folio" readonly="">
 				</div>
 				<div class="col-12 col-xs-12 col-md-6 col-lg-4 form-group">
 					<label for="identificacion">Tipo de Identificación</label>
@@ -72,8 +76,11 @@
 						<div class="input group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" name="monto" id="monto" required="">
-						{{-- <input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required=""> --}}
+						<input type="number" class="form-control" step="any"
+							min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
+							name="monto" id="monto" required="">
+						{{-- <input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
+						max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required=""> --}}
 					</div>
 				</div>
 			</div>
@@ -85,10 +92,39 @@
 		</div>
 	</form>
 </div>
+<hr>
+<div class="card">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-12 col-md-4">
+				<label for="email" class="text-uppercase text-muted">Email</label>
+				<input type="email" id="email" name="email" value="test_user_19653727@testuser.com"
+					placeholder="Tu correo" class="form-control" />
+			</div>
+			<div class="col-12 col-md-4">
+				<label for="cardNumber">Número de tarjeta de credito:</label>
+				<input type="text" id="cardNumber" data-checkout="cardNumber" placeholder="4509 9535 6623 3704"
+					onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+					onDrag="return false" onDrop="return false" autocomplete=off class="form-control"/>
+			</div>
+		</div>
+	</div>
+</div>
+
 @endsection
 @push('scripts')
-	<script type="text/javascript">
-		$("#forma").change(function(){
+
+<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+
+<script type="text/javascript">
+	// ==========================
+	// OBTENCION DE CLAVE PUBLICA
+	// ==========================
+
+	window.Mercadopago.setPublishableKey("TEST-2f5c1496-fc3c-4492-a3fc-795f46dc0a82");
+
+
+	$("#forma").change(function(){
 			var forma_pago = $("#forma").val();
 			$("#div_banco").removeClass("col-12 col-xs-12 col-md-6 col-lg-3 form-group");
 			$("#div_banco").empty();
@@ -115,5 +151,6 @@
 			total = monto;
 			$("#total").val(total);
 		}
-	</script>
+</script>
+
 @endpush

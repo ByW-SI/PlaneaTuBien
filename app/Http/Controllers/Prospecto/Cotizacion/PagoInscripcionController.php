@@ -32,7 +32,6 @@ class PagoInscripcionController extends Controller
      */
     public function create(Prospecto $prospecto, Cotizacion $cotizacion)
     {
-        //
         $bancos = Banco::orderBy('nombre','asc')->get();
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
         $folio = $prospecto->id.$cotizacion->plan->abreviatura.$cotizacion->id.sizeof($cotizacion->pago_inscripcions);
