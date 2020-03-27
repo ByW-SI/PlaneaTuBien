@@ -1,6 +1,14 @@
 @extends('principal')
 @section('content')
 
+@if( $errors->any() )
+
+<div class="alert alert-danger">
+	{{$errors->first()}}
+</div>
+
+@endif
+
 <div class="card">
 	<div class="card-header">
 		<div class="d-flex justify-content-between">

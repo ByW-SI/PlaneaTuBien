@@ -1,112 +1,184 @@
 @extends('principal')
 @section('content')
-<div class="card">
+{{-- <div class="card">
 	<div class="card-header">
 		<h4>
 			{{$edit ? "Actualizar Pago" : "Nuevo Pago"}}
-		</h4>
-		<span>Tipo de inscripción:
-			{{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
-	</div>
-	<form method="POST"
-		action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
-		@csrf
-		@if ($edit)
-		@method('PUT')
-		@endif
-		<div class="card-body">
-			@if ($errors->any())
-			<div class="alert alert-danger">
-				<ul>
-					@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-			</div>
-			@endif
-			<div class="row">
-				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
-					<label for="referencia">Referencia</label>
-					<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}"
-						name="referencia" id="referencia">
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-6 form-group">
-					<label for="folio">Folio</label>
-					<input type="text" class="form-control" step="any" min="0" value="{{$folio}}" name="folio"
-						id="folio" readonly="">
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-4 form-group">
-					<label for="identificacion">Tipo de Identificación</label>
-					<select name="identificacion" id="identificacion" class="form-control" required="">
-						<option value="">Seleccionar una opción</option>
-						<option value="INE">INE/IFE</option>
-						<option value="Pasaporte">Pasaporte</option>
-						<option value="Cédula Profesional">Cédula Profesional</option>
-						<option value="Cartilla">Cartilla</option>
-						<option value="Otro">Otro</option>
-					</select>
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-4 form-group">
-					<label for="comprobante">Comprobante de Domicilio</label>
-					<select name="comprobante" id="comprobante" class="form-control" required="">
-						<option value="">Seleccionar una opción</option>
-						<option value="Luz">Luz</option>
-						<option value="Agua">Agua</option>
-						<option value="Teléfono">Teléfono</option>
-						<option value="Predial">Predial</option>
-						<option value="Otro">Otro</option>
-					</select>
-				</div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-4 form-group">
-					<label for="forma">Forma de Pago</label>
-					<select name="forma" id="forma" class="form-control" required="">
-						<option value="">Seleccionar una opción</option>
-						<option value="Efectivo">Efectivo</option>
-						<option value="Depósito">Depósito</option>
-						<option value="Cheque">Cheque</option>
-						<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-						<option value="Tarjeta de Débito">Tarjeta de Débito</option>
-						<option value="Transferencia">Transferencia</option>
-					</select>
-				</div>
-				<div class="" id="div_banco"></div>
-				<div class="col-12 col-xs-12 col-md-6 col-lg-3 form-group" id="div_monto">
-					<label for="monto">Monto</label>
-					<div class="input-group mb-3">
-						<div class="input group-prepend">
-							<span class="input-group-text">$</span>
-						</div>
-						<input type="number" class="form-control" step="any"
-							min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
-							name="monto" id="monto" required="">
-						{{-- <input type="number" class="form-control" step="any" min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
-						max="{{round($cotizacion->inscripcionFaltante(),2)}}" name="monto" id="monto" required=""> --}}
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card-header">
-			<div class="d-flex justify-content-center">
-				<button type="submit" class="btn btn-success">Guardar</button>
-			</div>
-		</div>
-	</form>
+</h4>
+<span>Tipo de inscripción:
+	{{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
 </div>
-<hr>
-<div class="card">
+<form method="POST"
+	action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
+	@csrf
+	@if ($edit)
+	@method('PUT')
+	@endif
 	<div class="card-body">
-		<div class="row">
-			<div class="col-12 col-md-4">
-				<label for="email" class="text-uppercase text-muted">Email</label>
-				<input type="email" id="email" name="email" value="test_user_19653727@testuser.com"
-					placeholder="Tu correo" class="form-control" />
-			</div>
-			<div class="col-12 col-md-4">
-				<label for="cardNumber">Número de tarjeta de credito:</label>
-				<input type="text" id="cardNumber" data-checkout="cardNumber" placeholder="4509 9535 6623 3704"
-					onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
-					onDrag="return false" onDrop="return false" autocomplete=off class="form-control"/>
-			</div>
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
+
+	</div>
+	<div class="card-header">
+		<div class="d-flex justify-content-center">
+			<button type="submit" class="btn btn-success">Guardar</button>
+		</div>
+	</div>
+</form>
+</div> --}}
+{{-- <hr> --}}
+
+<div class="container">
+	<h3 class="text-center text-uppercase text-muted">💵 NUEVO PAGO</h3>
+	<div class="card">
+		<div class="card-body">
+			<form
+				action="{{route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion])}}"
+				method="post" id="pay" name="pay">
+				@csrf
+				<fieldset>
+					<div class="row">
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="referencia">Prospecto</label>
+							<input type="text" class="form-control" value="{{$prospecto->full_name}}" readonly>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="referencia">Email</label>
+							<input type="text" class="form-control" value="{{$prospecto->email}}" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="referencia">Referencia</label>
+							<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}"
+								name="referencia" id="referencia">
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="folio">Folio</label>
+							<input type="text" class="form-control" step="any" min="0" value="{{$folio}}" name="folio"
+								id="folio" readonly="">
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="identificacion">Tipo de Identificación</label>
+							<select name="identificacion" id="identificacion" class="form-control" required="">
+								<option value="">Seleccionar una opción</option>
+								<option value="INE">INE/IFE</option>
+								<option value="Pasaporte">Pasaporte</option>
+								<option value="Cédula Profesional">Cédula Profesional</option>
+								<option value="Cartilla">Cartilla</option>
+								<option value="Otro">Otro</option>
+							</select>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="comprobante">Comprobante de Domicilio</label>
+							<select name="comprobante" id="comprobante" class="form-control" required="">
+								<option value="">Seleccionar una opción</option>
+								<option value="Luz">Luz</option>
+								<option value="Agua">Agua</option>
+								<option value="Teléfono">Teléfono</option>
+								<option value="Predial">Predial</option>
+								<option value="Otro">Otro</option>
+							</select>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="forma">Forma de Pago</label>
+							<select name="forma" id="forma" class="form-control" required="">
+								<option value="">Seleccionar una opción</option>
+								<option value="Efectivo">Efectivo</option>
+								<option value="Depósito">Depósito</option>
+								<option value="Cheque">Cheque</option>
+								<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+								<option value="Tarjeta de Débito">Tarjeta de Débito</option>
+								<option value="Transferencia">Transferencia</option>
+								<option value="Mercado Pago">Mercado Pago</option>
+							</select>
+						</div>
+						<div class="" id="div_banco" class="col-12 col-md-4 mt-2">
+
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label class="text-muted text-uppercase" for="monto">Monto</label>
+							<div class="input-group mb-3">
+								<div class="input group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<input type="number" class="form-control" step="any"
+									min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
+									name="monto" id="monto" required="">
+							</div>
+						</div>
+					</div>
+					<div class="row" id="grupoInputsMercadoPago" style="display:none">
+						<div class="col-12">
+							<hr>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="email" class="text-uppercase text-muted">Correo</label>
+							<input type="email" id="email" name="email" value="{{$prospecto->email}}"
+								placeholder="your email" class="form-control" required/>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="cardNumber" class="text-uppercase text-muted">Número de tarjeta de crédito:</label>
+							<input type="text" id="cardNumber" data-checkout="cardNumber"
+								placeholder="4509 9535 6623 3704" value="4509 9535 6623 3704"
+								onselectstart="return false" onpaste="return false" onCopy="return false"
+								onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off
+								class="form-control" required minlength="6"/>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="securityCode" class="text-uppercase text-muted">Código de seguridad:</label>
+							<input type="text" id="securityCode" data-checkout="securityCode" placeholder="123"
+								value="123" onselectstart="return false" onpaste="return false" onCopy="return false"
+								onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off
+								class="form-control" required minlength="3"/>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="cardExpirationMonth" class="text-uppercase text-muted">Mes de expiración:</label>
+							<input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+								placeholder="11" value="11" onselectstart="return false" onpaste="return false"
+								onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+								autocomplete=off class="form-control" minlength="2" required/>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="cardExpirationYear" class="text-uppercase text-muted">Año de expiración:</label>
+							<input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear"
+								placeholder="2025" value="2025" onselectstart="return false" onpaste="return false"
+								onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+								autocomplete=off class="form-control" minlength="4" maxlength="4" required/>
+						</div>
+						<div class="col-12 col-md-4 mt-2">
+							<label for="cardholderName" class="text-uppercase text-muted">Nombre del titular:</label>
+							<input type="text" id="cardholderName" data-checkout="cardholderName" placeholder="APRO"
+								value="APRO" class="form-control" required/>
+						</div>
+						{{-- <div class="col-12 col-md-4 mt-2">
+							<label for="docType" class="text-uppercase text-muted">Document type:</label>
+							<select id="docType" data-checkout="docType" class="form-control"></select>
+						</div> --}}
+						{{-- <div class="col-12 col-md-4 mt-2">
+							<label for="docNumber" class="text-uppercase text-muted">Document number:</label>
+							<input type="text" id="docNumber" data-checkout="docNumber" placeholder="12345678"
+								value="12345678" class="form-control" />
+						</div> --}}
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-12">
+							<input type="hidden" name="amount" id="amount" />
+							<input type="hidden" name="description" />
+							<input type="hidden" name="paymentMethodId" />
+							<input type="submit" value="Pagar" class="btn btn-success" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
 		</div>
 	</div>
 </div>
@@ -121,12 +193,166 @@
 	// OBTENCION DE CLAVE PUBLICA
 	// ==========================
 
-	window.Mercadopago.setPublishableKey("TEST-2f5c1496-fc3c-4492-a3fc-795f46dc0a82");
+	window.Mercadopago.setPublishableKey("{{getenv('MERCADO_PAGO_PUBLIC_KEY')}}");
 
+
+	// ============================
+	// OBTENCIÓN DEL METODO DE PAGO
+	// ============================
+
+	function addEvent(to, type, fn){ 
+			if(document.addEventListener){
+				to.addEventListener(type, fn, false);
+			} else if(document.attachEvent){
+				to.attachEvent('on'+type, fn);
+			} else {
+				to['on'+type] = fn;
+			}  
+		}; 
+
+	addEvent(document.querySelector('#cardNumber'), 'keyup', guessingPaymentMethod);
+	addEvent(document.querySelector('#cardNumber'), 'change', guessingPaymentMethod);
+
+	function getBin() {
+	const cardnumber = document.getElementById("cardNumber");
+	return cardnumber.value.substring(0,6);
+	};
+
+	function guessingPaymentMethod(event) {
+		var bin = getBin();
+
+		if (event.type == "keyup") {
+			if (bin.length >= 6) {
+				window.Mercadopago.getPaymentMethod({
+					"bin": bin
+				}, setPaymentMethodInfo);
+			}
+		} else {
+			setTimeout(function() {
+				if (bin.length >= 6) {
+					window.Mercadopago.getPaymentMethod({
+						"bin": bin
+					}, setPaymentMethodInfo);
+				}
+			}, 100);
+		}
+	};
+
+	function setPaymentMethodInfo(status, response) {
+		if (status == 200) {
+			const paymentMethodElement = document.querySelector('input[name=paymentMethodId]');
+
+			if (paymentMethodElement) {
+				paymentMethodElement.value = response[0].id;
+			} else {
+				const input = document.createElement('input');
+				input.setAttribute('name', 'paymentMethodId');
+				input.setAttribute('type', 'hidden');
+				input.setAttribute('value', response[0].id);     
+
+				form.appendChild(input);
+			}
+
+			// Mercadopago.getInstallments({
+			// 	"bin": getBin(),
+			// 	"amount": parseFloat(document.querySelector('#amount').value),
+			// }, setInstallmentInfo);
+
+		} else {
+			alert(`payment method info error: ${response}`);  
+		}
+	};
+
+
+	// =========================
+	// CAPTURAR DATOS DE TARJETA
+	// =========================
+
+	doSubmit = false;
+addEvent(document.querySelector('#pay'), 'submit', doPay);
+function doPay(event){
+    event.preventDefault();
+    if(!doSubmit){
+        var $form = document.querySelector('#pay');
+
+        window.Mercadopago.createToken($form, sdkResponseHandler); // The function "sdkResponseHandler" is defined below
+
+        return false;
+    }
+};
+
+function sdkResponseHandler(status, response) {
+
+	console.log(
+		JSON.stringify(response)
+	);
+
+    if (status != 200 && status != 201) {
+        alert("verify filled data");
+    }else{
+        var form = document.querySelector('#pay');
+        var card = document.createElement('input');
+        card.setAttribute('name', 'token');
+        card.setAttribute('type', 'hidden');
+        card.setAttribute('value', response.id);
+        form.appendChild(card);
+        doSubmit=true;
+        form.submit();
+    }
+};
+
+
+	// ======================
+	// RECIBIR PAGO EN CUOTAS
+	// ======================
+
+	// function setInstallmentInfo(status, response) {
+    //     var selectorInstallments = document.querySelector("#installments"),
+    //     fragment = document.createDocumentFragment();
+    //     selectorInstallments.options.length = 0;
+
+    //     if (response.length > 0) {
+    //         var option = new Option("Escolha...", '-1'),
+    //         payerCosts = response[0].payer_costs;
+    //         fragment.appendChild(option);
+
+    //         for (var i = 0; i < payerCosts.length; i++) {
+    //             fragment.appendChild(new Option(payerCosts[i].recommended_message, payerCosts[i].installments));
+    //         }
+
+    //         selectorInstallments.appendChild(fragment);
+    //         selectorInstallments.removeAttribute('disabled');
+    //     }
+    // };
+
+
+	// ================================
+	// MANEJO DE INPUTS DE MERCADO PAGO
+	// ================================
+
+	$(document).on('change','#forma', function(){
+		
+		const formaPago = $("#forma").val();
+
+		if( formaPago == "Mercado Pago" ){
+			$("#grupoInputsMercadoPago").show('slow');
+		}else{
+			$("#grupoInputsMercadoPago").hide('slow');
+		}
+
+		console.log({
+			formaPago
+		});
+
+	});
+
+	// ==========================
+	// 
+	// ==========================
 
 	$("#forma").change(function(){
 			var forma_pago = $("#forma").val();
-			$("#div_banco").removeClass("col-12 col-xs-12 col-md-6 col-lg-3 form-group");
+			$("#div_banco").removeClass("col-12 col-md-4");
 			$("#div_banco").empty();
 			if(forma_pago == "Depósito"){
 				var html = `<label for="banco">Banco</label>
@@ -136,7 +362,7 @@
 							<option value="{{$banco->nombre}}" title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
 						@endforeach
 					</select>`;
-				$("#div_banco").addClass("col-12 col-xs-12 col-md-6 col-lg-3 form-group");
+				$("#div_banco").addClass("col-12 col-md-4");
 				$("#div_banco").append(html);
 			}
 		});
