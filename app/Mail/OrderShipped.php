@@ -16,9 +16,9 @@ class OrderShipped extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($payment)
     {
-        //
+        $this->payment = $payment;
     }
 
     /**
@@ -28,6 +28,9 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->subject("Gracias por comprar en TuFarmaciaLatina.com")->markdown('emails.orders.shipped');
+        return $this->subject("Gracias por elegir a PlaneaTuBien")
+        ->from('planeatubien@gmail.com')
+        ->markdown('emails.orders.shipped')
+        ->view('emails.orders.shipped', ['payment' => $this->payment]);
     }
 }

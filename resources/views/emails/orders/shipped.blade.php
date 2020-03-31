@@ -1,21 +1,17 @@
 @component('mail::message')
-# ¡Muchas gracias por tu compra!
+# ¡Muchas gracias por tu pago de inscripción!
 
-Tu orden no. 0022343 ha sido creada!
 
-Resumen del pedido:
+El identificador del cargo es el siguiente: {{$payment->statement_descriptor}}
 
 @component('mail::table')
-| Producto       | Cantidad         | Total  |
-|:------:   |:-----------:|:--------: |
-| Descripcion producto   | 10 |   $300 |
-| Nombre promocion    | 1 |  $200 |
-| Envio       |          | $300 |
-| Total       |          | $3100  |
+| DESCRIPCIÓN           | MONTO                             |
+|:--------------:       |:---------------------------------:|
+| Pago de inscripción   | ${{$payment->transaction_amount}} |
 @endcomponent
-@component('mail::button', ['url' => '#'])
+{{-- @component('mail::button', ['url' => '#'])
 Ver mi pedido
-@endcomponent
+@endcomponent --}}
 Gracias,<br>
-Farmacia
+PlaneaTuBien
 @endcomponent

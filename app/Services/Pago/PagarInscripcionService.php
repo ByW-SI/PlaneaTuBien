@@ -5,12 +5,12 @@ namespace App\Services\Pago;
 use App\Cotizacion;
 use MercadoPago;
 use App\Events\PagoCreated;
+use App\Mail\OrderShipped;
 use App\PagoInscripcion;
 use App\Prospecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Mail;
 
 class PagarInscripcionService
 {
@@ -21,6 +21,7 @@ class PagarInscripcionService
     protected $statusCompra;
     protected $detalleCompra;
     protected $message;
+    protected $statement_descriptor;
 
     public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request)
     {
@@ -36,6 +37,7 @@ class PagarInscripcionService
 
             if ($this->compraAprobada()) {
                 $this->message = "La compra ha sido aprobada exitosamente";
+                Mail::to('cristianguzmansuarez@gmail.com')->send(new OrderShipped($this->payment));
             }
 
             if ($this->compraEnProceso()) {
@@ -88,12 +90,9 @@ class PagarInscripcionService
         );
         // Save and posting the payment
         $payment->save();
-
-        // dd($payment);
-
         $this->statusCompra = $payment->status;
         $this->detalleCompra = $payment->status_detail;
-        // dd($this->detalleCompra);
+        $this->payment = $payment;
     }
 
     /**
