@@ -1,12 +1,23 @@
 @extends('principal')
 @section('content')
 
-@if( $errors->any() )
 
-<div class="alert alert-danger">
-	{{$errors->first()}}
+@if( session('status') == 'approved' )
+<div class="alert alert-success">
+	{{session('message')}}
 </div>
+@endif
 
+@if( session('status') == 'in_process' )
+<div class="alert alert-warning">
+	{{session('message')}}
+</div>
+@endif
+
+@if( session('status') == 'rejected' )
+<div class="alert alert-danger">
+	{{session('message')}}
+</div>
 @endif
 
 <div class="card">

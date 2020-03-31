@@ -49,7 +49,10 @@ class PagoInscripcionController extends Controller
     {
         $pagarInscripcionService = new PagarInscripcionService($prospecto, $cotizacion, $request);
         
-        return redirect()->route('prospectos.cotizacions.pagos.index', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion]);
+        return redirect()->route('prospectos.cotizacions.pagos.index', ['prospecto' => $prospecto, 'cotizacion' => $cotizacion])->with([
+            'status' => $pagarInscripcionService->getStatusCompra(),
+            'message' => $pagarInscripcionService->getMensajeCompra()
+        ]);
     }
 
     /**

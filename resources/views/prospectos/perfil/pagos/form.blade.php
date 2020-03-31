@@ -288,7 +288,16 @@ function sdkResponseHandler(status, response) {
 	);
 
     if (status != 200 && status != 201) {
-        alert("verify filled data");
+        swal({
+              title: "Error. Verifica que la información sea correcta en los campos solicitados.",
+              text: "Causa: " + response.cause[0].description,
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+              confirmButtonText: 'Autorizar',
+            })
+		// alert("verify filled data");
+
     }else{
         var form = document.querySelector('#pay');
         var card = document.createElement('input');

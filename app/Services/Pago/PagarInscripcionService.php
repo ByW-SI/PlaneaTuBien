@@ -18,6 +18,10 @@ class PagarInscripcionService
     protected $request;
     protected $errores;
 
+    protected $statusCompra;
+    protected $detalleCompra;
+    protected $message;
+
     public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request)
     {
         // dd($request->input());
@@ -30,11 +34,17 @@ class PagarInscripcionService
         if ($this->pagoPorMercadoPago()) {
             $this->realizarCompraMercadoPago();
 
-            if (!$this->compraAprobada()) {
-                // dd('error');
-                return redirect()->back()->withErrors([
-                    'message' => 'Compra no aprobada. Por favor, revisa que los datos sean validos'
-                ]);
+            if ($this->compraAprobada()) {
+                $this->message = "La compra ha sido aprobada exitosamente";
+            }
+
+            if ($this->compraEnProceso()) {
+                $this->message = "La compra está en proceso de validación. El cliente recibirá un correo con el resultado obtenido";
+            }
+
+            if ($this->compraRechazada()) {
+                $this->message = "La compra fue rechazada. Por favor, verifica que la información sea correcta.";
+                return;
             }
         }
 
@@ -63,7 +73,7 @@ class PagarInscripcionService
 
     public function realizarCompraMercadoPago()
     {
-        MercadoPago\SDK::setAccessToken( getenv('MERCADO_PAGO_ACCESS_TOKEN') );
+        MercadoPago\SDK::setAccessToken(getenv('MERCADO_PAGO_ACCESS_TOKEN'));
 
         // dd($this->prospecto->email);
 
@@ -82,6 +92,55 @@ class PagarInscripcionService
         // dd($payment);
 
         $this->statusCompra = $payment->status;
+        $this->detalleCompra = $payment->status_detail;
+        // dd($this->detalleCompra);
+    }
+
+    /**
+     * =======
+     * GETTERS
+     * =======
+     */
+
+    public function getStatusCompra()
+    {
+        return $this->statusCompra;
+    }
+
+    public function getMensajeCompra()
+    {
+
+        if ($this->detalleCompra == 'accredited') {
+            return 'El pago ha sido realizado exitosamente.';
+        }
+
+        if ($this->detalleCompra == 'pending_contingency') {
+            return 'Pago pendiente de aceptación. Recibirás un correo con con el resultado de la verificación.';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_call_for_authorize') {
+            return 'Pago rechazado. Por favor, llama para autorizar';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_insufficient_amount') {
+            return 'Pago rechazado. El monto es insuficiente';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_bad_filled_security_code') {
+            return 'Pago rechazado. Error en el código de seguridad.';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_bad_filled_date') {
+            return 'Pago rechazado. Error en la fecha de expiración';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_bad_filled_other') {
+            return 'Pago rechazado. Error en el formulario anterior. Por favor, verifica que los datos estén correctos.';
+        }
+
+        if ($this->detalleCompra == 'cc_rejected_other_reason') {
+            return 'Pago rechazado. Por favor, verifica que los detalles de la compra sean correctos.';
+        }
     }
 
     /**
@@ -109,5 +168,15 @@ class PagarInscripcionService
     public function compraAprobada()
     {
         return $this->statusCompra == 'approved';
+    }
+
+    public function compraEnProceso()
+    {
+        return $this->statusCompra == 'in_process';
+    }
+
+    public function compraRechazada()
+    {
+        return $this->statusCompra == 'rejected';
     }
 }
