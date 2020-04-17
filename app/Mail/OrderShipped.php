@@ -29,7 +29,7 @@ class OrderShipped extends Mailable
     public function build()
     {
         return $this->subject("Gracias por elegir a PlaneaTuBien")
-        ->from('planeatubien@gmail.com')
+        ->from('info@planeatubien.com')
         ->markdown('emails.orders.shipped')
         ->view('emails.orders.shipped', ['payment' => $this->payment]);
     }
