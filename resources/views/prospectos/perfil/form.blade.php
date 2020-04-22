@@ -98,7 +98,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="" readonly="">
+							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="" >
 						</div>
 		    		</div>
 		    	</div>
@@ -267,7 +267,7 @@
 		    		</div>
 		    		<label for="email" class="col-form-label col-sm-2">✱ Email:</label>
 		    		<div class="col-sm-4">
-		    			<input type="email" name="email" class="form-control" id="email" value="{{old('email') ? old('email') : $prospecto->email}}" required="" readonly="">
+		    			<input type="email" name="email" class="form-control" id="email" value="{{old('email') ? old('email') : $prospecto->email}}" required="" >
 		    		</div>
 		    	</div>
 		    	<div class="form-group row">
