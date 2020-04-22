@@ -59,16 +59,16 @@
               <input type="date" name="fecha_llamada" class="form-control modalCrearCitaInput inputFechaLlamada" prospectoId={{$prospecto->id}}>
             </div>
             <div class="form-group col-sm-4">
-              <label for="message-text" class="col-form-label">Número de tarjetas:</label>
-              <input type="text" name="numeroTarjeta" class="form-control numeroTarjetas modalCrearCitaInput"
+              <label for="message-text" class="col-form-label">✱Número de tarjetas:</label>
+              <input type="text" name="numeroTarjeta" required class="form-control numeroTarjetas modalCrearCitaInput"
                 prospectoId={{$prospecto->id}} value="{{$prospecto->numeroTarjetas}}">
             </div>
           </div>
           <!-- FILA-->
           <div class="form-row">
             <div class="form-group col-sm-4">
-              <label for="message-text" class="col-form-label">Cuánto gana al mes:</label>
-              <input type="text" name="sueldo" class="form-control sueldo modalCrearCitaInput inputSueldo"
+              <label for="message-text" class="col-form-label">✱Cuánto gana al mes:</label>
+              <input type="text" name="sueldo" required class="form-control sueldo modalCrearCitaInput inputSueldo"
                 prospectoId={{$prospecto->id}} value="{{$prospecto->sueldo}}">
             </div>
             <div class="form-group col-sm-4">
