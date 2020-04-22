@@ -46,9 +46,9 @@
               <input type="text" class="form-control clavePreautorizacion" value="{{$prospecto->citas()->first() ? $prospecto->citas()->first()->clave_preautorizacion : ''}}" name="clave_preautorizacion" prospectoId="{{$prospecto->id}}" readonly>
             </div>
             <div class="form-group col-sm-4 contenedorInputFechaCita" prospectoId={{$prospecto->id}}>
-              <label for="message-text" class="col-form-label">Fecha de cita:</label>
-              <input type="date" name="fecha_cita" class="form-control modalCrearCitaInput inputFechaCita"
-                prospectoId={{$prospecto->id}}>
+              <label for="message-text" class="col-form-label">✱Fecha de cita:</label>
+              <input type="date" name="fecha_cita" required class="form-control modalCrearCitaInput inputFechaCita"
+                prospectoId={{$prospecto->id}} >
             </div>
             <div class="form-group col-sm-4 contenedorInputHoraCita" prospectoId={{$prospecto->id}}>
               <label for="message-text" class="col-form-label">Hora cita:</label>
