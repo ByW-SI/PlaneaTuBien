@@ -493,10 +493,14 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_1_semanal" {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? 'checked="checked"' :""}}>Semanal{{$perfil->historial_crediticio->tipo_destino_1}}</label>
+                    <label><input type="radio" id="tipo_destino_1_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? 'checked="checked"' :""}}
+                      >Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_1_mensual" {{!$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_1_mensual" 
+                      {{$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? 'checked="checked"' :""}}
+                      >Mensual</label>
                   </div>
                 </div>
               </div>
@@ -520,10 +524,14 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_2_semanal" {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_2_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? 'checked="checked"' :""}}
+                      >Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_2_mensual" {{!$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_2_mensual" 
+                      {{$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? 'checked="checked"' :""}}
+                      >Mensual</label>
                   </div>
                 </div>
               </div>
@@ -547,7 +555,8 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_3_semanal" {{$perfil->historial_crediticio->tipo_destino_3 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_3_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_3 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
                     <label><input type="radio" id="tipo_destino_3_mensual" {{$perfil->historial_crediticio->tipo_destino_3 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
