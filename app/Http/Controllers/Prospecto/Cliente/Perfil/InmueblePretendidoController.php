@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Prospecto\Cliente\Perfil;
 
 use App\PerfilInmueblePretendidoCliente;
 use Illuminate\Http\Request;
+use App\Prospecto;
 use App\Http\Controllers\Controller;
 
 class InmueblePretendidoController extends Controller
