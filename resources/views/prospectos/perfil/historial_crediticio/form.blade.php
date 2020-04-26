@@ -231,7 +231,7 @@
 						<div class="form-group row">
 							<label for="destino_3" class="col-form-label col-sm-2">✱ Destino:</label>
 							<div class="col-sm-4">
-								<input type="text" name="destino_3" class="form-control" required="" value="$credito->destino_3}}">
+								<input type="text" name="destino_3" class="form-control" required="" value="{{$credito->destino_3}}">
 							</div>
 							<div class="col-sm-2">
 								<div class="form-check form-check-inline mt-1">
