@@ -363,7 +363,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingresos_extras" id="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0">
+		    				<input type="number" name="ingresos_extras" id="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0" onchange="actualizarTotalIngreso()">
 						</div>
 		    		</div>
 		    		<label for="ingreso_total" class="col-form-label col-sm-2">✱ Ingresos totales:</label>
@@ -372,7 +372,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" onchange="actualizarTotalIngreso()">
+		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" >
 						</div>
 		    		</div>
 		    	</div>
