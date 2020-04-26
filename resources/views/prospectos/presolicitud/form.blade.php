@@ -191,7 +191,7 @@
 					<select name="enterarse" id="enterarse" required="" class="form-control">
 						@foreach ($mediosDeContacto as $medioDeContacto)
 							<option value="{{$medioDeContacto->id}}"
-							    {{ $medioDeContacto->nombre ==$prospecto->inmueble_pretendido->medio_entero ? 'selected=""' : ''}}  
+							    {{ $medioDeContacto->nombre ==$prospecto->perfil->inmueble_pretendido->medio_entero ? 'selected=""' : ''}}  
 								>{{$medioDeContacto->nombre}}</option>
 						@endforeach
 						{{--<option value="">Medío por el que se entero de nosotros</option>
