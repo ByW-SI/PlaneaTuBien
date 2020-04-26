@@ -424,7 +424,7 @@
             </div>
             <div class="six columns u-pull-right">
               <div class="ten columns u-pull-left">
-                <label><input type="radio" id="tarjeta_credito_si" {{$perfil->historial_crediticio->tarjeta_credito!=0 ? 'checked="checked"' :""}}>Tarjeta de Crédito</label>
+                <label><input type="radio" id="tarjeta_credito_si" {{$perfil->historial_crediticio->numero_tarjeta_credito!=0 ? 'checked="checked"' :""}}>Tarjeta de Crédito</label>
               </div>
               <div class="two columns u-pull-right">
                 <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->historial_crediticio->numero_tarjeta_credito ? $perfil->historial_crediticio->numero_tarjeta_credito : "0"}}</label>
