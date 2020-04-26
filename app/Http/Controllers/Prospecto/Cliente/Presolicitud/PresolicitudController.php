@@ -9,6 +9,7 @@ use App\PagoInscripcion;
 use App\Pagos;
 use App\Presolicitud;
 use App\Prospecto;
+use App\MedioContacto;
 use Illuminate\Http\Request;
 
 class PresolicitudController extends Controller
@@ -46,8 +47,8 @@ class PresolicitudController extends Controller
         if (!$prospecto->tienePerfil()) {
             return redirect()->back();
         }
-
-        return view('prospectos.presolicitud.form', ['prospecto' => $prospecto]);
+        $mediosDeContacto = MedioContacto::get();
+        return view('prospectos.presolicitud.form', ['prospecto' => $prospecto,'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**
