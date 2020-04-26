@@ -80,7 +80,7 @@
 		  			@csrf
 			  		<div class="card-body">
 				    	<div class="form-group row">
-				    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro: $credito->tarjeta_debito</label>
+				    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro: {{$credito->tarjeta_debito}}</label>
 			    			<div class="col-sm-2">
 			    				<div class="form-check form-check-inline mt-1">
 									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1"  {{ $credito && $credito->tarjeta_debito ? "checked" : "required" }}>
