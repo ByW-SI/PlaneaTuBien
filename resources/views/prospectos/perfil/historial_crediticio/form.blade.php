@@ -57,10 +57,10 @@
 	    </div>
 	    <ul class="nav nav-tabs" id="myTab" role="tablist">
 		  <li class="nav-item">
-		    <a class="nav-link active" id="datos_personal-tab" data-toggle="tab" href="#datos_personal" role="tab" aria-controls="datos_personal" aria-selected="true">Datos personales</a>
+		    <a class="nav-link active" id="datos_personal-tab" data-toggle="tab" href="#datos_personal" role="tab" aria-controls="datos_personal" aria-selected="false">Datos personales</a>
 		  </li>
 		  <li class="nav-item disabled" aria-disabled="true">
-		    <a class="nav-link  disabled" aria-disabled="true" id="crediticio-tab" data-toggle="tab" href="#crediticio" role="tab" aria-controls="crediticio" aria-selected="false">Historial crediticio</a>
+		    <a class="nav-link  disabled" aria-disabled="true" id="crediticio-tab" data-toggle="tab" href="#crediticio" role="tab" aria-controls="crediticio" aria-selected="true">Historial crediticio</a>
 		  </li>
 		  <li class="nav-item disabled" aria-disabled="true">
 		    <a class="nav-link  disabled" aria-disabled="true" id="inmueble-tab" data-toggle="tab" href="#inmueble" role="tab" aria-controls="inmueble" aria-selected="false">Inmueble</a>
@@ -83,13 +83,13 @@
 				    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro:</label>
 			    			<div class="col-sm-2">
 			    				<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1" required="" {{old('tarjeta_debito') == "1" ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1" required="" {{  $credito->tarjeta_debito== 1 ? "checked" : "" }}>
 									<label class="form-check-label" for="tarjeta_debito_si" 
-									{{  $credito->tarjeta_debito== 1 ? "checked" : "" }}
+									
 										>Si</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="0" {{old('tarjeta_debito') == "0" ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="0" {{  $credito->tarjeta_debito== 0 ? "checked" : "" }}>
 									<label class="form-check-label" for="tarjeta_debito_no">No</label>
 								</div>
 			    			</div>
