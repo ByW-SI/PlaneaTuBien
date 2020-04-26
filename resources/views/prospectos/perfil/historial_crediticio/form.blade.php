@@ -120,11 +120,11 @@
 							<label for="en_buro_credito" class="col-form-label col-sm-3">✱ Buró de Crédito:</label>
 							<div class="col-sm-3">
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1" required="" {{$credito->buro_credito == '1' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_si" value="1" required="" {{$credito->en_buro_credito == '1' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="en_buro_credito_si">Si</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_no" value="0"  {{$credito->buro_credito == '0' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="en_buro_credito" id="en_buro_credito_no" value="0"  {{$credito->en_buro_credito == '0' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="en_buro_credito_no">No</label>
 								</div>
 							</div>
