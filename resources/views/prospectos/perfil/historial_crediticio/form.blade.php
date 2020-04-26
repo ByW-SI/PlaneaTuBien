@@ -75,7 +75,7 @@
 		  		<div class="card-header">
 		  			Cambiar Historial crediticio:
 		  		</div>
-		  		<form method="POST" action="{{ route('prospectos.perfil.historial_crediticio.update',['prospecto'=>$prospecto,'datos_personal'=>$datos_personal]) }}">
+		  		<form method="POST" action="{{ route('prospectos.perfil.historial_crediticio.update',['prospecto'=>$prospecto]) }}">
 		  			@method('PUT')
 		  			@csrf
 			  		<div class="card-body">
