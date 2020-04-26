@@ -458,10 +458,10 @@
                 </div>
                 <div class="one-half column u-pull-right">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="en_buro_credito_si" {{$perfil->historial_crediticio->en_buro_credito ? 'checked="checked"' :""}}>Si</label>
+                    <label><input type="radio" id="en_buro_credito_si" {{$perfil->historial_crediticio->en_buro_credito ? "checked" :""}}>Si</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="en_buro_credito_no" {{!$perfil->historial_crediticio->en_buro_credito ? 'checked="checked"' :""}}>No</label>
+                    <label><input type="radio" id="en_buro_credito_no" {{!$perfil->historial_crediticio->en_buro_credito ? "checked" :""}}>No</label>
                   </div>
                 </div>
               </div>
@@ -493,10 +493,10 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_1_semanal" {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_1_semanal" {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? "checked" :""}}>Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_1_mensual" {{!$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_1_mensual" {{!$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? "checked" :""}}>Mensual</label>
                   </div>
                 </div>
               </div>
@@ -520,10 +520,10 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_2_semanal" {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_2_semanal" {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? "checked" :""}}>Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_2_mensual" {{!$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_2_mensual" {{!$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? "checked" :""}}>Mensual</label>
                   </div>
                 </div>
               </div>
@@ -826,7 +826,7 @@
                   <label for="" style="text-align: left;">Nombre:</label>
                 </div>
                 <div class="ten columns u-pull-right">
-                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$referencia->nombre_completo}}</label>
+                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$referencia->nombre.$referencia->paterno.$referencia->materno}}</label>
                 </div>
               </div>
               <div class="one-third column u-pull-right">
