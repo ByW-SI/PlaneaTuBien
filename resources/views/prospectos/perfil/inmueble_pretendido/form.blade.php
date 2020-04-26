@@ -131,7 +131,7 @@
 				    		<label for="area_inmueble" class="col-form-label col-sm-2">✱ Area:</label>
 				    		<div class="col-sm-3">
 				    			<div class="input-group">
-									<input type="number" step="any" min="0" class="form-control" name="area_inmueble" id="area_inmueble" required="" value="$inmueble->area_inmueble}}">
+									<input type="number" step="any" min="0" class="form-control" name="area_inmueble" id="area_inmueble" required="" value="{{$inmueble->area_inmueble}}">
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon1">m²</span>
 									</div>
