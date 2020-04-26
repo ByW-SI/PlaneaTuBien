@@ -199,7 +199,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja" value="{{old('salario_2')}}" required="">
+									<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja" value="{{old('salario_2')}}" required="" onchange="actualizarTotalIngreso()">
 								</div>
 				    		</div>
 				    	</div>
@@ -363,7 +363,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0">
+		    				<input type="number" name="ingresos_extras" id="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0">
 						</div>
 		    		</div>
 		    		<label for="ingreso_total" class="col-form-label col-sm-2">✱ Ingresos totales:</label>
@@ -372,7 +372,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="">
+		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" onchange="actualizarTotalIngreso()">
 						</div>
 		    		</div>
 		    	</div>
@@ -1079,5 +1079,17 @@
 				}
 			});
 		});
+		function actualizarTotalIngreso() {
+			var Total=0;
+		  if ($("#salario_1").val()) {
+		  	Total+=$("#salario_1").val();
+		  }
+		  if ($("#ingresos_extras").val()) {
+		  	Total+=$("#ingresos_extras").val();
+		  }
+		  $("#ingreso_total").val(Total);
+
+		}
+
     </script>
 @endpush
