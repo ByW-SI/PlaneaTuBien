@@ -110,7 +110,7 @@
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="salario_1">Salario</label>
-			  					<input type="number" step="any" class="form-control" name="salario_1" value="{{$datos_personal->salario_1}}" required="" onchange="actualizarTotalIngreso()">
+			  					<input type="number" step="any" class="form-control" name="salario_1" id="salario_1" value="{{$datos_personal->salario_1}}" required="" onchange="actualizarTotalIngreso()">
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="rfc_1">RFC</label>
@@ -304,11 +304,11 @@
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="ingresos_extras">Ingresos extras</label>
-			  					<input type="number" step="any" min="0" class="form-control" name="ingresos_extras" value="{{$datos_personal->ingresos_extras}}" onchange="actualizarTotalIngreso()">
+			  					<input type="number" step="any" min="0" class="form-control" name="ingresos_extras" id="ingresos_extras" value="{{$datos_personal->ingresos_extras}}" onchange="actualizarTotalIngreso()">
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="ingreso_total">Ingresos totales</label>
-			  					<input type="number" step="any" min="0" class="form-control" name="ingreso_total" value="{{$datos_personal->ingreso_total}}" >
+			  					<input type="number" step="any" min="0" class="form-control" name="ingreso_total" id="ingreso_total" value="{{$datos_personal->ingreso_total}}" >
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="ahorro_inicial">¿Enganche o ahorro inicial?</label>
