@@ -630,9 +630,9 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="descripcion_calificacion" class="col-form-label col-sm-3">Descripción de calificación:</label>
+					<label for="descripcion_calificacion" class="col-form-label col-sm-3">✱ Descripción de calificación:</label>
 					<div class="col-sm-9">
-						<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion">{{old('descripcion_calificacion')}}</textarea>
+						<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion" required="">{{old('descripcion_calificacion')}}</textarea>
 					</div>
 				</div>
 		    </div>
