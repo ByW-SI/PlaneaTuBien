@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Prospecto\Cliente\Perfil;
 
+use App\Banco;
 use App\PerfilHistorialCrediticioCliente;
 use App\Prospecto;
 use Illuminate\Http\Request;
