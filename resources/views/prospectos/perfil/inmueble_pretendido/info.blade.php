@@ -39,7 +39,11 @@
 			<div class="col-6">
 				<label>Estado:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble->estado ? $inmueble->estado : "--"}}
+    				@if($inmueble->estado)
+							{{$inmueble->estado}}
+						@else
+							--
+						@endif
 				</label>
 			</div>
 			<div class="col-6">
