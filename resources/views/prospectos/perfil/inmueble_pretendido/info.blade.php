@@ -39,7 +39,7 @@
 			<div class="col-6">
 				<label>Estado:</label>
     			<label class="form-control" readonly="">
-					{{$inmueble ? $inmueble->estado : "--"}}
+					{{$inmueble->estado ? $inmueble->estado : "--"}}
 				</label>
 			</div>
 			<div class="col-6">
