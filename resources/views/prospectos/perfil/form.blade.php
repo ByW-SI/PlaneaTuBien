@@ -372,7 +372,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" >
+		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" readonly>
 						</div>
 		    		</div>
 		    	</div>
