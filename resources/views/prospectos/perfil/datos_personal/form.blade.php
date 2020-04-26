@@ -110,7 +110,7 @@
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="salario_1">Salario</label>
-			  					<input type="number" step="any" class="form-control" name="salario_1" value="{{$datos_personal->salario_1}}" required="">
+			  					<input type="number" step="any" class="form-control" name="salario_1" value="{{$datos_personal->salario_1}}" required="" onchange="actualizarTotalIngreso()">
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="rfc_1">RFC</label>
@@ -304,7 +304,7 @@
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="ingresos_extras">Ingresos extras</label>
-			  					<input type="number" step="any" min="0" class="form-control" name="ingresos_extras" value="{{$datos_personal->ingresos_extras}}" >
+			  					<input type="number" step="any" min="0" class="form-control" name="ingresos_extras" value="{{$datos_personal->ingresos_extras}}" onchange="actualizarTotalIngreso()">
 			  				</div>
 			  				<div class="form-group col-12 col-md-6">
 			  					<label for="ingreso_total">Ingresos totales</label>
@@ -493,6 +493,17 @@
 					$(el).attr("selected",true);
 				}
 			});
+
+		}
+		function actualizarTotalIngreso() {
+			var Total=parseInt(0,10);;
+		  if ($("#salario_1").val()) {
+		  	Total+=parseInt($("#salario_1").val(),10);
+		  }
+		  if ($("#ingresos_extras").val()) {
+		  	Total+=parseInt($("#ingresos_extras").val(),10);
+		  }
+		  $("#ingreso_total").val(Total);
 
 		}
 	</script>
