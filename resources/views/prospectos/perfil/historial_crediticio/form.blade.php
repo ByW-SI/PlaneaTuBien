@@ -56,11 +56,11 @@
 	    	{{-- {{$perfil->historial_crediticio}} --}}
 	    </div>
 	    <ul class="nav nav-tabs" id="myTab" role="tablist">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="datos_personal-tab" data-toggle="tab" href="#datos_personal" role="tab" aria-controls="datos_personal" aria-selected="false">Datos personales</a>
-		  </li>
 		  <li class="nav-item disabled" aria-disabled="true">
-		    <a class="nav-link  disabled" aria-disabled="true" id="crediticio-tab" data-toggle="tab" href="#crediticio" role="tab" aria-controls="crediticio" aria-selected="true">Historial crediticio</a>
+		    <a class="nav-link disabled" id="datos_personal-tab" aria-disabled="true" data-toggle="tab" href="#datos_personal" role="tab" aria-controls="datos_personal" aria-selected="false">Datos personales</a>
+		  </li>
+		  <li class="nav-item active" >
+		    <a class="nav-link  active"  id="crediticio-tab" data-toggle="tab" href="#crediticio" role="tab" aria-controls="crediticio" aria-selected="true">Historial crediticio</a>
 		  </li>
 		  <li class="nav-item disabled" aria-disabled="true">
 		    <a class="nav-link  disabled" aria-disabled="true" id="inmueble-tab" data-toggle="tab" href="#inmueble" role="tab" aria-controls="inmueble" aria-selected="false">Inmueble</a>
