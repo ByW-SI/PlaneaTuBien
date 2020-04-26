@@ -61,7 +61,7 @@ class HistorialCrediticioController extends Controller
     {
         //
         $perfil = $prospecto->perfil;
-        return view('prospectos.perfil.historial_credito.form',['prospecto'=>$prospecto,'credito'=>$credito,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
+        return view('prospectos.perfil.historial_crediticio.form',['prospecto'=>$prospecto,'credito'=>$credito,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
     }
 
     /**
