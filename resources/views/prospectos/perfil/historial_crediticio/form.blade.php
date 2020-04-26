@@ -183,15 +183,15 @@
 						<div class="form-group row">
 							<label for="destino_1" class="col-form-label col-sm-2">✱ Destino:</label>
 							<div class="col-sm-4">
-								<input type="text" name="destino_1" class="form-control" value="{{old('destino_1')}}" required="">
+								<input type="text" name="destino_1" class="form-control" value="{{$credito->destino_1}}" required="">
 							</div>
 							<div class="col-sm-2">
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_semanal" value="Semanal" required="" {{old('tipo_destino_1') == 'Semanal' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_semanal" value="Semanal" required="" {{$credito->tipo_destino_1 == 'Semanal' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_1_semanal">Semanal</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_mensual" value="Mensual" {{old('tipo_destino_1') == 'Mensual' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_1" id="tipo_destino_1_mensual" value="Mensual" {{$credito->tipo_destino_1 == 'Mensual' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_1_mensual">Mensual</label>
 								</div>
 							</div>
@@ -200,22 +200,22 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" step="any" min="0" class="form-control" name="monto_destino_1" id="monto_destino_1" required="" value="{{old('monto_destino_1')}}">
+									<input type="number" step="any" min="0" class="form-control" name="monto_destino_1" id="monto_destino_1" required="" value="{{$credito->monto_destino_1}}">
 								</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="destino_2" class="col-form-label col-sm-2">✱ Destino:</label>
 							<div class="col-sm-4">
-								<input type="text" name="destino_2" class="form-control" value="{{old('destino_2')}}" required="">
+								<input type="text" name="destino_2" class="form-control" value="{{$credito->destino_2}}" required="">
 							</div>
 							<div class="col-sm-2">
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_semanal" value="Semanal" required=""  {{old('tipo_destino_2') == 'Semanal' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_semanal" value="Semanal" required=""  {{$credito->tipo_destino_2 == 'Semanal' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_2_semanal">Semanal</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_mensual" value="Mensual"  {{old('tipo_destino_2') == 'Mensual' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_2" id="tipo_destino_2_mensual" value="Mensual"  {{$credito->tipo_destino_2 == 'Mensual' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_2_mensual">Mensual</label>
 								</div>
 							</div>
@@ -224,22 +224,22 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" step="any" min="0" class="form-control" name="monto_destino_2" id="monto_destino_2" value="{{old('monto_destino_2')}}" required="">
+									<input type="number" step="any" min="0" class="form-control" name="monto_destino_2" id="monto_destino_2" value="{{$credito->monto_destino_2}}" required="">
 								</div>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="destino_3" class="col-form-label col-sm-2">✱ Destino:</label>
 							<div class="col-sm-4">
-								<input type="text" name="destino_3" class="form-control" required="" value="{{old('destino_3')}}">
+								<input type="text" name="destino_3" class="form-control" required="" value="$credito->destino_3}}">
 							</div>
 							<div class="col-sm-2">
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_semanal" value="Semanal" required=""  {{old('tipo_destino_3') == 'Semanal' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_semanal" value="Semanal" required=""  {{$credito->tipo_destino_3 == 'Semanal' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_3_semanal">Semanal</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_mensual" value="Mensual"  {{old('tipo_destino_3') == 'Mensual' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tipo_destino_3" id="tipo_destino_3_mensual" value="Mensual"  {{$credito->tipo_destino_3 == 'Mensual' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tipo_destino_3_mensual">Mensual</label>
 								</div>
 							</div>
@@ -248,7 +248,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" step="any" min="0" class="form-control" name="monto_destino_3" id="monto_destino_3" value="{{old('monto_destino_3')}}" required="">
+									<input type="number" step="any" min="0" class="form-control" name="monto_destino_3" id="monto_destino_3" value="{{$credito->monto_destino_3}}" required="">
 								</div>
 							</div>
 						</div>
@@ -256,15 +256,15 @@
 							<label for="calificacion_credito" class="col-form-label col-sm-6">✱ Calificación del cliente:</label>
 							<div class="col-sm-6">
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_bien" value="Bien" required=""  {{old('calificacion_credito') == 'Bien' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_bien" value="Bien" required=""  {{$credito->calificacion_credito == 'Bien' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="calificacion_credito_bien">😊</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_regular" value="Regular" {{old('calificacion_credito') == 'Regular' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_regular" value="Regular" {{$credito->calificacion_credito == 'Regular' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="calificacion_credito_regular">😐</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_mal" value="Mal" {{old('calificacion_credito') == 'Mal' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="calificacion_credito" id="calificacion_credito_mal" value="Mal" {{$credito->calificacion_credito == 'Mal' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="calificacion_credito_mal">☹️</label>
 								</div>
 							</div>
@@ -272,7 +272,7 @@
 						<div class="form-group row">
 							<label for="descripcion_calificacion" class="col-form-label col-sm-3">✱ Descripción de calificación:</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion" required="">{{old('descripcion_calificacion')}}</textarea>
+								<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion" required="">{{$credito->descripcion_calificacion}}</textarea>
 							</div>
 						</div>
 				    </div>
