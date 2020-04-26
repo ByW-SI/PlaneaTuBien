@@ -63,7 +63,7 @@ class HistorialCrediticioController extends Controller
         //
         $perfil = $prospecto->perfil;
         $bancos = Banco::orderBy('nombre','asc')->get();
-        return view('prospectos.perfil.historial_crediticio.form',['prospecto'=>$prospecto,'credito'=>$credito,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion,'bancos'=>$bancos]);
+        return view('prospectos.perfil.historial_crediticio.form',['prospecto'=>$prospecto,'credito'=>$perfil->historial_crediticio,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion,'bancos'=>$bancos]);
     }
 
     /**
