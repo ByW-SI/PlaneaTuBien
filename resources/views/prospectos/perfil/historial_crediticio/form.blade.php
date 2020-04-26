@@ -137,17 +137,17 @@
 				    		<label for="tarjeta_credito" class="col-form-label col-sm-6">✱ Tarjeta de Crédito:</label>
 			    			<div class="col-sm-2">
 			    				<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1" required=""  {{old('tarjeta_credito') == '1' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_si" value="1" required=""  {{$credito->tarjeta_credito == '1' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tarjeta_credito_si">Si</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_no" value="0"  {{old('en_buro_credito') == '0' ? 'checked=""' : ''}}>
+									<input class="form-check-input" type="radio" name="tarjeta_credito" id="tarjeta_credito_no" value="0"  {{$credito->tarjeta_credito == '0' ? 'checked=""' : ''}}>
 									<label class="form-check-label" for="tarjeta_credito_no">No</label>
 								</div>
 			    			</div>
 			    			<label for="numero_tarjeta_credito" class="col-form-label col-sm-1">#</label>
 			    			<div class="col-sm-3">
-			    				<input type="number" name="numero_tarjeta_credito" id="numero_tarjeta_credito" value="{{old('numero_tarjeta_credito')}}" class="form-control">
+			    				<input type="number" name="numero_tarjeta_credito" id="numero_tarjeta_credito" value="{{$credito->numero_tarjeta_credito}}" class="form-control">
 			    			</div>
 				    	</div>
 						<div class="form-group row">
