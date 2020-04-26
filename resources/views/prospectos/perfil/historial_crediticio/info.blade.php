@@ -238,7 +238,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex justify-content-center">
-			<a href="#" class="btn btn-success">Editar historial crediticio</a>
+			<a href="{{ route('prospectos.perfil.historial_crediticio.edit',['prospecto'=>$prospecto,'credito'=>$credito]) }}" class="btn btn-success">Editar historial crediticio</a>
 		</div>
 	</div>
 </div>

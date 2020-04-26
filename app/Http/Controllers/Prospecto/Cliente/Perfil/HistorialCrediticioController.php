@@ -56,9 +56,11 @@ class HistorialCrediticioController extends Controller
      * @param  \App\PerfilHistorialCrediticioCliente  $perfilHistorialCrediticioCliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(PerfilHistorialCrediticioCliente $perfilHistorialCrediticioCliente)
+    public function edit(Prospecto $prospecto,PerfilHistorialCrediticioCliente $credito)
     {
         //
+        $perfil = $prospecto->perfil;
+        return view('prospectos.perfil.historial_credito.form',['prospecto'=>$prospecto,'credito'=>$credito,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
     }
 
     /**
