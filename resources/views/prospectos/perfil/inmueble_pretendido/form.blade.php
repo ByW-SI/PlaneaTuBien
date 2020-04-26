@@ -141,7 +141,7 @@
 				    	<div class="form-group row">
 				    		<label for="estado" class="col-form-label col-sm-2">✱ Estado:</label>
 				    		<div class="col-sm-4">
-				    			<input type="text" name="estado" class="form-control" value="$inmueble->estado}}" required="">
+				    			<input type="text" name="estado" class="form-control" value="{{$inmueble->estado}}" required="">
 				    		</div>
 				    		<label for="colonia" class="col-form-label col-sm-2">✱ Colonia:</label>
 				    		<div class="col-sm-4">
