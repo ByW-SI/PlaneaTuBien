@@ -95,7 +95,7 @@
 			    			</div>
 			    			<label for="" class="col-form-label col-sm-1">#</label>
 			    			<div class="col-sm-3">
-			    				<input type="number" name="numero_tarjeta_debito" id="numero_tarjeta_debito" value="{{old('numero_tarjeta_debito')}}" class="form-control">
+			    				<input type="number" name="numero_tarjeta_debito" id="numero_tarjeta_debito" value="{{  $credito->tarjeta_debito }}" class="form-control">
 			    			</div>
 				    	</div>
 						<div class="form-group row">
@@ -108,7 +108,8 @@
 									</div>
 									<select name="tarjetas_debito[]" id="tarjetas_debito" class="select-bancos form-control w-75" multiple="multiple">
 										@foreach ($bancos as $banco)
-											<option value="{{$banco->nombre}}" {{old('tarjetas_debito') && in_array($banco->nombre,old('tarjetas_debito')) ? 'selected=""' : ''}} title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
+											<option value="{{$banco->nombre}}" 
+												{{('["'.$banco->nombre.'"]')==$credito->tarjetas_debito ? 'selected=""' : ''}}  title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
 										@endforeach
 									</select>
 
