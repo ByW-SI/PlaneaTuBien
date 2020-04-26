@@ -88,9 +88,9 @@
 									<label for="">✱ Nombre:</label>
 									<div class="form-group col-sm-10 pr-0 pl-0">
 										<div class="input-group">
-											<input type="text" name="nombre[{{$index+1}}]" id="nombre[{{$index+1}}]" placeholder="Nombre" value="{{referencia->nombre}}" class="form-control" required="">
-											<input type="text" name="paterno[{{$index+1}}]" id="paterno[{{$index+1}}]" placeholder="Apellido Paterno" value="{{ referencia->paterno}}" class="form-control" required="">
-											<input type="text" name="materno[{{$index+1}}]" id="materno[{{$index+1}}]" placeholder="Apellido Materno" value="{{ referencia->materno}}" class="form-control">
+											<input type="text" name="nombre[{{$index+1}}]" id="nombre[{{$index+1}}]" placeholder="Nombre" value="{{referencia['nombre']}}" class="form-control" required="">
+											<input type="text" name="paterno[{{$index+1}}]" id="paterno[{{$index+1}}]" placeholder="Apellido Paterno" value="{{ referencia['paterno']}}" class="form-control" required="">
+											<input type="text" name="materno[{{$index+1}}]" id="materno[{{$index+1}}]" placeholder="Apellido Materno" value="{{ referencia['materno']}}" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -100,12 +100,12 @@
 								</div>
 								<div class="col-6">
 									<label for="">Telefono:</label>
-									<input numeroReferencia="1" type="text" name="telefono[{{$index+1}}]" minlength="10" maxlength="10" value="{{$referencia->telefono}}" class="form-control numeroReferencia" placeholder="Particular" required="">
+									<input numeroReferencia="1" type="text" name="telefono[{{$index+1}}]" minlength="10" maxlength="10" value="{{$referencia['telefono']}}" class="form-control numeroReferencia" placeholder="Particular" required="">
 									
 								</div>
 								<div class="col-6">
 									<label for="">Celular:</label>
-									<input numeroReferencia="1" type="text" name="celular[{{$index+1}}]" minlength="10" maxlength="10" value="{{$referencia->celular}}" class="form-control numeroReferencia" placeholder="Celular" required="">
+									<input numeroReferencia="1" type="text" name="celular[{{$index+1}}]" minlength="10" maxlength="10" value="{{$referencia['celular']}}" class="form-control numeroReferencia" placeholder="Celular" required="">
 								</div>
 							</div>
 						@endforeach
