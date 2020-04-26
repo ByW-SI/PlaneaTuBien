@@ -75,7 +75,7 @@
 		  		<div class="card-header">
 		  			Cambiar Datos De Referencias Personales:
 		  		</div>
-		  		<form method="POST" action="{{ route('prospectos.perfil.referencia_personals.update',['prospecto'=>$prospecto,'referencias'=>$referencias]) }}">
+		  		<form method="POST" action="{{ route('prospectos.perfil.referencia_personals.update',['prospecto'=>$prospecto,'referencias'=>$referencias[0]]) }}">
 		  			@method('PUT')
 		  			@csrf
 			  		<div class="card-body">
