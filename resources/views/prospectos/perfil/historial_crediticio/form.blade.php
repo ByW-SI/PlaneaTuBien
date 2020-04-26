@@ -80,16 +80,16 @@
 		  			@csrf
 			  		<div class="card-body">
 				    	<div class="form-group row">
-				    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro:</label>
+				    		<label for="tarjeta_debito" class="col-form-label col-sm-6">✱ Tarjeta de Débito o Cuenta de Ahorro: $credito->tarjeta_debito</label>
 			    			<div class="col-sm-2">
 			    				<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1" required="" {{ $credito && $credito->tarjeta_debito ? "checked" : "" }}>
+									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_si" value="1"  {{ $credito && $credito->tarjeta_debito ? "checked" : "required" }}>
 									<label class="form-check-label" for="tarjeta_debito_si" 
 									
 										>Si</label>
 								</div>
 								<div class="form-check form-check-inline mt-1">
-									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="0"  {{ $credito && $credito->tarjeta_debito ? "" : "checked" }}>
+									<input class="form-check-input" type="radio" name="tarjeta_debito" id="tarjeta_debito_no" value="0"  {{ $credito && $credito->tarjeta_debito ? "required" : "checked" }}>
 									<label class="form-check-label" for="tarjeta_debito_no">No</label>
 								</div>
 			    			</div>
