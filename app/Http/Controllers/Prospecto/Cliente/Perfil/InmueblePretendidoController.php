@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Prospecto\Cliente\Perfil;
 use App\PerfilInmueblePretendidoCliente;
 use Illuminate\Http\Request;
 use App\Prospecto;
+use App\MedioContacto;
 use App\Http\Controllers\Controller;
 
 class InmueblePretendidoController extends Controller
@@ -61,7 +62,8 @@ class InmueblePretendidoController extends Controller
     {
         //
         $perfil = $prospecto->perfil;
-        return view('prospectos.perfil.inmueble_pretendido.form',['prospecto'=>$prospecto,'inmueble'=>$perfil->inmueble_pretendido,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
+        $mediosDeContacto = MedioContacto::get();
+        return view('prospectos.perfil.inmueble_pretendido.form',['prospecto'=>$prospecto,'inmueble'=>$perfil->inmueble_pretendido,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion,'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**
