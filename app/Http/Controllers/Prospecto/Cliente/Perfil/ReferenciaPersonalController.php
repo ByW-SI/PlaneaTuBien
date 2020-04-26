@@ -61,7 +61,7 @@ class ReferenciaPersonalController extends Controller
     {
         //
         $perfil = $prospecto->perfil;
-        return view('prospectos.perfil.datos_personal.form',['prospecto'=>$prospecto,'referencias' =>
+        return view('prospectos.perfil.referencia_personals.form',['prospecto'=>$prospecto,'referencias' =>
                     $perfil->referencia_personals,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion]);
     }
 
