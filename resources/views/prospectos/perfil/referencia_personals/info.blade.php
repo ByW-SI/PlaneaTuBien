@@ -30,7 +30,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex justify-content-center">
-			<a href="#" class="btn btn-success">Agregar referencia personal</a>
+			<a href="{{ route('prospectos.perfil.referencia_personals.edit',['prospecto'=>$prospecto,'referencias'=>$referencias]) }}" class="btn btn-success">Editar referencia personal</a>
 		</div>
 	</div>
 </div>
