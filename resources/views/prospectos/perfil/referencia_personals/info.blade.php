@@ -11,7 +11,7 @@
 				</div>
 				<div class="col-6">
 					<label for="">Nombre:</label>
-					<label class="form-control" readonly="">{{$referencia->nombre_completo}}</label>
+					<label class="form-control" readonly="">{{$referencia->nombre.$referencia->paterno.$referencia->materno}}</label>
 				</div>
 				<div class="col-6">
 					<label for="">Parentesco:</label>
