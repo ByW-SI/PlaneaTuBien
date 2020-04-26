@@ -79,30 +79,6 @@
 		  			@method('PUT')
 		  			@csrf
 			  		<div class="card-body">
-						<h4>Referencia #1</h4>
-						<div class="form-group row">
-							<label class="col-form-label col-sm-2" for="nombre_completo[1]">✱ Nombre:</label>
-							<div class="form-group col-sm-10 pr-0 pl-0">
-								<div class="input-group">
-									<input type="text" name="nombre[1]" id="nombre[1]" placeholder="Nombre" value="{{old("nombre_1")}}" class="form-control" required="">
-									<input type="text" name="paterno[1]" id="paterno[1]" placeholder="Apellido Paterno" value="{{ old("paterno[1]")}}" class="form-control" required="">
-									<input type="text" name="materno[1]" id="materno[1]" placeholder="Apellido Materno" value="{{ old("materno[1]")}}" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-sm-2" for="parentesco[1]">✱ Parentesco:</label>
-							<div class="form-group col-sm-2 pr-0 pl-0">
-								<input type="text" name="parentesco[1]" value="{{old('parentesco[1]')}}" class="form-control" required="">
-							</div>
-							<label class="col-form-label col-sm-2" for="telefono[1]">✱ Telefonos:</label>
-							<div class="form-group col-sm-6 pr-0 pl-0">
-								<div class="input-group">
-									<input numeroReferencia="1" type="text" name="telefono[1]" minlength="10" maxlength="10" value="{{old('telefono[1]')}}" class="form-control numeroReferencia" placeholder="Particular" required="">
-									<input numeroReferencia="1" type="text" name="celular[1]" minlength="10" maxlength="10" value="{{old('celular[1]')}}" class="form-control numeroReferencia" placeholder="Celular" required="">
-								</div>
-							</div>
-						</div>
 						@foreach ($referencias as $index=> $referencia)
 							<div class="form-group row">
 								<div class="col-12">
