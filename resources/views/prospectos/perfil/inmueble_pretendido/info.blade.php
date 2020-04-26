@@ -40,7 +40,7 @@
 				<label>Estado:  </label>
     			<label class="form-control" readonly="">
     				@if($inmueble->estado)
-							{{$inmueble->estado}}
+							{{$inmueble['estado']}}
 						@else
 							--
 						@endif
