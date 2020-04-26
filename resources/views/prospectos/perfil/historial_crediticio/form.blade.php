@@ -160,7 +160,9 @@
 									</div>
 									<select name="tarjetas_credito[]" id="tarjetas_credito" class="select-bancos form-control w-75" multiple="multiple">
 										@foreach ($bancos as $banco)
-											<option value="{{$banco->nombre}}" {{old('tarjetas_credito') && in_array($banco->nombre,old('tarjetas_credito')) ? 'selected=""' : ''}} title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
+											<option value="{{$banco->nombre}}" 
+												{{('["'.$banco->nombre.'"]')==$credito->tarjetas_credito ? 'selected=""' : ''}}
+												title="{{$banco->etiqueta}}">{{$banco->nombre}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -173,7 +175,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" step="any" min="0" class="form-control" name="limite_credito" value="{{old('limite_credito')}}" id="limite_credito">
+									<input type="number" step="any" min="0" class="form-control" name="limite_credito" value="{{$credito->limite_credito}}" id="limite_credito">
 								</div>
 							</div>
 						</div>
