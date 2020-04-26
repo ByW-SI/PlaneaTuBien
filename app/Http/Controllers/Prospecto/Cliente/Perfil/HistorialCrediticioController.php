@@ -76,7 +76,8 @@ class HistorialCrediticioController extends Controller
     public function update(Request $request, Prospecto $prospecto,PerfilHistorialCrediticioCliente $credito)
     {
         //
-        $credito->update($request->all());
+        $perfil = $prospecto->perfil;
+        $perfil->historial_crediticio->update($request->all());
         return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
     }
 
