@@ -78,7 +78,7 @@ class ReferenciaPersonalController extends Controller
         $perfil = $prospecto->perfil;
 
         foreach ($perfil->referencia_personals as $i => $referencia) {
-            $referencia->->update([
+            $referencia->update([
                 'nombre' => $request->nombre[$i+1],
                 'paterno' => $request->paterno[$i+1],
                 'materno' => $request->materno[$i+1],
