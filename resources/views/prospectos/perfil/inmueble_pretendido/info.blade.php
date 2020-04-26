@@ -155,7 +155,7 @@
 	</div>
 	<div class="card-footer">
 		<div class="d-flex justify-content-center">
-			<a href="#" class="btn btn-success">Editar Inmueble</a>
+			<a href="{{ route('prospectos.perfil.inmueble_pretendido.edit',['prospecto'=>$prospecto,'inmueble'=>$inmueble]) }}" class="btn btn-success">Editar Inmueble</a>
 		</div>
 	</div>
 </div>
