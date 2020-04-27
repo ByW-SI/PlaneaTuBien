@@ -30,10 +30,28 @@ class StoreReferenciaService
      * =======
      */
 
-    public function crearContrato($request){
+    public function crearContrato($request)
+    {
+
+        $montoRestanteParaAsignarAContrato = $this->presolicitud->perfil->cotizacion->monto;
+        $totalContratosParaCrear = $montoRestanteParaAsignarAContrato / 350000 + 1;
+
+        while ($montoRestanteParaAsignarAContrato > 500000) {
+
+            $montoRestanteParaAsignarAContrato -= 350000;
+
+            Contrato::create([
+                'numero_contrato' => count(Contrato::get()) + 1,
+                'monto' => 350000,
+                'estado' => 'registrado',
+                'grupo_id' => $request->grupo ? $request->grupo : 1,
+                'presolicitud_id' => $this->presolicitud->id,
+            ]);
+        }
+
         Contrato::create([
-            'numero_contrato' => count( Contrato::get() ) + 1,
-            'monto' => $this->presolicitud->perfil->cotizacion,
+            'numero_contrato' => count(Contrato::get()) + 1,
+            'monto' => $montoRestanteParaAsignarAContrato,
             'estado' => 'registrado',
             'grupo_id' => $request->grupo ? $request->grupo : 1,
             'presolicitud_id' => $this->presolicitud->id,

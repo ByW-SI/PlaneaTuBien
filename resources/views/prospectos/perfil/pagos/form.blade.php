@@ -1,39 +1,5 @@
 @extends('principal')
 @section('content')
-{{-- <div class="card">
-	<div class="card-header">
-		<h4>
-			{{$edit ? "Actualizar Pago" : "Nuevo Pago"}}
-</h4>
-<span>Tipo de inscripción:
-	{{$cotizacion->tipo_inscripcion == "inscripcion_diferida" ? 'Inscripción diferida' : ($cotizacion->tipo_inscripcion == "0_inscripcion_inicial" ? 'No se requiere pago de inscripción para continuar' : "Inscripción completa")}}</span>
-</div>
-<form method="POST"
-	action="{{ $edit ? route('prospectos.cotizacions.pagos.update',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion,'pago'=>$pago]) : route('prospectos.cotizacions.pagos.store',['prospecto'=>$prospecto,'cotizacion'=>$cotizacion]) }}">
-	@csrf
-	@if ($edit)
-	@method('PUT')
-	@endif
-	<div class="card-body">
-		@if ($errors->any())
-		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-				@endforeach
-			</ul>
-		</div>
-		@endif
-
-	</div>
-	<div class="card-header">
-		<div class="d-flex justify-content-center">
-			<button type="submit" class="btn btn-success">Guardar</button>
-		</div>
-	</div>
-</form>
-</div> --}}
-{{-- <hr> --}}
 
 <div class="container">
 	<h3 class="text-center text-uppercase text-muted">💵 NUEVO PAGO</h3>
@@ -45,75 +11,151 @@
 				@csrf
 				<fieldset>
 					<div class="row">
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="referencia">Prospecto</label>
-							<input type="text" class="form-control" value="{{$prospecto->full_name}}" readonly>
+
+						{{-- BOTONES GENERALES --}}
+
+						<div class="col-12">
+							<a href="{{route('prospectos.cotizacions.pagos.index', ['propecto' => $prospecto->id, 'cotizacion' => $cotizacion->id])}}" class="btn btn-primary rounded-0">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+								VER PAGOS
+							</a>
 						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="referencia">Email</label>
-							<input type="text" class="form-control" value="{{$prospecto->email}}" readonly>
+
+						{{-- DATOS PROSPECTO --}}
+
+						<div class="col-12 col-md-6 mt-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="referencia">Prospecto</label>
+											<input type="text" class="form-control" value="{{$prospecto->full_name}}"
+												readonly>
+										</div>
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="referencia">Email</label>
+											<input type="text" class="form-control" value="{{$prospecto->email}}"
+												readonly>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+
+						{{-- IDENTIFICADORES PAGO --}}
+
+						<div class="col-12 col-md-6 mt-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="referencia">Referencia</label>
+											<input type="text" class="form-control" step="any" min="0"
+												value="{{$cotizacion->folio}}" name="referencia" id="referencia">
+										</div>
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="folio">Folio</label>
+											<input type="text" class="form-control" step="any" min="0"
+												value="{{$folio}}" name="folio" id="folio" readonly="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{{-- DATOS PAGO --}}
+
+						<div class="col-12 col-md-6 mt-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+
+										{{-- CONTENEDOR INPUT FORMA PAGO --}}
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="forma">Forma de Pago</label>
+											<select name="forma" id="forma" class="form-control" required="">
+												<option value="">Seleccionar una opción</option>
+												<option value="Efectivo">Efectivo</option>
+												<option value="Depósito">Depósito</option>
+												<option value="Cheque">Cheque</option>
+												<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+												<option value="Tarjeta de Débito">Tarjeta de Débito</option>
+												<option value="Transferencia">Transferencia</option>
+												<option value="Mercado Pago">Mercado Pago</option>
+											</select>
+										</div>
+
+										{{-- CONTENEDOR MONTO --}}
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="monto">Monto</label>
+											<div class="input-group">
+												<div class="input group-prepend">
+													<span class="input-group-text">$</span>
+												</div>
+												<input type="number" class="form-control" step="any" value="0.00"
+													id="inputMonto"
+													min="1"
+													{{-- min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" --}}
+													name="monto" id="monto" required="">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{{-- DATOS DE IDENTIFICACION --}}
+
+						<div class="col-12 col-md-6 mt-4">
+
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										{{-- CONTENEDOR TIPO IDENTIFICACION --}}
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="identificacion">Tipo de
+												Identificación</label>
+											<select name="identificacion" id="identificacion" class="form-control"
+												required="">
+												<option value="">Seleccionar una opción</option>
+												<option value="INE">INE/IFE</option>
+												<option value="Pasaporte">Pasaporte</option>
+												<option value="Cédula Profesional">Cédula Profesional</option>
+												<option value="Cartilla">Cartilla</option>
+												<option value="Otro">Otro</option>
+											</select>
+										</div>
+
+										{{-- CONTENEDOR COMPROBANTE DOMICILIO --}}
+										<div class="col-12 col-md-6 mt-2">
+											<label class="text-muted text-uppercase" for="comprobante">Comprobante de
+												Domicilio</label>
+											<select name="comprobante" id="comprobante" class="form-control"
+												required="">
+												<option value="">Seleccionar una opción</option>
+												<option value="Luz">Luz</option>
+												<option value="Agua">Agua</option>
+												<option value="Teléfono">Teléfono</option>
+												<option value="Predial">Predial</option>
+												<option value="Otro">Otro</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
 					</div>
 					<div class="row">
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="referencia">Referencia</label>
-							<input type="text" class="form-control" step="any" min="0" value="{{$cotizacion->folio}}"
-								name="referencia" id="referencia">
-						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="folio">Folio</label>
-							<input type="text" class="form-control" step="any" min="0" value="{{$folio}}" name="folio"
-								id="folio" readonly="">
-						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="identificacion">Tipo de Identificación</label>
-							<select name="identificacion" id="identificacion" class="form-control" required="">
-								<option value="">Seleccionar una opción</option>
-								<option value="INE">INE/IFE</option>
-								<option value="Pasaporte">Pasaporte</option>
-								<option value="Cédula Profesional">Cédula Profesional</option>
-								<option value="Cartilla">Cartilla</option>
-								<option value="Otro">Otro</option>
-							</select>
-						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="comprobante">Comprobante de Domicilio</label>
-							<select name="comprobante" id="comprobante" class="form-control" required="">
-								<option value="">Seleccionar una opción</option>
-								<option value="Luz">Luz</option>
-								<option value="Agua">Agua</option>
-								<option value="Teléfono">Teléfono</option>
-								<option value="Predial">Predial</option>
-								<option value="Otro">Otro</option>
-							</select>
-						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="forma">Forma de Pago</label>
-							<select name="forma" id="forma" class="form-control" required="">
-								<option value="">Seleccionar una opción</option>
-								<option value="Efectivo">Efectivo</option>
-								<option value="Depósito">Depósito</option>
-								<option value="Cheque">Cheque</option>
-								<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-								<option value="Tarjeta de Débito">Tarjeta de Débito</option>
-								<option value="Transferencia">Transferencia</option>
-								<option value="Mercado Pago">Mercado Pago</option>
-							</select>
-						</div>
+
+
+
 						<div class="" id="div_banco" class="col-12 col-md-4 mt-2">
 
 						</div>
-						<div class="col-12 col-md-4 mt-2">
-							<label class="text-muted text-uppercase" for="monto">Monto</label>
-							<div class="input-group mb-3">
-								<div class="input group-prepend">
-									<span class="input-group-text">$</span>
-								</div>
-								<input type="number" class="form-control" step="any"
-									min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
-									name="monto" id="monto" required="">
-							</div>
-						</div>
+
 					</div>
 					<div class="row" id="grupoInputsMercadoPago" style="display:none">
 						<div class="col-12">
@@ -122,41 +164,43 @@
 						<div class="col-12 col-md-4 mt-2">
 							<label for="email" class="text-uppercase text-muted">Correo</label>
 							<input type="email" id="email" name="email" value="{{$prospecto->email}}"
-								placeholder="your email" class="form-control" required/>
+								placeholder="your email" class="form-control" required />
 						</div>
 						<div class="col-12 col-md-4 mt-2">
-							<label for="cardNumber" class="text-uppercase text-muted">Número de tarjeta de crédito:</label>
+							<label for="cardNumber" class="text-uppercase text-muted">Número de tarjeta de
+								crédito:</label>
 							<input type="text" id="cardNumber" data-checkout="cardNumber"
 								placeholder="4509 9535 6623 3704" value="4509 9535 6623 3704"
 								onselectstart="return false" onpaste="return false" onCopy="return false"
 								onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off
-								class="form-control" required minlength="6"/>
+								class="form-control" required minlength="6" />
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="securityCode" class="text-uppercase text-muted">Código de seguridad:</label>
 							<input type="text" id="securityCode" data-checkout="securityCode" placeholder="123"
 								value="123" onselectstart="return false" onpaste="return false" onCopy="return false"
 								onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off
-								class="form-control" required minlength="3"/>
+								class="form-control" required minlength="3" />
 						</div>
 						<div class="col-12 col-md-4 mt-2">
-							<label for="cardExpirationMonth" class="text-uppercase text-muted">Mes de expiración:</label>
+							<label for="cardExpirationMonth" class="text-uppercase text-muted">Mes de
+								expiración:</label>
 							<input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
 								placeholder="11" value="11" onselectstart="return false" onpaste="return false"
 								onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-								autocomplete=off class="form-control" minlength="2" required/>
+								autocomplete=off class="form-control" minlength="2" required />
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cardExpirationYear" class="text-uppercase text-muted">Año de expiración:</label>
 							<input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear"
 								placeholder="2025" value="2025" onselectstart="return false" onpaste="return false"
 								onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
-								autocomplete=off class="form-control" minlength="4" maxlength="4" required/>
+								autocomplete=off class="form-control" minlength="4" maxlength="4" required />
 						</div>
 						<div class="col-12 col-md-4 mt-2">
 							<label for="cardholderName" class="text-uppercase text-muted">Nombre del titular:</label>
 							<input type="text" id="cardholderName" data-checkout="cardholderName" placeholder="APRO"
-								value="APRO" class="form-control" required/>
+								value="APRO" class="form-control" required />
 						</div>
 						{{-- <div class="col-12 col-md-4 mt-2">
 							<label for="docType" class="text-uppercase text-muted">Document type:</label>
@@ -168,6 +212,35 @@
 								value="12345678" class="form-control" />
 						</div> --}}
 					</div>
+
+					<div class="row">
+						<div class="col-12 mt-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-12 col-md-4">
+											<label for="" class="text-uppercase text-muted">Total a pagar</label>
+											<input type="text" id="inputTotalAPagar"
+												value="{{$cotizacion->inscripcion - $cotizacion->total_pagado}}"
+												class="form-control" readonly>
+										</div>
+										<div class="col-12 col-md-4">
+											<label for="" class="text-uppercase text-muted">Monto pagado +
+												comisión</label>
+											<input name="montoMasComision" type="number" step="any" value="0.00"
+												class="form-control" id="inputMontoPagadoMasComision" readonly>
+										</div>
+										<div class="col-12 col-md-4">
+											<label for="" class="text-uppercase text-muted">Restante</label>
+											<input type="text" value="" class="form-control" readonly
+												id="inputRestante">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<hr>
 					<div class="row">
 						<div class="col-12">
@@ -178,6 +251,9 @@
 						</div>
 					</div>
 				</fieldset>
+
+
+
 			</form>
 		</div>
 	</div>
@@ -189,6 +265,44 @@
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 
 <script type="text/javascript">
+	class Pago{
+		static getMonto(){
+			return parseFloat($("#inputMonto").val())
+		}
+
+		static getTotalAPagar(){
+			return parseFloat( $('#inputTotalAPagar').val() )
+		}
+
+		static getRestante(){
+			return this.getTotalAPagar() - this.getMonto()
+		}
+
+		static actualizarRestante(){
+			$('#inputRestante').val( this.getRestante().toFixed(2) )
+		}
+	}
+
+	class Comision {
+
+		static getCobroComision(){
+			const MONTO = $('#inputMonto').val();
+
+			if( $('#forma').val() == 'Mercado Pago' ){
+				return MONTO * 0.10
+			}
+
+			return 0
+
+		}
+
+		static actualizar(){
+			const total = (Pago.getMonto() + this.getCobroComision()).toFixed(2)
+			$('#inputMontoPagadoMasComision').val( total )
+		}
+
+	}
+
 	// ==========================
 	// OBTENCION DE CLAVE PUBLICA
 	// ==========================
@@ -339,6 +453,11 @@ function sdkResponseHandler(status, response) {
 	// MANEJO DE INPUTS DE MERCADO PAGO
 	// ================================
 
+	$(document).on('change', '#forma, #inputMonto', function(){
+		Comision.actualizar()
+		Pago.actualizarRestante()
+	});
+
 	$(document).on('change','#forma', function(){
 		
 		const formaPago = $("#forma").val();
@@ -354,6 +473,16 @@ function sdkResponseHandler(status, response) {
 		});
 
 	});
+
+	// ==========================
+	// 
+	// ==========================
+
+	$(document).ready( function(){
+		Comision.actualizar()
+		Pago.actualizarRestante()
+		console.log( Pago.getRestante() )
+	} );
 
 	// ==========================
 	// 

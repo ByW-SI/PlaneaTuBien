@@ -80,7 +80,7 @@ class PagarInscripcionService
         // dd($this->prospecto->email);
 
         $payment = new MercadoPago\Payment();
-        $payment->transaction_amount = $this->request->monto;
+        $payment->transaction_amount = $this->request->montoMasComision;
         $payment->token = $this->request->token;
         $payment->description = "Inscripción";
         $payment->installments = 1;
@@ -93,6 +93,8 @@ class PagarInscripcionService
         $this->statusCompra = $payment->status;
         $this->detalleCompra = $payment->status_detail;
         $this->payment = $payment;
+
+        // dd($this->payment);
     }
 
     /**

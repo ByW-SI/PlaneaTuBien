@@ -102,6 +102,7 @@ class Cotizacion extends Model
     {
         return $this->hasOne('App\TaskSendMail','cotizacion_id','id');
     }
+
     public function inscripcionFaltante(){
         $pagos = $this->pago_inscripcions;
         $total_pagos = 0.00;
@@ -114,6 +115,7 @@ class Cotizacion extends Model
         $resta= $inscripcion - $total_pagos;
         return $resta;
     }
+    
     public function getTotalPagadoAttribute()
     {
         $pagos = $this->pago_inscripcions;

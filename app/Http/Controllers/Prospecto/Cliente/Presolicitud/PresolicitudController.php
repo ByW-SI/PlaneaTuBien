@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 use App\Contrato;
 use App\Cotizacion;
 use App\Http\Controllers\Controller;
+use App\MedioContacto;
 use App\PagoInscripcion;
 use App\Pagos;
 use App\Presolicitud;
 use App\Prospecto;
-use App\MedioContacto;
 use Illuminate\Http\Request;
 
 class PresolicitudController extends Controller
@@ -47,8 +47,10 @@ class PresolicitudController extends Controller
         if (!$prospecto->tienePerfil()) {
             return redirect()->back();
         }
+
         $mediosDeContacto = MedioContacto::get();
-        return view('prospectos.presolicitud.form', ['prospecto' => $prospecto,'mediosDeContacto' => $mediosDeContacto]);
+
+        return view('prospectos.presolicitud.form', ['prospecto' => $prospecto, 'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**
@@ -68,8 +70,8 @@ class PresolicitudController extends Controller
         }
 
         $rules = [
-            'paterno' => 'required|max:190',
-            'materno' => 'nullable|max:190',
+            'appaterno' => 'required|max:190',
+            'apmaterno' => 'nullable|max:190',
             'nombre' => 'required|max:190',
             'calle' => 'required|max:190',
             'numero_ext' => "required|max:190",
@@ -85,22 +87,23 @@ class PresolicitudController extends Controller
             'email' => "email|required|max:190",
             'fecha_nacimiento' => "date|required|after:" . date('Y-m-d', strtotime('-64 years')),
             'lugar_nacimiento' => "required|max:190",
-            'nacionalidad' => "required|max:190",
+            'nacionalidad_1' => "required|max:190",
             'sexo' => "required|in:Masculino,Femenino",
             // 'edad'=>'required|numeric|lte:64',
             'estado_civil' => "required|in:Soltero,Casado,Viudo,Divorciado,Unión Libre",
-            'profesion' => "required|max:190",
+            'ocupacion_1' => "required|max:190",
             'empresa' => "nullable|max:190",
             'puesto' => "nullable|max:190",
-            'antiguedad_actual' => "required|max:190",
-            'antiguedad_anterior' => "required|max:190",
+            'antiguedad_1' => "required|max:190",
+            'antiguedad_2' => "required|max:190",
             'ingreso_mensual' => "numeric|required",
             'enterarse' => "required|max:190",
         ];
         $this->validate($request, $rules);
         $perfil = $prospecto->perfil;
         $perfil->update([
-            'cotizacion_id' => $request->cotizacion_id
+            'cotizacion_id' => $request->cotizacion_id,
+            'municipio' => $request->municipio
         ]);
         $perfil->save();
         // return $perfil;
