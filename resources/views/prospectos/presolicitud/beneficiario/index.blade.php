@@ -6,7 +6,7 @@
 	<div class="card-body">
 		<div class="d-flex justify-content-center">
 			<a 
-			href="{{ route('prospectos.presolicitud.beneficiarios.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }} }}" 
+			href="{{ route('prospectos.presolicitud.beneficiarios.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>$presolicitud]) }} }}" 
 
 			class="btn btn-success">Editar datos personales</a>
 		</div>
