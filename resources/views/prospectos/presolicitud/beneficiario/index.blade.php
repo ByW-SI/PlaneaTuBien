@@ -32,7 +32,7 @@
 			</table>
 			<div class="d-flex justify-content-center">
 				<a 
-				href="{{ route('prospectos.presolicitud.beneficiarios.show',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" 
+				href="{{ url('prospectos.presolicitud.beneficiarios.show',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" 
 
 				class="btn btn-success">Editar datos personales</a>
 			</div>
