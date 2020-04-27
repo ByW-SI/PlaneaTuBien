@@ -89,7 +89,7 @@ class PresolicitudBeneficiarioController extends Controller
     public function show(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
-         return redirect()->route('prospectos.presolicitud.referencias.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]);
+         return redirect()->route('prospectos.presolicitud.beneficiario.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]);
     }
 
     /**
@@ -101,7 +101,7 @@ class PresolicitudBeneficiarioController extends Controller
     public function edit(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
-        return redirect()->route('prospectos.presolicitud.referencias.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]);
+        return redirect()->route('prospectos.presolicitud.beneficiario.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]);
 
        
     }
