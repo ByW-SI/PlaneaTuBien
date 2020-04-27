@@ -183,7 +183,7 @@ class PresolicitudController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function show(Presolicitud $presolicitud,Presolicitud $presolicitud)
+    public function show(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
         //
