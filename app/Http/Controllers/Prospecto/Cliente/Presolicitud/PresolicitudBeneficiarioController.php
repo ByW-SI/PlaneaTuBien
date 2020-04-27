@@ -136,9 +136,10 @@ class PresolicitudBeneficiarioController extends Controller
             return back()->withErrors('El porcentaje total debe ser igual al 100%')->withInput();
         }
         else{
+            $presolicitud->beneficiarios()->delete();
             $this->validate($request,$rules);
-            foreach ($presolicitud->beneficiarios() as $key=>$beneficiario) {
-                $beneficiario->update([
+            foreach ($request->paterno as $key=>$paterno) {
+                $beneficiario = new Beneficiario([
                     'paterno'=>$request->paterno[$key],
                     'materno'=>$request->materno[$key],
                     'nombre'=>$request->nombre[$key],
@@ -146,6 +147,7 @@ class PresolicitudBeneficiarioController extends Controller
                     'parentesco'=>$request->parentesco[$key],
                     'porcentaje'=>$request->porcentaje[$key]
                 ]);
+                $presolicitud->beneficiarios()->save($beneficiario);
             }
             return redirect()->route('prospectos.presolicitud.referencias.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
         }
