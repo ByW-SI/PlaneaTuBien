@@ -3,7 +3,7 @@
 <div class="card">
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Beneficiario'])
 		<div class="card-body">
-	<form method="POST" action="{{ route('prospectos.presolicitud.beneficiarios.store',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">
+	<form method="POST" action="{{ route('prospectos.presolicitud.beneficiarios.update',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">
 		@csrf
 		@method('PUT')
 			@if ($errors->any())
@@ -49,7 +49,7 @@
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">✱ Nombre(s)</label>
-						<input type="text" class="form-control" name="nombre[]" required="" value="$beneficiario->nombre}}">
+						<input type="text" class="form-control" name="nombre[]" required="" value="{{$beneficiario->nombre}}">
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">✱ Edad</label>
@@ -62,7 +62,7 @@
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">✱ Porcentaje del bien</label>
 						<div class="input-group">
-							<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
+							<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{$beneficiario->porcentaje}}">
 					        <div class="input-group-append">
 					          <div class="input-group-text">%</div>
 					        </div>
