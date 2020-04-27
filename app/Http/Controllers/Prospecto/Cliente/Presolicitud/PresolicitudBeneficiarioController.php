@@ -86,9 +86,15 @@ class PresolicitudBeneficiarioController extends Controller
      * @param  \App\Beneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function show(Beneficiario $beneficiario)
+    public function show(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
+         return redirect()->route('prospectos.presolicitud.referencias.index',
+        [
+            'prospecto'=>$prospecto,
+            'presolicitud'=>$presolicitud,
+            'beneficiarios'=>$presolicitud->beneficiarios()
+        ]);
     }
 
     /**
@@ -102,12 +108,7 @@ class PresolicitudBeneficiarioController extends Controller
         //
         
 
-        return redirect()->route('prospectos.presolicitud.referencias.index',
-        [
-            'prospecto'=>$prospecto,
-            'presolicitud'=>$presolicitud,
-            'beneficiarios'=>$presolicitud->beneficiarios()
-        ]);
+       
     }
 
     /**
