@@ -27,7 +27,7 @@
 					</div>
 				</div>
 			</div>
-			@foreach ($beneficiarios as $beneficiario)
+			@foreach ($presolicitud->beneficiarios as $beneficiario)
 				<div class="row">
 					<div class="col-12">
 						<div class="d-flex bd-highlight">

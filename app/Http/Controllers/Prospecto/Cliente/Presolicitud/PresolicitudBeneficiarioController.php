@@ -109,8 +109,7 @@ class PresolicitudBeneficiarioController extends Controller
         return redirect()->route('prospectos.presolicitud.referencia.edit',
         [
             'prospecto'=>$prospecto,
-            'presolicitud'=>$presolicitud,
-            'beneficiarios'=>$presolicitud->beneficiarios()
+            'presolicitud'=>$presolicitud
         ]);
 
        
