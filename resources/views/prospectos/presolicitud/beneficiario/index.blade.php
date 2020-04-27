@@ -4,12 +4,7 @@
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Beneficiario'])
 
 	<div class="card-body">
-		<div class="d-flex justify-content-center">
-			<a 
-			href="{{ route('prospectos.presolicitud.beneficiarios.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]) }}" 
-
-			class="btn btn-success">Editar datos personales</a>
-		</div>
+		
 		<div class="row">
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -39,6 +34,13 @@
 			</table>
 			
 
+		</div>
+		<br><br>
+		<div class="d-flex justify-content-center">
+			<a 
+			href="{{ route('prospectos.presolicitud.beneficiarios.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]) }}" 
+
+			class="btn btn-success">Editar datos personales</a>
 		</div>
 	</div>
 	@include('prospectos.presolicitud.footer',['presolicitud'=>$presolicitud])
