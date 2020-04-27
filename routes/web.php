@@ -205,7 +205,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 	->name('prospectos.')
 	->group(function(){
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_plan_libre','Documentos\DocumentosController@anexoPlanLibre')->name('presolicitud.contratos.anexo_plan_libre');
-		Route::resource('presolicitud','PresolicitudController',['except'=>['show']])->middleware('auth');
+		Route::resource('presolicitud','PresolicitudController')->middleware('auth');
 		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']])->middleware('auth');
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController')->middleware('auth');
