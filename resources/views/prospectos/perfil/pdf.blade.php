@@ -79,7 +79,7 @@
 	  						<label style="/*border: 1px solid #ccc;*/ text-align: center;">Nacionalidad:</label>
 	  					</div>
 	  					<div class="six columns u-pull-right" style="width: 70%;">
-	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_1.$perfil->paterno_1.$perfil->materno_1}}</label>
+	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_1." ".$perfil->paterno_1." ".$perfil->materno_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->ocupacion_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->empresa_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->antiguedad_1}}</label>
@@ -102,7 +102,7 @@
 		  						<label style="/*border: 1px solid #ccc;*/ text-align: center;">Nacionalidad:</label>
 		  					</div>
 		  					<div class="six columns u-pull-right" style="width: 70%;">
-		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_completo_2}}</label>
+		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_2." ".$perfil->paterno_2." ".$perfil->materno_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->ocupacion_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->empresa_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->antiguedad_2}}</label>
