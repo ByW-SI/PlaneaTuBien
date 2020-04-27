@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Prospecto\Cliente\Perfil;
 
 use App\PerfilInmueblePretendidoCliente;
 use Illuminate\Http\Request;
+use App\Prospecto;
+use App\MedioContacto;
 use App\Http\Controllers\Controller;
 
 class InmueblePretendidoController extends Controller
@@ -56,9 +58,12 @@ class InmueblePretendidoController extends Controller
      * @param  \App\PerfilInmueblePretendidoCliente  $perfilInmueblePretendidoCliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(PerfilInmueblePretendidoCliente $perfilInmueblePretendidoCliente)
+    public function edit(Prospecto $prospecto,PerfilInmueblePretendidoCliente $inmueble)
     {
         //
+        $perfil = $prospecto->perfil;
+        $mediosDeContacto = MedioContacto::get();
+        return view('prospectos.perfil.inmueble_pretendido.form',['prospecto'=>$prospecto,'inmueble'=>$perfil->inmueble_pretendido,'perfil'=>$perfil,'cotizacion'=>$perfil->cotizacion,'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**
@@ -68,9 +73,12 @@ class InmueblePretendidoController extends Controller
      * @param  \App\PerfilInmueblePretendidoCliente  $perfilInmueblePretendidoCliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PerfilInmueblePretendidoCliente $perfilInmueblePretendidoCliente)
+    public function update(Request $request, Prospecto $prospecto,PerfilInmueblePretendidoCliente $inmueble)
     {
         //
+        $perfil = $prospecto->perfil;
+        $perfil->inmueble_pretendido->update($request->all());
+        return redirect()->route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]);
     }
 
     /**

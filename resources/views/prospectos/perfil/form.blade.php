@@ -98,7 +98,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="" >
+							<input type="number" name="salario_1" class="form-control" min="0" id="salario_1" value="{{old('salario_1') ? old('salario_1') : $prospecto->sueldo}}" required="" onchange="actualizarTotalIngreso()" >
 						</div>
 		    		</div>
 		    	</div>
@@ -199,7 +199,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon1">$</span>
 									</div>
-									<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja" value="{{old('salario_2')}}" required="">
+									<input type="number" name="salario_2" class="form-control" min="0" id="salario_2" placeholder="Salario de la pareja" value="{{old('salario_2')}}" required="" >
 								</div>
 				    		</div>
 				    	</div>
@@ -363,7 +363,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0">
+		    				<input type="number" name="ingresos_extras" id="ingresos_extras" class="form-control" step="any" value="{{old('ingresos_extras')}}" min="0" onchange="actualizarTotalIngreso()">
 						</div>
 		    		</div>
 		    		<label for="ingreso_total" class="col-form-label col-sm-2">✱ Ingresos totales:</label>
@@ -372,7 +372,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">$</span>
 							</div>
-		    				<input type="number" name="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="">
+		    				<input type="number" name="ingreso_total" id="ingreso_total" class="form-control" step="any" min="0" value="{{old('ingresos_extras')}}" required="" readonly>
 						</div>
 		    		</div>
 		    	</div>
@@ -630,9 +630,9 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="descripcion_calificacion" class="col-form-label col-sm-3">Descripción de calificación:</label>
+					<label for="descripcion_calificacion" class="col-form-label col-sm-3">✱ Descripción de calificación:</label>
 					<div class="col-sm-9">
-						<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion">{{old('descripcion_calificacion')}}</textarea>
+						<textarea class="form-control" rows="3" name="descripcion_calificacion" id="descripcion_calificacion" required="">{{old('descripcion_calificacion')}}</textarea>
 					</div>
 				</div>
 		    </div>
@@ -1079,5 +1079,17 @@
 				}
 			});
 		});
+		function actualizarTotalIngreso() {
+			var Total=parseInt(0,10);;
+		  if ($("#salario_1").val()) {
+		  	Total+=parseInt($("#salario_1").val(),10);
+		  }
+		  if ($("#ingresos_extras").val()) {
+		  	Total+=parseInt($("#ingresos_extras").val(),10);
+		  }
+		  $("#ingreso_total").val(Total);
+
+		}
+
     </script>
 @endpush

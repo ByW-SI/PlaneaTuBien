@@ -161,7 +161,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Profesión/Actividad</label>
-					<input type="text" class="form-control" value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}" name="ocupacion_id" required="">
+					<input type="text" class="form-control" value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}" name="ocupacion_1" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Empresa donde trabaja</label>
@@ -174,7 +174,7 @@
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Antigüedad trabajo actual</label>
 					<input type="text" class="form-control" value="{{$prospecto->perfil->antiguedad_1}}"
-						name="antiguedad_actual" required="">
+						name="antiguedad_1" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Antigüedad trabajo anterior</label>
@@ -189,11 +189,16 @@
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ ¿Cómo se entero de nosotros?</label>
 					<select name="enterarse" id="enterarse" required="" class="form-control">
-						<option value="">Medío por el que se entero de nosotros</option>
+						@foreach ($mediosDeContacto as $medioDeContacto)
+							<option value="{{$medioDeContacto->id}}"
+							    {{ $medioDeContacto->nombre ==$prospecto->perfil->inmueble_pretendido->medio_entero ? 'selected=""' : ''}}  
+								>{{$medioDeContacto->nombre}}</option>
+						@endforeach
+						{{--<option value="">Medío por el que se entero de nosotros</option>
 						<option value="Internet">Internet</option>
 						<option value="T.V.">T.V.</option>
 						<option value="Periodico">Periodico</option>
-						<option value="Otro">Otro</option>
+						<option value="Otro">Otro</option>--}}
 					</select>
 				</div>
 			</div>

@@ -79,7 +79,7 @@
 	  						<label style="/*border: 1px solid #ccc;*/ text-align: center;">Nacionalidad:</label>
 	  					</div>
 	  					<div class="six columns u-pull-right" style="width: 70%;">
-	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_completo_1}}</label>
+	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_1." ".$perfil->paterno_1." ".$perfil->materno_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->ocupacion_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->empresa_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->antiguedad_1}}</label>
@@ -102,7 +102,7 @@
 		  						<label style="/*border: 1px solid #ccc;*/ text-align: center;">Nacionalidad:</label>
 		  					</div>
 		  					<div class="six columns u-pull-right" style="width: 70%;">
-		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_completo_2}}</label>
+		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_2." ".$perfil->paterno_2." ".$perfil->materno_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->ocupacion_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->empresa_2}}</label>
 		  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->antiguedad_2}}</label>
@@ -416,7 +416,7 @@
           <div class="twelve columns">
             <div class="six columns u-pull-left">
               <div class="ten columns u-pull-left">
-                <label><input type="radio" id="tarjeta_debito_si" {{$perfil->historial_crediticio->tarjeta_debito ? 'checked="checked"' :""}}>Tarjeta de Débito o Cuenta de Ahorro</label>
+                <label><input type="radio" id="tarjeta_debito_si" {{$perfil->historial_crediticio->numero_tarjeta_debito!=0 ? 'checked="checked"' :""}}>Tarjeta de Débito o Cuenta de Ahorro</label>
               </div>
               <div class="two columns u-pull-right">
                 <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->historial_crediticio->numero_tarjeta_debito ? $perfil->historial_crediticio->numero_tarjeta_debito : "0"}}</label>
@@ -424,7 +424,7 @@
             </div>
             <div class="six columns u-pull-right">
               <div class="ten columns u-pull-left">
-                <label><input type="radio" id="tarjeta_credito_si" {{$perfil->historial_crediticio->tarjeta_credito ? 'checked="checked"' :""}}>Tarjeta de Crédito</label>
+                <label><input type="radio" id="tarjeta_credito_si" {{$perfil->historial_crediticio->numero_tarjeta_credito!=0 ? 'checked="checked"' :""}}>Tarjeta de Crédito</label>
               </div>
               <div class="two columns u-pull-right">
                 <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->historial_crediticio->numero_tarjeta_credito ? $perfil->historial_crediticio->numero_tarjeta_credito : "0"}}</label>
@@ -493,10 +493,14 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_1_semanal" {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_1_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_1 == "Semanal" ? 'checked="checked"' :""}}
+                      >Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_1_mensual" {{!$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_1_mensual" 
+                      {{$perfil->historial_crediticio->tipo_destino_1 == "Mensual" ? 'checked="checked"' :""}}
+                      >Mensual</label>
                   </div>
                 </div>
               </div>
@@ -520,10 +524,14 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_2_semanal" {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_2_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_2 == "Semanal" ? 'checked="checked"' :""}}
+                      >Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
-                    <label><input type="radio" id="tipo_destino_2_mensual" {{!$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
+                    <label><input type="radio" id="tipo_destino_2_mensual" 
+                      {{$perfil->historial_crediticio->tipo_destino_2 == "Mensual" ? 'checked="checked"' :""}}
+                      >Mensual</label>
                   </div>
                 </div>
               </div>
@@ -547,7 +555,8 @@
               <div class="one-half column u-pull-left">
                 <div class="row">
                   <div class="one-half column u-pull-left">
-                    <label><input type="radio" id="tipo_destino_3_semanal" {{$perfil->historial_crediticio->tipo_destino_3 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
+                    <label><input type="radio" id="tipo_destino_3_semanal" 
+                      {{$perfil->historial_crediticio->tipo_destino_3 == "Semanal" ? 'checked="checked"' :""}}>Semanal</label>
                   </div>
                   <div class="one-half column u-pull-right">
                     <label><input type="radio" id="tipo_destino_3_mensual" {{$perfil->historial_crediticio->tipo_destino_3 == "Mensual" ? 'checked="checked"' :""}}>Mensual</label>
@@ -826,7 +835,7 @@
                   <label for="" style="text-align: left;">Nombre:</label>
                 </div>
                 <div class="ten columns u-pull-right">
-                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$referencia->nombre_completo}}</label>
+                  <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$referencia->nombre.$referencia->paterno.$referencia->materno}}</label>
                 </div>
               </div>
               <div class="one-third column u-pull-right">
