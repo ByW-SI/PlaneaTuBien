@@ -67,8 +67,8 @@ class PresolicitudController extends Controller
         }
 
         $rules = [
-            'paterno' => 'required|max:190',
-            'materno' => 'nullable|max:190',
+            'appaterno' => 'required|max:190',
+            'apmaterno' => 'nullable|max:190',
             'nombre' => 'required|max:190',
             'calle' => 'required|max:190',
             'numero_ext' => "required|max:190",
@@ -99,7 +99,8 @@ class PresolicitudController extends Controller
         $this->validate($request, $rules);
         $perfil = $prospecto->perfil;
         $perfil->update([
-            'cotizacion_id' => $request->cotizacion_id
+            'cotizacion_id' => $request->cotizacion_id,
+            'municipio' => $request->municipio
         ]);
         $perfil->save();
         // return $perfil;

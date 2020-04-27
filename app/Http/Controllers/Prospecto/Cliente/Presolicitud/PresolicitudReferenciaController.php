@@ -47,9 +47,16 @@ class PresolicitudReferenciaController extends Controller
      */
     public function store(Prospecto $prospecto, Presolicitud $presolicitud,Request $request)
     {
+        // dd('HERE');
+
+        if($presolicitud->perfil->cotizacion->monto < 350000){
+            return redirect()->back()->withErrors([
+                'error' => 'La cotización debe tener un monto mayor a $350,000.00'
+            ]);
+        }
+
         $storeReferenciaService = new StoreReferenciaService($prospecto, $presolicitud, $request);
         return redirect()->route('prospectos.presolicitud.contratos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
-        // return redirect()->route('prospectos.presolicitud.recibos.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
     }
 
     /**

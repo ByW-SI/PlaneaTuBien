@@ -44,12 +44,12 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Apellido Paterno</label>
-					<input type="text" class="form-control" name="paterno" required=""
+					<input type="text" class="form-control" name="appaterno" required=""
 						value="{{$prospecto->appaterno}}">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Apellido Materno</label>
-					<input type="text" class="form-control" name="materno" required=""
+					<input type="text" class="form-control" name="apmaterno" required=""
 						value="{{$prospecto->apmaterno}}">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -74,7 +74,7 @@
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Código Postal</label>
 					<input type="text" class="form-control" value="{{$prospecto->perfil->cp}}" name="cp" id="cp"
-						required="">
+						required="" minlength="5" maxlength="5">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Colonia o Población</label>
@@ -131,8 +131,8 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Nacionalidad</label>
-					<input type="text" class="form-control" value="{{$prospecto->perfil->nacionalidad_1}}"
-						name="nacionalidad" required="">
+					<input type="text" class="form-control" value="{{ old('nacionalidad_1') ?: $prospecto->perfil->nacionalidad_1 }}"
+						name="nacionalidad_1" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Sexo</label>
@@ -161,7 +161,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Profesión/Actividad</label>
-					<input type="text" class="form-control" value="{{old('profesion')}}" name="profesion" required="">
+					<input type="text" class="form-control" value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}" name="ocupacion_id" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Empresa donde trabaja</label>
@@ -169,7 +169,7 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Puesto</label>
-					<input type="text" class="form-control" value="{{old('puesto')}}" name="puesto">
+					<input type="text" class="form-control" value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}" name="ocupacion_1">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Antigüedad trabajo actual</label>
@@ -178,8 +178,8 @@
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Antigüedad trabajo anterior</label>
-					<input type="text" class="form-control" value="{{old('antiguedad_anterior')}}"
-						name="antiguedad_anterior" required="">
+					<input type="text" class="form-control" value="{{old('antiguedad_2') ?: $prospecto->perfil->antiguedad_2}}"
+						name="antiguedad_2" required="">
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">✱ Ingreso Mensual Familiar</label>
