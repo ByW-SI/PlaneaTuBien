@@ -97,7 +97,7 @@ class PresolicitudBeneficiarioController extends Controller
      * @param  \App\Beneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Prospecto $prospecto,Presolicitud $presolicitud,Request $request)
+    public function edit(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
         
