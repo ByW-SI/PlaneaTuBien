@@ -2,7 +2,14 @@
 @section('content')
 <div class="card">
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Beneficiario'])
+
 	<div class="card-body">
+		<div class="d-flex justify-content-center">
+			<a 
+			href="{{ route('prospectos.presolicitud.beneficiarios.show',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" 
+
+			class="btn btn-success">Editar datos personales</a>
+		</div>
 		<div class="row">
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -30,12 +37,7 @@
 					@endforeach
 				</tbody>
 			</table>
-			<div class="d-flex justify-content-center">
-				<a 
-				href="{{ url('prospectos.presolicitud.beneficiarios.show',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}" 
-
-				class="btn btn-success">Editar datos personales</a>
-			</div>
+			
 
 		</div>
 	</div>
