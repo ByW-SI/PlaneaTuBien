@@ -34,9 +34,6 @@
 						  	<div class="p-2 w-100 bd-highlight">
 						  		<label>Beneficiario</label>
 						  	</div>
-						  	<div class="p-2 flex-shrink-1 bd-highlight">
-						  		<a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
-						  	</div>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
