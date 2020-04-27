@@ -94,7 +94,8 @@
 												</div>
 												<input type="number" class="form-control" step="any" value="0.00"
 													id="inputMonto"
-													min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}"
+													min="1"
+													{{-- min="{{$cotizacion->tipo_inscripcion != 'inscripcion_total'? '1' : ( round($cotizacion->inscripcionFaltante(),2)< round($cotizacion->inscripcion_total,2) ? '1' : round($cotizacion->inscripcion_total,2))}}" --}}
 													name="monto" id="monto" required="">
 											</div>
 										</div>
