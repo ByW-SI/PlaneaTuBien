@@ -47,7 +47,7 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link {{$active == "Solicitante" ? 'active' :''}}"
-      href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto]) }}">SOLICITANTE</a>
+      href="{{ route('prospectos.presolicitud.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">SOLICITANTE</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{$active == "Conyuge" ? 'active' :''}}"
