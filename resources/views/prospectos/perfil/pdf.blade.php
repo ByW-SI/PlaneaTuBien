@@ -79,7 +79,7 @@
 	  						<label style="/*border: 1px solid #ccc;*/ text-align: center;">Nacionalidad:</label>
 	  					</div>
 	  					<div class="six columns u-pull-right" style="width: 70%;">
-	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_completo_1}}</label>
+	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->nombre_1.$perfil->paterno_1.$perfil->materno_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->ocupacion_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->empresa_1}}</label>
 	  						<label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->antiguedad_1}}</label>
@@ -416,7 +416,7 @@
           <div class="twelve columns">
             <div class="six columns u-pull-left">
               <div class="ten columns u-pull-left">
-                <label><input type="radio" id="tarjeta_debito_si" {{$perfil->historial_crediticio->numero_tarjeta_debito ? 'checked="checked"' :""}}>Tarjeta de Débito o Cuenta de Ahorro</label>
+                <label><input type="radio" id="tarjeta_debito_si" {{$perfil->historial_crediticio->numero_tarjeta_debito!=0 ? 'checked="checked"' :""}}>Tarjeta de Débito o Cuenta de Ahorro</label>
               </div>
               <div class="two columns u-pull-right">
                 <label style="border-bottom: 0.5px solid #ccc; text-align: center;">{{$perfil->historial_crediticio->numero_tarjeta_debito ? $perfil->historial_crediticio->numero_tarjeta_debito : "0"}}</label>
