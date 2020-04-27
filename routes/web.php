@@ -209,7 +209,6 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::resource('presolicitud.credencials','CredencialController',['except'=>['index','destroy']]);
 		Route::resource('presolicitud.conyuge','PresolicitudConyugeController',['except'=>['show']])->middleware('auth');
 		Route::resource('presolicitud.beneficiarios','PresolicitudBeneficiarioController')->middleware('auth');
-		Route::get('presolicitud.beneficiariosedits','PresolicitudBeneficiarioController@edit')->middleware('auth');
 		Route::resource('presolicitud.recibos','PresolicitudReciboController')->middleware('auth');
 		Route::resource('presolicitud.referencias','PresolicitudReferenciaController')->middleware('auth');
 		// Premio de mensualidades
