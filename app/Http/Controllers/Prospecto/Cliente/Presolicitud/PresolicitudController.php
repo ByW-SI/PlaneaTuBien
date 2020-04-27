@@ -183,9 +183,22 @@ class PresolicitudController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function show(Presolicitud $presolicitud)
+    public function show(Presolicitud $presolicitud,Presolicitud $presolicitud)
     {
         //
+        //
+        if ($prospecto->perfil) {
+            //dd($prospecto->perfil->presolicitud);
+            if ($prospecto->perfil->presolicitud) {
+                //$presolicitud = $prospecto->perfil->presolicitud;
+                //dd($presolicitud->status);
+                return view('prospectos.presolicitud.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
+            } else {
+                return redirect()->route('prospectos.presolicitud.create', ['prospecto' => $prospecto]);
+            }
+        } else {
+            return back();
+        }
     }
 
     /**
