@@ -97,9 +97,17 @@ class PresolicitudBeneficiarioController extends Controller
      * @param  \App\Beneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Beneficiario $beneficiario)
+    public function edit(Prospecto $prospecto,Presolicitud $presolicitud,Request $request)
     {
         //
+        
+
+        return redirect()->route('prospectos.presolicitud.referencias.index',
+        [
+            'prospecto'=>$prospecto,
+            'presolicitud'=>$presolicitud,
+            'beneficiarios'=>$presolicitud->beneficiarios()
+        ]);
     }
 
     /**
@@ -109,9 +117,42 @@ class PresolicitudBeneficiarioController extends Controller
      * @param  \App\Beneficiario  $beneficiario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Beneficiario $beneficiario)
+    public function update(Prospecto $prospecto,Presolicitud $presolicitud,Request $request)
     {
         //
+        //
+
+        $rules =[
+            'paterno.*'=>'required|max:190',
+            'materno.*'=>'nullable|max:190',
+            'nombre.*'=>'required|max:190',
+            'edad.*'=>'required|numeric',
+            'parentesco.*'=>'required|max:190',
+            'porcentaje.*'=>'required|numeric|max:100'
+        ];
+        $porcentaje_total = 0.00;
+        foreach ($request->porcentaje as $porcentaje) {
+            $porcentaje_total+=$porcentaje;
+        }
+        // $porcentaje_total = 0.00;
+        if($porcentaje_total != 100){
+            return back()->withErrors('El porcentaje total debe ser igual al 100%')->withInput();
+        }
+        else{
+            $this->validate($request,$rules);
+            foreach ($presolicitud->beneficiarios() as $key=>$beneficiario) {
+                $beneficiario->update([
+                    'paterno'=>$request->paterno[$key],
+                    'materno'=>$request->materno[$key],
+                    'nombre'=>$request->nombre[$key],
+                    'edad'=>$request->edad[$key],
+                    'parentesco'=>$request->parentesco[$key],
+                    'porcentaje'=>$request->porcentaje[$key]
+                ]);
+            }
+            return redirect()->route('prospectos.presolicitud.referencias.index',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        }
+
     }
 
     /**
