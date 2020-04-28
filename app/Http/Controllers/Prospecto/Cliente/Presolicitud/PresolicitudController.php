@@ -86,7 +86,7 @@ class PresolicitudController extends Controller
             'tel_celular' => "required|max:15",
             'email' => "email|required|max:190",
             'fecha_nacimiento' => "date|required|after:" . date('Y-m-d', strtotime('-64 years')),
-            'lugar_nacimiento' => "required|max:190",
+            // 'lugar_nacimiento' => "required|max:190",
             'nacionalidad_1' => "required|max:190",
             'sexo' => "required|in:Masculino,Femenino",
             // 'edad'=>'required|numeric|lte:64',
@@ -101,6 +101,7 @@ class PresolicitudController extends Controller
         ];
         $this->validate($request, $rules);
         $perfil = $prospecto->perfil;
+        $prospecto->update($request->all());
         $perfil->update([
             'cotizacion_id' => $request->cotizacion_id,
             'municipio' => $request->municipio
