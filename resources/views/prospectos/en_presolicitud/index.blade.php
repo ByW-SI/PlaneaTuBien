@@ -31,10 +31,12 @@
                                 <td>{{$presolicitud->id}}</td>
                                 <td>
                                     {{-- BOTÓN MODIFICAR PLAN --}}
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-presolicitud-{{$presolicitud->id}}">
-                                        Modificar
-                                    </button>
+                                    <div class="d-flex justify-content-center">
+                                        <a 
+                                        href="{{route('prospectos.presolicitud.show',['prospecto'=>$presolicitud->perfil->prospecto,'presolicitud'=>$presolicitud]) }}" 
+
+                                        class="btn btn-primary">Modificar</a>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
