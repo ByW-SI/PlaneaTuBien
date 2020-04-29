@@ -2,12 +2,12 @@
   <h5>
     Pre solicitud para {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
   </h5>
-  @if ($presolicitud->status <= 100) <div class="progress">
+  @if ($presolicitud->status < 100) <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
       aria-valuenow="{{$presolicitud->status}}" aria-valuemin="0" aria-valuemax="100"
       style="width: {{$presolicitud->status}}%"></div>
 </div>
-@else
+@endif
 <div class="d-flex justify-content-center">
   <div>
     <a href="{{ route('prospectos.presolicitud.manual',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}"
@@ -42,7 +42,7 @@
   class="btn btn-info mr-3">Premio de mensualidad adelantada</a>
 </div> --}}
 </div>
-@endif
+{{-- @endif --}}
 </div>
 <ul class="nav nav-tabs">
   <li class="nav-item">
