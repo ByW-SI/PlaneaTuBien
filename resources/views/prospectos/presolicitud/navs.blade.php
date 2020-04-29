@@ -2,7 +2,7 @@
   <h5>
     Pre solicitud para {{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
   </h5>
-  @if ($presolicitud->status < 100) <div class="progress">
+  @if ($presolicitud->status <= 100) <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
       aria-valuenow="{{$presolicitud->status}}" aria-valuemin="0" aria-valuemax="100"
       style="width: {{$presolicitud->status}}%"></div>
