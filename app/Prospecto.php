@@ -17,6 +17,7 @@ class Prospecto extends Model
         'appaterno',
         'apmaterno',
         'sexo',
+        'fecha_nacimiento',
         'email',
         'telefono',
         'celular',
