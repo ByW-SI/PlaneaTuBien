@@ -16,7 +16,7 @@ class ApiEmpleadoController extends Controller
     }
 
     public function getProspectos(Empleado $empleado){
-    	return response()->json($empleado->prospectos->unique());
+    	return response()->json($empleado->prospectosActuales()->get());
     	// return $empleado->prospectos;
     }
 }

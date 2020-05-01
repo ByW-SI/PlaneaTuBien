@@ -4,6 +4,7 @@ namespace App\Services\Cita;
 
 use App\Citas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexCitaConfirmadaService
 {
@@ -13,6 +14,7 @@ class IndexCitaConfirmadaService
     public function __construct(Request $request)
     {
         $this->setCitas();
+        $this->filtrarCitasPorUsuarioEnSesion();
         $this->filtrarCitasPorFechaDeInicio($request->fechaCitaInicio);
         $this->filtrarCitasPorFechaDeFin($request->fechaCitaFin);
     }
@@ -22,6 +24,12 @@ class IndexCitaConfirmadaService
      * METHODS
      * =======
      */
+
+    public function filtrarCitasPorUsuarioEnSesion()
+    {
+        $idsProspectosActuales = Auth::user()->empleado->prospectosActuales()->get()->pluck('id')->toArray();
+        $this->citas = $this->citas->whereIn('prospecto_id', $idsProspectosActuales);
+    }
 
     public function filtrarCitasPorFechaDeInicio($fecha)
     {

@@ -129,12 +129,22 @@ class Empleado extends Model
     {
         return $this->hasMany('App\EmpleadoFaltaAdministrativa');
     }
+
     public function prospectos()
     {
         return $this->belongsToMany('App\Prospecto')
             ->using('App\EmpleadoProspecto')
             ->withPivot('temporal', 'activo', 'fechaInicioTemporal', 'fechaFinTemporal');
     }
+
+    public function prospectosActuales()
+    {
+        $prospectosDentroDeFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '>', date('Y-m-d'))->wherePivot('activo',1)->get();
+        $prospectosSinFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '=', null)->wherePivot('activo',1)->get();
+        $prospectosActuales = $prospectosDentroDeFechaFin->merge($prospectosSinFechaFin)->pluck('id')->flatten()->toArray();
+        return $this->id == 1 ? Prospecto::where('id','>',0) : Prospecto::whereIn('id',$prospectosActuales);
+    }
+
     public function crms()
     {
         return $this->hasManyThrough('App\ProspectoCRM', 'App\Prospecto');
@@ -170,8 +180,9 @@ class Empleado extends Model
         return $query->where('cargo', 'Gerente');
     }
 
-    public function scopeAsesores($query){
-        return $query->where('cargo','Asesor');
+    public function scopeAsesores($query)
+    {
+        return $query->where('cargo', 'Asesor');
     }
 
     /**

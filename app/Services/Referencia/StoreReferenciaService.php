@@ -34,15 +34,14 @@ class StoreReferenciaService
     {
 
         $montoRestanteParaAsignarAContrato = $this->presolicitud->perfil->cotizacion->monto;
-        $totalContratosParaCrear = $montoRestanteParaAsignarAContrato / 350000 + 1;
 
         while ($montoRestanteParaAsignarAContrato > 500000) {
 
-            $montoRestanteParaAsignarAContrato -= 350000;
+            $montoRestanteParaAsignarAContrato -= 300000;
 
             Contrato::create([
                 'numero_contrato' => count(Contrato::get()) + 1,
-                'monto' => 350000,
+                'monto' => 300000,
                 'estado' => 'registrado',
                 'grupo_id' => $request->grupo ? $request->grupo : 1,
                 'presolicitud_id' => $this->presolicitud->id,

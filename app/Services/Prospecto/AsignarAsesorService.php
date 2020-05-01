@@ -33,7 +33,7 @@ class AsignarAsesorService
     public function asignarNuevoAsesorComoOficial($prospecto)
     {
         $prospecto->asesores()->attach($this->asesor, ['activo' => 1, 'temporal' => 0]);
-        $prospecto->estatus()->associate(1);
+        // $prospecto->estatus()->associate(1);
         $prospecto->save();
         $prospecto->update([
             'empleado_id' => $this->asesor->id,
@@ -42,8 +42,8 @@ class AsignarAsesorService
 
     public function asignarAsesoresComoTemporales($prospecto)
     {
-        EmpleadoProspecto::where('prospecto_id', $prospecto->id)->update([
-            'temporal' => 1
+        EmpleadoProspecto::where('prospecto_id', $prospecto->id)->where('temporal', 0)->update([
+            'activo' => 0
         ]);
     }
 

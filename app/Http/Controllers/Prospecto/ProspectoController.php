@@ -69,9 +69,9 @@ class ProspectoController extends Controller
     }
 
     public function enPresolicitud(){
-        $prospectos = Prospecto::has('perfil')->has('cotizaciones')->get();
-        $presolicitudes = Presolicitud::whereHas('perfil', function($query){
-            return $query->has('cotizacion');
+        $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
+        $presolicitudes = Presolicitud::whereHas('perfil', function($query) use($prospectos){
+            return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
         })->get();
         $planes = Plan::get();
         return view('prospectos.en_presolicitud.index', compact('prospectos','presolicitudes','planes'));
