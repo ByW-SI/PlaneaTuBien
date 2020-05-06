@@ -63,7 +63,7 @@
                                 </div>
                                 <select name="propiedad" class="form-control" id="propiedad">
                                     @for($i = 300000; $i <= 20000000; $i += 50000)
-                                    	<option value="{{ $i }}">{{ number_format($i, 2) }}</option>
+                                    	<option value="{{ $i }}">${{ number_format($i, 2) }}</option>
                                     @endfor
                                 </select>
                             </div>

@@ -50,7 +50,7 @@
     </div>
     <div class="card-body">
         <div class="row row-group">
-            <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-12 col-md-6">
                 <label for="sueldo">Sueldo mensual del prospecto:</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -59,7 +59,7 @@
                     <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->sueldo, 2)}}">
                 </div>
             </div>
-            <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-12 col-md-6">
                 <label for="ahorro">Ahorro neto del prospecto:</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -68,11 +68,11 @@
                     <input class="form-control" readonly="" type="text" value="{{number_format($prospecto->ahorro, 2)}}">
                 </div>
             </div>
-            <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group col-12 col-md-6">
                 <label for="calificacion">Calificación del prospecto:</label>
                 <input class="form-control" readonly="" type="number" value="{{$prospecto->calificacion}}">
             </div>
-            <div class="form-group col-12 col-xs-12 col-md-12 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+            <div class="form-group col-12 col-md-6">
                 <label for="estado">Estado del prospecto:</label>
                 <input class="form-control" readonly="" type="text" value="{{$prospecto->aprobado ? 'Aprobado' : 'No Aprobado'}}" >
             </div>

@@ -125,6 +125,7 @@ class ProspectoController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->input());
         // dd(Auth::user()->empleado->id);
 
         $rules = [

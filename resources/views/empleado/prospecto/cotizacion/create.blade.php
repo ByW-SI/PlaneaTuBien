@@ -44,11 +44,13 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-4 col-xl-4">
                 <label>Asesor:</label>
-                <input type="text" class="form-control" value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}" readonly="">
+                <input type="text" class="form-control"
+                    value="{{ $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno }}"
+                    readonly="">
             </div>
         </div>
     </div>
-    
+
     <div class="card-header">
         <h4>
             Estudio socioeconómico
@@ -62,7 +64,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{number_format($prospecto->sueldo,2)}}">
+                    <input class="form-control" readonly="" type="number"
+                        value="{{number_format($prospecto->sueldo,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -71,7 +74,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{number_format($prospecto->ahorro,2)}}">
+                    <input class="form-control" readonly="" type="number"
+                        value="{{number_format($prospecto->ahorro,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
@@ -80,7 +84,8 @@
             </div>
             <div class="form-group col-12 col-xs-12 col-md-12 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
                 <label for="estado">Estado del prospecto:</label>
-                <input class="form-control" readonly="" type="text" value="{{$prospecto->aprobado ? 'Aprobado' : 'No Aprobado'}}" >
+                <input class="form-control" readonly="" type="text"
+                    value="{{$prospecto->aprobado ? 'Aprobado' : 'No Aprobado'}}">
             </div>
         </div>
     </div>
@@ -97,12 +102,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input class="form-control" readonly="" type="number" value="{{number_format($prospecto->monto,2)}}">
+                    <input class="form-control" readonly="" type="number"
+                        value="{{number_format($prospecto->monto,2)}}">
                 </div>
             </div>
             <div class="form-group col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
                 <label for="plan">Plan que desea obtener/ plan que puede obtener:</label>
-                <input class="form-control" readonly="" type="text" value="{{$prospecto->plan}}" >
+                <input class="form-control" readonly="" type="text" value="{{$prospecto->plan}}">
             </div>
         </div>
     </div>
@@ -113,13 +119,16 @@
                     <h5>Datos de la Cotización:</h5>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <a href="{{ route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" class="btn btn-primary">
+                    <a href="{{ route('empleados.prospectos.cotizacions.index', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}"
+                        class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Cotizaciones</strong>
                     </a>
                 </div>
             </div>
         </div>
-        <form action="{{ route('empleados.prospectos.cotizacions.store', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}" method="post">
+        <form
+            action="{{ route('empleados.prospectos.cotizacions.store', ['empleado'=>$empleado,'prospecto' => $prospecto]) }}"
+            method="post">
             {{ csrf_field() }}
             <div class="card-body">
                 <div class="row">
@@ -130,8 +139,10 @@
                                 <span class="input-group-text">$</span>
                             </div>
                             <select name="propiedad" class="form-control" id="propiedad">
-                                @for($i = 300000; $i <= 20000000; $i += 50000)
-                                	<option value="{{ $i }}">{{ number_format($i, 2) }}</option>
+                                @for($i = 300000; $i <= 20000000; $i +=50000)
+                                    @if ($i != 550000)
+                                    <option value="{{ $i }}">${{ number_format($i, 2) }}</option>
+                                    @endif
                                 @endfor
                             </select>
                         </div>
@@ -149,26 +160,26 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-4">
-                    	<label class="col-form-label">✱Plan:</label>
-                    	<select name="plan" class="form-control" id="plan">
-                    		<option value="">Seleccionar</option>
-                    		<option value="Tanda 36">Tanda 36</option>
-                    		<option value="Tanda 24">Tanda 24</option>
-                    		<option value="Tanda 18">Tanda 18</option>
-                    		<option value="Tanda 12">Tanda 12</option>
-                    		<option value="Tanda 6">Tanda 6</option>
-                    		<option value="Tanda 3">Tanda 3</option>
-                    		<option value="Tanda 2">Tanda 2</option>
-                    		<option value="Tanda 1">Tanda 1</option>
-                    	</select>
+                        <label class="col-form-label">✱Plan:</label>
+                        <select name="plan" class="form-control" id="plan">
+                            <option value="">Seleccionar</option>
+                            <option value="Tanda 36">Tanda 36</option>
+                            <option value="Tanda 24">Tanda 24</option>
+                            <option value="Tanda 18">Tanda 18</option>
+                            <option value="Tanda 12">Tanda 12</option>
+                            <option value="Tanda 6">Tanda 6</option>
+                            <option value="Tanda 3">Tanda 3</option>
+                            <option value="Tanda 2">Tanda 2</option>
+                            <option value="Tanda 1">Tanda 1</option>
+                        </select>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="col-form-label">Promocion:</label>
                         <select name="promocion" class="form-control" id="promocion_select">
                             <option value="">Seleccione una de las promociones</option>
-                                @foreach ($promociones as $promocion)
-                                    <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>   
-                                @endforeach   
+                            @foreach ($promociones as $promocion)
+                            <option value="{{$promocion->id}}">{{$promocion->nombre}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -184,7 +195,7 @@
                             <input type="text" class="form-control" id="adjudicar" name="adjudicar" readonly="">
                         </div>
                     </div>
-                    
+
                     <div class="form-group col-sm-4">
                         <label class="col-form-label">Plazo:</label>
                         <div class="input-group">

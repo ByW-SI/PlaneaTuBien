@@ -48,7 +48,7 @@
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">✱ Porcentaje del bien</label>
 						<div class="input-group">
-							<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
+							<input type="number" step="any" min="1" max="100" value="0.00" class="form-control inputPorcentajeBien" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
 					        <div class="input-group-append">
 					          <div class="input-group-text">%</div>
 					        </div>
@@ -59,7 +59,7 @@
 		</div>
 		<div class="card-footer">
 			<div class="d-flex justify-content-center">
-				<button class="btn btn-success" id="submit" type="submit"><i class="fas fa-arrow-alt-circle-right"></i> Siguiente</button>
+				<button class="btn btn-success" disabled="true" id="submit" type="submit"><i class="fas fa-arrow-alt-circle-right"></i> Siguiente</button>
 			</div>
 		</div>
 
@@ -68,6 +68,36 @@
 @endsection
 @push('scripts')
 <script>
+
+	class FormValidator{
+
+		static getPorcentajes(){
+			return $('.inputPorcentajeBien').map( function(){
+				return parseFloat(this.value)
+			} ).get();
+		}
+
+		static getTotalPorcentaje(){
+
+			let porcentajes = this.getPorcentajes()
+
+			let total = 0;
+			for (let i = 0; i < porcentajes.length; i++) {
+				total += porcentajes[i] << 0;
+			}
+
+			console.log(total)
+
+			return total;
+
+		}
+
+		static faltaPorcentaje(){
+			return this.getTotalPorcentaje() < 100.00 ? true : false;
+		}
+
+	}
+
 	$(document).ready(function(){
 	    var maxField = 4; //Input fields increment limitation
 	    var addButton = $('.add_button'); //Add button selector
@@ -107,7 +137,7 @@
 			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 				<label for="">✱ Porcentaje del bien</label>
 				<div class="input-group">
-					<input type="number" step="any" min="1" max="100" class="form-control" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
+					<input type="number" value="0.00" step="any" min="1" max="100" class="form-control inputPorcentajeBien" name="porcentaje[]" required="" onchange="cienporciento(this.value)" value="{{old('porcentaje')}}">
 			        <div class="input-group-append">
 			          <div class="input-group-text">%</div>
 			        </div>
@@ -126,7 +156,8 @@
 	    //Once add button is clicked
 	    $(addButton).click(function(){
 	        //Check maximum number of input fields
-	        if(x < maxField){ 
+
+	        if(x < maxField && FormValidator.faltaPorcentaje()){ 
 	            x++; //Increment field counter
 	            $(wrapper).append(fieldHTML); //Add field html
 	        }

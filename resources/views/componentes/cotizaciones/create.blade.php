@@ -54,10 +54,11 @@
                             </div>
                             <select name="monto" id="monto" class="form-control" required="">
                                 <option value="">Seleccione un monto</option>
-                                @for ($i = 300000; $i <= 20000000; $i+=50000) {{-- @if ($i%50000) --}} <option
-                                    value="{{$i}}">{{number_format($i)}}</option>
-                                    {{-- @endif --}}
-                                    @endfor
+                                @for ($i = 300000; $i <= 20000000; $i+=50000)
+                                    @if ($i != 550000)
+                                    <option value="{{$i}}">$ {{number_format($i,2)}}</option>
+                                    @endif
+                                @endfor
                             </select>
                             {{-- <input class="form-control" type="number" name="monto" id="monto" min="300000" max="20000000" step="50000" required=""> --}}
                         </div>
