@@ -45,7 +45,7 @@ class TipoPuestoController extends Controller
     {
         //
         $precarga = new TipoPuesto;
-        return view('precargas.form',['titulo'=>$this->titulo, 'edit'=>false,'guardar'=>$this->guardar, 'precarga'=>$precarga]);
+        return view('puestos.create',['titulo'=>$this->titulo, 'edit'=>false,'guardar'=>$this->guardar, 'precarga'=>$precarga]);
     }
 
     /**

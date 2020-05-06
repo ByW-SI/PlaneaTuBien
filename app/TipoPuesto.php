@@ -12,7 +12,8 @@ class TipoPuesto extends Model
     protected $fillable=[
     	'id',
     	'nombre',
-    	'descripcion',
+        'descripcion',
+        'jefe_id'
     ];
 
     protected $hidden = [
