@@ -73,8 +73,14 @@
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="tipo">✱Puesto:</label>
 					<select required class="form-control" id="tipo" name="puesto">
-						<option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
-							Seleccionar
+						<option value="">Seleccionar</option>
+						@foreach ($puestos as $puesto)
+						<option value="{{$puesto->nombre}}" {{$empleado->tipo == $puesto->nombre ? "selected" : ""}}>
+							{{$puesto->nombre}}
+						</option>
+						@endforeach
+						{{-- <option value="" {{$empleado->tipo == "" ? "selected" : ""}}>
+						Seleccionar
 						</option>
 						<option value="Asesor" {{$empleado->tipo == "Asesor" ? "selected" : ""}}>
 							Asesor
@@ -125,19 +131,23 @@
 						</option>
 						<option value="Administrador" {{$empleado->tipo == "Administrador" ? "selected" : ""}}>
 							Administrador
-						</option>
+						</option> --}}
+
 					</select>
 				</div>
 
 				{{-- CONTENEDOR INPUT JEFE --}}
 				<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 					<label for="">Jefe</label>
-					<select name="jefe_id" id="" class="form-control">
+					<input type="text" readonly id="nombreJefe" class="form-control">
+					<input type="hidden" readonly name="jefe_id" class="form-control" id="jefe_id">
+					{{-- <select name="jefe_id" id="" class="form-control">
 						<option value="">Seleccionar</option>
 						@foreach ($gerentes as $gerente)
-						<option value="{{$gerente->id}}">{{$gerente->nombre}} {{$gerente->paterno}} {{$gerente->materno}}</option>
+						<option value="{{$gerente->id}}">{{$gerente->nombre}} {{$gerente->paterno}}
+							{{$gerente->materno}}</option>
 						@endforeach
-					</select>
+					</select> --}}
 				</div>
 			</div>
 		</div>
@@ -246,6 +256,32 @@
 @endsection
 @push('scripts')
 <script>
+
+	function obtenerJefeDePuesto(puesto){
+		const response = $.ajax({
+			async: false,
+			url: `{{ url('api/puestos/${puesto}/jefe') }}`,
+			dataType: 'json',
+			success: function(response){
+				return response
+			}
+			});
+		return response.responseJSON;
+	}
+
+	$(document).on('change', '#tipo', function(){
+		console.log({
+			puesto_id: $(this).val()
+		})
+		jefe = obtenerJefeDePuesto( $(this).val() )
+		$('#jefe_id').val( jefe.id )
+		if(jefe.id){
+			$('#nombreJefe').val( jefe.nombre + " " + jefe.paterno + " " + jefe.materno )
+		}else{
+			$('#nombreJefe').val( 'N/A' )
+		}
+	})
+
 	$(document).ready(function() {
 		let cp = $("#cp").val();
 		if(cp != '' && cp.length === 5){

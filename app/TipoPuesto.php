@@ -27,4 +27,8 @@ class TipoPuesto extends Model
     public function datosLab(){
     	return $this->hasMany('App\EmpleadosDatosLab');
     }
+
+    public function jefe(){
+        return $this->belongsTo('App\Empleado', 'jefe_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Precargas;
 
+use App\Empleado;
 use App\TipoPuesto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,7 @@ class TipoPuestoController extends Controller
         else{
             $puestos = TipoPuesto::orderBy('nombre','asc')->paginate(10);
         }
-        return view('precargas.index',['precargas'=>$puestos,'index'=>$this->index, 'agregar'=>$this->agregar, 'editar'=>$this->editar,'borrar'=>$this->borrar,'titulo'=>$this->titulo,'buscar'=>$request->buscar]);
+        return view('puestos.index',['precargas'=>$puestos,'index'=>$this->index, 'agregar'=>$this->agregar, 'editar'=>$this->editar,'borrar'=>$this->borrar,'titulo'=>$this->titulo,'buscar'=>$request->buscar]);
         //
     }
 
@@ -43,9 +44,9 @@ class TipoPuestoController extends Controller
      */
     public function create()
     {
-        //
+        $empleados = Empleado::get();
         $precarga = new TipoPuesto;
-        return view('puestos.create',['titulo'=>$this->titulo, 'edit'=>false,'guardar'=>$this->guardar, 'precarga'=>$precarga]);
+        return view('puestos.create',['titulo'=>$this->titulo, 'edit'=>false,'guardar'=>$this->guardar, 'precarga'=>$precarga, 'empleados' => $empleados]);
     }
 
     /**

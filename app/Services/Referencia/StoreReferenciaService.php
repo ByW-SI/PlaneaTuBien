@@ -3,6 +3,7 @@
 namespace App\Services\Referencia;
 
 use App\Contrato;
+use App\Grupo;
 use App\Presolicitud;
 use App\Prospecto;
 use App\Referencia;
@@ -13,6 +14,7 @@ class StoreReferenciaService
 
     protected $prospecto;
     protected $presolicitud;
+    protected $grupo;
     protected $request;
 
     public function __construct(Prospecto $prospecto, Presolicitud $presolicitud, Request $request)
@@ -21,6 +23,7 @@ class StoreReferenciaService
         $this->presolicitud = $presolicitud;
         $this->request = $request;
         $this->crearReferencias($request);
+        $this->setGrupo($request);
         $this->crearContrato($request);
     }
 
@@ -43,7 +46,8 @@ class StoreReferenciaService
                 'numero_contrato' => count(Contrato::get()) + 1,
                 'monto' => 300000,
                 'estado' => 'registrado',
-                'grupo_id' => $request->grupo ? $request->grupo : 1,
+                // 'grupo_id' => $request->grupo ? $request->grupo : 1,
+                'grupo_id' => $this->grupo->id,
                 'presolicitud_id' => $this->presolicitud->id,
             ]);
         }
@@ -52,7 +56,8 @@ class StoreReferenciaService
             'numero_contrato' => count(Contrato::get()) + 1,
             'monto' => $montoRestanteParaAsignarAContrato,
             'estado' => 'registrado',
-            'grupo_id' => $request->grupo ? $request->grupo : 1,
+            // 'grupo_id' => $request->grupo ? $request->grupo : 1,
+            'grupo_id' => $this->grupo->id,
             'presolicitud_id' => $this->presolicitud->id,
         ]);
     }
@@ -70,4 +75,21 @@ class StoreReferenciaService
             $this->presolicitud->referencias()->save($referencia);
         }
     }
+
+    /**
+     * =======
+     * SETTERS
+     * =======
+     */
+
+    public function setGrupo($request){
+
+        if($request->grupo){
+            $this->grupo = Grupo::find($request->grupo);
+            return;
+        }
+        $this->grupo = Grupo::where('vigencia','>=',90)->first();
+
+    }
+
 }

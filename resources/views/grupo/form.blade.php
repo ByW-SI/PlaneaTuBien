@@ -27,7 +27,7 @@
 					<div class="col-12 col-xs-12 col-md-6 col-lg-3 col-xl-3">
 						<label for="vigencia">✱Vigencia del grupo</label>
 						<div class="input-group mb-3">
-						  <input type="number" step="1" name="vigencia" id="vigencia" class="form-control" value="{{$edit ? $grupo->vigencia : old('vigencia')}}" required="">
+						  <input type="number" step="1" name="vigencia" min="180" id="vigencia" class="form-control" value="{{$edit ? $grupo->vigencia : old('vigencia')}}" required="">
 						  <div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2">Meses</span>
 						  </div>

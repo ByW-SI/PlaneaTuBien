@@ -35,7 +35,7 @@ class PresolicitudReferenciaController extends Controller
      */
     public function create(Prospecto $prospecto, Presolicitud $presolicitud)
     {
-        $grupos = Grupo::get();
+        $grupos = Grupo::where('vigencia','>=',90)->get();
         return view('prospectos.presolicitud.referencia.form',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud, 'grupos' => $grupos]);
     }
 

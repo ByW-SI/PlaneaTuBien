@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Empleado\StoreEmpleadoService;
 use App\Services\Empleado\UpdateEmpleadoService;
+use App\TipoPuesto;
 
 class EmpleadoController extends Controller
 {
@@ -74,7 +75,8 @@ class EmpleadoController extends Controller
         $sucursales = Sucursal::get();
         $empleado = new Empleado;
         $gerentes = Empleado::get();
-        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'gerentes' => $gerentes, 'edit' => false]);
+        $puestos = TipoPuesto::get();
+        return view('empleado.form', ['sucursales' => $sucursales, 'empleado' => $empleado, 'gerentes' => $gerentes, 'puestos' => $puestos, 'edit' => false]);
         // return view('empleado.create', ['sucursales' => $sucursales]);
     }
 

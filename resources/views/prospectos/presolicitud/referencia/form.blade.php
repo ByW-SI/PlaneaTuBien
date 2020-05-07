@@ -47,7 +47,7 @@
 				@endfor
 		</div>
 
-		
+
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -63,19 +63,37 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<p class="text-monospace text-muted m-0">Solo aparecerán los grupos con una vigencia mayor o igual a 90 meses.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-2">
+							@if ($grupos->count() != 0)
+							<div class="col-12">
 								<label for="">ASIGNAR GRUPO</label>
 								<select name="grupo" id="" class="form-control">
 									<option value="">Automaticamente</option>
 									@foreach ($grupos as $grupo)
-										<option value="{{$grupo->id}}">{{$grupo->id}}</option>
+									<option value="{{$grupo->id}}">{{$grupo->id}}</option>
 									@endforeach
 								</select>
 							</div>
+							@else
+							<div class="col-12">
+								<div class="alert alert-danger">
+									No hay ningún grupo disponible que tenga una vigencia igual o mayor a 90 meses.
+								</div>
+							</div>
+							@endif
 						</div>
 					</div>
 					<div class="modal-footer">
-							<button class="btn btn-success" id="submit" type="submit"><i class="fas fa-arrow-alt-circle-right"></i>
-								Siguiente</button>
+						<button class="btn btn-success" id="submit" type="submit"><i
+								class="fas fa-arrow-alt-circle-right"></i>
+							Siguiente</button>
 					</div>
 				</div>
 			</div>
@@ -84,9 +102,9 @@
 		<div class="card-footer">
 			<div class="d-flex justify-content-center">
 				<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-				Guardar
-			</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+					Guardar
+				</button>
 			</div>
 		</div>
 
