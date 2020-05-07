@@ -4,6 +4,7 @@ namespace App\Services\Cita;
 
 use App\Citas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexCitaReprogramableService
 {
@@ -49,6 +50,10 @@ class IndexCitaReprogramableService
                 return $query->where('nombre', 'Reagendar cita');
             });
         })->get();
+
+        $this->citas = $this->citas->filter( function($cita){
+            return Auth::user()->empleado->prospectosActuales()->find($cita->prospecto_id) != null;
+        } );
     }
 
     /**
