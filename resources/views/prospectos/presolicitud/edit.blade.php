@@ -2,9 +2,11 @@
 @section('content')
 <div class="card">
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Solicitante'])
-	<form method="POST" action="">
+	<form method="POST" action="{{ route('prospectos.presolicitud.update',['prospecto'=>$prospecto,
+			'presolicitud'=>$presolicitud]) }}">
 		@csrf
 
+		@method('PUT')
 		<div class="card-body">
 			@if ($errors->any())
 			<div class="alert alert-danger">
@@ -27,26 +29,26 @@
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Apellido Paterno</label>
 									<input type="text" class="form-control" name="appaterno" required=""
-										value="{{old('appaterno') ?: $prospecto->appaterno}}">
+										value="{{old('appaterno') ?: $presolicitud->paterno}}">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Apellido Materno</label>
 									<input type="text" class="form-control" name="apmaterno" required=""
-										value="{{old('apmaterno') ?: $prospecto->apmaterno}}">
+										value="{{old('apmaterno') ?: $presolicitud->materno}}">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Nombre(s)</label>
 									<input type="text" class="form-control" name="nombre" required=""
-										value="{{$prospecto->nombre}}">
+										value="{{$presolicitud->nombre}}">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ R.F.C.</label>
-									<input type="text" class="form-control" value="{{$prospecto->perfil->rfc_1}}"
+									<input type="text" class="form-control" value="{{$presolicitud->perfil->rfc}}"
 										name="rfc" required="">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Fecha de Nacimiento</label>
-									<input type="date" class="form-control" value="{{old('fecha_nacimiento') ?: $prospecto->fecha_nacimiento}}"
+									<input type="date" class="form-control" value="{{old('fecha_nacimiento') ?: $presolicitud->fecha_nacimiento}}"
 										name="fecha_nacimiento"
 										min="{{(integer)date('Y')-64}}-{{date('m')}}-{{date('d')}}"
 										max="{{(integer)date('Y')-18}}-{{date('m')}}-{{date('d')}}" required=""
@@ -59,30 +61,30 @@
 								</div>
 								{{-- <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Lugar de Nacimiento</label>
-									<input type="text" class="form-control" value="{{old('lugar_nacimiento')}}"
+									<input type="text" class="form-control" value="{{$presolicitud->lugar_nacimiento}}"
 								name="lugar_nacimiento" required="">
 							</div> --}}
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Nacionalidad</label>
 								<input type="text" class="form-control"
-									value="{{ old('nacionalidad_1') ?: $prospecto->perfil->nacionalidad_1 }}"
-									name="nacionalidad_1" required="">
+									value="{{ $presolicitud->perfil->nacionalidad}}"
+									name="nacionalidad" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Sexo</label>
 								<select class="form-control" name="sexo" required="">
 									<option value="">Seleccione una opción</option>
-									<option {{$prospecto->sexo == "Masculino" ? 'selected' : ""}} value="Masculino">
+									<option {{$presolicitud->sexo == "Masculino" ? 'selected' : ""}} value="Masculino">
 										Masculino</option>
-									<option {{$prospecto->sexo == "Femenino" ? 'selected' : ""}} value="Femenino">
+									<option {{$presolicitud->sexo == "Femenino" ? 'selected' : ""}} value="Femenino">
 										Femenino</option>
 								</select>
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Estado Civil</label>
 								<select class="form-control" name="estado_civil" required="">
-									<option value="{{$prospecto->perfil->estado_civil}}">
-										{{$prospecto->perfil->estado_civil}}
+									<option value="{{$presolicitud->estado_civil}}">
+										{{$presolicitud->estado_civil}}
 									</option>
 									<option value="Soltero">Soltero</option>
 									<option value="Casado">Casado</option>
@@ -106,21 +108,21 @@
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Calle</label>
 								<input type="text" class="form-control" required=""
-									value="{{$prospecto->perfil->calle}}" name="calle">
+									value="{{$presolicitud->calle}}" name="calle">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Número Exterior</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->numero_ext}}"
+								<input type="text" class="form-control" value="{{$presolicitud->numero_ext}}"
 									name="numero_ext" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">Número Interior</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->numero_int}}"
+								<input type="text" class="form-control" value="{{$presolicitud->numero_int}}"
 									name="numero_int">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Código Postal</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->cp}}" name="cp"
+								<input type="text" class="form-control" value="{{$presolicitud->cp}}" name="cp"
 									id="cp" required="" minlength="5" maxlength="5">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -131,12 +133,12 @@
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Alcaldía o Municipio</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->municipio}}"
+								<input type="text" class="form-control" value="{{$presolicitud->municipio}}"
 									name="municipio" id="municipio" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Estado</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->estado}}"
+								<input type="text" class="form-control" value="{{$presolicitud->estado}}"
 									name="estado" id="estado" required="">
 							</div>
 						</div>
@@ -153,22 +155,22 @@
 						<div class="row">
 							<div class="col-sm-12 col-md-3 form-group">
 								<label for="">✱ Teléfono de Casa</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_casa}}"
+								<input type="text" class="form-control" value="{{$presolicitud->tel_casa}}"
 									name="tel_casa" required="">
 							</div>
 							<div class="col-sm-12 col-md-3 form-group">
 								<label for="">Teléfono de Oficina</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_oficina}}"
+								<input type="text" class="form-control" value="{{$presolicitud->tel_oficina}}"
 									name="tel_oficina">
 							</div>
 							<div class="col-sm-12 col-md-3 form-group">
 								<label for="">✱ Teléfono Celular</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->telefono_celular}}"
+								<input type="text" class="form-control" value="{{$presolicitud->tel_celular}}"
 									name="tel_celular" required="">
 							</div>
 							<div class="col-sm-12 col-md-3 form-group">
 								<label for="">✱ Correo Electrónico</label>
-								<input type="email" class="form-control" value="{{$prospecto->perfil->email}}"
+								<input type="email" class="form-control" value="{{$presolicitud->email}}"
 									name="email" required="">
 							</div>
 						</div>
@@ -186,34 +188,34 @@
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Profesión/Actividad</label>
 								<input type="text" class="form-control"
-									value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}" name="ocupacion_1"
+									value="{{$presolicitud->profesion}}" name="profesion"
 									required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">Empresa donde trabaja</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->empresa_1}}"
+								<input type="text" class="form-control" value="{{$presolicitud->empresa}}"
 									name="empresa">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">Puesto</label>
 								<input type="text" class="form-control"
-									value="{{old('ocupacion_1') ?: $prospecto->perfil->ocupacion_1}}"
+									value="{{$presolicitud->puesto}}"
 									name="ocupacion_1">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Antigüedad trabajo actual</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->antiguedad_1}}"
-									name="antiguedad_1" required="">
+								<input type="text" class="form-control" value="{{$presolicitud->antiguedad_actual}}"
+									name="antiguedad_actual" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Antigüedad trabajo anterior</label>
 								<input type="text" class="form-control"
-									value="{{old('antiguedad_2') ?: $prospecto->perfil->antiguedad_2}}"
-									name="antiguedad_2" required="">
+									value="{{$presolicitud->antiguedad_anterior}}"
+									name="antiguedad_anterior" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Ingreso Mensual Familiar</label>
-								<input type="text" class="form-control" value="{{$prospecto->perfil->ingreso_total}}"
+								<input type="text" class="form-control" value="{{$presolicitud->ingreso_mensual}}"
 									name="ingreso_mensual" required="">
 							</div>
 						</div>
@@ -227,7 +229,7 @@
 				<select name="enterarse" id="enterarse" required="" class="form-control">
 					@foreach ($mediosDeContacto as $medioDeContacto)
 					<option value="{{$medioDeContacto->id}}"
-						{{ $medioDeContacto->nombre ==$prospecto->perfil->inmueble_pretendido->medio_entero ? 'selected=""' : ''}}>
+						{{ $medioDeContacto->nombre ==$presolicitud->enterarse ? 'selected=""' : ''}}>
 						{{$medioDeContacto->nombre}}</option>
 					@endforeach
 					{{--<option value="">Medío por el que se entero de nosotros</option>

@@ -223,10 +223,14 @@ class PresolicitudController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function update(Prospecto $prospecto, Request $request)
+    public function update(Prospecto $prospecto,Presolicitud $presolicitud, Request $request)
     {
 
-        //
+        $presolicitud->update($request->all());
+        return redirect()->route('prospectos.presolicitud.conyuge.index', 
+            ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]
+        );
+
     }
 
     public function modificarCotizacion(Request $request, Presolicitud $presolicitud)
