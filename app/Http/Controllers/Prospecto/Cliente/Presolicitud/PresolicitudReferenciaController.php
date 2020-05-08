@@ -79,7 +79,7 @@ class PresolicitudReferenciaController extends Controller
     public function edit(Prospecto $prospecto, Presolicitud $presolicitud)
     {
         //
-        return redirect()->route('prospectos.presolicitud.referencia.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        return view('prospectos.presolicitud.referencia.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
     }
 
     /**
