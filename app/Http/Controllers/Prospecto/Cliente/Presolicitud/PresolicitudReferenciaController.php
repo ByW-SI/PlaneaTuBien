@@ -79,7 +79,8 @@ class PresolicitudReferenciaController extends Controller
     public function edit(Prospecto $prospecto, Presolicitud $presolicitud)
     {
         //
-        return view('prospectos.presolicitud.referencia.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
+        $grupos = Grupo::where('vigencia','>=',90)->get();
+        return view('prospectos.presolicitud.referencia.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud, 'grupos' => $grupos]);
     }
 
     /**
