@@ -92,7 +92,6 @@ class PresolicitudReferenciaController extends Controller
     public function update(Prospecto $prospecto, Presolicitud $presolicitud,Request $request)
     {
         //
-        $presolicitud->referencias()->delete();
         for ($i = 0; $i <= 2; $i++) {
             $referencia = new Referencia([
                 'paterno' => $request->paterno[$i],
