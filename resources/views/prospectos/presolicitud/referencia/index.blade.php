@@ -31,6 +31,12 @@
 			
 			
 		</div>
+		<div class="d-flex justify-content-center">
+			<a 
+			href="{{ route('prospectos.presolicitud.beneficiarios.edit',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'beneficiario'=>1]) }}" 
+
+			class="btn btn-success">Editar</a>
+		</div>
 	</div>
 	@include('prospectos.presolicitud.footer',['presolicitud'=>$presolicitud])
 </div>

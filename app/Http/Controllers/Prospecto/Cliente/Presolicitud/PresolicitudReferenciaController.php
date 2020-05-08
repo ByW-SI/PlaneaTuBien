@@ -76,9 +76,10 @@ class PresolicitudReferenciaController extends Controller
      * @param  \App\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Referencia $referencia)
+    public function edit(Prospecto $prospecto, Presolicitud $presolicitud)
     {
         //
+        return redirect()->route('prospectos.presolicitud.referencias.create',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]);
     }
 
     /**
@@ -88,9 +89,21 @@ class PresolicitudReferenciaController extends Controller
      * @param  \App\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Referencia $referencia)
+    public function update(Prospecto $prospecto, Presolicitud $presolicitud,Request $request)
     {
         //
+        $presolicitud->referencias()->delete();
+        for ($i = 0; $i <= 2; $i++) {
+            $referencia = new Referencia([
+                'paterno' => $request->paterno[$i],
+                'materno' => $request->materno[$i],
+                'nombre' => $request->nombre[$i],
+                'telefono' => $request->telefono[$i],
+                'parentesco' => $request->parentesco[$i]
+            ]);
+            $presolicitud->referencias()->save($referencia);
+        }
+        return view('prospectos.presolicitud.referencia.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto]);
     }
 
     /**
