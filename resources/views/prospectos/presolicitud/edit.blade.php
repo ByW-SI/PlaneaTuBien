@@ -28,12 +28,12 @@
 							<div class="row">
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Apellido Paterno</label>
-									<input type="text" class="form-control" name="appaterno" required=""
+									<input type="text" class="form-control" name="paterno" required=""
 										value="{{old('appaterno') ?: $presolicitud->paterno}}">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Apellido Materno</label>
-									<input type="text" class="form-control" name="apmaterno" required=""
+									<input type="text" class="form-control" name="materno" required=""
 										value="{{old('apmaterno') ?: $presolicitud->materno}}">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
