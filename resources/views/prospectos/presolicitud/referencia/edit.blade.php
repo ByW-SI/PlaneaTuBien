@@ -19,7 +19,7 @@
 			@foreach ($presolicitud->referencias as $i=>$referencia)
 				<label>Referencia #{{$i+1}}</label>
 				<div class="row">
-					<input name="index[{{$i}}]" type="hidden" value="{{$referencia->id}}">
+					<input  class="form-control" name="index[{{$i}}]" type="hidden" value="{{$referencia->id}}">
 					<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 						<label for="">Apellido Paterno</label>
 						<input type="text" class="form-control" name="paterno[{{$i}}]" required=""
