@@ -54,12 +54,12 @@
 										max="{{(integer)date('Y')-18}}-{{date('m')}}-{{date('d')}}" required=""
 										onchange="getAge(this.value)">
 								</div>
-								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+								{{--<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Edad</label>
 									<input type="number" class="form-control" id="edad" value="{{old('edad')}}" min="0"
 										max="64" required="" readonly>
 								</div>
-								{{-- <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+								 <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ Lugar de Nacimiento</label>
 									<input type="text" class="form-control" value="{{$presolicitud->lugar_nacimiento}}"
 								name="lugar_nacimiento" required="">
