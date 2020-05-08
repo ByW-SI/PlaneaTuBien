@@ -3,7 +3,7 @@
 <div class="card">
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Referencias'])
 	<form method="POST"
-		action="{{ route('prospectos.presolicitud.referencias.update',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud]) }}">
+		action="{{ route('prospectos.presolicitud.referencias.update',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'referencia'=>1]) }}">
 		@csrf
 		@method('PUT')
 		<div class="card-body">
