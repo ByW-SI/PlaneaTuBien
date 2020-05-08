@@ -101,7 +101,7 @@ class PresolicitudReferenciaController extends Controller
                 'telefono' => $request->telefono[$i],
                 'parentesco' => $request->parentesco[$i]
             ]);
-            $presolicitud->referencias()->save($referencia);
+            $presolicitud->referencias()->updateOrCreate(['id'=>$request->id[$i]],$referencia);
         }
         return view('prospectos.presolicitud.referencia.index',['presolicitud'=>$presolicitud,'prospecto'=>$prospecto]);
     }
