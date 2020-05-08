@@ -5,24 +5,6 @@
 	<form method="POST" action="">
 		@csrf
 
-		<ul class="nav nav-tabs">
-			<li class="nav-item">
-				<a class="nav-link active" href="#">SOLICITANTE</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">CÓNYUGE, CONCUBINO U OBLIGADO
-					SOLIDARIO</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">BENEFICIARIO</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">REFERENCIAS PERSONALES</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">RECIBO PROVISIONAL</a>
-			</li>
-		</ul>
 		<div class="card-body">
 			@if ($errors->any())
 			<div class="alert alert-danger">
