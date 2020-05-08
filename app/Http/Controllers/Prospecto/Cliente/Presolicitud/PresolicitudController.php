@@ -227,9 +227,7 @@ class PresolicitudController extends Controller
     {
 
         $presolicitud->update($request->all());
-        return redirect()->route('prospectos.presolicitud.conyuge.index', 
-            ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]
-        );
+        return view('prospectos.presolicitud.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
 
     }
 

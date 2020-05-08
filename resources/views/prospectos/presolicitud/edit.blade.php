@@ -43,7 +43,7 @@
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 									<label for="">✱ R.F.C.</label>
-									<input type="text" class="form-control" value="{{$presolicitud->perfil->rfc}}"
+									<input type="text" class="form-control" value="{{$presolicitud->rfc}}"
 										name="rfc" required="">
 								</div>
 								<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -67,7 +67,7 @@
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
 								<label for="">✱ Nacionalidad</label>
 								<input type="text" class="form-control"
-									value="{{ $presolicitud->perfil->nacionalidad}}"
+									value="{{ $presolicitud->nacionalidad}}"
 									name="nacionalidad" required="">
 							</div>
 							<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
@@ -244,7 +244,7 @@
 <div class="card-footer">
 	<div class="d-flex justify-content-center">
 		<button class="btn btn-success" type="submit"><i class="fas fa-arrow-alt-circle-right"></i>
-			Siguiente</button>
+			Guardar</button>
 	</div>
 </div>
 
