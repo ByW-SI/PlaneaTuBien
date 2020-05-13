@@ -208,9 +208,12 @@ class PresolicitudController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Presolicitud $presolicitud)
+    public function edit(Prospecto $prospecto,Presolicitud $presolicitud)
     {
         //
+        $mediosDeContacto = MedioContacto::get();
+         $perfil = $prospecto->perfil;
+          return view('prospectos.presolicitud.edit', ['prospecto' => $prospecto,'presolicitud'=>$presolicitud, 'mediosDeContacto' => $mediosDeContacto]);
     }
 
     /**
@@ -220,9 +223,12 @@ class PresolicitudController extends Controller
      * @param  \App\Presolicitud  $presolicitud
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Presolicitud $presolicitud)
+    public function update(Prospecto $prospecto,Presolicitud $presolicitud, Request $request)
     {
-        //
+
+        $presolicitud->update($request->all());
+        return view('prospectos.presolicitud.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud]);
+
     }
 
     public function modificarCotizacion(Request $request, Presolicitud $presolicitud)
