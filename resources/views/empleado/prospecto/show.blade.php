@@ -72,7 +72,7 @@
 					<strong> Ver Perfil</strong>
 				</a>
 				@else
-				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success"
+				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success {{ $prospecto->empleado ? '' : 'disabled' }}"
 					id="basic-addon1">
 					<i class="fas fa-file-invoice"></i>
 					<strong> Crear Perfil</strong>

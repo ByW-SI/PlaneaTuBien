@@ -52,12 +52,17 @@ class CargarEstadoCuentaExcelController extends Controller
 
     public function esConceptoValido($concepto)
     {
+        // Si la cadena contiene 'CE000000' es concepto valido
         if (strpos($concepto, 'CE000000') !== false) {
             return true;
         }
+
+        // Si la cadena contiene  'DEPOSITO EN EFECTIVO' ES CONCEPTO VALIDO
         if (strpos($concepto, 'DEPOSITO EN EFECTIVO') !== false) {
             return true;
         }
+
+        // Si la cadena contiene 'DEPOSITO EN EFECTIVO' Es concepto valido
         if (strpos($concepto, 'DEPOSITO EFECTIVO') !== false) {
             return true;
         }
