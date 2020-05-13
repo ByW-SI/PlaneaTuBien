@@ -32,7 +32,7 @@
 			</div>
 			<div class="card-body">
 				<span class="text-uppercase">
-					{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
+					{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : "NO ASIGNADO"}}
 
 				</span>
 			</div>
@@ -58,11 +58,13 @@
 					<i class="fas fa-user-edit"></i>
 					<strong> Editar prospecto</strong>
 				</a>
+				@if (!is_null( $prospecto->empleado ))
 				<a href="{{ route('empleados.prospectos.cotizacions.index',['empleado'=>$prospecto->empleado->id,'prospecto'=>$prospecto]) }}"
 					class="btn btn-success" id="basic-addon1">
 					<i class="fas fa-file-invoice"></i>
 					<strong> Cotizaciones</strong>
 				</a>
+				@endif
 				@if ($prospecto->perfil)
 				<a href="{{ route('prospectos.perfil.datos_personal.index',['prospecto'=>$prospecto]) }}"
 					class="btn btn-success" id="basic-addon1">
