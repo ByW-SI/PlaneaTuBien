@@ -51,7 +51,7 @@
 						<div class="col-12 col-md-6">
 							<label for="clave">Clave preautorización:</label>
 							<input type="text" class="form-control" id="clave" name="clave" placeholder="Clave"
-								value="{{ $prospecto->citas()->get()->last()->clave_preautorizacion }}" readonly="">
+								value="{{ $prospecto->citas()->get()->last() ? $prospecto->citas()->get()->last()->clave_preautorizacion : '' }}" readonly="">
 						</div>
 					</div>
 					{{-- <div class="row mb-3">
