@@ -12,7 +12,7 @@
 @endif
 
 <div class="row">
-	<div class="col-4">
+	<div class="col-12 col-md-4 mt-4">
 		<div class="card">
 			<div class="card-header">
 				<h5 class="text-center text-uppercase text-muted">PROSPECTO</h5>
@@ -20,13 +20,11 @@
 			<div class="card-body">
 				<span class="text-uppercase">
 					{{$prospecto->nombre." ".$prospecto->appaterno." ".$prospecto->apmaterno}}
-					{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : ""}}
-
 				</span>
 			</div>
 		</div>
 	</div>
-	<div class="col-4">
+	<div class="col-12 col-md-4 mt-4">
 		<div class="card">
 			<div class="card-header">
 				<h5 class="text-center text-uppercase text-muted">ASESOR</h5>
@@ -34,7 +32,6 @@
 			<div class="card-body">
 				<span class="text-uppercase">
 					{{ $prospecto->asesor ? $prospecto->asesor->nombre.' '.$prospecto->asesor->paterno.' '.$prospecto->asesor->materno : "NO ASIGNADO"}}
-
 				</span>
 			</div>
 		</div>
