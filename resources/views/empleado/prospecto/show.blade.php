@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 @extends('principal')
 @section('content')
 @if ($errors->any())
@@ -72,11 +73,13 @@
 					<strong> Ver Perfil</strong>
 				</a>
 				@else
-				<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success {{ $prospecto->empleado ? '' : 'disabled' }}"
-					id="basic-addon1">
-					<i class="fas fa-file-invoice"></i>
-					<strong> Crear Perfil</strong>
-				</a>
+				<div style="display:inline-block" data-toggle="tooltip" data-placement="top" title="Para poder crear un perfil es necesario asginar un asesor a este prospecto.">
+					<a href="{{ route('crear-perfil-sin-cotizacion',['prospecto'=>$prospecto]) }}" class="btn btn-success {{ $prospecto->empleado ? '' : 'disabled' }}"
+						id="basic-addon1">
+						<i class="fas fa-file-invoice"></i>
+						<strong> Crear Perfil</strong>
+					</a>
+				</div>
 				@endif
 				@if ($prospecto->perfil && $prospecto->cotizaciones)
 				<a href="{{ route('prospectos.presolicitud.create',['prospecto'=>$prospecto]) }}"
