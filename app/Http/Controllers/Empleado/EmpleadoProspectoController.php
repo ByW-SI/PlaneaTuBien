@@ -64,7 +64,8 @@ class EmpleadoProspectoController extends Controller
         $asesoresTemporales = $prospecto->asesores()
             ->where('temporal', 1)
             ->get();
-        return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto, 'asesoresTemporales' => $asesoresTemporales]);
+        $directivos = Empleado::directivos()->get();
+        return view('empleado.prospecto.show', ['empleado' => $empleado, 'prospecto' => $prospecto, 'asesoresTemporales' => $asesoresTemporales, 'directivos' => $directivos]);
     }
 
     /**

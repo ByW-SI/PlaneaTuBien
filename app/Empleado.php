@@ -46,11 +46,6 @@ class Empleado extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function getFullNameAttribute()
-    {
-        return $this->nombre . " " . $this->paterno . " " . $this->materno;
-    }
-
     public function clientes()
     {
         return $this->hasOne('App\Cliente');
@@ -139,10 +134,10 @@ class Empleado extends Model
 
     public function prospectosActuales()
     {
-        $prospectosDentroDeFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '>', date('Y-m-d'))->wherePivot('activo',1)->get();
-        $prospectosSinFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '=', null)->wherePivot('activo',1)->get();
+        $prospectosDentroDeFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '>', date('Y-m-d'))->wherePivot('activo', 1)->get();
+        $prospectosSinFechaFin = $this->prospectos()->wherePivot('fechaFinTemporal', '=', null)->wherePivot('activo', 1)->get();
         $prospectosActuales = $prospectosDentroDeFechaFin->merge($prospectosSinFechaFin)->pluck('id')->flatten()->toArray();
-        return $this->id == 1 ? Prospecto::where('id','>',0) : Prospecto::whereIn('id',$prospectosActuales);
+        return $this->id == 1 ? Prospecto::where('id', '>', 0) : Prospecto::whereIn('id', $prospectosActuales);
     }
 
     public function crms()
@@ -155,6 +150,16 @@ class Empleado extends Model
      * ATTRIBUTES
      * ==========
      */
+
+    public function getEsAsesorAttribute()
+    {
+        return strtolower($this->puesto) == 'asesor';
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->nombre . " " . $this->paterno . " " . $this->materno;
+    }
 
     public function getInicialesAttribute()
     {
@@ -173,6 +178,11 @@ class Empleado extends Model
     {
         $users_id = User::whereNotNull('empleado_id')->pluck('empleado_id')->all();
         return $query->whereNotIn('id', $users_id);
+    }
+
+    public function scopeDirectivos($query)
+    {
+        return $query->where('puesto', 'Directivo');
     }
 
     public function gerentes($query)

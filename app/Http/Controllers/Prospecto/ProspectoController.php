@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Prospecto;
 
 use App\Empleado;
+use App\EmpleadoProspecto;
 use App\Events\ProspectoCreated;
 use App\Http\Controllers\Controller;
 use App\Plan;
@@ -68,13 +69,31 @@ class ProspectoController extends Controller
         return view('prospectos.create', ['asesor' => $asesor]);
     }
 
-    public function enPresolicitud(){
+    public function asignarDirectivo(Prospecto $prospecto, Request $request)
+    {
+        $prospecto->update([
+            'empleado_id' => $request->directivo_id
+        ]);
+
+        EmpleadoProspecto::create([
+            'prospecto_id' => $prospecto->id,
+            'empleado_id' => $request->directivo_id,
+            'temporal' => 1,
+            'activo' => 1,
+            'fechaInicioTemporal' => date('Y-m-d'),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function enPresolicitud()
+    {
         $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
-        $presolicitudes = Presolicitud::whereHas('perfil', function($query) use($prospectos){
+        $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
             return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
         })->get();
         $planes = Plan::get();
-        return view('prospectos.en_presolicitud.index', compact('prospectos','presolicitudes','planes'));
+        return view('prospectos.en_presolicitud.index', compact('prospectos', 'presolicitudes', 'planes'));
     }
 
     /**
@@ -216,7 +235,8 @@ class ProspectoController extends Controller
         }
     }
 
-    public function asignarAsesorTemporalIndefinido(Request $request){
+    public function asignarAsesorTemporalIndefinido(Request $request)
+    {
         try {
             //code...
             $asignarAsesorTemporalIndefinidoService = new AsignarAsesorTemporalIndefinidoService($request);

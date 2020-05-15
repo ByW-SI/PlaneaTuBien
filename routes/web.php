@@ -137,6 +137,7 @@ Route::get('unete','Prospecto\ProspectoController@formprospecto')->name('prospec
 Route::post('unete','Prospecto\ProspectoController@submitprospecto')->name('prospecto.submit');
 
 // PROSPECTOS
+Route::post('prospectos/{prospecto}/asignar/directivo', 'Prospecto\ProspectoController@asignarDirectivo')->middleware('auth')->name('prospectos.asignar.directivo');
 Route::resource('prospectos', 'Prospecto\ProspectoController')->middleware('auth');
 Route::get('prospectos/create/excel', 'Prospecto\ProspectoController@createExcel')->name('prospectos.alta.excel')->middleware('auth');
 Route::post('prospectos/create/excel', 'Prospecto\ProspectoController@storeExcel')->name('prospectos.store.excel')->middleware('auth');
