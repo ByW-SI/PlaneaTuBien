@@ -43,7 +43,8 @@ class Presolicitud extends Model
 		'antiguedad_actual',
 		'antiguedad_anterior',
 		'ingreso_mensual',
-		'enterarse'
+		'enterarse',
+        'prospecto'
     ];
 
     protected $hidden=[
