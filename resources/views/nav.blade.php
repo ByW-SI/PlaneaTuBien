@@ -126,10 +126,10 @@
 			@if($componente->nombre == "indice prospectos")
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-					data-target="#prospectos">
+					data-target="#Clientes">
 					<i class="fa fa-users"></i><strong> Clientes</strong>
 				</a>
-				<div class="dropdown-menu" aria-labelledby="prospectos" id="prospectos">
+				<div class="dropdown-menu" aria-labelledby="Clientes" id="Clientes">
 					<a class="dropdown-item"
 						href="{{ route('Cliente.index') }}">
 						<i class="fa fa-search"></i><strong> Búsqueda</strong>
