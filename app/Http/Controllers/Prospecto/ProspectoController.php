@@ -91,7 +91,9 @@ class ProspectoController extends Controller
         $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
         $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
             return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
-        })->get();
+        })
+        ->where('prospecto',0)
+        ->get();
         $planes = Plan::get();
         return view('prospectos.en_presolicitud.index', compact('prospectos', 'presolicitudes', 'planes'));
     }

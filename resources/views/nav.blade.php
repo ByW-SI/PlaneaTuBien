@@ -122,6 +122,25 @@
 			@endif
 			@endforeach
 
+
+			{{--  Clientes --}}
+			@foreach(Auth::user()->perfil->componentes as $componente)
+			@if($componente->nombre == "indice prospectos")
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+					data-target="#prospectos">
+					<i class="fa fa-users"></i><strong> Clientes</strong>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="prospectos" id="prospectos">
+					<a class="dropdown-item"
+						href="{{ route('Cliente.index') }}">
+						<i class="fa fa-search"></i><strong> Búsqueda</strong>
+					</a>
+				</div>
+			</li>
+			@endif
+			@endforeach
+
 			{{-- Agentes --}}
 			{{-- @foreach(Auth::user()->perfil->componentes as $componente)
 		        @if($componente->nombre == "indice agentes")
