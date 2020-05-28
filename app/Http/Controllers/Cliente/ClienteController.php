@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Cliente;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Presolicitud;
+use App\Plan;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
