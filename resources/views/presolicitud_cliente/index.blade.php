@@ -77,6 +77,7 @@
                                 <th>Estatus de pago</th>
                                 <th>Tipo de pago</th>
                                 <th>Referencia</th>
+                                <th>Monto</th>
 
                             </tr>
                         </thead>
