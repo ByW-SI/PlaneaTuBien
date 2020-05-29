@@ -15,6 +15,7 @@
                             <tr class="thead-dark">
                                 <th>Cliente</th>
                                 <th>Plan</th>
+                                <th>Contrato</th>
                                 <th>Presolicitud</th>
                                 <th>estatus de pago</th>
                                 <th>Acciones</th>
@@ -27,6 +28,7 @@
                                     {{$presolicitud->perfil->prospecto->appaterno}}
                                     {{$presolicitud->perfil->prospecto->apmaterno}}</td>
                                 <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
+                                <td>{{$presolicitud->contratos->first()->numero_contrato}}</td>
                                 <td>{{$presolicitud->id}}</td>
                                 <td>{{
 
@@ -57,4 +59,31 @@
     </div>
 </div>
 
+<div class="container">
+    <h4 class="text-center text-uppercase text-muted">
+        CLIENTES
+    </h4>
+    <div class="card">
+        <div class="card-body">
+            <div class="row-group">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="crms">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th>Cliente</th>
+                                <th>Plan</th>
+                                <th>Presolicitud</th>
+                                <th>estatus de pago</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
