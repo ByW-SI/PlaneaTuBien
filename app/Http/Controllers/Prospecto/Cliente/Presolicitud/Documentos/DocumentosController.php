@@ -73,9 +73,6 @@ class DocumentosController extends Controller
         $primera_cuota_periodica_total = $aportacion_periodica + $cuota_administracion + $iva_cuota_admon + $seguro_vida;
         $suma_incripcion_y_cuota = $cuota_inscripcion + $iva_inscripcion + $primera_cuota_periodica_total;
 
-        //Actualizamos el pefil con usuario ala presolicitud 
-
-        $presolicitud->update(['prospecto'=>1]);
 
         // CARGAMOS EL PDF
         $pdf = PDF::loadView('prospectos.presolicitud.documentos.contrato_pdf', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'cotizacion' => $cotizacion, 'plan' => $plan, 'contrato' => $contrato, 'monto' => $monto, 'cuota_inscripcion' => $cuota_inscripcion, 'iva_inscripcion' => $iva_inscripcion, 'aportacion_periodica' => $aportacion_periodica, 'cuota_administracion' => $cuota_administracion, 'iva_cuota_admon' => $iva_cuota_admon, 'seguro_vida' => $seguro_vida, 'primera_cuota_periodica_total' => $primera_cuota_periodica_total, 'suma_incripcion_y_cuota' => $suma_incripcion_y_cuota]);

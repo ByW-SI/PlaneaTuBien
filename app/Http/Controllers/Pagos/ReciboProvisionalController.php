@@ -272,11 +272,16 @@ class ReciboProvisionalController extends Controller
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
                 //dd($presolicitud->contratos);
+
                 if ($presolicitud->contratos->isEmpty()) {
                   foreach ($cotizacion->contratos() as $value) {
 
                     // dd($presolicitud->cotizacion());
 
+                    //Actualizamos el pefil con usuario ala presolicitud 
+
+                    $presolicitud->update(['prospecto'=>1]);
+                    
                     $contrato = new Contrato;
                     $contrato->monto = $value;
                     $contrato->grupo()->associate($grupo->id);

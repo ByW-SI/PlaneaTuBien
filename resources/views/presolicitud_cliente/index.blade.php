@@ -23,33 +23,35 @@
                         </thead>
                         <tbody>
                             @foreach ($presolicitudes as $presolicitud)
-                            <tr>
-                                <td>{{$presolicitud->perfil->prospecto->nombre}}
-                                    {{$presolicitud->perfil->prospecto->appaterno}}
-                                    {{$presolicitud->perfil->prospecto->apmaterno}}</td>
-                                <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
-                                <td>{{$presolicitud->contratos->first()->numero_contrato}}</td>
-                                <td>{{$presolicitud->id}}</td>
-                                <td>{{
+                                @foreach ($presolicitud->contratos as $contrato)
+                                <tr>
+                                    <td>{{$presolicitud->perfil->prospecto->nombre}}
+                                        {{$presolicitud->perfil->prospecto->appaterno}}
+                                        {{$presolicitud->perfil->prospecto->apmaterno}}</td>
+                                    <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
+                                    <td>{{$contrato->numero_contrato}}</td>
+                                    <td>{{$presolicitud->id}}</td>
+                                    <td>{{
 
 
-                                    (is_null ($presolicitud->contratos->first()->mensualidades->last()->first()->pagos()->get()))
-                                        ?"Sin pagos"
-                                        :($presolicitud->precio_inicial/$presolicitud->cotizacion()->plan->plazo<=$presolicitud->contratos->first()->mensualidades->last()->first()->pagos()->aprobados()->whereMonth ('fecha_pago', '=', date ('m'))->sum('monto'))
-                                            ?"Alcorriente con los pagos"
-                                            :"Con Deuda de pagos"
+                                        (is_null ($contrato->mensualidades->last()->first()->pagos()->get()))
+                                            ?"Sin pagos"
+                                            :($contrato->monto/$presolicitud->cotizacion()->plan->plazo<=$contrato->mensualidades->last()->first()->pagos()->aprobados()->whereMonth ('fecha_pago', '=', date ('m'))->sum('monto'))
+                                                ?"Alcorriente con los pagos"
+                                                :"Con Deuda de pagos"
 
-                                    }}</td>
-                                <td>
-                                    {{-- BOTÓN MODIFICAR PLAN --}}
-                                    <div class="d-flex justify-content-center">
-                                        <a 
-                                        onclick="document.getElementById('HistorialDePago').style.display = 'block';" 
-                                        class="btn btn-primary">Historial de pago</a>
-                                    </div>
-                                </td>
+                                        }}</td>
+                                    <td>
+                                        {{-- BOTÓN MODIFICAR PLAN --}}
+                                        <div class="d-flex justify-content-center">
+                                            <a 
+                                            onclick="document.getElementById('HistorialDePago').style.display = 'block';" 
+                                            class="btn btn-primary">Historial de pago</a>
+                                        </div>
+                                    </td>
 
-                            </tr>
+                                </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                     </table>
