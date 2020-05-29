@@ -44,7 +44,7 @@
                                     {{-- BOTÓN MODIFICAR PLAN --}}
                                     <div class="d-flex justify-content-center">
                                         <a 
-                                        onclick="document.getElementById('HistorialDePago').style.visibility = 'visible'" 
+                                        onclick="document.getElementById('HistorialDePago').style.display = 'block';" 
                                         class="btn btn-primary">Historial de pago</a>
                                     </div>
                                 </td>
