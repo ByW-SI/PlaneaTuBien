@@ -235,7 +235,7 @@ class ReciboProvisionalController extends Controller
     	$presolicitud = $prospecto->perfil->presolicitud;
         $grupos = $cotizacion->plan->grupos;
 
-        dd($presolicitud->cotizacion()->plan);
+        //dd($presolicitud->cotizacion()->plan);
 
         // dd($cotizacion->contratos());
         // dd($cotizacion->plan->grupos()->get());
@@ -270,7 +270,7 @@ class ReciboProvisionalController extends Controller
                 $recibo->clave = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
-
+                dd($presolicitud->contratos->isEmpty());
                 if ($presolicitud->contratos->isEmpty()) {
                   foreach ($cotizacion->contratos() as $value) {
 
