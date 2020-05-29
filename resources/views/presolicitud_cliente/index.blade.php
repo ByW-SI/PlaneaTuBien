@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row-group">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="crms">
+                    <table class="table table-striped" id="clientes">
                         <thead>
                             <tr class="thead-dark">
                                 <th>Cliente</th>
@@ -90,3 +90,39 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#clientes').DataTable({
+            pageLength : 5,
+            'language':{
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
+
+    });
+
+    </script>
+@endpush
