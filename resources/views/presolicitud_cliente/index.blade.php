@@ -44,7 +44,7 @@
                                     {{-- BOTÓN MODIFICAR PLAN --}}
                                     <div class="d-flex justify-content-center">
                                         <a 
-                                        href="" 
+                                        onclick="document.getElementById('HistorialDePago').style.visibility = 'visible'" 
                                         class="btn btn-primary">Historial de pago</a>
                                     </div>
                                 </td>
@@ -59,15 +59,15 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="HistorialDePago" style="display:none;">
     <h4 class="text-center text-uppercase text-muted">
-        CLIENTES
+        Historial de pago
     </h4>
     <div class="card">
         <div class="card-body">
             <div class="row-group">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="crms">
+                    <table class="table table-striped" >
                         <thead>
                             <tr class="thead-dark">
                                 <th>Cliente</th>
