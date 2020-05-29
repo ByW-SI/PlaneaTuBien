@@ -58,7 +58,7 @@
         </div>
     </div>
 </div>
-
+<br><br>
 <div class="container" id="HistorialDePago" style="display:none;">
     <h4 class="text-center text-uppercase text-muted">
         Historial de pago
