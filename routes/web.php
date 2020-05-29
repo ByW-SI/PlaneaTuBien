@@ -273,6 +273,9 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+
+
+Route::post('getHistorial','Pagos\PagosController@getHistorial');
 // PAGOS
 Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');
 Route::get('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');

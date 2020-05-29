@@ -40,4 +40,13 @@ class PagosController extends Controller
         return $total_monto_pagado;
 
     }
+    public function getHistorial(Request $request){
+        $Pagos=Pagos::where("contrato_id",$request->input('id'))->get();
+        $ajaxPagos=array();
+        foreach ($Pagos as $Pago) {
+            array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia]);
+        }
+        return json_encode(['data'=> $ajaxPagos]);
+
+    }
 }
