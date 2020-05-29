@@ -28,7 +28,7 @@
                                     {{$presolicitud->perfil->prospecto->apmaterno}}</td>
                                 <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
                                 <td>{{$presolicitud->id}}</td>
-                                <td>{{($presolicitudes->precio_inicial/$presolicitud->cotizacion->plan->plazo<=$presolicitudes->contratos->first()->mensualidades->first()->pagos()->whereMonth ('fecha_pago', '=', date ('m'))->where('status_id',1)->sum('monto'))?"Alcorriente con los pagos":"Con Deuda de pagos"}}</td>
+                                <td>{{($presolicitud->precio_inicial/$presolicitud->cotizacion->plan->plazo<=$presolicitud->contratos->first()->mensualidades->first()->pagos()->whereMonth ('fecha_pago', '=', date ('m'))->where('status_id',1)->sum('monto'))?"Alcorriente con los pagos":"Con Deuda de pagos"}}</td>
                                 <td>
                                     {{-- BOTÓN MODIFICAR PLAN --}}
                                     <div class="d-flex justify-content-center">
