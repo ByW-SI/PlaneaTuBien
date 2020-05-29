@@ -72,7 +72,7 @@
                             <tr class="thead-dark">
                                 <th>Folio</th>
                                 <th>Fecha de pago</th>
-                                <th>estatus de pago</th>
+                                <th>Estatus de pago</th>
                                 <th>Acciones</th>
                                 <th>Tipo de pago</th>
                                 <th>Referencia</th>
