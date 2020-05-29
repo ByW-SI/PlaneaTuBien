@@ -31,9 +31,9 @@
                                 <td>{{
 
 
-                                    ($presolicitud->contratos->first()->mensualidades->first()->pagos())
+                                    ($presolicitud->contratos->first()->mensualidades->first()->pagos()->aprobados()->get())
                                         ?"Sin pagos"
-                                        :($presolicitud->precio_inicial/$presolicitud->cotizacion()->plan->plazo<=$presolicitud->contratos->first()->mensualidades->first()->pagos()->whereMonth ('fecha_pago', '=', date ('m'))->where('status_id',1)->sum('monto'))
+                                        :($presolicitud->precio_inicial/$presolicitud->cotizacion()->plan->plazo<=$presolicitud->contratos->first()->mensualidades->first()->pagos()->aprobados()->whereMonth ('fecha_pago', '=', date ('m'))->sum('monto'))
                                             ?"Alcorriente con los pagos"
                                             :"Con Deuda de pagos"
 
