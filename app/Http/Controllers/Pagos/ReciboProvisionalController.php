@@ -235,7 +235,7 @@ class ReciboProvisionalController extends Controller
     	$presolicitud = $prospecto->perfil->presolicitud;
         $grupos = $cotizacion->plan->grupos;
 
-        // dd($presolicitud->cotizacion()->plan);
+        dd($presolicitud->cotizacion()->plan);
 
         // dd($cotizacion->contratos());
         // dd($cotizacion->plan->grupos()->get());
