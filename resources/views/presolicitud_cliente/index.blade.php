@@ -70,11 +70,13 @@
                     <table class="table table-striped" >
                         <thead>
                             <tr class="thead-dark">
-                                <th>Cliente</th>
-                                <th>Plan</th>
-                                <th>Presolicitud</th>
+                                <th>Folio</th>
+                                <th>Fecha de pago</th>
                                 <th>estatus de pago</th>
                                 <th>Acciones</th>
+                                <th>Tipo de pago</th>
+                                <th>Referencia</th>
+
                             </tr>
                         </thead>
                         <tbody>
