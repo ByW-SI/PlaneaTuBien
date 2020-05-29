@@ -13,7 +13,7 @@
                     <table class="table table-striped" id="crms">
                         <thead>
                             <tr class="thead-dark">
-                                <th>Prospecto</th>
+                                <th>Cliente</th>
                                 <th>Plan</th>
                                 <th>Presolicitud</th>
                                 <th>estatus de pago</th>
@@ -28,7 +28,7 @@
                                     {{$presolicitud->perfil->prospecto->apmaterno}}</td>
                                 <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
                                 <td>{{$presolicitud->id}}</td>
-                                <td></td>
+                                <td>{{($presolicitudes->precio_inicial/$presolicitud->cotizacion->plan->plazo<=$presolicitudes->contratos->first()->mensualidades->first()->pagos()->whereMonth ('fecha_pago', '=', date ('m'))->where('status_id',1)->sum('monto'))?"Alcorriente con los pagos":"Con Deuda de pagos"}}</td>
                                 <td>
                                     {{-- BOTÓN MODIFICAR PLAN --}}
                                     <div class="d-flex justify-content-center">
