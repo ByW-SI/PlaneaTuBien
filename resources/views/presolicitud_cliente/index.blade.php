@@ -45,7 +45,7 @@
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">
                                             <a 
-                                            onclick="document.getElementById('HistorialDePago').style.display = 'block';" 
+                                            onclick="AgregarHistorial($contrato->id)" 
                                             class="btn btn-primary">Historial de pago</a>
                                         </div>
                                     </td>
@@ -123,6 +123,7 @@
         });
     });
     function AgregarHistorial(id) {
+        document.getElementById('HistorialDePago').style.display = 'block';
         $("#HistorialDePagoTable").dataTable().fnDestroy();
                 //console.log($(this).val());
                 $('#HistorialDePagoTable').DataTable({
