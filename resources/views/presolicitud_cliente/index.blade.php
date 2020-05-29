@@ -45,7 +45,7 @@
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">
                                             <a 
-                                            onclick="AgregarHistorial($contrato->id)" 
+                                            onclick="AgregarHistorial({{$contrato->id}})" 
                                             class="btn btn-primary">Historial de pago</a>
                                         </div>
                                     </td>
