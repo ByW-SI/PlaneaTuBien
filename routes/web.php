@@ -245,7 +245,7 @@ Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\Cred
 
 Route::post('navegacion_contrato','Cliente\ClienteController@navegacion_contrato');
 Route::post('get_contrato','Cliente\ClienteController@get_contrato');
-
+Route::post('get_prepagos','Cliente\ClienteController@get_prepagos');
 
 
 // PRECARGAS
@@ -278,7 +278,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::post('getHistorial','Pagos\PagosController@getHistorial');
+
 
 // PAGOS
 Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');

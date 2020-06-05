@@ -8,6 +8,7 @@ use App\Presolicitud;
 use App\Plan;
 use App\Contrato;
 use Carbon\Carbon;
+use App\Referencia;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
@@ -50,5 +51,18 @@ class ClienteController extends Controller
         $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'));
         return json_encode($jsonEn);
         # code...
+    }
+    public function get_prepagos(Request $request)
+    {
+        $Presolicituds=Presolicitud::where('id',$request->input('idP'))->get();
+        $Contratos=Contrato::where('id',$request->input('idD'))->get();
+        $Contrato=$Contratos[0];
+        $ajaxPagos=array();
+        foreach ($Presolicituds as $Presolicitud) {
+            $Referencias=Referencia::where('presolicitud_id',$Presolicitud->id)->get();
+            array_push ($ajaxPagos,[ $Presolicitud->nombre." ".$Presolicitud->paterno." ".$Presolicitud->materno,1,$Contrato->mensualidades->cantidad,$Presolicitud->tel_casa,$Presolicitud->tel_oficina,$Presolicitud->tel_celular,$Referencia[0]->telefono,$Referencia[1]->telefono,$Referencia[2]->telefono);
+        }
+        return json_encode(['data'=> $ajaxPagos]);
+
     }
 }

@@ -111,16 +111,18 @@
                 <br>
                 <div class="row-group">
                     <div class="table-responsive">
-                        <table class="table table-striped" id="HistorialDePagoTable" >
+                        <table class="table table-striped" id="UsuarioTable" >
                             <thead>
                                 <tr class="thead-dark">
-                                    <th>Folio</th>
-                                    <th>Fecha de pago</th>
-                                    <th>Estatus de pago</th>
-                                    <th>Tipo de pago</th>
-                                    <th>Referencia</th>
-                                    <th>Monto</th>
-
+                                    <th>Cliente</th>
+                                    <th>Meses vencidos</th>
+                                    <th>Importe total</th>
+                                    <th>Tel casa</th>
+                                    <th>Oficina</th>
+                                    <th>Celular</th>
+                                    <th>Referencia 1</th>
+                                    <th>Referencia 2</th>
+                                    <th>Referencia 3</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -217,8 +219,8 @@
                 $('#valorI_contrato').text(res.Contrato.monto);
                 $('#valorP_contrato').text(res.Contrato.monto);
                 //$('#valorA_contrato').text(res.Contrato.monto);
-                //$('#plazo_contrato').text(res.Contrato.monto);
-
+                $('#plazo_contrato').text(res.Presolicitud.plazo_contratado);
+                UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
             }
@@ -241,19 +243,21 @@
                 $('#HistorialDePago').show();
                 $('#Contrato').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
+
             }
         });
+
     }
-    function AgregarHistorial(id) {
-        
-        $("#HistorialDePagoTable").dataTable().fnDestroy();
+    function UsuarioBusqueda(idP,idD) {        
+        $("#UsuarioTable").dataTable().fnDestroy();
                 //console.log($(this).val());
-                $('#HistorialDePagoTable').DataTable({
+                $('#UsuarioTable').DataTable({
                     "ajax":{
                         type: "POST",
-                        url:"/getHistorial",
+                        url:"/get_prepagos",
                         data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                               "id" : id
+                               "idP" : idP,
+                               "idD" : idD
                         }
                     },
                     "searching": false,
