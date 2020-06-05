@@ -5,7 +5,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="crearGestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="crear_Gestion_id"  action="{{route('gestion.store')}}" method="POST">
+    <form id="crear_Gestion_id"  action="{{url('gestion.store')}}" method="POST">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
