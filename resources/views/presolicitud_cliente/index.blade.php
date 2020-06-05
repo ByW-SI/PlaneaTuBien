@@ -181,7 +181,7 @@
                     "id" : id
                 },
             success: function(res){
-                $('#navContrato').html(res);
+                $('#navContrato').append("`"+res+"`");
                 $('#HistorialDePago').show();
                 //document.getElementById('HistorialDePago').style.display = 'block';
             }
