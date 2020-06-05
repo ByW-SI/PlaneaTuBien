@@ -67,10 +67,9 @@
 
                                     <td>
                                         {{-- BOTÓN MODIFICAR PLAN --}}
-                                        <div class="d-flex justify-content-center">
-                                            <a 
-                                            value="{{$presolicitud->id}}"
-                                            id="BNTdetalles" 
+                                        <div value="{{$presolicitud->id}}"
+                                            id="BNTdetalles" class="d-flex justify-content-center">
+                                            <a  
                                             class="btn btn-primary">Detalles del cliente</a>
                                         </div>
                                     </td>
