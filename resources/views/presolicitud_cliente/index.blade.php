@@ -207,10 +207,10 @@
                 },
             dataType: "json",
             success: function(res){
-                var todayTime = new Date();
-                var month = format(todayTime.getMonth() + 1);
-                var day = format(todayTime.getDate());
-                var year = format(todayTime.getFullYear());
+                let date = new Date();
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
                 $('#fecha_corte').text(day+"/"+month+"/"+year);
                 $('#fecha_contrato').text(res.Creacion);
                 $('#grupo_contrato').text(res.Contrato.grupo_id);
