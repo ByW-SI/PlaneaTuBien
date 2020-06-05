@@ -166,14 +166,15 @@
                 }
             }
         });
+        
 
+        $(".SelectContrato").click(function(){
+            $(".SelectContrato").addClass("active");
+            $('#Contrato').show();
+            $(this).addClass("active");
+        });
 
     });
-    function Pestalla(id) {
-        //document.getElementById('Contrato').style.display = 'block';
-        $('#Contrato').show();
-        // body...
-    }
     function DetallesPresolicitud(id) {
         $.ajax({
             url:"/navegacion_contrato",
