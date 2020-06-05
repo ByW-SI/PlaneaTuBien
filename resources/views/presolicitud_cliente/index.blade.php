@@ -23,7 +23,6 @@
                                 <th>Estatus del cliente</th>
                                 <th>Ultima gestion</th>
                                 <th>Fecha de la ultima gestion</th>
-                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,7 +69,7 @@
                                         <div class="d-flex justify-content-center">
                                             <a 
                                             onclick="DetallesPresolicitud({{$presolicitud->id}})" 
-                                            class="btn btn-primary">Detalles del cliente</a>
+                                            class="btn btn-primary">Detalles</a>
                                         </div>
                                     </td>
 
@@ -220,6 +219,8 @@
                 $('#valorP_contrato').text(res.Contrato.monto);
                 //$('#valorA_contrato').text(res.Contrato.monto);
                 $('#plazo_contrato').text(res.Presolicitud.plazo_contratado);
+                $('#cuotasPagar_contrato').text(res.Presolicitud.plazo_contratado);
+                
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
