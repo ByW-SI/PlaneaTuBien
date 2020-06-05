@@ -69,7 +69,7 @@
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">
                                             <a 
-                                            onclick="AgregarHistorial({{$contrato->id}})" 
+                                            onclick="DetallesPresolicitud({{$presolicitud->id}})" 
                                             class="btn btn-primary">Detalles del cliente</a>
                                         </div>
                                     </td>
@@ -85,29 +85,48 @@
 </div>
 <br><br>
 <div class="container" id="HistorialDePago" style="display:none;">
-    <h4 class="text-center text-uppercase text-muted">
-        Historial de pago
-    </h4>
-    <div class="card">
-        <div class="card-body">
-            <div class="row-group">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="HistorialDePagoTable" >
-                        <thead>
-                            <tr class="thead-dark">
-                                <th>Folio</th>
-                                <th>Fecha de pago</th>
-                                <th>Estatus de pago</th>
-                                <th>Tipo de pago</th>
-                                <th>Referencia</th>
-                                <th>Monto</th>
+    <div id="navContrato">
+        
+    </div>
+    
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                    </table>
+    
+    <div id="Contrato" style="display:none;">
+        <div class="card">
+            <div class="card-body">
+                <div class="row-group">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="HistorialDePagoTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>Folio</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Estatus de pago</th>
+                                    <th>Tipo de pago</th>
+                                    <th>Referencia</th>
+                                    <th>Monto</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <span class="input-group-text">$</span>
+                            <span class="input-group-text">0.00</span>
+                        </div>
+                        <div class="col-sm">
+
+                        </div>
+                        <div class="col-sm">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,9 +164,29 @@
                 }
             }
         });
+
+
     });
+    function Pestalla(id) {
+        document.getElementById('Contrato').style.display = 'block';
+        // body...
+    }
+    function DetallesPresolicitud(id) {
+        $.ajax({
+            url:"/navegacion_contrato",
+            type:'POST',
+            dataType:'json',
+            data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                    "id" : id
+                },
+            success: function(res){
+                $('#navContrato').append(res);
+                document.getElementById('HistorialDePago').style.display = 'block';
+            }
+        });
+    }
     function AgregarHistorial(id) {
-        document.getElementById('HistorialDePago').style.display = 'block';
+        
         $("#HistorialDePagoTable").dataTable().fnDestroy();
                 //console.log($(this).val());
                 $('#HistorialDePagoTable').DataTable({
@@ -187,6 +226,7 @@
                     }
             });
     }
+
 
     </script>
 @endpush

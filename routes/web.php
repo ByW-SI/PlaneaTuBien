@@ -243,6 +243,8 @@ Route::get('contratos/{contrato}/checklist/{checklist}/aprobar/{aprobar}', 'Pros
 Route::resource('contratos.domiciliacion','Prospecto\Cliente\Presolicitud\Contrato\DomiciliacionController')->middleware('auth');
 Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create'])->middleware('auth');
 
+Route::post('navegacion_contrato','Cliente\ClienteController@navegacion_contrato');
+
 
 
 // PRECARGAS
@@ -276,6 +278,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::post('getHistorial','Pagos\PagosController@getHistorial');
+
 // PAGOS
 Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');
 Route::get('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
