@@ -172,6 +172,7 @@
     function Pestalla(id) {
         //document.getElementById('Contrato').style.display = 'block';
         $('#Contrato').show();
+        $('.SelectNav').removeClass("active");
         $('#n'+id).addClass("active");
         
         // body...
