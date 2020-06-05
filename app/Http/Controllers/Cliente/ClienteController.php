@@ -84,7 +84,7 @@ class ClienteController extends Controller
         $Contrato=Contrato::where("id",$request->input('contrato_id'))->get();
         $Presolicitud=$Contrato->presolicitud;
 
-        $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at])
+        $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at]);
         $Gestion=Gestion::create([
             'contrato_id'=>$request->input('contrato_id'),
             'gestion'=>$request->input('gestion'),
