@@ -110,7 +110,9 @@
                                         {{$presolicitud->gestion}}
                                     </td>
                                     <td>
-                                        {{\Carbon\Carbon::parse($presolicitud->fecha_gestion)->format('d/m/Y')}}
+                                        @if($presolicitud->fecha_gestion!=0)
+                                            {{\Carbon\Carbon::parse($presolicitud->fecha_gestion)->format('d/m/Y')}}
+                                        @endif
                                     </td>
 
                                     <td>
