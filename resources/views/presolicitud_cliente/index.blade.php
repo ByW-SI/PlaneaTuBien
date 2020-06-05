@@ -168,7 +168,8 @@
 
     });
     function Pestalla(id) {
-        document.getElementById('Contrato').style.display = 'block';
+        //document.getElementById('Contrato').style.display = 'block';
+        $('#Contrato').show();
         // body...
     }
     function DetallesPresolicitud(id) {
@@ -180,8 +181,9 @@
                     "id" : id
                 },
             success: function(res){
-                $('#navContrato').append("res");
-                document.getElementById('HistorialDePago').style.display = 'block';
+                $('#navContrato').html(res);
+                $('#HistorialDePago').show();
+                //document.getElementById('HistorialDePago').style.display = 'block';
             }
         });
     }
