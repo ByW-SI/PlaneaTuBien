@@ -34,7 +34,7 @@ class ClienteController extends Controller
             
                 $Html.="<li role='presentation' class='nav-item' 
                         onclick='Pestalla(".$Contrato->id.")'>
-                    <a  id='nav-historial".$Contrato->id."' class='nav-link submenu SelectNav' >
+                    <a  id='n".$Contrato->id."' class='nav-link submenu SelectNav' >
                         Contrato N°".$Contrato->numero_contrato.":
                     </a>
                 </li>";
