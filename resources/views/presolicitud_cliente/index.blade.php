@@ -6,6 +6,7 @@
 <!-- Modal -->
 <div class="modal fade" id="crearGestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form id="crear_Gestion_id"  action="{{url('gestion.store')}}" method="POST">
+        {{ csrf_field() }}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
