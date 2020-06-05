@@ -14,44 +14,67 @@
                         <thead>
                             <tr class="thead-dark">
                                 <th>Cliente</th>
-                                <th>Plan</th>
-                                <th>Contrato</th>
-                                <th>Presolicitud</th>
-                                <th>estatus de pago</th>
-                                <th>Acciones</th>
+                                <th>Contratos</th>
+                                <th>Meses vencidos</th>
+                                <th>Importe total</th>
+                                <th>Tel casa</th>
+                                <th>Tel oficina</th>
+                                <th>Celular</th>
+                                <th>Estatus del cliente</th>
+                                <th>Ultima gestion</th>
+                                <th>Fecha de la ultima gestion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($presolicitudes as $presolicitud)
-                                @foreach ($presolicitud->contratos as $contrato)
+                                
                                 <tr>
                                     <td>{{$presolicitud->perfil->prospecto->nombre}}
                                         {{$presolicitud->perfil->prospecto->appaterno}}
-                                        {{$presolicitud->perfil->prospecto->apmaterno}}</td>
-                                    <td>{{$presolicitud->perfil->cotizacion->plan->id}}</td>
-                                    <td>{{$contrato->numero_contrato}}</td>
-                                    <td>{{$presolicitud->id}}</td>
-                                    <td>{{
+                                        {{$presolicitud->perfil->prospecto->apmaterno}}
+                                    </td>
+                                    <td>
+                                        @foreach ($presolicitud->contratos as $contrato)
+                                            {{$contrato->numero_contrato.","}}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        11
+                                    </td>
+                                    <td>
+                                        $25,000
+                                    </td>
+                                    <td>
+                                        {{$presolicitud->tel_casa}}
+                                    </td>
+                                    <td>
+                                        {{$presolicitud->tel_oficina}}
+                                    </td>
+                                    <td>
+                                        {{$presolicitud->tel_celular}}
+                                    </td>
+                                    <td>
+                                        Integrante
+                                    </td>
 
+                                    <td>
+                                        {{$presolicitud->gestion}}
+                                    </td>
+                                    <td>
+                                        {{$presolicitud->fecha_gestion}}
+                                    </td>
 
-                                        (is_null ($contrato->mensualidades->last()->first()->pagos()->get()))
-                                            ?"Sin pagos"
-                                            :($contrato->monto/$presolicitud->cotizacion()->plan->plazo<=$contrato->mensualidades->last()->first()->pagos()->aprobados()->whereMonth ('fecha_pago', '=', date ('m'))->sum('monto'))
-                                                ?"Alcorriente con los pagos"
-                                                :"Con Deuda de pagos"
-
-                                        }}</td>
                                     <td>
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">
                                             <a 
                                             onclick="AgregarHistorial({{$contrato->id}})" 
-                                            class="btn btn-primary">Historial de pago</a>
+                                            class="btn btn-primary">Detalles del cliente</a>
                                         </div>
                                     </td>
 
                                 </tr>
-                                @endforeach
                             @endforeach
                         </tbody>
                     </table>
