@@ -117,8 +117,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm">
-                            <span class="input-group-text">$</span>
-                            <span class="input-group-text">0.00</span>
+                            Número de grupo:<span class="input-group-text">$</span><br>
+                            Fecha de contrato:<span class="input-group-text">0.00</span>
+
                         </div>
                         <div class="col-sm">
 
