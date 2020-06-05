@@ -208,10 +208,10 @@
             dataType: "json",
             success: function(res){
                 var todayTime = new Date();
-                var month = format(todayTime .getMonth() + 1);
-                var day = format(todayTime .getDate());
-                var year = format(todayTime .getFullYear());
-                $('#fecha_corte').text(day + "/" + month + "/" + year);
+                var month = format(todayTime.getMonth() + 1);
+                var day = format(todayTime.getDate());
+                var year = format(todayTime.getFullYear());
+                $('#fecha_corte').text(day+"/"+month+"/"+year);
                 $('#fecha_contrato').text(res.Creacion);
                 $('#grupo_contrato').text(res.Contrato.grupo_id);
                 $('#valorI_contrato').text(res.Contrato.monto);
