@@ -54,6 +54,10 @@ class Contrato extends Model
     public function mensualidades(){
         return $this->hasMany('App\Mensualidad');
     }
+     public function gestiones()
+    {
+        return $this->hasMany('App\Gestion');
+    }
 
 
     /**
