@@ -58,9 +58,10 @@ class ClienteController extends Controller
         $Contratos=Contrato::where('id',$request->input('idD'))->get();
         $Contrato=$Contratos[0];
         $ajaxPagos=array();
+        dd($Contrato->mensualidade);
         foreach ($Presolicituds as $Presolicitud) {
             $Referencias=Referencia::where('presolicitud_id',$Presolicitud->id)->get();
-            array_push ($ajaxPagos,[ $Presolicitud->nombre." ".$Presolicitud->paterno." ".$Presolicitud->materno,1,$Contrato->mensualidade->first()->cantidad,$Presolicitud->tel_casa,$Presolicitud->tel_oficina,$Presolicitud->tel_celular,$Referencia[0]->telefono,$Referencia[1]->telefono,$Referencia[2]->telefono]);
+            array_push ($ajaxPagos,[ $Presolicitud->nombre." ".$Presolicitud->paterno." ".$Presolicitud->materno,1,$Contrato->mensualidade,$Presolicitud->tel_casa,$Presolicitud->tel_oficina,$Presolicitud->tel_celular,$Referencia[0]->telefono,$Referencia[1]->telefono,$Referencia[2]->telefono]);
         }
         return json_encode(['data'=> $ajaxPagos]);
 
