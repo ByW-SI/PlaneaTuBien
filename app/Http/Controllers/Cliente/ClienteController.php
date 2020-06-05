@@ -46,7 +46,7 @@ class ClienteController extends Controller
     public function get_contrato(Request $request)
     {
         $Contrato=Contrato::where('id',$request->input('id'))->get();
-        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud);
+        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>$Contrato[0]->created_at);
         return json_encode($jsonEn);
         # code...
     }

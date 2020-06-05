@@ -209,7 +209,7 @@
             success: function(res){
                 hoy = new Date();
                 $('#fecha_corte').text(hoy);
-                $('#fecha_contrato').text(res.Contrato.created_at);
+                $('#fecha_contrato').text(res.Creacion);
                 $('#grupo_contrato').text(res.Contrato.grupo_id);
                 $('#valorI_contrato').text(res.Contrato.monto);
                 $('#valorP_contrato').text(res.Contrato.monto);
