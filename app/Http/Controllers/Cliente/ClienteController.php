@@ -63,7 +63,7 @@ class ClienteController extends Controller
         $ajaxPagos=array();
         foreach ($Presolicituds as $Presolicitud) {
             $Referencias=Referencia::where('presolicitud_id',$Presolicitud->id)->get();
-            array_push ($ajaxPagos,[ $Presolicitud->nombre." ".$Presolicitud->paterno." ".$Presolicitud->materno,1,$Mensualidad,$Presolicitud->tel_casa,$Presolicitud->tel_oficina,$Presolicitud->tel_celular,$Referencias[0]->telefono,$Referencias[1]->telefono,$Referencias[2]->telefono]);
+            array_push ($ajaxPagos,[ $Presolicitud->nombre,1,$Mensualidad->cantidad,$Presolicitud->tel_casa,$Presolicitud->tel_oficina,$Presolicitud->tel_celular,$Referencias[0]->telefono,$Referencias[1]->telefono,$Referencias[2]->telefono]);
         }
         return json_encode(['data'=> $ajaxPagos]);
 
