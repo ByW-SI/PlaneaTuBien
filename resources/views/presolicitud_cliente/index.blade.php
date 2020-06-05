@@ -180,7 +180,7 @@
                     "id" : id
                 },
             success: function(res){
-                $('#navContrato').append(res);
+                $('#navContrato').append("res");
                 document.getElementById('HistorialDePago').style.display = 'block';
             }
         });
