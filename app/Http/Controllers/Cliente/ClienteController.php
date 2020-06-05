@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Presolicitud;
 use App\Plan;
 use App\Contrato;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
@@ -46,7 +47,7 @@ class ClienteController extends Controller
     public function get_contrato(Request $request)
     {
         $Contrato=Contrato::where('id',$request->input('id'))->get();
-        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon\Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'));
+        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'));
         return json_encode($jsonEn);
         # code...
     }
