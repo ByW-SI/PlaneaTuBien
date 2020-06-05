@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <div class="row-group">
                     <div class="table-responsive">
                         <table class="table table-striped" id="HistorialDePagoTable" >
