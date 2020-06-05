@@ -151,19 +151,36 @@
                             <div class="row">
                                 <div class="col-sm">
                                     <div class="d-flex justify-content-center">
-                                        <a 
-                                        onclick="DetallesPresolicitud({{$presolicitud->id}})" 
-                                        class="btn btn-primary">Ultimagestion</a>
+                                        <a class="btn btn-primary HistorialGestion">Ultimagestion</a>
                                     </div>
                                 </div>
                                 <div class="col-sm">
-                                    Dia sig gestion:<span class="input-group-text" id="Dia_sig_contrato">0</span><br>
+                                    Dia sig gestion:<span class="input-group-text" id="Dia_sig_gestion">0</span><br>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm">
 
                         </div>
+                    </div>
+                </div>
+                <div class="row-group" id="HistorialGestionTablevisible">
+                    <h5 class="text-center text-uppercase text-muted">
+                        Historial de Gestiones
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="HistorialGestionTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>gestion</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Fecha siguiente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -177,6 +194,8 @@
     $(document).ready(function () {
         $('#Contrato').hide();
         $('#HistorialDePago').hide();
+        $('#HistorialGestionTablevisible').hide();
+        
         $('#clientes').DataTable({
             pageLength : 5,
             'language':{
@@ -207,9 +226,53 @@
 
 
     });
+    $(document).ready(function(){
+        $(".HistorialGestion").click(function(){
+            $('#HistorialGestionTablevisible').show();
+            $("#HistorialGestionTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#HistorialGestionTable').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_gestion",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "id" : $(this).val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    });
     function Pestalla(id) {
         //document.getElementById('Contrato').style.display = 'block';
         $('#Contrato').show();
+        $('#HistorialGestionTablevisible').hide();
         $('.SelectNav').removeClass("active");
         $('#n'+id).addClass("active");
         $.ajax({
@@ -232,7 +295,7 @@
                 //$('#valorA_contrato').text(res.Contrato.monto);
                 $('#plazo_contrato').text(res.Presolicitud.plazo_contratado);
                 $('#cuotasPagar_contrato').text(res.Presolicitud.plazo_contratado);
-                
+                $('.HistorialGestion').val(res.Contrato.id);
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
@@ -255,6 +318,7 @@
                 $('#navContrato').append(res);
                 $('#HistorialDePago').show();
                 $('#Contrato').hide();
+                $('#HistorialGestionTablevisible').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
 
             }
@@ -263,44 +327,44 @@
     }
     function UsuarioBusqueda(idP,idD) {        
         $("#UsuarioTable").dataTable().fnDestroy();
-                //console.log($(this).val());
-                $('#UsuarioTable').DataTable({
-                    "ajax":{
-                        type: "POST",
-                        url:"/get_prepagos",
-                        data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                               "idP" : idP,
-                               "idD" : idD
-                        }
-                    },
-                    "searching": false,
-                    pageLength : 3,
-                    'language':{
-                        "sProcessing":     "Procesando...",
-                        "sLengthMenu":     "Mostrar _MENU_ registros",
-                        "sZeroRecords":    "No se encontraron resultados",
-                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                        "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
-                        "sInfoEmpty":      "Productos 0 de un total de 0 ",
-                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                        "sInfoPostFix":    "",
-                        "sSearch":         "Buscar:",
+        //console.log($(this).val());
+        $('#UsuarioTable').DataTable({
+            "ajax":{
+                type: "POST",
+                url:"/get_prepagos",
+                data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                       "idP" : idP,
+                       "idD" : idD
+                }
+            },
+            "searching": false,
+            pageLength : 3,
+            'language':{
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
 
-                        "sUrl":            "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "oPaginate": {
-                            "sFirst":    "Primero",
-                            "sLast":     "Último",
-                            "sNext":     "Siguiente",
-                            "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        }
-                    }
-            });
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
     }
 
 

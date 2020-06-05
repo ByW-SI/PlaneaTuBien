@@ -10,6 +10,7 @@ use App\Contrato;
 use Carbon\Carbon;
 use App\Referencia;
 use App\Mensualidad;
+use App\Gestion;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
@@ -67,5 +68,15 @@ class ClienteController extends Controller
         }
         return json_encode(['data'=> $ajaxPagos]);
 
+    }
+    public function get_gestion(Request $request)
+    {
+        $Gestiones=Gestion::where('contrato_id',$request->input('id'))->get();
+
+        $ajaxPagos=array();
+        foreach ($Gestiones as $Gestion) {
+            array_push ($ajaxPagos,[ $Gestion->gestion,Carbon::parse($Gestion->created_at)->format('d/m/Y'),Carbon::parse($Gestion->fecha_sig)->format('d/m/Y')]);
+        }
+        return json_encode(['data'=> $ajaxPagos]);
     }
 }

@@ -246,6 +246,7 @@ Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\Cred
 Route::post('navegacion_contrato','Cliente\ClienteController@navegacion_contrato');
 Route::post('get_contrato','Cliente\ClienteController@get_contrato');
 Route::post('get_prepagos','Cliente\ClienteController@get_prepagos');
+Route::post('get_gestion','Cliente\ClienteController@get_gestion');
 
 
 // PRECARGAS
