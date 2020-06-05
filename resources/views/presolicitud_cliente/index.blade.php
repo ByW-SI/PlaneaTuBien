@@ -69,7 +69,8 @@
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">
                                             <a 
-                                            onclick="DetallesPresolicitud({{$presolicitud->id}})" 
+                                            value="{{$presolicitud->id}}"
+                                            id="BNTdetalles" 
                                             class="btn btn-primary">Detalles del cliente</a>
                                         </div>
                                     </td>
@@ -84,14 +85,14 @@
     </div>
 </div>
 <br><br>
-<div class="container" id="HistorialDePago" style="display:none;">
+<div class="container" id="HistorialDePago" >
     <div id="navContrato">
         
     </div>
     
 
     
-    <div id="Contrato" style="display:none;">
+    <div id="Contrato" >
         <div class="card">
             <div class="card-body">
                 <div class="row-group">
@@ -137,6 +138,8 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
+        $('#Contrato').hide();
+        $('#HistorialDePago').hide();
         $('#clientes').DataTable({
             pageLength : 5,
             'language':{
@@ -165,6 +168,23 @@
             }
         });
 
+        $("#BNTdetalles").click(function(){
+            $.ajax({
+                url:"/navegacion_contrato",
+                type:'POST',
+                dataType:'json',
+                data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                        "id" : id
+                    },
+                success: function(res){
+                    //$('#navContrato').remove();
+                     $("#navContrato").append(res);
+                    $('#HistorialDePago').show();
+                    //document.getElementById('HistorialDePago').style.display = 'block';
+                }
+            });
+           
+        }); 
 
     });
     function Pestalla(id) {
@@ -173,20 +193,7 @@
         // body...
     }
     function DetallesPresolicitud(id) {
-        $.ajax({
-            url:"/navegacion_contrato",
-            type:'POST',
-            dataType:'json',
-            data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                    "id" : id
-                },
-            success: function(res){
-                alert(res);
-                $('#navContrato').append("`"+res+"`");
-                $('#HistorialDePago').show();
-                //document.getElementById('HistorialDePago').style.display = 'block';
-            }
-        });
+        
     }
     function AgregarHistorial(id) {
         
