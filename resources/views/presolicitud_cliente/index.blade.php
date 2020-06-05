@@ -169,7 +169,7 @@
         
 
         $(".SelectContrato").click(function(){
-            $(".SelectContrato").addClass("active");
+            //$(".SelectContrato").addClass("active");
             $('#Contrato').show();
             $(this).addClass("active");
         });
