@@ -244,6 +244,7 @@ Route::resource('contratos.domiciliacion','Prospecto\Cliente\Presolicitud\Contra
 Route::resource('presolicituds.credencials','Prospecto\Cliente\Presolicitud\CredencialController',['only','create'])->middleware('auth');
 
 Route::post('navegacion_contrato','Cliente\ClienteController@navegacion_contrato');
+Route::post('get_contrato','Cliente\ClienteController@get_contrato');
 
 
 

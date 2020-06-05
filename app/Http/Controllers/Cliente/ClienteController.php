@@ -43,4 +43,11 @@ class ClienteController extends Controller
         </div>";
         return $Html;
     }
+    public function get_contrato(Request $request)
+    {
+        $Contrato=Contrato::where('presolicitud_id',$request->input('id'))->get();
+        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud);
+        return json_encode($jsonEn);
+        # code...
+    }
 }
