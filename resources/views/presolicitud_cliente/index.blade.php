@@ -2,6 +2,54 @@
 
 @section('content')
 
+
+<!-- Modal -->
+<div class="modal fade" id="crearGestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="crear_Gestion_id"  action="{{route('gestion.store')}}" method="POST">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Gestion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input id="contrato_id" name="contrato_id" type="hidden" value="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Example select</label>
+                        <select class="form-control" id="gestion" name="gestion">
+                            <option>NC</option>
+                            <option>PP</option>
+                            <option>PI</option>
+                            <option>MJT</option>
+                            <option>BZ</option>
+                            <option>MR1</option>
+                            <option>MR2</option>
+                            <option>MR3</option>
+                            <option>ACL</option>
+                            <option>ACP</option>
+                            <option>IL</option>
+                            <option>CC</option>
+                            <option>CIT</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label for="desde">Fecha siguiente:</label>
+                        <input class="form-control" type="date" name="fecha_sig" value="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
 <div class="container">
     <h4 class="text-center text-uppercase text-muted">
         CLIENTES
@@ -150,12 +198,17 @@
                         <div class="col-sm">
                             <div class="row">
                                 <div class="col-sm">
+                                    Ultimagestion:
+                                    <span class="input-group-text" id="Dia_ultima_gestion">_</span>
                                     <div class="d-flex justify-content-center">
-                                        <a class="btn btn-primary HistorialGestion">Ultimagestion</a>
+                                        <a class="btn btn-primary HistorialGestion">Historial</a>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     Dia sig gestion:<span class="input-group-text" id="Dia_sig_gestion">0</span><br>
+                                    <button id="crearGestionBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearGestion">
+                                      Crear Gestion
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -227,6 +280,12 @@
 
     });
     $(document).ready(function(){
+        
+        $("#crearGestionBTN").click(function(){
+            $("#contrato_id").val($('.HistorialGestion').val());
+            
+        });
+
         $(".HistorialGestion").click(function(){
             $('#HistorialGestionTablevisible').show();
             $("#HistorialGestionTable").dataTable().fnDestroy();

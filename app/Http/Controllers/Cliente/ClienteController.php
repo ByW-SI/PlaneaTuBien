@@ -79,4 +79,22 @@ class ClienteController extends Controller
         }
         return json_encode(['data'=> $ajaxPagos]);
     }
+    public function gestionStore(Request $request)
+    {
+        $Gestion=Gestion::create([
+            'contrato_id'=>$request->input('contrato_id'),
+            'gestion'=>$request->input('gestion'),
+            'fecha_sig'=>$request->input('fecha_sig')
+        ]);
+        $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
+        $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
+            return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
+        })
+        ->where('prospecto',1)
+        ->get();
+
+        $planes = Plan::get();
+        return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
+        # code...
+    }
 }
