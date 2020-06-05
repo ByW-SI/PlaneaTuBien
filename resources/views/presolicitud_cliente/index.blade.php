@@ -132,17 +132,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm">
-                            Número de grupo:<span class="input-group-text" id="grupo_contrato"></span><br>
-                            Fecha de contrato:<span class="input-group-text" id="fecha_contrato"></span><br>
-                            Valor inicial:<span class="input-group-text" id="valorI_contrato"></span><br>
-                            Valor presente:<span class="input-group-text" id="valorP_contrato"></span><br>
-                            Valor a adjudicar:<span class="input-group-text" id="valorA_contrato"></span><br>
-                            Plazo contratado:<span class="input-group-text" id="plazo_contrato"></span><br>
+                            Número de grupo:<span class="input-group-text" id="grupo_contrato">0</span><br>
+                            Fecha de contrato:<span class="input-group-text" id="fecha_contrato">0</span><br>
+                            Valor inicial:<span class="input-group-text" id="valorI_contrato">0</span><br>
+                            Valor presente:<span class="input-group-text" id="valorP_contrato">0</span><br>
+                            Valor a adjudicar:<span class="input-group-text" id="valorA_contrato">0</span><br>
+                            Plazo contratado:<span class="input-group-text" id="plazo_contrato">0</span><br>
                             <br><br><br>
-                            Cuotas pagadas:<span class="input-group-text" id="cuotasP_contrato"></span><br><br>
-                            Cuotas por pagar:<span class="input-group-text" id="cuotasPagar_contrato"></span><br><br>
-                            Puntos acumulados:<span class="input-group-text" id="puntos_contrato"></span><br><br>
-                            Participantes adjudicados:<span class="input-group-text" id="participantes_contrato"></span><br><br>
+                            Cuotas pagadas:<span class="input-group-text" id="cuotasP_contrato">0</span><br><br>
+                            Cuotas por pagar:<span class="input-group-text" id="cuotasPagar_contrato">0</span><br><br>
+                            Puntos acumulados:<span class="input-group-text" id="puntos_contrato">0</span><br><br>
+                            Participantes adjudicados:<span class="input-group-text" id="participantes_contrato">0</span><br><br>
                             
                         </div>
                         <div class="col-sm">
