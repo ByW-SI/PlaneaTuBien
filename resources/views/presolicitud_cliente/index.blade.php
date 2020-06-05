@@ -182,7 +182,7 @@
                     "id" : id
                 },
             success: function(res){
-                
+                $('#navContrato2').remove();
                 $('#navContrato').append(res);
                 $('#HistorialDePago').show();
                 //document.getElementById('HistorialDePago').style.display = 'block';

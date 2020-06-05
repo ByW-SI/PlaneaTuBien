@@ -28,7 +28,8 @@ class ClienteController extends Controller
     public function navegacion_contrato(Request $request)
     {
         $Contratos=Contrato::where('presolicitud_id',$request->input('id'))->get();
-        $Html="<ul class='nav nav-pills nav-fill'>";
+        $Html="<div id='navContrato2'>
+        <ul class='nav nav-pills nav-fill'>";
         foreach ($Contratos as $Contrato) {
             
                 $Html.="<li role='presentation' class='nav-item' 
@@ -38,7 +39,8 @@ class ClienteController extends Controller
                     </a>
                 </li>";
         }
-        $Html.="</ul>";
+        $Html.="</ul>
+        </div>";
         return $Html;
     }
 }
