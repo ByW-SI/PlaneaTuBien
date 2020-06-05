@@ -185,6 +185,7 @@
                 $('#navContrato2').remove();
                 $('#navContrato').append(res);
                 $('#HistorialDePago').show();
+                $('#Contrato').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
             }
         });
