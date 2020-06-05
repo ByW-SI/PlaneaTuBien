@@ -81,6 +81,10 @@ class ClienteController extends Controller
     }
     public function gestionStore(Request $request)
     {
+        $Contrato=Contrato::where("id",$request->input('contrato_id'))->get();
+        $Presolicitud=$Contrato->presolicitud;
+
+        $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at])
         $Gestion=Gestion::create([
             'contrato_id'=>$request->input('contrato_id'),
             'gestion'=>$request->input('gestion'),
