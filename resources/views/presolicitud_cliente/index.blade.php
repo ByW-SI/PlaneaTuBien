@@ -200,9 +200,11 @@
                                 <div class="col-sm">
                                     Ultimagestion:
                                     <span class="input-group-text" id="Dia_ultima_gestion">_</span>
+                                    <br>
                                     <div class="d-flex justify-content-center">
                                         <a class="btn btn-primary HistorialGestion">Historial</a>
                                     </div>
+
                                 </div>
                                 <div class="col-sm">
                                     Dia sig gestion:<span class="input-group-text" id="Dia_sig_gestion">0</span><br>
