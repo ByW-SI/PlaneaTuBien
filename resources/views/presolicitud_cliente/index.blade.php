@@ -207,8 +207,11 @@
                 },
             dataType: "json",
             success: function(res){
-                hoy = new Date();
-                $('#fecha_corte').text(hoy);
+                var todayTime = new Date();
+                var month = format(todayTime .getMonth() + 1);
+                var day = format(todayTime .getDate());
+                var year = format(todayTime .getFullYear());
+                $('#fecha_corte').text(day + "/" + month + "/" + year);
                 $('#fecha_contrato').text(res.Creacion);
                 $('#grupo_contrato').text(res.Contrato.grupo_id);
                 $('#valorI_contrato').text(res.Contrato.monto);
