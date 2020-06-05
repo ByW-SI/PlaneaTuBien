@@ -10,7 +10,8 @@ class Gestion extends Model
     protected $table = 'gestiones';
 
     protected $fillable = ['contrato_id', 
-    'gestion'];
+    'gestion',
+	'fecha_sig'];
 
     protected $hidden =[
     	'created_at',

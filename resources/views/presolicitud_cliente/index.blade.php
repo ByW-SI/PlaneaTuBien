@@ -25,6 +25,7 @@
                                 <th>Fecha de la ultima gestion</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach ($presolicitudes as $presolicitud)
                                 
@@ -147,7 +148,18 @@
                             
                         </div>
                         <div class="col-sm">
-
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="d-flex justify-content-center">
+                                        <a 
+                                        onclick="DetallesPresolicitud({{$presolicitud->id}})" 
+                                        class="btn btn-primary">Ultimagestion</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    Dia sig gestion:<span class="input-group-text" id="Dia_sig_contrato">0</span><br>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm">
 
