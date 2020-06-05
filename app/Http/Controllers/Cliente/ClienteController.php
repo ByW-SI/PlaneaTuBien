@@ -32,9 +32,9 @@ class ClienteController extends Controller
         <ul class='nav nav-pills nav-fill'>";
         foreach ($Contratos as $Contrato) {
             
-                $Html.="<li role='presentation' class='nav-item SelectContrato' 
-                        value='".$Contrato->id."'>
-                    <a  id='nav-historial' class='nav-link submenu' >
+                $Html.="<li role='presentation' class='nav-item' 
+                        onclick='Pestalla(".$Contrato->id.")'>
+                    <a  id='nav-historial".$Contrato->id."' class='nav-link submenu SelectNav' >
                         Contrato N°".$Contrato->numero_contrato.":
                     </a>
                 </li>";
