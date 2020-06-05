@@ -67,9 +67,9 @@
 
                                     <td>
                                         {{-- BOTÓN MODIFICAR PLAN --}}
-                                        <div value="{{$presolicitud->id}}"
-                                            id="BNTdetalles" class="d-flex justify-content-center">
-                                            <a  
+                                        <div class="d-flex justify-content-center">
+                                            <a 
+                                            onclick="DetallesPresolicitud({{$presolicitud->id}})" 
                                             class="btn btn-primary">Detalles del cliente</a>
                                         </div>
                                     </td>
@@ -167,23 +167,6 @@
             }
         });
 
-        $("#BNTdetalles").click(function(){
-            $.ajax({
-                url:"/navegacion_contrato",
-                type:'POST',
-                dataType:'json',
-                data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                        "id" : id
-                    },
-                success: function(res){
-                    //$('#navContrato').remove();
-                     $("#navContrato").append(res);
-                    $('#HistorialDePago').show();
-                    //document.getElementById('HistorialDePago').style.display = 'block';
-                }
-            });
-           
-        }); 
 
     });
     function Pestalla(id) {
@@ -192,7 +175,19 @@
         // body...
     }
     function DetallesPresolicitud(id) {
-        
+        $.ajax({
+            url:"/navegacion_contrato",
+            type:'POST',
+            data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                    "id" : id
+                },
+            success: function(res){
+                
+                $('#navContrato').append(res);
+                $('#HistorialDePago').show();
+                //document.getElementById('HistorialDePago').style.display = 'block';
+            }
+        });
     }
     function AgregarHistorial(id) {
         
