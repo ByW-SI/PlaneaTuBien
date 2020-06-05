@@ -9,6 +9,7 @@ use App\Plan;
 use App\Contrato;
 use Carbon\Carbon;
 use App\Referencia;
+use App\Mensualidad;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
@@ -57,6 +58,7 @@ class ClienteController extends Controller
         $Presolicituds=Presolicitud::where('id',$request->input('idP'))->get();
         $Contratos=Contrato::where('id',$request->input('idD'))->get();
         $Contrato=$Contratos[0];
+        $Mensualidad=Mensualidad::where('contrato_id',$Contrato->id)->get();
         $ajaxPagos=array();
         dd($Contrato);
         foreach ($Presolicituds as $Presolicitud) {
