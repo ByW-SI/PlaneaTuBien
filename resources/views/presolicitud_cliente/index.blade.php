@@ -35,11 +35,11 @@
                             <option>CIT</option>
                         </select>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
+                    <div class="form-group">
                         <label for="desde">Fecha siguiente:</label>
                         <input class="form-control" type="date" name="fecha_sig" value="">
                     </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 form-group">
+                    <div class="form-group">
                         <label for="desde">Comentarios:</label>
                         <input class="form-control" type="text" name="comentario" value="">
                     </div>
@@ -237,6 +237,7 @@
                                     <th>gestion</th>
                                     <th>Fecha de creación</th>
                                     <th>Fecha siguiente</th>
+                                    <th>Comentario</th>
                                 </tr>
                             </thead>
                             <tbody>

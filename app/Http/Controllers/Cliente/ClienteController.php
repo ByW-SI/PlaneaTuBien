@@ -76,7 +76,7 @@ class ClienteController extends Controller
 
         $ajaxPagos=array();
         foreach ($Gestiones as $Gestion) {
-            array_push ($ajaxPagos,[ $Gestion->gestion,Carbon::parse($Gestion->created_at)->format('d/m/Y'),Carbon::parse($Gestion->fecha_sig)->format('d/m/Y')]);
+            array_push ($ajaxPagos,[ $Gestion->gestion,Carbon::parse($Gestion->created_at)->format('d/m/Y'),Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),$Gestion->comentario]);
         }
         return json_encode(['data'=> $ajaxPagos]);
     }
