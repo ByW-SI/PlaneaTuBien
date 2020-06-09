@@ -298,6 +298,24 @@
                                     Formato adjudicatario
                                 </button>
                             </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                    Reestructura
+                                </button>
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                    Formato cancelacion
+                                </button>
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                    Formato rescindido
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
