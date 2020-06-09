@@ -268,7 +268,7 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            
+                            <br><br><br><br><br><br><br><br><br><br>
                             <button id="HistorialPagos" type="button" class="btn btn-primary">
                                 Historial de Pagos
                             </button>
