@@ -268,10 +268,33 @@
                             </div>
                         </div>
                         <div class="col-sm">
-
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary" id="HistorialPagos">Historial de Pagos</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row-group" id="HistorialPagosTablevisible">
+                    <h5 class="text-center text-uppercase text-muted">
+                        Historial de Gestiones
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="HistorialPagosTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>gestion</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Fecha siguiente</th>
+                                    <th>Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="row-group" id="HistorialGestionTablevisible">
                     <h5 class="text-center text-uppercase text-muted">
                         Historial de Gestiones
@@ -304,6 +327,7 @@
         $('#Contrato').hide();
         $('#HistorialDePago').hide();
         $('#HistorialGestionTablevisible').hide();
+        $('#HistorialPagosTablevisible').hide();
         
         $('#clientes').DataTable({
             pageLength : 5,
@@ -388,8 +412,10 @@
         //document.getElementById('Contrato').style.display = 'block';
         $('#Contrato').show();
         $('#HistorialGestionTablevisible').hide();
+        $('#HistorialPagosTablevisible').hide();
         $('.SelectNav').removeClass("active");
         $('#n'+id).addClass("active");
+        $('#HistorialPagos').val(id);
         $.ajax({
             url:"/get_contrato",
             type:'POST',
@@ -413,6 +439,7 @@
                 $('.HistorialGestion').val(res.Contrato.id);
                 $('#Dia_ultima_gestion').text(res.UltimaGfecha);
                 $('#Dia_sig_gestion').text(res.UltimaGSig);
+
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
@@ -436,6 +463,7 @@
                 $('#HistorialDePago').show();
                 $('#Contrato').hide();
                 $('#HistorialGestionTablevisible').hide();
+                $('#HistorialPagosTablevisible').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
 
             }
