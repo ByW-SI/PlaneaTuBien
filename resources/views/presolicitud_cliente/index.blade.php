@@ -359,6 +359,8 @@
                 $('#plazo_contrato').text(res.Presolicitud.plazo_contratado);
                 $('#cuotasPagar_contrato').text(res.Presolicitud.plazo_contratado);
                 $('.HistorialGestion').val(res.Contrato.id);
+                $('#Dia_ultima_gestion').text(res.UltimaGfecha);
+                $('#Dia_sig_gestion').text(res.UltimaGSig);
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
