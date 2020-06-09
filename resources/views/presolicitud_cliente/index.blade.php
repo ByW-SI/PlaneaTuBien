@@ -268,24 +268,27 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            <div class="d-flex justify-content-center">
-                                <a class="btn btn-primary" id="HistorialPagos">Historial de Pagos</a>
-                            </div>
+                            
+                            <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                Historial de Pagos
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="row-group" id="HistorialPagosTablevisible">
                     <h5 class="text-center text-uppercase text-muted">
-                        Historial de Gestiones
+                        Historial de Pagos
                     </h5>
                     <div class="table-responsive">
                         <table class="table table-striped" id="HistorialPagosTable" >
                             <thead>
                                 <tr class="thead-dark">
-                                    <th>gestion</th>
-                                    <th>Fecha de creación</th>
-                                    <th>Fecha siguiente</th>
-                                    <th>Comentario</th>
+                                    <th>Folio</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Status</th>
+                                    <th>Tipo de pago</th>
+                                    <th>Referencia</th>
+                                    <th>Monto</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -407,6 +410,48 @@
                 }
             });
         });
+        $("#HistorialPagos").click(function(){
+            $('#HistorialPagosTablevisible').show();
+            $("#HistorialPagosTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#HistorialPagosTable').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_Historial",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "id" : $('.HistorialGestion').val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+        
     });
     function Pestalla(id) {
         //document.getElementById('Contrato').style.display = 'block';
