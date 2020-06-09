@@ -89,7 +89,8 @@ class ClienteController extends Controller
         $Gestion=Gestion::create([
             'contrato_id'=>$request->input('contrato_id'),
             'gestion'=>$request->input('gestion'),
-            'fecha_sig'=>$request->input('fecha_sig')
+            'fecha_sig'=>$request->input('fecha_sig'),
+            'comentario'=>$request->input('comentario')
         ]);
         $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at]);
         $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
