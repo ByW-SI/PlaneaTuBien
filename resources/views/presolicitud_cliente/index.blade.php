@@ -273,29 +273,29 @@
                                 <button id="HistorialPagos" type="button" class="btn btn-primary">
                                     Historial de Pagos
                                 </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
                                     Edicion de datos
                                 </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
                                     Estado de cuenta
                                 </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
                                     Link de pago
                                 </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
-                                    Reestructura
-                                </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
-                                    Formato cancelacion
-                                </button>
-                                <br>
-                                <button  type="button" class="btn btn-primary">
-                                    Formato rescindido
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                    Formato adjudicatario
                                 </button>
                             </div>
                         </div>
