@@ -268,10 +268,12 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            <br><br><br><br><br><br><br><br><br><br>
-                            <button id="HistorialPagos" type="button" class="btn btn-primary">
-                                Historial de Pagos
-                            </button>
+                            <br><br><br>
+                            <div class="d-flex justify-content-center">
+                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                    Historial de Pagos
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
