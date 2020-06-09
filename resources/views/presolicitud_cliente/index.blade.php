@@ -220,6 +220,51 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="row">
+                                Terminos del plan
+                                <table class="table table-striped" id="HistorialGestionTable" >
+                                    <thead>
+                                        <tr class="thead-dark">
+                                            <th></th>
+                                            <th>%</th>
+                                            <th>Mes</th>
+                                            <th>Pagado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                           <td>Apex 1</td>
+                                           <td></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                       <tr>
+                                           <td>Apex 2</td>
+                                           <td></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                       <tr>
+                                           <td>Apex 3</td>
+                                           <td></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                       <tr>
+                                           <td>Apex 4</td>
+                                           <td></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                       <tr>
+                                           <td>Valor de mensualidad</td>
+                                           <td></td>
+                                           <td></td>
+                                           <td></td>
+                                       </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="col-sm">
 
