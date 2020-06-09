@@ -11,7 +11,8 @@ class Gestion extends Model
 
     protected $fillable = ['contrato_id', 
     'gestion',
-	'fecha_sig'];
+	'fecha_sig',
+    'comentario'];
 
     protected $hidden =[
     	'created_at',
