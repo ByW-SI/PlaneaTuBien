@@ -223,7 +223,7 @@
                             <br><br><br><br><br>
                             <div class="row">
                                 Terminos del plan
-                                <table class="table table-striped" id="HistorialGestionTable" >
+                                <table class="table table-striped"  >
                                     <thead>
                                         <tr class="thead-dark">
                                             <th></th>
