@@ -60,7 +60,7 @@ class ClienteController extends Controller
         $Contratos=Contrato::where('id',$request->input('idD'))->get();
         $Contrato=$Contratos[0];
         $Mensualidad=Mensualidad::where('contrato_id',$Contrato->id)->get();
-        dd($Mensualidad);
+        dd($Mensualidad[0]->cantidad);
         $ajaxPagos=array();
         foreach ($Presolicituds as $Presolicitud) {
             $Referencias=Referencia::where('presolicitud_id',$Presolicitud->id)->get();
