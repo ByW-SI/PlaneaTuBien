@@ -104,6 +104,7 @@
                     <table class="table table-striped" id="clientes">
                         <thead>
                             <tr class="thead-dark">
+                                <th>Identificador</th>
                                 <th>Cliente</th>
                                 <th>Contratos</th>
                                 <th>Meses vencidos</th>
@@ -122,6 +123,7 @@
                             @foreach ($presolicitudes as $presolicitud)
                                 
                                 <tr>
+                                    <td>{{$presolicitud->id}}</td>
                                     <td>{{$presolicitud->perfil->prospecto->nombre}}
                                         {{$presolicitud->perfil->prospecto->appaterno}}
                                         {{$presolicitud->perfil->prospecto->apmaterno}}

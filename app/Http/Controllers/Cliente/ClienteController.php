@@ -89,7 +89,7 @@ class ClienteController extends Controller
         $Gestion=Gestion::create([
             'contrato_id'=>$request->input('contrato_id'),
             'gestion'=>$request->input('gestion'),
-            'fecha_sig'=>$request->input('fecha_sig'),
+            'fecha_sig'=>$request->inp('fecha_sig'),
             'comentario'=>$request->input('comentario')
         ]);
         $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at]);
@@ -101,7 +101,7 @@ class ClienteController extends Controller
         ->get();
 
         $planes = Plan::get();
-        //return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
+        return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
         # code...
     }
     public function edicionDatosStore(Request $request)
@@ -113,6 +113,15 @@ class ClienteController extends Controller
                                 'tel_celular'=>$request->input('tel_celular'),
                                 'email'=>$request->input('email')
                             ]);
+        $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
+        $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
+            return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
+        })
+        ->where('prospecto',1)
+        ->get();
+
+        $planes = Plan::get();
+        return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
         # code...
     }
 }
