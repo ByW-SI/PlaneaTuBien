@@ -450,11 +450,11 @@
                     "oAria": {
                         "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }//,
-                    //"autoWidth": true
+                    },
+                    "autoWidth": true
                 }
             });
-            $("#HistorialGestionTable").dataTable().columns.adjust().draw();
+            //$("#HistorialGestionTable").dataTable().columns().adjust().draw();
         });
         $("#HistorialPagos").click(function(){
             $('#HistorialPagosTablevisible').show();
