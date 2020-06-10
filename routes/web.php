@@ -248,6 +248,7 @@ Route::post('get_contrato','Cliente\ClienteController@get_contrato');
 Route::post('get_prepagos','Cliente\ClienteController@get_prepagos');
 Route::post('get_gestion','Cliente\ClienteController@get_gestion');
 Route::post('gestion.store','Cliente\ClienteController@gestionStore');
+Route::post('edicionDatos.store','Cliente\ClienteController@edicionDatosStore');
 
 Route::post('get_Historial','Pagos\PagosController@getHistorial');
 

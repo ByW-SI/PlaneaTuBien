@@ -52,8 +52,47 @@
 
     </form>
 </div>
+<!--fin del modal-->
+<!-- Modal Edicion de datos--> 
+<div class="modal fade" id="edicionDatos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="edicion_datos_id"  action="{{url('edicionDatos.store')}}" method="POST">
+        {{ csrf_field() }}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edicion de datos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input id="id_Pre" name="id_Pre" type="hidden" value="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="desde">Teléfono de casa:</label>
+                        <input class="form-control" type="number" name="tel_casa" id="tel_casa" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="desde">Teléfono de oficina:</label>
+                        <input class="form-control" type="number" name="tel_oficina" id="tel_oficina" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="desde">Teléfono de celular:</label>
+                        <input class="form-control" type="number" name="tel_celular" id="tel_celular" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="desde">Email:</label>
+                        <input class="form-control" type="number" name="email" id="email" value="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
 
-
+    </form>
+</div>
+<!--fin del modal-->
 <div class="container">
     <h4 class="text-center text-uppercase text-muted">
         CLIENTES
@@ -276,43 +315,43 @@
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="BTNedicionDatos" type="button" class="btn btn-primary" data-toggle="modal" data-target="#edicionDatos">
                                     Edicion de datos
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Estado de cuenta
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Link de pago
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Formato adjudicatario
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Reestructura
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Formato cancelacion
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <button id="HistorialPagos" type="button" class="btn btn-primary">
+                                <button id="" type="button" class="btn btn-primary">
                                     Formato rescindido
                                 </button>
                             </div>
@@ -413,6 +452,11 @@
             $("#contrato_id").val($('.HistorialGestion').val());
             
         });
+        $("#BTNedicionDatos").click(function(){
+            
+            
+        });
+        
 
         $(".HistorialGestion").click(function(){
             $('#HistorialGestionTablevisible').show();
@@ -531,6 +575,12 @@
                 $('.HistorialGestion').val(res.Contrato.id);
                 $('#Dia_ultima_gestion').text(res.UltimaGfecha);
                 $('#Dia_sig_gestion').text(res.UltimaGSig);
+
+                $('#tel_casa').val(res.Presolicitud.tel_casa);
+                $('#tel_oficina').val(res.Presolicitud.tel_oficina);
+                $('#tel_celular').val(res.Presolicitud.tel_celular);
+                $('#email').val(res.Presolicitud.email);
+                $("#id_Pre").val(res.Presolicitud.id);
 
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 

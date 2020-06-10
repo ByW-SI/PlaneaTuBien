@@ -101,7 +101,18 @@ class ClienteController extends Controller
         ->get();
 
         $planes = Plan::get();
-        return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
+        //return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
+        # code...
+    }
+    public function edicionDatosStore(Request $request)
+    {
+        $Presolicitud=Presolicitud::where('id',$request->input('id_Pre'))->get();
+        $Presolicitud=$Presolicitud[0];
+        $Presolicitud->update([ 'tel_casa'=>$request->input('tel_casa'),
+                                'tel_oficina'=>$request->input('tel_oficina'),
+                                'tel_celular'=>$request->input('tel_celular'),
+                                'email'=>$request->input('email')
+                            ]);
         # code...
     }
 }
