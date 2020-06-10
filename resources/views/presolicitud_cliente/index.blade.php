@@ -3,7 +3,7 @@
 @section('content')
 
 
-<!-- Modal -->
+<!-- Modal Crear Gestion-->
 <div class="modal fade" id="crearGestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form id="crear_Gestion_id"  action="{{url('gestion.store')}}" method="POST">
         {{ csrf_field() }}
@@ -450,9 +450,11 @@
                     "oAria": {
                         "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
+                    }//,
+                    //"autoWidth": true
                 }
             });
+            $("#HistorialGestionTable").dataTable().columns.adjust().draw();
         });
         $("#HistorialPagos").click(function(){
             $('#HistorialPagosTablevisible').show();
@@ -599,6 +601,7 @@
                 }
             }
         });
+
     }
 
 
