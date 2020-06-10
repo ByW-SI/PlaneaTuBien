@@ -352,8 +352,9 @@
                                 <tr class="thead-dark">
                                     <th>gestion</th>
                                     <th>Fecha de creación</th>
-                                    <th>Fecha siguiente</th>
                                     <th>Comentario</th>
+                                    <th>Fecha siguiente</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
