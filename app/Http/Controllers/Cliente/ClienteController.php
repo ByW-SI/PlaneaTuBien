@@ -51,8 +51,14 @@ class ClienteController extends Controller
     {
         $Contrato=Contrato::where('id',$request->input('id'))->get();
         $Gestion=Gestion::where('contrato_id',$Contrato[0]->id)->orderBy('created_at', 'desc')->first();
-        $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'));
-        return json_encode($jsonEn);
+        if ($Gestion!=null) {
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'));
+            return json_encode($jsonEn);
+        }else{
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>"--/--/--",'UltimaGfecha'=>"--/--/--";
+            return json_encode($jsonEn);
+        }
+        
         # code...
     }
     public function get_prepagos(Request $request)
