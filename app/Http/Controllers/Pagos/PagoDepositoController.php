@@ -16,7 +16,7 @@ class PagoDepositoController extends Controller
 
         $deposito = DepositoEfectivo::find($request->input('deposito_id'));
         // dd($deposito);
-        $deposito->update(['motonasig'=>$request->input('input_abono')]);
+        $deposito->update(['motonasig'=>($request->input('input_abono')+$deposito->motonasig)]);
         $contrato = Contrato::find($request->input('contrato_id'));
         // dd($contrato);
         $mensualidad = $contrato->mensualidades()->last()->first();
