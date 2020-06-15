@@ -15,8 +15,14 @@
         {{-- Input de fecha --}}
         <div class="col-12 col-md-3">
             <div class="form-group">
-                <label for="fecha">Fecha de pago</label>
-                <input type="date" name="fecha" id="fecha" class="form-control" required>
+                <label for="fecha">Fecha de pago por dia</label>
+                <input type="date" name="fecha" id="fechaD" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="form-group">
+                <label for="fecha">Fecha de pago por mes</label>
+                <input type="month" name="fecha" id="fechaM" class="form-control" required>
             </div>
         </div>
         {{-- Input de monto --}}

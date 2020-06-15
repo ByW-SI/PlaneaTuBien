@@ -21,9 +21,10 @@ class BuscarReferenciaController extends Controller
 
     public function show(Request $request){
 
-        $fecha = $request->input('fecha');
+        $fecha = $request->input('fechaD');
         $monto = $request->input('monto');
-        if ($request->input('fecha')==null) {
+        dd($request->input('fechaM'));
+        if ($request->input('fechaD')==null&&$request->input('fechaM')==null) {
             # code...
             $depositos_efectivos = DepositoEfectivo::
             get();
@@ -33,6 +34,7 @@ class BuscarReferenciaController extends Controller
             orwhere('abono',$monto)->
             get();
         }
+
        /* if (isset($request->input('monto') && $request->input('fecha'))) {*/
             
         /*}elseif (isset($request->input('monto'))) {
