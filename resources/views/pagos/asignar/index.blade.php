@@ -118,8 +118,13 @@
                     {{-- Formulario de confirmación --}}
                     <hr>
                     <div class="col-12" style="display:none" id="formularioConfirmacion">
+                            <form action="{{route('pagos.deposito.store')}}" method="POST">
+                                @csrf
+                                    <input type="hidden" class="form-control" name="deposito_id" id="deposito_id">
+                                    <input type="hidden" class="form-control" name="cliente_id" id="cliente_id">
+                                    <input type="hidden" class="form-control" name="contrato_id" id="contrato_id">
                             <div class="row">
-                                <form action="{{route('pagos.deposito.store')}}" method="POST">
+                                
                                     {{-- input del deposito seleccionado --}}
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
@@ -140,15 +145,12 @@
                                             <input type="text" class="form-control" name="input_contrato" id="input_contrato" readonly>
                                         </div>
                                     </div>
-                                    @csrf
-                                    <input type="hidden" class="form-control" name="deposito_id" id="deposito_id">
-                                    <input type="hidden" class="form-control" name="cliente_id" id="cliente_id">
-                                    <input type="hidden" class="form-control" name="contrato_id" id="contrato_id">
+                                    
                                     <button type="submit" class="btn btn-success">
                                         <strong>CONFIRMAR</strong>
                                     </button>
-                                </form>
                             </div>
+                            </form>
                     </div>
                 </div>
             </div>
