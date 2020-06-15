@@ -180,7 +180,7 @@
             $('#deposito_id').val(deposito_id);
 
             const abono = $('.abono_'+deposito_id).html();
-            $('#input_abono').val(parseInt(abono));
+            $('#input_abono').val(parseInt(abono.replace(",","")));
 
             $('#buscadorCliente').show('slow');
         } );
