@@ -10,7 +10,10 @@ use App\Presolicitud;
 class BuscarReferenciaController extends Controller
 {
     public function index(){
-        $depositos_efectivos = array();
+        //$depositos_efectivos = array();
+        $depositos_efectivos = DepositoEfectivo::
+            whereMonth('dia',Carbon::now()->addMonth())
+            ->get();
         $clientes = null;
         return view('pagos.asignar.index',compact('depositos_efectivos','clientes'));
     }
