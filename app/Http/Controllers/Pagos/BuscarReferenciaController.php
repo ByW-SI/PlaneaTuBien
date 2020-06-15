@@ -24,14 +24,14 @@ class BuscarReferenciaController extends Controller
         $fecha = $request->input('fechaD');
         $monto = $request->input('monto');
         //dd(Carbon::parse($request->input('fechaM')."-01")->addMonth());
-        dd($request->input('fechaD')."-01");
+        //dd($request->input('fechaM')."-01");
         if ($request->input('fechaD')==null&&$request->input('fechaM')==null) {
             # code...
             $depositos_efectivos = DepositoEfectivo::
             get();
         }elseif($request->input('fechaM')!=null){
             $depositos_efectivos = DepositoEfectivo::
-            whereMonth('dia',Carbon::parse()->addMonth())
+            whereMonth('dia',Carbon::parse($request->input('fechaM')."-01")->month)
             ->get();
         }else{
             $depositos_efectivos = DepositoEfectivo::
