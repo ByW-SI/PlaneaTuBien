@@ -156,6 +156,7 @@
 <script>
     $(document).ready(function() {
         $('#tablaClientes').DataTable();
+        $('#corrida').DataTable();
     } );
 </script>
 
