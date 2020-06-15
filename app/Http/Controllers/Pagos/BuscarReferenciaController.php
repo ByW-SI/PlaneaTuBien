@@ -23,7 +23,7 @@ class BuscarReferenciaController extends Controller
 
         $fecha = $request->input('fechaD');
         $monto = $request->input('monto');
-        dd($request->input('fechaM'));
+        dd(Carbon::parse($request->input('fechaM'))->addMonth());
         if ($request->input('fechaD')==null&&$request->input('fechaM')==null) {
             # code...
             $depositos_efectivos = DepositoEfectivo::
