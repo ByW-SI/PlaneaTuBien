@@ -19,12 +19,18 @@ class BuscarReferenciaController extends Controller
 
         $fecha = $request->input('fecha');
         $monto = $request->input('monto');
-
-       /* if (isset($request->input('monto') && $request->input('fecha'))) {*/
+        if ($request->input('fecha')==null) {
+            # code...
+            $depositos_efectivos = DepositoEfectivo::
+            get();
+        }else{
             $depositos_efectivos = DepositoEfectivo::
             where('dia',$fecha)->
             orwhere('abono',$monto)->
             get();
+        }
+       /* if (isset($request->input('monto') && $request->input('fecha'))) {*/
+            
         /*}elseif (isset($request->input('monto'))) {
             $depositos_efectivos = DepositoEfectivo::
             where('dia',$fecha)->
