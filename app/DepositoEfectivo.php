@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DepositoEfectivo extends Model
 {
     protected $table = "depositos_efectivos";
-    protected $fillable = ['dia', 'concepto', 'cargo', 'abono', 'saldo'];
+    protected $fillable = ['dia', 'concepto', 'cargo', 'abono', 'saldo','motonasig'];
 
     public function contrato()
     {

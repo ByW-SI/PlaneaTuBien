@@ -67,7 +67,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $deposito->dia }}</td>
                                     <td>{{ $deposito->concepto }}</td>
-                                    <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono, 2) }}</td>
+                                    <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning asignar_deposito" deposito-id="{{$deposito->id}}">
                                             <strong>Asignar pago</strong>
@@ -119,27 +119,27 @@
                     <hr>
                     <div class="col-12" style="display:none" id="formularioConfirmacion">
                             <div class="row">
-                                {{-- input del deposito seleccionado --}}
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="deposito_id">Deposito</label>
-                                        <input type="text" class="form-control" name="input_abono" id="input_abono" readonly>
-                                    </div>
-                                </div>
-                                {{-- input del cliente --}}
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="cliente_id">Cliente</label>
-                                        <input type="text" class="form-control" name="input_cliente" id="input_cliente" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="contrato_id">Contrato</label>
-                                        <input type="text" class="form-control" name="input_contrato" id="input_contrato" readonly>
-                                    </div>
-                                </div>
                                 <form action="{{route('pagos.deposito.store')}}" method="POST">
+                                    {{-- input del deposito seleccionado --}}
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="deposito_id">Deposito</label>
+                                            <input type="text" class="form-control" name="input_abono" id="input_abono" >
+                                        </div>
+                                    </div>
+                                    {{-- input del cliente --}}
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="cliente_id">Cliente</label>
+                                            <input type="text" class="form-control" name="input_cliente" id="input_cliente" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="contrato_id">Contrato</label>
+                                            <input type="text" class="form-control" name="input_contrato" id="input_contrato" readonly>
+                                        </div>
+                                    </div>
                                     @csrf
                                     <input type="hidden" class="form-control" name="deposito_id" id="deposito_id">
                                     <input type="hidden" class="form-control" name="cliente_id" id="cliente_id">

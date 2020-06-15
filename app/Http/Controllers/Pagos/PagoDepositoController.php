@@ -16,6 +16,7 @@ class PagoDepositoController extends Controller
 
         $deposito = DepositoEfectivo::find($request->input('deposito_id'));
         // dd($deposito);
+        $deposito->update(['motonasig'=>$request->input('input_abono')]);
         $contrato = Contrato::find($request->input('contrato_id'));
         // dd($contrato);
         $mensualidad = $contrato->mensualidades()->last()->first();
@@ -23,7 +24,7 @@ class PagoDepositoController extends Controller
 
         $pago = Pagos::create([
             'contrato_id' =>$contrato->id,
-            'monto'=> $deposito->abono,
+            'monto'=> $request->input('input_abono'),
             'fecha_pago'=> Carbon::now(),
             'status_id'=>1,
             'tipopago_id'=>2,
