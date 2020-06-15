@@ -13,7 +13,8 @@ class BuscarReferenciaController extends Controller
     public function index(){
         //$depositos_efectivos = array();
         $depositos_efectivos = DepositoEfectivo::
-            whereMonth('dia',Carbon::now()->addMonth())
+            whereMonth('dia',Carbon::now()->month)
+            ->whereYear('dia', Carbon::now()->year)
             ->get();
         $clientes = null;
         return view('pagos.asignar.index',compact('depositos_efectivos','clientes'));
@@ -32,6 +33,7 @@ class BuscarReferenciaController extends Controller
         }elseif($request->input('fechaM')!=null){
             $depositos_efectivos = DepositoEfectivo::
             whereMonth('dia',Carbon::parse($request->input('fechaM')."-01")->month)
+            ->whereYear('dia', Carbon::parse($request->input('fechaM')."-01")->year)
             ->get();
         }else{
             $depositos_efectivos = DepositoEfectivo::
