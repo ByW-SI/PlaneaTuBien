@@ -16,20 +16,20 @@
         <div class="col-12 col-md-3">
             <div class="form-group">
                 <label for="fecha">Fecha de pago por dia</label>
-                <input type="date" name="fechaD" id="fechaD" class="form-control" required>
+                <input type="date" name="fechaD" id="fechaD" class="form-control" >
             </div>
         </div>
         <div class="col-12 col-md-3">
             <div class="form-group">
                 <label for="fecha">Fecha de pago por mes</label>
-                <input type="month" name="fechaM" id="fechaM" class="form-control" required>
+                <input type="month" name="fechaM" id="fechaM" class="form-control" >
             </div>
         </div>
         {{-- Input de monto --}}
         <div class="col-12 col-md-3">
             <div class="form-group">
                 <label for="monto">Monto pagado</label>
-                <input type="number" name="monto" step="0.01" class="form-control" required>
+                <input type="number" name="monto" step="0.01" class="form-control" >
             </div>
         </div>
         {{-- Botón de buscar --}}
