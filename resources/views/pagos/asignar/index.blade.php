@@ -72,6 +72,7 @@
                                     <td>
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
                                                 {{"Monto: ".$refdepositopago->pago->monto.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                                <br>
                                             @endforeach
                                         
                                     </td>
