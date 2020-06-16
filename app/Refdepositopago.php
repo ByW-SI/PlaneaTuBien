@@ -11,7 +11,7 @@ class Refdepositopago extends Model
 
 	protected $fillable = [
         'id',
-        'depositos_efectivo_id',
+        'deposito_efectivo_id',
         'pago_id'
     ];
     
