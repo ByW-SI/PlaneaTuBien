@@ -35,7 +35,7 @@ class PagoDepositoController extends Controller
         $refdepositopago= Refdepositopago::create([
             'depositos_efectivo_id'=>$deposito->id,
             'pago_id'=>$pago->id
-        ])
+        ]);
 
         $this->actualizarMensualidad($mensualidad->id);
 
