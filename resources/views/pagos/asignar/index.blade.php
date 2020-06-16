@@ -70,9 +70,11 @@
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
+                                        @if(!empty($deposito->refdepositopago))
                                         <button type="button" class="btn btn-info ver_deposito_ref" value="{{$deposito->id}}">
                                             <strong>Ver</strong>
                                         </button>
+                                        @endif
 
 
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
