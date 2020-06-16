@@ -70,9 +70,8 @@
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
-                                        
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
-                                                {{"folio: ".$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                                {{"Monto: ".$refdepositopago->pago->monto.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
                                             @endforeach
                                         
                                     </td>
