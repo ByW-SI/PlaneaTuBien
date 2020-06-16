@@ -98,13 +98,13 @@
                     {{-- Tabla para de los deposito_ref --}}
                     <div class="col-12" style="display:none" id="deposito_referencia">
                         @if ($clientes)
-                            <h3 class="text-center">CLIENTE PARA ASIGNAR EL PAGO</h3>
+                            <h3 class="text-center">Referencias a los pagos</h3>
                             <table class="table table-bordered table-striped" id="tabla_deposito_referencia">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col">Monto</th>
                                         <th class="text-center" scope="col">Grupo</th>
                                         <th class="text-center" scope="col">N° contrato</th>
+                                        <th class="text-center" scope="col">Monto</th>
                                         <th class="text-center">Acción</th>
                                     </tr>
                                 </thead>
