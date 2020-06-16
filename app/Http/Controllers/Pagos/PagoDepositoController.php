@@ -81,7 +81,7 @@ class PagoDepositoController extends Controller
 
         $ajaxPagos=array();
         foreach ($deposito->refdepositopago as $refdepositopago) {
-            array_push ($ajaxPagos,[$refdepositopago->pago->monto,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->contrato->grupo_id," boton Eliminar"]);
+            array_push ($ajaxPagos,[$refdepositopago->pago->contrato->grupo_id,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->monto," boton Eliminar"]);
         }
         return json_encode(['data'=> $ajaxPagos]);
     }

@@ -102,27 +102,14 @@
                             <table class="table table-bordered table-striped" id="tabla_deposito_referencia">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" scope="col">#</th>
-                                        <th class="text-center" scope="col">Nombre</th>
-                                        <th class="text-center" scope="col">Apellido paterno</th>
-                                        <th class="text-center" scope="col">Apellido materno</th>
+                                        <th class="text-center" scope="col">Monto</th>
+                                        <th class="text-center" scope="col">Grupo</th>
+                                        <th class="text-center" scope="col">N° contrato</th>
                                         <th class="text-center">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($clientes as $key => $cliente)
-                                    <tr class="text-center">
-                                        <td>{{ $key + 1 }}</td>
-                                        <td class="nombre_{{$cliente->id}}">{{ $cliente->nombre }}</td>
-                                        <td class="materno_{{$cliente->id}}">{{ $cliente->materno }}</td>
-                                        <td class="paterno_{{$cliente->id}}">{{ $cliente->paterno }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning asignar_cliente" cliente-id="{{$cliente->id}}">
-                                                <strong>Asignar cliente</strong>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         @endif
