@@ -72,7 +72,7 @@
                                     <td>
                                         @if($deposito->refdepositopago)
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
-                                                {{"folio: "$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                                {{"folio: ".$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
                                             @endforeach
                                         @else
                                             S/N
