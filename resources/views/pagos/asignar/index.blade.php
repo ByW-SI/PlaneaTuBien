@@ -71,8 +71,8 @@
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
-                                                {{"Monto: ".$refdepositopago->pago->monto.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
-                                                <br>
+                                                {{"Monto: ".$refdepositopago->pago->monto."<br>mes: ".$refdepositopago->pago->mensualidad->fecha."<br>contrato : ".$refdepositopago->pago->contrato->numero_contrato.",  grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                                <br><br>
                                             @endforeach
                                         
                                     </td>
