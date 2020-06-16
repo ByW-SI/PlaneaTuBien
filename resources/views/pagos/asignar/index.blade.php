@@ -74,7 +74,7 @@
                                                 {{"Monto: ".$refdepositopago->pago->monto}}
                                                 <br>
                                                 
-                                                {{"contrato : ".$refdepositopago->pago->contrato->numero_contrato.",  grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                                {{"Contrato : ".$refdepositopago->pago->contrato->numero_contrato.",  Grupo: ".$refdepositopago->pago->contrato->grupo_id}}
                                                 <br><br>
                                             @endforeach
                                         
