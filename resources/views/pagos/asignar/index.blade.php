@@ -70,9 +70,13 @@
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
-                                        @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
-                                            {{"folio: "$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
-                                        @endforeach
+                                        @if($deposito->refdepositopago)
+                                            @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
+                                                {{"folio: "$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                            @endforeach
+                                        @else
+                                            S/N
+                                        @endif
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-warning asignar_deposito" deposito-id="{{$deposito->id}}">
