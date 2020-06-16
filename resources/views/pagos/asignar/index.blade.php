@@ -70,7 +70,7 @@
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
-                                        @if(!empty($deposito->refdepositopago))
+                                        @if(count($deposito->refdepositopago)>0)
                                         <button type="button" class="btn btn-info ver_deposito_ref" value="{{$deposito->id}}">
                                             <strong>Ver</strong>
                                         </button>
