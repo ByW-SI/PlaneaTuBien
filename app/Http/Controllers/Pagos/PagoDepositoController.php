@@ -38,7 +38,7 @@ class PagoDepositoController extends Controller
         ]);
 
         //$this->actualizarMensualidad($mensualidad->id);
-        dd($deposito->refdepositopago);
+        //dd($deposito->refdepositopago);
         return redirect()->route('pagos.realizados')->with('status','Se agregó el pago adecuadamente');
     }
 
