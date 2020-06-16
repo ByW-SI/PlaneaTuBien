@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DepositoEfectivo extends Model
 {
     protected $table = "depositos_efectivos";
-    protected $fillable = ['dia', 'concepto', 'cargo', 'abono', 'saldo','motonasig'];
+    protected $fillable = ['id','dia', 'concepto', 'cargo', 'abono', 'saldo','motonasig'];
 
     public function contrato()
     {
@@ -44,5 +44,9 @@ class DepositoEfectivo extends Model
     public function scopeReferencia($query, $referencia)
     {
         return $query->where('concepto', 'LIKE', "%$referencia%");
+    }
+    public function refdepositopago()
+    {
+        return $this->hasMany('App\Refdepositopago');
     }
 }

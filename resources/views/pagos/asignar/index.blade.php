@@ -58,6 +58,7 @@
                                     <th class="text-center" scope="col">fecha</th>
                                     <th class="text-center" scope="col">Concepto</th>
                                     <th class="text-center" scope="col">Monto</th>
+                                    <th class="text-center" scope="col">Pagos Referenciados</th>
                                     <th class="text-center" scope="col">Accion</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,11 @@
                                     <td>{{ $deposito->dia }}</td>
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
+                                    <td>
+                                        @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
+                                            {{"folio: "$refdepositopago->pago->folio.",mes: ".$refdepositopago->pago->mensualidad->fecha.",contrato : ".$refdepositopago->pago->contrato->numero_contrato.",grupo: ".$refdepositopago->pago->contrato->grupo_id}}
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-warning asignar_deposito" deposito-id="{{$deposito->id}}">
                                             <strong>Asignar pago</strong>

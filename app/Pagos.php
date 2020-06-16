@@ -30,6 +30,10 @@ class Pagos extends Model
 	public function contrato() {
 		return $this->belongsTo('App\Contrato');
 	}
+	public function refdepositopago()
+    {
+        return $this->hasMany('App\Refdepositopago');
+    }
 
 	public function plan(){
 

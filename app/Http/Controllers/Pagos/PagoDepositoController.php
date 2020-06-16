@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Mensualidad;
 use App\Pagos;
 use Illuminate\Support\Carbon;
+use App\Refdepositopago;
 
 class PagoDepositoController extends Controller
 {
@@ -31,6 +32,10 @@ class PagoDepositoController extends Controller
             'referencia'=>'-',
             'mensualidad_id'=>$mensualidad->id,
         ]);
+        $refdepositopago= Refdepositopago::create([
+            'depositos_efectivo_id'=>$deposito->id,
+            'pago_id'=>$pago->id
+        ])
 
         $this->actualizarMensualidad($mensualidad->id);
 
