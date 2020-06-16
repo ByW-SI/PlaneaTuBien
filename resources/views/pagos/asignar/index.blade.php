@@ -70,6 +70,11 @@
                                     <td>{{ $deposito->concepto }}</td>
                                     <td class="abono_{{$deposito->id}}">{{ number_format($deposito->abono-$deposito->motonasig, 2) }}</td>
                                     <td>
+                                        <button type="button" class="btn btn-info ver_deposito_ref" value="{{$deposito->id}}">
+                                            <strong>Ver</strong>
+                                        </button>
+
+
                                             @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
                                                 {{"Monto: ".$refdepositopago->pago->monto}}
                                                 <br>
@@ -90,6 +95,39 @@
                         </table>
                     </div>
                     <hr>
+                    {{-- Tabla para de los deposito_ref --}}
+                    <div class="col-12" style="display:none" id="deposito_referencia">
+                        @if ($clientes)
+                            <h3 class="text-center">CLIENTE PARA ASIGNAR EL PAGO</h3>
+                            <table class="table table-bordered table-striped" id="tabla_deposito_referencia">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col">#</th>
+                                        <th class="text-center" scope="col">Nombre</th>
+                                        <th class="text-center" scope="col">Apellido paterno</th>
+                                        <th class="text-center" scope="col">Apellido materno</th>
+                                        <th class="text-center">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($clientes as $key => $cliente)
+                                    <tr class="text-center">
+                                        <td>{{ $key + 1 }}</td>
+                                        <td class="nombre_{{$cliente->id}}">{{ $cliente->nombre }}</td>
+                                        <td class="materno_{{$cliente->id}}">{{ $cliente->materno }}</td>
+                                        <td class="paterno_{{$cliente->id}}">{{ $cliente->paterno }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning asignar_cliente" cliente-id="{{$cliente->id}}">
+                                                <strong>Asignar cliente</strong>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+
                     {{-- Tabla para de los cliente --}}
                     <div class="col-12" style="display:none" id="buscadorCliente">
                         @if ($clientes)
@@ -194,8 +232,57 @@
             $('#input_abono').val(parseInt(abono.replace(",","")));
 
             $('#buscadorCliente').show('slow');
+            $('#deposito_referencia').hide();
         } );
 
+        /**/
+        $('.ver_deposito_ref').click( function(){
+            $('#deposito_referencia').show('slow');
+            $('#buscadorCliente').hide();
+            $('#buscadorContratos').hide();
+            $('#formularioConfirmacion').hide();
+            
+            $("#tabla_deposito_referencia").dataTable().fnDestroy();
+             $('#tabla_deposito_referencia').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_pagos_referenciados",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "deposito_id" : $(this).val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "autoWidth": true
+                }
+            });
+
+        } );
+        
         /**/
 
         $('.asignar_cliente').click( async function(){

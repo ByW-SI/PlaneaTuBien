@@ -306,6 +306,9 @@ Route::post('/pagos/{pago}/recibo_provisional','Pagos\ReciboProvisionalControlle
 Route::get('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@index')->name('pagos.asignar');
 Route::post('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@show')->name('pagos.referencia.buscar');
 
+Route::post('get_pagos_referenciados','Pagos\PagoDepositoController@get_pagos_referenciados')->name('get_pagos_referenciados');
+
+
 // CODIGOS POSTAL
 Route::get('cp/{cp}','CodigoPostal\CodigoPostalController@getCP')->name('cp.get');
 Route::get('cp/{cp}/{colonia}','CodigoPostal\CodigoPostalController@getColonia')->name('colonia.get');

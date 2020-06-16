@@ -75,4 +75,14 @@ class PagoDepositoController extends Controller
 
         return $mensualidad;
     }
+    public function get_pagos_referenciados(Request $request)
+    {
+        $deposito = DepositoEfectivo::find($request->input('deposito_id'));
+
+        $ajaxPagos=array();
+        foreach ($deposito->refdepositopago as $refdepositopago) {
+            array_push ($ajaxPagos,[$refdepositopago->pago->monto,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->contrato->grupo_id," boton Eliminar"]);
+        }
+        return json_encode(['data'=> $ajaxPagos]);
+    }
 }
