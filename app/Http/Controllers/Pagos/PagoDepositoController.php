@@ -81,7 +81,33 @@ class PagoDepositoController extends Controller
 
         $ajaxPagos=array();
         foreach ($deposito->refdepositopago as $refdepositopago) {
-            array_push ($ajaxPagos,[$refdepositopago->pago->contrato->grupo_id,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->monto," boton Eliminar"]);
+            array_push ($ajaxPagos,[$refdepositopago->pago->contrato->grupo_id,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->monto,"<div class='d-flex justify-content-center'>
+                                            <a 
+                                            onclick='eliminarPago(".$refdepositopago->pago->id.",".$request->input('deposito_id').")' 
+                                            class='btn btn-primary'>Eliminar Pago</a>
+                                        </div> boton Eliminar"]);
+        }
+        return json_encode(['data'=> $ajaxPagos]);
+    }
+    
+
+    public function get_pagos_referenciados_eliminar(Request $request)
+    {
+        $deposito = DepositoEfectivo::find($request->input('deposito_id'));
+        $Pago=Pago::find($request->input('id'));
+        if (isset($Pago)) {
+            # code...
+             $Pago->delete();
+        }
+       
+        //actualizar cuando se tenga la programacion de los planes 
+        $ajaxPagos=array();
+        foreach ($deposito->refdepositopago as $refdepositopago) {
+            array_push ($ajaxPagos,[$refdepositopago->pago->contrato->grupo_id,$refdepositopago->pago->contrato->numero_contrato,$refdepositopago->pago->monto,"<div class='d-flex justify-content-center'>
+                                            <a 
+                                            onclick='eliminarPago(".$refdepositopago->pago->id.",".$request->input('deposito_id').")' 
+                                            class='btn btn-primary'>Eliminar Pago</a>
+                                        </div> boton Eliminar"]);
         }
         return json_encode(['data'=> $ajaxPagos]);
     }
