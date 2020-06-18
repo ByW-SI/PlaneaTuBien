@@ -85,7 +85,7 @@ class PagoDepositoController extends Controller
                                             <a 
                                             onclick='eliminarPago(".$refdepositopago->pago->id.",".$request->input('deposito_id').")' 
                                             class='btn btn-primary'>Eliminar Pago</a>
-                                        </div> boton Eliminar"]);
+                                        </div>"]);
         }
         return json_encode(['data'=> $ajaxPagos]);
     }
