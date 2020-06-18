@@ -104,9 +104,10 @@ class PagoDepositoController extends Controller
             $deposito->update(['motonasig'=>$deposito->motonasig-$Pago->monto]);
             $Refdeposito->delete();
             $Pago->delete();
-
+            return "1";
         }
-        return true;
+        return "0";
+        
        /*
         //actualizar cuando se tenga la programacion de los planes 
         $ajaxPagos=array();
