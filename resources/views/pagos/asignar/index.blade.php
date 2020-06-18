@@ -316,7 +316,8 @@
                        "id"          : id
                 },
             success: function(res){
-                
+                location.reload();
+
             }
         });
     }

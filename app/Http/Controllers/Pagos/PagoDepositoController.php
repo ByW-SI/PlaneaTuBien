@@ -105,7 +105,7 @@ class PagoDepositoController extends Controller
             $Pago->delete();
 
         }
-        return redirect()->back();
+        return true;
        /*
         //actualizar cuando se tenga la programacion de los planes 
         $ajaxPagos=array();
