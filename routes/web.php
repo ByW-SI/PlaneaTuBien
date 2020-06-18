@@ -307,7 +307,7 @@ Route::get('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@index')
 Route::post('pagos/busqueda/referencia','Pagos\BuscarReferenciaController@show')->name('pagos.referencia.buscar');
 
 Route::post('get_pagos_referenciados','Pagos\PagoDepositoController@get_pagos_referenciados')->name('get_pagos_referenciados');
-Route::post('get_pagos_referenciados_eliminar','Pagos\PagoDepositoController@get_pagos_referenciados_eliminar')->name('get_pagos_referenciados_eliminar');
+Route::get('get_pagos_referenciados_eliminar','Pagos\PagoDepositoController@get_pagos_referenciados_eliminar')->name('get_pagos_referenciados_eliminar');
 
 
 // CODIGOS POSTAL

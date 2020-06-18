@@ -105,7 +105,8 @@ class PagoDepositoController extends Controller
             $Pago->delete();
 
         }
-       
+        return redirect()->back();
+       /*
         //actualizar cuando se tenga la programacion de los planes 
         $ajaxPagos=array();
         foreach ($deposito->refdepositopago as $refdepositopago) {
@@ -116,5 +117,6 @@ class PagoDepositoController extends Controller
                                         </div> boton Eliminar"]);
         }
         return json_encode(['data'=> $ajaxPagos]);
+        */
     }
 }

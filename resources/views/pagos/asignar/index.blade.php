@@ -307,48 +307,15 @@
         } );
     } );
     function eliminarPago(id,id_deposito) {
-        $('#deposito_referencia').show('slow');
-        $('#buscadorCliente').hide();
-        $('#buscadorContratos').hide();
-        $('#formularioConfirmacion').hide();
-        
-        $("#tabla_deposito_referencia").dataTable().fnDestroy();
-         $('#tabla_deposito_referencia').DataTable({
-            "ajax":{
-                type: "POST",
-                url:"/get_pagos_referenciados_eliminar",
-                data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                       "deposito_id" : id_deposito,
-                       "id"          : id
-                }
-            },
-            "searching": false,
-            pageLength : 3,
-            'language':{
-                "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron resultados",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
-                "sInfoEmpty":      "Productos 0 de un total de 0 ",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
 
-                "sUrl":            "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
-                    "sPrevious": "Anterior"
+        $.ajax({
+            url:"/get_pagos_referenciados_eliminar",
+            type:'GET',
+            data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                    "deposito_id" : id_deposito,
+                       "id"          : id
                 },
-                "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                },
-                "autoWidth": true
+            success: function(res){
             }
         });
     }
