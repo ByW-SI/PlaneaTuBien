@@ -310,7 +310,7 @@
 
         $.ajax({
             url:"/get_pagos_referenciados_eliminar",
-            type:'GET',
+            type:'POST',
             data: {"_token": $("meta[name='csrf-token']").attr("content"),
                     "deposito_id" : id_deposito,
                        "id"          : id
