@@ -97,7 +97,7 @@ class PagoDepositoController extends Controller
         $Refdeposito= Refdepositopago::where("pago_id",$request->input('id'))->get();
         $Refdeposito=$Refdeposito[0];
 
-        $Pago=Pago::find($request->input('id'));
+        $Pago=Pagos::find($request->input('id'));
         if (isset($Pago)) {
             # code...
             $deposito->update(['motonasig'=>$deposito->motonasig-$Pago->monto]);
