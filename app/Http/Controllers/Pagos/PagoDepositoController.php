@@ -94,10 +94,16 @@ class PagoDepositoController extends Controller
     public function get_pagos_referenciados_eliminar(Request $request)
     {
         $deposito = DepositoEfectivo::find($request->input('deposito_id'));
+        $Refdeposito= Refdepositopago::where("pago_id",$request->input('id'))->get();
+        $Refdeposito=$Refdeposito[0];
+
         $Pago=Pago::find($request->input('id'));
         if (isset($Pago)) {
             # code...
-             $Pago->delete();
+            $deposito->update(['motonasig'=>$deposito->motonasig-$Pago->monto]);
+            $Refdeposito->delete();
+            $Pago->delete();
+
         }
        
         //actualizar cuando se tenga la programacion de los planes 
