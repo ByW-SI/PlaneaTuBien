@@ -317,6 +317,7 @@
                 },
             success: function(res){
                 location.reload();
+                window.location.reload();
 
             }
         });
