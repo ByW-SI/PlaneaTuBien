@@ -286,8 +286,10 @@
 
 			// MOSTRAMOS ALGUNOS INPUTS
 			if(tipo_plan == 'normal'){
+
 				$('.escondible').show('slow');
 				$(".input-escondible").prop('required',true);
+				$('.input-escondible').prop('readonly', false);
 			}
 
 			// Rellenamos algunos campos
