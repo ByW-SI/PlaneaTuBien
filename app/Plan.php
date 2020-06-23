@@ -341,6 +341,8 @@ class Plan extends Model
         $cuota_periodica_adjudicado = $cuota_periodica_adjudicado / ($this->plazo - ($this->mes_s_d - 1));
         $total_aportaciones_en_extraordin = $monto_adjudicar * ($aportaciones_extraordinarias / 100);
         $total_aportacion = $total_aportacion_en_mensualidades + $total_aportaciones_en_extraordin;
+
+        dd($corrida);
         return [
             'aportaciones_extraordinarias' => $aportaciones_extraordinarias,
             'monto_financiar' => $monto_financiar,
