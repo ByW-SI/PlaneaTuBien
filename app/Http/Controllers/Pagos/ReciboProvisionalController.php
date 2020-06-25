@@ -272,7 +272,7 @@ class ReciboProvisionalController extends Controller
                 $recibo->total_letra = $this->to_word($recibo->total,"MXN");
                 $pago->recibo()->save($recibo);
                 //$presolicitud->delete(); 
-                dd($presolicitud->contratos);
+                //dd($presolicitud->contratos);
 
                 if ($presolicitud->contratos->isEmpty()) {
                   foreach ($cotizacion->contratos() as $value) {
@@ -300,7 +300,7 @@ class ReciboProvisionalController extends Controller
                         "pagado"=>0,
                         "abono"=>0
                     ]);
-                    dd($mensualidad);
+                    //dd($mensualidad);
                   }
                 }
                 return redirect()->route('pagos.index');
