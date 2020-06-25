@@ -280,6 +280,7 @@ class Plan extends Model
                 $mes_actual = date('Y-m-d', strtotime("+1 month", strtotime($mes_actual)));
             }
         }
+        dd($corrida);
         $aportacion_integrante = 0.00;
         $cuota_periodica_integrante = 0.00;
         $cuota_administracion_integrante = 0.00;
@@ -321,7 +322,7 @@ class Plan extends Model
         $sv_adjudicado = 0.00;
         $sd_adjudicado = 0.00;
         // var_dump('adjudicado');
-        dd($corrida);
+
         if ($this->mes_s_d > 0) {
             for ($i =  $this->mes_s_d - 1; $i < $this->plazo; $i++) {
                 $aportacion_adjudicado += $corrida[$i]['aportacion'];
