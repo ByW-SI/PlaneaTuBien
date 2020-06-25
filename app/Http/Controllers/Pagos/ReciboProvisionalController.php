@@ -238,7 +238,7 @@ class ReciboProvisionalController extends Controller
         //dd($presolicitud->cotizacion()->plan);
 
         // dd($cotizacion->contratos());
-        dd($cotizacion->plan->grupos()->get());
+        //dd($cotizacion->plan->grupos()->get());
         foreach ($grupos as $grupo) {
             // dd($grupo->contratos);
             //dd($grupo->contratos);
