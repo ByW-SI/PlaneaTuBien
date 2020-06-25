@@ -157,7 +157,7 @@ class Plan extends Model
         $monto_financiar = $this->monto_financiar($monto);
         $monto_adjudicar = $this->monto_adjudicar($monto, $factor_actualizacion);
 
-        $mes_actual = date('2018-11-01');
+        $mes_actual = date('y-m-d');
 
 
         // INT: APORTACION POR MES
