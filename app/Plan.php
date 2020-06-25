@@ -280,7 +280,7 @@ class Plan extends Model
                 $mes_actual = date('Y-m-d', strtotime("+1 month", strtotime($mes_actual)));
             }
         }
-        //dd("Aqui");
+        dd($corrida);
         $aportacion_integrante = 0.00;
         $cuota_periodica_integrante = 0.00;
         $cuota_administracion_integrante = 0.00;
