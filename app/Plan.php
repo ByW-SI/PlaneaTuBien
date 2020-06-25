@@ -321,6 +321,7 @@ class Plan extends Model
         $sv_adjudicado = 0.00;
         $sd_adjudicado = 0.00;
         // var_dump('adjudicado');
+        dd($corrida);
         if ($this->mes_s_d > 0) {
             for ($i =  $this->mes_s_d - 1; $i < $this->plazo; $i++) {
                 $aportacion_adjudicado += $corrida[$i]['aportacion'];
@@ -342,7 +343,7 @@ class Plan extends Model
         $total_aportaciones_en_extraordin = $monto_adjudicar * ($aportaciones_extraordinarias / 100);
         $total_aportacion = $total_aportacion_en_mensualidades + $total_aportaciones_en_extraordin;
 
-        dd($corrida);
+        
         return [
             'aportaciones_extraordinarias' => $aportaciones_extraordinarias,
             'monto_financiar' => $monto_financiar,
