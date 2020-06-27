@@ -34,7 +34,7 @@ class Contrato extends Model
 
     public function presolicitud()
     {
-    	return $this->belongsTo('App\Presolicitud');
+    	return $this->belongsTo('App\Presolicitud','presolicitud_id','id');
     }
 
     public function domiciliacion()
