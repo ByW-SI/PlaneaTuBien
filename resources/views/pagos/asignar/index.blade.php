@@ -79,7 +79,7 @@
                                        
                                         
                                     </td>
-                                    <td>{{ $deposito->statusPago->nombre }}</td>
+                                    <td>{{ $deposito->statusPago()->nombre }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning asignar_deposito" deposito-id="{{$deposito->id}}">
                                             <strong>Asignar pago</strong>
