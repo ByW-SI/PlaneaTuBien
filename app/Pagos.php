@@ -66,7 +66,7 @@ class Pagos extends Model
 		return $query->where('status_id',$status_aprobado->id);
 	}
 	public function statusPago() {
-		return $this->belongsTo('App\StatusPago');
+		return $this->belongsTo('App\StatusPago','status_id','id');
 	}
 
 }
