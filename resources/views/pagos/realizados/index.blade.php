@@ -60,7 +60,7 @@
                         <tr class="text-center">
                             <td>{{$pago->referencia}}</td>
                             <td>{{$pago->fecha_pago}}</td>
-                            <td>{{$pago->contrato->presolicitud_id}}</td>
+                            <td>{{$pago->contrato->presolicitud->nombre." ".$pago->contrato->presolicitud->paterno." ".$pago->contrato->presolicitud->materno}}</td>
                             <td>{{$pago->monto}}</td>
                             <td>{{$pago->mensualidad ? $pago->mensualidad()->first()->cantidad : 'N/D'}}</td>
                             <td>{{$pago->statusPago->nombre}}</td>
