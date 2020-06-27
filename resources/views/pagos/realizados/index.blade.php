@@ -50,6 +50,9 @@
                             <th class="text-center" scope="col">Cliente</th>
                             <th class="text-center" scope="col">Pago</th>
                             <th class="text-center" scope="col">Debio pagar</th>
+                            <th class="text-center" scope="col">Status pagar</th>
+                            <th class="text-center" scope="col">Cambiar status</th>
+                            <th class="text-center" scope="col">Voucher</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,9 +60,12 @@
                         <tr class="text-center">
                             <td>{{$pago->referencia}}</td>
                             <td>{{$pago->fecha_pago}}</td>
-                            <td></td>
+                            <td>{{$pago->contrato->presolicitud->nombre." ".$pago->contrato->presolicitud->paterno." ".$pago->contrato->presolicitud->materno}}</td>
                             <td>{{$pago->monto}}</td>
                             <td>{{$pago->mensualidad ? $pago->mensualidad()->first()->cantidad : 'N/D'}}</td>
+                            <td>{{$pago->statusPago->nombre}}</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         @endforeach
                     </tbody>
