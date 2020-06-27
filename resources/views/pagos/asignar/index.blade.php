@@ -59,6 +59,7 @@
                                     <th class="text-center" scope="col">Concepto</th>
                                     <th class="text-center" scope="col">Monto</th>
                                     <th class="text-center" scope="col">Pagos Referenciados</th>
+                                    <th class="text-center" scope="col">status de pago</th>
                                     <th class="text-center" scope="col">Accion</th>
                                 </tr>
                             </thead>
@@ -75,15 +76,10 @@
                                             <strong>Ver</strong>
                                         </button>
                                         @endif
-                                        @foreach($deposito->refdepositopago as $key2 => $refdepositopago)
-                                            {{"Monto: ".$refdepositopago->pago->monto}}
-                                            <br>
-                                            
-                                            {{"Contrato : ".$refdepositopago->pago->contrato->numero_contrato.",  Grupo: ".$refdepositopago->pago->contrato->grupo_id}}
-                                            <br><br>
-                                        @endforeach
+                                       
                                         
                                     </td>
+                                    <td>{{ $deposito->statusPago->nombre }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning asignar_deposito" deposito-id="{{$deposito->id}}">
                                             <strong>Asignar pago</strong>

@@ -21,4 +21,9 @@ class StatusPago extends Model
 	//public function empleados(){
 	//	return $this->hasMany('App\Empleados');
 	//}
+
+    public function pagos()
+    {
+        return $this->hasMany('App\Pagos');
+    }
 }

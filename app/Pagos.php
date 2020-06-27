@@ -65,4 +65,9 @@ class Pagos extends Model
 		$status_aprobado = StatusPago::where('nombre','Aprobado')->first();
 		return $query->where('status_id',$status_aprobado->id);
 	}
+	public function statusPago() {
+		return $this->belongsTo('App\StatusPago');
+	}
+
 }
+
