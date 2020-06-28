@@ -69,7 +69,7 @@
                 <div class="modal-body">
                     <div class=" text-center">
                         <label class="control-label" for="">Voucher</label>
-                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  id="voucher"data-preview-file-type="text" >
+                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  id="voucher"data-preview-file-type="text" enctype="multipart/form-data">
                     </div>
                 </div>
                 <div class="modal-footer">
