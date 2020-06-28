@@ -67,13 +67,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
+                    <div class=" text-center">
                         <label class="control-label" for="">Voucher</label>
                         <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  id="voucher"data-preview-file-type="text" >
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Cargar</button>
+                    <button type="submit" class="btn btn-primary">Cargar</button>
                 </div>
             </div>
         </div>
