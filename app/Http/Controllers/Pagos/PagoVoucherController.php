@@ -38,5 +38,6 @@ class PagoVoucherController extends Controller
     	$pago=Pagos::where("id",$request->input("pago_id2"))->get();
     	$pago=$pago[0];
     	$pago->update(['voucher' => null ]);
+    	return back()->withInput();
     }
 }
