@@ -4,7 +4,7 @@
 
 <!-- Modal Actualizar Status-->
 <div class="modal fade" id="actualizarStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="actualizar_status_id"  action="{{url('pago.realizados.actualizarStatus')}}" method="POST">
+    <form id="actualizar_status_id"  action="{{route('pago.realizados.actualizarStatus')}}" method="POST">
         {{ csrf_field() }}
         <input id="pago_id" name="pago_id" type="hidden" value="">
         <div class="modal-dialog" role="document">
