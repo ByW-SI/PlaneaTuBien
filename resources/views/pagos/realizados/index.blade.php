@@ -52,7 +52,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="img_vaucher" class="card" src="" width="400px" height="600px" alt="">
+                    <img id="img_vaucher" class="card" src="" width="500px" height="500px" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Eliminar</button>
