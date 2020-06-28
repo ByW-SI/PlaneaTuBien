@@ -404,7 +404,7 @@
                                     <th>Tipo de pago</th>
                                     <th>Referencia</th>
                                     <th>Monto</th>
-                                    <tr>Cargar Voucher</tr>
+                                    <th>Cargar Voucher</th>
                                 </tr>
                             </thead>
                             <tbody>
