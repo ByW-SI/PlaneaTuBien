@@ -58,6 +58,6 @@ class PagosController extends Controller
         if ($Pago) {
             $Pago->update(['status_id' => $request->input('status') ]);
         }
-        return redirect()->back()->refresh()->with('flash_success', 'Thank you,!');
+        return back()->withInput();
     }
 }
