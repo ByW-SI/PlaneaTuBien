@@ -26,7 +26,8 @@ class PagoVoucherController extends Controller
             $voucher=$voucher[2];
         }
 
-        $pago->update(['voucher' => $request->input('voucher') ]);
+        dd($voucher);
+        $pago->update(['voucher' => $voucher ]);
 
 
         return back()->withInput();
