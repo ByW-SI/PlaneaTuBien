@@ -486,14 +486,11 @@
             $("#pago_id").val($(this).val());
             console.log("Entra");
             console.log($(this).val());
+            $('#verVoucher').modal('show');
         });
 
         $("#crearGestionBTN").click(function(){
             $("#contrato_id").val($('.HistorialGestion').val());
-            
-        });
-        $("#BTNedicionDatos").click(function(){
-            
             
         });
         

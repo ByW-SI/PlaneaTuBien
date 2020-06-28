@@ -135,7 +135,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button id="verVoucherBTN" type="button" class="btn btn-primary " data-toggle="modal" data-target="#verVoucher"  onclick='cambiarImagenVoucher("{{$pago->id}}","$pago->voucher");'>
+                                <button id="verVoucherBTN" type="button" class="btn btn-primary " data-toggle="modal" data-target="#verVoucher"  onclick='cambiarImagenVoucher("{{$pago->id}}","{{$pago->voucher}}");'>
                                       Ver mas
                                 </button>
                             </td>
@@ -170,8 +170,6 @@
 
             $(".verVoucherBTN").click(function(){
                 $("#img_vaucher").attr("src","image2.jpg");
-
-                .val($(this).val());
                 
             });
 
