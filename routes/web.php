@@ -331,7 +331,7 @@ Route::get('/voucher/{pago}/{file}', function ($pago, $file) {
     return Storage::response("public/voucher/$pago/$file");
 });
 
-Route::post('pagovoucher','Pagos\PagoVoucherController@cargarVoucher');
+Route::post('pagovoucher','Pagos\PagoVoucherController@cargarVoucher')->name('pagovoucher');
 
 
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-
