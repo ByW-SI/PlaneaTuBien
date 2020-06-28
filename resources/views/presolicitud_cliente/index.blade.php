@@ -482,12 +482,7 @@
     $(document).ready(function(){
         
 
-        $(".verVoucherBTN").click(function(){
-            $("#pago_id").val($(this).val());
-            console.log("Entra");
-            console.log($(this).val());
-            $('#verVoucher').modal('show');
-        });
+        
 
         $("#crearGestionBTN").click(function(){
             $("#contrato_id").val($('.HistorialGestion').val());
@@ -690,6 +685,13 @@
             }
         });
 
+    }
+    function Accion_verVoucherBTN(id) {
+        // body...
+        $("#pago_id").val(id);
+        console.log("Entra");
+        console.log(id);
+        $('#verVoucher').modal('show');
     }
 
 

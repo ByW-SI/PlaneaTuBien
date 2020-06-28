@@ -46,7 +46,7 @@ class PagosController extends Controller
         $Pagos=Pagos::where("contrato_id",$request->input('id'))->get();
         $ajaxPagos=array();
         foreach ($Pagos as $Pago) {
-            $boton='<a  type="button" class="btn btn-primary verVoucherBTN"  value="'.$Pago->id.'" >
+            $boton='<a  type="button" class="btn btn-primary verVoucherBTN"  value="'.$Pago->id.'" onclick="Accion_verVoucherBTN('.$Pago->id.')" >
                                       Cargar
                                 </a>';
             array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia,$Pago->monto,$boton]);
