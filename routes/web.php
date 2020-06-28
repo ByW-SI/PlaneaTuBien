@@ -326,6 +326,11 @@ Route::resource('cotizacion0','Admin\Cotizacion0Controller',['only'=>['index','s
 
 Route::get('pruebas','PruebasController@index')->name('pruebas');
 
+//Voucher
+Route::get('/voucher/{pago}/{file}', function ($pago, $file) {
+    return Storage::response("public/voucher/$pago/$file");
+});
+
 
 
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-

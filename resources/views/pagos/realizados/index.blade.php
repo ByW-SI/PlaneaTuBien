@@ -38,6 +38,31 @@
     </form>
 </div>
 <!--fin del modal-->
+<!-- Modal ver Mas-->
+<div class="modal fade" id="verVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="ver_voucher_id"  action="{{route('pago.realizados.actualizarStatus')}}" method="POST">
+        {{ csrf_field() }}
+        <input id="pago_id" name="pago_id" type="hidden" value="">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Voucher</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="img_vaucher" class="card" src="" width="200px" height="200px" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--fin del modal-->
 
 <div class="container">
     @if (session('status'))
@@ -107,9 +132,13 @@
                             <td>
                                 <button id="actualizarStatusBTN" type="button" class="btn btn-primary actualizarStatusBTN" data-toggle="modal" data-target="#actualizarStatus" value="{{$pago->id}}">
                                       Actualizar Status
-                                    </button>
+                                </button>
                             </td>
-                            <td></td>
+                            <td>
+                                <button id="verVoucherBTN" type="button" class="btn btn-primary actualizarStatusBTN" data-toggle="modal" data-target="#verVoucher" value="{{$pago->id}}" onclick='cambiarImagenVoucher("{{$pago->id}}","$pago->voucher");'>
+                                      Ver mas
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -138,7 +167,23 @@
                 $("#pago_id").val($(this).val());
                 
             });
+
+            $(".verVoucherBTN").click(function(){
+                $("#img_vaucher").attr("src","image2.jpg");
+
+                .val($(this).val());
+                
+            });
+
+            
         });
+        function cambiarImagenVoucher(pago,archivo){
+
+            var Raiz="{{ url('/voucher/') }}";
+            $("#img_vaucher").attr("src",Raiz.concat(pago,archivo));
+
+        }
+
     </script>
 @endpush
 

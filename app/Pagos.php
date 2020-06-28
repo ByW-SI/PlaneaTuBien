@@ -19,7 +19,8 @@ class Pagos extends Model
 		'referencia',
 		'spei',
 		'file_comprobante',
-		'mensualidad_id'
+		'mensualidad_id',
+		'voucher'
 	];
 
 	protected $hidden =[
