@@ -484,6 +484,8 @@
 
         $(".verVoucherBTN").click(function(){
             $("#pago_id").val($(this).val());
+            console.log("Entra");
+            console.log($(this).val());
         });
 
         $("#crearGestionBTN").click(function(){
