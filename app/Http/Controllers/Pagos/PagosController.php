@@ -53,5 +53,11 @@ class PagosController extends Controller
     }
     public function actualizarStatus(Request $request)
     {
+        $Pagos=Pagos::where("id",$request->input('pago_id'))->get();
+        $Pago=$Pagos[0];
+        if ($Pago) {
+            $Pago->update(['status_id' => $request->input('status') ]);
+        }
+        return redirect()->back();
     }
 }

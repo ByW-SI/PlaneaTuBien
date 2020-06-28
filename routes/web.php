@@ -291,6 +291,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::post('pagos/deposito/store','Pagos\PagoDepositoController@store')->name('pagos.deposito.store');
 Route::get('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
 Route::post('pagos/realizados','Pagos\PagosController@index')->name('pagos.realizados');
+Route::post('pagos/realizados/actualizarStatus','Pagos\PagosController@actualizarStatus')->name('pago.realizados.actualizarStatus');
+
 Route::resource('pagos', 'Pagos\PagoInscripcionController',['only'=>['index','show']])->middleware('auth');
 Route::get('excelpagos','CargarEstadoCuentaExcelController@show')->name('excelpagos')->middleware('auth');
 Route::post('excel.store','CargarEstadoCuentaExcelController@store')->name('excel.store')->middleware('auth');
