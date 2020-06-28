@@ -19,9 +19,9 @@ class PagosController extends Controller
             $pagos = $this->getPagosPorFecha($request);
             $total_monto_pagado = $this->getTotalMontoPagado($pagos);
         }
-        $statu=StatusPago::all();
+        $status=StatusPago::all();
 
-        return view('pagos.realizados.index', compact('pagos','total_monto_pagado','statu'));
+        return view('pagos.realizados.index', compact('pagos','total_monto_pagado','status'));
     }
 
     public function getPagosPorFecha(Request $request)
