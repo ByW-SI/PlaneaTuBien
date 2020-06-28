@@ -2,6 +2,12 @@
 
 @section('content')
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<script src="{{ asset('js/plugins/piexif.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/plugins/sortable.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/fileinput.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/locales/fr.js')}}" type="text/javascript"></script>
+<script src="{{ asset('js/locales/es.js')}}" type="text/javascript"></script>
 
 <!-- Modal Crear Gestion-->
 <div class="modal fade" id="crearGestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,7 +75,7 @@
                 <div class="modal-body">
                     <div class=" text-center">
                         <label class="control-label" for="">Voucher</label>
-                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  id="voucher"data-preview-file-type="text" enctype="multipart/form-data">
+                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  data-preview-file-type="text" enctype="multipart/form-data">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -694,6 +700,15 @@
         $('#verVoucher').modal('show');
     }
 
-
+    $("#input-id2").fileinput({
+            theme: 'fas',
+            showUpload: true,
+            showCaption: true,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            overwriteInitial: true,
+            initialPreviewAsData: true
+        });
     </script>
 @endpush
