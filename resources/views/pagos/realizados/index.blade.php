@@ -131,7 +131,7 @@
                             <td>{{$pago->statusPago->nombre}}</td>
                             <td>
                                 <button id="actualizarStatusBTN" type="button" class="btn btn-primary actualizarStatusBTN" data-toggle="modal" data-target="#actualizarStatus" value="{{$pago->id}}">
-                                      Actualizar Status
+                                      Actualizar
                                 </button>
                             </td>
                             <td>
