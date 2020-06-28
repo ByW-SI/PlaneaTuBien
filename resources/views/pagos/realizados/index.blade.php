@@ -175,7 +175,7 @@
         function cambiarImagenVoucher(pago,archivo){
 
             var Raiz="{{ url('/voucher/') }}";
-            $("#img_vaucher").attr("src",Raiz.concat(pago,"/",archivo));
+            $("#img_vaucher").attr("src",Raiz.concat("/",pago,"/",archivo));
 
         }
 
