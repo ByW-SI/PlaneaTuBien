@@ -1,6 +1,44 @@
 @extends('principal')
 @section('content')
 
+
+<!-- Modal Actualizar Status-->
+<div class="modal fade" id="actualizarStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="actualizar_status_id"  action="{{url('gestion.store')}}" method="POST">
+        {{ csrf_field() }}
+        <input id="pago_id" name="pago_id" type="hidden" value="">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Actualizar status pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Nuevo status</label>
+                        <select class="form-control" id="gestion" name="gestion">
+                            @foreach($status as $statu)
+                                <option value="{{$statu->id}}">{{$statu->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="desde">Por:</label>
+                        <input class="form-control" type="text" name="nombre" value="{{Auth::user()->name}}" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--fin del modal-->
+
 <div class="container">
     @if (session('status'))
         <div class="row">
@@ -66,7 +104,11 @@
                             <td>{{$pago->monto}}</td>
                             <td>{{$pago->mensualidad ? $pago->mensualidad()->first()->cantidad : 'N/D'}}</td>
                             <td>{{$pago->statusPago->nombre}}</td>
-                            <td></td>
+                            <td>
+                                <button id="actualizarStatusBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#actualizarStatus" value="{{$pago->id}}">
+                                      Actualizar Status
+                                    </button>
+                            </td>
                             <td></td>
                         </tr>
                         @endforeach
@@ -89,3 +131,14 @@
 </div>
 
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#actualizarStatusBTN").click(function(){
+                $("#pago_id").val($('#actualizarStatusBTN').val());
+                
+            });
+        });
+    </script>
+@endpush
+

@@ -18,7 +18,7 @@
                 <input id="contrato_id" name="contrato_id" type="hidden" value="">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Example select</label>
+                        <label for="exampleFormControlSelect1">Gestion</label>
                         <select class="form-control" id="gestion" name="gestion">
                             <option>NC</option>
                             <option>PP</option>

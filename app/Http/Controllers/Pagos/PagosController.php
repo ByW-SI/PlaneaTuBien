@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensualidad;
 use App\Pagos;
+use App\StatusPago;
 
 class PagosController extends Controller
 {
@@ -18,8 +19,9 @@ class PagosController extends Controller
             $pagos = $this->getPagosPorFecha($request);
             $total_monto_pagado = $this->getTotalMontoPagado($pagos);
         }
+        $statu=StatusPago::all();
 
-        return view('pagos.realizados.index', compact('pagos','total_monto_pagado'));
+        return view('pagos.realizados.index', compact('pagos','total_monto_pagado','statu'));
     }
 
     public function getPagosPorFecha(Request $request)
@@ -48,5 +50,8 @@ class PagosController extends Controller
         }
         return json_encode(['data'=> $ajaxPagos]);
 
+    }
+    public function actualizarStatus(Request $request)
+    {
     }
 }
