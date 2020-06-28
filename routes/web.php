@@ -331,6 +331,7 @@ Route::get('/voucher/{pago}/{file}', function ($pago, $file) {
     return Storage::response("public/voucher/$pago/$file");
 });
 
+Route::resource('pago.voucher','Pagos\PagoVoucherController');
 
 
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-

@@ -60,4 +60,5 @@ class PagosController extends Controller
         }
         return back()->withInput();
     }
+    
 }

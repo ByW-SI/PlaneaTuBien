@@ -40,7 +40,7 @@
 <!--fin del modal-->
 <!-- Modal ver Mas-->
 <div class="modal fade" id="verVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="ver_voucher_id"  action="{{route('pago.realizados.actualizarStatus')}}" method="POST">
+    <form id="ver_voucher_id"  action="" method="POST">
         {{ csrf_field() }}
         <input id="pago_id" name="pago_id" type="hidden" value="">
         <div class="modal-dialog" role="document">
@@ -52,7 +52,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="img_vaucher" class="card" src="" width="200px" height="200px" alt="">
+                    <img id="img_vaucher" class="card" src="" width="400px" height="600px" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Eliminar</button>
