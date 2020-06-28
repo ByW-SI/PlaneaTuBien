@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pagos;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pagos;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class PagoVoucherController extends Controller
 {
