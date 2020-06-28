@@ -55,7 +55,7 @@
                     <img id="img_vaucher" class="card" src="" width="450px" height="400px" alt="">
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button id="verVoucherBTN" type="button" class="btn btn-primary actualizarStatusBTN" data-toggle="modal" data-target="#verVoucher" value="{{$pago->id}}" onclick='cambiarImagenVoucher("{{$pago->id}}","$pago->voucher");'>
+                                <button id="verVoucherBTN" type="button" class="btn btn-primary " data-toggle="modal" data-target="#verVoucher"  onclick='cambiarImagenVoucher("{{$pago->id}}","$pago->voucher");'>
                                       Ver mas
                                 </button>
                             </td>

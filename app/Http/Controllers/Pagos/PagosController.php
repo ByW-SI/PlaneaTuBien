@@ -46,7 +46,10 @@ class PagosController extends Controller
         $Pagos=Pagos::where("contrato_id",$request->input('id'))->get();
         $ajaxPagos=array();
         foreach ($Pagos as $Pago) {
-            array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia,$Pago->monto]);
+            array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia,$Pago->monto,
+                '<button id="verVoucherBTN" type="button" class="btn btn-primary " data-toggle="modal" data-target="#verVoucher" value=".'$Pago->id'." >
+                                      Cargar
+                                </button>']);
         }
         return json_encode(['data'=> $ajaxPagos]);
 
@@ -60,5 +63,5 @@ class PagosController extends Controller
         }
         return back()->withInput();
     }
-    
+
 }

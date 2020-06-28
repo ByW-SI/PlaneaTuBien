@@ -9,8 +9,11 @@ use App\Pagos;
 class PagoVoucherController extends Controller
 {
     //
-     public function store(Request $request, Pagos $pago)
+     public function cargarVoucher(Request $request)
     {
+
+    	$pago=Pagos::where("id",$request->input("pago_id"))->get();
+    	$pago=$pago[0];
        
         if ($request->voucher && $request->file('voucher')->isValid()) {
             $voucher = explode("/",$request->voucher->storeAs('voucher/'.$pago->id, 'voucher.'.$request->voucher->extension(), 'public'));

@@ -53,6 +53,36 @@
     </form>
 </div>
 <!--fin del modal-->
+<!-- Modal ver Mas-->
+<div class="modal fade" id="verVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="ver_voucher_id"  action=" route('pagovoucher')" method="POST">
+        {{ csrf_field() }}
+        <input id="pago_id" name="pago_id" type="hidden" value="">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Cargar Voucher</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
+                        <label class="control-label" for="">Voucher</label>
+                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  id="voucher"data-preview-file-type="text" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Cargar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--fin del modal-->
+
+
 <!-- Modal Edicion de datos--> 
 <div class="modal fade" id="edicionDatos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form id="edicion_datos_id"  action="{{url('edicionDatos.store')}}" method="POST">
@@ -374,6 +404,7 @@
                                     <th>Tipo de pago</th>
                                     <th>Referencia</th>
                                     <th>Monto</th>
+                                    <tr>Cargar Voucher</tr>
                                 </tr>
                             </thead>
                             <tbody>
@@ -450,6 +481,11 @@
     });
     $(document).ready(function(){
         
+
+        $(".verVoucherBTN").click(function(){
+            $("#pago_id").val($(this).val());
+        });
+
         $("#crearGestionBTN").click(function(){
             $("#contrato_id").val($('.HistorialGestion').val());
             
