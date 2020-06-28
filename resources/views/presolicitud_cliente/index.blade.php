@@ -410,6 +410,7 @@
                                     <th>Tipo de pago</th>
                                     <th>Referencia</th>
                                     <th>Monto</th>
+                                    <th>Voucher Registrado</th>
                                     <th>Cargar Voucher</th>
                                 </tr>
                             </thead>

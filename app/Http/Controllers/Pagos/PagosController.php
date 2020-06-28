@@ -45,11 +45,17 @@ class PagosController extends Controller
     public function getHistorial(Request $request){
         $Pagos=Pagos::where("contrato_id",$request->input('id'))->get();
         $ajaxPagos=array();
+        $PagoVoucher="Sin Voucher";
         foreach ($Pagos as $Pago) {
             $boton='<a  type="button" class="btn btn-primary verVoucherBTN"  value="'.$Pago->id.'" onclick="Accion_verVoucherBTN('.$Pago->id.')" >
                                       Cargar
                                 </a>';
-            array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia,$Pago->monto,$boton]);
+            if ($Pago->voucher) {
+                $PagoVoucher="Con Voucher";
+            }else{
+                $PagoVoucher="Sin Voucher";
+            }
+            array_push ($ajaxPagos,[ $Pago->folio,$Pago->fecha_pago,$Pago->status_id,$Pago->tipopago_id,$Pago->referencia,$Pago->monto,$PagoVoucher,$boton]);
         }
         return json_encode(['data'=> $ajaxPagos]);
 
