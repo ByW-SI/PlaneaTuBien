@@ -168,10 +168,7 @@
                 
             });
 
-            $(".verVoucherBTN").click(function(){
-                $("#img_vaucher").attr("src","image2.jpg");
-                
-            });
+           
 
             
         });
