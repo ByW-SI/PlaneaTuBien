@@ -105,7 +105,7 @@
                             <td>{{$pago->mensualidad ? $pago->mensualidad()->first()->cantidad : 'N/D'}}</td>
                             <td>{{$pago->statusPago->nombre}}</td>
                             <td>
-                                <button id="actualizarStatusBTN" type="button" class="btn btn-primary" data-toggle="modal" data-target="#actualizarStatus" value="{{$pago->id}}">
+                                <button id="actualizarStatusBTN" type="button" class="btn btn-primary actualizarStatusBTN" data-toggle="modal" data-target="#actualizarStatus" value="{{$pago->id}}">
                                       Actualizar Status
                                     </button>
                             </td>
@@ -134,8 +134,8 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#actualizarStatusBTN").click(function(){
-                $("#pago_id").val($('#actualizarStatusBTN').val());
+            $(".actualizarStatusBTN").click(function(){
+                $("#pago_id").val($(this).val());
                 
             });
         });
