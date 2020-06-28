@@ -40,9 +40,9 @@
 <!--fin del modal-->
 <!-- Modal ver Mas-->
 <div class="modal fade" id="verVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="ver_voucher_id"  action="" method="POST">
+    <form id="ver_voucher_id"  action="{{route('pagovoucher_eliminar')}}" method="POST">
         {{ csrf_field() }}
-        <input id="pago_id" name="pago_id" type="hidden" value="">
+        <input id="pago_id2" name="pago_id2" type="hidden" value="">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -173,7 +173,8 @@
             
         });
         function cambiarImagenVoucher(pago,archivo){
-
+            
+            $("#pago_id2").val(pago);
             var Raiz="{{ url('/voucher/') }}";
             $("#img_vaucher").attr("src",Raiz.concat("/",pago,"/",archivo));
 

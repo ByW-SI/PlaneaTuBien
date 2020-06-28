@@ -332,7 +332,7 @@ Route::get('/voucher/{pago}/{file}', function ($pago, $file) {
 });
 
 Route::post('pagovoucher','Pagos\PagoVoucherController@cargarVoucher')->name('pagovoucher');
-
+Route::post('pagovoucher_eliminar','Pagos\PagoVoucherController@pagovoucher_eliminar')->name('pagovoucher_eliminar');
 
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-
 Route::resource('excel-clientes', 'ClienteExcelController', ['only'=>['index','store']]);
