@@ -16,9 +16,9 @@ class PagoVoucherController extends Controller
     	$pago=Pagos::where("id",$request->input("pago_id"))->get();
     	$pago=$pago[0];
        
-        if ($request->voucher && $request->file('voucher')->isValid()) {
+        //f ($request->voucher && $request->file('voucher')->isValid()) {
             $voucher = explode("/",$request->voucher->storeAs('voucher/'.$pago->id, 'voucher.'.$request->voucher->extension(), 'public'));
-        }
+        //}
 
         if (!isset($voucher)) {
             $voucher=null;
