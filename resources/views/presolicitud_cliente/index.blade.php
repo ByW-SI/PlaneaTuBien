@@ -61,7 +61,7 @@
 <!--fin del modal-->
 <!-- Modal ver Mas-->
 <div class="modal fade" id="verVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form id="ver_voucher_id"  action=" {{route('pagovoucher')}}" method="POST">
+    <form id="ver_voucher_id"  action=" {{route('pagovoucher')}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input id="pago_id" name="pago_id" type="hidden" value="">
         <div class="modal-dialog" role="document">
@@ -75,7 +75,7 @@
                 <div class="modal-body">
                     <div class=" text-center">
                         <label class="control-label" for="">Voucher</label>
-                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  data-preview-file-type="text" enctype="multipart/form-data">
+                        <input id="input-id2" type="file" accept=".jpg, .jpeg, .png" class="file" name="voucher"  data-preview-file-type="text" >
                     </div>
                 </div>
                 <div class="modal-footer">
