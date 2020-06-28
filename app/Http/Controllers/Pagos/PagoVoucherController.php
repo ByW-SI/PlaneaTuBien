@@ -26,7 +26,7 @@ class PagoVoucherController extends Controller
             $voucher=$voucher[2];
         }
 
-        dd($voucher);
+        //dd($voucher);
         $pago->update(['voucher' => $voucher ]);
 
 
