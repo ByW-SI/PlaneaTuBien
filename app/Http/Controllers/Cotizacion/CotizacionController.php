@@ -120,11 +120,11 @@ class CotizacionController extends Controller
         for ($i=0; $i < $plazo; $i++) { 
             
             if ($Dia_de_inicio->format('m') == "06" || $Dia_de_inicio->format('m') == "12") {
-                $Aportacion=$Aportacion*(($Factor_Actualizacion/100)+1);
-                $Cuota_Admin_monto=$Cuota_Admin_monto*(($Factor_Actualizacion/100)+1);
-                $Seguro_vida_monto=$Seguro_vida_monto*(($Factor_Actualizacion/100)+1);
-                $Seguro_dano_monto=$Seguro_dano_monto*(($Factor_Actualizacion/100)+1);
-                $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto+($Cuota_Admin_monto*0.16);
+                $Aportacion=round($Aportacion*(($Factor_Actualizacion/100)+1),2);
+                $Cuota_Admin_monto=round($Cuota_Admin_monto*(($Factor_Actualizacion/100)+1),2);
+                $Seguro_vida_monto=round($Seguro_vida_monto*(($Factor_Actualizacion/100)+1),2);
+                $Seguro_dano_monto=round($Seguro_dano_monto*(($Factor_Actualizacion/100)+1),2);
+                $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto+round(($Cuota_Admin_monto*0.16),2);
                 //dd($Factor_Actualizacion);
             }
             
@@ -147,9 +147,9 @@ class CotizacionController extends Controller
         $Pagosegundario=0;
         for ($i=0; $i <$plazo ; $i++) { 
             if ($Adjudicacion<($i+1)) {
-                $Pagosegundario+=$corrida[$i]['Total'];
+                $Pagosegundario+=round($corrida[$i]['Total'],2);
             }else{
-                $Pagoinicial+=$corrida[$i]['Total']-$corrida[$i]['Seguro_danos'];
+                $Pagoinicial+=round($corrida[$i]['Total'],2)-round($corrida[$i]['Seguro_danos'],2);
             }
         }
         //dd([$Pagoinicial,$Pagosegundario,($plazo-$Adjudicacion)]);
