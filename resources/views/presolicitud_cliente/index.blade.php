@@ -732,51 +732,51 @@
                 $('#email').val(res.Presolicitud.email);
                 $("#id_Pre").val(res.Presolicitud.id);
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
+                $("#ApexTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+                $('#ApexTable').DataTable({
+                    "ajax":{
+                        type: "POST",
+                        url:"/get_apex",
+                        data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                               "id" : res.Contrato.id
+                        }
+                    },
+                    "searching": false,
+                    pageLength : 3,
+                    'language':{
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                        "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
 
-                //document.getElementById('HistorialDePago').style.display = 'block';
-            }
-        });
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                });
+                    //document.getElementById('HistorialDePago').style.display = 'block';
+                }
+            });
 
 
         
-        $("#ApexTable").dataTable().fnDestroy();
-            //console.log($(this).val());
-            $('#ApexTable').DataTable({
-                "ajax":{
-                    type: "POST",
-                    url:"/get_apex",
-                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                           "id" : $('.HistorialGestion').val()
-                    }
-                },
-                "searching": false,
-                pageLength : 3,
-                'language':{
-                    "sProcessing":     "Procesando...",
-                    "sLengthMenu":     "Mostrar _MENU_ registros",
-                    "sZeroRecords":    "No se encontraron resultados",
-                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
-                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
-                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix":    "",
-                    "sSearch":         "Buscar:",
-
-                    "sUrl":            "",
-                    "sInfoThousands":  ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
-            });
+        
         // body...
     }
     function DetallesPresolicitud(id) {
