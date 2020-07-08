@@ -95,6 +95,12 @@ class CotizacionController extends Controller
                 //dd($Factor_Actualizacion);
             }
             $PagoAcumuladoTotal+=$Total;
+            if ( $Dia_de_inicio->format('m') == "12") {
+                $Total=$Total+($Monto*($Plan->anual/100));
+            }else{
+                $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto+($Cuota_Admin_monto*0.16);
+            }
+            
             if ($Plan->mes_1==($i+1)) {
                 $Total=$Total+($Monto*($aportacion1/100));
             }
@@ -108,9 +114,7 @@ class CotizacionController extends Controller
                 $Total=$Total+($Monto*($aportacionFinal/100));
             }
 
-            if ( $Dia_de_inicio->format('m') == "12") {
-                $Total=$Total+($Monto*($Plan->anual/100));
-            }
+
 
             $PagoAcumulado+=$Total;
             array_push($corrida,
