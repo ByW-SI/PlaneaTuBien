@@ -35,7 +35,7 @@ class CotizacionController extends Controller
         $Presolicitud=$Contrato->presolicitud;
         $Cotizacion=$Presolicitud->perfil->cotizacion;
         $Plan=$Cotizacion->plan;
-        dd($Cotizacion);
+        //dd($Cotizacion);
 
         $Monto=$Contrato->monto;
         if ($this->SumatoriaAportaciones($Plan)>0) {
