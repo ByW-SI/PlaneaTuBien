@@ -70,7 +70,7 @@ class CotizacionController extends Controller
             $aportacion3=0;
         }
         if ($Plan->mes_liquidacion) {
-            $aportacionFinal=$plan->aportacion_liquidacion;
+            $aportacionFinal=$Plan->aportacion_liquidacion;
         }else{
             $aportacionFinal=0;
         }
