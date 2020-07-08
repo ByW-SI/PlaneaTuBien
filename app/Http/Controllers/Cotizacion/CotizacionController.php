@@ -35,23 +35,23 @@ class CotizacionController extends Controller
         $Plan=$Cotizacion->plan;        
 
         $Apex=[];
-        if ($Plan->aportacion_1) {
+        if (!is_null($Plan->aportacion_1)&&!is_null($Plan->mes_1)) {
             array_push ($Apex,[ "Apex 1",$Plan->aportacion_1,$Plan->mes_1,"No pagado"]);
         }else{
             array_push ($Apex,[ "Apex 1","N/A","N/A","N/A"]);
         }
         
-        if ($Plan->aportacion_2) {
+        if (!is_null($Plan->aportacion_2)&&!is_null($Plan->mes_2)) {
             array_push ($Apex,[ "Apex 2",$Plan->aportacion_3,$Plan->mes_2,"No pagado"]);
         }else{
             array_push ($Apex,[ "Apex 3","N/A","N/A","N/A"]);
         }
-        if ($Plan->aportacion_3) {
+        if (!is_null($Plan->aportacion_3)&&!is_null($Plan->mes_3)) {
             array_push ($Apex,[ "Apex 3",$Plan->aportacion_3,$Plan->mes_3,"No pagado"]);
         }else{
             array_push ($Apex,[ "Apex 3","N/A","N/A","N/A"]);
         }
-        if ($Plan->aportacion_liquidacion) {
+        if (!is_null($Plan->aportacion_liquidacion)&&!is_null($Plan->mes_liquidacion)) {
             array_push ($Apex,[ "Apex Liquidacion",$Plan->aportacion_liquidacion,$Plan->mes_liquidacion,"No pagado"]);
         }else{
             array_push ($Apex,[ "Apex 1","N/A","N/A","N/A"]);
