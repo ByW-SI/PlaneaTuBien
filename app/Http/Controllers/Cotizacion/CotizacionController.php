@@ -94,8 +94,8 @@ class CotizacionController extends Controller
             if ($Plan->mes_3==($i+1)) {
                 $Total=$Total+($Monto*($aportacion3/100));
             }
-            if ( (date('m', strtotime($Dia_de_inicio)) == "12")&&(!is_null($Plan->$anual))) {
-                $Total=$Total+($Monto*($Plan->$anual/100));
+            if ( (date('m', strtotime($Dia_de_inicio)) == "12")&&(!is_null($Plan->anual))) {
+                $Total=$Total+($Monto*($Plan->anual/100));
             }
 
 
