@@ -27,8 +27,8 @@ class CotizacionController extends Controller
     }
     public function Apex(Request $request)
     {
-        $Contrato=Contrato::where("id",$request->input('id'))->get();
-        $Contrato=$Contrato[0];
+        $Contrato=Contrato::where("id",$request->input('id'))->first();
+        //$Contrato=$Contrato[0];
         $Grupo=$Contrato->Grupo;
         $Presolicitud=$Contrato->presolicitud;
         $Cotizacion=$Presolicitud->perfil->cotizacion;
@@ -146,12 +146,13 @@ class CotizacionController extends Controller
         $Pagoinicial=0;
         $Pagosegundario=0;
         for ($i=0; $i <$plazo ; $i++) { 
-            if ($Adjudicacion<$i) {
+            if ($Adjudicacion<($i+1)) {
                 $Pagoinicial+=$corrida[$i]['Total'];
             }else{
                 $Pagosegundario+=$corrida[$i]['Total'];
             }
         }
+        dd($Pagoinicial);
         $Pagoinicial=$Pagoinicial/$Adjudicacion;
         $Pagosegundario=$Pagosegundario/($plazo-$Adjudicacion);
 
