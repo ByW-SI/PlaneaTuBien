@@ -62,13 +62,14 @@ class CotizacionController extends Controller
         $Seguro_vida_monto=$Monto_finaciar*($Seguro_vida/100);
         $Seguro_dano_monto=$Monto_finaciar*($Seguro_dano/100);
         $corridaTabla=[];
+        dd($Factor_Actualizacion);
         for ($i=0; $i < $plazo; $i++) { 
             if (date('m', strtotime($Contrato->created_at)) == "06" || date('m', strtotime($Contrato->created_at)) == "12") {
                 $Aportacion=$Aportacion*(($Factor_Actualizacion/100)+1);
                 $Cuota_Admin_monto=$Cuota_Admin_monto*(($Factor_Actualizacion/100)+1);
                 $Seguro_vida_monto=$Seguro_vida_monto*(($Factor_Actualizacion/100)+1);
                 $Seguro_dano_monto=$Seguro_dano_monto*(($Factor_Actualizacion/100)+1);
-                dd($Factor_Actualizacion);
+
             }
             array_push($corrida,
                         array('Aportacion' => $Aportacion , 
