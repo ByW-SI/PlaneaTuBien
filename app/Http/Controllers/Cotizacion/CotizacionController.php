@@ -42,7 +42,7 @@ class CotizacionController extends Controller
         }
         
         if (!is_null($Plan->aportacion_2)&&!is_null($Plan->mes_2)) {
-            array_push ($Apex,[ "Apex 2",$Plan->aportacion_3,$Plan->mes_2,"No pagado"]);
+            array_push ($Apex,[ "Apex 2",$Plan->aportacion_2,$Plan->mes_2,"No pagado"]);
         }else{
             array_push ($Apex,[ "Apex 3","N/A","N/A","N/A"]);
         }
