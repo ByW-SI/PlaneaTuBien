@@ -152,10 +152,11 @@ class CotizacionController extends Controller
                 $Pagosegundario+=$corrida[$i]['Total'];
             }
         }
+        dd([$Pagoinicial,$Pagosegundario]);
         
         $Pagoinicial=$Pagoinicial/$Adjudicacion;
         $Pagosegundario=$Pagosegundario/($plazo-$Adjudicacion);
-        dd([$Pagoinicial,$Pagosegundario]);
+        
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
         
@@ -181,7 +182,7 @@ class CotizacionController extends Controller
                 $PagoExtra+=$Monto*($aportacionFinal/100);
             }
 
-            if ($Adjudicacion<$i) {
+            if ($Adjudicacion<($i+1)) {
                 array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagoinicial,$PagoExtra,"No pagado"]);
             }else{
                 array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagosegundario,$PagoExtra,"No pagado"]);
