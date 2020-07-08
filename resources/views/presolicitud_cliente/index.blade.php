@@ -529,9 +529,9 @@
 
         $("#Corrida").click(function(){
             $('#CorridaTablevisible').show();
-            $("#CorridaTablevisible").dataTable().fnDestroy();
+            $("#CorridaTable").dataTable().fnDestroy();
             //console.log($(this).val());
-            $('#CorridaTablevisible').DataTable({
+            $('#CorridaTable').DataTable({
                 "ajax":{
                     type: "POST",
                     url:"/get_corrida",
