@@ -464,6 +464,7 @@
                                     <th>Seguro de daños</th>
                                     <th>Mensualidad</th>
                                     <th>Pago acumulado</th>
+                                    <th>Pago acumulado Total</th>
                                 </tr>
                             </thead>
                             <tbody>
