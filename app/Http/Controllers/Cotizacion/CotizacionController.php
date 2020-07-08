@@ -82,10 +82,10 @@ class CotizacionController extends Controller
         for ($i=0; $i < $plazo; $i++) { 
             
             if ($Dia_de_inicio->format('m') == "06" || $Dia_de_inicio->format('m') == "12") {
-                $Aportacion=round($Aportacion*(($Factor_Actualizacion/100)+1),2);
-                $Cuota_Admin_monto=round($Cuota_Admin_monto*(($Factor_Actualizacion/100)+1),2);
-                $Seguro_vida_monto=round($Seguro_vida_monto*(($Factor_Actualizacion/100)+1),2);
-                $Seguro_dano_monto=round($Seguro_dano_monto*(($Factor_Actualizacion/100)+1),2);
+                $Aportacion=$Aportacion*(($Factor_Actualizacion/100)+1);
+                $Cuota_Admin_monto=$Cuota_Admin_monto*(($Factor_Actualizacion/100)+1);
+                $Seguro_vida_monto=$Seguro_vida_monto*(($Factor_Actualizacion/100)+1);
+                $Seguro_dano_monto=$Seguro_dano_monto*(($Factor_Actualizacion/100)+1);
                 $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto+($Cuota_Admin_monto*0.16);
                 //dd($Factor_Actualizacion);
             }
