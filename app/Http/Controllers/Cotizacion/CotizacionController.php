@@ -147,12 +147,12 @@ class CotizacionController extends Controller
         $Pagosegundario=0;
         for ($i=0; $i <$plazo ; $i++) { 
             if ($Adjudicacion<($i+1)) {
-                $Pagoinicial+=$corrida[$i]['Total'];
-            }else{
                 $Pagosegundario+=$corrida[$i]['Total'];
+            }else{
+                $Pagoinicial+=$corrida[$i]['Total'];
             }
         }
-        dd([$Pagoinicial,$Pagosegundario]);
+        //dd([$Pagoinicial,$Pagosegundario]);
         
         $Pagoinicial=$Pagoinicial/$Adjudicacion;
         $Pagosegundario=$Pagosegundario/($plazo-$Adjudicacion);
