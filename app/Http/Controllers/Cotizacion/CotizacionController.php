@@ -84,7 +84,7 @@ class CotizacionController extends Controller
 
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
-        $Dia_de_inicio=$Dia_de_inicio->addYear();
+        $Dia_de_inicio=$Dia_de_inicio->addYear(2);
         //$Dia_de_inicio=date($Dia_de_inicio->format('m'));
 
         if ($Plan->mes_1) {
@@ -160,7 +160,7 @@ class CotizacionController extends Controller
         
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
-        $Dia_de_inicio=$Dia_de_inicio->addYear();
+        $Dia_de_inicio=$Dia_de_inicio->addYear(2);
         
         for ($i=0; $i <$plazo ; $i++) { 
 
@@ -224,7 +224,7 @@ class CotizacionController extends Controller
 
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
-        $Dia_de_inicio=$Dia_de_inicio->addYear();
+        $Dia_de_inicio=$Dia_de_inicio->addYear(2);
         //$Dia_de_inicio=date($Dia_de_inicio->format('m'));
 
 
