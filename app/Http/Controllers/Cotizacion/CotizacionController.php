@@ -76,7 +76,9 @@ class CotizacionController extends Controller
         $Seguro_dano_monto=$Monto_finaciar*($Seguro_dano/100);
         $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto;
         $corridaTabla=[];
+        $PagoAcumulado=0;
         for ($i=0; $i < $plazo; $i++) { 
+            
             if (date('m', strtotime($Dia_de_inicio)) == "06" || date('m', strtotime($Dia_de_inicio)) == "12") {
                 $Aportacion=round($Aportacion*(($Factor_Actualizacion/100)+1),2);
                 $Cuota_Admin_monto=round($Cuota_Admin_monto*(($Factor_Actualizacion/100)+1),2);
@@ -98,7 +100,7 @@ class CotizacionController extends Controller
                 $Total=$Total+($Monto*($Plan->anual/100));
             }
 
-
+            $PagoAcumulado+=$Total;
             array_push($corrida,
                         array(
                               'mes'=>$i+1,
@@ -108,7 +110,8 @@ class CotizacionController extends Controller
                               'Seguro_danos'=>$Seguro_dano_monto,
                               'Total'=>$Total
                         ));
-            array_push ($corridaTabla,[ $i+1,$Aportacion,$Cuota_Admin_monto,$Seguro_vida_monto,$Seguro_dano_monto,$Total]);
+            array_push ($corridaTabla,[ $i+1,$Aportacion,$Cuota_Admin_monto,$Seguro_vida_monto,$Seguro_dano_monto,$Total,$PagoAcumulado]);
+
         }
 
         

@@ -463,6 +463,7 @@
                                     <th>Seguro de vida</th>
                                     <th>Seguro de daños</th>
                                     <th>Mensualidad</th>
+                                    <th>Pago acumulado</th>
                                 </tr>
                             </thead>
                             <tbody>
