@@ -434,7 +434,7 @@
                                     <th>Cuota</th>
                                     <th>Seguro de vida</th>
                                     <th>Seguro de daños</th>
-                                    <th>IVA</th>
+                                    <th>Total sin SD</th>
 
                                     <th>Total</th>
                                     <th>Pago acumulado</th>
