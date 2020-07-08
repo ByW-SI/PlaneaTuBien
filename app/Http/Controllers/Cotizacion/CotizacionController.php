@@ -71,9 +71,9 @@ class CotizacionController extends Controller
         }
 
         $Aportacion=$Monto_finaciar/$plazo;
-        $Cuota_Admin_monto=$Monto_finaciar*($Cuota_Admin);
-        $Seguro_vida_monto=$Monto_finaciar*($Seguro_vida);
-        $Seguro_dano_monto=$Monto_finaciar*($Seguro_dano);
+        $Cuota_Admin_monto=$Monto_finaciar*($Cuota_Admin/100);
+        $Seguro_vida_monto=$Monto_finaciar*($Seguro_vida/100);
+        $Seguro_dano_monto=$Monto_finaciar*($Seguro_dano/100);
         $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto+($Cuota_Admin_monto*0.16);
         $corridaTabla=[];
         $PagoAcumuladoTotal=0;
