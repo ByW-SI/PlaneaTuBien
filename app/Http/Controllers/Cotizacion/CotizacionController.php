@@ -152,7 +152,7 @@ class CotizacionController extends Controller
                 $Pagoinicial+=round($corrida[$i]['Total'],2)-round($corrida[$i]['Seguro_danos'],2);
             }
         }
-        dd([$Pagoinicial,$Pagosegundario,($plazo-$Adjudicacion),(($Factor_Actualizacion/100)+1)]);
+        //dd([$Pagoinicial,$Pagosegundario,($plazo-$Adjudicacion),(($Factor_Actualizacion/100)+1)]);
         
         $Pagoinicial=round($Pagoinicial/$Adjudicacion,2);
         $Pagosegundario=round($Pagosegundario/($plazo-$Adjudicacion),2);
