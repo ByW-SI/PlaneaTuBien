@@ -253,6 +253,9 @@ Route::post('edicionDatos.store','Cliente\ClienteController@edicionDatosStore');
 Route::post('get_Historial','Pagos\PagosController@getHistorial');
 //Cotizacion JC
 Route::post('get_corrida','Cotizacion\CotizacionController@Cotizacion');
+Route::post('get_mensualidad','Cotizacion\CotizacionController@Mensualidad');
+Route::post('get_apex','Cotizacion\CotizacionController@Apex');
+
 
 
 

@@ -300,7 +300,7 @@
                             <br><br><br><br><br>
                             <div class="row">
                                 Terminos del plan
-                                <table class="table table-striped"  >
+                                <table class="table table-striped" id="ApexTable" >
                                     <thead>
                                         <tr class="thead-dark">
                                             <th></th>
@@ -310,36 +310,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <tr>
-                                           <td>Apex 1</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-                                           <td>Apex 2</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-                                           <td>Apex 3</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-                                           <td>Apex 4</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td></td>
-                                       </tr>
-                                       <tr>
-                                           <td>Valor de mensualidad</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td></td>
-                                       </tr>
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -463,9 +434,28 @@
                                     <th>Cuota</th>
                                     <th>Seguro de vida</th>
                                     <th>Seguro de daños</th>
-                                    <th>Mensualidad</th>
+                                    <th>Total</th>
                                     <th>Pago acumulado</th>
-                                    <th>Pago acumulado Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="text-center text-uppercase text-muted">
+                        Mensualidad
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="MensualidadTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>#mes</th>
+                                    <th>N° mes</th>
+                                    <th>Pago</th>
+                                    <th>Complemento</th>
+                                    <th>Estatus</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -572,6 +562,47 @@
                     "autoWidth": true
                 }
             });
+            $("#MensualidadTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#MensualidadTable').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_mensualidad",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "contrato" : $('.HistorialGestion').val()
+                    }
+                },
+                "searching": false,
+                pageLength : 25,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "autoWidth": true
+                }
+            });
+
+
             //$("#HistorialGestionTable").dataTable().columns().adjust().draw();
         });
 
@@ -706,8 +737,46 @@
             }
         });
 
+
         
-        
+        $("#ApexTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#ApexTable').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_apex",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "id" : $('.HistorialGestion').val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
         // body...
     }
     function DetallesPresolicitud(id) {
