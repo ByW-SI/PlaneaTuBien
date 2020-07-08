@@ -69,6 +69,11 @@ class CotizacionController extends Controller
         }else{
             $aportacion3=0;
         }
+        if ($Plan->mes_liquidacion) {
+            $aportacionFinal=$plan->aportacion_liquidacion;
+        }else{
+            $aportacionFinal=0;
+        }
 
         $Aportacion=$Monto_finaciar/$plazo;
         $Cuota_Admin_monto=$Monto_finaciar*($Cuota_Admin/100);
@@ -99,6 +104,10 @@ class CotizacionController extends Controller
             if ($Plan->mes_3==($i+1)) {
                 $Total=$Total+($Monto*($aportacion3/100));
             }
+            if ($Plan->mes_liquidacion==($i+1)) {
+                $Total=$Total+($Monto*($aportacionFinal/100));
+            }
+
             if ( (date('m', strtotime($Dia_de_inicio)) == "12")&&(!is_null($Plan->anual))) {
                 $Total=$Total+($Monto*($Plan->anual/100));
             }
