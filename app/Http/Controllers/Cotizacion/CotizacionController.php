@@ -51,7 +51,7 @@ class CotizacionController extends Controller
 
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
-        $Dia_de_inicio=date($Dia_de_inicio->format('m'));
+        //$Dia_de_inicio=date($Dia_de_inicio->format('m'));
 
         if ($Plan->mes_1) {
             $aportacion1=$Plan->aportacion_1;
@@ -78,10 +78,10 @@ class CotizacionController extends Controller
         $corridaTabla=[];
         $PagoAcumuladoTotal=0;
         $PagoAcumulado=0;
-        dd($Dia_de_inicio);
+        //dd($Dia_de_inicio);
         for ($i=0; $i < $plazo; $i++) { 
             
-            if (date('m', strtotime($Dia_de_inicio)) == "06" || date('m', strtotime($Dia_de_inicio)) == "12") {
+            if ($Dia_de_inicio->format('m') == "06" || $Dia_de_inicio->format('m') == "12") {
                 $Aportacion=round($Aportacion*(($Factor_Actualizacion/100)+1),2);
                 $Cuota_Admin_monto=round($Cuota_Admin_monto*(($Factor_Actualizacion/100)+1),2);
                 $Seguro_vida_monto=round($Seguro_vida_monto*(($Factor_Actualizacion/100)+1),2);
@@ -114,6 +114,7 @@ class CotizacionController extends Controller
                               'Total'=>$Total
                         ));
             array_push ($corridaTabla,[ $i+1,$Aportacion,$Cuota_Admin_monto,$Seguro_vida_monto,$Seguro_dano_monto,round($Total,2),round($PagoAcumulado,2)]);
+            $Dia_de_inicio->addMonths(1);
 
         }
 
