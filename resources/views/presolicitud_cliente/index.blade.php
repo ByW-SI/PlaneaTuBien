@@ -743,7 +743,7 @@
                         }
                     },
                     "searching": false,
-                    pageLength : 3,
+                    pageLength : 4,
                     'language':{
                         "sProcessing":     "Procesando...",
                         "sLengthMenu":     "Mostrar _MENU_ registros",

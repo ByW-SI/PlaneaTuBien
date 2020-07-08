@@ -54,7 +54,7 @@ class CotizacionController extends Controller
         if (!is_null($Plan->aportacion_liquidacion)&&!is_null($Plan->mes_liquidacion)) {
             array_push ($Apex,[ "Apex Liquidacion",$Plan->aportacion_liquidacion,$Plan->mes_liquidacion,"No pagado"]);
         }else{
-            array_push ($Apex,[ "Apex 1","N/A","N/A","N/A"]);
+            array_push ($Apex,[ "Apex Liquidacion","N/A","N/A","N/A"]);
         }
         return json_encode(['data'=> $Apex]);
     }
