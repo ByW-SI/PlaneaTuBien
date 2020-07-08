@@ -108,7 +108,7 @@ class CotizacionController extends Controller
                 $Total=$Total+($Monto*($aportacionFinal/100));
             }
 
-            if ( ($Dia_de_inicio->format('m') == "12")&&(!is_null($Plan->anual))) {
+            if ( $Dia_de_inicio->format('m') == "12") {
                 $Total=$Total+($Monto*($Plan->anual/100));
             }
 
