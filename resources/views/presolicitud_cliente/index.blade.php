@@ -359,6 +359,12 @@
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
+                                <button id="Corrida" type="button" class="btn btn-primary">
+                                    Ver Corrida
+                                </button>
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
                                 <button id="" type="button" class="btn btn-primary">
                                     Estado de cuenta
                                 </button>
@@ -442,6 +448,29 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="row-group" id="CorridaTablevisible">
+                    <h5 class="text-center text-uppercase text-muted">
+                        Corridas
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="CorridaTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>Aportacion</th>
+                                    <th>Cuota</th>
+                                    <th>Seguro de vida</th>
+                                    <th>Seguro de daños</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -455,6 +484,8 @@
         $('#HistorialDePago').hide();
         $('#HistorialGestionTablevisible').hide();
         $('#HistorialPagosTablevisible').hide();
+        $('#CorridaTablevisible').hide();
+        
         
         $('#clientes').DataTable({
             pageLength : 5,
@@ -495,7 +526,51 @@
             $("#contrato_id").val($('.HistorialGestion').val());
             
         });
-        
+
+        $("#Corrida").click(function(){
+            $('#CorridaTablevisible').show();
+            $("#CorridaTablevisible").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#CorridaTablevisible').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_corrida",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "contrato" : $('.HistorialGestion').val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "autoWidth": true
+                }
+            });
+            //$("#HistorialGestionTable").dataTable().columns().adjust().draw();
+        });
+
 
         $(".HistorialGestion").click(function(){
             $('#HistorialGestionTablevisible').show();
@@ -588,6 +663,7 @@
         $('#Contrato').show();
         $('#HistorialGestionTablevisible').hide();
         $('#HistorialPagosTablevisible').hide();
+        $('#CorridaTablevisible').hide();
         $('.SelectNav').removeClass("active");
         $('#n'+id).addClass("active");
         $('#HistorialPagos').val(id);
@@ -620,7 +696,6 @@
                 $('#tel_celular').val(res.Presolicitud.tel_celular);
                 $('#email').val(res.Presolicitud.email);
                 $("#id_Pre").val(res.Presolicitud.id);
-
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
 
                 //document.getElementById('HistorialDePago').style.display = 'block';
@@ -645,6 +720,7 @@
                 $('#Contrato').hide();
                 $('#HistorialGestionTablevisible').hide();
                 $('#HistorialPagosTablevisible').hide();
+                $('#CorridaTablevisible').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
 
             }
