@@ -78,7 +78,7 @@ class CotizacionController extends Controller
         $corridaTabla=[];
         $PagoAcumuladoTotal=0;
         $PagoAcumulado=0;
-        dd(date('m', strtotime($Dia_de_inicio)));
+        dd($Dia_de_inicio);
         for ($i=0; $i < $plazo; $i++) { 
             
             if (date('m', strtotime($Dia_de_inicio)) == "06" || date('m', strtotime($Dia_de_inicio)) == "12") {
