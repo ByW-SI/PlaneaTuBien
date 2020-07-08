@@ -113,7 +113,7 @@ class CotizacionController extends Controller
                               'Seguro_danos'=>$Seguro_dano_monto,
                               'Total'=>$Total
                         ));
-            array_push ($corridaTabla,[ $i+1,$Aportacion,$Cuota_Admin_monto,$Seguro_vida_monto,$Seguro_dano_monto,round($Total,2),round($PagoAcumulado,2)]);
+            array_push ($corridaTabla,[ $i+1,round($Aportacion),round($Cuota_Admin_monto),round($Seguro_vida_monto),round($Seguro_dano_monto),round($Total,2),round($PagoAcumulado,2)]);
             $Dia_de_inicio->addMonths(1);
 
         }
