@@ -137,7 +137,11 @@ class CotizacionController extends Controller
                               'Seguro_danos'=>$Seguro_dano_monto,
                               'Total'=>$Total
                         ));
-            $Dia_de_inicio->addDay(30);
+             if ($Dia_de_inicio->format('m')=="3") {
+                # code...
+                $Dia_de_inicio->addMonths(-1);
+            }
+            $Dia_de_inicio->addMonths(1);
            
 
         }
@@ -188,7 +192,11 @@ class CotizacionController extends Controller
             }else{
                 array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagoinicial,$PagoExtra,"No pagado"]);
             }
-            $Dia_de_inicio->addDay(30);
+            if ($Dia_de_inicio->format('m')=="3") {
+                # code...
+                $Dia_de_inicio->addMonths(-1);
+            }
+            $Dia_de_inicio->addMonths(1);
             
         }
 
@@ -259,7 +267,11 @@ class CotizacionController extends Controller
                               'Total'=>$Total
                         ));
             array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),round($Aportacion,2),round($Cuota_Admin_monto,2),round($Seguro_vida_monto,2),round($Seguro_dano_monto,2),round(($Total-$Seguro_dano_monto),2),round($Total,2),round($PagoAcumulado,2)]);
-            $Dia_de_inicio->addDay(30);
+             if ($Dia_de_inicio->format('m')=="3") {
+                # code...
+                $Dia_de_inicio->addMonths(-1);
+            }
+            $Dia_de_inicio->addMonths(1);
 
         }
 
