@@ -35,7 +35,7 @@ class CotizacionController extends Controller
         $Presolicitud=$Contrato->presolicitud;
         $Cotizacion=$Presolicitud->perfil->cotizacion;
         $Plan=$Cotizacion->plan;
-
+        dd($Cotizacion);
 
         $Monto=$Contrato->monto;
         if ($this->SumatoriaAportaciones($Plan)>0) {
@@ -77,6 +77,7 @@ class CotizacionController extends Controller
         $Total=$Aportacion+$Cuota_Admin_monto+$Seguro_vida_monto+$Seguro_dano_monto;
         $corridaTabla=[];
         $PagoAcumulado=0;
+
         for ($i=0; $i < $plazo; $i++) { 
             
             if (date('m', strtotime($Dia_de_inicio)) == "06" || date('m', strtotime($Dia_de_inicio)) == "12") {
