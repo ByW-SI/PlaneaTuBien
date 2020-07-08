@@ -183,9 +183,10 @@ class CotizacionController extends Controller
             }
 
             if ($Adjudicacion<($i+1)) {
-                array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagoinicial,$PagoExtra,"No pagado"]);
-            }else{
                 array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagosegundario,$PagoExtra,"No pagado"]);
+                
+            }else{
+                array_push ($corridaTabla,[ $i+1,$Dia_de_inicio->format('m'),$Pagoinicial,$PagoExtra,"No pagado"]);
             }
             $Dia_de_inicio->addMonths(1);
             
