@@ -458,6 +458,7 @@
                             <thead>
                                 <tr class="thead-dark">
                                     <th>#mes</th>
+                                    <th>N° mes</th>
                                     <th>Aportacion</th>
                                     <th>Cuota</th>
                                     <th>Seguro de vida</th>
