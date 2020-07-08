@@ -457,11 +457,12 @@
                         <table class="table table-striped" id="CorridaTable" >
                             <thead>
                                 <tr class="thead-dark">
+                                    <th>#mes</th>
                                     <th>Aportacion</th>
                                     <th>Cuota</th>
                                     <th>Seguro de vida</th>
                                     <th>Seguro de daños</th>
-                                    
+                                    <th>Mensualidad</th>
                                 </tr>
                             </thead>
                             <tbody>
