@@ -154,8 +154,8 @@ class CotizacionController extends Controller
         }
         //dd([$Pagoinicial,$Pagosegundario]);
         
-        $Pagoinicial=$Pagoinicial/$Adjudicacion;
-        $Pagosegundario=$Pagosegundario/($plazo-$Adjudicacion);
+        $Pagoinicial=round($Pagoinicial/$Adjudicacion,2);
+        $Pagosegundario=round($Pagosegundario/($plazo-$Adjudicacion),2);
         
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
