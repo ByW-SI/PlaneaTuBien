@@ -69,7 +69,7 @@ class CotizacionController extends Controller
                 $Cuota_Admin_monto=$Cuota_Admin_monto*(($Factor_Actualizacion/100)+1);
                 $Seguro_vida_monto=$Seguro_vida_monto*(($Factor_Actualizacion/100)+1);
                 $Seguro_dano_monto=$Seguro_dano_monto*(($Factor_Actualizacion/100)+1);
-                dd($Factor_Actualizacion);
+                //dd($Factor_Actualizacion);
             }
             array_push($corrida,
                         array('Aportacion' => $Aportacion , 
