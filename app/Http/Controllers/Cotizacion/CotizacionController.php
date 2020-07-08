@@ -51,7 +51,7 @@ class CotizacionController extends Controller
 
 
         $Dia_de_inicio=Carbon::parse($Contrato->created_at);
-        $Dia_de_inicio=date($Dia_de_inicio->format('Y-M-d'));
+        $Dia_de_inicio=date($Dia_de_inicio->format('m'));
 
         if ($Plan->mes_1) {
             $aportacion1=$Plan->aportacion_1;
