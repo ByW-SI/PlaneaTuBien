@@ -33,7 +33,7 @@ class CotizacionController extends Controller
         $Contrato=$Contrato[0];
         $Grupo=$Contrato->Grupo;
         $Presolicitud=$Contrato->presolicitud;
-        $Cotizacion=$Presolicitud->cotizacion;
+        $Cotizacion=$Presolicitud->perfil->cotizacion;
         $Plan=$Cotizacion->plan;
 
 
