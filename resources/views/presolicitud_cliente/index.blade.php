@@ -280,13 +280,13 @@
                             <div class="row">
                                 <div class="col-sm">
                                     Puntos mensuales atrasado dentro de mes:
-                                    <span class="input-group-text" id="puntos_madm">_</span>
+                                    <span class="input-group-text" id="puntos_madm"></span>
                                     <br>
 
                                 </div>
                                 <div class="col-sm">
-                                    Puntos mensuales atrasado fuera de mes:
-                                    <span class="input-group-text" id="puntos_mafm">0</span><br>
+                                    Puntos mensuales atrasado  fuera  de mes:
+                                    <span class="input-group-text" id="puntos_mafm"></span><br>
                                 </div>
                             </div>
 
