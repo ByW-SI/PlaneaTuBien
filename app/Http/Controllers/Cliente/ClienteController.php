@@ -51,7 +51,7 @@ class ClienteController extends Controller
     {
         $Contrato=Contrato::where('id',$request->input('id'))->get();
         $Gestion=Gestion::where('contrato_id',$Contrato[0]->id)->orderBy('created_at', 'desc')->first();
-        $Presolicitud=$Contrato->presolicitud;
+        $Presolicitud=$Contrato[0]->presolicitud;
         $Cotizacion=$Presolicitud->perfil->cotizacion;
         $Plan=$Cotizacion->plan; 
 
