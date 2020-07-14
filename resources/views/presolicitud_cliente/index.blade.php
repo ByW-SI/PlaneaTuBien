@@ -275,6 +275,21 @@
                             <br><br><br>
                             Cuotas pagadas:<span class="input-group-text" id="cuotasP_contrato">0</span><br><br>
                             Cuotas por pagar:<span class="input-group-text" id="cuotasPagar_contrato">0</span><br><br>
+                            Regalo de puntos:<span class="input-group-text" id="puntos_regalo">0</span><br><br>
+                            Puntos mensuales puntual:<span class="input-group-text" id="puntos_mp">0</span><br><br>
+                            <div class="row">
+                                <div class="col-sm">
+                                    Puntos mensuales atrasado dentro de mes:
+                                    <span class="input-group-text" id="puntos_madm">_</span>
+                                    <br>
+
+                                </div>
+                                <div class="col-sm">
+                                    Puntos mensuales atrasado fuera de mes:
+                                    <span class="input-group-text" id="puntos_mafm">0</span><br>
+                                </div>
+                            </div>
+
                             Puntos acumulados:<span class="input-group-text" id="puntos_contrato">0</span><br><br>
                             Participantes adjudicados:<span class="input-group-text" id="participantes_contrato">0</span><br><br>
                             
@@ -735,6 +750,12 @@
                 $("#id_Pre").val(res.Presolicitud.id);
                 UsuarioBusqueda(res.Presolicitud.id,res.Contrato.id);
                 $("#ApexTable").dataTable().fnDestroy();
+                //Puntos 
+                $('#puntos_regalo').text(res.Puntos.Regalo);
+                $('#puntos_mp').text(res.Puntos.Mespuntal);
+                $('#puntos_madm').text(res.Puntos.MesinpuntualA);
+                $('#puntos_mafm').text(res.Puntos.MesinpuntualF);                 
+
             //console.log($(this).val());
                 $('#ApexTable').DataTable({
                     "ajax":{

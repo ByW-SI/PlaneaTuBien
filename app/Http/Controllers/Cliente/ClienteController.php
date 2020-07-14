@@ -51,11 +51,15 @@ class ClienteController extends Controller
     {
         $Contrato=Contrato::where('id',$request->input('id'))->get();
         $Gestion=Gestion::where('contrato_id',$Contrato[0]->id)->orderBy('created_at', 'desc')->first();
+        $Presolicitud=$Contrato->presolicitud;
+        $Cotizacion=$Presolicitud->perfil->cotizacion;
+        $Plan=$Cotizacion->plan; 
+
         if ($Gestion!=null) {
-            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'));
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'),'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses));
             return json_encode($jsonEn);
         }else{
-            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>"--/--/--",'UltimaGfecha'=>"--/--/--");
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>"--/--/--",'UltimaGfecha'=>"--/--/--",'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses));
             return json_encode($jsonEn);
         }
         
@@ -129,5 +133,26 @@ class ClienteController extends Controller
         $planes = Plan::get();
         return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
         # code...
+    }
+    public function PuntosPlan($MesualidadFija,$Mes,$Plazo)
+    {
+        if ($MesualidadFija) {
+            $Mespuntal=(1800-720)/($Plazo-$Mes);
+            $MesinpuntualA=(1440-720)/($Plazo-$Mes);
+            $MesinpuntualF=(1080-720)/($Plazo-$Mes);
+            $Regalo=720-($Mespuntal*$Mes);
+        }else{
+            $Mespuntal=(1800-720)/($Plazo);
+            $MesinpuntualA=(1440-720)/($Plazo);
+            $MesinpuntualF=(1080-720)/($Plazo);
+            $Regalo=0;
+        }
+        return array(
+            'Mespuntal' => $Mespuntal, 
+            'MesinpuntualA' => $MesinpuntualA,
+            'MesinpuntualF' => $MesinpuntualF,
+            'Regalo' => $Regalo,
+
+        );
     }
 }

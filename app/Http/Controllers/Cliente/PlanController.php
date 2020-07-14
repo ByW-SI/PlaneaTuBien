@@ -14,7 +14,8 @@ class PlanController extends Controller
     {
         $this->middleware('auth:cliente');
     }
-
+    
+    
 
     public function corrida()
     {
