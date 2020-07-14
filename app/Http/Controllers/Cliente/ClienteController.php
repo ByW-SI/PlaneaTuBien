@@ -148,10 +148,10 @@ class ClienteController extends Controller
             $Regalo=0;
         }
         return array(
-            'Mespuntal' => $Mespuntal, 
-            'MesinpuntualA' => $MesinpuntualA,
-            'MesinpuntualF' => $MesinpuntualF,
-            'Regalo' => $Regalo,
+            'Mespuntal' => round ($Mespuntal,2), 
+            'MesinpuntualA' => round ($MesinpuntualA,2),
+            'MesinpuntualF' => round ($MesinpuntualF,2),
+            'Regalo' => round ($Regalo,2),
 
         );
     }
