@@ -6,7 +6,7 @@ use App\Presolicitud;
 use App\Contrato;
 use App\Mensualidad;
 use App\Prospecto;
-use App\Grupo:
+use App\Grupo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
