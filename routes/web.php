@@ -236,6 +236,10 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda','Documentos\DocumentosController@anexoTanda')->name('presolicitud.contratos.anexo_tanda');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_tanda_clasica','Documentos\DocumentosController@anexoTandaClasica')->name('presolicitud.contratos.anexo_tanda_clasica');
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.contratos.anexo_inscripcion_diferida');
+		//Menualidades
+		//crear corrida 
+		Route::post('/presolicitud/{presolicitud}/crear/mensualidad','Cliente\MensualidaController@GenerarMensualidad')->name('mensualidad.crear');
+		
 
 	});
 Route::resource('contratos.checklist','Prospecto\Cliente\Presolicitud\ChecklistFolderController')->middleware('auth');
@@ -286,7 +290,6 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
 
 
 
