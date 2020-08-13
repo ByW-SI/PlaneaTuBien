@@ -21,7 +21,7 @@ class MensualidadController extends Controller
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
     	foreach ($cotizador['corrida'] as $key => $mes) {
     		$total_mes=0;
-    		$total_mes=$mes->total;
+    		$total_mes=$mes['total'];
     		//fecha
     		if($key!=0){
     			$fecha=Carbon::now()->addMonths($key);
