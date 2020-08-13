@@ -75,7 +75,7 @@
 							<td>${{number_format($contrato->monto,2)}}</td>
 							<td>
 								<form
-									action="{{route('presolicitud.mensualidad.crear',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato' => $contrato->id])}}"
+									action="{{route('prospectos.presolicitud.mensualidad.crear',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato' => $contrato->id])}}"
 									method="POST">
 									<div class="form-group row">
 									  <label for="example-date-input" class="col-2 col-form-label">Date</label>
