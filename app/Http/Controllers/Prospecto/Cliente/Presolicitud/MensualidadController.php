@@ -18,7 +18,7 @@ class MensualidadController extends Controller
     	$plan = $presolicitud->cotizacion()->plan;
     	$cotizador=$plan->cotizador($contrato->monto);
     	$fecha = Carbon::parse($request->fecha);
-
+        dd($cotizador['corrida']);
     	foreach ($cotizador->corrida as $key => $mes) {
     		$total_mes=0;
     		$total_mes=$mes->total;
