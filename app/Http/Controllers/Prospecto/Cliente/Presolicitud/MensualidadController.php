@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-class MensualidaController extends Controller
+class MensualidadController extends Controller
 {
     public function GenerarMensualidad(Prospecto $prospecto, Presolicitud $presolicitud,Contrato $contrato, Request $request)
     {
