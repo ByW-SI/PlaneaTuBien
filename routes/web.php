@@ -238,7 +238,7 @@ Route::namespace('Prospecto\Cliente\Presolicitud')
 		Route::get('/presolicitud/{presolicitud}/contrato/{contrato}/anexo_inscripcion_diferida','Documentos\DocumentosController@anexoInscripcionDiferida')->name('presolicitud.contratos.anexo_inscripcion_diferida');
 		//Menualidades
 		//crear corrida 
-		Route::post('/presolicitud/{presolicitud}/crear/mensualidad','MensualidadController@GenerarMensualidad')->name('presolicitud.mensualidad.crear');
+		Route::post('/presolicitud/{presolicitud}/contrato/{contrato}/crear/mensualidad','MensualidadController@GenerarMensualidad')->name('presolicitud.mensualidad.crear');
 
 
 	});
