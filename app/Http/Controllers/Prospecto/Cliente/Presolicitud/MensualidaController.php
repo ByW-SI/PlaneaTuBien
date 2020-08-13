@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Prospecto\Cliente\Presolicitud;
 
 use App\Presolicitud;
 use App\Contrato;
 use App\Mensualidad;
+use App\Prospecto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-class MensualidadController extends Controller
+class MensualidaController extends Controller
 {
-    public function GenerarMensualidad(Presolicitud $presolicitud,Contrato $contrato, Request $request)
+    public function GenerarMensualidad(Prospecto $prospecto, Presolicitud $presolicitud,Contrato $contrato, Request $request)
     {
     	//Plan 
     	$plan = $presolicitud->cotizacion()->plan;
