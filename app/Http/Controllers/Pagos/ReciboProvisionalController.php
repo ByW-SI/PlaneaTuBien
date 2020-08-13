@@ -279,9 +279,7 @@ class ReciboProvisionalController extends Controller
 
                     // dd($presolicitud->cotizacion());
 
-                    //Actualizamos el pefil con usuario ala presolicitud 
-
-                    $presolicitud->update(['prospecto'=>1]);
+                   
                     
                     $contrato = new Contrato;
                     $contrato->monto = $value;
@@ -291,15 +289,14 @@ class ReciboProvisionalController extends Controller
                     $contrato->numero_contrato = 500-$grupo->contratos;
                     $contrato->estado = "registrado";
                     $presolicitud->contratos()->save($contrato);
-                    
-                    $mensualidad = Mensualidad::create([
+                    /*$mensualidad = Mensualidad::create([
                         "contrato_id"=>$contrato->id,
                         "cantidad"=>$presolicitud->cotizacion()->plan->corrida_meses_fijos($contrato->monto)['integrante']['total'],
                         "fecha"=>$contrato->getFechaPago(),
                         "recargo"=>0,
                         "pagado"=>0,
                         "abono"=>0
-                    ]);
+                    ]);*/
                     //dd($mensualidad);
                   }
                 }

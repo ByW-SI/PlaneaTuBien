@@ -74,6 +74,7 @@
 							</td>
 							<td>${{number_format($contrato->monto,2)}}</td>
 							<td>
+								@if(is_null($contrato->mensualidades))
 								<form
 									action="{{route('prospectos.presolicitud.mensualidad.crear',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato' => $contrato->id])}}"
 									method="POST">
@@ -85,11 +86,13 @@
 									</div>	
 									<div class="form-group row text-center">
 									  <div class="col-12">
-									    <button type="submit" class="btn btn-primary">Crear Mensualidades</button>
+									    <button class="btn btn-primary ">Crear Mensualidades</button>
 									  </div>
 									</div>
-									
 								</form>
+								@endif 
+
+
 								<div class="d-flex justify-content-center mb-3">
 									{{-- <a href="{{ route('prospectos.presolicitud.recibos.pdf',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'recibo'=>$recibo]) }}"
 									class="btn btn-info btn-sm mr-3">

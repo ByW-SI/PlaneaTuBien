@@ -38,5 +38,7 @@ class MensualidadController extends Controller
     		);
     		$Mensualidad->save();
     	}
+        $grupos = Grupo::get();
+        return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
 }
