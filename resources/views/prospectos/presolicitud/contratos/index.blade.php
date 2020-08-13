@@ -74,7 +74,7 @@
 							</td>
 							<td>${{number_format($contrato->monto,2)}}</td>
 							<td>
-								@if(is_null($contrato->mensualidades))
+								@if(!is_null($contrato->mensualidades))
 								<form
 									action="{{route('prospectos.presolicitud.mensualidad.crear',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato' => $contrato->id])}}"
 									method="POST">
