@@ -77,6 +77,7 @@
 								<form
 									action="{{route('prospectos.presolicitud.mensualidad.crear',['prospecto'=>$prospecto,'presolicitud'=>$presolicitud,'contrato' => $contrato->id])}}"
 									method="POST">
+									@csrf
 									<div class="form-group row">
 									  <label for="example-date-input" class="col-2 col-form-label">Date</label>
 									  <div class="col-10">
@@ -138,4 +139,5 @@
 
 
 </div>
+<
 @endsection
