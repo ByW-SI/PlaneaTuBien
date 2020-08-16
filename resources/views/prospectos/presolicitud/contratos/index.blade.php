@@ -4,12 +4,7 @@
 	@include('prospectos.presolicitud.navs',['prospectos'=>$prospecto,'presolicitud'=>$presolicitud,'active'=>'Contratos'])
 	<div class="card-body">
 		<div class="row">
-			<div class="col-12 text-center" >
-				<button class="btn btn-primary " id="Prospecto_cliente">
-					Convertir prospecto a cliente 
-				</button>
-			</div>
-			<br><br><br>
+			
 
 			<div class="col-12">
 
