@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-12" >
-				<button id="Prospecto_cliente">
+				<button class="btn btn-primary " id="Prospecto_cliente">
 					Convertir prospecto a cliente 
 				</button>
 			</div>
