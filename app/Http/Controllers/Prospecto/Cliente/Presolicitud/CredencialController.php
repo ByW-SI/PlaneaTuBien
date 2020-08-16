@@ -40,11 +40,14 @@ class CredencialController extends Controller
             'presolicitud_id'=>$presolicitud->id
         ]);
 
+
         // ENVIAMOS CORREO AL USUARIO SI LAS CREDENCIALES FUERON ENVIADAS
         if(!$credencial){
             return back();
         }
         $credencial->sendCredentialNotification($password);
+        $presolicitud->prospecto=1;
+        $presolicitud->save();
         return back();
     }
 
