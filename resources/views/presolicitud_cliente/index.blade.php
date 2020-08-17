@@ -401,15 +401,15 @@
                 </div>
                 <div class="row-group" id="HistorialMesesTablevisible">
                     <h5 class="text-center text-uppercase text-muted">
-                        Historial de Meses
+                        Historial de Meses a Pagar
                     </h5>
                     <div class="table-responsive">
                         <table class="table table-striped" id="HistorialMesesTable" >
                             <thead>
                                 <tr class="thead-dark">
-                                    <th>Abono</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad a pagar</th>
                                     <th>Fecha de pago</th>
+                                    <th>Abono</th>
                                     <th>Recargo</th>
                                     <th>Pagado</th>
                                 </tr>

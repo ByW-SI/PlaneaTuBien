@@ -312,9 +312,9 @@ class CotizacionController extends Controller
             if ($Mes->pagado==0) {
                 array_push($Mensualidades,
                     [
-                          $Mes->abono,
                           $Mes->cantidad, 
                           $Mes->fecha,
+                          $Mes->abono,
                           $Mes->recargo,
                          "No pagado"
                     ]
@@ -322,11 +322,11 @@ class CotizacionController extends Controller
             }else{
                 array_push($Mensualidades,
                     array(
-                          'Abono'=>$Mes->abono,
-                          'Cantidad' => $Mes->cantidad, 
-                          'Fecha'=> $Mes->fecha,
-                          'Recargo'=>$Mes->recargo,
-                          'Pagado'=>"Pagado"
+                          $Mes->cantidad, 
+                          $Mes->fecha,
+                          $Mes->abono,
+                          $Mes->recargo,
+                          "Pagado"
                 ));
             }
             
