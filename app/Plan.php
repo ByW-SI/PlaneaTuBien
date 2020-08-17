@@ -170,7 +170,7 @@ class Plan extends Model
         $cuota_admon_mes = $monto_financiar * ($this->cuota_admon / 100);
         $cuota_admon_mes_iva = $cuota_admon_mes * (16 / 100);
         $seguro_vida_mes = $monto * ($this->s_v / 100);
-        $seguro_desempleo = $monto_adjudicar * ($this->s_d / 100);
+        $seguro_desempleo = $monto * ($this->s_d / 100);
         
 
         // SI ES TANDA CLASICA
