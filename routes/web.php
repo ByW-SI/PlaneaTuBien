@@ -259,6 +259,8 @@ Route::post('get_Historial','Pagos\PagosController@getHistorial');
 Route::post('get_corrida','Cotizacion\CotizacionController@Cotizacion');
 Route::post('get_mensualidad','Cotizacion\CotizacionController@Mensualidad');
 Route::post('get_apex','Cotizacion\CotizacionController@Apex');
+Route::post('get_meses','Cotizacion\CotizacionController@MensualidadesPagadas');
+
 
 
 

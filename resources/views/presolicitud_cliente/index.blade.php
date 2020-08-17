@@ -356,6 +356,12 @@
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
+                                <button id="BTNhistorialmensualida" type="button" class="btn btn-primary">
+                                    Historial de mensualidades
+                                </button>
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
                                 <button id="" type="button" class="btn btn-primary">
                                     Estado de cuenta
                                 </button>
@@ -393,6 +399,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="row-group" id="HistorialMesesTablevisible">
+                    <h5 class="text-center text-uppercase text-muted">
+                        Historial de Meses
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="HistorialMesesTable" >
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>Abono</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha de pago</th>
+                                    <th>Recargo</th>
+                                    <th>Pagado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="row-group" id="HistorialPagosTablevisible">
                     <h5 class="text-center text-uppercase text-muted">
                         Historial de Pagos
@@ -499,6 +527,7 @@
         $('#Contrato').hide();
         $('#HistorialDePago').hide();
         $('#HistorialGestionTablevisible').hide();
+        $('#HistorialMesesTablevisible').hide();
         $('#HistorialPagosTablevisible').hide();
         $('#CorridaTablevisible').hide();
         
@@ -535,7 +564,51 @@
     });
     $(document).ready(function(){
         
+        $("#BTNhistorialmensualida").click(function(){
+            $('#HistorialMesesTablevisible').show();
+            
+            
+            $("#HistorialMesesTable").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#HistorialMesesTable').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/get_meses",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "contrato" : $('.HistorialGestion').val()
+                    }
+                },
+                "searching": false,
+                pageLength : 25,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
 
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "autoWidth": true
+                }
+            });
+
+        });
         
 
         $("#crearGestionBTN").click(function(){
@@ -720,6 +793,7 @@
         $('#Contrato').show();
         $('#HistorialGestionTablevisible').hide();
         $('#HistorialPagosTablevisible').hide();
+        $('#HistorialMesesTablevisible').hide();
         $('#CorridaTablevisible').hide();
         $('.SelectNav').removeClass("active");
         $('#n'+id).addClass("active");
@@ -821,6 +895,7 @@
                 $('#Contrato').hide();
                 $('#HistorialGestionTablevisible').hide();
                 $('#HistorialPagosTablevisible').hide();
+                $('#HistorialMesesTablevisible').hide();
                 $('#CorridaTablevisible').hide();
                 //document.getElementById('HistorialDePago').style.display = 'block';
 

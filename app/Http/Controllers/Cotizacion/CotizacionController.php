@@ -6,6 +6,7 @@ use App\Cotizacion;
 use App\Contrato;
 use App\Grupo;
 use App\Plan;
+use App\Mensualidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -302,5 +303,34 @@ class CotizacionController extends Controller
         }
         $ayos=$plazo/12;
         return($aportacion1+$aportacion2+$aportacion3+$aportacionFinal+($ayos*$aportacionAnual));
+    }
+    public function MensualidadesPagadas(Request $request)
+    {
+        $Mensualidad=Mensualidad::where("contrato_id",$request->input('contrato'))->get();
+        $Mensualidades=[];
+        foreach ($Mensualidad as $Mes) {
+            if ($Mes->pagado==0) {
+                array_push($Mensualidades,
+                    [
+                          $Mes->abono,
+                          $Mes->cantidad, 
+                          $Mes->fecha,
+                          $Mes->recargo,
+                         "No pagado"
+                    ]
+                );
+            }else{
+                array_push($Mensualidades,
+                    array(
+                          'Abono'=>$Mes->abono,
+                          'Cantidad' => $Mes->cantidad, 
+                          'Fecha'=> $Mes->fecha,
+                          'Recargo'=>$Mes->recargo,
+                          'Pagado'=>"Pagado"
+                ));
+            }
+            
+        }
+        return json_encode(['data'=> $Mensualidades]);
     }
 }
