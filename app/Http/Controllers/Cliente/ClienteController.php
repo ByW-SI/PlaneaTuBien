@@ -165,10 +165,10 @@ class ClienteController extends Controller
     {
         $Mensualidades=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'asc')->get();
         $fecha= new Carbon('first day of this month');
-        $fecha=$fecha->addDays(15);
+        $fecha=$fecha->addDays(17);
         foreach ($Mensualidades as $key => $mes) {
             if($mes->pagado!=1){
-                    return $fecha->diffInMonths(Carbon::parse($mes->fecha));
+                    return Carbon::parse($mes->fecha)->diffInMonths($fecha);
             }
         }    
     }
