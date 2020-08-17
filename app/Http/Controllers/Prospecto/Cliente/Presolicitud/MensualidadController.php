@@ -32,9 +32,9 @@ class MensualidadController extends Controller
             $Parcialidad2=0;
             for ($i=0; $i <count($Corrida) ; $i++) { 
                 if ($Mes<($i+1)) {
-                    $Pagosegundario+=round($corrida[$i]['Total'],2);
+                    $Pagosegundario+=round($Corrida[$i]['Total'],2);
                 }else{
-                    $Pagoinicial+=round($corrida[$i]['Total'],2);
+                    $Pagoinicial+=round($Corrida[$i]['Total'],2);
                 }
             }
             dd([$Pagoinicial,$Pagosegundario]);
