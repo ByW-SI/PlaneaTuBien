@@ -246,7 +246,7 @@ class Plan extends Model
                     $monto_anual = $monto_anual * (1 + ($factor_actualizacion / 100));
                 }
                 // if($this->plan_meses+1<$i){
-                dd($this->mes_s_d);
+                //dd($this->mes_s_d);
                 if ($this->mes_s_d - 1 < $i) {
 
                     // $seguro_desempleo = $monto_adjudicar*($this->s_d/100);
