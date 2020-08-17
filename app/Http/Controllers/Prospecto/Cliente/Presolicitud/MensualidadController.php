@@ -28,8 +28,8 @@ class MensualidadController extends Controller
     public function TipoMensualidad($Abrebiatura,$Corrida,$Mes)
     {
         if ($Abrebiatura=="TA") {
-            $Parcialidad1=0;
-            $Parcialidad2=0;
+            $Pagoinicial=0;
+            $Pagosegundario=0;
             for ($i=0; $i <count($Corrida) ; $i++) { 
                 if ($Mes<($i+1)) {
                     $Pagosegundario+=round($Corrida[$i]['total'],2);
