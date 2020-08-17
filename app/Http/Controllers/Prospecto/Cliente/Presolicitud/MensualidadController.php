@@ -110,16 +110,16 @@ class MensualidadController extends Controller
             }
 
             if ($Plan->mes_1==($i+1)) {
-                $PagoExtra+=$Monto*($aportacion1/100);
+                $PagoExtra+=$Monto*($Plan->aportacion_1/100);
             }
             if ($Plan->mes_2==($i+1)) {
-                $PagoExtra+=$Monto*($aportacion2/100);
+                $PagoExtra+=$Monto*($Plan->aportacion_2/100);
             }
             if ($Plan->mes_3==($i+1)) {
-                $PagoExtra+=$Monto*($aportacion3/100);
+                $PagoExtra+=$Monto*($Plan->aportacion_3/100);
             }
             if ($Plan->mes_liquidacion==($i+1)) {
-                $PagoExtra+=$Monto*($aportacionFinal/100);
+                $PagoExtra+=$Monto*($Plan->aportacion_liquidacion/100);
             }
 
             if ($PagoExtra>0) {
