@@ -103,7 +103,6 @@ class MensualidadController extends Controller
                 $Dia_de_inicio=$fecha->addMonths($i);
             }
 
-            $PagoAcumuladoTotal+=$Total;
             if ( $Dia_de_inicio->format('m') == "12") {
                 $PagoExtra=$Monto*($Plan->anual/100);
             }else{
