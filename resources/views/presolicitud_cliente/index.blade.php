@@ -813,7 +813,11 @@
                 $('#puntos_regalo').text(res.Puntos.Regalo);
                 $('#puntos_mp').text(res.Puntos.Mespuntal);
                 $('#puntos_madm').text(res.Puntos.MesinpuntualA);
-                $('#puntos_mafm').text(res.Puntos.MesinpuntualF);                 
+                $('#puntos_mafm').text(res.Puntos.MesinpuntualF); 
+                $('#puntos_contrato').text(res.PuntosPlan);
+                $('#participantes_contrato').text(res.PuntosTotales); 
+                
+                                            
 
             //console.log($(this).val());
                 $('#ApexTable').DataTable({
