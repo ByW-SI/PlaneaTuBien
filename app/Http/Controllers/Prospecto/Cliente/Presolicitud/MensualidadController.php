@@ -21,7 +21,7 @@ class MensualidadController extends Controller
         //dd($cotizador);
     	$fecha = Carbon::parse($request->fecha);
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
-    	TipoMensualidad($Plan->abreviatura,$cotizador['corrida'],$Plan->mes_adjudicado);
+    	$this->TipoMensualidad($Plan->abreviatura,$cotizador['corrida'],$Plan->mes_adjudicado);
         $grupos = Grupo::get();
         return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
