@@ -23,14 +23,14 @@ class MensualidadController extends Controller
 
     	$fecha = Carbon::parse($request->fecha);
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
-    	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$fecha,$plan);
+    	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$request->fecha,$plan);
         $grupos = Grupo::get();
         return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
     public function CargarTodasMensualidades($Abrebiatura,$Corrida,$Mes,Contrato $contrato,$fecha,Plan $Plan)
     {
-        $Dia_de_inicio=$fecha;
-        $fechaFor=$fecha;
+        $Dia_de_inicio=Carbon::parse($fecha);
+        $fechaFor=Carbon::parse($fecha);
         if ($Abrebiatura=="TA") {
             $Pagoinicial=0;
             $Pagosegundario=0;
@@ -47,7 +47,7 @@ class MensualidadController extends Controller
             foreach ($Corrida as $key => $mes) {
                 //fecha
                 if($key!=0){
-                    $fechaFor=$fecha->addMonths($key);
+                    $fechaFor=Carbon::parse($fecha)->addMonths($key);
                 }
                 if ($Mes<($key+1)) {
                     $Mensualidad = new Mensualidad(
@@ -82,7 +82,7 @@ class MensualidadController extends Controller
                 $total_mes=round($mes['Total'],2);
                 //fecha
                 if($key!=0){
-                    $fechaFor=$fecha->addMonths($key);
+                    $fechaFor=Carbon::parse($fecha)->addMonths($key);
                 }
                 $Mensualidad = new Mensualidad(
                     array(
@@ -100,7 +100,7 @@ class MensualidadController extends Controller
         $Monto=$contrato->monto;
         for ($i=0; $i <count($Corrida) ; $i++) { 
             if($i!=0){
-                $Dia_de_inicio=$fecha->addMonths($i);
+                $Dia_de_inicio=Carbon::parse($fecha);->addMonths($i);
             }
 
             if ( $Dia_de_inicio->format('m') == "12") {
