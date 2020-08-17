@@ -29,6 +29,7 @@ class CotizacionController extends Controller
     public function Apex(Request $request)
     {
         $Contrato=Contrato::where("id",$request->input('id'))->first();
+        $Mensualidades=Mensualidad::where("contrato_id",$request->input('id'))->orderBy('fecha', 'asc')->get();
         //$Contrato=$Contrato[0];
         $Grupo=$Contrato->Grupo;
         $Presolicitud=$Contrato->presolicitud;
@@ -36,24 +37,41 @@ class CotizacionController extends Controller
         $Plan=$Cotizacion->plan;        
 
         $Apex=[];
+
         if (!is_null($Plan->aportacion_1)&&!is_null($Plan->mes_1)) {
-            array_push ($Apex,[ "Apex 1",$Plan->aportacion_1,$Plan->mes_1,"No pagado"]);
+            if ($Mensualidades[$Plan->mes_1-1]->pagado==1) {
+                array_push ($Apex,[ "Apex 1",$Plan->aportacion_1,$Plan->mes_1,"Pagado"]);
+            }else{
+                array_push ($Apex,[ "Apex 1",$Plan->aportacion_1,$Plan->mes_1,"No pagado"]);
+            }
         }else{
             array_push ($Apex,[ "Apex 1","N/A","N/A","N/A"]);
         }
         
         if (!is_null($Plan->aportacion_2)&&!is_null($Plan->mes_2)) {
-            array_push ($Apex,[ "Apex 2",$Plan->aportacion_2,$Plan->mes_2,"No pagado"]);
+            if ($Mensualidades[$Plan->mes_2-1]->pagado==1) {
+                array_push ($Apex,[ "Apex 2",$Plan->aportacion_2,$Plan->mes_2,"Pagado"]);
+            }else{
+                array_push ($Apex,[ "Apex 2",$Plan->aportacion_2,$Plan->mes_2,"No pagado"]);
+            }
         }else{
             array_push ($Apex,[ "Apex 3","N/A","N/A","N/A"]);
         }
         if (!is_null($Plan->aportacion_3)&&!is_null($Plan->mes_3)) {
-            array_push ($Apex,[ "Apex 3",$Plan->aportacion_3,$Plan->mes_3,"No pagado"]);
+            if ($Mensualidades[$Plan->mes_2-1]->pagado==1) {
+                array_push ($Apex,[ "Apex 3",$Plan->aportacion_3,$Plan->mes_3,"Pagado"]);
+            }else{
+                array_push ($Apex,[ "Apex 3",$Plan->aportacion_3,$Plan->mes_3,"No pagado"]);
+            }
         }else{
             array_push ($Apex,[ "Apex 3","N/A","N/A","N/A"]);
         }
         if (!is_null($Plan->aportacion_liquidacion)&&!is_null($Plan->mes_liquidacion)) {
-            array_push ($Apex,[ "Apex Liquidacion",$Plan->aportacion_liquidacion,$Plan->mes_liquidacion,"No pagado"]);
+            if ($Mensualidades[$Plan->mes_liquidacion-1]->pagado==1) {
+                array_push ($Apex,[ "Apex Liquidacion",$Plan->aportacion_liquidacion,$Plan->mes_liquidacion,"Pagado"]);
+            }else{
+                array_push ($Apex,[ "Apex Liquidacion",$Plan->aportacion_liquidacion,$Plan->mes_liquidacion,"No pagado"]);
+            }
         }else{
             array_push ($Apex,[ "Apex Liquidacion","N/A","N/A","N/A"]);
         }
