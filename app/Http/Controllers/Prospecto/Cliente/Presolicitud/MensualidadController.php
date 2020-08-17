@@ -32,15 +32,13 @@ class MensualidadController extends Controller
             $Parcialidad2=0;
             for ($i=0; $i <count($Corrida) ; $i++) { 
                 if ($Mes<($i+1)) {
-                    $Pagosegundario+=round($Corrida[$i]['Total'],2);
+                    $Pagosegundario+=round($Corrida[$i]['total'],2);
                 }else{
-                    $Pagoinicial+=round($Corrida[$i]['Total'],2);
+                    $Pagoinicial+=round($Corrida[$i]['total'],2);
                 }
             }
             dd([$Pagoinicial,$Pagosegundario]);
             foreach ($Corrida as $key => $mes) {
-                $total_mes=0;
-                $total_mes=round($mes['Total'],2);
                 //fecha
                 if($key!=0){
                     $fecha=Carbon::now()->addMonths($key);
