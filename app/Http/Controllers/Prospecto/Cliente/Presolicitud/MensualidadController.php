@@ -100,7 +100,7 @@ class MensualidadController extends Controller
         $Monto=$contrato->monto;
         for ($i=0; $i <count($Corrida) ; $i++) { 
             if($i!=0){
-                $Dia_de_inicio=Carbon::parse($fecha);->addMonths($i);
+                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
 
             if ( $Dia_de_inicio->format('m') == "12") {
