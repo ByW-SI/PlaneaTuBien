@@ -493,24 +493,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <h5 class="text-center text-uppercase text-muted">
-                        Mensualidad
-                    </h5>
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="MensualidadTable" >
-                            <thead>
-                                <tr class="thead-dark">
-                                    <th>#mes</th>
-                                    <th>N° mes</th>
-                                    <th>Pago</th>
-                                    <th>Complemento</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
             </div>
