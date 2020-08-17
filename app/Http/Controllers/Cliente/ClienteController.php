@@ -164,10 +164,15 @@ class ClienteController extends Controller
     public function MesesVencidos(Contrato $contrato)
     {
         $Mensualidades=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'asc')->get();
-        $fecha=Carbon::now();
+        $fecha= new Carbon('first day of this month');
         foreach ($Mensualidades as $key => $mes) {
             if($mes->pagado!=1){
-                return $fecha->diffInMonths(Carbon::parse($mes->fecha));
+                if ($key=0) {
+                    return "1";
+                }else{
+                    return $fecha->diffInMonths(Carbon::parse($mes->fecha));
+                }
+                
             }
         }    
     }
