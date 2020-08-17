@@ -102,7 +102,7 @@ class ClienteController extends Controller
             'fecha_sig'=>$request->input('fecha_sig'),
             'comentario'=>$request->input('comentario')
         ]);
-        $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at]);
+        $Presolicitud->update(['gestion'=>$request->input('gestion'),'fecha_gestion'=>$Gestion->created_at,'fecha_gestion_sig'=>$Gestion->fecha_sig]);
         $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
         $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
             return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());

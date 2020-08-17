@@ -17,6 +17,8 @@ class AddGestionToPresolicitudsTable extends Migration
             //
             $table->string('gestion')->nullable();
             $table->date('fecha_gestion')->nullable();
+            $table->date('fecha_gestion_sig')->nullable();
+
         });
     }
 

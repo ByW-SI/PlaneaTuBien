@@ -151,6 +151,7 @@
                                 <th>Estatus del cliente</th>
                                 <th>Ultima gestion</th>
                                 <th>Fecha de la ultima gestion</th>
+                                <th>Fecha de la siguiente gestion</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -196,7 +197,11 @@
                                             {{\Carbon\Carbon::parse($presolicitud->fecha_gestion)->format('d/m/Y')}}
                                         @endif
                                     </td>
-
+                                    <td>
+                                        @if($presolicitud->fecha_gestion_sig!=0)
+                                            {{\Carbon\Carbon::parse($presolicitud->fecha_gestion_sig)->format('d/m/Y')}}
+                                        @endif
+                                    </td>
                                     <td>
                                         {{-- BOTÓN MODIFICAR PLAN --}}
                                         <div class="d-flex justify-content-center">

@@ -46,7 +46,8 @@ class Presolicitud extends Model
 		'enterarse',
         'prospecto',
         'gestion',
-        'fecha_gestion'
+        'fecha_gestion',
+        'fecha_gestion_sig'
     ];
 
     protected $hidden=[
