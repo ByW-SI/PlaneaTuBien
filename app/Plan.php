@@ -659,7 +659,7 @@ class Plan extends Model
         }
     }
 
-
+   
     // RELACIONES
 
 

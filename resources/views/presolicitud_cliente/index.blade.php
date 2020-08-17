@@ -143,7 +143,6 @@
                                 <th>Identificador</th>
                                 <th>Cliente</th>
                                 <th>Contratos</th>
-                                <th>Meses vencidos</th>
                                 <th>Importe total</th>
                                 <th>Tel casa</th>
                                 <th>Tel oficina</th>
@@ -169,9 +168,6 @@
                                         @foreach ($presolicitud->contratos as $contrato)
                                             {{$contrato->numero_contrato.","}}
                                         @endforeach
-                                    </td>
-                                    <td>
-                                        11
                                     </td>
                                     <td>
                                         $25,000
