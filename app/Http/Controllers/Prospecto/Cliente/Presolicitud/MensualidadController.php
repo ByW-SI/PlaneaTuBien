@@ -37,7 +37,9 @@ class MensualidadController extends Controller
                     $Pagoinicial+=round($Corrida[$i]['total'],2);
                 }
             }
-            dd([$Pagoinicial/($Mes),$Pagosegundario/(count($Corrida)-$Mes)]);
+            $Pagoinicial=round($Pagoinicial/$Mes,2);
+            $Pagosegundario=round($Pagosegundario/(count($Corrida)-$Mes),2);
+            dd([$Pagoinicial,$Pagosegundario]);
             foreach ($Corrida as $key => $mes) {
                 //fecha
                 if($key!=0){
