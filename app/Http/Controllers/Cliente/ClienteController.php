@@ -167,8 +167,7 @@ class ClienteController extends Controller
         $fecha=Carbon::now();
         foreach ($Mensualidades as $key => $mes) {
             if($mes->pagado!=1){
-                dd($mes->fecha);
-                return Carbon::parse($mes->fecha)->diffInMonths($fecha);
+                return $fecha->diffInMonths(Carbon::parse($mes->fecha));
             }
         }    
     }
