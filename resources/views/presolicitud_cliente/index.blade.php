@@ -504,8 +504,6 @@
                                     <th>N° mes</th>
                                     <th>Pago</th>
                                     <th>Complemento</th>
-                                    <th>Estatus</th>
-
                                 </tr>
                             </thead>
                             <tbody>
