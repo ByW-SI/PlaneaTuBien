@@ -25,7 +25,7 @@ class MensualidadController extends Controller
         $grupos = Grupo::get();
         return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
-    public function TipoMensualidad($Abrebiatura,$Corrida,$Mes,Contrato $contrato)
+    public function TipoMensualidad($Abrebiatura,$Corrida,$Mes,Contrato $contrato,$fecha)
     {
         if ($Abrebiatura=="TA") {
             $Pagoinicial=0;
