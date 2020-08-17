@@ -55,7 +55,7 @@ class ClienteController extends Controller
         $Cotizacion=$Presolicitud->perfil->cotizacion;
         $Plan=$Cotizacion->plan; 
         $PuntosAcomuladosPlan=Mensualidad::where("contrato_id",$Contrato[0]->id)->sum('puntos');
-        $Contratos_totales_usuario=Contrato::where("presolicitud_id",$Contrato->presolicitud_id)->get();
+        $Contratos_totales_usuario=Contrato::where("presolicitud_id",$Contrato[0]->presolicitud_id)->get();
         $PuntosAcomuladosUsuario=0;
         foreach ($Contratos_totales_usuario as $Contrato_por_usuario) {
             $PuntosAcomuladosUsuario+=Mensualidad::where("contrato_id",$Contrato_por_usuario->id)->sum('puntos');
