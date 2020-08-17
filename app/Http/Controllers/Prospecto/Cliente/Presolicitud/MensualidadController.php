@@ -102,8 +102,9 @@ class MensualidadController extends Controller
             if($i!=0){
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
-            dd($Dia_de_inicio->format('m'));
+
             if ( $Dia_de_inicio->format('m') == "12") {
+                dd($Dia_de_inicio->format('m'));
                 $PagoExtra=$Monto*($Plan->anual/100);
             }else{
                 $PagoExtra=0;
