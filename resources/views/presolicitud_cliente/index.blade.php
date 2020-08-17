@@ -816,6 +816,8 @@
                 $('#puntos_mafm').text(res.Puntos.MesinpuntualF); 
                 $('#puntos_contrato').text(res.PuntosPlan);
                 $('#participantes_contrato').text(res.PuntosTotales); 
+                $('#cuotasP_contrato').text(res.MesesPagados); 
+                $('#valorA_contrato').text(res.valorDelPrestamo); 
                 
                                             
 

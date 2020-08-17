@@ -19,14 +19,17 @@ class MensualidadController extends Controller
     	$plan = $presolicitud->cotizacion()->plan;
     	$cotizador=$plan->cotizador($contrato->monto);
         //dd($cotizador);
+
     	$fecha = Carbon::parse($request->fecha);
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
-    	$this->TipoMensualidad($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$fecha);
+    	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$fecha,$plan);
         $grupos = Grupo::get();
         return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
-    public function TipoMensualidad($Abrebiatura,$Corrida,$Mes,Contrato $contrato,$fecha)
+    public function CargarTodasMensualidades($Abrebiatura,$Corrida,$Mes,Contrato $contrato,$fecha,Plan $Plan)
     {
+        $Dia_de_inicio=$fecha;
+        $fechaFor=$fecha;
         if ($Abrebiatura=="TA") {
             $Pagoinicial=0;
             $Pagosegundario=0;
@@ -43,7 +46,7 @@ class MensualidadController extends Controller
             foreach ($Corrida as $key => $mes) {
                 //fecha
                 if($key!=0){
-                    $fecha=Carbon::now()->addMonths($key);
+                    $fechaFor=$fecha->addMonths($key);
                 }
                 if ($Mes<($key+1)) {
                     $Mensualidad = new Mensualidad(
@@ -52,7 +55,7 @@ class MensualidadController extends Controller
                             'contrato_id'=>$contrato->id ,
                             'adono'=> 0.00,
                             'cantidad'=> $Pagosegundario,
-                            'fecha'=> $fecha->toDateString() ,  
+                            'fecha'=> $fechaFor->toDateString() ,  
                             'recargo'=>0,
                         )
                     );
@@ -64,7 +67,7 @@ class MensualidadController extends Controller
                             'contrato_id'=>$contrato->id ,
                             'adono'=> 0.00,
                             'cantidad'=> $Pagoinicial,
-                            'fecha'=> $fecha->toDateString() ,  
+                            'fecha'=> $fechaFor->toDateString() ,  
                             'recargo'=>0,
                         )
                     );
@@ -78,7 +81,7 @@ class MensualidadController extends Controller
                 $total_mes=round($mes['Total'],2);
                 //fecha
                 if($key!=0){
-                    $fecha=Carbon::now()->addMonths($key);
+                    $fechaFor=$fecha->addMonths($key);
                 }
                 $Mensualidad = new Mensualidad(
                     array(
@@ -86,12 +89,46 @@ class MensualidadController extends Controller
                         'contrato_id'=>$contrato->id ,
                         'adono'=> 0.00,
                         'cantidad'=> $total_mes,
-                        'fecha'=> $fecha->toDateString() ,  
+                        'fecha'=> $fechaFor->toDateString() ,  
                         'recargo'=>0,
                     )
                 );
                 $Mensualidad->save();
             }
+        }
+        $Monto=$contrato->monto;
+        for ($i=0; $i <count($Corrida) ; $i++) { 
+            if($i!=0){
+                $Dia_de_inicio=$fecha->addMonths($i);
+            }
+
+            $PagoAcumuladoTotal+=$Total;
+            if ( $Dia_de_inicio->format('m') == "12") {
+                $PagoExtra=$Monto*($Plan->anual/100);
+            }else{
+                $PagoExtra=0;
+            }
+
+            if ($Plan->mes_1==($i+1)) {
+                $PagoExtra+=$Monto*($aportacion1/100);
+            }
+            if ($Plan->mes_2==($i+1)) {
+                $PagoExtra+=$Monto*($aportacion2/100);
+            }
+            if ($Plan->mes_3==($i+1)) {
+                $PagoExtra+=$Monto*($aportacion3/100);
+            }
+            if ($Plan->mes_liquidacion==($i+1)) {
+                $PagoExtra+=$Monto*($aportacionFinal/100);
+            }
+
+            if ($PagoExtra>0) {
+                $Mes=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'desc')->get();
+                $Mes[$i]->Monto+=$PagoExtra;
+                $Mes->save();  
+            }
+
+            
         }
     }
 }

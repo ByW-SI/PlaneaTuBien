@@ -60,11 +60,13 @@ class ClienteController extends Controller
         foreach ($Contratos_totales_usuario as $Contrato_por_usuario) {
             $PuntosAcomuladosUsuario+=Mensualidad::where("contrato_id",$Contrato_por_usuario->id)->sum('puntos');
         }
+        $MesPagados=Mensualidad::where("contrato_id",$Contrato[0]->id)->sum('pagado');
+        $valorDelPrestamo=Mensualidad::where("contrato_id",$Contrato[0]->id)->sum('cantidad');
         if ($Gestion!=null) {
-            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'),'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses),'PuntosPlan'=>round ($PuntosAcomuladosPlan,2),'PuntosTotales'=>round ($PuntosAcomuladosUsuario,2));
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>Carbon::parse($Gestion->fecha_sig)->format('d/m/Y'),'UltimaGfecha'=>Carbon::parse($Gestion->created_at)->format('d/m/Y'),'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses),'PuntosPlan'=>round ($PuntosAcomuladosPlan,2),'PuntosTotales'=>round ($PuntosAcomuladosUsuario,2),"MesesPagados"=>$MesPagados,"valorDelPrestamo"=>$valorDelPrestamo);
             return json_encode($jsonEn);
         }else{
-            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>"--/--/--",'UltimaGfecha'=>"--/--/--",'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses),'PuntosPlan'=>round ($PuntosAcomuladosPlan,2),'PuntosTotales'=>round ($PuntosAcomuladosUsuario,2));
+            $jsonEn = array('Contrato' => $Contrato[0],'Presolicitud'=> $Contrato[0]->presolicitud,'Creacion'=>Carbon::parse($Contrato[0]->created_at)->format('d/m/Y'),'UltimaGSig'=>"--/--/--",'UltimaGfecha'=>"--/--/--",'Puntos'=>$this->PuntosPlan(true,$Plan->mes_adjudicado,$Plan->plan_meses),'PuntosPlan'=>round ($PuntosAcomuladosPlan,2),'PuntosTotales'=>round ($PuntosAcomuladosUsuario,2),"MesesPagados"=>$MesPagados,"valorDelPrestamo"=>$valorDelPrestamo);
             return json_encode($jsonEn);
         }
     }
