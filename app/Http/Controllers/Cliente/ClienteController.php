@@ -167,12 +167,7 @@ class ClienteController extends Controller
         $fecha= new Carbon('first day of this month');
         foreach ($Mensualidades as $key => $mes) {
             if($mes->pagado!=1){
-                if ($key=0) {
-                    return "1";
-                }else{
                     return $fecha->diffInMonths(Carbon::parse($mes->fecha));
-                }
-                
             }
         }    
     }
