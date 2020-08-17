@@ -8,7 +8,7 @@ class Mensualidad extends Model
 {
     protected $table = "mensualidades";
 
-    protected $fillable = ['pagado', 'contrato_id', 'abono', 'cantidad', 'fecha', 'recargo'];
+    protected $fillable = ['pagado', 'contrato_id', 'abono', 'cantidad', 'fecha', 'recargo','puntos'];
 
     protected $hidden =[
     	'created_at',
