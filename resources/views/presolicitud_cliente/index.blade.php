@@ -790,7 +790,7 @@
                 $('#fecha_contrato').text(res.Creacion);
                 $('#grupo_contrato').text(res.Contrato.grupo_id);
                 $('#valorI_contrato').text(res.Contrato.monto);
-                $('#valorP_contrato').text(res.VPresente);
+                $('#valorP_contrato').text(res.valorDelPrestamo-res.VPresente);
                 //$('#valorA_contrato').text(res.Contrato.monto);
                 $('#plazo_contrato').text(res.Presolicitud.plazo_contratado);
                 $('#cuotasPagar_contrato').text(res.Presolicitud.plazo_contratado);
