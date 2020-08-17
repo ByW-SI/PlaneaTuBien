@@ -247,7 +247,7 @@ class Plan extends Model
                 }
                 // if($this->plan_meses+1<$i){
                 //dd($this->mes_s_d);
-                if ($this->mes_s_d - 1 < $i) {
+                if ($this->mes_s_d - 2 < $i) {
 
                     // $seguro_desempleo = $monto_adjudicar*($this->s_d/100);
                     // if($bandera_s_d && (date('m',strtotime($mes_actual)) == "06" || date('m',strtotime($mes_actual)) == "12"))
