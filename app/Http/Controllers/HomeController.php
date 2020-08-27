@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +28,7 @@ class HomeController extends Controller
     }
     public function restablecer()
     {
-        $Usuario=User::where('id',1)->get();
+        $Usuario=User::where('id', 1)->get();
         $Usuario[0]->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
     }
 }
