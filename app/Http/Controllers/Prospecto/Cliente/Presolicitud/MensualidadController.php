@@ -26,7 +26,7 @@ class MensualidadController extends Controller
         $fechaInici =$fecha->startofMonth();
         $fecha = $fechaInici->addDays(6);
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
-    	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$request->fecha,$plan);
+    	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$fecha,$plan);
         $grupos = Grupo::get();
         return view('prospectos.presolicitud.contratos.index', ['prospecto' => $prospecto, 'presolicitud' => $presolicitud, 'grupos'=>$grupos]);
     }
