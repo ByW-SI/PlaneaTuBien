@@ -159,7 +159,7 @@ class MensualidadController extends Controller
                         'contrato_id'=>$contrato->id,
                         'adono'=> 0.00,
                         'cantidad'=> $PagoExtra,
-                        'fecha'=> $Mes[$i]->fecha,  
+                        'fecha'=> $Mes[$i+1]->fecha,  
                         'recargo'=>0,
                         'descripcion'=>$descripcion
                     )
