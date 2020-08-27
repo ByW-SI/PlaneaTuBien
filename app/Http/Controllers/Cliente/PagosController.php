@@ -259,7 +259,7 @@ class PagosController extends Controller
         $bancos = Banco::orderBy('nombre', 'asc')->get();
         $
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
-        $folio = $prospecto->id . $mensualidad->contrato->numero_contrato;
+        $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
         return view('prospectos.perfil.pagos.form', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio]);
         
     }
