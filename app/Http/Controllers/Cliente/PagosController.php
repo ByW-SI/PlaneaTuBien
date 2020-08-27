@@ -269,11 +269,11 @@ class PagosController extends Controller
     {
         
         $pagarService = new PagoService($prospecto, $mensualidad->Contrato->Presolicitud->Perfil->Cotizacion, $request,$mensualidad);
-        $bancos = Banco::orderBy('nombre', 'asc')->get();
+        //$bancos = Banco::orderBy('nombre', 'asc')->get();
         
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
         $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
-        return redirect()->route('prospectos.mensualidad.generar', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
+        return redirect()->route('prospectos.mensualidad.generar', ['prospecto' => $prospecto,'mensualidad'=>$mensualidad])->with([
             'status' => $pagarService->getStatusCompra(),
             'message' => $pagarService->getMensajeCompra()
         ]);
