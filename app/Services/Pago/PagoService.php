@@ -78,7 +78,7 @@ class PagoService
                                             'referencia' => $request->input('forma') , 
 
                                     ));
-        dd($PagoMensualidad);
+        //dd($PagoMensualidad);
         $PagoMensualidad->mensualidad()->associate($mensualidad);
         if ($PagoMensualidad->monto==$mensualidad->monto) {
             $mensualidad->pagado=1;
@@ -87,6 +87,7 @@ class PagoService
         }else{
             $mensualidad->abono=$PagoMensualidad->monto;
         }
+        $PagoMensualidad->save();
         event(new Pago2Created($prospecto, $PagoMensualidad, Auth::user()));
     }
 
