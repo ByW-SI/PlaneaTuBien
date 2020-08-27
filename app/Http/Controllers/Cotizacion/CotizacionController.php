@@ -335,6 +335,7 @@ class CotizacionController extends Controller
         $Mensualidades=[];
         foreach ($Mensualidad as $Mes) {
             if ($Mes->pagado==0) {
+                dd($Mes->Contrato->Presolicitud);
                 array_push($Mensualidades,
                     [
                           $Mes->descripcion,
