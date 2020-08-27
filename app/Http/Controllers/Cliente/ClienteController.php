@@ -139,7 +139,6 @@ class ClienteController extends Controller
 
         $planes = Plan::get();
         return view('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'));
-        # code...
     }
     public function PuntosPlan($MesualidadFija,$Mes,$Plazo)
     {
