@@ -363,11 +363,19 @@ class CotizacionController extends Controller
                           $Mes->abono,
                           $Mes->recargo,
                           "Pagado",
-                          ""
+                          '
+                          <a class="btn btn-primary" href="
+                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Perfil->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
+
+                          Pagar
+
+                          </a>
+                          '
                 ));
             }
             
         }
+        dd($Mensualidades);
         return json_encode(['data'=> $Mensualidades]);
     }
 }
