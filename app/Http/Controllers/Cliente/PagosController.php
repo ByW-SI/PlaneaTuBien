@@ -260,7 +260,7 @@ class PagosController extends Controller
         
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
         $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
-        return view('prospectos.perfil.pagos.form', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio]);
+        return view('presolicitud_cliente.pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio]);
         
     }
 
