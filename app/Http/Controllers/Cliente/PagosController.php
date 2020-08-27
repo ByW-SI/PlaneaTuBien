@@ -267,7 +267,7 @@ class PagosController extends Controller
 
     public function procesandoPago(Prospecto $prospecto, Mensualidad $mensualidad,Request $request)
     {
-        
+        dd($mensualidad->Contrato->Presolicitud->Perfil->Cotizacion);
         $pagarService = new PagoService($prospecto, $mensualidad->Contrato->Presolicitud->Perfil->Cotizacion, $request,$mensualidad);
         $bancos = Banco::orderBy('nombre', 'asc')->get();
         
