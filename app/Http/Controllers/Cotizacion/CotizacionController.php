@@ -343,7 +343,7 @@ class CotizacionController extends Controller
                           "No pagado",
                           '
                           <a class="btn btn-primary" href="
-                          {{route(\'prospectos.mensualidad.generar\',[\'prospecto\'=>$prospecto,\'mensualidad\'=>'.$Mes->id.'])}}" >
+                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
 
                           Pagar
 
