@@ -45,7 +45,7 @@
                                         <div class="col-12 col-md-6 mt-2">
                                             <label class="text-muted text-uppercase" for="referencia">Mes</label>
                                             <input type="text" class="form-control" step="any" min="0"
-                                                value="{{$mensualidad->fecha}}" name="referencia" id="referencia">
+                                                value="{{$mensualidad->fecha}}" name="referencia" id="referencia" readonly>
                                         </div>
                                         <div class="col-12 col-md-6 mt-2">
                                             <label class="text-muted text-uppercase" for="folio">Folio</label>
