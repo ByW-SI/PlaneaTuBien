@@ -104,9 +104,9 @@ class MensualidadController extends Controller
         }
         $Monto=$contrato->monto;
         $descripcion="";
-        for ($i=1; $i <count($Corrida) ; $i++) { 
-            if($i!=1){
-                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i+1);
+        for ($i=0; $i <count($Corrida) ; $i++) { 
+            if($i!=0){
+                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
 
             if ( $Dia_de_inicio->format('m') == "12") {
@@ -117,7 +117,7 @@ class MensualidadController extends Controller
                 $descripcion="";
             }
 
-            if ($Plan->mes_1==($i)) {
+            if ($Plan->mes_1==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_1/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -126,7 +126,7 @@ class MensualidadController extends Controller
                 }
                 
             }
-            if ($Plan->mes_2==($i)) {
+            if ($Plan->mes_2==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_2/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -134,7 +134,7 @@ class MensualidadController extends Controller
                     $descripcion=$descripcion." y Apex";
                 }
             }
-            if ($Plan->mes_3==($i)) {
+            if ($Plan->mes_3==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_3/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -142,7 +142,7 @@ class MensualidadController extends Controller
                     $descripcion=$descripcion." y Apex";
                 }
             }
-            if ($Plan->mes_liquidacion==($i)) {
+            if ($Plan->mes_liquidacion==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_liquidacion/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -159,7 +159,7 @@ class MensualidadController extends Controller
                         'contrato_id'=>$contrato->id,
                         'adono'=> 0.00,
                         'cantidad'=> $PagoExtra,
-                        'fecha'=> $Mes[$i-1]->fecha,  
+                        'fecha'=> $Mes[$i]->fecha,  
                         'recargo'=>0,
                         'descripcion'=>$descripcion
                     )
@@ -171,7 +171,6 @@ class MensualidadController extends Controller
                 //$Mes[$i]->save();  
             }
 
-            
             
         }
     }
