@@ -12,7 +12,7 @@ use App\Mensualidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
+use Carbon\Carbon;
 class PagoService
 {
 
@@ -73,7 +73,7 @@ class PagoService
                                             'tipopago_id' => 1 , 
                                             'mensualidad_id' => $mensualidad->id , 
                                             'monto' => $request->input('monto') , 
-                                            'fecha_pago' => Carbon\Carbon::now()->toDateTimeString() , 
+                                            'fecha_pago' => Carbon::now()->toDateTimeString() , 
                                             'folio' => $request->input('folio') , 
                                             'referencia' => $request->input('forma') , 
 
