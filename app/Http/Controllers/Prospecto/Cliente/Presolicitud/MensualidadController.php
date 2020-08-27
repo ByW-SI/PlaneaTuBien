@@ -152,7 +152,7 @@ class MensualidadController extends Controller
             }
 
             if ($PagoExtra>0) {
-                $Mes=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'asc')->get();
+                $Mes=Mensualidad::where("contrato_id",$contrato->id)->where("descripcion","Mensualidad")->orderBy('fecha', 'asc')->get();
                 $Mensualidad = new Mensualidad(
                     array(
                         'pagado' => 0, 
