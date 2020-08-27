@@ -80,13 +80,14 @@ class PagoService
                                     ));
         //dd($PagoMensualidad);
         $PagoMensualidad->mensualidad()->associate($mensualidad);
-        if ($PagoMensualidad->monto==$mensualidad->monto) {
+        if ($request->input('monto')==$mensualidad->monto) {
             $mensualidad->pagado=1;
             $mensualidad->abono=$PagoMensualidad->monto;
             //$mensualidad->puntos=$request->input("Puntos");
         }else{
             $mensualidad->abono=$PagoMensualidad->monto;
         }
+        $mensualidad->save();
         $PagoMensualidad->save();
         event(new Pago2Created($prospecto, $PagoMensualidad, Auth::user()));
     }
