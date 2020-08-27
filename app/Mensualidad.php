@@ -18,7 +18,9 @@ class Mensualidad extends Model
     public function plans(){
     	return $this->belongsTo('App\Contrato');
     }
-
+    public function contrato(){
+        return $this->belongsTo('App\Contrato');
+    }
     public function pagos()
     {
         return $this->hasMany('App\Pagos');
