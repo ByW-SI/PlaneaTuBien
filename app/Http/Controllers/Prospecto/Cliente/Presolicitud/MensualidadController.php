@@ -105,9 +105,9 @@ class MensualidadController extends Controller
         $Monto=$contrato->monto;
         $descripcion="";
         for ($i=1; $i <count($Corrida) ; $i++) { 
-            //if($i!=1){
+            if($i!=1){
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i+1);
-            //}
+            }
 
             if ( $Dia_de_inicio->format('m') == "12") {
                 $PagoExtra=$Monto*($Plan->anual/100);
