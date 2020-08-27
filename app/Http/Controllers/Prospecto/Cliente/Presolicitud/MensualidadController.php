@@ -115,7 +115,7 @@ class MensualidadController extends Controller
                 $descripcion="";
             }
 
-            if ($Plan->mes_1==($i+1)) {
+            if ($Plan->mes_1==($i)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_1/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -124,7 +124,7 @@ class MensualidadController extends Controller
                 }
                 
             }
-            if ($Plan->mes_2==($i+1)) {
+            if ($Plan->mes_2==($i)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_2/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -132,7 +132,7 @@ class MensualidadController extends Controller
                     $descripcion=$descripcion." y Apex";
                 }
             }
-            if ($Plan->mes_3==($i+1)) {
+            if ($Plan->mes_3==($i)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_3/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -140,7 +140,7 @@ class MensualidadController extends Controller
                     $descripcion=$descripcion." y Apex";
                 }
             }
-            if ($Plan->mes_liquidacion==($i+1)) {
+            if ($Plan->mes_liquidacion==($i)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_liquidacion/100);
                 if ($descripcion=="") {
                     $descripcion=$descripcion."Apex";
@@ -168,7 +168,7 @@ class MensualidadController extends Controller
                 //$Mes[$i]->cantidad+=$PagoExtra;
                 //$Mes[$i]->save();  
             }
-            
+
             if($i!=0){
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
