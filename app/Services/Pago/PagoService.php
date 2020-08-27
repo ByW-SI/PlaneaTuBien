@@ -26,7 +26,7 @@ class PagoService
 
     public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request,Mensualidad $mensualidad)
     {
-        dd($request->input());
+        //dd($request->input());
 
         $this->setRequest($request);
         $this->prospecto = $prospecto;
