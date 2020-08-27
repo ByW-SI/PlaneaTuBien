@@ -59,7 +59,7 @@
 
                         {{-- DATOS PAGO --}}
 
-                        <div class="col-12 col-md-6 mt-4">
+                        <div class="col-12 col-md-12 mt-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
@@ -184,7 +184,7 @@
 
                     <hr>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <input type="hidden" name="amount" id="amount" />
                             <input type="hidden" name="description" />
                             <input type="hidden" name="paymentMethodId" />
