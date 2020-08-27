@@ -161,7 +161,7 @@ class MensualidadController extends Controller
                         'cantidad'=> $PagoExtra,
                         'fecha'=> $Mes[$i]->fecha,  
                         'recargo'=>0,
-                        'descripcion'=>$descripcion."  ".$i
+                        'descripcion'=>$descripcion
                     )
                 );
                 $Mensualidad->save();
