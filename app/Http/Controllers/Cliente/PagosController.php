@@ -14,6 +14,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Mail;
+use App\Services\Pago\PagoService;
 
 class PagosController extends Controller
 {
@@ -266,7 +267,15 @@ class PagosController extends Controller
 
     public function procesandoPago(Prospecto $prospecto, Mensualidad $mensualidad,Request $request)
     {
-
-        # code...
+        
+        $pagarService = new PagoService($prospecto, $mensualidad->Contrato->Presolicitud->Perfil->Cotizacion, $request,$mensualidad);
+        $bancos = Banco::orderBy('nombre', 'asc')->get();
+        
+        // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
+        $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
+        return redirect()->route('presolicitud_cliente.Pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
+            'status' => $pagarService->getStatusCompra(),
+            'message' => $pagarService->getMensajeCompra()
+        ]);
     }
 }

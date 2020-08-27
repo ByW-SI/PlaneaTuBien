@@ -67,6 +67,13 @@ class PagoService
         //$cotizacion->pago_inscripcions()->save($pago);
         $PagoMensualidad =new Pagos($request->all());
         $PagoMensualidad->mensualidad()->associate($mensualidad);
+        if ($PagoMensualidad->monto==$mensualidad->monto) {
+            $mensualidad->pagado=1;
+            $mensualidad->abono=$PagoMensualidad->monto;
+            //$mensualidad->puntos=$request->input("Puntos");
+        }else{
+            $mensualidad->abono=$PagoMensualidad->monto;
+        }
         event(new PagoCreated($prospecto, $pago, Auth::user()));
     }
 

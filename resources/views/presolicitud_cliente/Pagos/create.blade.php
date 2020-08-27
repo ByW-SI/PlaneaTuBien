@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <form
-                action=""
+                action="{{route('prospectos.mensualidad.guadar',['prospecto'=>$prospecto,'mensualidad'=>$mensualidad])}}"
                 method="post" id="pay" name="pay">
                 @csrf
                 <input id="contrato_id" name="contrato_id" type="hidden" value="{{$mensualidad->contrato_id}}">
