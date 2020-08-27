@@ -69,6 +69,13 @@ class PagoService
         $PagoMensualidad =new Pagos(
                                     array(
                                             'contrato_id' => $request->input('contrato_id') , 
+                                            'status_id' => 1 , 
+                                            'tipopago_id' => 1 , 
+                                            'mensualidad_id' => $mensualidad->id , 
+                                            'monto' => $request->input('monto') , 
+                                            'fecha_pago' => Carbon\Carbon::now()->toDateTimeString() , 
+                                            'folio' => $request->input('folio') , 
+                                            'referencia' => $request->input('forma') , 
 
                                     ));
 
