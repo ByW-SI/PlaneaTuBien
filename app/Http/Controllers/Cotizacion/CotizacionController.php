@@ -330,6 +330,7 @@ class CotizacionController extends Controller
             if ($Mes->pagado==0) {
                 array_push($Mensualidades,
                     [
+                          $Mes->descripcion,
                           $Mes->cantidad, 
                           $Mes->fecha,
                           $Mes->abono,
@@ -340,6 +341,7 @@ class CotizacionController extends Controller
             }else{
                 array_push($Mensualidades,
                     array(
+                          $Mes->descripcion,
                           $Mes->cantidad, 
                           $Mes->fecha,
                           $Mes->abono,

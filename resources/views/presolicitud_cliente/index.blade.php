@@ -403,6 +403,7 @@
                         <table class="table table-striped" id="HistorialMesesTable" >
                             <thead>
                                 <tr class="thead-dark">
+                                    <th>Descripción</th>
                                     <th>Cantidad a pagar</th>
                                     <th>Fecha de pago</th>
                                     <th>Abono</th>
