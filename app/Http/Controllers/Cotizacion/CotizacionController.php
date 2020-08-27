@@ -335,7 +335,7 @@ class CotizacionController extends Controller
         $Mensualidades=[];
         foreach ($Mensualidad as $Mes) {
             if ($Mes->pagado==0) {
-                dd($Mes->Contrato->Presolicitud->Perfil->Cotizacion);
+                //dd($Mes->Contrato->Presolicitud->Perfil->Cotizacion);
                 array_push($Mensualidades,
                     [
                           $Mes->descripcion,
@@ -346,7 +346,7 @@ class CotizacionController extends Controller
                           "No pagado",
                           '
                           <a class="btn btn-primary" href="
-                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
+                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Perfil->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
 
                           Pagar
 
