@@ -80,11 +80,12 @@ class PagoService
                                     ));
         //dd($PagoMensualidad);
         $PagoMensualidad->mensualidad()->associate($mensualidad);
-        if ($request->input('monto')==$mensualidad->monto) {
-            $mensualidad->pagado=1;
-            $mensualidad->abono=$PagoMensualidad->monto;
+        if ($request->input('monto')<$mensualidad->monto) {
+            
             //$mensualidad->puntos=$request->input("Puntos");
+            $mensualidad->abono=$PagoMensualidad->monto;
         }else{
+            $mensualidad->pagado=1;
             $mensualidad->abono=$PagoMensualidad->monto;
         }
         $mensualidad->save();
