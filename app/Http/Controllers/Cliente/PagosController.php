@@ -273,9 +273,25 @@ class PagosController extends Controller
         
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
         $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
-        return view('presolicitud_cliente.Pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
+        return redirect()->route('prospectos.mensualidad.generar', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
             'status' => $pagarService->getStatusCompra(),
             'message' => $pagarService->getMensajeCompra()
         ]);
+        
+        /*
+        $prospectos = Auth::user()->empleado->prospectosActuales()->has('perfil')->has('cotizaciones')->get();
+        $presolicitudes = Presolicitud::whereHas('perfil', function ($query) use ($prospectos) {
+            return $query->has('cotizacion')->whereIn('prospecto_id', $prospectos->pluck('id')->flatten());
+        })
+        ->where('prospecto',1)
+        ->get();
+
+        $planes = Plan::get();
+        return  redirect()->route('presolicitud_cliente.index', compact('prospectos', 'presolicitudes', 'planes'))->with([
+            'status' => $pagarService->getStatusCompra(),
+            'message' => $pagarService->getMensajeCompra()
+        ]);
+        */
+
     }
 }
