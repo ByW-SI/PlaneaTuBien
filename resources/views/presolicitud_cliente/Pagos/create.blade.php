@@ -178,9 +178,6 @@
                                         </div>
                                     </div>
                                     <br><br>
-                                    <br><br>
-                                    <br><br>
-                                    <br><br>
                                     <div class="row">
                                         <div class="col-12 col-md-12 text-center">
                                                 <input type="hidden" name="amount" id="amount" />
