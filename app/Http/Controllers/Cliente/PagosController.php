@@ -277,6 +277,7 @@ class PagosController extends Controller
             'status' => $pagarService->getStatusCompra(),
             'message' => $pagarService->getMensajeCompra()
         ]);*/
+        dd($pagarService);
         return view('presolicitud_cliente.Pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad,'status' => $pagarService->getStatusCompra(),
             'message' => $pagarService->getMensajeCompra()]);
         
