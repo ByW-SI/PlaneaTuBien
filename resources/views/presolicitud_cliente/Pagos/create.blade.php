@@ -156,7 +156,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12 mt-4">
+                        <div class="col-12 col-md-12 mt-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
@@ -183,6 +183,7 @@
                     </div>
 
                     <hr>
+                    <br><br>
                     <div class="row">
                         <div class="col-12 col-md-12 text-center">
                             <a>
