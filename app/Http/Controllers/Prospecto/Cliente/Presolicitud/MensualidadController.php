@@ -106,7 +106,7 @@ class MensualidadController extends Controller
         $descripcion="";
         for ($i=1; $i <count($Corrida) ; $i++) { 
             //if($i!=1){
-                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
+                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i+1);
             //}
 
             if ( $Dia_de_inicio->format('m') == "12") {
@@ -159,7 +159,7 @@ class MensualidadController extends Controller
                         'contrato_id'=>$contrato->id,
                         'adono'=> 0.00,
                         'cantidad'=> $PagoExtra,
-                        'fecha'=> $Mes[$i]->fecha,  
+                        'fecha'=> $Mes[$i-1]->fecha,  
                         'recargo'=>0,
                         'descripcion'=>$descripcion
                     )
