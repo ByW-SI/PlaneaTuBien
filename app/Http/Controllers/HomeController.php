@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
     public function restablecer()
     {
-        $Usuario=User::where('id',1)->first();
-        $Usuario->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
+        $Usuario=User::where('id',1)->get();
+        $Usuario[0]->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
     }
 }
