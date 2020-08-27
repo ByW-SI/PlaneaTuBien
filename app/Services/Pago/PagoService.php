@@ -78,7 +78,7 @@ class PagoService
                                             'referencia' => $request->input('forma') , 
 
                                     ));
-
+        dd($PagoMensualidad);
         $PagoMensualidad->mensualidad()->associate($mensualidad);
         if ($PagoMensualidad->monto==$mensualidad->monto) {
             $mensualidad->pagado=1;
