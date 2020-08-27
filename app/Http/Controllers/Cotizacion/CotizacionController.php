@@ -29,7 +29,7 @@ class CotizacionController extends Controller
     public function Apex(Request $request)
     {
         $Contrato=Contrato::where("id",$request->input('id'))->first();
-        $Mensualidades=Mensualidad::where("contrato_id",$request->input('id'))->orderBy('fecha', 'asc')->get();
+        $Mensualidades=Mensualidad::where("contrato_id",$request->input('id'))->orderBy('fecha', 'asc')->where("descripcion","Apex")->get();
         //$Contrato=$Contrato[0];
         $Grupo=$Contrato->Grupo;
         $Presolicitud=$Contrato->presolicitud;

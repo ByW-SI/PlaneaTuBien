@@ -109,46 +109,21 @@ class MensualidadController extends Controller
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
 
-            if ( $Dia_de_inicio->format('m') == "12") {
-                $PagoExtra=$Monto*($Plan->anual/100);
-                $descripcion=$descripcion."Año ";
-            }else{
-                $PagoExtra=0;
-                $descripcion="";
-            }
-
             if ($Plan->mes_1==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_1/100);
-                if ($descripcion=="") {
-                    $descripcion=$descripcion."Apex";
-                }else{
-                    $descripcion=$descripcion." y Apex";
-                }
-                
+                $descripcion=$descripcion."Apex";
             }
             if ($Plan->mes_2==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_2/100);
-                if ($descripcion=="") {
-                    $descripcion=$descripcion."Apex";
-                }else{
-                    $descripcion=$descripcion." y Apex";
-                }
+                $descripcion=$descripcion."Apex";
             }
             if ($Plan->mes_3==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_3/100);
-                if ($descripcion=="") {
-                    $descripcion=$descripcion."Apex";
-                }else{
-                    $descripcion=$descripcion." y Apex";
-                }
+                $descripcion=$descripcion."Apex";
             }
             if ($Plan->mes_liquidacion==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_liquidacion/100);
-                if ($descripcion=="") {
-                    $descripcion=$descripcion."Apex";
-                }else{
-                    $descripcion=$descripcion." y Apex";
-                }
+                $descripcion=$descripcion."Apex";
             }
 
             if ($PagoExtra>0) {
@@ -173,5 +148,41 @@ class MensualidadController extends Controller
 
             
         }
+        $Dia_de_inicio=Carbon::parse($fecha);
+        $Monto=$contrato->monto;
+        $descripcion="";
+        for ($i=0; $i <count($Corrida) ; $i++) { 
+            if($i!=0){
+                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
+            }
+
+            if ( $Dia_de_inicio->format('m') == "12") {
+                $PagoExtra=$Monto*($Plan->anual/100);
+                $descripcion=$descripcion."Año";
+            }else{
+                $PagoExtra=0;
+                $descripcion="";
+            }
+
+
+            if ($PagoExtra>0) {
+                $Mes=Mensualidad::where("contrato_id",$contrato->id)->where("descripcion","Mensualidad")->orderBy('fecha', 'asc')->get();
+                $Mensualidad = new Mensualidad(
+                    array(
+                        'pagado' => 0, 
+                        'contrato_id'=>$contrato->id,
+                        'adono'=> 0.00,
+                        'cantidad'=> $PagoExtra,
+                        'fecha'=> $Mes[$i]->fecha,  
+                        'recargo'=>0,
+                        'descripcion'=>$descripcion
+                    )
+                );
+                $Mensualidad->save();
+            }
+
+            
+        }
+
     }
 }
