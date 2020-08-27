@@ -273,7 +273,7 @@ class PagosController extends Controller
         
         // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
         $folio = $prospecto->id.$mensualidad->Contrato->numero_contrato;
-        return redirect()->route('presolicitud_cliente.Pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
+        return view('presolicitud_cliente.Pagos.create', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio,'mensualidad'=>$mensualidad])->with([
             'status' => $pagarService->getStatusCompra(),
             'message' => $pagarService->getMensajeCompra()
         ]);
