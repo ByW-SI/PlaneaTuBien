@@ -58,6 +58,7 @@ class MensualidadController extends Controller
                             'cantidad'=> $Pagosegundario,
                             'fecha'=> $fechaFor->toDateString() ,  
                             'recargo'=>0,
+                            'descripcion'=>"Mensualidad"
                         )
                     );
                     $Mensualidad->save();
@@ -70,6 +71,8 @@ class MensualidadController extends Controller
                             'cantidad'=> $Pagoinicial,
                             'fecha'=> $fechaFor->toDateString() ,  
                             'recargo'=>0,
+                            'descripcion'=>"Mensualidad"
+
                         )
                     );
                     $Mensualidad->save();
@@ -92,6 +95,8 @@ class MensualidadController extends Controller
                         'cantidad'=> $total_mes,
                         'fecha'=> $fechaFor->toDateString() ,  
                         'recargo'=>0,
+                        'descripcion'=>"Mensualidad"
+
                     )
                 );
                 $Mensualidad->save();
@@ -125,8 +130,22 @@ class MensualidadController extends Controller
 
             if ($PagoExtra>0) {
                 $Mes=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'asc')->get();
-                $Mes[$i]->cantidad+=$PagoExtra;
-                $Mes[$i]->save();  
+                $Mensualidad = new Mensualidad(
+                    array(
+                        'pagado' => 0, 
+                        'contrato_id'=>$contrato->id,
+                        'adono'=> 0.00,
+                        'cantidad'=> $PagoExtra,
+                        'fecha'=> $$Mes[$i]->fecha,  
+                        'recargo'=>0,
+                        'descripcion'=>"Mensualidad"
+                    )
+                );
+                $Mensualidad->save();
+
+                //$Mes=Mensualidad::where("contrato_id",$contrato->id)->orderBy('fecha', 'asc')->get();
+                //$Mes[$i]->cantidad+=$PagoExtra;
+                //$Mes[$i]->save();  
             }
 
             
