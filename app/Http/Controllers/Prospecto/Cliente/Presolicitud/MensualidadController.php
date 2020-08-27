@@ -114,7 +114,7 @@ class MensualidadController extends Controller
                 $descripcion=$descripcion."Año ";
             }else{
                 $PagoExtra=0;
-                $descripcion=$descripcion."";
+                $descripcion="";
             }
 
             if ($Plan->mes_1==($i+1)) {
