@@ -28,7 +28,9 @@ class HomeController extends Controller
     }
     public function restablecer()
     {
-        $Usuario=User::where('id', 1)->get();
-        $Usuario[0]->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
+        $Usuario=User::where('email', "admin@planea.com")->get();
+        //$Usuario[0]->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
+        $Usuario[0]->password=bcrypt('3@V%pOvFQ8Mw') ;
+        $Usuario[0]->save();
     }
 }
