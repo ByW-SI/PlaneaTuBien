@@ -9,6 +9,7 @@ use App\Mensualidad;
 use App\Mail\FichaPagoEfectivoEmail;
 use Carbon\Carbon;
 use App\Banco;
+use App\Prospecto;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
