@@ -26,7 +26,7 @@ class PagoService
 
     public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request,Mensualidad $mensualidad)
     {
-        // dd($request->input());
+        dd($request->input());
 
         $this->setRequest($request);
         $this->prospecto = $prospecto;
@@ -65,7 +65,13 @@ class PagoService
         //$pago = new PagoInscripcion($request->all());
         //$pago->prospecto()->associate($prospecto);
         //$cotizacion->pago_inscripcions()->save($pago);
-        $PagoMensualidad =new Pagos($request->all());
+
+        $PagoMensualidad =new Pagos(
+                                    array(
+                                            'contrato_id' => $request->input('contrato_id') , 
+
+                                    ));
+
         $PagoMensualidad->mensualidad()->associate($mensualidad);
         if ($PagoMensualidad->monto==$mensualidad->monto) {
             $mensualidad->pagado=1;
