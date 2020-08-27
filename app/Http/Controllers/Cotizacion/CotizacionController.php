@@ -340,7 +340,15 @@ class CotizacionController extends Controller
                           $Mes->fecha,
                           $Mes->abono,
                           $Mes->recargo,
-                         "No pagado"
+                          "No pagado",
+                          '
+                          <a class="btn btn-primary" href="
+                          {{route(\'prospectos.mensualidad.generar\',[\'prospecto\'=>$prospecto,\'mensualidad\'=>'.$Mes->id.'])}}" >
+
+                          Pagar
+
+                          </a>
+                          '
                     ]
                 );
             }else{
@@ -351,7 +359,8 @@ class CotizacionController extends Controller
                           $Mes->fecha,
                           $Mes->abono,
                           $Mes->recargo,
-                          "Pagado"
+                          "Pagado",
+                          ""
                 ));
             }
             

@@ -409,6 +409,7 @@
                                     <th>Abono</th>
                                     <th>Recargo</th>
                                     <th>Pagado</th>
+                                    <th>Pagar</th>
                                 </tr>
                             </thead>
                             <tbody>

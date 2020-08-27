@@ -8,6 +8,7 @@ use App\Pagos;
 use App\Mensualidad;
 use App\Mail\FichaPagoEfectivoEmail;
 use Carbon\Carbon;
+use App\Banco;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
@@ -250,5 +251,21 @@ class PagosController extends Controller
         $cliente = auth('cliente')->user()->presolicitud;
         $pdf = $this->generarPDFFichaPagoEfectivo($request);
         Mail::to($request->correodestino)->send(new FichaPagoEfectivoEmail($pdf, $cliente));
+    }
+
+    public function generandoPago(Prospecto $prospecto, Mensualidad $mensualidad)
+    {
+        $bancos = Banco::orderBy('nombre', 'asc')->get();
+        $
+        // $folio = strtoupper(substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 51), 1).substr(md5(time().$prospecto->id.$cotizacion->id), 1));
+        $folio = $prospecto->id . $mensualidad->contrato->numero_contrato;
+        return view('prospectos.perfil.pagos.form', ['prospecto' => $prospecto,'bancos' => $bancos, 'edit' => false, 'folio' => $folio]);
+        
+    }
+
+    public function procesandoPago(Prospecto $prospecto, Mensualidad $mensualidad,Request $request)
+    {
+
+        # code...
     }
 }

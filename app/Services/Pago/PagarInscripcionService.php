@@ -37,7 +37,7 @@ class PagarInscripcionService
 
             if ($this->compraAprobada()) {
                 $this->message = "La compra ha sido aprobada exitosamente";
-                Mail::to('cristianguzmansuarez@gmail.com')->send(new OrderShipped($this->payment));
+                Mail::to('jjuanccarloss_96@hotmail.com')->send(new OrderShipped($this->payment));
             }
 
             if ($this->compraEnProceso()) {

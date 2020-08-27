@@ -260,8 +260,9 @@ Route::post('get_corrida','Cotizacion\CotizacionController@Cotizacion');
 Route::post('get_mensualidad','Cotizacion\CotizacionController@Mensualidad');
 Route::post('get_apex','Cotizacion\CotizacionController@Apex');
 Route::post('get_meses','Cotizacion\CotizacionController@MensualidadesPagadas');
-
-
+//Pagos
+Route::get('prospectos/{prospecto}/mensualidad/{mensualidad}/generar','Cliente\PagosController@generandoPago')->middleware('auth')->name('prospectos.mensualidad.generar');;
+Route::post('prospectos/{prospecto}/mensualidad/{mensualidad}/guardar','Cliente\PagosController@procesandoPago')->middleware('auth');
 
 
 

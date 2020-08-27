@@ -6,8 +6,9 @@ use App\Cotizacion;
 use MercadoPago;
 use App\Events\PagoCreated;
 use App\Mail\OrderShipped;
-use App\PagoInscripcion;
+use App\Pagos;
 use App\Prospecto;
+use App\Mensualidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,7 @@ class PagoService
     protected $message;
     protected $statement_descriptor;
 
-    public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request)
+    public function __construct(Prospecto $prospecto, Cotizacion $cotizacion, Request $request,Mensualidad $mensualidad)
     {
         // dd($request->input());
 
@@ -37,7 +38,7 @@ class PagoService
 
             if ($this->compraAprobada()) {
                 $this->message = "La compra ha sido aprobada exitosamente";
-                Mail::to('cristianguzmansuarez@gmail.com')->send(new OrderShipped($this->payment));
+                Mail::to('jjuanccarloss_96@gmail.com')->send(new OrderShipped($this->payment));
             }
 
             if ($this->compraEnProceso()) {
@@ -61,9 +62,11 @@ class PagoService
         // $this->validate($request, $rules);
 
         //return dd($request->all());
-        $pago = new PagoInscripcion($request->all());
-        $pago->prospecto()->associate($prospecto);
-        $cotizacion->pago_inscripcions()->save($pago);
+        //$pago = new PagoInscripcion($request->all());
+        //$pago->prospecto()->associate($prospecto);
+        //$cotizacion->pago_inscripcions()->save($pago);
+        $PagoMensualidad =new Pagos($request->all());
+        $PagoMensualidad->mensualidad()->associate($mensualidad);
         event(new PagoCreated($prospecto, $pago, Auth::user()));
     }
 
