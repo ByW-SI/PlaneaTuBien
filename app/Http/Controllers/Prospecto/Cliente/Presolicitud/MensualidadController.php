@@ -106,6 +106,7 @@ class MensualidadController extends Controller
         $descripcion="";
         for ($i=0; $i <count($Corrida) ; $i++) { 
             $PagoExtra=0;
+            
             if($i!=0){
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
             }
