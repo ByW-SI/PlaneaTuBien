@@ -15,10 +15,10 @@ class Mensualidad extends Model
     	'updated_at',
     ];
 
-    public function plans(){
+    public function contrato(){
     	return $this->belongsTo('App\Contrato');
     }
-    
+
     public function pagos()
     {
         return $this->hasMany('App\Pagos');
