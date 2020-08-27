@@ -155,8 +155,8 @@
                         </div> --}}
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 col-md-12 mt-4">
+
+                    <div class="col-12 col-md-12 mt-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
@@ -180,7 +180,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+
+                    
 
                     <hr>
                     <br><br>
