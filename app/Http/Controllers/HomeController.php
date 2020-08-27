@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('auth:user');
-    }*/
+    }
 
     /**
      * Show the application dashboard.
@@ -26,11 +26,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function restablecer()
+    /*public function restablecer()
     {
         $Usuario=User::where('email', "admin@planea.com")->get();
         //$Usuario[0]->update(['password' => bcrypt('3@V%pOvFQ8Mw') ]);
         $Usuario[0]->password=bcrypt('3@V%pOvFQ8Mw') ;
         $Usuario[0]->save();
-    }
+    }*/
 }

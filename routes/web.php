@@ -346,5 +346,3 @@ Route::post('pagovoucher_eliminar','Pagos\PagoVoucherController@pagovoucher_elim
 //+-+-+-+-+-+-+-+  RUTA PROVISIONAL PARA SUBIR EL EXCEL DE LOS CLIENTES +-+-+-+-+-+-+-
 Route::resource('excel-clientes', 'ClienteExcelController', ['only'=>['index','store']]);
 //http://cie.adquiramexico.com/#/
-
-Route::get('cambiar','HomeController@restablecer');
