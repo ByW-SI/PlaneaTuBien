@@ -345,8 +345,8 @@ class CotizacionController extends Controller
                           $Mes->recargo,
                           "No pagado",
                           '
-                          <a class="btn btn-primary" href="
-                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Perfil->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
+                          <a class=\'btn btn-primary\' href=\'
+                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Perfil->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).'\' >
 
                           Pagar
 
