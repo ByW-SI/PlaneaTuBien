@@ -103,6 +103,7 @@ class MensualidadController extends Controller
             }
         }
         $Monto=$contrato->monto;
+        $descripcion="";
         for ($i=0; $i <count($Corrida) ; $i++) { 
             if($i!=0){
                 $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
@@ -110,22 +111,44 @@ class MensualidadController extends Controller
 
             if ( $Dia_de_inicio->format('m') == "12") {
                 $PagoExtra=$Monto*($Plan->anual/100);
-                
+                $descripcion=$descripcion."Año ";
             }else{
                 $PagoExtra=0;
+                $descripcion=$descripcion."";
             }
 
             if ($Plan->mes_1==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_1/100);
+                if ($descripcion=="") {
+                    $descripcion=$descripcion." y Apex";
+                }else{
+                    $descripcion=$descripcion."Apex";
+                }
+                
             }
             if ($Plan->mes_2==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_2/100);
+                if ($descripcion=="") {
+                    $descripcion=$descripcion." y Apex";
+                }else{
+                    $descripcion=$descripcion."Apex";
+                }
             }
             if ($Plan->mes_3==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_3/100);
+                if ($descripcion=="") {
+                    $descripcion=$descripcion." y Apex";
+                }else{
+                    $descripcion=$descripcion."Apex";
+                }
             }
             if ($Plan->mes_liquidacion==($i+1)) {
                 $PagoExtra+=$Monto*($Plan->aportacion_liquidacion/100);
+                if ($descripcion=="") {
+                    $descripcion=$descripcion." y Apex";
+                }else{
+                    $descripcion=$descripcion."Apex";
+                }
             }
 
             if ($PagoExtra>0) {
@@ -138,7 +161,7 @@ class MensualidadController extends Controller
                         'cantidad'=> $PagoExtra,
                         'fecha'=> $Mes[$i]->fecha,  
                         'recargo'=>0,
-                        'descripcion'=>"Mensualidad"
+                        'descripcion'=>$descripcion
                     )
                 );
                 $Mensualidad->save();
