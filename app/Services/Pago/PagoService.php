@@ -4,7 +4,7 @@ namespace App\Services\Pago;
 
 use App\Cotizacion;
 use MercadoPago;
-use App\Events\PagoCreated;
+use App\Events\Pago2Created;
 use App\Mail\OrderShipped;
 use App\Pagos;
 use App\Prospecto;
@@ -74,7 +74,7 @@ class PagoService
         }else{
             $mensualidad->abono=$PagoMensualidad->monto;
         }
-        event(new PagoCreated($prospecto, $pago, Auth::user()));
+        event(new Pago2Created($prospecto, $PagoMensualidad, Auth::user()));
     }
 
     /**
