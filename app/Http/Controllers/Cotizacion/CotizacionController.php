@@ -7,6 +7,8 @@ use App\Contrato;
 use App\Grupo;
 use App\Plan;
 use App\Mensualidad;
+use App\Presolicitud;
+use App\Prospecto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -343,7 +345,7 @@ class CotizacionController extends Controller
                           "No pagado",
                           '
                           <a class="btn btn-primary" href="
-                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->Presolicitud->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
+                          '.route('prospectos.mensualidad.generar',['prospecto'=>$Mes->Contrato->presolicitud()->Cotizacion->Prospecto,'mensualidad'=>'.$Mes->id.']).' >
 
                           Pagar
 
