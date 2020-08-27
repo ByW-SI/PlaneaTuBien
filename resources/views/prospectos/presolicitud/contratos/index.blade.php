@@ -84,7 +84,7 @@
 									@csrf
 									<div class="form-group row">
 									  <div class="col-12">
-									    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+									    <input class="form-control" type="date" name="fecha" value="2011-08-19" id="example-date-input">
 									  </div>
 									</div>	
 									<div class="form-group row text-center">

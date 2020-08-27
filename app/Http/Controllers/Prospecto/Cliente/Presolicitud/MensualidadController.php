@@ -22,6 +22,9 @@ class MensualidadController extends Controller
         //dd($cotizador);
 
     	$fecha = Carbon::parse($request->fecha);
+
+        $fecha =$fecha->startofMonth();
+        $fecha = $fecha->addDays(6);
         //dd(["corrida"=>$cotizador['corrida'],"monto"=>number_format($contrato->monto,2)]);
     	$this->CargarTodasMensualidades($plan->abreviatura,$cotizador['corrida'],$plan->mes_adjudicado,$contrato,$request->fecha,$plan);
         $grupos = Grupo::get();
