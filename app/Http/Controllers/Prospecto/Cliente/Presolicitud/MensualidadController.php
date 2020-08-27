@@ -104,10 +104,8 @@ class MensualidadController extends Controller
         }
         $Monto=$contrato->monto;
         $descripcion="";
-        for ($i=0; $i <count($Corrida) ; $i++) { 
-            if($i!=0){
-                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
-            }
+        for ($i=1; $i <count($Corrida) ; $i++) { 
+            
 
             if ( $Dia_de_inicio->format('m') == "12") {
                 $PagoExtra=$Monto*($Plan->anual/100);
@@ -159,7 +157,7 @@ class MensualidadController extends Controller
                         'contrato_id'=>$contrato->id,
                         'adono'=> 0.00,
                         'cantidad'=> $PagoExtra,
-                        'fecha'=> $Mes[$i+1]->fecha,  
+                        'fecha'=> $Mes[$i]->fecha,  
                         'recargo'=>0,
                         'descripcion'=>$descripcion
                     )
@@ -170,7 +168,10 @@ class MensualidadController extends Controller
                 //$Mes[$i]->cantidad+=$PagoExtra;
                 //$Mes[$i]->save();  
             }
-
+            
+            if($i!=0){
+                $Dia_de_inicio=Carbon::parse($fecha)->addMonths($i);
+            }
             
         }
     }
