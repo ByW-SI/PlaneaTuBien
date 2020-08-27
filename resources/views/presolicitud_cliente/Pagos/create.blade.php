@@ -184,11 +184,13 @@
 
                     <hr>
                     <div class="row">
-                        <div class="col-12 text-center">
-                            <input type="hidden" name="amount" id="amount" />
-                            <input type="hidden" name="description" />
-                            <input type="hidden" name="paymentMethodId" />
-                            <input type="submit" value="Pagar" class="btn btn-success" />
+                        <div class="col-12 col-md-12 text-center">
+                            <a>
+                                <input type="hidden" name="amount" id="amount" />
+                                <input type="hidden" name="description" />
+                                <input type="hidden" name="paymentMethodId" />
+                                <input type="submit" value="Pagar" class="btn btn-success" />
+                            </a>
                         </div>
                     </div>
                 </fieldset>
